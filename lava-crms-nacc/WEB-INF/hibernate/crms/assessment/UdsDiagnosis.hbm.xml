@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsDiagnosis" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+				
+		<join table="udsdiagnosis">
+			<key column="InstrID"/>		
+		   	<property name="whoDidDx" column="WHODIDDX" type="short"/>
+	       	<property name="normCog" column="NORMCOG" type="short"/>
+	       	<property name="demented" column="DEMENTED" type="short"/>
+	       	<property name="mciaMem" column="MCIAMEM" type="short"/>
+	       	<property name="mciaPlus" column="MCIAPLUS" type="short"/>
+	       	<property name="mciaPLan" column="MCIAPLAN" type="short"/>
+	       	<property name="mciaPAtt" column="MCIAPATT" type="short"/>
+	       	<property name="mciaPEx" column="MCIAPEX" type="short"/>
+	       	<property name="mciaPVis" column="MCIAPVIS" type="short"/>
+	       	<property name="mciNon1" column="MCINON1" type="short"/>
+	       	<property name="mciN1Lan" column="MCIN1LAN" type="short"/>
+	       	<property name="mciN1Att" column="MCIN1ATT" type="short"/>
+	       	<property name="mciN1Ex" column="MCIN1EX" type="short"/>
+	       	<property name="mciN1Vis" column="MCIN1VIS" type="short"/>
+	       	<property name="mciNon2" column="MCINON2" type="short"/>
+	       	<property name="mciN2Lan" column="MCIN2LAN" type="short"/>
+	       	<property name="mciN2Att" column="MCIN2ATT" type="short"/>
+	       	<property name="mciN2Ex" column="MCIN2EX" type="short"/>
+	       	<property name="mciN2Vis" column="MCIN2VIS" type="short"/>
+	       	<property name="impNoMci" column="IMPNOMCI" type="short"/>
+	       	<property name="probAd" column="PROBAD" type="short"/>
+	       	<property name="probAdIf" column="PROBADIF" type="short"/>
+	       	<property name="possAd" column="POSSAD" type="short"/>
+	       	<property name="possAdIf" column="POSSADIF" type="short"/>
+	       	<property name="dlb" column="DLB" type="short"/>
+	       	<property name="dlbIf" column="DLBIF" type="short"/>
+	       	<property name="vasc" column="VASC" type="short"/>
+	       	<property name="vascIf" column="VASCIF" type="short"/>
+	       	<property name="vascPs" column="VASCPS" type="short"/>
+	       	<property name="vascPsIf" column="VASCPSIF" type="short"/>
+	       	<property name="alcDem" column="ALCDEM" type="short"/>
+	       	<property name="alcDemIf" column="ALCDEMIF" type="short"/>
+	       	<property name="demUn" column="DEMUN" type="short"/>
+	       	<property name="demUnIf" column="DEMUNIF" type="short"/>
+	       	<property name="ftd" column="FTD" type="short"/>
+	       	<property name="ftdIf" column="FTDIF" type="short"/>
+	       	<property name="ppAph" column="PPAPH" type="short"/>
+	       	<property name="ppAphIf" column="PPAPHIF" type="short"/>
+	       	<property name="pnAph" column="PNAPH" type="short"/>
+	       	<property name="semDemAn" column="SEMDEMAN" type="short"/>
+	       	<property name="semDemAg" column="SEMDEMAG" type="short"/>
+	       	<property name="ppAOthr" column="PPAOTHR" type="short"/>
+	       	<property name="psp" column="PSP" type="short"/>
+	       	<property name="pspIf" column="PSPIF" type="short"/>
+	       	<property name="cort" column="CORT" type="short"/>
+	       	<property name="cortIf" column="CORTIF" type="short"/>
+	       	<property name="hunt" column="HUNT" type="short"/>
+	       	<property name="huntIf" column="HUNTIF" type="short"/>
+	       	<property name="prion" column="PRION" type="short"/>
+	       	<property name="prionIf" column="PRIONIF" type="short"/>
+	       	<property name="meds" column="MEDS" type="short"/>
+	       	<property name="medsIf" column="MEDSIF" type="short"/>
+	       	<property name="dysIll" column="DYSILL" type="short"/>
+	       	<property name="dysIllIf" column="DYSILLIF" type="short"/>
+	       	<property name="dep" column="DEP" type="short"/>
+	       	<property name="depIf" column="DEPIF" type="short"/>
+	       	<property name="othPsy" column="OTHPSY" type="short"/>
+	       	<property name="othPsyIf" column="OTHPSYIF" type="short"/>
+	       	<property name="downs" column="DOWNS" type="short"/>
+	       	<property name="downsIf" column="DOWNSIF" type="short"/>
+	       	<property name="park" column="PARK" type="short"/>
+	       	<property name="parkIf" column="PARKIF" type="short"/>
+	       	<property name="stroke" column="STROKE" type="short"/>
+	       	<property name="strokIf" column="STROKIF" type="short"/>
+	       	<property name="hyceph" column="HYCEPH" type="short"/>
+	       	<property name="hycephIf" column="HYCEPHIF" type="short"/>
+	       	<property name="brnInj" column="BRNINJ" type="short"/>
+	       	<property name="brnInjIf" column="BRNINJIF" type="short"/>
+	       	<property name="neop" column="NEOP" type="short"/>
+	       	<property name="neopIf" column="NEOPIF" type="short"/>
+	       	<property name="cogOth" column="COGOTH" type="short"/>
+	       	<property name="cogOthIf" column="COGOTHIF" type="short"/>
+	       	<property name="cogOthx" column="COGOTHX" type="string" length="60"/>
+  	       	<property name="cogOth2" column="COGOTH2" type="short"/>
+	       	<property name="cogOth2If" column="COGOTH2IF" type="short"/>
+	       	<property name="cogOth2x" column="COGOTH2X" type="string" length="60"/>
+   	       	<property name="cogOth3" column="COGOTH3" type="short"/>
+	       	<property name="cogOth3If" column="COGOTH3IF" type="short"/>
+	       	<property name="cogOth3x" column="COGOTH3X" type="string" length="60"/>
+			</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

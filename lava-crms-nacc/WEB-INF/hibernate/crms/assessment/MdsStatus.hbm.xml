@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.MdsStatus" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		
+		<join table="MdsStatus">
+		<key column="InstrID"/>		
+     <property name="mdsdec" column="mdsdec" type="short"/>
+       <property name="mdsdecdt" column="mdsdecdt" type="timestamp"/>
+       <property name="mdsdecaut" column="mdsdecaut" type="short"/>
+       <property name="mdsdisc" column="mdsdisc" type="short"/>
+       <property name="mdsdiscdt" column="mdsdiscdt" type="timestamp"/>
+       <property name="mdsdiscrea" column="mdsdiscrea" type="short"/>
+       <property name="mdsdiscreao" column="mdsdiscreao" type="string" length="1500"/>
+       <property name="mdsstat" column="mdsstat" type="short"/>
+
+			</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+

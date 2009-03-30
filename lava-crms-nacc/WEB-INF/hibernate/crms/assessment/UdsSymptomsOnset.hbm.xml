@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+  
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsSymptomsOnset" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udssymptomsonset">
+			<key column="InstrID"/>		
+		   <property name="b9Chg" column="B9CHG" type="short"/>
+	       <property name="decSub" column="DECSUB" type="short"/>
+	       <property name="decIn" column="DECIN" type="short"/>
+	       <property name="decClin" column="DECCLIN" type="short"/>
+	       <property name="decAge" column="DECAGE" type="short"/>
+	       <property name="cogMem" column="COGMEM" type="short"/>
+	       <property name="cogJudg" column="COGJUDG" type="short"/>
+	       <property name="cogLang" column="COGLANG" type="short"/>
+	       <property name="cogVis" column="COGVIS" type="short"/>
+	       <property name="cogAttn" column="COGATTN" type="short"/>
+	       <property name="cogFluc" column="COGFLUC" type="short"/>
+	       <property name="cogOther" column="COGOTHR" type="short"/>
+	       <property name="cogOthrx" column="COGOTHRX" type="string" length="60"/>
+	       <property name="cogFrst" column="COGFRST" type="short"/>
+	       <property name="cogFrstx" column="COGFRSTX" type="string" length="60"/>
+	       <property name="cogMode" column="COGMODE" type="short"/>
+	       <property name="cogModex" column="COGMODEX" type="string" length="60"/>
+	       <property name="beApathy" column="BEAPATHY" type="short"/>
+	       <property name="bdDep" column="BEDEP" type="short"/>
+	       <property name="beVHall" column="BEVHALL" type="short"/>
+	       <property name="beVWell" column="BEVWELL" type="short"/>
+	       <property name="beAHall" column="BEAHALL" type="short"/>
+	       <property name="beDel" column="BEDEL" type="short"/>
+	       <property name="beDisin" column="BEDISIN" type="short"/>
+	       <property name="beIrrit" column="BEIRRIT" type="short"/>
+	       <property name="beAgit" column="BEAGIT" type="short"/>
+	       <property name="bePerCh" column="BEPERCH" type="short"/>
+	       <property name="beRem" column="BEREM" type="short"/>
+	       <property name="beOthr" column="BEOTHR" type="short"/>
+	       <property name="beOthrx" column="BEOTHRX" type="string" length="60"/>
+	       <property name="beFrst" column="BEFRST" type="short"/>
+	       <property name="beFrstx" column="BEFRSTX" type="string" length="60"/>
+	       <property name="beMode" column="BEMODE" type="short"/>
+	       <property name="beModex" column="BEMODEX" type="string" length="60"/>
+	       <property name="moGait" column="MOGAIT" type="short"/>
+	       <property name="moFalls" column="MOFALLS" type="short"/>
+	       <property name="moTrem" column="MOTREM" type="short"/>
+	       <property name="moSlow" column="MOSLOW" type="short"/>
+	       <property name="moFrst" column="MOFRST" type="short"/>
+	       <property name="moMode" column="MOMODE" type="short"/>
+	       <property name="moModex" column="MOMODEX" type="string" length="60"/>
+	       <property name="moMoPark" column="MOMOPARK" type="short"/>
+	       <property name="course" column="COURSE" type="short"/>
+	       <property name="frstChg" column="FRSTCHG" type="short"/>
+			</join>	
+		
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!-- All specific security configuration should be defined here -->
+
+<beans>
+
+   <!-- ======================== FILTER CHAIN ======================= -->
+
+   <!-- this is referenced by a filter configuration in the webapp web.xml file
+        filter chain is:
+        Acegi Session Context Integration Filter - required, storing authentication info in session
+        Acegi Authentication Processing Filter - UI to obtain principal (username) and credentials (password)
+        Acegi Request Wrapper - so standard Servlet API still works, e.g. getRemoteUser
+        Acegi HTTP Request Security Filter - perform authentication and authorization
+   
+        note: if you wish to use channel security, add "channelProcessingFilter," in front
+              of "httpSessionContextIntegrationFilter" in the list below 
+   -->
+   <bean id="filterChainProxy" class="org.acegisecurity.util.FilterChainProxy">
+      <property name="filterInvocationDefinitionSource">
+         <value>
+            CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+            PATTERN_TYPE_APACHE_ANT
+            /**=httpSessionContextIntegrationFilter,authenticationProcessingFilter,requestWrapper,exceptionTranslationFilter,filterInvocationInterceptor
+         </value>
+      </property>
+   </bean>
+
+  <bean id="httpSessionContextIntegrationFilter" class="org.acegisecurity.context.HttpSessionContextIntegrationFilter"/>
+
+
+
+  <bean id="authenticationManager" class="org.acegisecurity.providers.ProviderManager">
+    <property name="providers">
+      <list>
+        <ref bean="localDaoAuthenticationProvider"/>
+        <!-- 
+        	<ref bean="ldapAuthProvider"/>
+        -->        
+      </list>
+    </property>
+  </bean>
+  
+  
+  	
+  <bean id="localDaoAuthenticationProvider" class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
+  	<property name="userDetailsService"><ref bean="localInMemoryDaoImpl"/></property>
+  </bean>
+	
+   <bean id="localInMemoryDaoImpl" class="org.acegisecurity.userdetails.memory.InMemoryDaoImpl">
+     <property name="userMap">
+       <value>
+          jhesse=ads1vf,ROLE_USER
+          admin=ads1vf,ROLE_USER
+          dan=ads1vf,ROLE_USER
+          robin=ads1vf,ROLE_USER
+    </value>
+  </property>
+</bean>    
+
+  
+  <!-- cacheing authentication info -->
+  <!-- Ehcache comes with a failsafe configuration declared in the ehcache-failsafe.xml file, which 
+       is provided in the ehcache.jar. It is only used when no ehcache.xml configuration file is 
+       found in the classpath, and CacheManager is created without any arguments. 
+       If it is used a log warning level message will be issued.
+       see Ehcache page for more docs 
+       
+       Using our own configuration, ehcache.xml 
+       note: this writes to a cache in the /tmp dir, so the webdev group who runs JVM/JBoss
+        needs write access to this directory -->
+  <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <property name="configLocation">
+      <value>classpath:/ehcache.xml</value>
+    </property>
+  </bean>
+     
+  <bean id="userCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+    <property name="cacheManager">
+      <ref local="cacheManager"/>
+    </property>
+    <property name="cacheName">
+      <value>userCache</value>
+    </property>
+  </bean>
+   
+  <bean id="userCache" class="org.acegisecurity.providers.dao.cache.EhCacheBasedUserCache">
+    <property name="cache"><ref local="userCacheBackend"/></property>
+  </bean>
+  
+  <bean id="initialDirContextFactory" class="org.acegisecurity.ldap.DefaultInitialDirContextFactory">
+    <constructor-arg value="ldap://campus01.campus.net.ucsf.edu:389/DC=campus,DC=net,DC=ucsf,DC=edu"/>
+    <property name="managerDn"><value>CN=MacLDAPClient,OU=Accounts,OU=Memory and Aging Center (MAC),DC=campus,DC=net,DC=ucsf,DC=edu</value></property>
+    <property name="managerPassword"><value>F0rgetMeN0t</value></property>
+  </bean>
+  
+  <bean id="userSearch" class="org.acegisecurity.ldap.search.FilterBasedLdapUserSearch">
+  	<constructor-arg index="0">
+           <!-- search for the user relative to the following, which relative to the root in initDirContextFactory.
+           		this is not necessary to find the user, since the subtree is searched, but because of a weirdness 
+           		between Acegi and Active Directory, if this is not present additional referrals may be found resulting 
+           		in PartialResultException -->
+  		<value>OU=Memory and Aging Center (MAC)</value>
+  	</constructor-arg>
+  	<constructor-arg index="1">
+  		<value>sAMAccountName={0}</value>
+  	</constructor-arg>
+  	<constructor-arg index="2">
+	  	<ref local="initialDirContextFactory" />
+  	</constructor-arg>
+    <property name="searchSubtree"><value>true</value></property>
+  </bean>
+     
+  <bean id="ldapAuthProvider" class="org.acegisecurity.providers.ldap.LdapAuthenticationProvider">
+  	<constructor-arg>
+	 	<bean class="org.acegisecurity.providers.ldap.authenticator.BindAuthenticator">
+           <constructor-arg><ref local="initialDirContextFactory"/></constructor-arg>
+           <!-- use userSearch rather than DN pattern because not searching on the uid (e.g. "Toohey, Charlie")
+            	rather on the username (e.g. ctoohey). userSearch searches for the username by filtering
+            	on the user sAMAccount attribute -->
+           <!-- <property name="userDnPatterns"><list><value>uid={0},ou=people</value></list></property> -->
+           <property name="userSearch"><ref local="userSearch"/></property>
+        </bean>
+  	</constructor-arg>
+    <constructor-arg>
+        <bean class="org.acegisecurity.providers.ldap.populator.DefaultLdapAuthoritiesPopulator">
+           <constructor-arg><ref local="initialDirContextFactory"/></constructor-arg>
+           <!-- search for groups (roles) relative to the following, which is relative to the root 
+           	in initDirContextFactory. Acegi looks at the "member" attribute of each active directory
+           	group that is found to determine to which groups an authenticated user belongs, and
+           	then makes sure that user is in a group (has a role) that matches a role which is authorized in 
+           	filterInvocationInterceptor (configured in instance specific security) -->
+           <constructor-arg><value>OU=Groups,OU=Memory and Aging Center (MAC)</value></constructor-arg>
+		   <property name="searchSubtree"><value>false</value></property>
+		   <property name="rolePrefix"><value>ROLE_</value></property>
+		   <property name="convertToUpperCase"><value>true</value></property>
+        </bean>
+    </constructor-arg>	
+    <property name="userCache"><ref bean="userCache"/></property>
+  </bean>
+
+
+  <!-- UnanimousBased is strange in that if a secured resource has more than one role config 
+       attributes, the RoleVoter votes once per each attribute, meaning that the authenicated
+       user's authorities must match ALL of the config attributes, or access will be denied.
+       For now, use ConsensusBased. There is also AffirmativeBased which for a single voter,
+       gives the same result as ConsensusBased (i.e. if there is a single match between the 
+       secured resource config attributes and the authenicated user's authorities, then access
+       is granted). -->
+  <bean id="accessDecisionManager" class="org.acegisecurity.vote.ConsensusBased">
+    <property name="decisionVoters">
+      <list>
+        <ref bean="roleVoter"/>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="roleVoter" class="org.acegisecurity.vote.RoleVoter"/>
+
+	<!-- the exceptionTranslationFilter bean which specifies the error page to go to if access is denied
+		is defined in the instance specific configuration file -->
+  
+  <!-- the authenticationEntryPoint bean which specifies loginFormUrl is defined in the instance specific
+   		security configuration file -->
+
+  
+  <!-- the filterInvocationInterceptor bean, which defines which roles are accepted, is defined in each
+       of the instance specific security xml files -->
+    
+  <bean id="requestWrapper" class="org.acegisecurity.wrapper.SecurityContextHolderAwareRequestFilter"/>
+
+
+
+
+
+
+  <bean id="authenticationEntryPoint" class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+    <property name="loginFormUrl"><value>/security/local/demo/login.jsp</value></property>
+    <property name="forceHttps"><value>false</value></property>
+  </bean>
+  
+  <bean id="authenticationProcessingFilter" class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilter">
+    <property name="authenticationManager"><ref bean="authenticationManager"/></property>
+    <property name="authenticationFailureUrl"><value>/security/local/demo/retryLogin.jsp</value></property>
+    <property name="defaultTargetUrl"><value>/mylava/home/welcome.lava</value></property>
+    <property name="filterProcessesUrl"><value>/j_acegi_security_check.lava</value></property>
+  </bean>
+
+  <bean id="exceptionTranslationFilter" class="org.acegisecurity.ui.ExceptionTranslationFilter">
+    <property name="authenticationEntryPoint"><ref bean="authenticationEntryPoint"/></property>
+    <!-- handler for Acegi AccessDeniedException if user does not hold required authority. however
+    	this should never occur because Acegi is only being used for authentication not authorization, 
+    	i.e. authorization is configured so that a role can access all URLs (see filterInvocationInterceptor) -->
+    <property name="accessDeniedHandler">
+      <bean class="org.acegisecurity.ui.AccessDeniedHandlerImpl">
+        <property name="errorPage" value="/security/local/demo/retryLogin.jsp"/>
+      </bean>
+    </property>
+  </bean>  
+
+  <bean id="filterInvocationInterceptor" class="org.acegisecurity.intercept.web.FilterSecurityInterceptor">
+    <property name="authenticationManager"><ref bean="authenticationManager"/></property>
+    <property name="accessDecisionManager"><ref bean="accessDecisionManager"/></property>
+    	
+    <property name="objectDefinitionSource">
+      <value>
+        CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+        \A/.*\Z=ROLE_USER
+      </value>
+    </property>
+
+	
+  </bean>
+
+</beans>

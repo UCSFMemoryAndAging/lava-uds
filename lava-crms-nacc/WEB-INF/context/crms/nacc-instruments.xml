@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+<!-- actions -->
+	
+	
+	<bean id="lava.crms.assessment.uds.patientUdsInstruments" parent="crmsPatientSectionInstrumentListAction"/>
+	<bean id="lava.crms.assessment.uds.projectUdsInstruments" parent="crmsSectionInstrumentListAction"/>
+	<bean id="lava.crms.assessment.uds.patientUdsSubmissions" parent="crmsInstrumentListFlowAction"/>
+	<bean id="lava.crms.assessment.uds.projectUdsSubmissions" parent="crmsInstrumentListFlowAction"/>
+	
+	
+	<!-- most instruments share common flows (assessment.instrument.instrument.*) and the flow 
+	    listener sets the specific instrument type in the current action. the exception is instruments
+		that require their own handler which are configured below -->
+	<bean id="lava.crms.assessment.instrument.mdsstatus" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.naccpathology9" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsappraisal1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsappraisal2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udscdr1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udscdr2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsdiagnosis1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsdiagnosis2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsfamilyhistory1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsfamilyhistory2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsfaq1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsfaq2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsformchecklist1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsformchecklist2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsgds1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsgds2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udshachinski1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udshachinski2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udshealthhistory1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udshealthhistory2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsinformantdemo1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsinformantdemo2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udslabsimaging1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udslabsimaging2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsmedications1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsmedications2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsmilestone1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsmilestone2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsneuropsych1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsneuropsych2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsnpi1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsnpi2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsphoneinclusion2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsphysical1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsphysical2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udssymptomsonset1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udssymptomsonset2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udssubjectdemo1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udssubjectdemo2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsupdrs1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsupdrs2" parent="crmsInstrumentCommonFlowAction"/>
+
+			
+	 <!-- form action definitions -->
+
+
+	<!--  custom assessment form actions for UDS instument lists -->
+	<bean id="patientUdsInstrumentsFormAction" parent="crmsListComponentFormAction">
+    	<constructor-arg><list><bean class="edu.ucsf.lava.crms.assessment.controller.PatientUdsInstrumentsHandler" parent="crmsHandler"/></list></constructor-arg>
+	</bean>  
+	
+	<bean id="projectUdsInstrumentsFormAction" parent="crmsListComponentFormAction">
+    	<constructor-arg><list><bean class="edu.ucsf.lava.crms.assessment.controller.ProjectUdsInstrumentsHandler" parent="crmsHandler"/></list></constructor-arg>
+	</bean>  
+	<bean id="patientUdsSubmissionsFormAction" parent="crmsListComponentFormAction">
+    	<constructor-arg><list><bean class="edu.ucsf.lava.crms.assessment.controller.PatientUdsSubmissionsHandler" parent="crmsHandler"/></list></constructor-arg>
+	</bean>  
+	
+	<bean id="projectUdsSubmissionsFormAction" parent="crmsListComponentFormAction">
+    	<constructor-arg><list><bean class="edu.ucsf.lava.crms.assessment.controller.ProjectUdsSubmissionsHandler" parent="crmsHandler"/></list></constructor-arg>
+	</bean>  
+	
+
+	<bean id="udsmedications2FormAction" parent="crmsInstrumentComponentFormAction"><constructor-arg><list>
+		<bean class="edu.ucsf.lava.crms.assessment.controller.UdsMedications2Handler" parent="crmsHandler"/>
+	</list></constructor-arg></bean>
+    
+
+	<!-- Instrument Configurations -->
+	
+	<bean id="mdsstatus" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.MdsStatus</value></property>
+		<property name="supportedFlows"><value>enter,print</value></property>
+	</bean>	
+	
+	
+		
+	<bean id="naccpathology9" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.instruments.nacc.model.NaccPathology</value></property>
+		<property name="supportedFlows"><value>enter,print</value></property>
+		<property name="currentVersionAlias"><value>naccpathology</value></property>
+	</bean>		
+	
+	
+	<bean id="udsappraisal1" parent="instrumentConfig">
+			<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsAppraisal</value></property>
+			<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+	
+	<bean id="udsappraisal2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsAppraisal</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsappraisal</value></property>
+	</bean>		 			
+	 
+	<bean id="udscdr1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsCdr</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+	
+	<bean id="udscdr2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsCdr</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udscdr</value></property>
+	</bean>		 			
+	 
+	<bean id="udsdiagnosis1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsDiagnosis</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+
+	<bean id="udsdiagnosis2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsDiagnosis</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsdiagnosis</value></property>
+	</bean>		 			
+
+	<bean id="udsfamilyhistory1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory1</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+	
+	<bean id="udsfamilyhistory2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory2</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsfamilyhistory</value></property>
+	</bean>		 			
+
+	<bean id="udsfaq1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFaq</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+
+	<bean id="udsfaq2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFaq</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsfaq</value></property>
+	</bean>		 			
+
+	<bean id="udsformchecklist1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFormChecklist</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+
+	<bean id="udsformchecklist2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFormChecklist</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsformchecklist</value></property>
+	</bean>		 			
+
+	<bean id="udsgds1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsGds</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+
+	<bean id="udsgds2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsGds</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsgds</value></property>
+	</bean>		 			
+
+	<bean id="udshachinski1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsHachinski</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+
+	<bean id="udshachinski2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsHachinski</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udshachinski</value></property>
+	</bean>		 			
+
+	<bean id="udshealthhistory1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsHealthHistory</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>	
+		 			
+	<bean id="udshealthhistory2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsHealthHistory</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udshealthhistory</value></property>
+	</bean>		 			
+
+	<bean id="udsinformantdemo1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsInformantDemo</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+
+	<bean id="udsinformantdemo2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsInformantDemo</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsinformantdemo</value></property>
+	</bean>
+	
+	<bean id="udslabsimaging1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsLabsImaging</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+
+	<bean id="udslabsimaging2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsLabsImaging</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udslabsimaging</value></property>
+	</bean>		 			
+	 
+	 <bean id="udsmedications1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsMedications1</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 		
+		
+	<bean id="udsmedications2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsMedications2</value></property>
+		<property name="supportedFlows"><value>enterReview</value></property>
+		<property name="verify"><value>false</value></property>
+		<property name="currentVersionAlias"><value>udsmedications</value></property>
+	</bean>		 			
+	
+	<bean id="udsmilestone1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsMilestone</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+	
+	<bean id="udsmilestone2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsMilestone</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsmilestone</value></property>
+	</bean>		 			
+	<bean id="udsneuropsych1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsNeuroPsych</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+	
+	<bean id="udsneuropsych2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsNeuroPsych</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsneuropsych</value></property>
+	</bean>		 			
+	
+	<bean id="udsnpi1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsNpi</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+	
+	<bean id="udsnpi2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsNpi</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsnpi</value></property>
+	</bean>		 			
+	
+	<bean id="udsphoneinclusion2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsPhoneInclusion</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsphoneinclusion</value></property>
+	</bean>		 			
+	
+	<bean id="udsphysical1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsPhysical</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+	
+	<bean id="udsphysical2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsPhysical</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsphysical</value></property>
+	</bean>		 			
+	
+	<bean id="udssubjectdemo1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsSubjectDemo</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+	
+	<bean id="udssubjectdemo2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsSubjectDemo</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udssubjectdemo</value></property>
+	</bean>		 			
+	
+	<bean id="udssymptomsonset1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsSymptomsOnset</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+	
+	<bean id="udssymptomsonset2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsSymptomsOnset</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udssymptomsonset</value></property>
+	</bean>		 			
+	
+	<bean id="udsupdrs1" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsUpdrs</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+	
+	<bean id="udsupdrs2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsUpdrs</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udsupdrs</value></property>
+	</bean>		 			
+
+	
+</beans>

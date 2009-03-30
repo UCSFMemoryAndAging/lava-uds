@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+<project name="lava"  basedir="."  default="usage">
+    <property file="build.properties"/>
+
+    <property name="war.file" value="${instanceName}.war"/>
+  
+    <property name="lava-core.path" value="${workspace.path}/lava-core"/>
+	<property name="lava-crms.path" value="${workspace.path}/lava-crms"/>
+	<property name="lava-crms-nacc.path" value="${workspace.path}/lava-crms-nacc"/>
+	<property name="instance.path" value="${workspace.path}/lava-app-${instanceName}"/>
+	
+    <property name="src.folder" value="src"/>
+    <property name="lib.folder" value="WEB-INF/lib"/>
+    <property name="build.folder" value="WEB-INF/classes"/>
+    <property name="name" value="lava"/>
+
+	<property name="instance-deploy.path" value="${deploy.path}/${war.file}"/>
+	
+    
+	<path id="master-classpath">
+        <fileset dir="${instance-deploy.path}/${lib.folder}">
+            <include name="*.jar"/>
+        </fileset>
+        <!-- We need the servlet API classes:        -->
+        <!--   for JBoss Tomcat 4.1 use servlet.jar        -->
+        <!--   for Tomcat 5.0 use servlet-api.jar    -->
+        <!--   for Other app server - check the docs -->
+        <fileset dir="${j2ee14lib.home}">
+            <include name="servlet*.jar"/>
+        </fileset>
+        <pathelement path="${instance-deploy.path}/${build.folder}"/>
+    </path>
+
+    <target name="usage">
+        <echo message=""/>
+        <echo message="${name} build file"/>
+        <echo message="-----------------------------------"/>
+        <echo message=""/>
+        <echo message="Available targets are:"/>
+        <echo message=""/>
+        <echo message="compile    --> Compile java files into deployment classes directory"/>
+    	<echo message="copy-deploy  --> Copy all files into the deployment directory"/>
+        <echo message="rebuild-deploy  --> Delete and rebuild the deployment directory"/>
+        <echo message="deploy  --> Copy files into the deployment directory and compile java files"/>
+        <echo message="reload  --> Just reload the servlet by touching the web.xml file"/>
+    	<echo message="package-war --> Package application as a WAR file and place in workspace directory"/>
+        <echo message="clean-class-files --> delete the compiled class files from the deployment directory"/>
+        <echo message="clean-all --> Delete the entire deployment directory"/>
+        <echo message=""/>
+    </target>
+
+    <target name="compile" description="Compile all modified java source files into the deploy build folder">
+        <mkdir dir="${instance-deploy.path}/${build.folder}"/>
+        <javac destdir="${instance-deploy.path}/${build.folder}" target="1.5" debug="true"
+               deprecation="false" optimize="false" failonerror="true">
+            <src path="${lava-core.path}/${src.folder}"/>
+        	<src path="${lava-crms.path}/${src.folder}"/>
+           	<src path="${lava-crms-nacc.path}/${src.folder}"/>
+           	<src path="${instance.path}/${src.folder}"/>
+            <classpath refid="master-classpath"/>
+        </javac>
+    </target>
+    
+	 
+	<target name="copy" description="copy all files into the deployment directory">
+		<copy todir="${instance-deploy.path}" preservelastmodified="true" verbose="true">
+			<fileset dir="${lava-core.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
+			<fileset dir="${lava-crms.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
+			<fileset dir="${lava-crms-nacc.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
+			<fileset dir="${instance.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
+		</copy>
+	</target>    
+	
+    
+	<target name="rebuild-deploy" depends="clean-all,deploy"/>
+	
+	<target name="deploy" depends="copy,compile"/>
+	    
+   
+    <target name="deploy-reload" depends="deploy,reload"/>
+			
+	<target name="reload" description="reload servlet" >
+		<!-- reload the servlet by "touching" the web.xml file -->
+			<touch file="${instance-deploy.path}/WEB-INF/web.xml"/>
+	</target>    
+
+	
+	<!-- package into a .war file per the Servlet Spec. -->
+	<target name="package-war" depends="deploy" description="Package web app into [instance].war">
+
+		<!-- note that the Ant war task could also be used for packaging. -->
+		<jar destfile="${workspace.path}\${war.file}">
+			<zipfileset dir="${instance-deploy.path}/WEB-INF" prefix="WEB-INF" includes="web.xml,lava-servlet.xml,hibernate.properties"/>
+			<zipfileset dir="${instance-deploy.path}/WEB-INF/classes" prefix="WEB-INF/classes" includes="**/*.class,ehcache.xml,*.jrtx"/>
+			<zipfileset dir="${instance-deploy.path}/WEB-INF/hibernate" prefix="WEB-INF/hibernate" includes="**/*.hbm.xml,**/*.xml"/>
+			<zipfileset dir="${instance-deploy.path}/WEB-INF/context" prefix="WEB-INF/context" includes="**/*.xml"/>
+			<zipfileset dir="${instance-deploy.path}/WEB-INF/decorators" prefix="WEB-INF/decorators" includes="**/*.jsp,**/*.xml"/>
+			<zipfileset dir="${instance-deploy.path}/WEB-INF/i18n" prefix="WEB-INF/i18n" includes="**/*.properties"/>
+			<zipfileset dir="${instance-deploy.path}/WEB-INF/jsp" prefix="WEB-INF/jsp" includes="**/*.jsp"/>
+			<zipfileset dir="${instance-deploy.path}/WEB-INF/report" prefix="WEB-INF/report" includes="**/*.jrxml"/>
+			<zipfileset dir="${instance-deploy.path}/WEB-INF/lib" prefix="WEB-INF/lib" includes="**/*.jar"/>
+			<zipfileset dir="${instance-deploy.path}/WEB-INF/tags" prefix="WEB-INF/tags" includes="**/*.tag,tags-include.jsp"/>
+			<zipfileset dir="${instance-deploy.path}/security" prefix="security" includes="**/*.jsp"/>
+			<zipfileset dir="${instance-deploy.path}/images" prefix="images" includes="**/*.gif,**/*.png"/>
+			<zipfileset dir="${instance-deploy.path}/styles" prefix="styles" includes="**/*.css"/>
+			<zipfileset dir="${instance-deploy.path}/javascript" prefix="javascript" includes="**/*.js"/>
+		</jar>
+	</target>
+	
+    <target name="clean-class-files" description="Delete all .class files">
+        <delete includeemptydirs="true">
+  	        <fileset dir="${instance-deploy.path}/${build.folder}" includes="**/*.class"/>
+        </delete>
+    </target>
+
+    <target name="clean-all" description="Delete the instance deploy folder prior to a rebuild">
+        <delete dir="${instance-deploy.path}"/>
+    </target>
+
+
+
+
+</project>

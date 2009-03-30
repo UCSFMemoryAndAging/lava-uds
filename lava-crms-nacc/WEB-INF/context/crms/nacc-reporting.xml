@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="naccReportViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+		<!-- must be ordered to come before jspViewResolver, because InternalResourceViewResolver does not
+			report non-existing views and therefore the next view resolver in the chain will not be tried,
+			i.e. when chaining view resolvers, InternalResourceViewResolver must be last -->
+		<property name="order" value="240"/>
+		<property name="location"><value>/WEB-INF/context/crms/nacc-reports.xml</value></property>
+	</bean>
+  
+  	
+	
+<!-- actions -->
+
+
+	
+	<bean id="lava.crms.reporting.reports.udsExtract" parent="crmsReportFlowAction"/>
+
+
+	<!-- subclassed report handler to add custom criteria handling -->
+	<bean id="udsExtractFormAction" parent="crmsEntityComponentFormAction"><constructor-arg><list>
+    	<bean id="udsExtractHandler" class="edu.ucsf.lava.crms.assessment.controller.UdsExtractComponentHandler" parent="crmsDateCriteriaReportHandler"/>
+    </list></constructor-arg></bean>		
+
+	
+	
+	<bean id="projectPatientStatusFormAction"  parent="crmsEntityComponentFormAction"><constructor-arg><list>
+		<bean parent="crmsProjectCriteriaReportHandler"/>
+	</list></constructor-arg></bean>	
+	
+	<bean id="researchVisitListByDateFormAction"  parent="crmsEntityComponentFormAction"><constructor-arg><list>
+		<bean parent="crmsDateCriteriaReportHandler"/>
+	</list></constructor-arg></bean>	
+	
+	<bean id="researchVisitListByPatientFormAction"  parent="crmsEntityComponentFormAction"><constructor-arg><list>
+		<bean parent="crmsDateCriteriaReportHandler"/>
+	</list></constructor-arg></bean>	
+	
+	<bean id="projectVisitListByDateFormAction" parent="crmsEntityComponentFormAction"><constructor-arg><list>
+		<bean parent="crmsDateProjectCriteriaReportHandler"/>
+	</list></constructor-arg></bean>	
+	
+	<bean id="projectVisitListByPatientFormAction" parent="crmsEntityComponentFormAction"><constructor-arg><list>
+		<bean parent="crmsProjectCriteriaReportHandler"/>
+	</list></constructor-arg></bean>	
+	
+	
+	
+	
+</beans>

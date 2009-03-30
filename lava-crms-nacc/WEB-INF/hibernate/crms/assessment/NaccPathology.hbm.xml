@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.NaccPathology" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		
+		<join table="naccpathology">
+		<key column="InstrID"/>		
+  <property name="ptid" column="PTID" type="string" length="10"/>
+       <property name="npform" column="NPFORM" type="timestamp"/>
+       <property name="npformmo" column="NPFORMMO" type="short"/>
+       <property name="npformdy" column="NPFORMDY" type="short"/>
+       <property name="npformyr" column="NPFORMYR" type="short"/>
+       <property name="npid" column="NPID" type="string" length="10"/>
+       <property name="npsex" column="NPSEX" type="short"/>
+       <property name="npdage" column="NPDAGE" type="short"/>
+       <property name="npdod" column="NPDOD" type="timestamp"/>
+       <property name="npdodmo" column="NPDODMO" type="short"/>
+       <property name="npdoddy" column="NPDODDY" type="short"/>
+       <property name="npdodyr" column="NPDODYR" type="short"/>
+       <property name="submissionstatus" column="SubmissionStatus" type="string" length="25"/>
+       <property name="statnote" column="Statnote" type="string" length="100"/>
+       <property name="subdate" column="Subdate" type="string" length="10"/>
+       <property name="npgross" column="NPGROSS" type="short"/>
+       <property name="npnit" column="NPNIT" type="short"/>
+       <property name="npcerad" column="NPCERAD" type="short"/>
+       <property name="npadrda" column="NPADRDA" type="short"/>
+       <property name="npocrit" column="NPOCRIT" type="short"/>
+       <property name="npbraak" column="NPBRAAK" type="short"/>
+       <property name="npneur" column="NPNEUR" type="short"/>
+       <property name="npdiff" column="NPDIFF" type="short"/>
+       <property name="npvasc" column="NPVASC" type="short"/>
+       <property name="nplinf" column="NPLINF" type="short"/>
+       <property name="npmicro" column="NPMICRO" type="short"/>
+       <property name="nplac" column="NPLAC" type="short"/>
+       <property name="nphem" column="NPHEM" type="short"/>
+       <property name="npart" column="NPART" type="short"/>
+       <property name="npnec" column="NPNEC" type="short"/>
+       <property name="npscl" column="NPSCL" type="short"/>
+       <property name="npavas" column="NPAVAS" type="short"/>
+       <property name="nparter" column="NPARTER" type="short"/>
+       <property name="npamy" column="NPAMY" type="short"/>
+       <property name="npoang" column="NPOANG" type="short"/>
+       <property name="npvoth" column="NPVOTH" type="short"/>
+       <property name="nplewy" column="NPLEWY" type="short"/>
+       <property name="nplewycs" column="NPLEWYCS" type="short"/>
+       <property name="nppick" column="NPPICK" type="short"/>
+       <property name="npcort" column="NPCORT" type="short"/>
+       <property name="npprog" column="NPPROG" type="short"/>
+       <property name="npfront" column="NPFRONT" type="short"/>
+       <property name="nptau" column="NPTAU" type="short"/>
+       <property name="npftd" column="NPFTD" type="short"/>
+       <property name="npftdno" column="NPFTDNO" type="short"/>
+       <property name="npftdspc" column="NPFTDSPC" type="short"/>
+       <property name="npcj" column="NPCJ" type="short"/>
+       <property name="npprion" column="NPPRION" type="short"/>
+       <property name="npmajor" column="NPMAJOR" type="short"/>
+       <property name="npmpath1" column="NPMPATH1" type="string" length="30"/>
+       <property name="npmpath2" column="NPMPATH2" type="string" length="30"/>
+       <property name="npmpath3" column="NPMPATH3" type="string" length="30"/>
+       <property name="npgene" column="NPGENE" type="short"/>
+       <property name="npfhspec" column="NPFHSPEC" type="string" length="30"/>
+       <property name="npapoe" column="NPAPOE" type="short"/>
+       <property name="nptauhap" column="NPTAUHAP" type="short"/>
+       <property name="npprnp" column="NPPRNP" type="short"/>
+       <property name="npchrom" column="NPCHROM" type="short"/>
+       <property name="nppnorm" column="NPPNORM" type="short"/>
+       <property name="npcnorm" column="NPCNORM" type="short"/>
+       <property name="nppadp" column="NPPADP" type="short"/>
+       <property name="npcadp" column="NPCADP" type="short"/>
+       <property name="nppad" column="NPPAD" type="short"/>
+       <property name="npcad" column="NPCAD" type="short"/>
+       <property name="npplewy" column="NPPLEWY" type="short"/>
+       <property name="npclewy" column="NPCLEWY" type="short"/>
+       <property name="nppvasc" column="NPPVASC" type="short"/>
+       <property name="npcvasc" column="NPCVASC" type="short"/>
+       <property name="nppftld" column="NPPFTLD" type="short"/>
+       <property name="npcftld" column="NPCFTLD" type="short"/>
+       <property name="npphipp" column="NPPHIPP" type="short"/>
+       <property name="npchipp" column="NPCHIPP" type="short"/>
+       <property name="nppprion" column="NPPPRION" type="short"/>
+       <property name="npcprion" column="NPCPRION" type="short"/>
+       <property name="nppoth1" column="NPPOTH1" type="short"/>
+       <property name="npcoth1" column="NPCOTH1" type="short"/>
+       <property name="npoth1x" column="NPOTH1X" type="string" length="60"/>
+       <property name="nppoth2" column="NPPOTH2" type="short"/>
+       <property name="npcoth2" column="NPCOTH2" type="short"/>
+       <property name="npoth2x" column="NPOTH2X" type="string" length="60"/>
+       <property name="nppoth3" column="NPPOTH3" type="short"/>
+       <property name="npcoth3" column="NPCOTH3" type="short"/>
+       <property name="npoth3x" column="NPOTH3X" type="string" length="60"/>
+       <property name="npbrfrzn" column="NPBRFRZN" type="short"/>
+       <property name="npbrfrm" column="NPBRFRM" type="short"/>
+       <property name="npbrparf" column="NPBRPARF" type="short"/>
+       <property name="npcsfant" column="NPCSFANT" type="short"/>
+
+
+
+		
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+

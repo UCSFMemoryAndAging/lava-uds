@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+     [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsLabsImaging" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udslabsimaging">
+			<key column="InstrID"/>		
+	       	<property name="ctFlm" column="CTFLM" type="short"/>
+	       	<property name="ctDig" column="CTDIG" type="short"/>
+	       	<property name="mri1Flm" column="MRI1FLM" type="short"/>
+	       	<property name="mri1Dig" column="MRI1DIG" type="short"/>
+	       	<property name="mri2Flm" column="MRI2FLM" type="short"/>
+	       	<property name="mri2Dig" column="MRI2DIG" type="short"/>
+	       	<property name="mri3Flm" column="MRI3FLM" type="short"/>
+	       	<property name="mri3Dig" column="MRI3DIG" type="short"/>
+	       	<property name="mriSpFlm" column="MRISPFLM" type="short"/>
+	       	<property name="mriSpDig" column="MRISPDIG" type="short"/>
+	       	<property name="spectFlm" column="SPECTFLM" type="short"/>
+	       	<property name="spectDig" column="SPECTDIG" type="short"/>
+	       	<property name="petFlm" column="PETFLM" type="short"/>
+	       	<property name="petDig" column="PETDIG" type="short"/>
+	       	<property name="dna" column="DNA" type="short"/>
+	       	<property name="csfAntem" column="CSFANTEM" type="short"/>
+	       	<property name="serum" column="SERUM" type="short"/>
+	       	<property name="apoe" column="APOE" type="short"/>
+				</join>	
+	
+		&instrInclude2;
+		
+	</class>		
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

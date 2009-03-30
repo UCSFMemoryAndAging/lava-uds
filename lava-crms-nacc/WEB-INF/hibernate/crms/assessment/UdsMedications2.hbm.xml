@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+     [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsMedications2" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		
+		<list name="details" table="udsmedicationsdetails2" lazy="false">
+	    	<key column="InstrID"/>
+	       	<list-index column="LineNum"/>
+	     	<composite-element class="edu.ucsf.lava.crms.assessment.model.UdsMedications2$UdsMedicationsDetails2">
+		   		<!-- medDetailID is an identity column so do not need to insert or update -->
+		 	   <property name="drugId" column="DRUGID" type="long"/>
+		       <property name="generic" column="Generic" type="string" length="50"/>
+		       <property name="brand" column="Brand" type="string" length="50"/>
+		       <property name="notListed" column="NotListed" type="string" length="50"/>
+				</composite-element>					
+		</list>			
+		
+		&udsInstrInclude;
+		
+		
+		
+		<join table="udsmedications2">
+			<key column="InstrID"/>		
+			<property name="anyMeds" column="ANYMEDS" type="short"/>
+		
+		</join>	
+
+		
+		&instrInclude2;
+		
+		
+	</class>		
+	
+	<query name="list.medications.drugLookup"><![CDATA[
+		select new edu.ucsf.lava.core.list.model.LabelValueBean(lv.valueDesc, lv.valueKey)
+		from edu.ucsf.lava.core.list.model.LavaList list 
+		join list.listValues lv
+		where list.listName = 'MultumDrugLookup'
+		order by lv.orderIndex
+	]]></query>
+
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

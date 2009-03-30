@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsGds" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsgds">
+			<key column="InstrID"/>		
+			<property name="noGds" column="NOGDS" type="short"/>
+	      	<property name="satis" column="SATIS" type="short"/>
+			<property name="dropAct" column="DROPACT" type="short"/>
+			<property name="empty" column="EMPTY" type="short"/>
+			<property name="bored" column="BORED" type="short"/>
+			<property name="spirits" column="SPIRITS" type="short"/>
+			<property name="afraid" column="AFRAID" type="short"/>
+			<property name="happy" column="HAPPY" type="short"/>
+			<property name="helpless" column="HELPLESS" type="short"/>
+			<property name="stayhome" column="STAYHOME" type="short"/>
+			<property name="memprob" column="MEMPROB" type="short"/>
+			<property name="wondrful" column="WONDRFUL" type="short"/>
+			<property name="wrthless" column="WRTHLESS" type="short"/>
+			<property name="energy" column="ENERGY" type="short"/>
+			<property name="hopeless" column="HOPELESS" type="short"/>
+			<property name="better" column="BETTER" type="short"/>
+			<property name="gds" column="GDS" type="short"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

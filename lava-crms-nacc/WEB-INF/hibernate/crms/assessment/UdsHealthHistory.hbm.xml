@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+     [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsHealthHistory" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udshealthhistory">
+			<key column="InstrID"/>		
+	       <property name="cvHAtt" column="CVHATT" type="short"/>
+	       <property name="cvAFib" column="CVAFIB" type="short"/>
+	       <property name="cvAngio" column="CVANGIO" type="short"/>
+	       <property name="cvBypass" column="CVBYPASS" type="short"/>
+	       <property name="cvPace" column="CVPACE" type="short"/>
+	       <property name="cvChf" column="CVCHF" type="short"/>
+	       <property name="cvOthr" column="CVOTHR" type="short"/>
+	       <property name="cvOthrx" column="CVOTHRX" type="string" length="60"/>
+	       <property name="cbStroke" column="CBSTROKE" type="short"/>
+	       <property name="strok1Yr" column="STROK1YR" type="short"/>
+	       <property name="strok2Yr" column="STROK2YR" type="short"/>
+	       <property name="strok3Yr" column="STROK3YR" type="short"/>
+	       <property name="strok4Yr" column="STROK4YR" type="short"/>
+	       <property name="strok5Yr" column="STROK5YR" type="short"/>
+	       <property name="strok6Yr" column="STROK6YR" type="short"/>
+	       <property name="cbTia" column="CBTIA" type="short"/>
+	       <property name="tia1Yr" column="TIA1YR" type="short"/>
+	       <property name="tia2Yr" column="TIA2YR" type="short"/>
+	       <property name="tia3Yr" column="TIA3YR" type="short"/>
+	       <property name="tia4Yr" column="TIA4YR" type="short"/>
+	       <property name="tia5Yr" column="TIA5YR" type="short"/>
+	       <property name="tia6Yr" column="TIA6YR" type="short"/>
+	       <property name="cbOthr" column="CBOTHR" type="short"/>
+	       <property name="cbOthrx" column="CBOTHRX" type="string" length="60"/>
+	       <property name="pd" column="PD" type="short"/>
+	       <property name="pdYr" column="PDYR" type="short"/>
+	       <property name="pdOthr" column="PDOTHR" type="short"/>
+	       <property name="pdOthrYr" column="PDOTHRYR" type="short"/>
+	       <property name="seizures" column="SEIZURES" type="short"/>
+	       <property name="traumBrf" column="TRAUMBRF" type="short"/>
+	       <property name="traumExt" column="TRAUMEXT" type="short"/>
+	       <property name="traumChr" column="TRAUMCHR" type="short"/>
+	       <property name="ncOthr" column="NCOTHR" type="short"/>
+	       <property name="ncOthrx" column="NCOTHRX" type="string" length="60"/>
+	       <property name="hyperten" column="HYPERTEN" type="short"/>
+	       <property name="hyperCho" column="HYPERCHO" type="short"/>
+	       <property name="diabetes" column="DIABETES" type="short"/>
+	       <property name="b12Def" column="B12DEF" type="short"/>
+	       <property name="thyroid" column="THYROID" type="short"/>
+	       <property name="incontU" column="INCONTU" type="short"/>
+	       <property name="incontF" column="INCONTF" type="short"/>
+	       <property name="dep2Yrs" column="DEP2YRS" type="short"/>
+	       <property name="depOthr" column="DEPOTHR" type="short"/>
+	       <property name="alcohol" column="ALCOHOL" type="short"/>
+	       <property name="tobac30" column="TOBAC30" type="short"/>
+	       <property name="tobac100" column="TOBAC100" type="short"/>
+	       <property name="smokYrs" column="SMOKYRS" type="short"/>
+	       <property name="packsPer" column="PACKSPER" type="short"/>
+	       <property name="quitSmok" column="QUITSMOK" type="short"/>
+	       <property name="abusOthr" column="ABUSOTHR" type="short"/>
+	       <property name="abusx" column="ABUSX" type="string" length="60"/>
+	       <property name="psycDis" column="PSYCDIS" type="short"/>
+	       <property name="psycDisx" column="PSYCDISX" type="string" length="60"/>
+			</join>	
+		
+		&instrInclude2;
+		
+	</class>		
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

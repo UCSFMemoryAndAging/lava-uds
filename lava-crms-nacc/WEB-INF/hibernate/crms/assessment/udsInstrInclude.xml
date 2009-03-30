@@ -1,0 +1,39 @@
+			 
+	
+		<join table="udstracking">
+			<key column="InstrID"/>
+
+		<property name="packet" column="Packet" type="string" length="2"/>
+		<property name="formId" column="FormID" type="string" length="3"/>
+		<property name="formVer" column="FormVer" type="string" length="3"/>
+		<property name="adcId" column="ADCID" type="short"/>
+		<property name="ptid" column="PTID" type="string" length="10"/>
+		<property name="visitMo" column="VisitMo" type="short"/>
+		<property name="visitDay" column="VisitDay" type="short"/>
+		<property name="visitYr" column="VisitYr" type="short"/>
+		<property name="visitNum" column="VisitNum" type="short"/>
+		<property name="initials" column="Initials" type="string" length="3"/>
+		<property name="packetDate" column="PacketDate" type="timestamp"/>
+		<property name="packetBy" column="PacketBy" type="string" length="25"/>
+		<property name="packetStatus" column="PacketStatus" type="string" length="25"/>
+		<property name="packetReason" column="PacketReason" type="string" length="25"/>
+		<property name="packetNotes" column="PacketNotes" type="string" length="100"/>
+		<property name="dsDate" column="DSDate" type="timestamp"/>
+		<property name="dsBy" column="DSBy" type="string" length="25"/>
+		<property name="dsStatus" column="DSStatus" type="string" length="25"/>
+		<property name="dsReason" column="DSReason" type="string" length="25"/>
+		<property name="dsNotes" column="DSNotes" type="string" length="100"/>
+		<property name="lcDate" column="LCDate" type="timestamp"/>
+		<property name="lcBy" column="LCBy" type="string" length="25"/>
+		<property name="lcStatus" column="LCStatus" type="string" length="25"/>
+		<property name="lcReason" column="LCReason" type="string" length="25"/>
+		<property name="lcNotes" column="LCNotes" type="string" length="100"/>
+
+	   
+	    <!-- note: because both the InstrumenTracking and instrument specific tables have the 
+	         same Audit* columns, the property names must be different so that the getters/setters 
+	         of the Instrument superclass and the instrument specific subclass do not conflict. -->
+
+        <!-- the audit timestamp fields have db defaults, so do not need to set and insert -->
+		</join>
+		

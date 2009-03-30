@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+     [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsPhoneInclusion" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsphoneinclusion">
+			<key column="InstrID"/>
+			<property name="cogImp" column="TELCOG" type="short"/>
+			<property name="physImp" column="TELILL" type="short"/>
+			<property name="home" column="TELHOME" type="short"/>
+			<property name="refused" column="TELREFU" type="short"/>
+			<property name="other" column="TELOTHR" type="short"/>
+			<property name="otherx" column="TELOTHRX" type="string" length="60"/>
+			<property name="milestone" column="TELMILE" type="short"/>
+			<property name="inperson" column="TELINPER" type="short"/>			
+			</join>	
+		
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

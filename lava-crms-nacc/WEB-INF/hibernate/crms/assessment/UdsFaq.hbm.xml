@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFaq" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsfaq">
+			<key column="InstrID"/>		
+			<property name="bills" column="BILLS" type="short"/>
+			<property name="taxes" column="TAXES" type="short"/>
+			<property name="shopping" column="SHOPPING" type="short"/>
+			<property name="games" column="GAMES" type="short"/>
+			<property name="stove" column="STOVE" type="short"/>
+			<property name="mealPrep" column="MEALPREP" type="short"/>
+			<property name="events" column="EVENTS" type="short"/>
+			<property name="payAttn" column="PAYATTN" type="short"/>
+			<property name="remDates" column="REMDATES" type="short"/>
+			<property name="travel" column="TRAVEL" type="short"/>
+			</join>	
+
+       &instrInclude2;
+       
+	</class>       
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

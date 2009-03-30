@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsPhysical" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsphysical">
+			<key column="InstrID"/>		
+	       	<property name="height" column="HEIGHT" type="float" precision="4" scale="1"/>
+	       	<property name="weight" column="WEIGHT" type="short"/>
+	       	<property name="bpSys" column="BPSYS" type="short"/>
+	       	<property name="bpDias" column="BPDIAS" type="short"/>
+	       	<property name="hrate" column="HRATE" type="short"/>
+	       	<property name="vision" column="VISION" type="short"/>
+	       	<property name="visCorr" column="VISCORR" type="short"/>
+	       	<property name="visWCorr" column="VISWCORR" type="short"/>
+	       	<property name="hearing" column="HEARING" type="short"/>
+	       	<property name="hearAid" column="HEARAID" type="short"/>
+	       	<property name="hearWAid" column="HEARWAID" type="short"/>
+			</join>	
+	
+		&instrInclude2;
+		
+	</class>			
+			
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

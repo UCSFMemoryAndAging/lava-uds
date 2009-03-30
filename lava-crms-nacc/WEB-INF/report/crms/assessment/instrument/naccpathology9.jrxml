@@ -1,0 +1,3432 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="naccpathology9"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="792"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="36"
+		 rightMargin="36"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="AllSectionsNoDetail"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+	<template><![CDATA["reportStyles.jrtx"]]></template>
+
+
+	<parameter name="currentPatient" isForPrompting="false" class="edu.ucsf.lava.crms.people.model.Patient"/>
+	<parameter name="currentVisit" isForPrompting="false" class="edu.ucsf.lava.crms.scheduling.model.Visit"/>
+	<parameter name="handler" isForPrompting="false" class="edu.ucsf.lava.core.controller.LavaComponentHandler"/>
+	<parameter name="dynamicLists" isForPrompting="false" class="java.util.Map"/>
+	<parameter name="webappInstance" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="instrStatusSubreport" isForPrompting="true" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="instrHeaderSubreport" isForPrompting="true" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="instrFooterSubreport" isForPrompting="true" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="instrTrackingDataSource" isForPrompting="true" class="net.sf.jasperreports.engine.JRDataSource"/>
+
+	<field name="ptid" class="java.lang.String"/>
+	<field name="npform" class="java.util.Date"/>
+	<field name="npformmo" class="java.lang.Short"/>
+	<field name="npformdy" class="java.lang.Short"/>
+	<field name="npformyr" class="java.lang.Short"/>
+	<field name="npid" class="java.lang.String"/>
+	<field name="npsex" class="java.lang.Short"/>
+	<field name="npdage" class="java.lang.Short"/>
+	<field name="npdod" class="java.util.Date"/>
+	<field name="npdodmo" class="java.lang.Short"/>
+	<field name="npdoddy" class="java.lang.Short"/>
+	<field name="npdodyr" class="java.lang.Short"/>
+	<field name="submissionstatus" class="java.lang.String"/>
+	<field name="statnote" class="java.lang.String"/>
+	<field name="subdate" class="java.lang.String"/>
+	<field name="npgross" class="java.lang.Short"/>
+	<field name="npnit" class="java.lang.Short"/>
+	<field name="npcerad" class="java.lang.Short"/>
+	<field name="npadrda" class="java.lang.Short"/>
+	<field name="npocrit" class="java.lang.Short"/>
+	<field name="npbraak" class="java.lang.Short"/>
+	<field name="npneur" class="java.lang.Short"/>
+	<field name="npdiff" class="java.lang.Short"/>
+	<field name="npvasc" class="java.lang.Short"/>
+	<field name="nplinf" class="java.lang.Short"/>
+	<field name="npmicro" class="java.lang.Short"/>
+	<field name="nplac" class="java.lang.Short"/>
+	<field name="nphem" class="java.lang.Short"/>
+	<field name="npart" class="java.lang.Short"/>
+	<field name="npnec" class="java.lang.Short"/>
+	<field name="npscl" class="java.lang.Short"/>
+	<field name="npavas" class="java.lang.Short"/>
+	<field name="nparter" class="java.lang.Short"/>
+	<field name="npamy" class="java.lang.Short"/>
+	<field name="npoang" class="java.lang.Short"/>
+	<field name="npvoth" class="java.lang.Short"/>
+	<field name="nplewy" class="java.lang.Short"/>
+	<field name="nplewycs" class="java.lang.Short"/>
+	<field name="nppick" class="java.lang.Short"/>
+	<field name="npcort" class="java.lang.Short"/>
+	<field name="npprog" class="java.lang.Short"/>
+	<field name="npfront" class="java.lang.Short"/>
+	<field name="nptau" class="java.lang.Short"/>
+	<field name="npftd" class="java.lang.Short"/>
+	<field name="npftdno" class="java.lang.Short"/>
+	<field name="npftdspc" class="java.lang.Short"/>
+	<field name="npcj" class="java.lang.Short"/>
+	<field name="npprion" class="java.lang.Short"/>
+	<field name="npmajor" class="java.lang.Short"/>
+	<field name="npmpath1" class="java.lang.String"/>
+	<field name="npmpath2" class="java.lang.String"/>
+	<field name="npmpath3" class="java.lang.String"/>
+	<field name="npgene" class="java.lang.Short"/>
+	<field name="npfhspec" class="java.lang.String"/>
+	<field name="npapoe" class="java.lang.Short"/>
+	<field name="nptauhap" class="java.lang.Short"/>
+	<field name="npprnp" class="java.lang.Short"/>
+	<field name="npchrom" class="java.lang.Short"/>
+	<field name="nppnorm" class="java.lang.Short"/>
+	<field name="npcnorm" class="java.lang.Short"/>
+	<field name="nppadp" class="java.lang.Short"/>
+	<field name="npcadp" class="java.lang.Short"/>
+	<field name="nppad" class="java.lang.Short"/>
+	<field name="npcad" class="java.lang.Short"/>
+	<field name="npplewy" class="java.lang.Short"/>
+	<field name="npclewy" class="java.lang.Short"/>
+	<field name="nppvasc" class="java.lang.Short"/>
+	<field name="npcvasc" class="java.lang.Short"/>
+	<field name="nppftld" class="java.lang.Short"/>
+	<field name="npcftld" class="java.lang.Short"/>
+	<field name="npphipp" class="java.lang.Short"/>
+	<field name="npchipp" class="java.lang.Short"/>
+	<field name="nppprion" class="java.lang.Short"/>
+	<field name="npcprion" class="java.lang.Short"/>
+	<field name="nppoth1" class="java.lang.Short"/>
+	<field name="npcoth1" class="java.lang.Short"/>
+	<field name="npoth1x" class="java.lang.String"/>
+	<field name="nppoth2" class="java.lang.Short"/>
+	<field name="npcoth2" class="java.lang.Short"/>
+	<field name="npoth2x" class="java.lang.String"/>
+	<field name="nppoth3" class="java.lang.Short"/>
+	<field name="npcoth3" class="java.lang.Short"/>
+	<field name="npoth3x" class="java.lang.String"/>
+	<field name="npbrfrzn" class="java.lang.Short"/>
+	<field name="npbrfrm" class="java.lang.Short"/>
+	<field name="npbrparf" class="java.lang.Short"/>
+	<field name="npcsfant" class="java.lang.Short"/>
+	<field name="id" class="java.lang.Long"/>
+	<field name="projName" class="java.lang.String"/>
+	<field name="instrType" class="java.lang.String"/>
+	<field name="instrVer" class="java.lang.String"/>
+	<field name="dcDate" class="java.util.Date"/>
+	<field name="dcBy" class="java.lang.String"/>
+	<field name="dcStatus" class="java.lang.String"/>
+	<field name="dcNotes" class="java.lang.String"/>
+	<field name="researchStatus" class="java.lang.String"/>
+	<field name="qualityIssue" class="java.lang.String"/>
+	<field name="qualityIssue2" class="java.lang.String"/>
+	<field name="qualityIssue3" class="java.lang.String"/>
+	<field name="qualityNotes" class="java.lang.String"/>
+	<field name="deDate" class="java.util.Date"/>
+	<field name="deBy" class="java.lang.String"/>
+	<field name="deStatus" class="java.lang.String"/>
+	<field name="deNotes" class="java.lang.String"/>
+	<field name="dvDate" class="java.util.Date"/>
+	<field name="dvBy" class="java.lang.String"/>
+	<field name="dvStatus" class="java.lang.String"/>
+	<field name="dvNotes" class="java.lang.String"/>
+	<field name="ageAtDC" class="java.lang.Short"/>
+	<field name="notes(data)" class="java.lang.String"/>
+	<field name="notes(q20)" class="java.lang.String"/>
+	<field name="notes(q21_24)" class="java.lang.String"/>
+	<field name="notes(q7_19)" class="java.lang.String"/>
+	<field name="notes(tracking)" class="java.lang.String"/>
+
+
+		<group  name="group0" >
+			<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+			<groupHeader>
+			<band height="160"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="title"
+						x="0"
+						y="0"
+						width="540"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["NACC Pathology (V9)"]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="20"
+						width="540"
+						height="0"
+						key="line"
+						positionType="Float"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="section"
+						x="0"
+						y="25"
+						width="540"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getSectionName("instrument.tracking")]]></textFieldExpression>
+				</textField>
+				<frame>					<reportElement
+						x="0"
+						y="45"
+						width="251"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.ptid", $F{ptid}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="159"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.ptid")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="65"
+						width="251"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npform", $F{npform}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="159"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npform")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="87"
+						width="251"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npid", $F{npid}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="159"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npid")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="107"
+						width="251"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npsex", $F{npsex}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="159"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npsex")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="127"
+						width="251"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npdage", $F{npdage}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="159"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npdage")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="147"
+						width="251"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npdod", $F{npdod}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="159"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npdod")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="287"
+						y="45"
+						width="251"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.submissionstatus", $F{submissionstatus}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="159"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.submissionstatus")]]></textFieldExpression>
+				</textField>
+				</frame>				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="287"
+						y="86"
+						width="251"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.statnote")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="287"
+						y="98"
+						width="251"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{statnote}]]></textFieldExpression>
+				</textField>
+				<frame>					<reportElement
+						x="287"
+						y="64"
+						width="251"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.subdate", $F{subdate}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="159"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.subdate")]]></textFieldExpression>
+				</textField>
+				</frame>			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="group5" >
+			<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+			<groupHeader>
+			<band height="469"  isSplitAllowed="true" >
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="3"
+						width="540"
+						height="0"
+						key="line"
+						positionType="Float"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="section"
+						x="0"
+						y="8"
+						width="300"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getSectionName("naccpathology9.q7_19")]]></textFieldExpression>
+				</textField>
+				<frame>					<reportElement
+						x="0"
+						y="28"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="212"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npgross", $F{npgross}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="212"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npgross")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="68"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npnit", $F{npnit}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npnit")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="88"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcerad", $F{npcerad}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcerad")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="108"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npadrda", $F{npadrda}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npadrda")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="128"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npocrit", $F{npocrit}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npocrit")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="148"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="212"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npbraak", $F{npbraak}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="212"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npbraak")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="168"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="212"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npneur", $F{npneur}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="212"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npneur")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="188"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="212"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npdiff", $F{npdiff}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="212"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npdiff")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="208"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="212"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npvasc", $F{npvasc}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="212"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npvasc")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="228"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nplinf", $F{nplinf}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.nplinf")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="248"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npmicro", $F{npmicro}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npmicro")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="268"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nplac", $F{nplac}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.nplac")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="288"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nphem", $F{nphem}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.nphem")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="308"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npart", $F{npart}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npart")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="328"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npnec", $F{npnec}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npnec")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="348"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npscl", $F{npscl}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npscl")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="368"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npavas", $F{npavas}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npavas")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="388"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nparter", $F{nparter}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.nparter")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="408"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npamy", $F{npamy}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npamy")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="428"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npoang", $F{npoang}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npoang")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="448"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npvoth", $F{npvoth}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npvoth")]]></textFieldExpression>
+				</textField>
+				</frame>				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="50"
+						width="300"
+						height="12"
+						key="textField-1"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getMessage("naccpathology9.q8.label")]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="group10" >
+			<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+			<groupHeader>
+			<band height="569"  isSplitAllowed="true" >
+				<frame>					<reportElement
+						x="31"
+						y="23"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nplewy", $F{nplewy}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.nplewy")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="43"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nplewycs", $F{nplewycs}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.nplewycs")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="63"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nppick", $F{nppick}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.nppick")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="83"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcort", $F{npcort}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcort")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="103"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npprog", $F{npprog}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npprog")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="123"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npfront", $F{npfront}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npfront")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="143"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nptau", $F{nptau}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.nptau")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="163"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npftd", $F{npftd}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npftd")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="183"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npftdno", $F{npftdno}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npftdno")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="203"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npftdspc", $F{npftdspc}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npftdspc")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="253"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcj", $F{npcj}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcj")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="273"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npprion", $F{npprion}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npprion")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="300"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="212"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npmajor", $F{npmajor}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="212"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npmajor")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="320"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npmpath1", $F{npmpath1}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npmpath1")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="340"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npmpath2", $F{npmpath2}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npmpath2")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="360"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npmpath3", $F{npmpath3}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npmpath3")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="407"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npgene", $F{npgene}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npgene")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="427"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npfhspec", $F{npfhspec}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npfhspec")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="475"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npapoe", $F{npapoe}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npapoe")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="495"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nptauhap", $F{nptauhap}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.nptauhap")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="31"
+						y="515"
+						width="509"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="181"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npprnp", $F{npprnp}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="181"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npprnp")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="543"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="212"
+						y="0"
+						width="326"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npchrom", $F{npchrom}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="0"
+						width="212"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npchrom")]]></textFieldExpression>
+				</textField>
+				</frame>				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="5"
+						width="300"
+						height="12"
+						key="textField-2"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getMessage("naccpathology9.q14.label")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="232"
+						width="300"
+						height="12"
+						key="textField-3"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getMessage("naccpathology9.q15.label")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="387"
+						width="300"
+						height="12"
+						key="textField-4"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getMessage("naccpathology9.q17.label")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="454"
+						width="300"
+						height="12"
+						key="textField-5"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getMessage("naccpathology9.q18.label")]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="group15" >
+			<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+			<groupHeader>
+			<band height="241"  isSplitAllowed="true" >
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="3"
+						width="540"
+						height="0"
+						key="line"
+						positionType="Float"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="section"
+						x="0"
+						y="8"
+						width="540"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getSectionName("naccpathology9.q20")]]></textFieldExpression>
+				</textField>
+				<frame>					<reportElement
+						x="0"
+						y="41"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nppnorm", $F{nppnorm}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="41"
+						width="438"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcnorm", $F{npcnorm}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="346"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcnorm")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="58"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nppadp", $F{nppadp}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="58"
+						width="438"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcadp", $F{npcadp}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="346"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcadp")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="75"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nppad", $F{nppad}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="75"
+						width="438"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcad", $F{npcad}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="346"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcad")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="93"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npplewy", $F{npplewy}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="93"
+						width="438"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npclewy", $F{npclewy}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="346"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npclewy")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="111"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nppvasc", $F{nppvasc}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="111"
+						width="438"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcvasc", $F{npcvasc}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="346"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcvasc")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="129"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nppftld", $F{nppftld}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="129"
+						width="438"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcftld", $F{npcftld}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="346"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcftld")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="147"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npphipp", $F{npphipp}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="147"
+						width="438"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npchipp", $F{npchipp}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="346"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npchipp")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="165"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nppprion", $F{nppprion}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="165"
+						width="438"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcprion", $F{npcprion}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="346"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcprion")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="182"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nppoth1", $F{nppoth1}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="182"
+						width="188"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcoth1", $F{npcoth1}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="96"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcoth1")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="269"
+						y="182"
+						width="250"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="250"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npoth1x", $F{npoth1x}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="200"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nppoth2", $F{nppoth2}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="200"
+						width="188"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcoth2", $F{npcoth2}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="96"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcoth2")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="269"
+						y="200"
+						width="250"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="250"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npoth2x", $F{npoth2x}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="221"
+						width="72"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.nppoth3", $F{nppoth3}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="81"
+						y="221"
+						width="188"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcoth3", $F{npcoth3}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="96"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcoth3")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="269"
+						y="221"
+						width="250"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="250"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npoth3x", $F{npoth3x}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				</frame>				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="0"
+						y="25"
+						width="72"
+						height="12"
+						key="textField-6"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getMessage("naccpathology9.primaryHeader")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="81"
+						y="25"
+						width="72"
+						height="12"
+						key="textField-7"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getMessage("naccpathology9.contributingHeader")]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="group20" >
+			<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+			<groupHeader>
+			<band height="134"  isSplitAllowed="true" >
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="3"
+						width="540"
+						height="0"
+						key="line"
+						positionType="Float"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="section"
+						x="0"
+						y="8"
+						width="540"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getSectionName("naccpathology9.q21_24")]]></textFieldExpression>
+				</textField>
+				<frame>					<reportElement
+						x="0"
+						y="28"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npbrfrzn", $F{npbrfrzn}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="448"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npbrfrzn")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="48"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npbrfrm", $F{npbrfrm}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="448"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npbrfrm")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="68"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npbrparf", $F{npbrparf}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="448"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npbrparf")]]></textFieldExpression>
+				</textField>
+				</frame>				<frame>					<reportElement
+						x="0"
+						y="88"
+						width="540"
+						height="12"
+						key="frame"
+						positionType="Float"/>
+					<box></box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="value"
+						x="0"
+						y="0"
+						width="72"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npcsfant", $F{npcsfant}, $P{dynamicLists})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="label"
+						x="92"
+						y="0"
+						width="448"
+						height="12"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npcsfant")]]></textFieldExpression>
+				</textField>
+				</frame>			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="group25" >
+			<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+			<groupHeader>
+			<band height="114"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="0"
+						width="476"
+						height="114"
+						key="subreport"
+						positionType="Float"/>
+					<subreportParameter  name="handler">
+						<subreportParameterExpression><![CDATA[$P{handler}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{instrTrackingDataSource}]]></dataSourceExpression>
+					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{instrStatusSubreport}]]></subreportExpression>
+				</subreport>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="30"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="0"
+						width="476"
+						height="30"
+						key="subreport"
+						positionType="Float"/>
+					<subreportParameter  name="currentPatient">
+						<subreportParameterExpression><![CDATA[$P{currentPatient}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="currentVisit">
+						<subreportParameterExpression><![CDATA[$P{currentVisit}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="handler">
+						<subreportParameterExpression><![CDATA[$P{handler}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="webappInstance">
+						<subreportParameterExpression><![CDATA[$P{webappInstance}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="dcDate">
+						<subreportParameterExpression><![CDATA[$F{dcDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="dcBy">
+						<subreportParameterExpression><![CDATA[$F{dcBy}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{instrHeaderSubreport}]]></subreportExpression>
+				</subreport>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="39"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="0"
+						width="476"
+						height="39"
+						key="subreport"
+						positionType="Float"/>
+					<subreportParameter  name="handler">
+						<subreportParameterExpression><![CDATA[$P{handler}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="projName">
+						<subreportParameterExpression><![CDATA[$F{projName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="instrType">
+						<subreportParameterExpression><![CDATA[$F{instrType}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{instrFooterSubreport}]]></subreportExpression>
+				</subreport>
+				<rectangle>
+					<reportElement
+						x="475"
+						y="0"
+						width="66"
+						height="18"
+						key="rectangle"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+</graphicElement>
+				</rectangle>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="pageNumber"
+						x="480"
+						y="3"
+						width="45"
+						height="15"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="pageNumber"
+						x="519"
+						y="3"
+						width="22"
+						height="15"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

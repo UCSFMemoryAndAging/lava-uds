@@ -1,0 +1,309 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory2" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsfamilyhistory2">
+			<key column="InstrID"/>		
+		  
+			<property name="a3Chg" column="A3CHG" type="short"/>
+			<property name="parChg" column="PARCHG" type="short"/>
+			<property name="momYob" column="MOMYOB" type="short"/>
+			<property name="momLiv" column="MOMLIV" type="short"/>
+			<property name="momYod" column="MOMYOD" type="short"/>
+			<property name="momDem" column="MOMDEM" type="short"/>
+			<property name="momOnset" column="MOMONSET" type="short"/>
+			<property name="dadYob" column="DADYOB" type="short"/>
+			<property name="dadLiv" column="DADLIV" type="short"/>
+			<property name="dadYod" column="DADYOD" type="short"/>
+			<property name="dadDem" column="DADDEM" type="short"/>
+			<property name="dadOnset" column="DADONSET" type="short"/>
+			<property name="twin" column="TWIN" type="short"/>
+			<property name="twinType" column="TWINTYPE" type="short"/>
+			<property name="sibChg" column="SIBCHG" type="short"/>
+			<property name="sibs" column="SIBS" type="short"/>
+			<property name="sib1Yob" column="SIB1YOB" type="short"/>
+			<property name="sib1Liv" column="SIB1LIV" type="short"/>
+			<property name="sib1Yod" column="SIB1YOD" type="short"/>
+			<property name="sib1Dem" column="SIB1DEM" type="short"/>
+			<property name="sib1Ons" column="SIB1ONS" type="short"/>
+			<property name="sib2Yob" column="SIB2YOB" type="short"/>
+			<property name="sib2Liv" column="SIB2LIV" type="short"/>
+			<property name="sib2Yod" column="SIB2YOD" type="short"/>
+			<property name="sib2Dem" column="SIB2DEM" type="short"/>
+			<property name="sib2Ons" column="SIB2ONS" type="short"/>
+			<property name="sib3Yob" column="SIB3YOB" type="short"/>
+			<property name="sib3Liv" column="SIB3LIV" type="short"/>
+			<property name="sib3Yod" column="SIB3YOD" type="short"/>
+			<property name="sib3Dem" column="SIB3DEM" type="short"/>
+			<property name="sib3Ons" column="SIB3ONS" type="short"/>
+			<property name="sib4Yob" column="SIB4YOB" type="short"/>
+			<property name="sib4Liv" column="SIB4LIV" type="short"/>
+			<property name="sib4Yod" column="SIB4YOD" type="short"/>
+			<property name="sib4Dem" column="SIB4DEM" type="short"/>
+			<property name="sib4Ons" column="SIB4ONS" type="short"/>
+			<property name="sib5Yob" column="SIB5YOB" type="short"/>
+			<property name="sib5Liv" column="SIB5LIV" type="short"/>
+			<property name="sib5Yod" column="SIB5YOD" type="short"/>
+			<property name="sib5Dem" column="SIB5DEM" type="short"/>
+			<property name="sib5Ons" column="SIB5ONS" type="short"/>
+			<property name="sib6Yob" column="SIB6YOB" type="short"/>
+			<property name="sib6Liv" column="SIB6LIV" type="short"/>
+			<property name="sib6Yod" column="SIB6YOD" type="short"/>
+			<property name="sib6Dem" column="SIB6DEM" type="short"/>
+			<property name="sib6Ons" column="SIB6ONS" type="short"/>
+			<property name="sib7Yob" column="SIB7YOB" type="short"/>
+			<property name="sib7Liv" column="SIB7LIV" type="short"/>
+			<property name="sib7Yod" column="SIB7YOD" type="short"/>
+			<property name="sib7Dem" column="SIB7DEM" type="short"/>
+			<property name="sib7Ons" column="SIB7ONS" type="short"/>
+			<property name="sib8Yob" column="SIB8YOB" type="short"/>
+			<property name="sib8Liv" column="SIB8LIV" type="short"/>
+			<property name="sib8Yod" column="SIB8YOD" type="short"/>
+			<property name="sib8Dem" column="SIB8DEM" type="short"/>
+			<property name="sib8Ons" column="SIB8ONS" type="short"/>
+			<property name="sib9Yob" column="SIB9YOB" type="short"/>
+			<property name="sib9Liv" column="SIB9LIV" type="short"/>
+			<property name="sib9Yod" column="SIB9YOD" type="short"/>
+			<property name="sib9Dem" column="SIB9DEM" type="short"/>
+			<property name="sib9Ons" column="SIB9ONS" type="short"/>
+			<property name="sib10Yob" column="SIB10YOB" type="short"/>
+			<property name="sib10Liv" column="SIB10LIV" type="short"/>
+			<property name="sib10Yod" column="SIB10YOD" type="short"/>
+			<property name="sib10Dem" column="SIB10DEM" type="short"/>
+			<property name="sib10Ons" column="SIB10ONS" type="short"/>
+			<property name="sib11Yob" column="SIB11YOB" type="short"/>
+			<property name="sib11Liv" column="SIB11LIV" type="short"/>
+			<property name="sib11Yod" column="SIB11YOD" type="short"/>
+			<property name="sib11Dem" column="SIB11DEM" type="short"/>
+			<property name="sib11Ons" column="SIB11ONS" type="short"/>
+			<property name="sib12Yob" column="SIB12YOB" type="short"/>
+			<property name="sib12Liv" column="SIB12LIV" type="short"/>
+			<property name="sib12Yod" column="SIB12YOD" type="short"/>
+			<property name="sib12Dem" column="SIB12DEM" type="short"/>
+			<property name="sib12Ons" column="SIB12ONS" type="short"/>
+			<property name="sib13Yob" column="SIB13YOB" type="short"/>
+			<property name="sib13Liv" column="SIB13LIV" type="short"/>
+			<property name="sib13Yod" column="SIB13YOD" type="short"/>
+			<property name="sib13Dem" column="SIB13DEM" type="short"/>
+			<property name="sib13Ons" column="SIB13ONS" type="short"/>
+			<property name="sib14Yob" column="SIB14YOB" type="short"/>
+			<property name="sib14Liv" column="SIB14LIV" type="short"/>
+			<property name="sib14Yod" column="SIB14YOD" type="short"/>
+			<property name="sib14Dem" column="SIB14DEM" type="short"/>
+			<property name="sib14Ons" column="SIB14ONS" type="short"/>
+			<property name="sib15Yob" column="SIB15YOB" type="short"/>
+			<property name="sib15Liv" column="SIB15LIV" type="short"/>
+			<property name="sib15Yod" column="SIB15YOD" type="short"/>
+			<property name="sib15Dem" column="SIB15DEM" type="short"/>
+			<property name="sib15Ons" column="SIB15ONS" type="short"/>
+			<property name="sib16Yob" column="SIB16YOB" type="short"/>
+			<property name="sib16Liv" column="SIB16LIV" type="short"/>
+			<property name="sib16Yod" column="SIB16YOD" type="short"/>
+			<property name="sib16Dem" column="SIB16DEM" type="short"/>
+			<property name="sib16Ons" column="SIB16ONS" type="short"/>
+			<property name="sib17Yob" column="SIB17YOB" type="short"/>
+			<property name="sib17Liv" column="SIB17LIV" type="short"/>
+			<property name="sib17Yod" column="SIB17YOD" type="short"/>
+			<property name="sib17Dem" column="SIB17DEM" type="short"/>
+			<property name="sib17Ons" column="SIB17ONS" type="short"/>
+			<property name="sib18Yob" column="SIB18YOB" type="short"/>
+			<property name="sib18Liv" column="SIB18LIV" type="short"/>
+			<property name="sib18Yod" column="SIB18YOD" type="short"/>
+			<property name="sib18Dem" column="SIB18DEM" type="short"/>
+			<property name="sib18Ons" column="SIB18ONS" type="short"/>
+			<property name="sib19Yob" column="SIB19YOB" type="short"/>
+			<property name="sib19Liv" column="SIB19LIV" type="short"/>
+			<property name="sib19Yod" column="SIB19YOD" type="short"/>
+			<property name="sib19Dem" column="SIB19DEM" type="short"/>
+			<property name="sib19Ons" column="SIB19ONS" type="short"/>
+			<property name="sib20Yob" column="SIB20YOB" type="short"/>
+			<property name="sib20Liv" column="SIB20LIV" type="short"/>
+			<property name="sib20Yod" column="SIB20YOD" type="short"/>
+			<property name="sib20Dem" column="SIB20DEM" type="short"/>
+			<property name="sib20Ons" column="SIB20ONS" type="short"/>
+			
+</join>
+<join table="udsfamilyhistorychildren2">
+			<key column="InstrID"/>
+			<property name="kidChg" column="KIDCHG" type="short"/>
+			<property name="kids" column="KIDS" type="short"/>
+			<property name="kid1Yob" column="KID1YOB" type="short"/>
+			<property name="kid1Liv" column="KID1LIV" type="short"/>
+			<property name="kid1Yod" column="KID1YOD" type="short"/>
+			<property name="kid1Dem" column="KID1DEM" type="short"/>
+			<property name="kid1Ons" column="KID1ONS" type="short"/>
+			<property name="kid2Yob" column="KID2YOB" type="short"/>
+			<property name="kid2Liv" column="KID2LIV" type="short"/>
+			<property name="kid2Yod" column="KID2YOD" type="short"/>
+			<property name="kid2Dem" column="KID2DEM" type="short"/>
+			<property name="kid2Ons" column="KID2ONS" type="short"/>
+			<property name="kid3Yob" column="KID3YOB" type="short"/>
+			<property name="kid3Liv" column="KID3LIV" type="short"/>
+			<property name="kid3Yod" column="KID3YOD" type="short"/>
+			<property name="kid3Dem" column="KID3DEM" type="short"/>
+			<property name="kid3Ons" column="KID3ONS" type="short"/>
+			<property name="kid4Yob" column="KID4YOB" type="short"/>
+			<property name="kid4Liv" column="KID4LIV" type="short"/>
+			<property name="kid4Yod" column="KID4YOD" type="short"/>
+			<property name="kid4Dem" column="KID4DEM" type="short"/>
+			<property name="kid4Ons" column="KID4ONS" type="short"/>
+			<property name="kid5Yob" column="KID5YOB" type="short"/>
+			<property name="kid5Liv" column="KID5LIV" type="short"/>
+			<property name="kid5Yod" column="KID5YOD" type="short"/>
+			<property name="kid5Dem" column="KID5DEM" type="short"/>
+			<property name="kid5Ons" column="KID5ONS" type="short"/>
+			<property name="kid6Yob" column="KID6YOB" type="short"/>
+			<property name="kid6Liv" column="KID6LIV" type="short"/>
+			<property name="kid6Yod" column="KID6YOD" type="short"/>
+			<property name="kid6Dem" column="KID6DEM" type="short"/>
+			<property name="kid6Ons" column="KID6ONS" type="short"/>
+			<property name="kid7Yob" column="KID7YOB" type="short"/>
+			<property name="kid7Liv" column="KID7LIV" type="short"/>
+			<property name="kid7Yod" column="KID7YOD" type="short"/>
+			<property name="kid7Dem" column="KID7DEM" type="short"/>
+			<property name="kid7Ons" column="KID7ONS" type="short"/>
+			<property name="kid8Yob" column="KID8YOB" type="short"/>
+			<property name="kid8Liv" column="KID8LIV" type="short"/>
+			<property name="kid8Yod" column="KID8YOD" type="short"/>
+			<property name="kid8Dem" column="KID8DEM" type="short"/>
+			<property name="kid8Ons" column="KID8ONS" type="short"/>
+			<property name="kid9Yob" column="KID9YOB" type="short"/>
+			<property name="kid9Liv" column="KID9LIV" type="short"/>
+			<property name="kid9Yod" column="KID9YOD" type="short"/>
+			<property name="kid9Dem" column="KID9DEM" type="short"/>
+			<property name="kid9Ons" column="KID9ONS" type="short"/>
+			<property name="kid10Yob" column="KID10YOB" type="short"/>
+			<property name="kid10Liv" column="KID10LIV" type="short"/>
+			<property name="kid10Yod" column="KID10YOD" type="short"/>
+			<property name="kid10Dem" column="KID10DEM" type="short"/>
+			<property name="kid10Ons" column="KID10ONS" type="short"/>
+			<property name="kid11Yob" column="KID11YOB" type="short"/>
+			<property name="kid11Liv" column="KID11LIV" type="short"/>
+			<property name="kid11Yod" column="KID11YOD" type="short"/>
+			<property name="kid11Dem" column="KID11DEM" type="short"/>
+			<property name="kid11Ons" column="KID11ONS" type="short"/>
+			<property name="kid12Yob" column="KID12YOB" type="short"/>
+			<property name="kid12Liv" column="KID12LIV" type="short"/>
+			<property name="kid12Yod" column="KID12YOD" type="short"/>
+			<property name="kid12Dem" column="KID12DEM" type="short"/>
+			<property name="kid12Ons" column="KID12ONS" type="short"/>
+			<property name="kid13Yob" column="KID13YOB" type="short"/>
+			<property name="kid13Liv" column="KID13LIV" type="short"/>
+			<property name="kid13Yod" column="KID13YOD" type="short"/>
+			<property name="kid13Dem" column="KID13DEM" type="short"/>
+			<property name="kid13Ons" column="KID13ONS" type="short"/>
+			<property name="kid14Yob" column="KID14YOB" type="short"/>
+			<property name="kid14Liv" column="KID14LIV" type="short"/>
+			<property name="kid14Yod" column="KID14YOD" type="short"/>
+			<property name="kid14Dem" column="KID14DEM" type="short"/>
+			<property name="kid14Ons" column="KID14ONS" type="short"/>
+			<property name="kid15Yob" column="KID15YOB" type="short"/>
+			<property name="kid15Liv" column="KID15LIV" type="short"/>
+			<property name="kid15Yod" column="KID15YOD" type="short"/>
+			<property name="kid15Dem" column="KID15DEM" type="short"/>
+			<property name="kid15Ons" column="KID15ONS" type="short"/>
+
+</join>
+<join table="udsfamilyhistoryrelatives2">
+			<key column="InstrID"/>
+			<property name="relChg" column="RELCHG" type="short"/>
+			<property name="relsDem" column="RELSDEM" type="short"/>
+			<property name="rel1Yob" column="REL1YOB" type="short"/>
+			<property name="rel1Liv" column="REL1LIV" type="short"/>
+			<property name="rel1Yod" column="REL1YOD" type="short"/>
+			<property name="rel1Ons" column="REL1ONS" type="short"/>
+			<property name="rel2Yob" column="REL2YOB" type="short"/>
+			<property name="rel2Liv" column="REL2LIV" type="short"/>
+			<property name="rel2Yod" column="REL2YOD" type="short"/>
+			<property name="rel2Ons" column="REL2ONS" type="short"/>
+			<property name="rel3Yob" column="REL3YOB" type="short"/>
+			<property name="rel3Liv" column="REL3LIV" type="short"/>
+			<property name="rel3Yod" column="REL3YOD" type="short"/>
+			<property name="rel3Ons" column="REL3ONS" type="short"/>
+			<property name="rel4Yob" column="REL4YOB" type="short"/>
+			<property name="rel4Liv" column="REL4LIV" type="short"/>
+			<property name="rel4Yod" column="REL4YOD" type="short"/>
+			<property name="rel4Ons" column="REL4ONS" type="short"/>
+			<property name="rel5Yob" column="REL5YOB" type="short"/>
+			<property name="rel5Liv" column="REL5LIV" type="short"/>
+			<property name="rel5Yod" column="REL5YOD" type="short"/>
+			<property name="rel5Ons" column="REL5ONS" type="short"/>
+			<property name="rel6Yob" column="REL6YOB" type="short"/>
+			<property name="rel6Liv" column="REL6LIV" type="short"/>
+			<property name="rel6Yod" column="REL6YOD" type="short"/>
+			<property name="rel6Ons" column="REL6ONS" type="short"/>
+			<property name="rel7Yob" column="REL7YOB" type="short"/>
+			<property name="rel7Liv" column="REL7LIV" type="short"/>
+			<property name="rel7Yod" column="REL7YOD" type="short"/>
+			<property name="rel7Ons" column="REL7ONS" type="short"/>
+			<property name="rel8Yob" column="REL8YOB" type="short"/>
+			<property name="rel8Liv" column="REL8LIV" type="short"/>
+			<property name="rel8Yod" column="REL8YOD" type="short"/>
+			<property name="rel8Ons" column="REL8ONS" type="short"/>
+			<property name="rel9Yob" column="REL9YOB" type="short"/>
+			<property name="rel9Liv" column="REL9LIV" type="short"/>
+			<property name="rel9Yod" column="REL9YOD" type="short"/>
+			<property name="rel9Ons" column="REL9ONS" type="short"/>
+			<property name="rel10Yob" column="REL10YOB" type="short"/>
+			<property name="rel10Liv" column="REL10LIV" type="short"/>
+			<property name="rel10Yod" column="REL10YOD" type="short"/>
+			<property name="rel10Ons" column="REL10ONS" type="short"/>
+			<property name="rel11Yob" column="REL11YOB" type="short"/>
+			<property name="rel11Liv" column="REL11LIV" type="short"/>
+			<property name="rel11Yod" column="REL11YOD" type="short"/>
+			<property name="rel11Ons" column="REL11ONS" type="short"/>
+			<property name="rel12Yob" column="REL12YOB" type="short"/>
+			<property name="rel12Liv" column="REL12LIV" type="short"/>
+			<property name="rel12Yod" column="REL12YOD" type="short"/>
+			<property name="rel12Ons" column="REL12ONS" type="short"/>
+			<property name="rel13Yob" column="REL13YOB" type="short"/>
+			<property name="rel13Liv" column="REL13LIV" type="short"/>
+			<property name="rel13Yod" column="REL13YOD" type="short"/>
+			<property name="rel13Ons" column="REL13ONS" type="short"/>
+			<property name="rel14Yob" column="REL14YOB" type="short"/>
+			<property name="rel14Liv" column="REL14LIV" type="short"/>
+			<property name="rel14Yod" column="REL14YOD" type="short"/>
+			<property name="rel14Ons" column="REL14ONS" type="short"/>
+			<property name="rel15Yob" column="REL15YOB" type="short"/>
+			<property name="rel15Liv" column="REL15LIV" type="short"/>
+			<property name="rel15Yod" column="REL15YOD" type="short"/>
+			<property name="rel15Ons" column="REL15ONS" type="short"/>
+					  
+			</join>	
+	
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

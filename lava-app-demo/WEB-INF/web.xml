@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+  <!-- to view DTD for this file, syntax, etc., consult:
+       1. the 2.4 Servlet Spec:
+          file:///home/ctoohey/download/j2ee/servlet-2_4-fr-spec.pdf
+       2. the following XML Schemas for deployment descriptors:
+          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd
+          http://java.sun.com/xml/ns/j2ee/j2ee_1_4.xsd
+       3. the DTDs:
+          http://java.sun.com/dtd/
+          
+  -->
+  
+  
+
+  <context-param>
+    <param-name>webappVersion</param-name>
+    <param-value>3.0.0.4 3/5/2009</param-value>
+  </context-param>
+
+  <!-- Spring configuration file locations
+       /WEB-INF/lava-servlet.xml loaded by default. In addition, load the following Spring config files. -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/context/context-demo.xml</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>sitemesh.configfile</param-name>
+    <param-value>/WEB-INF/decorators/sitemesh.xml</param-value>
+  </context-param>
+  
+      
+  <!-- Filter to handle session expiration, maintenace windows, and admin disconnects -->
+   <filter>
+    <filter-name>sessionMonitoringFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+     <param-name>targetBeanName</param-name>
+     <param-value>sessionMonitoringFilter</param-value>
+     </init-param>
+  </filter>
+  
+  <!-- Acegi filter. Configuration in /WEB-INF/lava-security.xml    -->
+  <filter>
+    <filter-name>Acegi Filter Chain Proxy</filter-name>
+    <filter-class>org.acegisecurity.util.FilterToBeanProxy</filter-class>
+    <init-param>
+      <param-name>targetClass</param-name>
+      <param-value>org.acegisecurity.util.FilterChainProxy</param-value>
+    </init-param>
+  </filter>
+
+  <!-- SiteMesh filter. Configuration in /WEB-INF/decorators/sitemesh.xml (see context-param above) -->
+  <filter>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+  </filter>
+   
+   
+  
+   <!-- Filter to set the currentUser in the session -->
+   <filter>
+    <filter-name>CoreAuthUserContextFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+     <param-name>targetBeanName</param-name>
+     <param-value>coreAuthUserContextFilter</param-value>
+     </init-param>
+   </filter>
+  
+   <!-- Filter to set the currentUser in the session -->
+   <filter>
+    <filter-name>CrmsAuthUserContextFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+     <param-name>targetBeanName</param-name>
+     <param-value>crmsAuthUserContextFilter</param-value>
+     </init-param>
+   </filter>
+
+ 
+  <filter-mapping>
+    <filter-name>Acegi Filter Chain Proxy</filter-name>
+    <url-pattern>*.lava</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>*.lava</url-pattern>
+  </filter-mapping>
+  
+
+   <filter-mapping>
+	<filter-name>sessionMonitoringFilter</filter-name>
+	<url-pattern>*.lava</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+	<filter-name>CoreAuthUserContextFilter</filter-name>
+	<url-pattern>*.lava</url-pattern>
+  </filter-mapping>
+  
+   <filter-mapping>
+	<filter-name>CrmsAuthUserContextFilter</filter-name>
+	<url-pattern>*.lava</url-pattern>
+  </filter-mapping>
+  
+  <listener> 
+  	<!-- note: the order of the listener classes is critical. ApplicationEventListener accesses beans
+  		configured in the Spring application context, so the ContextLoaderListener needs to fire 
+  		before the ApplicationEventListener -->
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>edu.ucsf.lava.core.manager.ApplicationEventListener</listener-class>
+    <listener-class>edu.ucsf.lava.core.session.SessionEventListener</listener-class>
+    <listener-class>edu.ucsf.lava.core.controller.RequestEventListener</listener-class>
+  </listener>
+  
+  <servlet>
+    <servlet-name>lava</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>uitags.js</servlet-name>
+    <servlet-class>net.sf.uitags.js.JsProviderServlet</servlet-class>
+    <init-param>
+      <param-name>suites</param-name>
+      <param-value>core,formGuide</param-value>
+      <description>
+        Optional param.
+        If specified, this servlet serves the JS files for the
+        specified suites in the order they are declared. If unspecified,
+        the servlet serves JS files for all suites.
+      </description>
+    </init-param>
+  </servlet>
+
+ 
+
+  <servlet-mapping>
+    <servlet-name>lava</servlet-name>
+    <url-pattern>*.lava</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>uitags.js</servlet-name>
+    <url-pattern>/uitags.js</url-pattern>
+  </servlet-mapping>
+
+  
+
+  <!-- Define the default session timeout for your application,
+       in minutes.  From a servlet or JSP page, you can modify
+       the timeout for a particular session dynamically by using
+       HttpSession.getMaxInactiveInterval(). 
+       
+       With the new session monitoring functionlity...session expiration 
+       is handled ...so set the default timeout to a really high number. -->
+       
+
+  <session-config>
+    <session-timeout>10000</session-timeout>   
+  </session-config>
+
+
+  <welcome-file-list>
+    <welcome-file>
+      /security/redirect.jsp
+    </welcome-file>
+  </welcome-file-list>
+
+ </web-app>

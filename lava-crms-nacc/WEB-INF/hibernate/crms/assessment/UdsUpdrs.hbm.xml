@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+        
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsUpdrs" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsupdrs">
+			<key column="InstrID"/>
+	       <property name="pdNormal" column="PDNORMAL" type="short"/>
+	       <property name="speech" column="SPEECH" type="short"/>
+	       <property name="speechx" column="SPEECHX" type="string" length="60"/>
+	       <property name="faceXp" column="FACEXP" type="short"/>
+	       <property name="faceXpx" column="FACEXPX" type="string" length="60"/>
+	       <property name="trestFac" column="TRESTFAC" type="short"/>
+	       <property name="trestFacx" column="TRESTFAX" type="string" length="60"/>
+	       <property name="trestRHd" column="TRESTRHD" type="short"/>
+	       <property name="trestRHdx" column="TRESTRHX" type="string" length="60"/>
+	       <property name="trestLHd" column="TRESTLHD" type="short"/>
+	       <property name="trestLHdx" column="TRESTLHX" type="string" length="60"/>
+	       <property name="trestRFt" column="TRESTRFT" type="short"/>
+	       <property name="trestRFtx" column="TRESTRFX" type="string" length="60"/>
+	       <property name="trestLFt" column="TRESTLFT" type="short"/>
+	       <property name="trestLFtx" column="TRESTLFX" type="string" length="60"/>
+	       <property name="trActRHd" column="TRACTRHD" type="short"/>
+	       <property name="trActRHdx" column="TRACTRHX" type="string" length="60"/>
+	       <property name="trActLHd" column="TRACTLHD" type="short"/>
+	       <property name="trActLHdx" column="TRACTLHX" type="string" length="60"/>
+	       <property name="rigdNeck" column="RIGDNECK" type="short"/>
+	       <property name="rigdNeckx" column="RIGDNEX" type="string" length="60"/>
+	       <property name="rigdUpRt" column="RIGDUPRT" type="short"/>
+	       <property name="rigdUpRtx" column="RIGDUPRX" type="string" length="60"/>
+	       <property name="rigdUpLf" column="RIGDUPLF" type="short"/>
+	       <property name="rigdUpLfx" column="RIGDUPLX" type="string" length="60"/>
+	       <property name="rigdLoRt" column="RIGDLORT" type="short"/>
+	       <property name="rigdLoRtx" column="RIGDLORX" type="string" length="60"/>
+	       <property name="rigdLoLf" column="RIGDLOLF" type="short"/>
+	       <property name="rigdLoLfx" column="RIGDLOLX" type="string" length="60"/>
+	       <property name="tapsRt" column="TAPSRT" type="short"/>
+	       <property name="tapsRtx" column="TAPSRTX" type="string" length="60"/>
+	       <property name="tapsLf" column="TAPSLF" type="short"/>
+	       <property name="tapsLfx" column="TAPSLFX" type="string" length="60"/>
+	       <property name="handMovR" column="HANDMOVR" type="short"/>
+	       <property name="handMvRx" column="HANDMVRX" type="string" length="60"/>
+	       <property name="handMovL" column="HANDMOVL" type="short"/>
+	       <property name="handMvLx" column="HANDMVLX" type="string" length="60"/>
+	       <property name="handAltR" column="HANDALTR" type="short"/>
+	       <property name="handAtRx" column="HANDATRX" type="string" length="60"/>
+	       <property name="handAltL" column="HANDALTL" type="short"/>
+	       <property name="handAtLx" column="HANDATLX" type="string" length="60"/>
+	       <property name="legRt" column="LEGRT" type="short"/>
+	       <property name="legRtx" column="LEGRTX" type="string" length="60"/>
+	       <property name="legLf" column="LEGLF" type="short"/>
+	       <property name="legLfx" column="LEGLFX" type="string" length="60"/>
+	       <property name="arising" column="ARISING" type="short"/>
+	       <property name="arisingx" column="ARISINGX" type="string" length="60"/>
+	       <property name="posture" column="POSTURE" type="short"/>
+	       <property name="posturex" column="POSTUREX" type="string" length="60"/>
+	       <property name="gait" column="GAIT" type="short"/>
+	       <property name="gaitx" column="GAITX" type="string" length="60"/>
+	       <property name="posStab" column="POSSTAB" type="short"/>
+	       <property name="posStabx" column="POSSTABX" type="string" length="60"/>
+	       <property name="bradykin" column="BRADYKIN" type="short"/>
+	       <property name="bradykinx" column="BRADYKIX" type="string" length="60"/>
+			</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsMilestone" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsmilestone">
+			<key column="InstrID"/>		
+			<property name="deceased" column="DECEASED" type="short"/>
+<property name="deathMo" column="DEATHMO" type="short"/>
+<property name="deathDy" column="DEATHDY" type="short"/>
+<property name="deathYr" column="DEATHYR" type="short"/>
+<property name="autopsy" column="AUTOPSY" type="short"/>
+<property name="discont" column="DISCONT" type="short"/>
+<property name="discMo" column="DISCMO" type="short"/>
+<property name="discDy" column="DISCDY" type="short"/>
+<property name="discYr" column="DISCYR" type="short"/>
+<property name="discReas" column="DISCREAS" type="short"/>
+<property name="discReax" column="DISCREAX" type="string" length="60"/>
+<property name="rejoined" column="REJOINED" type="short"/>
+<property name="nurseHome" column="NURSEHOME" type="short"/>
+<property name="nurseMo" column="NURSEMO" type="short"/>
+<property name="nurseDy" column="NURSEDY" type="short"/>
+<property name="nurseYr" column="NURSEYR" type="short"/>
+<property name="protocol" column="PROTOCOL" type="short"/>
+<property name="npsyTest" column="NPSYTEST" type="short"/>
+<property name="npCogImp" column="NPCOGIMP" type="short"/>
+<property name="npPhyIll" column="NPPHYILL" type="short"/>
+<property name="npHomen" column="NPHOMEN" type="short"/>
+<property name="npRefus" column="NPREFUS" type="short"/>
+<property name="npOthRea" column="NPOTHREA" type="short"/>
+<property name="npOthRex" column="NPOTHREX" type="string" length="60"/>
+<property name="phynData" column="PHYNDATA" type="short"/>
+<property name="phyCog" column="PHYCOG" type="short"/>
+<property name="phyIll" column="PHYILL" type="short"/>
+<property name="phyHome" column="PHYHOME" type="short"/>
+<property name="phyRefus" column="PHYREFUS" type="short"/>
+<property name="phyOth" column="PHYOTH" type="short"/>
+<property name="phyOthx" column="PHYOTHX" type="string" length="60"/>
+<property name="udsActiv" column="UDSACTIV" type="short"/>
+
+			</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

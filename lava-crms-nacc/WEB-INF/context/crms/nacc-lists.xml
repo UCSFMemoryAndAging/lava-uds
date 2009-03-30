@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+
+<beans>
+
+		
+	<bean id="list.udsinstrument.formId" parent="list.dynamic">
+		<property name="query" value="udsinstrument.formId"/>
+	</bean>
+			
+		
+	<bean id="list.ref.udsErrorCodes" parent="list.standard">
+		<property name="dbListName" value="UDSErrorCodes"/>
+	</bean>
+	
+	<bean id="list.ref.udsErrorCodesWithSkipCodes" parent="list.combination">
+		<property name="staticReferenceLists"><list>
+			<ref bean="list.ref.udsErrorCodes"/>
+			<ref bean="list.ref.skipErrorCodes"/>
+		</list></property>
+	</bean>
+		
+	<bean id="list.standardUds" abstract="true" parent="list.standard">
+		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodes"/></property>
+		<property name="defaultSort" value="valueNumeric"/>
+		<property name="defaultFormat" value="valueConcatLabel"/>
+	</bean>
+	
+	<bean id="list.dataOnlyUds" abstract="true" parent="list.dataOnly">
+		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodes"/></property>
+		<property name="defaultSort" value="valueNumeric"/>
+	</bean>
+	
+	<bean id="list.numericRangeUds" abstract="true" parent="list.numericRange">
+		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodes"/></property>
+	</bean>
+	
+	<bean id="list.uds.codes" abstract="true" parent="list.combination">
+		<property name="staticReferenceLists">
+			<list><ref bean="list.ref.udsErrorCodes"/>
+		</list></property>
+	</bean>     
+	
+	<bean id="list.uds.npiCodes" abstract="true" parent="list.uds.codes">
+		<property name="staticReferenceLists"><list>
+			<ref bean="list.ref.udsErrorCodes"/>
+			<ref bean="list.ref.skipErrorCodes"/>
+		</list></property>
+	</bean>  	
+	
+	<bean id="list.udsformchecklist1.codes" parent="list.uds.codes"/>
+	<bean id="list.udssubjectdemo1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsinformantdemo1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsfamilyhistory1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsmedications1.codes" parent="list.uds.codes"/>
+	<bean id="list.udshealthhistory1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsphysical1.codes" parent="list.uds.codes"/>
+	<bean id="list.udshachinski1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsupdrs1.codes" parent="list.uds.codes"/>
+	<bean id="list.udscdr1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsnpi1.codes" parent="list.uds.npiCodes"/>
+	<bean id="list.udsgds1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsfaq1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsappraisal1.codes" parent="list.uds.codes"/>
+	<bean id="list.udssymptomsonset1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsneuropsych1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsdiagnosis1.codes" parent="list.uds.codes"/>
+	<bean id="list.udslabsimaging1.codes" parent="list.uds.codes"/>
+	<bean id="list.udsformchecklist2.codes" parent="list.uds.codes"/>
+	<bean id="list.udssubjectdemo2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsinformantdemo2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsfamilyhistory2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsmedications2.codes" parent="list.uds.codes"/>
+	<bean id="list.udshealthhistory2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsphysical2.codes" parent="list.uds.codes"/>
+	<bean id="list.udshachinski2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsupdrs2.codes" parent="list.uds.codes"/>
+	<bean id="list.udscdr2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsnpi2.codes" parent="list.uds.npiCodes"/>
+	<bean id="list.udsgds2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsfaq2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsappraisal2.codes" parent="list.uds.codes"/>
+	<bean id="list.udssymptomsonset2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsneuropsych2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsdiagnosis2.codes" parent="list.uds.codes"/>
+	<bean id="list.udslabsimaging2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsphoneinclusion2.codes" parent="list.uds.codes"/>
+	<bean id="list.mdsstatus.codes" parent="list.uds.codes"/>
+				
+    
+	
+ 	<bean id="list.uds.gender" parent="list.standardUds">
+ 		<property name="dbListName" value="Gender"/>
+ 	</bean>
+	
+	<bean id="list.uds.noYes01" parent="list.standardUds">
+ 		<property name="dbListName" value="udsnoyes01"/>
+ 	</bean>
+				
+    <bean id="list.uds.noYesUnknown019" parent="list.standardUds">
+ 		<property name="dbListName" value="udsnoyesunknown019"/>
+ 	</bean>
+				
+	<bean id="list.mdsstatus.discReason" parent="list.standardUds">
+ 		<property name="dbListName" value="mdsstatdiscrea"/>
+ 	</bean>
+				
+	<bean id="list.uds.mdsstatus.currentStat" parent="list.standardUds">
+ 		<property name="dbListName" value="mdsstatcurrentstat"/>
+ 	</bean>
+				
+	
+	<bean id="list.uds.m1.day" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="1"/>	
+		<property name="defaultMaxValue" value="31"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="99"/><constructor-arg value="99"/></bean>
+		</list></property>
+	</bean>	
+    
+    <bean id="list.uds.m1.month" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="1"/>	
+		<property name="defaultMaxValue" value="12"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="99"/><constructor-arg value="99"/></bean>
+		</list></property>
+	</bean>	
+    
+     <bean id="list.uds.m1.year" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="2004"/>	
+		<property name="defaultMaxValue" value="2010"/>
+	</bean>	
+				
+	<bean id="list.uds.z1Reason" parent="list.standardUds">
+ 		<property name="dbListName" value="udsZ1Reason"/>
+ 	</bean>
+				
+    <bean id="list.uds.m1.discont" parent="list.standardUds">
+ 		<property name="dbListName" value="udsM1Discont"/>
+ 	</bean>
+			
+	<bean id="list.uds.m1.discontV1" parent="list.standardUds">
+ 		<property name="dbListName" value="udsm1nurse"/>
+ 		<property name="defaultFormat" value="label"/>
+ 	</bean>
+			
+	<bean id="list.uds.m1.udsActiv" parent="list.standardUds">
+ 		<property name="dbListName" value="udsm1status"/>
+ 		<property name="defaultFormat" value="label"/>
+ 	</bean>
+				
+				
+	<bean id="list.uds.m1.protocol" parent="list.standardUds">
+ 		<property name="dbListName" value="udsM1Protocol"/>
+ 	</bean>
+		
+	
+	<bean id="list.uds.range" abstract="true" parent="list.numericRangeUds">
+		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodesWithSkipCodes"/></property>
+		<property name="defaultMinValue" value="0"/>	
+	</bean>	
+	
+	<bean id="list.uds.rangeUnknown" abstract="true" parent="list.uds.range">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="99"/><constructor-arg value="99"/></bean>
+		</list></property>
+	</bean>	
+	
+	<bean id="list.uds.rangeNAUnknown" abstract="true" parent="list.uds.range">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="88"/><constructor-arg value="88"/></bean>
+			<bean parent="list.data"><constructor-arg value="99"/><constructor-arg value="99"/></bean>
+		</list></property>
+	</bean>	
+	
+	<bean id="list.uds.range1_3" parent="list.uds.range">
+		<property name="defaultMinValue" value="1"/>	
+		<property name="defaultMaxValue" value="3"/>
+	</bean>	
+
+	<bean id="list.uds.range0_20" parent="list.uds.rangeUnknown">
+		<property name="defaultMaxValue" value="20"/>
+	</bean>	
+
+	<bean id="list.uds.range0_20NA" parent="list.uds.rangeNAUnknown">
+		<property name="defaultMaxValue" value="20"/>
+	</bean>	
+
+	<bean id="list.uds.range0_30" parent="list.uds.rangeNAUnknown">
+		<property name="defaultMaxValue" value="30"/>
+	</bean>	
+
+	<bean id="list.uds.range0_80" parent="list.uds.rangeNAUnknown">
+		<property name="defaultMaxValue" value="80"/>
+	</bean>	
+
+    <bean id="list.uds.ageUnknown" parent="list.uds.range">
+		<property name="defaultMaxValue" value="120"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="999"/><constructor-arg value="999"/></bean>
+		</list></property>
+	</bean>	
+    
+     <bean id="list.uds.ageNAUnknown" parent="list.uds.ageUnknown">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="888"/><constructor-arg value="888"/></bean>
+			<bean parent="list.data"><constructor-arg value="999"/><constructor-arg value="999"/></bean>
+		</list></property>
+	</bean>	
+    
+    <bean id="list.uds.yearUnknown" parent="list.uds.range">
+		<property name="defaultMinValue" value="1850"/>	
+		<property name="defaultMaxValue" value="2050"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="9999"/><constructor-arg value="9999"/></bean>
+		</list></property>
+	</bean>	
+    
+     
+				
+				
+				
+				
+	<bean id="list.uds.noYesNA" parent="list.standardUds">
+ 		<property name="dbListName" value="udsNoYesNA"/>
+ 	</bean>
+				
+    <bean id="list.uds.a1.primReason" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1primreason"/>
+ 	</bean>
+				
+    			
+    <bean id="list.uds.a1.refSource" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1refsource"/>
+ 	</bean>
+				
+    <bean id="list.uds.a1.presDis" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1presdis"/>
+ 	</bean>
+			
+    			
+    <bean id="list.uds.a1.presPart" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1prespart"/>
+ 	</bean>
+						
+    <bean id="list.uds.a1.padCType" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1padctype"/>
+ 	</bean>
+						
+    <bean id="list.uds.a1.hispanic" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1hispanic"/>
+ 	</bean>
+				
+    <bean id="list.uds.a1.race" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1race"/>
+ 	</bean>
+				
+    <bean id="list.uds.a1.race2" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1race2"/>
+ 	</bean>
+				
+    <bean id="list.uds.a1.lang" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1lang"/>
+ 	</bean>
+					
+    <bean id="list.uds.a1.liveSit" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1livesit"/>
+ 	</bean>
+					
+   	<bean id="list.uds.a1.indepd" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1indepd"/>
+ 	</bean>
+					
+    <bean id="list.uds.a1.residence" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1residence"/>
+ 	</bean>
+				
+    <bean id="list.uds.a1.marital" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1marital"/>
+ 	</bean>
+					
+    <bean id="list.uds.a1.handed" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa1handed"/>
+ 	</bean>
+					
+    <bean id="list.uds.a2.relation" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa2relation"/>
+ 	</bean>
+					
+   	<bean id="list.uds.a2.freq" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa2freq"/>
+ 	</bean>
+				 	
+   	<bean id="list.uds.a3.twinType" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa3twintype"/>
+ 	</bean>
+				 			
+				 			
+	<bean id="list.uds.a4.medUnit" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa4medunit"/>
+ 		<property name="defaultFormat" value="label"/>
+ 	</bean>
+	
+	<bean id="list.uds.a4.freqUnit" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa4frequnit"/>
+ 		<property name="defaultFormat" value="label"/>
+ 	</bean>
+	
+	
+   	
+   	<bean id="list.uds.a5.presence3" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa5presence3"/>
+ 	</bean>
+				 	
+				 	
+    <bean id="list.uds.a5.presence4" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa5presence4"/>
+ 	</bean>
+					
+   	<bean id="list.uds.a5.packSmoke" parent="list.standardUds">
+ 		<property name="dbListName" value="udsa5packsmoke"/>
+ 	</bean>
+				 			
+   	<bean id="list.uds.b2.01" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb201"/>
+ 	</bean>
+				 	
+   	<bean id="list.uds.b2.02" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb202"/>
+ 	</bean>
+ 	
+ 	
+ 	
+ 	<bean id="list.uds.b3.pdNormal" parent="list.dataOnlyUds">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - NOT NORMAL"/><constructor-arg value="0"/></bean>
+			<bean parent="list.data"><constructor-arg value="1 - NORMAL"/><constructor-arg value="1"/></bean>
+		</list></property>
+		<property name="defaultCodes"><ref bean="list.noCodes"/></property>
+	</bean>	
+	
+	
+
+	<bean id="list.uds.b3.speech" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - SLIGHT LOSS OF EXPRESSION"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MONOTONE"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MARKED IMPAIRMENT"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - UNINTELLIGIBLE"/><constructor-arg value="4"/></bean>
+			</list></property>
+	</bean>
+			
+
+	<bean id="list.uds.b3.faceXp" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - MINIMAL HYPOMIMIA"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - SLIGHT"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MODERATE HYPOMIMIA"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - MASKED OR FIED FACIES"/><constructor-arg value="4"/></bean>
+			</list></property>
+	</bean>
+			
+		
+	<bean id="list.uds.b3.tremorAtRest" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - ABSENT"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - SLIGHT"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MILD"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MODERATE"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - MARKED"/><constructor-arg value="4"/></bean>
+			</list></property>
+	</bean>
+			
+	<bean id="list.uds.b3.tremorHand" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - ABSENT"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - SLIGHT"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MODERATE IN AMPLITUDE W/ACTION"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MODERATE IN AMPLITUDE W/POSTURE"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - MARKED"/><constructor-arg value="4"/></bean>
+			</list></property>
+	</bean>	
+			
+	<bean id="list.uds.b3.rigidity" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - ABSENT"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - SLIGHT"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MILD TO MODERATE"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MARKED"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - SEVERE"/><constructor-arg value="4"/></bean>
+			</list></property>
+	</bean>	
+				
+	<bean id="list.uds.b3.fingerTapsEtc" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - MILD"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MODERATELY"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - SEVERE"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - BARELY PERFORM"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>	
+	
+	<bean id="list.uds.b3.arising" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - SLOW"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - PUSHES SELF FROM ARM REST"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - TENDS TO FALL BACK"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - UNABLE TO RISE W/OUT HELP"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>	
+		
+		<bean id="list.uds.b3.posture" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - NOT QUITE ERECT"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MODERATELY STOOPED"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - SEVERELY STOOPED"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - MARKED FLEXION"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>	
+			
+	<bean id="list.uds.b3.gait" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - WALKS SLOWLY"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - WALKS W/DIFFICULTY"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - SEVERE DISTURBANCE"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - CANNOT WALK"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>	
+		
+			
+	<bean id="list.uds.b3.posStab" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - RETROPULSION"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - ABSENCE OF POSTURAL RESPONSE"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - VERY UNSTABLE"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - UNABLE TO STAND"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>	
+		
+	<bean id="list.uds.b3.bradykin" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - MINIMAL SLOWNESS"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MILD SLOWNESS"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MODERATE SLOWNESS"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - MARKED SLOWNESS"/><constructor-arg value="4"/></bean>
+						
+			</list></property>
+	</bean>	
+			
+
+	<bean id="list.uds.b3.speechV2" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - SLIGHT LOSS OF EXPRESSION"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MONOTONE"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MARKED IMPAIRMENT"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - UNINTELLIGIBLE"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>
+			
+
+	<bean id="list.uds.b3.faceXpV2" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - MINIMAL HYPOMIMIA"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - SLIGHT"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MODERATE HYPOMIMIA"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - MASKED OR FIED FACIES"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>
+			
+		
+	<bean id="list.uds.b3.tremorAtRestV2" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - ABSENT"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - SLIGHT"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MILD"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MODERATE"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - MARKED"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>
+			
+	<bean id="list.uds.b3.tremorHandV2" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - ABSENT"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - SLIGHT"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MODERATE IN AMPLITUDE W/ACTION"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MODERATE IN AMPLITUDE W/POSTURE"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - MARKED"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>	
+			
+	<bean id="list.uds.b3.rigidityV2" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - ABSENT"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - SLIGHT"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MILD TO MODERATE"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MARKED"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - SEVERE"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>	
+				
+		
+	<bean id="list.uds.b3.bradykinV2" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - MINIMAL SLOWNESS"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - MILD SLOWNESS"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - MODERATE SLOWNESS"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="4 - MARKED SLOWNESS"/><constructor-arg value="4"/></bean>
+						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
+			</list></property>
+	</bean>	
+			
+	<bean id="list.uds.b5.informant" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="1 - Spouse"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - Child"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - Other"/><constructor-arg value="3"/></bean>
+					
+			</list></property>
+	</bean>	
+ 		
+
+	<bean id="list.uds.b6.noGds" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="Able to Complete"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="Unable to Complete"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - Other"/><constructor-arg value="3"/></bean>
+					
+			</list></property>
+	</bean>	
+				
+
+	    		
+    <bean id="list.uds.b6.yesNoScale_NoCorrect" parent="list.standardUds">
+ 		<property name="dbListName" value="YesNoScale_NoCorrect"/>
+ 	</bean>
+				
+    <bean id="list.uds.b6.yesNoScale_YesCorrect" parent="list.standardUds">
+ 		<property name="dbListName" value="YesNoScale_YesCorrect"/>
+ 	</bean>
+					
+	<bean id="list.uds.b7.diff" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb7diff"/>
+ 	</bean>
+	
+	<bean id="list.uds.b9.fuChg" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb9fuchg"/>
+ 		<property name="defaultFormat" value="label"/>
+ 	</bean>			    		
+	
+    			
+    <bean id="list.uds.b9.predomCog" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb9predomcog"/>
+ 		<property name="defaultFormat" value="label"/>
+ 	</bean>				
+    			
+    		
+    <bean id="list.uds.b9.predomCogV2" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb9predomcog"/>
+ 		<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="7 - Fluctuating Cognition"/><constructor-arg value="7"/></bean>
+		</list></property>
+ 	</bean>
+		
+	<bean id="list.uds.b9.mode" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb9mode"/>
+ 	</bean>
+						
+
+	<bean id="list.uds.b9.yesNoNA" parent="list.dataOnlyUds">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="1 - Yes"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="88 - N/A"/><constructor-arg value="88"/></bean>
+			</list></property>
+	</bean>	
+			
+	
+	<bean id="list.uds.b9.predomBeh" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb9predombeh"/>
+ 		<property name="defaultFormat" value="label"/>
+ 	</bean>				
+    			
+			
+    <bean id="list.uds.b9.predomBehV2" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb9predombeh"/>
+ 		<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="9 - REM sleep behavior disorder"/><constructor-arg value="9"/></bean>
+		</list></property>
+ 	</bean>
+				
+    <bean id="list.uds.b9.predomMot" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb9predommot"/>
+ 	</bean>
+				
+    
+    <bean id="list.uds.b9.overall" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb9overall"/>
+ 	</bean>
+					
+					
+    <bean id="list.uds.b9.domain" parent="list.standardUds">
+ 		<property name="dbListName" value="udsb9domain"/>
+ 	</bean>
+						
+		
+	<bean id="list.usd.ref.c1.key95_98" parent="list.dataOnly">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="95 - Physical problem"/><constructor-arg value="95"/></bean>
+						<bean parent="list.data"><constructor-arg value="96 - Cog/behavior problem"/><constructor-arg value="96"/></bean>
+						<bean parent="list.data"><constructor-arg value="97 - Other problem"/><constructor-arg value="97"/></bean>
+						<bean parent="list.data"><constructor-arg value="98 - Verbal refusal"/><constructor-arg value="98"/></bean>
+			</list></property>
+	</bean>	
+
+	<bean id="list.usd.ref.c1.key995_998" parent="list.dataOnly">
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="995 - Physical problem"/><constructor-arg value="995"/></bean>
+						<bean parent="list.data"><constructor-arg value="996 - Cog/behavior problem"/><constructor-arg value="996"/></bean>
+						<bean parent="list.data"><constructor-arg value="997 - Other problem"/><constructor-arg value="997"/></bean>
+						<bean parent="list.data"><constructor-arg value="998 - Verbal refusal"/><constructor-arg value="998"/></bean>
+			</list></property>
+	</bean>	
+	
+	<bean id="list.uds.c1.admin" parent="list.standardUds">
+ 		<property name="dbListName" value="udsc1admin"/>
+ 	</bean>
+	
+    
+    
+    <bean id="list.uds.c1.lang" parent="list.standardUds">
+ 		<property name="dbListName" value="udsc1lang"/>
+ 	</bean>
+    		
+    <bean id="list.uds.c1.cogStatV2" parent="list.standardUds">
+ 		<property name="dbListName" value="udsc1cogstatV2"/>
+ 	</bean>
+    		
+    		
+    <bean id="list.uds.c1.cogStat" parent="list.standardUds">
+ 		<property name="dbListName" value="udsc1cogstat"/>
+ 		<property name="defaultFormat" value="label"/>
+ 		
+ 	</bean>
+    	
+    <bean id="list.uds.c1.range" abstract="true" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="0"/>	
+		<property name="staticReferenceLists"><list><ref bean="list.usd.ref.c1.key95_98"/></list></property>
+	</bean>					
+	
+	<bean id="list.uds.c1.rangeNA" abstract="true" parent="list.uds.c1.range">
+		<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="88 - N/A"/><constructor-arg value="88"/></bean>
+		</list></property>
+	</bean>		
+    			
+    <bean id="list.uds.c1.range0_1" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="1"/>
+	</bean>				
+    		
+    
+    <bean id="list.uds.c1.range0_5" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="5"/>
+	</bean>				
+    				
+    <bean id="list.uds.c1.range0_7" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="7"/>
+	</bean>						
+    
+    <bean id="list.uds.c1.range0_8" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="8"/>
+	</bean>				
+    		
+    		
+				
+	<bean id="list.uds.c1.range0_12" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="12"/>
+	</bean>				
+    		
+	
+	<bean id="list.uds.c1.range0_24NA" parent="list.uds.c1.rangeNA">
+		<property name="defaultMaxValue" value="24"/>
+	</bean>				
+    		
+	
+	<bean id="list.uds.c1.range0_25NA" parent="list.uds.c1.rangeNA">
+		<property name="defaultMaxValue" value="25"/>
+	</bean>	
+			
+    			
+    <bean id="list.uds.c1.range0_25" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="25"/>
+	</bean>						
+    		
+      <bean id="list.uds.c1.range0_30" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="30"/>
+	</bean>			
+	
+	
+	<bean id="list.uds.c1.range0_40NA" parent="list.uds.c1.rangeNA">
+		<property name="defaultMaxValue" value="40"/>
+	</bean>	
+	
+	
+	<bean id="list.uds.c1.range0_77" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="77"/>
+	</bean>			
+	
+	<bean id="list.uds.c1.range0_85NA" parent="list.uds.c1.rangeNA">
+		<property name="defaultMaxValue" value="85"/>
+		<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="88 - N/A"/><constructor-arg value="88"/></bean>
+						<bean parent="list.data"><constructor-arg value="99 - Unknown"/><constructor-arg value="99"/></bean>
+		</list></property>
+	</bean>	
+	
+	<bean id="list.uds.c1.range0_93" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="93"/>
+	</bean>			
+	
+	
+	<bean id="list.uds.c1.range0_150" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="150"/>
+		<property name="staticReferenceLists"><list><ref bean="list.usd.ref.c1.key995_998"/></list></property>
+	</bean>			
+
+	<bean id="list.uds.c1.range0_300" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="300"/>
+		<property name="staticReferenceLists"><list><ref bean="list.usd.ref.c1.key995_998"/></list></property>
+	</bean>			
+
+    <bean id="list.uds.d1.response" parent="list.standardUds">
+ 		<property name="dbListName" value="udsd1response"/>
+ 	</bean>
+					
+    <bean id="list.uds.d1.presAb" parent="list.standardUds">
+ 		<property name="dbListName" value="udsd1presab"/>
+ 	</bean>
+					
+    <bean id="list.uds.d1.ifPresSht" parent="list.standardUds">
+ 		<property name="dbListName" value="udsd1ifpressht"/>
+ 	</bean>
+					
+    <bean id="list.uds.d1.ifPres" parent="list.standardUds">
+ 		<property name="dbListName" value="udsd1ifpres"/>
+ 	</bean>
+						
+	
+	<bean id="list.udsinstrument.packetStatus" parent="list.standardValueNoLabel">
+ 		<property name="dbListName" value="UDSPacketStatus"/>
+ 		<property name="defaultSort" value="orderIndex"/>
+ 	</bean>
+	
+	<bean id="list.udsinstrument.packetReason" parent="list.standardValueNoLabel">
+ 		<property name="dbListName" value="UDSPacketReason"/>
+ 		<property name="defaultSort" value="orderIndex"/>
+ 	</bean>
+	
+	<bean id="list.udsinstrument.formSubmissionStatus" parent="list.standardValueNoLabel">
+ 		<property name="dbListName" value="UDSFormSubmissionStatus"/>
+ 		<property name="defaultSort" value="orderIndex"/>
+ 	</bean>
+	
+	<bean id="list.udsinstrument.formSubmissionReason" parent="list.standardValueNoLabel">
+ 		<property name="dbListName" value="UDSFormSubmissionReason"/>
+ 		<property name="defaultSort" value="orderIndex"/>
+ 	</bean>
+		
+	<bean id="list.udsinstrument.formLogicCheckStatus" parent="list.standardValueNoLabel">
+ 		<property name="dbListName" value="UDSFormLogicCheckStatus"/>
+ 		<property name="defaultSort" value="orderIndex"/>
+ 	</bean>
+			
+	<bean id="list.udsinstrument.formLogicCheckReason" parent="list.standardValueNoLabel">
+ 		<property name="dbListName" value="UDSFormLogicCheckReason"/>
+ 		<property name="defaultSort" value="orderIndex"/>
+ 	</bean>	
+	
+	<bean id="list.udsinstrument.packetType" parent="list.standard">
+ 		<property name="dbListName" value="UDSPacketTypes"/>
+ 		<property name="defaultSort" value="orderIndex"/>
+ 	</bean>	
+				
+	
+	<bean id="list.naccpathology9.codes" parent="list.standard">
+		<property name="staticReferenceLists">
+			<list><ref bean="list.ref.stdErrorCodes"/>
+		</list></property>
+	</bean>     
+		
+	<bean id="list.naccpathology9.yesNo" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPathYesNo"/>
+	</bean>
+	
+	<bean id="list.naccpathology9.submissionStatus" parent="list.standardValueNoLabel">
+		<property name="dbListName" value="NaccSubmissionStatus"/>
+	</bean>
+	
+	<bean id="list.naccpathology9.yesNoOnly" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPathYesNoOnly"/>
+	</bean>
+			
+	<bean id="list.naccpathology9.mildModerateSevere" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPathMildModerateSevere"/>
+	</bean>
+	
+	<bean id="list.naccpathology9.ques7" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath7"/>
+	</bean>
+	
+	<bean id="list.naccpathology9.ques8A" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath8A"/>
+	</bean>
+			
+	<bean id="list.naccpathology9.ques8B" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath8B"/>
+	</bean>
+	
+	<bean id="list.naccpathology9.ques8C" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath8C"/>
+	</bean>
+	
+	<bean id="list.naccpathology9.ques8D" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath8D"/>
+	</bean>
+				
+	<bean id="list.naccpathology9.ques9" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath9"/>
+	</bean>
+				
+	<bean id="list.naccpathology9.ques10" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath10"/>
+	</bean>
+
+	<bean id="list.naccpathology9.ques11" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath11"/>
+	</bean>
+		
+	<bean id="list.naccpathology9.ques13A" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath13A"/>
+	</bean>
+	
+	<bean id="list.naccpathology9.ques13B" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath13B"/>
+	</bean>
+				
+	<bean id="list.naccpathology9.ques14F" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath14F"/>
+	</bean>
+			
+	<bean id="list.naccpathology9.ques17A" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath17A"/>
+	</bean>
+			
+	<bean id="list.naccpathology9.ques18A" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath18A"/>
+	</bean>
+	
+	<bean id="list.naccpathology9.ques18B" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath18B"/>
+	</bean>
+		
+	<bean id="list.naccpathology9.ques18C" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath18C"/>
+	</bean>
+	
+	<bean id="list.naccpathology9.ques19" parent="list.standardNumericValue">
+				<property name="dbListName" value="NaccPath19"/>
+	</bean>
+	
+</beans>

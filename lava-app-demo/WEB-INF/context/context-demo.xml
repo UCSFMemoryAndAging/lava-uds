@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- this context file is referenced by WEB-INF/web-xml and loaded into the application context -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- lava/core/core-context.xml imports all core lava bean definitions -->
+	<import resource="core/core-context.xml"/>
+
+	<!-- lava/crms/crms-context.xml imports all crms lava bean definitions -->
+	<import resource="crms/crms-context.xml"/>
+
+	<import resource="crms/nacc-context.xml"/>
+
+	<!-- local/demo/demo-context.xml imports all local demo1 bean definitions -->
+	<import resource="local/demo/demo-context.xml"/>
+
+
+</beans>

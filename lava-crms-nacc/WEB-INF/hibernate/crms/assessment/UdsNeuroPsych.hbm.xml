@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsNeuroPsych" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+			
+		<join table="udsneuropsych">
+			<key column="InstrID"/>		
+			<property name="mmseLoc" column="MMSELOC" type="short"/>
+	       	<property name="mmseLan" column="MMSELAN" type="short"/>
+	       	<property name="mmseLanx" column="MMSELANX" type="string" length="60"/>
+	       	<property name="mmseOrDa" column="MMSEORDA" type="short"/>
+	       	<property name="mmseOrLo" column="MMSEORLO" type="short"/>
+	       	<property name="pentagon" column="PENTAGON" type="short"/>
+	       	<property name="mmse" column="MMSE" type="short"/>
+	       	<property name="npsycLoc" column="NPSYCLOC" type="short"/>
+	       	<property name="npsyLan" column="NPSYLAN" type="short"/>
+	       	<property name="npsyLanx" column="NPSYLANX" type="string" length="60"/>
+	       	<property name="logiMo" column="LOGIMO" type="short"/>
+	       	<property name="logiDay" column="LOGIDAY" type="short"/>
+	       	<property name="logiYr" column="LOGIYR" type="short"/>
+	       	<property name="logiPrev" column="LOGIPREV" type="short"/>
+	       	<property name="logiMem" column="LOGIMEM" type="short"/>
+	       	<property name="digiF" column="DIGIF" type="short"/>
+	       	<property name="digiFLen" column="DIGIFLEN" type="short"/>
+	       	<property name="digiB" column="DIGIB" type="short"/>
+	       	<property name="digiBLen" column="DIGIBLEN" type="short"/>
+	       	<property name="animals" column="ANIMALS" type="short"/>
+	       	<property name="veg" column="VEG" type="short"/>
+	       	<property name="trailA" column="TRAILA" type="short"/>
+	       	<property name="trailARR" column="TRAILARR" type="short"/>
+	       	<property name="trailALI" column="TRAILALI" type="short"/>
+	       	<property name="trailB" column="TRAILB" type="short"/>
+	       	<property name="trailBRR" column="TRAILBRR" type="short"/>
+	       	<property name="trailBLI" column="TRAILBLI" type="short"/>
+	       	<property name="wais" column="WAIS" type="short"/>
+	       	<property name="memUnits" column="MEMUNITS" type="short"/>
+	       	<property name="memTime" column="MEMTIME" type="short"/>
+	       	<property name="boston" column="BOSTON" type="short"/>
+	       	<property name="cogStat" column="COGSTAT" type="short"/>
+		</join>	
+		
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

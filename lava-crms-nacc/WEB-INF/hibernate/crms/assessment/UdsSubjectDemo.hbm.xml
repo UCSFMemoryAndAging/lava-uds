@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+  
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsSubjectDemo" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udssubjectdemo">
+			<key column="InstrID"/>		
+			<property name="inMds" column="INMDS" type="short"/>
+			<property name="reason" column="REASON" type="short"/>
+	       <property name="reasonx" column="REASONX" type="string" length="60"/>
+	       <property name="refer" column="REFER" type="short"/>
+	       <property name="referx" column="REFERX" type="string" length="60"/>
+	       <property name="preStat" column="PRESTAT" type="short"/>
+	       <property name="presPart" column="PRESPART" type="short"/>
+	       <property name="source" column="SOURCE" type="short"/>
+	       <property name="birthMo" column="BIRTHMO" type="short"/>
+	       <property name="birthYr" column="BIRTHYR" type="short"/>
+	       <property name="sex" column="SEX" type="short"/>
+	       <property name="hispanic" column="HISPANIC" type="short"/>
+	       <property name="hispOr" column="HISPOR" type="short"/>
+	       <property name="hispOrx" column="HISPORX" type="string" length="60"/>
+	       <property name="race" column="RACE" type="short"/>
+	       <property name="racex" column="RACEX" type="string" length="60"/>
+	       <property name="raceSec" column="RACESEC" type="short"/>
+	       <property name="raceSecx" column="RACESECX" type="string" length="60"/>
+	       <property name="raceTer" column="RACETER" type="short"/>
+	       <property name="raceTerx" column="RACETERX" type="string" length="60"/>
+	       <property name="primLang" column="PRIMLANG" type="short"/>
+	       <property name="primLanx" column="PRIMLANX" type="string" length="60"/>
+	       <property name="educ" column="EDUC" type="short"/>
+	       <property name="livSit" column="LIVSIT" type="short"/>
+	       <property name="livSitx" column="LIVSITX" type="string" length="60"/>
+	       <property name="independ" column="INDEPEND" type="short"/>
+	       <property name="residenc" column="RESIDENC" type="short"/>
+	       <property name="residenx" column="RESIDENX" type="string" length="60"/>
+	       <property name="zip" column="ZIP" type="string" length="3"/>
+	       <property name="mariStat" column="MARISTAT" type="short"/>
+	       <property name="mariStax" column="MARISTAX" type="string" length="60"/>
+	       <property name="handed" column="HANDED" type="short"/>
+			</join>	
+		
+		&instrInclude2;
+		
+	</class>				
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

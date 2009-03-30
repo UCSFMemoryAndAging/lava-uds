@@ -1,0 +1,416 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+     [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+     
+<hibernate-mapping>
+
+
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsMedications1" table="instrumenttracking" select-before-update="true">
+		
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsmedicationspre1">
+			<key column="InstrID"/>		
+		
+	       <property name="pmeds" column="PMEDS" type="short"/>
+	       <property name="pma" column="PMA" type="string" length="30"/>
+	       <property name="pmas" column="PMAS" type="short"/>
+	       <property name="pmasu" column="PMASU" type="short"/>
+	       <property name="pmaf" column="PMAF" type="short"/>
+	       <property name="pmafu" column="PMAFU" type="short"/>
+	       <property name="pmap" column="PMAP" type="short"/>
+	       <property name="pmapf" column="PMAPF" type="short"/>
+	       <property name="pmapfu" column="PMAPFU" type="short"/>
+	       <property name="pmb" column="PMB" type="string" length="30"/>
+	       <property name="pmbs" column="PMBS" type="short"/>
+	       <property name="pmbsu" column="PMBSU" type="short"/>
+	       <property name="pmbf" column="PMBF" type="short"/>
+	       <property name="pmbfu" column="PMBFU" type="short"/>
+	       <property name="pmbp" column="PMBP" type="short"/>
+	       <property name="pmbpf" column="PMBPF" type="short"/>
+	       <property name="pmbpfu" column="PMBPFU" type="short"/>
+	       <property name="pmc" column="PMC" type="string" length="30"/>
+	       <property name="pmcs" column="PMCS" type="short"/>
+	       <property name="pmcsu" column="PMCSU" type="short"/>
+	       <property name="pmcf" column="PMCF" type="short"/>
+	       <property name="pmcfu" column="PMCFU" type="short"/>
+	       <property name="pmcp" column="PMCP" type="short"/>
+	       <property name="pmcpf" column="PMCPF" type="short"/>
+	       <property name="pmcpfu" column="PMCPFU" type="short"/>
+	       <property name="pmd" column="PMD" type="string" length="30"/>
+	       <property name="pmds" column="PMDS" type="short"/>
+	       <property name="pmdsu" column="PMDSU" type="short"/>
+	       <property name="pmdf" column="PMDF" type="short"/>
+	       <property name="pmdfu" column="PMDFU" type="short"/>
+	       <property name="pmdp" column="PMDP" type="short"/>
+	       <property name="pmdpf" column="PMDPF" type="short"/>
+	       <property name="pmdpfu" column="PMDPFU" type="short"/>
+	       <property name="pme" column="PME" type="string" length="30"/>
+	       <property name="pmes" column="PMES" type="short"/>
+	       <property name="pmesu" column="PMESU" type="short"/>
+	       <property name="pmef" column="PMEF" type="short"/>
+	       <property name="pmefu" column="PMEFU" type="short"/>
+	       <property name="pmep" column="PMEP" type="short"/>
+	       <property name="pmepf" column="PMEPF" type="short"/>
+	       <property name="pmepfu" column="PMEPFU" type="short"/>
+	       <property name="pmf" column="PMF" type="string" length="30"/>
+	       <property name="pmfs" column="PMFS" type="short"/>
+	       <property name="pmfsu" column="PMFSU" type="short"/>
+	       <property name="pmff" column="PMFF" type="short"/>
+	       <property name="pmffu" column="PMFFU" type="short"/>
+	       <property name="pmfp" column="PMFP" type="short"/>
+	       <property name="pmfpf" column="PMFPF" type="short"/>
+	       <property name="pmfpfu" column="PMFPFU" type="short"/>
+	       <property name="pmg" column="PMG" type="string" length="30"/>
+	       <property name="pmgs" column="PMGS" type="short"/>
+	       <property name="pmgsu" column="PMGSU" type="short"/>
+	       <property name="pmgf" column="PMGF" type="short"/>
+	       <property name="pmgfu" column="PMGFU" type="short"/>
+	       <property name="pmgp" column="PMGP" type="short"/>
+	       <property name="pmgpf" column="PMGPF" type="short"/>
+	       <property name="pmgpfu" column="PMGPFU" type="short"/>
+	       <property name="pmh" column="PMH" type="string" length="30"/>
+	       <property name="pmhs" column="PMHS" type="short"/>
+	       <property name="pmhsu" column="PMHSU" type="short"/>
+	       <property name="pmhf" column="PMHF" type="short"/>
+	       <property name="pmhfu" column="PMHFU" type="short"/>
+	       <property name="pmhp" column="PMHP" type="short"/>
+	       <property name="pmhpf" column="PMHPF" type="short"/>
+	       <property name="pmhpfu" column="PMHPFU" type="short"/>
+	       <property name="pmi" column="PMI" type="string" length="30"/>
+	       <property name="pmis" column="PMIS" type="short"/>
+	       <property name="pmisu" column="PMISU" type="short"/>
+	       <property name="pmif" column="PMIF" type="short"/>
+	       <property name="pmifu" column="PMIFU" type="short"/>
+	       <property name="pmip" column="PMIP" type="short"/>
+	       <property name="pmipf" column="PMIPF" type="short"/>
+	       <property name="pmipfu" column="PMIPFU" type="short"/>
+	       <property name="pmj" column="PMJ" type="string" length="30"/>
+	       <property name="pmjs" column="PMJS" type="short"/>
+	       <property name="pmjsu" column="PMJSU" type="short"/>
+	       <property name="pmjf" column="PMJF" type="short"/>
+	       <property name="pmjfu" column="PMJFU" type="short"/>
+	       <property name="pmjp" column="PMJP" type="short"/>
+	       <property name="pmjpf" column="PMJPF" type="short"/>
+	       <property name="pmjpfu" column="PMJPFU" type="short"/>
+	       <property name="pmk" column="PMK" type="string" length="30"/>
+	       <property name="pmks" column="PMKS" type="short"/>
+	       <property name="pmksu" column="PMKSU" type="short"/>
+	       <property name="pmkf" column="PMKF" type="short"/>
+	       <property name="pmkfu" column="PMKFU" type="short"/>
+	       <property name="pmkp" column="PMKP" type="short"/>
+	       <property name="pmkpf" column="PMKPF" type="short"/>
+	       <property name="pmkpfu" column="PMKPFU" type="short"/>
+	       <property name="pml" column="PML" type="string" length="30"/>
+	       <property name="pmls" column="PMLS" type="short"/>
+	       <property name="pmlsu" column="PMLSU" type="short"/>
+	       <property name="pmlf" column="PMLF" type="short"/>
+	       <property name="pmlfu" column="PMLFU" type="short"/>
+	       <property name="pmlp" column="PMLP" type="short"/>
+	       <property name="pmlpf" column="PMLPF" type="short"/>
+	       <property name="pmlpfu" column="PMLPFU" type="short"/>
+	       <property name="pmm" column="PMM" type="string" length="30"/>
+	       <property name="pmms" column="PMMS" type="short"/>
+	       <property name="pmmsu" column="PMMSU" type="short"/>
+	       <property name="pmmf" column="PMMF" type="short"/>
+	       <property name="pmmfu" column="PMMFU" type="short"/>
+	       <property name="pmmp" column="PMMP" type="short"/>
+	       <property name="pmmpf" column="PMMPF" type="short"/>
+	       <property name="pmmpfu" column="PMMPFU" type="short"/>
+	       <property name="pmn" column="PMN" type="string" length="30"/>
+	       <property name="pmns" column="PMNS" type="short"/>
+	       <property name="pmnsu" column="PMNSU" type="short"/>
+	       <property name="pmnf" column="PMNF" type="short"/>
+	       <property name="pmnfu" column="PMNFU" type="short"/>
+	       <property name="pmnp" column="PMNP" type="short"/>
+	       <property name="pmnpf" column="PMNPF" type="short"/>
+	       <property name="pmnpfu" column="PMNPFU" type="short"/>
+	       <property name="pmo" column="PMO" type="string" length="30"/>
+	       <property name="pmos" column="PMOS" type="short"/>
+	       <property name="pmosu" column="PMOSU" type="short"/>
+	       <property name="pmof" column="PMOF" type="short"/>
+	       <property name="pmofu" column="PMOFU" type="short"/>
+	       <property name="pmop" column="PMOP" type="short"/>
+	       <property name="pmopf" column="PMOPF" type="short"/>
+	       <property name="pmopfu" column="PMOPFU" type="short"/>
+	       <property name="pmp" column="PMP" type="string" length="30"/>
+	       <property name="pmps" column="PMPS" type="short"/>
+	       <property name="pmpsu" column="PMPSU" type="short"/>
+	       <property name="pmpf" column="PMPF" type="short"/>
+	       <property name="pmpfu" column="PMPFU" type="short"/>
+	       <property name="pmpp" column="PMPP" type="short"/>
+	       <property name="pmppf" column="PMPPF" type="short"/>
+	       <property name="pmppfu" column="PMPPFU" type="short"/>
+	       <property name="pmq" column="PMQ" type="string" length="30"/>
+	       <property name="pmqs" column="PMQS" type="short"/>
+	       <property name="pmqsu" column="PMQSU" type="short"/>
+	       <property name="pmqf" column="PMQF" type="short"/>
+	       <property name="pmqfu" column="PMQFU" type="short"/>
+	       <property name="pmqp" column="PMQP" type="short"/>
+	       <property name="pmqpf" column="PMQPF" type="short"/>
+	       <property name="pmqpfu" column="PMQPFU" type="short"/>
+	       <property name="pmr" column="PMR" type="string" length="30"/>
+	       <property name="pmrs" column="PMRS" type="short"/>
+	       <property name="pmrsu" column="PMRSU" type="short"/>
+	       <property name="pmrf" column="PMRF" type="short"/>
+	       <property name="pmrfu" column="PMRFU" type="short"/>
+	       <property name="pmrp" column="PMRP" type="short"/>
+	       <property name="pmrpf" column="PMRPF" type="short"/>
+	       <property name="pmrpfu" column="PMRPFU" type="short"/>
+	       <property name="pms" column="PMS" type="string" length="30"/>
+	       <property name="pmss" column="PMSS" type="short"/>
+	       <property name="pmssu" column="PMSSU" type="short"/>
+	       <property name="pmsf" column="PMSF" type="short"/>
+	       <property name="pmsfu" column="PMSFU" type="short"/>
+	       <property name="pmsp" column="PMSP" type="short"/>
+	       <property name="pmspf" column="PMSPF" type="short"/>
+	       <property name="pmspfu" column="PMSPFU" type="short"/>
+	       <property name="pmt" column="PMT" type="string" length="30"/>
+	       <property name="pmts" column="PMTS" type="short"/>
+	       <property name="pmtsu" column="PMTSU" type="short"/>
+	       <property name="pmtf" column="PMTF" type="short"/>
+	       <property name="pmtfu" column="PMTFU" type="short"/>
+	       <property name="pmtp" column="PMTP" type="short"/>
+	       <property name="pmtpf" column="PMTPF" type="short"/>
+	       <property name="pmtpfu" column="PMTPFU" type="short"/>
+			</join>	
+	
+		<join table="udsmedicationsnon1">
+			<key column="InstrID"/>
+			<property name="nmeds" column="NMEDS" type="short"/>
+		   <property name="nma" column="NMA" type="string" length="30"/>
+	       <property name="nmas" column="NMAS" type="short"/>
+		   <property name="nmasu" column="NMASU" type="short"/>
+	       <property name="nmaf" column="NMAF" type="short"/>
+	       <property name="nmafu" column="NMAFU" type="short"/>
+		   <property name="nmb" column="NMB" type="string" length="30"/>
+	       <property name="nmbs" column="NMBS" type="short"/>
+		   <property name="nmbsu" column="NMBSU" type="short"/>
+	       <property name="nmbf" column="NMBF" type="short"/>
+	       <property name="nmbfu" column="NMBFU" type="short"/>
+	       <property name="nmc" column="NMC" type="string" length="30"/>
+	       <property name="nmcs" column="NMCS" type="short"/>
+	       <property name="nmcsu" column="NMCSU" type="short"/>
+	       <property name="nmcf" column="NMCF" type="short"/>
+	       <property name="nmcfu" column="NMCFU" type="short"/>
+	       <property name="nmd" column="NMD" type="string" length="30"/>
+	       <property name="nmds" column="NMDS" type="short"/>
+	       <property name="nmdsu" column="NMDSU" type="short"/>
+	       <property name="nmdf" column="NMDF" type="short"/>
+	       <property name="nmdfu" column="NMDFU" type="short"/>
+	       <property name="nme" column="NME" type="string" length="30"/>
+	       <property name="nmes" column="NMES" type="short"/>
+	       <property name="nmesu" column="NMESU" type="short"/>
+	       <property name="nmef" column="NMEF" type="short"/>
+	       <property name="nmefu" column="NMEFU" type="short"/>
+	       <property name="nmf" column="NMF" type="string" length="30"/>
+	       <property name="nmfs" column="NMFS" type="short"/>
+	       <property name="nmfsu" column="NMFSU" type="short"/>
+	       <property name="nmff" column="NMFF" type="short"/>
+	       <property name="nmffu" column="NMFFU" type="short"/>
+	       <property name="nmg" column="NMG" type="string" length="30"/>
+	       <property name="nmgs" column="NMGS" type="short"/>
+	       <property name="nmgsu" column="NMGSU" type="short"/>
+	       <property name="nmgf" column="NMGF" type="short"/>
+	       <property name="nmgfu" column="NMGFU" type="short"/>
+	       <property name="nmh" column="NMH" type="string" length="30"/>
+	       <property name="nmhs" column="NMHS" type="short"/>
+	       <property name="nmhsu" column="NMHSU" type="short"/>
+	       <property name="nmhf" column="NMHF" type="short"/>
+	       <property name="nmhfu" column="NMHFU" type="short"/>
+	       <property name="nmi" column="NMI" type="string" length="30"/>
+	       <property name="nmis" column="NMIS" type="short"/>
+	       <property name="nmisu" column="NMISU" type="short"/>
+	       <property name="nmif" column="NMIF" type="short"/>
+	       <property name="nmifu" column="NMIFU" type="short"/>
+	       <property name="nmj" column="NMJ" type="string" length="30"/>
+	       <property name="nmjs" column="NMJS" type="short"/>
+	       <property name="nmjsu" column="NMJSU" type="short"/>
+	       <property name="nmjf" column="NMJF" type="short"/>
+	       <property name="nmjfu" column="NMJFU" type="short"/>
+	       <property name="nmk" column="NMK" type="string" length="30"/>
+	       <property name="nmks" column="NMKS" type="short"/>
+	       <property name="nmksu" column="NMKSU" type="short"/>
+	       <property name="nmkf" column="NMKF" type="short"/>
+	       <property name="nmkfu" column="NMKFU" type="short"/>
+	       <property name="nml" column="NML" type="string" length="30"/>
+	       <property name="nmls" column="NMLS" type="short"/>
+	       <property name="nmlsu" column="NMLSU" type="short"/>
+	       <property name="nmlf" column="NMLF" type="short"/>
+	       <property name="nmlfu" column="NMLFU" type="short"/>
+	       <property name="nmm" column="NMM" type="string" length="30"/>
+	       <property name="nmms" column="NMMS" type="short"/>
+	       <property name="nmmsu" column="NMMSU" type="short"/>
+	       <property name="nmmf" column="NMMF" type="short"/>
+	       <property name="nmmfu" column="NMMFU" type="short"/>
+	       <property name="nmn" column="NMN" type="string" length="30"/>
+	       <property name="nmns" column="NMNS" type="short"/>
+	       <property name="nmnsu" column="NMNSU" type="short"/>
+	       <property name="nmnf" column="NMNF" type="short"/>
+	       <property name="nmnfu" column="NMNFU" type="short"/>
+	       <property name="nmo" column="NMO" type="string" length="30"/>
+	       <property name="nmos" column="NMOS" type="short"/>
+	       <property name="nmosu" column="NMOSU" type="short"/>
+	       <property name="nmof" column="NMOF" type="short"/>
+	       <property name="nmofu" column="NMOFU" type="short"/>
+	       <property name="nmp" column="NMP" type="string" length="30"/>
+	       <property name="nmps" column="NMPS" type="short"/>
+	       <property name="nmpsu" column="NMPSU" type="short"/>
+	       <property name="nmpf" column="NMPF" type="short"/>
+	       <property name="nmpfu" column="NMPFU" type="short"/>
+	       <property name="nmq" column="NMQ" type="string" length="30"/>
+	       <property name="nmqs" column="NMQS" type="short"/>
+	       <property name="nmqsu" column="NMQSU" type="short"/>
+	       <property name="nmqf" column="NMQF" type="short"/>
+	       <property name="nmqfu" column="NMQFU" type="short"/>
+	       <property name="nmr" column="NMR" type="string" length="30"/>
+	       <property name="nmrs" column="NMRS" type="short"/>
+	       <property name="nmrsu" column="NMRSU" type="short"/>
+	       <property name="nmrf" column="NMRF" type="short"/>
+	       <property name="nmrfu" column="NMRFU" type="short"/>
+	       <property name="nms" column="NMS" type="string" length="30"/>
+	       <property name="nmss" column="NMSS" type="short"/>
+	       <property name="nmssu" column="NMSSU" type="short"/>
+	       <property name="nmsf" column="NMSF" type="short"/>
+	       <property name="nmsfu" column="NMSFU" type="short"/>
+	       <property name="nmt" column="NMT" type="string" length="30"/>
+	       <property name="nmts" column="NMTS" type="short"/>
+	       <property name="nmtsu" column="NMTSU" type="short"/>
+	       <property name="nmtf" column="NMTF" type="short"/>
+	       <property name="nmtfu" column="NMTFU" type="short"/>
+			</join>
+
+		<join table="udsmedicationsvit1">
+			<key column="InstrID"/>
+	       <property name="vitasups" column="VITASUPS" type="short"/>
+	       <property name="vsa" column="VSA" type="string" length="30"/>
+	       <property name="vsas" column="VSAS" type="short"/>
+	       <property name="vsasu" column="VSASU" type="short"/>
+	       <property name="vsaf" column="VSAF" type="short"/>
+	       <property name="vsafu" column="VSAFU" type="short"/>
+	       <property name="vsb" column="VSB" type="string" length="30"/>
+	       <property name="vsbs" column="VSBS" type="short"/>
+	       <property name="vsbsu" column="VSBSU" type="short"/>
+	       <property name="vsbf" column="VSBF" type="short"/>
+	       <property name="vsbfu" column="VSBFU" type="short"/>
+	       <property name="vsc" column="VSC" type="string" length="30"/>
+	       <property name="vscs" column="VSCS" type="short"/>
+	       <property name="vscsu" column="VSCSU" type="short"/>
+	       <property name="vscf" column="VSCF" type="short"/>
+	       <property name="vscfu" column="VSCFU" type="short"/>
+	       <property name="vsd" column="VSD" type="string" length="30"/>
+	       <property name="vsds" column="VSDS" type="short"/>
+	       <property name="vsdsu" column="VSDSU" type="short"/>
+	       <property name="vsdf" column="VSDF" type="short"/>
+	       <property name="vsdfu" column="VSDFU" type="short"/>
+	       <property name="vse" column="VSE" type="string" length="30"/>
+	       <property name="vses" column="VSES" type="short"/>
+	       <property name="vsesu" column="VSESU" type="short"/>
+	       <property name="vsef" column="VSEF" type="short"/>
+	       <property name="vsefu" column="VSEFU" type="short"/>
+	       <property name="vsf" column="VSF" type="string" length="30"/>
+	       <property name="vsfs" column="VSFS" type="short"/>
+	       <property name="vsfsu" column="VSFSU" type="short"/>
+	       <property name="vsff" column="VSFF" type="short"/>
+	       <property name="vsffu" column="VSFFU" type="short"/>
+	       <property name="vsg" column="VSG" type="string" length="30"/>
+	       <property name="vsgs" column="VSGS" type="short"/>
+	       <property name="vsgsu" column="VSGSU" type="short"/>
+	       <property name="vsgf" column="VSGF" type="short"/>
+	       <property name="vsgfu" column="VSGFU" type="short"/>
+	       <property name="vsh" column="VSH" type="string" length="30"/>
+	       <property name="vshs" column="VSHS" type="short"/>
+	       <property name="vshsu" column="VSHSU" type="short"/>
+	       <property name="vshf" column="VSHF" type="short"/>
+	       <property name="vshfu" column="VSHFU" type="short"/>
+	       <property name="vsi" column="VSI" type="string" length="30"/>
+	       <property name="vsis" column="VSIS" type="short"/>
+	       <property name="vsisu" column="VSISU" type="short"/>
+	       <property name="vsif" column="VSIF" type="short"/>
+	       <property name="vsifu" column="VSIFU" type="short"/>
+	       <property name="vsj" column="VSJ" type="string" length="30"/>
+	       <property name="vsjs" column="VSJS" type="short"/>
+	       <property name="vsjsu" column="VSJSU" type="short"/>
+	       <property name="vsjf" column="VSJF" type="short"/>
+	       <property name="vsjfu" column="VSJFU" type="short"/>
+	       <property name="vsk" column="VSK" type="string" length="30"/>
+	       <property name="vsks" column="VSKS" type="short"/>
+	       <property name="vsksu" column="VSKSU" type="short"/>
+	       <property name="vskf" column="VSKF" type="short"/>
+	       <property name="vskfu" column="VSKFU" type="short"/>
+	       <property name="vsl" column="VSL" type="string" length="30"/>
+	       <property name="vsls" column="VSLS" type="short"/>
+	       <property name="vslsu" column="VSLSU" type="short"/>
+	       <property name="vslf" column="VSLF" type="short"/>
+	       <property name="vslfu" column="VSLFU" type="short"/>
+	       <property name="vsm" column="VSM" type="string" length="30"/>
+	       <property name="vsms" column="VSMS" type="short"/>
+	       <property name="vsmsu" column="VSMSU" type="short"/>
+	       <property name="vsmf" column="VSMF" type="short"/>
+	       <property name="vsmfu" column="VSMFU" type="short"/>
+	       <property name="vsn" column="VSN" type="string" length="30"/>
+	       <property name="vsns" column="VSNS" type="short"/>
+	       <property name="vsnsu" column="VSNSU" type="short"/>
+	       <property name="vsnf" column="VSNF" type="short"/>
+	       <property name="vsnfu" column="VSNFU" type="short"/>
+	       <property name="vso" column="VSO" type="string" length="30"/>
+	       <property name="vsos" column="VSOS" type="short"/>
+	       <property name="vsosu" column="VSOSU" type="short"/>
+	       <property name="vsof" column="VSOF" type="short"/>
+	       <property name="vsofu" column="VSOFU" type="short"/>
+	       <property name="vsp" column="VSP" type="string" length="30"/>
+	       <property name="vsps" column="VSPS" type="short"/>
+	       <property name="vspsu" column="VSPSU" type="short"/>
+	       <property name="vspf" column="VSPF" type="short"/>
+	       <property name="vspfu" column="VSPFU" type="short"/>
+	       <property name="vsq" column="VSQ" type="string" length="30"/>
+	       <property name="vsqs" column="VSQS" type="short"/>
+	       <property name="vsqsu" column="VSQSU" type="short"/>
+	       <property name="vsqf" column="VSQF" type="short"/>
+	       <property name="vsqfu" column="VSQFU" type="short"/>
+	       <property name="vsr" column="VSR" type="string" length="30"/>
+	       <property name="vsrs" column="VSRS" type="short"/>
+	       <property name="vsrsu" column="VSRSU" type="short"/>
+	       <property name="vsrf" column="VSRF" type="short"/>
+	       <property name="vsrfu" column="VSRFU" type="short"/>
+	       <property name="vss" column="VSS" type="string" length="30"/>
+	       <property name="vsss" column="VSSS" type="short"/>
+	       <property name="vsssu" column="VSSSU" type="short"/>
+	       <property name="vssf" column="VSSF" type="short"/>
+	       <property name="vssfu" column="VSSFU" type="short"/>
+	       <property name="vst" column="VST" type="string" length="30"/>
+	       <property name="vsts" column="VSTS" type="short"/>
+	       <property name="vstsu" column="VSTSU" type="short"/>
+	   		<property name="vstf" column="VSTF" type="short"/>
+	   		<property name="vstfu" column="VSTFU" type="short"/>
+			</join>
+
+		&instrInclude2;
+
+	</class>
+
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

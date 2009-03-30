@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory1" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsfamilyhistory1">
+			<key column="InstrID"/>		
+		   <property name="a3Chg" column="A3CHG" type="short"/>
+	       <property name="parChg" column="PARCHG" type="short"/>
+	       <property name="momDem" column="MOMDEM" type="short"/>
+	       <property name="momOnset" column="MOMONSET" type="short"/>
+	       <property name="momAge" column="MOMAGE" type="short"/>
+	       <property name="momDAge" column="MOMDAGE" type="short"/>
+	       <property name="dadDem" column="DADDEM" type="short"/>
+	       <property name="dadOnset" column="DADONSET" type="short"/>
+	       <property name="dadAge" column="DADAGE" type="short"/>
+	       <property name="dadDAge" column="DADDAGE" type="short"/>
+	       <property name="sibChg" column="SIBCHG" type="short"/>
+	       <property name="twin" column="TWIN" type="short"/>
+	       <property name="twinType" column="TWINTYPE" type="short"/>
+	       <property name="sibs" column="SIBS" type="short"/>
+	       <property name="sibsDem" column="SIBSDEM" type="short"/>
+	       <property name="sib1Ons" column="SIB1ONS" type="short"/>
+	       <property name="sib1Age" column="SIB1AGE" type="short"/>
+	       <property name="sib2Ons" column="SIB2ONS" type="short"/>
+	       <property name="sib2Age" column="SIB2AGE" type="short"/>
+	       <property name="sib3Ons" column="SIB3ONS" type="short"/>
+	       <property name="sib3Age" column="SIB3AGE" type="short"/>
+	       <property name="sib4Ons" column="SIB4ONS" type="short"/>
+	       <property name="sib4Age" column="SIB4AGE" type="short"/>
+	       <property name="sib5Ons" column="SIB5ONS" type="short"/>
+	       <property name="sib5Age" column="SIB5AGE" type="short"/>
+	       <property name="sib6Ons" column="SIB6ONS" type="short"/>
+	       <property name="sib6Age" column="SIB6AGE" type="short"/>
+	       <property name="kidChg" column="KIDCHG" type="short"/>
+	       <property name="kids" column="KIDS" type="short"/>
+	       <property name="kidsDem" column="KIDSDEM" type="short"/>
+	       <property name="kids1Ons" column="KIDS1ONS" type="short"/>
+	       <property name="kids1Age" column="KIDS1AGE" type="short"/>
+	       <property name="kids2Ons" column="KIDS2ONS" type="short"/>
+	       <property name="kids2Age" column="KIDS2AGE" type="short"/>
+	       <property name="kids3Ons" column="KIDS3ONS" type="short"/>
+	       <property name="kids3Age" column="KIDS3AGE" type="short"/>
+	       <property name="kids4Ons" column="KIDS4ONS" type="short"/>
+	       <property name="kids4Age" column="KIDS4AGE" type="short"/>
+	       <property name="kids5Ons" column="KIDS5ONS" type="short"/>
+	       <property name="kids5Age" column="KIDS5AGE" type="short"/>
+	       <property name="kids6Ons" column="KIDS6ONS" type="short"/>
+	       <property name="kids6Age" column="KIDS6AGE" type="short"/>
+	       <property name="relChg" column="RELCHG" type="short"/>
+	       <property name="relsDem" column="RELSDEM" type="short"/>
+	       <property name="rel1Ons" column="REL1ONS" type="short"/>
+	       <property name="rel1Age" column="REL1AGE" type="short"/>
+	       <property name="rel2Ons" column="REL2ONS" type="short"/>
+	       <property name="rel2Age" column="REL2AGE" type="short"/>
+	       <property name="rel3Ons" column="REL3ONS" type="short"/>
+	       <property name="rel3Age" column="REL3AGE" type="short"/>
+	       <property name="rel4Ons" column="REL4ONS" type="short"/>
+	       <property name="rel4Age" column="REL4AGE" type="short"/>
+	       <property name="rel5Ons" column="REL5ONS" type="short"/>
+	       <property name="rel5Age" column="REL5AGE" type="short"/>
+	       <property name="rel6Ons" column="REL6ONS" type="short"/>
+	       <property name="rel6Age" column="REL6AGE" type="short"/>
+			</join>	
+	
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

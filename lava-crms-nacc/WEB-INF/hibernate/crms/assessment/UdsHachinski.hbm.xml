@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsHachinski" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udshachinski">
+			<key column="InstrID"/>
+			<property name="cvdCog" column="CVDCOG" type="short"/>
+			<property name="strokCog" column="STROKCOG" type="short"/>
+			<property name="cvdImag" column="CVDIMAG" type="short"/>
+			<property name="cvdImag1" column="CVDIMAG1" type="short"/>
+			<property name="cvdImag2" column="CVDIMAG2" type="short"/>
+			<property name="cvdImag3" column="CVDIMAG3" type="short"/>
+			<property name="cvdImag4" column="CVDIMAG4" type="short"/>
+			<property name="cvdImagx" column="CVDIMAGX" type="string" length="60"/>						
+			<property name="abrupt" column="ABRUPT" type="short"/>
+	       	<property name="stepwise" column="STEPWISE" type="short"/>
+	      	<property name="somatic" column="SOMATIC" type="short"/>
+	       	<property name="emot" column="EMOT" type="short"/>
+	       	<property name="hxHyper" column="HXHYPER" type="short"/>
+	       	<property name="hxStroke" column="HXSTROKE" type="short"/>
+	       	<property name="foclSym" column="FOCLSYM" type="short"/>
+	       	<property name="foclSign" column="FOCLSIGN" type="short"/>
+	       	<property name="hachin" column="HACHIN" type="short"/>
+		</join>	
+	
+		&instrInclude2;
+		
+	</class>		
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsinformantdemo">
+			<key column="InstrID"/>		
+		    <property name="inBirMo" column="INBIRMO" type="short"/>
+	       <property name="inBirYr" column="INBIRYR" type="short"/>
+	       <property name="inSex" column="INSEX" type="short"/>
+	       <property name="newInf" column="NEWINF" type="short"/>
+	       <property name="inHisp" column="INHISP" type="short"/>
+	       <property name="inHispOr" column="INHISPOR" type="short"/>
+	       <property name="inHispOx" column="INHISPOX" type="string" length="60"/>
+	       <property name="inRace" column="INRACE" type="short"/>
+	       <property name="inRacex" column="INRACEX" type="string" length="60"/>
+	       <property name="inRaSec" column="INRASEC" type="short"/>
+	       <property name="inRaSecx" column="INRASECX" type="string" length="60"/>
+	       <property name="inRaTer" column="INRATER" type="short"/>
+	       <property name="inRaTerx" column="INRATERX" type="string" length="60"/>
+	       <property name="inEduc" column="INEDUC" type="short"/>
+	       <property name="inRelTo" column="INRELTO" type="short"/>
+	       <property name="inRelTox" column="INRELTOX" type="string" length="60"/>
+	       <property name="inLivWth" column="INLIVWTH" type="short"/>
+	       <property name="inVisits" column="INVISITS" type="short"/>
+	       <property name="inCalls" column="INCALLS" type="short"/>
+	       <property name="inRely" column="INRELY" type="short"/>
+			</join>	
+		
+		&instrInclude2;
+	
+	</class>		
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

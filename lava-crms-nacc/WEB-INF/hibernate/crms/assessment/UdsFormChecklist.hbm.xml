@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+     [<!ENTITY instrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "resource://WEB-INF/hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "resource://WEB-INF/hibernate/crms/assessment/udsInstrInclude.xml" >]>
+    
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFormChecklist" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsformchecklist">
+			<key column="InstrID"/>		
+			<property name="a2Sub" column="A2SUB" type="short"/>
+			<property name="a2Not" column="A2NOT" type="short"/>
+			<property name="a2Comm" column="A2COMM" type="string" length="50"/>
+			<property name="a3Sub" column="A3SUB" type="short"/>
+			<property name="a3Not" column="A3NOT" type="short"/>
+			<property name="a3Comm" column="A3COMM" type="string" length="50"/>
+			<property name="a4Sub" column="A4SUB" type="short"/>
+			<property name="a4Not" column="A4NOT" type="short"/>
+			<property name="a4Comm" column="A4COMM" type="string" length="50"/>
+			<property name="b1Sub" column="B1SUB" type="short"/>
+			<property name="b1Not" column="B1NOT" type="short"/>
+			<property name="b1Comm" column="B1COMM" type="string" length="50"/>
+			<property name="b2Sub" column="B2SUB" type="short"/>
+			<property name="b2Not" column="B2NOT" type="short"/>
+			<property name="b2Comm" column="B2COMM" type="string" length="50"/>
+			<property name="b3Sub" column="B3SUB" type="short"/>
+			<property name="b3Not" column="B3NOT" type="short"/>
+			<property name="b3Comm" column="B3COMM" type="string" length="50"/>
+			<property name="b5Sub" column="B5SUB" type="short"/>
+			<property name="b5Not" column="B5NOT" type="short"/>
+			<property name="b5Comm" column="B5COMM" type="string" length="50"/>
+			<property name="b6Sub" column="B6SUB" type="short"/>
+			<property name="b6Not" column="B6NOT" type="short"/>
+			<property name="b6Comm" column="B6COMM" type="string" length="50"/>
+			<property name="b7Sub" column="B7SUB" type="short"/>
+			<property name="b7Not" column="B7NOT" type="short"/>
+			<property name="b7Comm" column="B7COMM" type="string" length="50"/>
+			<property name="b8Sub" column="B8SUB" type="short"/>
+			<property name="b8Not" column="B8NOT" type="short"/>
+			<property name="b8Comm" column="B8COMM" type="string" length="50"/>
+			</join>	
+		
+        &instrInclude2;
+        
+	</class>        
+	
+		<query name="udsinstrument.formId"><![CDATA[
+	    select new edu.ucsf.lava.core.list.model.LabelValueBean(lv.valueDesc, lv.valueDesc, lv.orderIndex)
+		from LavaList list 
+		join list.listValues lv
+		where list.listName = 'UDSFormIds' and lv.valueKey = :instrument 
+		order by lv.orderIndex, lv.valueDesc
+	]]></query>
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
