@@ -12,7 +12,7 @@
         </map></constructor-arg>
      </bean>
     
-    <bean id="appFlowControllerMappings" class="java.util.LinkedHashMap">
+    <bean id="appFlowControllerUrlMappings" class="java.util.LinkedHashMap">
      	<constructor-arg><map>
      	</map></constructor-arg>
      </bean>
