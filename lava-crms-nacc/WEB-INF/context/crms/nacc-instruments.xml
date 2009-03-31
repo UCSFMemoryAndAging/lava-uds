@@ -93,7 +93,7 @@
 	
 		
 	<bean id="naccpathology9" parent="instrumentConfig">
-		<property name="className"><value>edu.ucsf.lava.crms.instruments.nacc.model.NaccPathology</value></property>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.NaccPathology</value></property>
 		<property name="supportedFlows"><value>enter,print</value></property>
 		<property name="currentVersionAlias"><value>naccpathology</value></property>
 	</bean>		

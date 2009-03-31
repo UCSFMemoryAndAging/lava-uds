@@ -3,11 +3,14 @@ package edu.ucsf.lava.crms.assessment.model;
 import java.util.Calendar;
 import java.util.Date;
 
+import edu.ucsf.lava.core.model.EntityBase;
+import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.assessment.model.Instrument;
 import edu.ucsf.lava.crms.people.model.Patient;
 import edu.ucsf.lava.crms.scheduling.model.Visit;
 
 public class NaccPathology extends Instrument {
+	public static EntityManager MANAGER = new EntityBase.Manager(NaccPathology.class);
 	
 	public NaccPathology() {}
 	
