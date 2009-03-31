@@ -15,7 +15,18 @@
 	</bean>
 	
 
+ 
+   	 <!-- move to [xxxx]-mappings.xml if any mappings defined -->
+   	 <bean id="localControllerUrlMappings" class="java.util.LinkedHashMap">
+     	<constructor-arg><map>
+        </map></constructor-arg>
+     </bean>
 
+     <!-- move to [xxxx]-mappings.xml if any mappings defined -->
+    <bean id="localFlowControllerUrlMappings" class="java.util.LinkedHashMap">
+     	<constructor-arg><map>
+     	</map></constructor-arg>
+     </bean>
 	
      			
      	<bean id="localInstrumentGroupPrototypes" class="java.util.LinkedHashMap">
