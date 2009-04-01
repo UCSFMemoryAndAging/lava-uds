@@ -88,7 +88,6 @@ public class UdsMedications2Handler extends InstrumentHandler {
 			// change property values
 			
 			ScrollablePagedListHolder details = (ScrollablePagedListHolder) new ScrollablePagedListHolder();
-			details.setPageSize(this.DATA_ENTRY_SECTION_LENGTH);
 			backingObjects.put("details", details);
 			details.setSource(dto.getDetails());
 	
