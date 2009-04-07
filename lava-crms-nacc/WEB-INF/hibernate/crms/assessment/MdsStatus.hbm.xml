@@ -12,7 +12,7 @@
 
 		&instrInclude;
 		
-		<join table="MdsStatus">
+		<join table="mdsstatus">
 		<key column="InstrID"/>		
      <property name="mdsdec" column="mdsdec" type="short"/>
        <property name="mdsdecdt" column="mdsdecdt" type="timestamp"/>
