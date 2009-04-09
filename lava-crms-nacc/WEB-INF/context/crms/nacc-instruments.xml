@@ -12,50 +12,47 @@
 	<bean id="lava.crms.assessment.uds.projectUdsSubmissions" parent="crmsInstrumentListFlowAction"/>
 	
 	
-	<!-- most instruments share common flows (assessment.instrument.instrument.*) and the flow 
-	    listener sets the specific instrument type in the current action. the exception is instruments
-		that require their own handler which are configured below -->
-	<bean id="lava.crms.assessment.instrument.mdsstatus" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.naccpathology9" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsappraisal1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsappraisal2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udscdr1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udscdr2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsdiagnosis1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsdiagnosis2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsfamilyhistory1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsfamilyhistory2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsfaq1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsfaq2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsformchecklist1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsformchecklist2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsgds1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsgds2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udshachinski1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udshachinski2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udshealthhistory1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udshealthhistory2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsinformantdemo1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsinformantdemo2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udslabsimaging1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udslabsimaging2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsmedications1" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.mdsstatus" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.naccpathology9" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsappraisal1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsappraisal2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udscdr1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udscdr2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsdiagnosis1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsdiagnosis2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsfamilyhistory1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsfamilyhistory2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsfaq1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsfaq2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsformchecklist1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsformchecklist2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsgds1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsgds2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udshachinski1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udshachinski2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udshealthhistory1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udshealthhistory2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsinformantdemo1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsinformantdemo2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udslabsimaging1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udslabsimaging2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsmedications1" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsmedications2" parent="crmsInstrumentFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsmilestone1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsmilestone2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsneuropsych1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsneuropsych2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsnpi1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsnpi2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsphoneinclusion2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsphysical1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsphysical2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udssymptomsonset1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udssymptomsonset2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udssubjectdemo1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udssubjectdemo2" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsupdrs1" parent="crmsInstrumentCommonFlowAction"/>
-	<bean id="lava.crms.assessment.instrument.udsupdrs2" parent="crmsInstrumentCommonFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsmilestone1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsmilestone2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsneuropsych1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsneuropsych2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsnpi1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsnpi2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsphoneinclusion2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsphysical1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsphysical2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udssymptomsonset1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udssymptomsonset2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udssubjectdemo1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udssubjectdemo2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsupdrs1" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsupdrs2" parent="crmsInstrumentFlowAction"/>
 
 			
 	 <!-- form action definitions -->
@@ -75,12 +72,54 @@
 	
 	<bean id="projectUdsSubmissionsFormAction" parent="crmsListComponentFormAction">
     	<constructor-arg><list><bean class="edu.ucsf.lava.crms.assessment.controller.ProjectUdsSubmissionsHandler" parent="crmsHandler"/></list></constructor-arg>
-	</bean>  
+	</bean>
 	
-
+	<bean id="mdsstatusFormAction" parent="instrumentFormAction"/>
+	<bean id="naccpathology9FormAction" parent="instrumentFormAction"/>
+	<bean id="udsappraisal1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsappraisal2FormAction" parent="instrumentFormAction"/>
+	<bean id="udscdr1FormAction" parent="instrumentFormAction"/>
+	<bean id="udscdr2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsdiagnosis1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsdiagnosis2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsfamilyhistory1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsfamilyhistory2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsfaq1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsfaq2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsformchecklist1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsformchecklist2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsgds1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsgds2FormAction" parent="instrumentFormAction"/>
+	<bean id="udshachinski1FormAction" parent="instrumentFormAction"/>
+	<bean id="udshachinski2FormAction" parent="instrumentFormAction"/>
+	<bean id="udshealthhistory1FormAction" parent="instrumentFormAction"/>
+	<bean id="udshealthhistory2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsinformantdemo1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsinformantdemo2FormAction" parent="instrumentFormAction"/>
+	<bean id="udslabsimaging1FormAction" parent="instrumentFormAction"/>
+	<bean id="udslabsimaging2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsmedications1FormAction" parent="instrumentFormAction"/>
 	<bean id="udsmedications2FormAction" parent="crmsInstrumentComponentFormAction"><constructor-arg><list>
 		<bean class="edu.ucsf.lava.crms.assessment.controller.UdsMedications2Handler" parent="crmsHandler"/>
 	</list></constructor-arg></bean>
+	<bean id="udsmilestone1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsmilestone2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsneuropsych1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsneuropsych2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsnpi1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsnpi2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsphoneinclusion2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsphysical1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsphysical2FormAction" parent="instrumentFormAction"/>
+	<bean id="udssymptomsonset1FormAction" parent="instrumentFormAction"/>
+	<bean id="udssymptomsonset2FormAction" parent="instrumentFormAction"/>
+	<bean id="udssubjectdemo1FormAction" parent="instrumentFormAction"/>
+	<bean id="udssubjectdemo2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsupdrs1FormAction" parent="instrumentFormAction"/>
+	<bean id="udsupdrs2FormAction" parent="instrumentFormAction"/>
+	  
+	
+
     
 
 	<!-- Instrument Configurations -->
