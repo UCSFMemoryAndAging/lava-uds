@@ -333,7 +333,6 @@ public class UdsSubjectDemo extends UdsInstrument {
 		    "livSit",
 		    "independ",
 		    "residenc",
-		    "zip",
 		    "mariStat",
 		    "handed"
 		};
