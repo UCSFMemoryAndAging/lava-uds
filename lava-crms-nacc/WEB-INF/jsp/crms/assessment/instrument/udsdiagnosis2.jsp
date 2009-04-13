@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/jsp/includes/include.jsp" %>
 <c:set var="instrTypeEncoded" value="udsdiagnosis2"/>
-<c:import url="/WEB-INF/jsp/crms/assessment/instrument/include.jsp">
+<c:import url="/WEB-INF/jsp/assessment/instrument/include.jsp">
 	<c:param name="instrTypeEncoded" value="${instrTypeEncoded}"/>
 </c:import>
 
@@ -16,13 +16,13 @@
   <page:param name="component">${instrTypeEncoded}</page:param> 
   <page:param name="focusField">${focusField}</page:param>
   <page:param name="pageHeadingArgs">UDS Diagnosis</page:param>
-  <page:param name="quicklinks">udsd114,udsd1512,udsd11327</page:param>
+  <page:param name="quicklinks">udsd114,udsd1513,udsd11430</page:param>
    
 <page:applyDecorator name="component.instrument.content">
   <page:param name="instrTypeEncoded">${instrTypeEncoded}</page:param>
   <page:param name="view">${componentView}</page:param>
 
-<c:import url="/WEB-INF/jsp/crms/assessment/instrument/udsCommon.jsp">
+<c:import url="/WEB-INF/jsp/assessment/instrument/udsCommon.jsp">
 	<c:param name="entity" value="${instrTypeEncoded}"/>
 	<c:param name="view" value="${componentView}"/>
 	<c:param name="component" value="${component}"/>
@@ -37,6 +37,7 @@
 <tags:createField property="normCog" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:outputText textKey="udsdiagnosis2.normCog.instructions" inline="false" associated="true"/>
 <tags:createField property="demented" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:outputText textKey="udsdiagnosis2.demented.instructions" inline="false" associated="true"/>
 <tags:outputText textKey="udsdiagnosis2.noNormCog_noDemented.instructions" inline="false" hangingIndent="true"/>
 
 <tags:tableForm>  
@@ -100,77 +101,156 @@
 </tags:tableForm>
 </page:applyDecorator>
 
-<tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="udsd1512" linkTextKey="top.quicklink"/>
+<tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="udsd1513" linkTextKey="top.quicklink"/>
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udsdiagnosis2.5-12.section"/></page:param>
+  <page:param name="section"><spring:message code="udsdiagnosis2.5-13.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
-<tags:createField property="probAd" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="probAdIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="possAd" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="possAdIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="dlb" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="dlbIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="vasc" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="vascIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="vascPs" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="vascPsIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="alcDem" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="alcDemIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="demUn" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="demUnIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="ftd" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="ftdIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="ppAph" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="ppAphIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="pnAph" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="semDemAn" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="semDemAg" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="ppAOthr" entity="${instrTypeEncoded}" component="${component}"/>
+
+<tags:tableForm>  
+<tags:listRow>
+	<tags:listColumnHeader labelKey="udsdiagnosis2.noNormCog_noDemented.presentColHeader" width="62%"/>
+	<tags:listColumnHeader labelKey="udsdiagnosis2.primaryColHeader" width="38%"/>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="probAd" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="probAdIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="possAd" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="possAdIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="dlb" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="dlbIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="vasc" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="vascIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="vascPs" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="vascPsIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="alcDem" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="alcDemIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="demUn" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="demUnIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="ftd" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="ftdIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="ppAph" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="ppAphIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide">
+		<tags:outputText textKey="udsdiagnosis2.13.instructions" inline="false"/>
+		<tags:createField property="pnAph" entity="${instrTypeEncoded}" component="${component}"/><br>
+		<tags:createField property="semDemAn" entity="${instrTypeEncoded}" component="${component}"/><br>
+		<tags:createField property="semDemAg" entity="${instrTypeEncoded}" component="${component}"/><br>
+		<tags:createField property="ppAOthr" entity="${instrTypeEncoded}" component="${component}"/><br>
+	</tags:listCell>
+	<tags:listCell/>
+</tags:listRow>
+</tags:tableForm>
+
 </page:applyDecorator>
 
-<tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="udsd11327" linkTextKey="top.quicklink"/>
+<tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="udsd11430" linkTextKey="top.quicklink"/>
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udsdiagnosis2.13-27.section"/></page:param>
+  <page:param name="section"><spring:message code="udsdiagnosis2.14-30.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
-<tags:createField property="psp" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="pspIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cort" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cortIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="hunt" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="huntIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="prion" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="prionIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="meds" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="medsIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="dysIll" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="dysIllIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="dep" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="depIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="othPsy" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="othPsyIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="downs" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="downsIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="park" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="parkIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="stroke" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="strokIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="hyceph" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="hycephIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="brnInj" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="brnInjIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="neop" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="neopIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOth" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOthIf" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOthx" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOth2" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOth2If" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOth2x" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOth3" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOth3If" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOth3x" entity="${instrTypeEncoded}" component="${component}"/>
+  
+<tags:tableForm>  
+<tags:listRow>
+	<tags:listColumnHeader labelKey="udsdiagnosis2.noNormCog_noDemented.presentColHeader" width="62%"/>
+	<tags:listColumnHeader labelKey="udsdiagnosis2.primaryColHeader" width="38%"/>
+</tags:listRow>  
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="psp" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="pspIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="cort" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="cortIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="hunt" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="huntIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="prion" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="prionIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="meds" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="medsIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="dysIll" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="dysIllIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="dep" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="depIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="othPsy" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="othPsyIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="downs" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="downsIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="park" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="parkIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="stroke" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="strokIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="hyceph" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="hycephIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="brnInj" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="brnInjIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide"><tags:createField property="neop" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="neopIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide">
+		<tags:createField property="cogOth" entity="${instrTypeEncoded}" component="${component}"/><br>
+		<tags:createField property="cogOthx" entity="${instrTypeEncoded}" component="${component}"/>
+	</tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="cogOthIf" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide">
+		<tags:createField property="cogOth2" entity="${instrTypeEncoded}" component="${component}"/><br>
+		<tags:createField property="cogOth2x" entity="${instrTypeEncoded}" component="${component}"/>
+	</tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="cogOth2If" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+<tags:listRow>
+	<tags:listCell labelSize="wide">
+		<tags:createField property="cogOth3" entity="${instrTypeEncoded}" component="${component}"/><br>
+		<tags:createField property="cogOth3x" entity="${instrTypeEncoded}" component="${component}"/>
+	</tags:listCell>
+	<tags:listCell labelSize="wide"><tags:createField property="cogOth3If" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+</tags:listRow>
+</tags:tableForm>
 </page:applyDecorator>
 
 <page:applyDecorator name="component.instrument.section">
@@ -196,7 +276,8 @@
   <ui:observe elementIds="normCog" component="${componentPrefix}" forValue="^1" />
   <ui:skip elementIds="demented,mciaMem,mciaPlus,mciaPLan,mciaPAtt,mciaPEx,mciaPVis,mciNon1,mciN1Lan,mciN1Att,mciN1Ex,mciN1Vis,
   	mciNon2,mciN2Lan,mciN2Att,mciN2Ex,mciN2Vis,impNoMci,probAd,probAdIf,possAd,possAdIf,dlb,dlbIf,vasc,vascIf,vascPs,vascPsIf,alcDem,alcDemIf,
-  	demUn,demUnIf,ftd,ftdIf,ppAph,ppAphIf,pnAph,semDemAn,semDemAg,ppAOthr" component="${componentPrefix}" 
+  	demUn,demUnIf,ftd,ftdIf,ppAph,ppAphIf,pnAph,semDemAn,semDemAg,ppAOthr,
+  	pspIf,cortIf,huntIf,prionIf,medsIf,dysIllIf,depIf,othPsyIf,downsIf,parkIf,strokIf,hycephIf,brnInjIf,neopIf,cogOthIf,cogOth2If,cogOth3If" component="${componentPrefix}" 
   	comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
 </ui:formGuide>           
 <ui:formGuide>
@@ -360,4 +441,4 @@
 
 </page:applyDecorator>    
 </page:applyDecorator>    
-	    
+
