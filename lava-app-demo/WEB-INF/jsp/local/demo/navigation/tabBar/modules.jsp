@@ -10,7 +10,7 @@
   	<tags:crmsNavTab module="enrollment" text="Enrollment"/>
   	<tags:crmsNavTab module="scheduling" text="Scheduling"/>
   	<tags:crmsNavTab module="assessment" text="Assessment"/>
-  	<tags:coreNavTab module="reporting" text="Reporting"/>
+  	<tags:crmsNavTab module="reporting" text="Reporting"/>
   	<tags:coreNavTab module="admin" text="Admin"/>
   	
   </ul>

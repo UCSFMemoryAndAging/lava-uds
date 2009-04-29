@@ -89,7 +89,7 @@ public class UdsMedications2Handler extends InstrumentHandler {
 			
 			ScrollablePagedListHolder details = (ScrollablePagedListHolder) new ScrollablePagedListHolder();
 			backingObjects.put("details", details);
-			details.setSource(dto.getDetails());
+			details.setSourceFromEntityList(dto.getDetails());
 	
 			backingObjects.put(this.MEDICATIONS_DTO, dto);
 		}
@@ -159,7 +159,7 @@ public class UdsMedications2Handler extends InstrumentHandler {
 		// revise)
 		ScrollablePagedListHolder details = (ScrollablePagedListHolder) new ScrollablePagedListHolder();
 		details.setPageSize(this.DATA_ENTRY_SECTION_LENGTH);
-		details.setSource(medications.getDetails());
+		details.setSourceFromEntityList(medications.getDetails());
 		((ComponentCommand)command).getComponents().put("details", details);
 			
 

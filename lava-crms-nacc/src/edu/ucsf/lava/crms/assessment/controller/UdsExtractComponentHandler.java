@@ -89,14 +89,7 @@ public class UdsExtractComponentHandler extends CrmsReportComponentHandler {
 	}
 
 	
-	public void registerPropertyEditors(PropertyEditorRegistry registry) {
-		super.registerPropertyEditors(registry);
-		// register a property-specific custom editor for customDateStart since it also requires a time component
-		// vital: Spring binding requires our syntax to not include the single quotes around the component entity name,
-		// i.e. must pass in "components[reportSetup].visitDate" and not "components['reportSetup'].visitDate" to registerCustomEditor
-		SimpleDateFormat dateFormat = new SimpleDateFormat("M/d/yy h:mma");
-		registry.registerCustomEditor(Date.class, "components[reportSetup].filter.params[customDateStart]", new CustomDateEditor(dateFormat, true));
-	}
+
 	
 	public Map addReferenceData(RequestContext context, Object command, BindingResult errors, Map model)
 	{
