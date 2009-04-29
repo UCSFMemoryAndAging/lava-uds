@@ -33,7 +33,7 @@ public class ProjectUdsSubmissionsHandler extends CrmsCalendarComponentHandler {
 		this.setEntityForStandardSourceProvider(UdsInstrumentTracking.class);
 	}
 
-	public LavaDaoFilter prepareFilter(RequestContext context, LavaDaoFilter filter) {
+	public LavaDaoFilter prepareFilter(RequestContext context, LavaDaoFilter filter, Map components) {
 		HttpServletRequest request =  ((ServletExternalContext)context.getExternalContext()).getRequest();
 		filter.addDefaultSort("patient.fullNameRevNoSuffix", true);
 		filter.addParamHandler(new LavaDateRangeParamHandler("dsDate"));
