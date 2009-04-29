@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/jsp/includes/include.jsp" %>
 <c:set var="instrTypeEncoded" value="udsdiagnosis2"/>
-<c:import url="/WEB-INF/jsp/assessment/instrument/include.jsp">
+<c:import url="/WEB-INF/jsp/crms/assessment/instrument/include.jsp">
 	<c:param name="instrTypeEncoded" value="${instrTypeEncoded}"/>
 </c:import>
 
