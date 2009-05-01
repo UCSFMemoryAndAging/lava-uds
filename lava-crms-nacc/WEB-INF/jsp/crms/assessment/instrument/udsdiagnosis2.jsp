@@ -22,7 +22,7 @@
   <page:param name="instrTypeEncoded">${instrTypeEncoded}</page:param>
   <page:param name="view">${componentView}</page:param>
 
-<c:import url="/WEB-INF/jsp/assessment/instrument/udsCommon.jsp">
+<c:import url="/WEB-INF/jsp/crms/assessment/instrument/udsCommon.jsp">
 	<c:param name="entity" value="${instrTypeEncoded}"/>
 	<c:param name="view" value="${componentView}"/>
 	<c:param name="component" value="${component}"/>
@@ -438,6 +438,7 @@
   </c:if>
 </c:forEach>
 </c:if>
+
 
 </page:applyDecorator>    
 </page:applyDecorator>    
