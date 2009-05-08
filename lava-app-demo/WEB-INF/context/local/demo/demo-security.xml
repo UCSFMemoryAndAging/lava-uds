@@ -51,10 +51,12 @@
    <bean id="localInMemoryDaoImpl" class="org.acegisecurity.userdetails.memory.InMemoryDaoImpl">
      <property name="userMap">
        <value>
-          jhesse=ads1vf,ROLE_USER
-          admin=ads1vf,ROLE_USER
-          dan=ads1vf,ROLE_USER
-          robin=ads1vf,ROLE_USER
+          charlie=charlie,ROLE_USER
+          joe=joe,ROLE_USER
+          demo=demo,ROLE_USER
+          admin=admin,ROLE_USER
+          dan=dan,ROLE_USER
+          robin=robin,ROLE_USER
     </value>
   </property>
 </bean>    
