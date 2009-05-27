@@ -34,21 +34,30 @@
   <bean id="authenticationManager" class="org.acegisecurity.providers.ProviderManager">
     <property name="providers">
       <list>
-        <ref bean="localDaoAuthenticationProvider"/>
-        <!-- 
-        	<ref bean="ldapAuthProvider"/>
-        -->        
+        <ref bean="localXmlConfigAuthenticationProvider"/>
+        <ref bean="localLavaAuthUserAuthenticationProvider"/>
+             
       </list>
     </property>
   </bean>
   
+    <!-- Password Delegates must be configured for each authentication provider enabled above -->
+  	<bean id="localPasswordDelegate" class="edu.ucsf.lava.core.auth.DefaultPasswordDelegate">
+		<property name="passwordDelegates"><ref bean="passwordDelegates"/></property>
+  	</bean>
+
+	<bean id="xmlConfigPasswordDelegate" class="edu.ucsf.lava.core.auth.XmlConfigPasswordDelegate">
+		<property name="passwordDelegates"><ref bean="passwordDelegates"/></property>
+	</bean>
+
+  
   
   	
-  <bean id="localDaoAuthenticationProvider" class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
-  	<property name="userDetailsService"><ref bean="localInMemoryDaoImpl"/></property>
+  <bean id="localXmlConfigAuthenticationProvider" class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
+  	<property name="userDetailsService"><ref bean="localXmlConfigDaoImpl"/></property>
   </bean>
 	
-   <bean id="localInMemoryDaoImpl" class="org.acegisecurity.userdetails.memory.InMemoryDaoImpl">
+   <bean id="localXmlConfigDaoImpl" class="org.acegisecurity.userdetails.memory.InMemoryDaoImpl">
      <property name="userMap">
        <value>
           charlie=charlie,ROLE_USER
@@ -60,7 +69,15 @@
     </value>
   </property>
 </bean>    
-
+<bean id="localLavaAuthUserAuthenticationProvider" class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
+  	<property name="userDetailsService"><ref bean="authManager"/></property>
+	<property name="saltSource"><ref bean="localPasswordSaltSource"/></property>
+	<property name="passwordEncoder"><ref bean="localPasswordEncoder"/></property>
+	
+  </bean>
+  <bean id="localPasswordEncoder" class="edu.ucsf.lava.core.auth.DefaultPasswordEncoder"/>
+  <bean id="localPasswordSaltSource" class="edu.ucsf.lava.core.auth.DefaultPasswordSaltSource"/>
+  
   
   <!-- cacheing authentication info -->
   <!-- Ehcache comes with a failsafe configuration declared in the ehcache-failsafe.xml file, which 
@@ -91,56 +108,6 @@
     <property name="cache"><ref local="userCacheBackend"/></property>
   </bean>
   
-  <bean id="initialDirContextFactory" class="org.acegisecurity.ldap.DefaultInitialDirContextFactory">
-    <constructor-arg value="ldap://campus01.campus.net.ucsf.edu:389/DC=campus,DC=net,DC=ucsf,DC=edu"/>
-    <property name="managerDn"><value>CN=MacLDAPClient,OU=Accounts,OU=Memory and Aging Center (MAC),DC=campus,DC=net,DC=ucsf,DC=edu</value></property>
-    <property name="managerPassword"><value>F0rgetMeN0t</value></property>
-  </bean>
-  
-  <bean id="userSearch" class="org.acegisecurity.ldap.search.FilterBasedLdapUserSearch">
-  	<constructor-arg index="0">
-           <!-- search for the user relative to the following, which relative to the root in initDirContextFactory.
-           		this is not necessary to find the user, since the subtree is searched, but because of a weirdness 
-           		between Acegi and Active Directory, if this is not present additional referrals may be found resulting 
-           		in PartialResultException -->
-  		<value>OU=Memory and Aging Center (MAC)</value>
-  	</constructor-arg>
-  	<constructor-arg index="1">
-  		<value>sAMAccountName={0}</value>
-  	</constructor-arg>
-  	<constructor-arg index="2">
-	  	<ref local="initialDirContextFactory" />
-  	</constructor-arg>
-    <property name="searchSubtree"><value>true</value></property>
-  </bean>
-     
-  <bean id="ldapAuthProvider" class="org.acegisecurity.providers.ldap.LdapAuthenticationProvider">
-  	<constructor-arg>
-	 	<bean class="org.acegisecurity.providers.ldap.authenticator.BindAuthenticator">
-           <constructor-arg><ref local="initialDirContextFactory"/></constructor-arg>
-           <!-- use userSearch rather than DN pattern because not searching on the uid (e.g. "Toohey, Charlie")
-            	rather on the username (e.g. ctoohey). userSearch searches for the username by filtering
-            	on the user sAMAccount attribute -->
-           <!-- <property name="userDnPatterns"><list><value>uid={0},ou=people</value></list></property> -->
-           <property name="userSearch"><ref local="userSearch"/></property>
-        </bean>
-  	</constructor-arg>
-    <constructor-arg>
-        <bean class="org.acegisecurity.providers.ldap.populator.DefaultLdapAuthoritiesPopulator">
-           <constructor-arg><ref local="initialDirContextFactory"/></constructor-arg>
-           <!-- search for groups (roles) relative to the following, which is relative to the root 
-           	in initDirContextFactory. Acegi looks at the "member" attribute of each active directory
-           	group that is found to determine to which groups an authenticated user belongs, and
-           	then makes sure that user is in a group (has a role) that matches a role which is authorized in 
-           	filterInvocationInterceptor (configured in instance specific security) -->
-           <constructor-arg><value>OU=Groups,OU=Memory and Aging Center (MAC)</value></constructor-arg>
-		   <property name="searchSubtree"><value>false</value></property>
-		   <property name="rolePrefix"><value>ROLE_</value></property>
-		   <property name="convertToUpperCase"><value>true</value></property>
-        </bean>
-    </constructor-arg>	
-    <property name="userCache"><ref bean="userCache"/></property>
-  </bean>
 
 
   <!-- UnanimousBased is strange in that if a secured resource has more than one role config 
@@ -150,7 +117,7 @@
        gives the same result as ConsensusBased (i.e. if there is a single match between the 
        secured resource config attributes and the authenicated user's authorities, then access
        is granted). -->
-  <bean id="accessDecisionManager" class="org.acegisecurity.vote.ConsensusBased">
+  <bean id="accessDecisionManager" class="org.acegisecurity.vote.AffirmativeBased">
     <property name="decisionVoters">
       <list>
         <ref bean="roleVoter"/>
@@ -160,22 +127,7 @@
 
   <bean id="roleVoter" class="org.acegisecurity.vote.RoleVoter"/>
 
-	<!-- the exceptionTranslationFilter bean which specifies the error page to go to if access is denied
-		is defined in the instance specific configuration file -->
-  
-  <!-- the authenticationEntryPoint bean which specifies loginFormUrl is defined in the instance specific
-   		security configuration file -->
-
-  
-  <!-- the filterInvocationInterceptor bean, which defines which roles are accepted, is defined in each
-       of the instance specific security xml files -->
-    
   <bean id="requestWrapper" class="org.acegisecurity.wrapper.SecurityContextHolderAwareRequestFilter"/>
-
-
-
-
-
 
   <bean id="authenticationEntryPoint" class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilterEntryPoint">
     <property name="loginFormUrl"><value>/security/local/demo/login.jsp</value></property>
@@ -185,7 +137,7 @@
   <bean id="authenticationProcessingFilter" class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilter">
     <property name="authenticationManager"><ref bean="authenticationManager"/></property>
     <property name="authenticationFailureUrl"><value>/security/local/demo/retryLogin.jsp</value></property>
-    <property name="defaultTargetUrl"><value>/mylava/home/welcome.lava</value></property>
+    <property name="defaultTargetUrl"><value>/crms/mylava/welcome/welcome.lava</value></property>
     <property name="filterProcessesUrl"><value>/j_acegi_security_check.lava</value></property>
   </bean>
 

@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jsp/includes/include.jsp" %>
 <html>
-<head><title>LAVA CRMS Demo Application</title>
-<meta name="pageHeading" content="Welcome to LAVA CRMS Demo Application">
+<head><title>DEMO LAVA CRMS Application</title>
+<meta name="pageHeading" content="Welcome to the DEMO LAVA CRMS Application">
 </head>
 <body>
 

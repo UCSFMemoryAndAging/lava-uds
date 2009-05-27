@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>MAC LavaWeb Logout</title>
+<title>DEMO LAVA CRMS Application Logout</title>
 <%@ include file="/WEB-INF/jsp/includes/base.jsp" %>
 <%-- note: does not use any styles from lava/styles/stylesheet.css --%>
 <style type="text/css">
@@ -43,8 +43,12 @@ input.loginButton:hover{
    
   </tr>
   <tr>
-    <td colspan="2" scope="col" align="left" ><p style="font-size: 12px">This is a UCSF Memory and Aging Center Data Management application, provided only for use by authorized personnel.  Unauthorized access or violations of the data access agreements governing the use of this application may result in criminal prosecution and/or UCSF administrative sanctions.  All usage is monitored and logged, and by accessing this application you are consenting to this monitoring and to the terms of the governing access agreements.</p></td>
-  </tr>
+   <td colspan="2" scope="col" align="left" ><p style="font-size: 12px">
+     This demo application illustrates the basic core features of the LAVA CRMS (Clinical Research Management System) application development framework.  
+          <br/><br/> 
+     By default, you can login as an administrator using username: admin password: admin, or as a regular user with username: demo password: demo. 
+     </p></td>
+    </tr>
    <tr><form name="form1" method="post" action="<c:url value='/j_acegi_security_check.lava'/>" >
      <th height="15" valign="bottom" scope="col"><p align="right" style="font-size:16px;font-weight:bold">Please log in </p>
       </th>
@@ -52,7 +56,7 @@ input.loginButton:hover{
      <tr>
      <th scope="col"><div align="right" style="font-size:16px;font-weight:normal">Username</div></th>
      <td height="15"><input name="j_username" type="text" id="j_username" autocomplete="off" size="25" maxlength="25">   
-	  <span style="font-size:9pt">(do NOT include "CAMPUS\")</span></td>
+	 </td>
   </tr>
    <tr>
      <th scope="col"><div align="right" style="font-size:16px;font-weight:normal">Password</div></th>
@@ -60,7 +64,7 @@ input.loginButton:hover{
   		<input name="_login"  type="submit" class="loginButton" value="Login"/>
       </tr>
      <tr>
-       <th colspan="2" scope="col" style="background-color:#ddddaa;color:#990000;font-size:12px;font-weight:normal;margin-top:20px;">You have been logged out of the system. You may re-login or close your browser.</th>
+       <th colspan="2" scope="col" style="background-color:#cccccc;color:#990000;font-size:12px;font-weight:normal;margin-top:20px;">You have been logged out of the system. You may re-login or close your browser.</th>
        </tr>
    </form>
   </tr>
