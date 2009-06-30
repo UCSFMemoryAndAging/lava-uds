@@ -1,4 +1,4 @@
-﻿DELETE from viewproperty where instance='lava' and scope='crms-nacc';
+DELETE from viewproperty where instance='lava' and scope='crms-nacc';
 DELETE from hibernateproperty where instance='lava' and scope='crms-nacc';
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.mdsstatus.mdsdec','en','lava','crms-nacc',NULL,'mdsstatus','mdsdec','info','r','range','Yes','1. Is the subject deceased?',NULL,NULL,0,NULL,'uds.noYes01',NULL,25,'MDS Patient deceased','2009-01-24 21:28:51');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.mdsstatus.mdsdecdt','en','lava','crms-nacc',NULL,'mdsstatus','mdsdecdt','info','r','date','No','1a. Date of death',NULL,NULL,0,NULL,NULL,NULL,26,'Date of Death','2009-01-24 21:28:51');
