@@ -2,16 +2,15 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-insert into versionhistory(`Module`,`Version`,`VersionDate`,`Major`,`Minor`,`Fix`,`UpdateRequired`)
-	VALUES ('lava-crms-nacc-model','3.0.2',NOW(),3,0,2,1);
-
+CREATE SCHEMA IF NOT EXISTS `lava_crms_nacc` DEFAULT CHARACTER SET latin1 ;
+USE `lava_crms_nacc`;
 
 -- -----------------------------------------------------
--- Table `cdrcalclookup`
+-- Table `lava_crms_nacc`.`cdrcalclookup`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `cdrcalclookup` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`cdrcalclookup` ;
 
-CREATE  TABLE IF NOT EXISTS `cdrcalclookup` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`cdrcalclookup` (
   `Memory` DECIMAL(3,1) NULL DEFAULT NULL ,
   `Ornt` DECIMAL(3,1) NULL DEFAULT NULL ,
   `Prblm` DECIMAL(3,1) NULL DEFAULT NULL ,
@@ -25,11 +24,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `mdspatients`
+-- Table `lava_crms_nacc`.`mdspatients`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mdspatients` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`mdspatients` ;
 
-CREATE  TABLE IF NOT EXISTS `mdspatients` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`mdspatients` (
   `pidn` INT(10) NOT NULL AUTO_INCREMENT ,
   PRIMARY KEY (`pidn`) )
 ENGINE = InnoDB
@@ -38,11 +37,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `mdsstatus`
+-- Table `lava_crms_nacc`.`mdsstatus`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mdsstatus` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`mdsstatus` ;
 
-CREATE  TABLE IF NOT EXISTS `mdsstatus` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`mdsstatus` (
   `InstrID` INT(10) NOT NULL ,
   `mdsdec` SMALLINT(5) NULL DEFAULT NULL ,
   `mdsdecdt` DATETIME NULL DEFAULT NULL ,
@@ -58,11 +57,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `multumbrandlookup`
+-- Table `lava_crms_nacc`.`multumbrandlookup`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `multumbrandlookup` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`multumbrandlookup` ;
 
-CREATE  TABLE IF NOT EXISTS `multumbrandlookup` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`multumbrandlookup` (
   `BrandID` INT(10) NOT NULL ,
   `BrandDesc` VARCHAR(50) NULL DEFAULT NULL ,
   `GenericID` INT(10) NULL DEFAULT NULL ,
@@ -72,11 +71,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `multumgenericmeds`
+-- Table `lava_crms_nacc`.`multumgenericmeds`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `multumgenericmeds` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`multumgenericmeds` ;
 
-CREATE  TABLE IF NOT EXISTS `multumgenericmeds` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`multumgenericmeds` (
   `GenericID` INT(10) NULL DEFAULT NULL ,
   `GenericName` VARCHAR(50) NULL DEFAULT NULL ,
   `CategoryID` INT(10) NOT NULL ,
@@ -86,11 +85,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `naccpathology`
+-- Table `lava_crms_nacc`.`naccpathology`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `naccpathology` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`naccpathology` ;
 
-CREATE  TABLE IF NOT EXISTS `naccpathology` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`naccpathology` (
   `InstrID` INT(10) NOT NULL ,
   `PTID` VARCHAR(10) NULL DEFAULT NULL ,
   `NPFORM` DATETIME NULL DEFAULT NULL ,
@@ -185,11 +184,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsappraisal`
+-- Table `lava_crms_nacc`.`udsappraisal`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsappraisal` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsappraisal` ;
 
-CREATE  TABLE IF NOT EXISTS `udsappraisal` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsappraisal` (
   `InstrID` INT(10) NOT NULL ,
   `NORMAL` SMALLINT(5) NULL DEFAULT NULL ,
   `FOCLDEF` SMALLINT(5) NULL DEFAULT NULL ,
@@ -201,11 +200,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udscdr`
+-- Table `lava_crms_nacc`.`udscdr`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udscdr` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udscdr` ;
 
-CREATE  TABLE IF NOT EXISTS `udscdr` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udscdr` (
   `InstrID` INT(10) NOT NULL ,
   `MEMORY` DECIMAL(3,1) NULL DEFAULT NULL ,
   `ORIENT` DECIMAL(3,1) NULL DEFAULT NULL ,
@@ -223,11 +222,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsdiagnosis`
+-- Table `lava_crms_nacc`.`udsdiagnosis`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsdiagnosis` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsdiagnosis` ;
 
-CREATE  TABLE IF NOT EXISTS `udsdiagnosis` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsdiagnosis` (
   `InstrID` INT(10) NOT NULL ,
   `WHODIDDX` SMALLINT(5) NULL DEFAULT NULL ,
   `NORMCOG` SMALLINT(5) NULL DEFAULT NULL ,
@@ -314,11 +313,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsfamilyhistory1`
+-- Table `lava_crms_nacc`.`udsfamilyhistory1`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsfamilyhistory1` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsfamilyhistory1` ;
 
-CREATE  TABLE IF NOT EXISTS `udsfamilyhistory1` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsfamilyhistory1` (
   `InstrID` INT(10) NOT NULL ,
   `A3CHG` SMALLINT(5) NULL DEFAULT NULL ,
   `PARCHG` SMALLINT(5) NULL DEFAULT NULL ,
@@ -382,11 +381,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsfamilyhistory2`
+-- Table `lava_crms_nacc`.`udsfamilyhistory2`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsfamilyhistory2` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsfamilyhistory2` ;
 
-CREATE  TABLE IF NOT EXISTS `udsfamilyhistory2` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsfamilyhistory2` (
   `InstrID` INT(10) NOT NULL ,
   `A3CHG` SMALLINT(5) NULL DEFAULT NULL ,
   `PARCHG` SMALLINT(5) NULL DEFAULT NULL ,
@@ -510,11 +509,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsfamilyhistorychildren2`
+-- Table `lava_crms_nacc`.`udsfamilyhistorychildren2`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsfamilyhistorychildren2` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsfamilyhistorychildren2` ;
 
-CREATE  TABLE IF NOT EXISTS `udsfamilyhistorychildren2` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsfamilyhistorychildren2` (
   `InstrID` INT(10) NOT NULL ,
   `KIDCHG` SMALLINT(5) NULL DEFAULT NULL ,
   `KIDS` SMALLINT(5) NULL DEFAULT NULL ,
@@ -599,11 +598,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsfamilyhistoryrelatives2`
+-- Table `lava_crms_nacc`.`udsfamilyhistoryrelatives2`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsfamilyhistoryrelatives2` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsfamilyhistoryrelatives2` ;
 
-CREATE  TABLE IF NOT EXISTS `udsfamilyhistoryrelatives2` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsfamilyhistoryrelatives2` (
   `InstrID` INT(10) NOT NULL ,
   `RELCHG` SMALLINT(5) NULL DEFAULT NULL ,
   `RELSDEM` SMALLINT(5) NULL DEFAULT NULL ,
@@ -673,11 +672,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsfaq`
+-- Table `lava_crms_nacc`.`udsfaq`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsfaq` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsfaq` ;
 
-CREATE  TABLE IF NOT EXISTS `udsfaq` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsfaq` (
   `InstrID` INT(10) NOT NULL ,
   `BILLS` SMALLINT(5) NULL DEFAULT NULL ,
   `TAXES` SMALLINT(5) NULL DEFAULT NULL ,
@@ -695,11 +694,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsformchecklist`
+-- Table `lava_crms_nacc`.`udsformchecklist`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsformchecklist` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsformchecklist` ;
 
-CREATE  TABLE IF NOT EXISTS `udsformchecklist` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsformchecklist` (
   `InstrID` INT(10) NOT NULL ,
   `A2SUB` SMALLINT(5) NULL DEFAULT NULL ,
   `A2NOT` SMALLINT(5) NULL DEFAULT NULL ,
@@ -737,11 +736,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsgds`
+-- Table `lava_crms_nacc`.`udsgds`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsgds` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsgds` ;
 
-CREATE  TABLE IF NOT EXISTS `udsgds` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsgds` (
   `InstrID` INT(10) NOT NULL ,
   `NOGDS` SMALLINT(5) NULL DEFAULT NULL ,
   `SATIS` SMALLINT(5) NULL DEFAULT NULL ,
@@ -766,11 +765,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udshachinski`
+-- Table `lava_crms_nacc`.`udshachinski`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udshachinski` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udshachinski` ;
 
-CREATE  TABLE IF NOT EXISTS `udshachinski` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udshachinski` (
   `InstrID` INT(10) NOT NULL ,
   `ABRUPT` SMALLINT(5) NULL DEFAULT NULL ,
   `STEPWISE` SMALLINT(5) NULL DEFAULT NULL ,
@@ -795,11 +794,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udshealthhistory`
+-- Table `lava_crms_nacc`.`udshealthhistory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udshealthhistory` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udshealthhistory` ;
 
-CREATE  TABLE IF NOT EXISTS `udshealthhistory` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udshealthhistory` (
   `InstrID` INT(10) NOT NULL ,
   `CVHATT` SMALLINT(5) NULL DEFAULT NULL ,
   `CVAFIB` SMALLINT(5) NULL DEFAULT NULL ,
@@ -860,11 +859,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsinformantdemo`
+-- Table `lava_crms_nacc`.`udsinformantdemo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsinformantdemo` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsinformantdemo` ;
 
-CREATE  TABLE IF NOT EXISTS `udsinformantdemo` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsinformantdemo` (
   `InstrID` INT(10) NOT NULL ,
   `INBIRMO` SMALLINT(5) NULL DEFAULT NULL ,
   `INBIRYR` SMALLINT(5) NULL DEFAULT NULL ,
@@ -892,11 +891,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udslabsimaging`
+-- Table `lava_crms_nacc`.`udslabsimaging`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udslabsimaging` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udslabsimaging` ;
 
-CREATE  TABLE IF NOT EXISTS `udslabsimaging` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udslabsimaging` (
   `InstrID` INT(10) NOT NULL ,
   `CTFLM` SMALLINT(5) NULL DEFAULT NULL ,
   `CTDIG` SMALLINT(5) NULL DEFAULT NULL ,
@@ -922,11 +921,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsmedications2`
+-- Table `lava_crms_nacc`.`udsmedications2`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsmedications2` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsmedications2` ;
 
-CREATE  TABLE IF NOT EXISTS `udsmedications2` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsmedications2` (
   `InstrID` INT(10) NOT NULL ,
   `ANYMEDS` SMALLINT(5) NULL DEFAULT NULL ,
   PRIMARY KEY (`InstrID`) )
@@ -935,11 +934,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsmedicationsdetails2`
+-- Table `lava_crms_nacc`.`udsmedicationsdetails2`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsmedicationsdetails2` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsmedicationsdetails2` ;
 
-CREATE  TABLE IF NOT EXISTS `udsmedicationsdetails2` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsmedicationsdetails2` (
   `InstrID` INT(10) NOT NULL ,
   `MedDetailID` INT(10) NOT NULL AUTO_INCREMENT ,
   `LineNum` INT(10) NULL DEFAULT NULL ,
@@ -954,11 +953,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsmedicationsnon1`
+-- Table `lava_crms_nacc`.`udsmedicationsnon1`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsmedicationsnon1` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsmedicationsnon1` ;
 
-CREATE  TABLE IF NOT EXISTS `udsmedicationsnon1` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsmedicationsnon1` (
   `InstrID` INT(10) NOT NULL ,
   `NMEDS` SMALLINT(5) NULL DEFAULT NULL ,
   `NMA` VARCHAR(30) NULL DEFAULT NULL ,
@@ -1067,11 +1066,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsmedicationspre1`
+-- Table `lava_crms_nacc`.`udsmedicationspre1`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsmedicationspre1` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsmedicationspre1` ;
 
-CREATE  TABLE IF NOT EXISTS `udsmedicationspre1` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsmedicationspre1` (
   `InstrID` INT(10) NOT NULL ,
   `PMEDS` SMALLINT(5) NULL DEFAULT NULL ,
   `PMA` VARCHAR(30) NULL DEFAULT NULL ,
@@ -1240,11 +1239,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsmedicationsvit1`
+-- Table `lava_crms_nacc`.`udsmedicationsvit1`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsmedicationsvit1` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsmedicationsvit1` ;
 
-CREATE  TABLE IF NOT EXISTS `udsmedicationsvit1` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsmedicationsvit1` (
   `InstrID` INT(10) NOT NULL ,
   `VITASUPS` SMALLINT(5) NULL DEFAULT NULL ,
   `VSA` VARCHAR(30) NULL DEFAULT NULL ,
@@ -1353,11 +1352,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsmilestone`
+-- Table `lava_crms_nacc`.`udsmilestone`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsmilestone` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsmilestone` ;
 
-CREATE  TABLE IF NOT EXISTS `udsmilestone` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsmilestone` (
   `InstrID` INT(10) NOT NULL ,
   `DECEASED` SMALLINT(5) NULL DEFAULT NULL ,
   `DEATHMO` SMALLINT(5) NULL DEFAULT NULL ,
@@ -1397,11 +1396,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsneuropsych`
+-- Table `lava_crms_nacc`.`udsneuropsych`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsneuropsych` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsneuropsych` ;
 
-CREATE  TABLE IF NOT EXISTS `udsneuropsych` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsneuropsych` (
   `InstrID` INT(10) NOT NULL ,
   `MMSELOC` SMALLINT(5) NULL DEFAULT NULL ,
   `MMSELAN` SMALLINT(5) NULL DEFAULT NULL ,
@@ -1441,11 +1440,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsnpi`
+-- Table `lava_crms_nacc`.`udsnpi`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsnpi` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsnpi` ;
 
-CREATE  TABLE IF NOT EXISTS `udsnpi` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsnpi` (
   `InstrID` INT(10) NOT NULL ,
   `NPIQINF` SMALLINT(5) NULL DEFAULT NULL ,
   `NPIQINFX` VARCHAR(60) NULL DEFAULT NULL ,
@@ -1479,11 +1478,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsphoneinclusion`
+-- Table `lava_crms_nacc`.`udsphoneinclusion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsphoneinclusion` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsphoneinclusion` ;
 
-CREATE  TABLE IF NOT EXISTS `udsphoneinclusion` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsphoneinclusion` (
   `InstrID` INT(10) NOT NULL ,
   `TELCOG` SMALLINT(5) NULL DEFAULT NULL ,
   `TELILL` SMALLINT(5) NULL DEFAULT NULL ,
@@ -1499,11 +1498,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsphysical`
+-- Table `lava_crms_nacc`.`udsphysical`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsphysical` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsphysical` ;
 
-CREATE  TABLE IF NOT EXISTS `udsphysical` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsphysical` (
   `InstrID` INT(10) NOT NULL ,
   `HEIGHT` DECIMAL(4,1) NULL DEFAULT NULL ,
   `WEIGHT` SMALLINT(5) NULL DEFAULT NULL ,
@@ -1522,11 +1521,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udssubjectdemo`
+-- Table `lava_crms_nacc`.`udssubjectdemo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udssubjectdemo` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udssubjectdemo` ;
 
-CREATE  TABLE IF NOT EXISTS `udssubjectdemo` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udssubjectdemo` (
   `InstrID` INT(10) NOT NULL ,
   `INMDS` SMALLINT(5) NULL DEFAULT NULL ,
   `REASON` SMALLINT(5) NULL DEFAULT NULL ,
@@ -1566,11 +1565,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udssymptomsonset`
+-- Table `lava_crms_nacc`.`udssymptomsonset`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udssymptomsonset` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udssymptomsonset` ;
 
-CREATE  TABLE IF NOT EXISTS `udssymptomsonset` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udssymptomsonset` (
   `InstrID` INT(10) NOT NULL ,
   `B9CHG` SMALLINT(5) NULL DEFAULT NULL ,
   `DECSUB` SMALLINT(5) NULL DEFAULT NULL ,
@@ -1622,11 +1621,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udstracking`
+-- Table `lava_crms_nacc`.`udstracking`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udstracking` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udstracking` ;
 
-CREATE  TABLE IF NOT EXISTS `udstracking` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udstracking` (
   `InstrID` INT(10) NOT NULL ,
   `Packet` VARCHAR(2) NULL DEFAULT NULL ,
   `FormID` VARCHAR(3) NULL DEFAULT NULL ,
@@ -1659,11 +1658,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `udsupdrs`
+-- Table `lava_crms_nacc`.`udsupdrs`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `udsupdrs` ;
+DROP TABLE IF EXISTS `lava_crms_nacc`.`udsupdrs` ;
 
-CREATE  TABLE IF NOT EXISTS `udsupdrs` (
+CREATE  TABLE IF NOT EXISTS `lava_crms_nacc`.`udsupdrs` (
   `InstrID` INT(10) NOT NULL ,
   `PDNORMAL` SMALLINT(5) NULL DEFAULT NULL ,
   `SPEECH` SMALLINT(5) NULL DEFAULT NULL ,
