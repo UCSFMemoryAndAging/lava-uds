@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    
+
+	<bean name="applicationServerDelegate" class="edu.ucsf.lava.core.environment.Tomcat6Delegate"/>
+	
+	<!-- hibernate session factory properties -->
+	<bean name="sessionFactoryHibernateProperties" class="java.util.Properties">
+		<constructor-arg><props>
+		 	<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+        </props></constructor-arg>
+	</bean>
+	
+	<!-- tomcat transaction manager configuration -->	
+
+	
+	<bean name="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory"><ref bean="sessionFactory"/></property>
+	</bean>
+	    
+	    
+	<bean id="localDataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/demoMy</value>
+		</property>
+	</bean>
+	
+	
+	
+</beans>
+    
+     
+
+

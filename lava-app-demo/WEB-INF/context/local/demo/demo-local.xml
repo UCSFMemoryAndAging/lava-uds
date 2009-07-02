@@ -7,15 +7,7 @@
 	for the local instance. -->
 <beans>       
            
-   	 <bean id="localDataSource"
-		class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName">
-			<value>java:demoMy</value>
-		</property>
-	</bean>
-	
-	
-	
+
 
  
    	 <!-- move to [xxxx]-mappings.xml if any mappings defined -->
