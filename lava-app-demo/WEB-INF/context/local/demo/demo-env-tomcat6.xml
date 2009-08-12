@@ -24,7 +24,7 @@
 	<bean id="localDataSource"
 		class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
-			<value>java:comp/env/jdbc/demoMy</value>
+			<value>java:comp/env/jdbc/demo</value>
 		</property>
 	</bean>
 	
