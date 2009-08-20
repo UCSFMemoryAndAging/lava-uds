@@ -74,49 +74,61 @@
     	<constructor-arg><list><bean class="edu.ucsf.lava.crms.assessment.controller.ProjectUdsSubmissionsHandler" parent="crmsHandler"/></list></constructor-arg>
 	</bean>
 	
-	<bean id="mdsstatusFormAction" parent="instrumentFormAction"/>
-	<bean id="naccpathology9FormAction" parent="instrumentFormAction"/>
-	<bean id="udsappraisal1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsappraisal2FormAction" parent="instrumentFormAction"/>
-	<bean id="udscdr1FormAction" parent="instrumentFormAction"/>
-	<bean id="udscdr2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsdiagnosis1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsdiagnosis2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsfamilyhistory1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsfamilyhistory2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsfaq1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsfaq2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsformchecklist1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsformchecklist2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsgds1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsgds2FormAction" parent="instrumentFormAction"/>
-	<bean id="udshachinski1FormAction" parent="instrumentFormAction"/>
-	<bean id="udshachinski2FormAction" parent="instrumentFormAction"/>
-	<bean id="udshealthhistory1FormAction" parent="instrumentFormAction"/>
-	<bean id="udshealthhistory2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsinformantdemo1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsinformantdemo2FormAction" parent="instrumentFormAction"/>
-	<bean id="udslabsimaging1FormAction" parent="instrumentFormAction"/>
-	<bean id="udslabsimaging2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsmedications1FormAction" parent="instrumentFormAction"/>
+	
+	<bean id="udsInstrumentHandler" class="edu.ucsf.lava.crms.assessment.controller.UdsInstrumentHandler" parent="baseEntityInstrumentHandler" abstract="true"/>		
+	
+	<bean id="udsInstrumentFormAction" parent="crmsInstrumentComponentFormAction">
+    	<constructor-arg>
+    		<list>
+      			<bean parent="udsInstrumentHandler"/>
+	      		<bean class="edu.ucsf.lava.crms.assessment.controller.VisitInstrumentsHandler" parent="crmsHandler"/>
+      		</list>
+   		</constructor-arg>
+    </bean>
+	
+	<bean id="mdsstatusFormAction" parent="udsInstrumentFormAction"/>
+	<bean id="naccpathology9FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsappraisal1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsappraisal2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udscdr1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udscdr2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsdiagnosis1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsdiagnosis2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsfamilyhistory1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsfamilyhistory2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsfaq1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsfaq2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsformchecklist1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsformchecklist2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsgds1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsgds2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udshachinski1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udshachinski2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udshealthhistory1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udshealthhistory2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsinformantdemo1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsinformantdemo2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udslabsimaging1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udslabsimaging2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsmedications1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsmedications2FormAction" parent="crmsInstrumentComponentFormAction"><constructor-arg><list>
 		<bean class="edu.ucsf.lava.crms.assessment.controller.UdsMedications2Handler" parent="crmsHandler"/>
 	</list></constructor-arg></bean>
-	<bean id="udsmilestone1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsmilestone2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsneuropsych1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsneuropsych2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsnpi1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsnpi2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsphoneinclusion2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsphysical1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsphysical2FormAction" parent="instrumentFormAction"/>
-	<bean id="udssymptomsonset1FormAction" parent="instrumentFormAction"/>
-	<bean id="udssymptomsonset2FormAction" parent="instrumentFormAction"/>
-	<bean id="udssubjectdemo1FormAction" parent="instrumentFormAction"/>
-	<bean id="udssubjectdemo2FormAction" parent="instrumentFormAction"/>
-	<bean id="udsupdrs1FormAction" parent="instrumentFormAction"/>
-	<bean id="udsupdrs2FormAction" parent="instrumentFormAction"/>
+	<bean id="udsmilestone1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsmilestone2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsneuropsych1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsneuropsych2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsnpi1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsnpi2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsphoneinclusion2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsphysical1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsphysical2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udssymptomsonset1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udssymptomsonset2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udssubjectdemo1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udssubjectdemo2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsupdrs1FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsupdrs2FormAction" parent="udsInstrumentFormAction"/>
 	  
 	
 

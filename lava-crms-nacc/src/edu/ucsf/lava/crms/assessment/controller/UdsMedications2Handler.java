@@ -23,7 +23,7 @@ import edu.ucsf.lava.crms.people.model.AddPatientCommand;
 import edu.ucsf.lava.crms.session.CrmsSessionUtils;
 
 
-public class UdsMedications2Handler extends InstrumentHandler {
+public class UdsMedications2Handler extends UdsInstrumentHandler {
 	public static final int DATA_ENTRY_SECTION_LENGTH = 40;
 	public static final String MEDICATIONS_DTO = "udsMedications2Dto";
 	
