@@ -109,8 +109,8 @@
 
 <tags:tableForm>  
 <tags:listRow>
-	<tags:listColumnHeader labelKey="udsdiagnosis2.noNormCog_noDemented.presentColHeader" width="62%"/>
-	<tags:listColumnHeader labelKey="udsdiagnosis2.primaryColHeader" width="38%"/>
+	<tags:listColumnHeader labelKey="udsdiagnosis2.noNormCog_noDemented.presentColHeader" width="58%"/>
+	<tags:listColumnHeader labelKey="udsdiagnosis2.primaryColHeader" width="42%"/>
 </tags:listRow>
 <tags:listRow>
 	<tags:listCell labelSize="wide"><tags:createField property="probAd" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
@@ -170,8 +170,8 @@
   
 <tags:tableForm>  
 <tags:listRow>
-	<tags:listColumnHeader labelKey="udsdiagnosis2.noNormCog_noDemented.presentColHeader" width="62%"/>
-	<tags:listColumnHeader labelKey="udsdiagnosis2.primaryColHeader" width="38%"/>
+	<tags:listColumnHeader labelKey="udsdiagnosis2.noNormCog_noDemented.presentColHeader" width="58%"/>
+	<tags:listColumnHeader labelKey="udsdiagnosis2.primaryColHeader" width="42%"/>
 </tags:listRow>  
 <tags:listRow>
 	<tags:listCell labelSize="wide"><tags:createField property="psp" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>

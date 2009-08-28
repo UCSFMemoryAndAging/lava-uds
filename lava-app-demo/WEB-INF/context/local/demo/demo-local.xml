@@ -33,23 +33,14 @@
 		</map></constructor-arg>
 	</bean>	
 	
-	<bean id="localInstrumentPrototypes" class="java.util.LinkedHashMap">
-		<constructor-arg><map>	
-		</map></constructor-arg>
-	</bean>	
-    
+	
   	 <!-- move to [xxxx]-enrollment.xml if any prototypes defined -->
    	<bean id="localEnrollmentStatusPrototypes" class="java.util.LinkedHashMap">
 		<constructor-arg><map>	
 		</map></constructor-arg>
 	</bean>	
 	
-	
-	 <!-- move to [xxxx]-scheduling.xml if any prototypes defined -->
-  	<bean id="localVisitPrototypes" class="java.util.LinkedHashMap">
-		<constructor-arg><map>	
-		</map></constructor-arg>
-	</bean>	
+
   
  <!-- move to [xxxx]-session.xml if any session policies defined -->
   	 <bean id="localSessionPolicyHandlers" class="java.util.ArrayList">
