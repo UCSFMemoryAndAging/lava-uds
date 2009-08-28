@@ -60,13 +60,9 @@
    <bean id="localXmlConfigDaoImpl" class="org.acegisecurity.userdetails.memory.InMemoryDaoImpl">
      <property name="userMap">
        <value>
-          charlie=charlie,ROLE_USER
-          joe=joe,ROLE_USER
           demo=demo,ROLE_USER
           admin=admin,ROLE_USER
-          dan=dan,ROLE_USER
-          robin=robin,ROLE_USER
-    </value>
+      </value>
   </property>
 </bean>    
 <bean id="localLavaAuthUserAuthenticationProvider" class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
