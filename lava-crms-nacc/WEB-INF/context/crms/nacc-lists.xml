@@ -3,8 +3,14 @@
 
 
 <beans>
-
-		
+	
+			
+	<bean id="list.udsVisit.packetType" parent="list.udsinstrument.packetType">
+ 		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="N/A"/><constructor-arg value="NA"/><constructor-arg value="5"/></bean>
+		</list></property>
+ 	</bean>	
+	
 	<bean id="list.udsinstrument.formId" parent="list.dynamic">
 		<property name="query" value="udsinstrument.formId"/>
 	</bean>
@@ -530,6 +536,29 @@
 						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
 			</list></property>
 	</bean>	
+	
+	
+	<bean id="list.uds.b4.cdrScale" parent="list.dataOnlyUds">
+		<property name="defaultSort" value="valueDecimal"/>
+			<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value=".5"/><constructor-arg value=".5"/></bean>
+						<bean parent="list.data"><constructor-arg value="1"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3"/><constructor-arg value="3"/></bean>
+			</list></property>
+	</bean>	
+
+	<bean id="list.uds.b4.cdrScaleNoPointFive" parent="list.dataOnlyUds">
+				<property name="defaultSort" value="valueNumeric"/>
+				<property name="data"><list>
+						<bean parent="list.data"><constructor-arg value="0"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="2"/><constructor-arg value="2"/></bean>
+						<bean parent="list.data"><constructor-arg value="3"/><constructor-arg value="3"/></bean>
+			</list></property>
+	</bean>	
+			
 			
 	<bean id="list.uds.b5.informant" parent="list.dataOnlyUds">
 			<property name="data"><list>
@@ -888,5 +917,6 @@
 	<bean id="list.naccpathology9.ques19" parent="list.standardNumericValue">
 				<property name="dbListName" value="NaccPath19"/>
 	</bean>
-	
+
+
 </beans>
