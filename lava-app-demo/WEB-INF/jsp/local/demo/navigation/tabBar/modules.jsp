@@ -11,6 +11,9 @@
   	<tags:crmsNavTab module="scheduling" text="Scheduling"/>
   	<tags:crmsNavTab module="assessment" text="Assessment"/>
   	<tags:crmsNavTab module="reporting" text="Reporting"/>
-  	<tags:coreNavTab module="admin" text="Admin"/>
+  	
+  	<tags:ifHasRole roles="SYSTEM ADMIN"> 
+ 	 	<tags:coreNavTab module="admin" text="Admin"/>
+  	</tags:ifHasRole>
   	
   </ul>
