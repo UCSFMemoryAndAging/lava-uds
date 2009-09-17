@@ -72,6 +72,19 @@
 		</copy>
 	</target>    
 	
+	<target name="merge-decorator-files" description="merge all decorator files from different scopes and projects">
+				<concat destfile="${instance-deploy.path}/WEB-INF/decorators/decorators.xml" append="false">
+					<fileset dir="${instance-deploy.path}/WEB-INF/decorators/config" includes="decorators-xml-starttag.xml"/>		
+				</concat>
+				<concat destfile="${instance-deploy.path}/WEB-INF/decorators/decorators.xml" append="true">
+					<fileset dir="${instance-deploy.path}/WEB-INF/decorators/config" includes="*-decorators.xml"/>		
+				</concat>
+		
+				<concat destfile="${instance-deploy.path}/WEB-INF/decorators/decorators.xml" append="true">
+					<fileset dir="${instance-deploy.path}/WEB-INF/decorators/config" includes="decorators-xml-endtag.xml"/>			
+				</concat>
+	</target>
+	
 	<target name="merge-i18n-files" description="merge all i18n files from different scopes and projects">
 			<concat destfile="${instance-deploy.path}/WEB-INF/i18n/messages.properties" append="false">
 				<fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-messages.properties"/>		
@@ -89,8 +102,9 @@
 			
 		<target name="rebuild-deploy" depends="clean-all,deploy"/>
 		
-		<target name="deploy" depends="copy,compile,merge-i18n-files"/>
+		<target name="deploy" depends="copy,compile,merge-i18n-files,merge-decorator-files"/>
 	    
+   
    
     <target name="deploy-reload" depends="deploy,reload"/>
 			
