@@ -57,7 +57,7 @@
             <src path="${lava-core.path}/${src.folder}"/>
         	<src path="${lava-crms.path}/${src.folder}"/>
            	<src path="${lava-crms-nacc.path}/${src.folder}"/>
-           	
+           	<src path="${instance.path}/${src.folder}"/>
             <classpath refid="master-classpath"/>
         </javac>
     </target>
