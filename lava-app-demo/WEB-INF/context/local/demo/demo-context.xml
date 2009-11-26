@@ -9,8 +9,6 @@ of WEB-INF/context/context-examiner.xml) and loaded into the application context
 
 <import resource="demo-local.xml"/>
 
-<import resource="demo-mappings.xml"/>
-
 <import resource="demo-mylava.xml"/>
 
 <import resource="demo-security.xml"/>
