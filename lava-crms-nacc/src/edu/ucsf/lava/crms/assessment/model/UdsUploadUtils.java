@@ -24,7 +24,6 @@ public class UdsUploadUtils {
 		buffer.append(formatField(udsInstrument.getPtid())).append(",");
 		buffer.append(formatField(udsInstrument.getVisitMo())).append(",");
 		buffer.append(formatField(udsInstrument.getVisitDay())).append(",");
-		buffer.append(formatField(udsInstrument.getVisitDay())).append(",");
 		buffer.append(formatField(udsInstrument.getVisitYr())).append(",");
 		buffer.append(formatField(udsInstrument.getVisitNum())).append(",");
 		buffer.append(formatField(udsInstrument.getInitials())).append(",");
