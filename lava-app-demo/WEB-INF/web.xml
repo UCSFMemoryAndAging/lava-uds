@@ -36,15 +36,6 @@
   
       
   <!-- Filter to handle session expiration, maintenace windows, and admin disconnects -->
-   <filter>
-    <filter-name>sessionMonitoringFilter</filter-name>
-    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    <init-param>
-     <param-name>targetBeanName</param-name>
-     <param-value>sessionMonitoringFilter</param-value>
-     </init-param>
-  </filter>
-  
   <!-- Acegi filter. Configuration in /WEB-INF/lava-security.xml    -->
   <filter>
     <filter-name>Acegi Filter Chain Proxy</filter-name>
@@ -55,6 +46,15 @@
     </init-param>
   </filter>
 
+  <filter>
+    <filter-name>sessionMonitoringFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+     <param-name>targetBeanName</param-name>
+     <param-value>sessionMonitoringFilter</param-value>
+     </init-param>
+  </filter>
+  
   <!-- SiteMesh filter. Configuration in /WEB-INF/decorators/sitemesh.xml (see context-param above) -->
   <filter>
     <filter-name>sitemesh</filter-name>
