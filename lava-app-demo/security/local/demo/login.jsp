@@ -39,6 +39,26 @@ input.loginButton:hover{
 
 <body onload="document.form1.j_username.focus()">
 <table width="600" height="250"  border="0" align="center" cellpadding="10" cellspacing="0" bgcolor="#FFFFFF">
+  <%-- for some reason, ${sessionScope.lavaSessionTerminationMessage} does not contain attribute
+       even though it is there. also tried ${sessionScope['lavaSessionTerminationMessage']
+       (also requestScope does not work either. appplicationScope does, but can not use that since
+       it would be set for all users). assume this is related to the way Acegi is redirecting to 
+       this page, such that these JSTL implicit vars are not set up correctly.
+       therefore, use Java to output attribute value --%>
+  <%
+    if (request.getSession().getAttribute("lavaSessionTerminationMessage") != null) {
+  %>       
+	<tr>
+		<td colspan="2">
+		  	<img class="infoMsgIcon" src="images/1uparrow.png" alt="error"/>
+			<span class="infoMsgHeaderText">Info</span>
+	 	  	<div class="infoMsgHeaderLine"></div>
+		  	<ol class="infoMsgList">
+				<%= request.getSession().getAttribute("lavaSessionTerminationMessage") %>
+			</ol>
+  		</td>
+	</tr>		
+  <% } %>  
   <tr>
     <th colspan="2" scope="col"><div align="left"><img src="images/local/${pageContext.request.contextPath}/${pageContext.request.contextPath}_logo.gif"></div></th>
   </tr>
