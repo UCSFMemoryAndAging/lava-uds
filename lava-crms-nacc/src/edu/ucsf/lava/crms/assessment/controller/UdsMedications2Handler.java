@@ -135,12 +135,6 @@ public class UdsMedications2Handler extends UdsInstrumentHandler {
 	 		
 		}
 	 	
-	 	
-	 	//TODO: write a check to make sure we are only adding the medications list to the model when it is needed
-//	 	load up dynamic lists
-		Map<String,Map<String,String>> dynamicLists = getDynamicLists(model);
-		dynamicLists.put("medications.drugLookup", listManager.getDynamicList("medications.drugLookup"));
-	 	
 	 	return model;
 	}
 
