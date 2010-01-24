@@ -41,14 +41,6 @@
 		
 	</class>		
 	
-	<query name="list.medications.drugLookup"><![CDATA[
-		select new edu.ucsf.lava.core.list.model.LabelValueBean(lv.valueDesc, lv.valueKey)
-		from edu.ucsf.lava.core.list.model.LavaList list 
-		join list.listValues lv
-		where list.listName = 'MultumDrugLookup'
-		order by lv.orderIndex
-	]]></query>
-
 </hibernate-mapping>
 
 
