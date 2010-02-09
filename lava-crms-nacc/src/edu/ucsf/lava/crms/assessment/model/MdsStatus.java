@@ -128,7 +128,7 @@ public class MdsStatus extends Instrument implements UdsUploadable{
 		}else{
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(getDcDate());
-			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.MONTH))).append(",");
+			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.MONTH)+1)).append(",");	// add 1, as 0 based 
 			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.DAY_OF_MONTH))).append(",");
 			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.YEAR))).append(",");
 		}
@@ -139,7 +139,7 @@ public class MdsStatus extends Instrument implements UdsUploadable{
 		}else{
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(getMdsdecdt());
-			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.MONTH))).append(",");
+			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.MONTH)+1)).append(",");	// add 1, as 0 based
 			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.DAY_OF_MONTH))).append(",");
 			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.YEAR))).append(",");
 		}
@@ -150,7 +150,7 @@ public class MdsStatus extends Instrument implements UdsUploadable{
 		}else{
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(getMdsdiscdt());
-			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.MONTH))).append(",");
+			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.MONTH)+1)).append(",");	// add 1, as 0 based
 			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.DAY_OF_MONTH))).append(",");
 			buffer.append(UdsUploadUtils.formatField(calendar.get(Calendar.YEAR))).append(",");
 		}	
