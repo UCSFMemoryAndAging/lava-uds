@@ -8,8 +8,7 @@
   	<tags:crmsNavTab module="assessment" text="Assessment" disabled="true"/>
   	<tags:crmsNavTab module="reporting" text="Reporting" disabled="true"/>
   
-    	<tags:ifHasRole roles="SYSTEM ADMIN"> 
- 	 	<tags:coreNavTab module="admin" text="Admin"/>
-  			<tags:coreNavTab module="admin" text="Admin" disabled="true"/>
-		</tags:ifHasRole>
+    <tags:ifHasRole roles="SYSTEM ADMIN"> 
+  		<tags:coreNavTab module="admin" text="Admin" disabled="true"/>
+	</tags:ifHasRole>
 </ul>
