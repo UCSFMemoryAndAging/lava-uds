@@ -110,6 +110,37 @@
 	<url-pattern>*.lava</url-pattern>
   </filter-mapping>
   
+  
+    <filter-name>MaxAgeFilter</filter-name>
+		<filter-class>edu.ucsf.lava.core.servlet.LavaResponseHeaderFilter</filter-class>
+		<init-param>
+			<param-name>max-age</param-name>
+			<param-value>43200</param-value>
+		</init-param>
+	</filter>
+  
+   <filter-mapping>
+	<filter-name>MaxAgeFilter</filter-name>
+	<url-pattern>*.js</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+	<filter-name>MaxAgeFilter</filter-name>
+	<url-pattern>*.css</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+	<filter-name>MaxAgeFilter</filter-name>
+	<url-pattern>*.gif</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+	<filter-name>MaxAgeFilter</filter-name>
+	<url-pattern>*.jpg</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+	<filter-name>MaxAgeFilter</filter-name>
+	<url-pattern>*.png</url-pattern>
+  </filter-mapping>
+    
+  
   <listener> 
   	<!-- note: the order of the listener classes is critical. ApplicationEventListener accesses beans
   		configured in the Spring application context, so the ContextLoaderListener needs to fire 
