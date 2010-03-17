@@ -85,7 +85,7 @@
 
 	<filter>
 		<filter-name>MaxAgeFilter</filter-name>
-		<filter-class>edu.ucsf.memory.lava.core.servlet.LavaResponseHeaderFilter</filter-class>
+		<filter-class>edu.ucsf.lava.core.servlet.LavaResponseHeaderFilter</filter-class>
 		<init-param>
 			<param-name>Cache-Control</param-name>
 			<param-value>max-age=43200,private</param-value>
