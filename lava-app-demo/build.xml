@@ -3,7 +3,7 @@
 <project name="lava"  basedir="."  default="usage">
     <property file="build.properties"/>
 
-    <property name="war.file" value="${instanceName}.war"/>
+    <property name="war.file" value="${warName}.war"/>
   
     <property name="lava-core.path" value="${workspace.path}/lava-core"/>
 	<property name="lava-crms.path" value="${workspace.path}/lava-crms"/>

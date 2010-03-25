@@ -60,7 +60,7 @@ input.loginButton:hover{
 	</tr>		
   <% } %>  
   <tr>
-    <th colspan="2" scope="col"><div align="left"><img src="images/local/${pageContext.request.contextPath}/${pageContext.request.contextPath}_logo.gif"></div></th>
+    <th colspan="2" scope="col"><div align="left"><img src="images/local/demo/demo_logo.gif"></div></th>
   </tr>
   <tr>
      <td colspan="2" scope="col" align="left" ><p style="font-size: 12px">

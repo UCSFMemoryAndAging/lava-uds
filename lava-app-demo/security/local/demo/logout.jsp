@@ -39,7 +39,7 @@ input.loginButton:hover{
 <body onload="document.form1.j_username.focus()">
 <table width="600" height="250"  border="0" align="center" cellpadding="10" cellspacing="0" bgcolor="#ffffff">
  <tr>
-    <th colspan="2" scope="col"><div align="left"><img src="images/local/${pageContext.request.contextPath}/${pageContext.request.contextPath}_logo.gif" ></div></th>
+    <th colspan="2" scope="col"><div align="left"><img src="images/local/demo/demo_logo.gif" ></div></th>
    
   </tr>
   <tr>
