@@ -134,15 +134,17 @@ public class UdsExtractComponentHandler extends CrmsReportComponentHandler {
 	protected Event doGenerate(RequestContext context, Object command, BindingResult errors) throws Exception {
  		
 		HttpServletRequest request =  ((ServletExternalContext)context.getExternalContext()).getRequest();
+		ReportSetup reportSetup = (ReportSetup) ((ComponentCommand)command).getComponents().get(this.getDefaultObjectName());
+	 	LavaDaoFilter reportFilter = reportSetup.getFilter();
+		
+		// transfer the customStartDate param used by the view to the startParam used in the query
+		CalendarHandlerUtils.handleCustomDateFilter(reportFilter, this.startDateParam, this.endDateParam);
 		
 		// conditionally check required fields here, i.e. since only one of the startDate and
  		// patientId report parameters are required, but it does not matter which one, can not
  		// enforce required fields via the binder, so do it here after the report params have
  		// been bound
 		
-		
-		ReportSetup reportSetup = (ReportSetup) ((ComponentCommand)command).getComponents().get(this.getDefaultObjectName());
-	 	LavaDaoFilter reportFilter = reportSetup.getFilter();
  		if (reportFilter.getParam(this.startDateParam) == null && reportFilter.getParam("patientId") == null) {
  			LavaComponentFormAction.createCommandError(errors, "udsExtract.reportSetup.required", null);
  			return new Event(this,ERROR_FLOW_EVENT_ID);
