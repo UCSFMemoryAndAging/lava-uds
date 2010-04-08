@@ -90,11 +90,9 @@ public class UdsMedications2 extends UdsInstrument {
 
 
 	public String[] getRequiredResultFields() {
+		// EMORY change: DTO objects are supported through getBindingComponentString()
 		return new String[] {
-			// right now there are no required fields set here. since a DTO is used for binding, need to figure out
-		    // how to do required field checking on the DTO instead of the command component. maybe a method which
-		    // returns the object on which required fields should be checked, which defaults to the command component
-		    // sec1Meds and sec2Meds are the fields that should be required
+			"anyMeds"
 				
 			// the detail required fields are conditional, so should be part of a secondary validation Validator
 			// class
