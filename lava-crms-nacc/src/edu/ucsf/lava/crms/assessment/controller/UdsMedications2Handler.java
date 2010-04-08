@@ -178,6 +178,12 @@ public class UdsMedications2Handler extends UdsInstrumentHandler {
 		return returnEvent;
 	}
 	
+	// EMORY change:
+	@Override
+	public String getBindingComponentString() {
+		// allow binding of UdsMedications' DTO object, not just the default 'instrument'
+		return "udsMedications2Dto"; 
+	}
 	
 	
 	
