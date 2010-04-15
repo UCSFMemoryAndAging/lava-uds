@@ -182,7 +182,7 @@ public class UdsMedications2Handler extends UdsInstrumentHandler {
 	@Override
 	public String getBindingComponentString() {
 		// allow binding of UdsMedications' DTO object, not just the default 'instrument'
-		return "udsMedications2Dto"; 
+		return MEDICATIONS_DTO;
 	}
 	
 	
