@@ -3,7 +3,7 @@
 
 
 	<tags:crmsNavSection module="mylava" section="welcome" textCode="section.welcome" />
-	<tags:crmsNavSection module="mylava" section="prefs" textCode="section.prefs" />
+	<tags:coreNavSection module="mylava" section="prefs" textCode="section.prefs" />
 	<tags:crmsNavSection module="mylava" section="myCalendar" textCode="section.myCalendar" lastSection="true"/>
 	
 

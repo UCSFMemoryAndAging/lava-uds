@@ -2,7 +2,7 @@
 
  
 	<tags:crmsNavSection module="mylava" section="welcome" textCode="section.welcome" disabled="true" />
-		<tags:crmsNavSection module="mylava" section="prefs" textCode="section.prefs" disabled="true" />
+	<tags:coreNavSection module="mylava" section="prefs" textCode="section.prefs" disabled="true" />
 	<tags:crmsNavSection module="mylava" section="mycalendar" textCode="section.myCalendar" lastSection="true" disabled="true" />
 	
 
