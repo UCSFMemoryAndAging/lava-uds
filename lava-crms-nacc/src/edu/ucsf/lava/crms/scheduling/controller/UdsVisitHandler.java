@@ -42,7 +42,7 @@ public class UdsVisitHandler extends VisitHandler {
 			else if(StringUtils.isNumeric(id)){
 				UdsVisit udsVisit = (UdsVisit) UdsVisit.MANAGER.getById(Long.valueOf(id), UdsVisit.newFilterInstance(this.getCurrentUser(request)));
 				if(udsVisit != null){
-					return new Event(this,this.CONTINUE_FLOW_EVENT_ID);
+					return new Event(this,this.SUCCESS_FLOW_EVENT_ID);
 				}
 			}
 			return new Event(this,this.UNHANDLED_FLOW_EVENT_ID);
