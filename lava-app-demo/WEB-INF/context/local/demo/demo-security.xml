@@ -133,7 +133,7 @@
   <bean id="authenticationProcessingFilter" class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilter">
     <property name="authenticationManager"><ref bean="authenticationManager"/></property>
     <property name="authenticationFailureUrl"><value>/security/local/demo/retryLogin.jsp</value></property>
-    <property name="defaultTargetUrl"><value>/crms/mylava/welcome/welcome.lava</value></property>
+    <property name="defaultTargetUrl"><value>/crms/home/home/home.lava</value></property>
     <property name="filterProcessesUrl"><value>/j_acegi_security_check.lava</value></property>
   </bean>
 
