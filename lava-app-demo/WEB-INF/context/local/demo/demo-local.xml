@@ -23,8 +23,32 @@
      </bean>
 	
      			
-     	<bean id="localInstrumentGroupPrototypes" class="java.util.LinkedHashMap">
+     <bean id="localInstrumentGroupPrototypes" class="java.util.LinkedHashMap">
 		<constructor-arg><map>	
+		 	<entry key="UDS~Initial Assessment">
+				<list>
+					<!-- values are instrument type, not instrTypeEncoded, because need ability to 
+						create an instrument that is missing from a group prototype -->
+		   			<value>UDS Subject Demo</value>
+   					<value>UDS Informant Demo</value>
+   					<value>UDS Family History</value>
+   					<value>UDS Medications</value>
+   					<value>UDS Health History</value>
+   					<value>UDS Physical</value>
+   					<value>UDS Hachinski</value>
+   					<value>UDS UPDRS</value>
+   					<value>UDS CDR</value>
+   					<value>UDS NPI</value>
+   					<value>UDS GDS</value>
+   					<value>UDS FAQ</value>
+					<value>UDS Appraisal</value>
+   					<value>UDS Symptoms Onset</value>
+					<value>UDS NeuroPsych</value>
+					<value>UDS Diagnosis</value>
+   					<value>UDS Labs Imaging</value>
+					<value>UDS Form Checklist</value>
+		     	 </list>
+			</entry>	
 		</map></constructor-arg>
 	</bean>	
 	 				
