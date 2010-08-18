@@ -8,7 +8,7 @@
 </c:if>
 
 <!--  project actions -->
-<a href="<tags:actionURL actionId="demo.crms.people.patient.addPatient" startMode="add"/>">
+<a href="<tags:actionURL actionId="lava.crms.people.patient.addPatient" startMode="add"/>">
 <spring:message code="action.lava.crms.people.patient.addPatient"/></a><br>
 
 </body>
