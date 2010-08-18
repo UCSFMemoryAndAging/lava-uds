@@ -203,7 +203,7 @@
 
   <welcome-file-list>
     <welcome-file>
-      /security/redirect.jsp
+      /security/local/ucd/redirect.jsp
     </welcome-file>
   </welcome-file-list>
 
