@@ -2,7 +2,7 @@
 
  
 	<tags:coreNavSection module="home" section="home" textCode="section.home" disabled="true" />
-	<tags:coreNavSection module="home" section="prefs" textCode="section.prefs" disabled="true" disabled="true"/>
+	<tags:coreNavSection module="home" section="prefs" textCode="section.prefs" lastSection="true" disabled="true"/>
 
 	<tags:crmsNavSection module="people" section="patient" textCode="section.patient" disabled="true" />
     <tags:crmsNavSection module="people" section="caregiver" textCode="section.caregiver" disabled="true" />
