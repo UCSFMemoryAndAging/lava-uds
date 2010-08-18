@@ -2,10 +2,8 @@
 
 
 
-	<tags:crmsNavSection module="mylava" section="welcome" textCode="section.welcome" />
-	<tags:coreNavSection module="mylava" section="prefs" textCode="section.prefs" />
-	<tags:crmsNavSection module="mylava" section="myCalendar" textCode="section.myCalendar" lastSection="true"/>
-	
+	<tags:coreNavSection module="home" section="home" textCode="section.home"/>
+	<tags:coreNavSection module="home" section="prefs" textCode="section.prefs" lastSection="true"/>
 
 	<tags:crmsNavSection module="people" section="patient" textCode="section.patient" />
     <tags:crmsNavSection module="people" section="caregiver" textCode="section.caregiver" />

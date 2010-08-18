@@ -2,7 +2,7 @@
 
   <ul>
   	
-  	<tags:crmsNavTab module="mylava" text="My Lava"/>
+  	<tags:crmsNavTab module="home" text="Home"/>
   	<tags:crmsNavTab module="people" text="People"/>
   <!-- 
   	<tags:crmsNavTab module="people" text="People2"/>

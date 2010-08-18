@@ -1,10 +1,8 @@
 <%@ include file="/WEB-INF/jsp/includes/include.jsp" %>
 
  
-	<tags:crmsNavSection module="mylava" section="welcome" textCode="section.welcome" disabled="true" />
-	<tags:coreNavSection module="mylava" section="prefs" textCode="section.prefs" disabled="true" />
-	<tags:crmsNavSection module="mylava" section="mycalendar" textCode="section.myCalendar" lastSection="true" disabled="true" />
-	
+	<tags:coreNavSection module="home" section="home" textCode="section.home" disabled="true" />
+	<tags:coreNavSection module="home" section="prefs" textCode="section.prefs" disabled="true" disabled="true"/>
 
 	<tags:crmsNavSection module="people" section="patient" textCode="section.patient" disabled="true" />
     <tags:crmsNavSection module="people" section="caregiver" textCode="section.caregiver" disabled="true" />

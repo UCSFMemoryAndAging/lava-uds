@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jsp/includes/include.jsp" %>
 
 <ul>
-	<tags:crmsNavTab module="mylava" text="My Lava" disabled="true"/>
+	<tags:crmsNavTab module="home" text="Home" disabled="true"/>
   	<tags:crmsNavTab module="people" text="People" disabled="true"/>
   	<tags:crmsNavTab module="enrollment" text="Enrollment" disabled="true"/>
   	<tags:crmsNavTab module="scheduling" text="Scheduling" disabled="true"/>
