@@ -22,7 +22,15 @@
 		    <property name="commun" column="COMMUN" type="float" precision="3" scale="1"/>
 		    <property name="homeHobb" column="HOMEHOBB" type="float" precision="3" scale="1"/>
 		    <property name="persCare" column="PERSCARE" type="float" precision="3" scale="1"/>
+		    <property name="cdrSumLookup" type="float" 
+		    	formula="(select ccl.BoxScore from cdrcalclookup ccl 
+		    				where ccl.Memory = MEMORY and ccl.Ornt = ORIENT and ccl.Prblm = JUDGEMENT 
+		    				and ccl.cmnaff = COMMUN and ccl.hobby = HOMEHOBB and ccl.Care = PERSCARE)"/>
 		    <property name="cdrSum" column="CDRSUM" type="float" precision="3" scale="1"/>
+		    <property name="cdrGlobLookup" type="float" 
+		    	formula="(select ccl.CDRTot from cdrcalclookup ccl 
+		    				where ccl.Memory = MEMORY and ccl.Ornt = ORIENT and ccl.Prblm = JUDGEMENT 
+		    				and ccl.cmnaff = COMMUN and ccl.hobby = HOMEHOBB and ccl.Care = PERSCARE)"/>
 		    <property name="cdrGlob" column="CDRGLOB" type="float" precision="3" scale="1"/>
 		    <property name="comport" column="COMPORT" type="float" precision="3" scale="1"/>
 		    <property name="cdrLang" column="CDRLANG" type="float" precision="3" scale="1"/>
@@ -30,8 +38,8 @@
 
         &instrInclude2;
         
-	</class>        
-	
+	</class>
+
 </hibernate-mapping>
 
 
