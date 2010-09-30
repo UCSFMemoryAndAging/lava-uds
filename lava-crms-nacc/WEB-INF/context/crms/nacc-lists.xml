@@ -26,13 +26,23 @@
 			<ref bean="list.ref.skipErrorCodes"/>
 		</list></property>
 	</bean>
-		
+	
 	<bean id="list.standardUds" abstract="true" parent="list.standard">
 		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodes"/></property>
 		<property name="defaultSort" value="valueNumeric"/>
 		<property name="defaultFormat" value="valueConcatLabel"/>
 	</bean>
-	
+
+	<bean id="list.ref.udsErrorCodesDecimal" parent="list.standardDecimal">
+		<property name="dbListName" value="UDSErrorCodes"/>
+	</bean>
+		
+	<bean id="list.standardUdsDecimal" abstract="true" parent="list.standardDecimal">
+		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodesDecimal"/></property>
+		<property name="defaultSort" value="valueDecimal"/>
+		<property name="defaultFormat" value="valueConcatLabel"/>
+	</bean>
+
 	<bean id="list.dataOnlyUds" abstract="true" parent="list.dataOnly">
 		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodes"/></property>
 		<property name="defaultSort" value="valueNumeric"/>
@@ -593,18 +603,14 @@
  		<property name="dbListName" value="udsb7diff"/>
  	</bean>
  	
-	<bean id="list.uds.b7.cdrScale" parent="list.standardUds">
+	<bean id="list.uds.b7.cdrScale" parent="list.standardUdsDecimal">
 		<property name="query" value="GenericListValueQueryDecimal"/>
 		<property name="dbListName" value="CDRScale"/>
-		<property name="defaultFormat" value="valueIsLabel"/>
-		<property name="defaultSort" value="valueDecimal"/>
 	</bean>
 
-	<bean id="list.uds.b7.cdrScaleNoPoint5" parent="list.standardUds">
+	<bean id="list.uds.b7.cdrScaleNoPoint5" parent="list.standardUdsDecimal">
 		<property name="query" value="ListValueQueryDecimalCDRScaleNoPoint5"/>
 		<property name="dbListName" value="CDRScale"/>
-		<property name="defaultFormat" value="valueIsLabel"/>
-		<property name="defaultSort" value="valueDecimal"/>
 	</bean>
 				
 	<bean id="list.uds.b9.fuChg" parent="list.standardUds">
