@@ -27,13 +27,12 @@ public class UdsCdr extends UdsInstrument {
 	private Float commun;
 	private Float homeHobb;
 	private Float persCare;
+	private Float cdrSumLookup;
 	private Float cdrSum;
+	private Float cdrGlobLookup;
 	private Float cdrGlob;
 	private Float comport;
 	private Float cdrLang;
-	
-
-	
 	
 	public Float getCdrLang() {
 		return cdrLang;
@@ -114,7 +113,22 @@ public class UdsCdr extends UdsInstrument {
 	public void setPersCare(Float persCare) {
 		this.persCare = persCare;
 	}
+	
+	public Float getCdrSumLookup() {
+		return cdrSumLookup;
+	}
 
+	public void setCdrSumLookup(Float cdrSumLookup) {
+		this.cdrSumLookup = cdrSumLookup;
+	}
+
+	public Float getCdrGlobLookup() {
+		return cdrGlobLookup;
+	}
+
+	public void setCdrGlobLookup(Float cdrGlobLookup) {
+		this.cdrGlobLookup = cdrGlobLookup;
+	}
 
 	public void markUnusedFields(String version) {
         if (version.equalsIgnoreCase("1")) {
@@ -178,6 +192,24 @@ public class UdsCdr extends UdsInstrument {
 	}
 	
 
+	public void beforeUpdate(){
+		if (this.getCdrGlobLookup() != null) {
+			this.setCdrGlob(this.getCdrGlobLookup());
+		}
+		else {
+			this.setCdrGlob((float)DATA_CODES_CANNOT_TOTAL);
+		}
+		
+		if (this.getCdrSumLookup() != null) {
+			this.setCdrSum(this.getCdrSumLookup());
+		}
+		else {
+			this.setCdrSum((float)DATA_CODES_CANNOT_TOTAL);
+		}
+		
+		this.setSummary(new StringBuffer("Sum of Boxes: " ).append(this.getCdrSum())
+				.append("\nGlobal: ").append(this.getCdrGlob()).toString());
+	}
 		
 }
 
