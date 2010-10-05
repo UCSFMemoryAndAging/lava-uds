@@ -193,6 +193,8 @@ public class UdsCdr extends UdsInstrument {
 	
 
 	public void beforeUpdate(){
+		super.beforeUpdate();
+		
 		if (this.getCdrGlobLookup() != null) {
 			this.setCdrGlob(this.getCdrGlobLookup());
 		}
