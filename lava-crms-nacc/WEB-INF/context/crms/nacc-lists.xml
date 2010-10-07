@@ -105,6 +105,9 @@
 	<bean id="list.mdsstatus.codes" parent="list.uds.codes"/>
 				
     
+	<bean id="list.uds.adcCenterIDs" parent="list.standard">
+		<property name="dbListName" value="UDSCenterIDs"/>
+	</bean>
 	
  	<bean id="list.uds.gender" parent="list.standardUds">
  		<property name="dbListName" value="Gender"/>
