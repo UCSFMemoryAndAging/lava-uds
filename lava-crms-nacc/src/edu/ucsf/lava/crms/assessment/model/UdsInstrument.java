@@ -2,14 +2,18 @@ package edu.ucsf.lava.crms.assessment.model;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
 import edu.ucsf.lava.core.dao.LavaDaoFilter;
+import edu.ucsf.lava.core.list.ListManager;
 import edu.ucsf.lava.core.list.model.LabelValueBean;
+import edu.ucsf.lava.core.manager.CoreManagerUtils;
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.assessment.model.Instrument;
@@ -348,6 +352,49 @@ public class UdsInstrument extends Instrument implements UdsUploadable{
 		//filter.addDaoParam(filter.daoLikeParam("instrType", "UDS"));
 		return MANAGER.get(UdsInstrumentTracking.class,filter);
 	}
+	
+	public void beforeUpdate() {
+		super.beforeUpdate();
+		/*
+		1) look up the ADCID from the ListValues table for the listName = 'UDSCenterIDs'
+		
+		2) set the PTID, VisitMo, VisitDay, VisitYr
+		*/
+
+		ListManager listManager = CoreManagerUtils.getListManager();
+		Map<String,String> adcCenters = listManager.getDefaultStaticList("uds.adcCenterIDs");
+		if (adcCenters.containsKey(this.getProjName())) {
+			String adcIDAsString = (String) adcCenters.get(this.getProjName());
+			try {
+				this.setAdcId(Short.valueOf(adcIDAsString));
+			}
+			catch (NumberFormatException ex) {
+				logger.warn("UdsInstrument beforeUpdate NumberFormatException ADCID=" + adcIDAsString);
+			}
+		}
+		
+		if (this.getPatient().getLastName().equals("DE-IDENTIFIED")) {
+			if (StringUtils.isNumeric(this.getPatient().getFirstName())) {
+				this.setPtid(this.getPatient().getFirstName());
+			}
+			else {
+				this.setPtid(null);
+			}
+		}
+		else {
+			this.setPtid(this.getPatient().getId().toString());
+		}
+		
+		Calendar calendar = Calendar.getInstance();
+		if (this.getDcDate() != null) {
+			calendar.setTime(this.getDcDate());
+			this.setVisitMo((short)(calendar.get(Calendar.MONTH)+1));
+			this.setVisitDay((short)calendar.get(Calendar.DAY_OF_MONTH));
+			this.setVisitYr((short)calendar.get(Calendar.YEAR));
+		}
+		
+	}
+	
 	
 
 	
