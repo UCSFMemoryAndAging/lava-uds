@@ -1,7 +1,9 @@
 package edu.ucsf.lava.crms.assessment.model;
 
 import java.util.Date;
+import java.util.List;
 
+import edu.ucsf.lava.core.dao.LavaDaoFilter;
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.people.model.Patient;
@@ -192,26 +194,47 @@ public class UdsCdr extends UdsInstrument {
 	}
 	
 
-	public void beforeUpdate(){
-		super.beforeUpdate();
+	public boolean afterUpdate(){
+		super.afterUpdate();
 		
-		if (this.getCdrGlobLookup() != null) {
-			this.setCdrGlob(this.getCdrGlobLookup());
-		}
-		else {
-			this.setCdrGlob((float)DATA_CODES_CANNOT_TOTAL);
-		}
-		
-		if (this.getCdrSumLookup() != null) {
-			this.setCdrSum(this.getCdrSumLookup());
+		// at this point, the entity modifications have been persisted but the summary values
+		// which are looked up when the entity is retrieved have not been updated, so now
+		// retrieve the lookup values only (since the entity itself is already part of the
+		// Hibernate session) and update their persistent counterparts, and return true
+		// from this method so the entity will be re-saved
+		LavaDaoFilter filter = newFilterInstance();
+		filter.addDaoParam(filter.daoNamedParam("id", this.getId()));
+		List list = MANAGER.findByNamedQuery("udsCdr.retrieveLookupValues",filter);
+		if (list != null) {
+			Object[] row = (Object[]) list.iterator().next();
+			this.setCdrSumLookup((Float)row[0]);
+			if (this.getCdrSumLookup() != null) {
+				this.setCdrSum(this.getCdrSumLookup());
+			}
+			else {
+				this.setCdrSum((float)DATA_CODES_CANNOT_TOTAL);
+			}
+			
+			this.setCdrGlobLookup((Float)row[1]);
+			if (this.getCdrGlobLookup() != null) {
+				this.setCdrGlob(this.getCdrGlobLookup());
+			}
+			else {
+				this.setCdrGlob((float)DATA_CODES_CANNOT_TOTAL);
+			}
 		}
 		else {
 			this.setCdrSum((float)DATA_CODES_CANNOT_TOTAL);
+			this.setCdrGlob((float)DATA_CODES_CANNOT_TOTAL);
 		}
+		
 		
 		this.setSummary(new StringBuffer("Sum of Boxes: " ).append(this.getCdrSum())
 				.append("\nGlobal: ").append(this.getCdrGlob()).toString());
+		
+		return true;
 	}
+	
 		
 }
 
