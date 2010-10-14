@@ -39,6 +39,12 @@
         &instrInclude2;
         
 	</class>
+	
+	<query name="udsCdr.retrieveLookupValues"><![CDATA[
+	    select cdrSumLookup, cdrGlobLookup
+		from UdsCdr u
+		where u.id = :id 
+	]]></query>
 
 </hibernate-mapping>
 
