@@ -9,7 +9,7 @@ import edu.ucsf.lava.crms.scheduling.model.Visit;
 
 public class UdsInstrumentTracking extends UdsInstrument {
 	/**
-	 * InstrumentTracking
+	 * UdsInstrumentTracking
 	 * 
 	 * This class is used for lightweight uds instrument instances, i.e. those containing only
 	 * the core instrument tracking portion of an instrument table. It is used for instances
