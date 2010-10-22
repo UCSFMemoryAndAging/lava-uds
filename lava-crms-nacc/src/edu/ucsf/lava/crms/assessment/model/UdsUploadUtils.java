@@ -213,4 +213,46 @@ public class UdsUploadUtils {
 	    	
 	    }
 	};
+		
+	
+	/**
+	 * returns whether a uds instrument was explicitly assigned NOT to be included in the submission packet
+	 *   based on the Z1 form.  If Z1 has not been completed yet, it is still assumed to be included.
+	 */
+	static public boolean includeInstrBasedOnZ1(UdsInstrument i, UdsFormChecklist z1){
+		if (i == null) return false;  // don't include nothing
+		if (z1 == null) return true;  // i.e. no filtering is done
+		
+		// always include these
+		if (i.getFormId().equals("A1")) return true;
+		if (i.getFormId().equals("A5")) return true;
+		if (i.getFormId().equals("B4")) return true;
+		if (i.getFormId().equals("B9")) return true;
+		if (i.getFormId().equals("C1")) return true;
+		if (i.getFormId().equals("D1")) return true;
+		if (i.getFormId().equals("E1")) return true;
+		if (i.getFormId().equals("Z1")) return true;
+		
+		// the following are only acceptable if Z1 has *explicitly* said not to submit it
+		//   (if Z1 hadn't been filled out yet, then for now, assume it to be submitted)
+		if (i.getFormId().equals("A3") && (z1.getA3Sub()==null || z1.getA3Sub().equals((short)1))) return true;
+		if (i.getFormId().equals("A4") && (z1.getA4Sub()==null || z1.getA4Sub().equals((short)1))) return true;
+		if (i.getFormId().equals("B5") && (z1.getB5Sub()==null || z1.getB5Sub().equals((short)1))) return true;
+		if (i.getFormId().equals("B7") && (z1.getB7Sub()==null || z1.getB7Sub().equals((short)1))) return true;
+
+		// just in case, somehow, a wrong instrument was added to a telephone packet
+		if (!z1.getVisit().getVisitType().equals("Telephone Follow Up")) {
+			if (i.getFormId().equals("T1")) return true;
+			
+			if (i.getFormId().equals("A2") && (z1.getA2Sub()==null || z1.getA2Sub().equals((short)1))) return true;
+			if (i.getFormId().equals("B1") && (z1.getB1Sub()==null || z1.getB1Sub().equals((short)1))) return true;
+			if (i.getFormId().equals("B2") && (z1.getB2Sub()==null || z1.getB2Sub().equals((short)1))) return true;
+			if (i.getFormId().equals("B3") && (z1.getB3Sub()==null || z1.getB3Sub().equals((short)1))) return true;
+			if (i.getFormId().equals("B6") && (z1.getB6Sub()==null || z1.getB6Sub().equals((short)1))) return true;				
+			if (i.getFormId().equals("B8") && (z1.getB8Sub()==null || z1.getB8Sub().equals((short)1))) return true;
+		}
+		
+		// if made it through, then this instrument is not to be included
+		return false;
+	}
 }
