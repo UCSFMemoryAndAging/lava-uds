@@ -1,6 +1,8 @@
 <%@ include file="/WEB-INF/jsp/includes/include.jsp" %>
 
-<c:set var="udsPacketMode" value="${fn:startsWith(param.instrTypeEncoded, 'udsformchecklist')?'dc':'vw'}"/>
+<c:set var="mode_string" value="${component}_mode"/>
+<c:set var="mode" value="${requestScope[mode_string]}"/>
+<c:set var="udsPacketMode" value="${mode == 'vw' ? 'vw' : fn:startsWith(param.instrTypeEncoded, 'udsformchecklist')?'dc':'vw'}"/>
 
 <tags:contentColumn columnClass="colLeft2Col5050">
 
