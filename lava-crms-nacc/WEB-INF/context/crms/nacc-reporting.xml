@@ -26,28 +26,4 @@
     </list></constructor-arg></bean>		
 
 	
-	
-	<bean id="projectPatientStatusFormAction"  parent="crmsEntityComponentFormAction"><constructor-arg><list>
-		<bean parent="crmsProjectCriteriaReportHandler"/>
-	</list></constructor-arg></bean>	
-	
-	<bean id="researchVisitListByDateFormAction"  parent="crmsEntityComponentFormAction"><constructor-arg><list>
-		<bean parent="crmsDateCriteriaReportHandler"/>
-	</list></constructor-arg></bean>	
-	
-	<bean id="researchVisitListByPatientFormAction"  parent="crmsEntityComponentFormAction"><constructor-arg><list>
-		<bean parent="crmsDateCriteriaReportHandler"/>
-	</list></constructor-arg></bean>	
-	
-	<bean id="projectVisitListByDateFormAction" parent="crmsEntityComponentFormAction"><constructor-arg><list>
-		<bean parent="crmsDateProjectCriteriaReportHandler"/>
-	</list></constructor-arg></bean>	
-	
-	<bean id="projectVisitListByPatientFormAction" parent="crmsEntityComponentFormAction"><constructor-arg><list>
-		<bean parent="crmsProjectCriteriaReportHandler"/>
-	</list></constructor-arg></bean>	
-	
-	
-	
-	
 </beans>
