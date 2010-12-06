@@ -50,11 +50,11 @@
 <tags:createField property="cvdCog" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="strokCog" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cvdImag" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cvdImag1" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cvdImag2" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cvdImag3" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cvdImag4" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cvdImagx" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cvdImagSingle" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cvdImagMultiple" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cvdImagExtensive" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cvdImagOther" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cvdImagOtherX" entity="${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
 
 <page:applyDecorator name="component.instrument.section">
@@ -78,11 +78,12 @@
 
 <ui:formGuide>
   <ui:observe elementIds="cvdImag" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="cvdImag1,cvdImag2,cvdImag3,cvdImag4,cvdImagx" component="${componentPrefix}"/>
+  <ui:unskip elementIds="cvdImagSingle,cvdImagMultiple,cvdImagExtensive,cvdImagOther" component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
 </ui:formGuide>
-<ui:formGuide>
-  <ui:observe elementIds="cvdImag4" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="cvdImagx" component="${componentPrefix}"/>
+<ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
+  <ui:depends elementIds="cvdImag" component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/> 
+  <ui:observe elementIds="cvdImagOther" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+  <ui:unskip elementIds="cvdImagOtherX" component="${componentPrefix}"/>
 </ui:formGuide>
 
   </c:if>
