@@ -19,11 +19,11 @@
 			<property name="cvdCog" column="CVDCOG" type="short"/>
 			<property name="strokCog" column="STROKCOG" type="short"/>
 			<property name="cvdImag" column="CVDIMAG" type="short"/>
-			<property name="cvdImag1" column="CVDIMAG1" type="short"/>
-			<property name="cvdImag2" column="CVDIMAG2" type="short"/>
-			<property name="cvdImag3" column="CVDIMAG3" type="short"/>
-			<property name="cvdImag4" column="CVDIMAG4" type="short"/>
-			<property name="cvdImagx" column="CVDIMAGX" type="string" length="60"/>						
+			<property name="cvdImagSingle" column="CVDIMAG1" type="short"/>
+			<property name="cvdImagMultiple" column="CVDIMAG2" type="short"/>
+			<property name="cvdImagExtensive" column="CVDIMAG3" type="short"/>
+			<property name="cvdImagOther" column="CVDIMAG4" type="short"/>
+			<property name="cvdImagOtherX" column="CVDIMAGX" type="string" length="60"/>						
 			<property name="abrupt" column="ABRUPT" type="short"/>
 	       	<property name="stepwise" column="STEPWISE" type="short"/>
 	      	<property name="somatic" column="SOMATIC" type="short"/>

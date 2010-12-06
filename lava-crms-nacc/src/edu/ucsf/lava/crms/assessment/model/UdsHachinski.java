@@ -22,11 +22,11 @@ public class UdsHachinski extends UdsInstrument {
 	private Short cvdCog;
 	private Short strokCog;
 	private Short cvdImag;
-	private Short cvdImag1;
-	private Short cvdImag2;
-	private Short cvdImag3;
-	private Short cvdImag4;
-	private String cvdImagx;
+	private Short cvdImagSingle;
+	private Short cvdImagMultiple;
+	private Short cvdImagExtensive;
+	private Short cvdImagOther;
+	private String cvdImagOtherX;
 	
 	private Short abrupt;
 	private Short stepwise;
@@ -126,44 +126,44 @@ public class UdsHachinski extends UdsInstrument {
 		this.cvdImag = cvdImag;
 	}
 
-	public Short getCvdImag1() {
-		return cvdImag1;
+	public Short getCvdImagSingle() {
+		return cvdImagSingle;
 	}
 
-	public void setCvdImag1(Short cvdImag1) {
-		this.cvdImag1 = cvdImag1;
+	public void setCvdImagSingle(Short cvdImagSingle) {
+		this.cvdImagSingle = cvdImagSingle;
 	}
 
-	public Short getCvdImag2() {
-		return cvdImag2;
+	public Short getCvdImagMultiple() {
+		return cvdImagMultiple;
 	}
 
-	public void setCvdImag2(Short cvdImag2) {
-		this.cvdImag2 = cvdImag2;
+	public void setCvdImagMultiple(Short cvdImagMultiple) {
+		this.cvdImagMultiple = cvdImagMultiple;
 	}
 
-	public Short getCvdImag3() {
-		return cvdImag3;
+	public Short getCvdImagExtensive() {
+		return cvdImagExtensive;
 	}
 
-	public void setCvdImag3(Short cvdImag3) {
-		this.cvdImag3 = cvdImag3;
+	public void setCvdImagExtensive(Short cvdImagExtensive) {
+		this.cvdImagExtensive = cvdImagExtensive;
 	}
 
-	public Short getCvdImag4() {
-		return cvdImag4;
+	public Short getCvdImagOther() {
+		return cvdImagOther;
 	}
 
-	public void setCvdImag4(Short cvdImag4) {
-		this.cvdImag4 = cvdImag4;
+	public void setCvdImagOther(Short cvdImagOther) {
+		this.cvdImagOther = cvdImagOther;
 	}
 
-	public String getCvdImagx() {
-		return cvdImagx;
+	public String getCvdImagOtherX() {
+		return cvdImagOtherX;
 	}
 
-	public void setCvdImagx(String cvdImagx) {
-		this.cvdImagx = cvdImagx;
+	public void setCvdImagOtherX(String cvdImagOtherX) {
+		this.cvdImagOtherX = cvdImagOtherX;
 	}
 
 	public Short getStrokCog() {
@@ -196,11 +196,11 @@ public class UdsHachinski extends UdsInstrument {
 				"cvdCog",
 				"strokCog",
 				"cvdImag",
-				"cvdImag1",
-				"cvdImag2",
-				"cvdImag3",
-				"cvdImag4",
-				"cvdImagx",
+				"cvdImagSingle",
+				"cvdImagMultiple",
+				"cvdImagExtensive",
+				"cvdImagOther",
+				"cvdImagOtherX",
 				"abrupt",
 				"stepwise",
 				"somatic",
@@ -242,11 +242,11 @@ public class UdsHachinski extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getCvdCog())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getStrokCog())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCvdImag())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCvdImag1())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCvdImag2())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCvdImag3())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCvdImag4())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCvdImagx()));
+			buffer.append(UdsUploadUtils.formatField(getCvdImagSingle())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvdImagMultiple())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvdImagExtensive())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvdImagOther())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvdImagOtherX()));
 		}
 		return buffer.toString();
 	}	
