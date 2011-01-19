@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.webflow.context.servlet.ServletExternalContext;
 import org.springframework.webflow.execution.RequestContext;
 
-import edu.ucsf.lava.core.controller.CalendarHandlerUtils;
+import edu.ucsf.lava.core.calendar.CalendarDaoUtils;
 import edu.ucsf.lava.core.dao.LavaDaoFilter;
 import edu.ucsf.lava.core.dao.LavaDateRangeParamHandler;
 import edu.ucsf.lava.core.dao.LavaTypedEqualityParamHandler;
@@ -29,7 +29,7 @@ public class ProjectUdsInstrumentsHandler extends CrmsCalendarComponentHandler {
 		this.addListedEntityName("udsInstrument");
 		
 		this.setDatePropertyName("dcDate");
-		this.setDefaultDisplayRange(CalendarHandlerUtils.DISPLAY_RANGE_ALL);
+		this.setDefaultDisplayRange(CalendarDaoUtils.DISPLAY_RANGE_ALL);
 		this.setEntityForStandardSourceProvider(UdsInstrumentTracking.class);
 	}
 

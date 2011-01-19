@@ -22,7 +22,8 @@ import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.RequestContext;
 
 import edu.ucsf.lava.core.action.ActionUtils;
-import edu.ucsf.lava.core.controller.CalendarHandlerUtils;
+import edu.ucsf.lava.core.calendar.CalendarDaoUtils;
+import edu.ucsf.lava.core.calendar.controller.CalendarHandlerUtils;
 import edu.ucsf.lava.core.controller.ComponentCommand;
 import edu.ucsf.lava.core.controller.LavaComponentFormAction;
 import edu.ucsf.lava.core.dao.LavaDaoFilter;
@@ -63,7 +64,7 @@ public class UdsExtractComponentHandler extends CrmsReportComponentHandler {
 		// transfer the default date range to the custom date params used as filter fields in the view. this
 		// must be done separately from the above call because the Calendar handler does not want this to happen
 		// (see updateCustomParamsFromDateParams comments)
-		CalendarHandlerUtils.updateCustomParamsFromDateParams(filter, this.startDateParam, this.endDateParam, Boolean.TRUE);	
+		CalendarDaoUtils.updateCustomParamsFromDateParams(filter, this.startDateParam, this.endDateParam, Boolean.TRUE);	
 		
 		// initialize the patientId filter field to the current patient
 		if (CrmsSessionUtils.getCurrentPatient(sessionManager,request) != null) {
@@ -125,7 +126,7 @@ public class UdsExtractComponentHandler extends CrmsReportComponentHandler {
 		ReportSetup reportSetup = (ReportSetup) ((ComponentCommand)command).getComponents().get(this.getDefaultObjectName());		
 		CalendarHandlerUtils.setDateFilterParams(context,(LavaDaoFilter)reportSetup.getFilter(), this.defaultDisplayRange, this.startDateParam, this.endDateParam);
 		// reflect the new date param values in the view by updating the custom date params
-		CalendarHandlerUtils.updateCustomParamsFromDateParams(reportSetup.getFilter(), this.startDateParam, this.endDateParam, Boolean.TRUE);	
+		CalendarDaoUtils.updateCustomParamsFromDateParams(reportSetup.getFilter(), this.startDateParam, this.endDateParam, Boolean.TRUE);	
 		return new Event(this,SUCCESS_FLOW_EVENT_ID);
 	}
 
