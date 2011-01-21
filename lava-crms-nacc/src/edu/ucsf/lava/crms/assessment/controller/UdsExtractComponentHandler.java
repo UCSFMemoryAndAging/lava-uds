@@ -29,6 +29,7 @@ import edu.ucsf.lava.core.controller.LavaComponentFormAction;
 import edu.ucsf.lava.core.dao.LavaDaoFilter;
 import edu.ucsf.lava.core.list.model.LabelValueBean;
 import edu.ucsf.lava.crms.assessment.dto.UdsExtractReportDto;
+import edu.ucsf.lava.crms.assessment.model.Instrument;
 import edu.ucsf.lava.crms.assessment.model.InstrumentConfig;
 import edu.ucsf.lava.crms.assessment.model.MdsStatus;
 import edu.ucsf.lava.crms.assessment.model.UdsFormChecklist;
@@ -225,26 +226,29 @@ public class UdsExtractComponentHandler extends CrmsReportComponentHandler {
  		boolean T_Visit;
  		UdsFormChecklist z1 = null;
  		Long last_visit_id = (long)-1;
- 		Iterator<UdsInstrument> it = udsExtractInstruments.iterator();
+ 		Iterator<Instrument> it = udsExtractInstruments.iterator();
  		while (it.hasNext()) {
- 			UdsInstrument i = it.next();
- 			if (i.getVisit()== null) it.remove();  // the voice of rogue instruments must be silenced!
-
- 			// grab z1 info
- 			//   To reduce lookups, only do if a different visit from last instrument (the prior sort helps)
- 			if (!last_visit_id.equals(i.getVisit().getId())) {
- 				last_visit_id = i.getVisit().getId();
- 				filterVisit = UdsFormChecklist.MANAGER.newFilterInstance(this.getCurrentUser(request));
- 				filterVisit.setAlias("visit", "visit");
- 				filterVisit.addDaoParam(filterVisit.daoEqualityParam("visit.id", new Long(last_visit_id)));
- 				z1 = (UdsFormChecklist)UdsFormChecklist.MANAGER.getOne(filterVisit);
- 			}
-			// a Z1 should always be found, and never removed; however, include a check anyway
- 			if (z1 == null) continue;  // nothing to base any removal
+ 			//jhesse fix to support MDSStatus records  (Emory doesn't have these -- wasn't an ADRC during MDS days)
+ 			Instrument instrument = it.next();
+ 			if(UdsInstrument.class.isAssignableFrom(instrument.getClass())){
+ 				UdsInstrument i = (UdsInstrument)instrument;
+ 				if (i.getVisit()== null) it.remove();  // the voice of rogue instruments must be silenced!
+ 				// grab z1 info
+ 				//   To reduce lookups, only do if a different visit from last instrument (the prior sort helps)
+ 				if (!last_visit_id.equals(i.getVisit().getId())) {
+ 					last_visit_id = i.getVisit().getId();
+ 					filterVisit = UdsFormChecklist.MANAGER.newFilterInstance(this.getCurrentUser(request));
+ 					filterVisit.setAlias("visit", "visit");
+ 					filterVisit.addDaoParam(filterVisit.daoEqualityParam("visit.id", new Long(last_visit_id)));
+ 					z1 = (UdsFormChecklist)UdsFormChecklist.MANAGER.getOne(filterVisit);
+ 				}
+ 				// a Z1 should always be found, and never removed; however, include a check anyway
+ 				if (z1 == null) continue;  // nothing to base any removal
  			
- 			// if found not to be included, remove it from list
- 			if (!UdsUploadUtils.includeInstrBasedOnZ1(i, z1))
- 				it.remove();
+ 				// if found not to be included, remove it from list
+ 				if (!UdsUploadUtils.includeInstrBasedOnZ1(i, z1))
+ 					it.remove();
+ 			}
  		}
  		
  		List udsExtractRecords = new ArrayList(udsExtractInstruments.size());
