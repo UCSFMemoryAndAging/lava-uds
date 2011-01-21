@@ -452,7 +452,7 @@ public class UdsInstrument extends Instrument implements UdsUploadable {
 			if (StringUtils.isNumeric(this.getPatient().getFirstName())) {
 				this.setPtid(this.getPatient().getFirstName());
 			} else {
-				this.setPtid(null);
+				this.setPtid(this.getPatient().getId().toString());
 			}
 		} else {
 			this.setPtid(this.getPatient().getId().toString());
