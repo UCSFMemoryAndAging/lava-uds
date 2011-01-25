@@ -3,7 +3,9 @@
 
 
 	<tags:coreNavSection module="home" section="home" textCode="section.home"/>
+	<tags:coreNavSection module="home" section="user" textCode="section.user"/>
 	<tags:coreNavSection module="home" section="prefs" textCode="section.prefs" lastSection="true"/>
+
 
 	<tags:crmsNavSection module="people" section="patient" textCode="section.patient" />
     <tags:crmsNavSection module="people" section="caregiver" textCode="section.caregiver" />
