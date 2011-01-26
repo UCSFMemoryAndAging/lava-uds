@@ -47,7 +47,14 @@ public class UdsUploadUtils {
 				}
 			}catch(NumberFormatException nfe){};
 		}
-		return StringUtils.defaultString(value,"");
+		// Since inside a CSV file, any commas found within string values would be interpreted
+		//   incorrectly.  A common way around this is to enclose any values with commas
+		//   in double-quotes.  Any readers of the CSV would have to accept this, and
+		//   NACC stated they do accept this.
+		if (value!=null && value.contains(","))
+			return new String("\""+value+"\"");
+		else
+			return StringUtils.defaultString(value,"");
 	}
 	
 
