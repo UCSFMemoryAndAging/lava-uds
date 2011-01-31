@@ -39,11 +39,14 @@
         <echo message=""/>
         <echo message="Available targets are:"/>
         <echo message=""/>
-        <echo message="compile    --> Compile java files into deployment classes directory"/>
-    	<echo message="copy-deploy  --> Copy all files into the deployment directory"/>
+        <echo message="compile --> Compile java files into deployment classes directory"/>
+    	<echo message="copy  --> Copy all files into the deployment directory"/>
+    	<echo message="merge-decorator-files --> Concatenates all scope and instance decorator config files into a single file in the deploy directory"/>
+    	<echo message="merge-i18n-files --> Concatenates all scope and instance properties files for each type of property file into a single file in the deploy directory"/>
         <echo message="rebuild-deploy  --> Delete and rebuild the deployment directory"/>
         <echo message="deploy  --> Copy files into the deployment directory and compile java files"/>
-        <echo message="reload  --> Just reload the servlet by touching the web.xml file"/>
+        <echo message="reload  --> Just reload the webapp by touching the web.xml file"/>
+		<echo message="deploy-reload  --> Copy files into the deployment directory, compile and reload webapp"/>
     	<echo message="package-war --> Package application as a WAR file and place in workspace directory"/>
         <echo message="clean-class-files --> delete the compiled class files from the deployment directory"/>
         <echo message="clean-all --> Delete the entire deployment directory"/>
@@ -72,47 +75,43 @@
 		</copy>
 	</target>    
 	
-	<target name="merge-decorator-files" description="merge all decorator files from different scopes and projects">
-				<concat destfile="${instance-deploy.path}/WEB-INF/decorators/decorators.xml" append="false">
-					<fileset dir="${instance-deploy.path}/WEB-INF/decorators/config" includes="decorators-xml-starttag.xml"/>		
-				</concat>
-				<concat destfile="${instance-deploy.path}/WEB-INF/decorators/decorators.xml" append="true">
-					<fileset dir="${instance-deploy.path}/WEB-INF/decorators/config" includes="*-decorators.xml"/>		
-				</concat>
-		
-				<concat destfile="${instance-deploy.path}/WEB-INF/decorators/decorators.xml" append="true">
-					<fileset dir="${instance-deploy.path}/WEB-INF/decorators/config" includes="decorators-xml-endtag.xml"/>			
-				</concat>
+	<target name="merge-decorator-files" description="merge all decorator files from different scopes and projects" depends="copy">
+		<concat destfile="${instance-deploy.path}/WEB-INF/decorators/decorators.xml" append="false">
+			<fileset dir="${instance-deploy.path}/WEB-INF/decorators/config" includes="decorators-xml-starttag.xml"/>		
+		</concat>
+		<concat destfile="${instance-deploy.path}/WEB-INF/decorators/decorators.xml" append="true">
+			<fileset dir="${instance-deploy.path}/WEB-INF/decorators/config" includes="*-decorators.xml"/>		
+		</concat>
+		<concat destfile="${instance-deploy.path}/WEB-INF/decorators/decorators.xml" append="true">
+			<fileset dir="${instance-deploy.path}/WEB-INF/decorators/config" includes="decorators-xml-endtag.xml"/>			
+		</concat>
 	</target>
 	
-	<target name="merge-i18n-files" description="merge all i18n files from different scopes and projects">
-			<concat destfile="${instance-deploy.path}/WEB-INF/i18n/messages.properties" append="false">
-				<fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-messages.properties"/>		
-			</concat>
-			<concat destfile="${instance-deploy.path}/WEB-INF/i18n/mvc.properties" append="false">
-				<fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-mvc.properties"/>		
-			</concat>
-			<concat destfile="${instance-deploy.path}/WEB-INF/i18n/metadata.properties" append="false">
-			      <fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-metadata.properties"/>		
-			</concat>
-			<concat destfile="${instance-deploy.path}/WEB-INF/i18n/custom.properties" append="false">
-				<fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-custom.properties"/>		
-			</concat>
-		</target>
+	<target name="merge-i18n-files" description="merge all i18n files from different scopes and projects" depends="copy">
+		<concat destfile="${instance-deploy.path}/WEB-INF/i18n/messages.properties" append="false">
+			<fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-messages.properties"/>		
+		</concat>
+		<concat destfile="${instance-deploy.path}/WEB-INF/i18n/mvc.properties" append="false">
+			<fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-mvc.properties"/>		
+		</concat>
+		<concat destfile="${instance-deploy.path}/WEB-INF/i18n/metadata.properties" append="false">
+		      <fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-metadata.properties"/>		
+		</concat>
+		<concat destfile="${instance-deploy.path}/WEB-INF/i18n/custom.properties" append="false">
+			<fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-custom.properties"/>		
+		</concat>
+	</target>
 			
-		<target name="rebuild-deploy" depends="clean-all,deploy"/>
+	<target name="rebuild-deploy" depends="clean-all,deploy"/>
 		
-		<target name="deploy" depends="copy,compile,merge-i18n-files,merge-decorator-files"/>
-	    
+	<target name="deploy" depends="copy,compile,merge-i18n-files,merge-decorator-files"/>
    
-   
-    <target name="deploy-reload" depends="deploy,reload"/>
-			
 	<target name="reload" description="reload servlet" >
 		<!-- reload the servlet by "touching" the web.xml file -->
-			<touch file="${instance-deploy.path}/WEB-INF/web.xml"/>
+		<touch file="${instance-deploy.path}/WEB-INF/web.xml"/>
 	</target>    
 
+    <target name="deploy-reload" depends="deploy,reload"/>
 	
 	<!-- package into a .war file per the Servlet Spec. -->
 	<target name="package-war" depends="deploy" description="Package web app into [instance].war">
