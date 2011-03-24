@@ -118,7 +118,7 @@
 
 		<!-- note that the Ant war task could also be used for packaging. -->
 		<jar destfile="${packagedWar.file}">
-			<zipfileset dir="${instance-deploy.path}/WEB-INF" prefix="WEB-INF" includes="web.xml,lava-servlet.xml,hibernate.properties"/>
+			<zipfileset dir="${instance-deploy.path}/WEB-INF" prefix="WEB-INF" includes="web.xml,lava-servlet.xml,hibernate.properties,bean.properties"/>
 			<zipfileset dir="${instance-deploy.path}/WEB-INF/classes" prefix="WEB-INF/classes" includes="**/*.class,ehcache.xml,*.jrtx"/>
 			<zipfileset dir="${instance-deploy.path}/WEB-INF/hibernate" prefix="WEB-INF/hibernate" includes="**/*.hbm.xml,**/*.xml"/>
 			<zipfileset dir="${instance-deploy.path}/WEB-INF/context" prefix="WEB-INF/context" includes="**/*.xml"/>
