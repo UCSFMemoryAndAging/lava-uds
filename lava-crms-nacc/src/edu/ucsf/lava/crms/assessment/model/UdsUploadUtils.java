@@ -15,10 +15,12 @@ public class UdsUploadUtils {
 	 * a comma separated value string.
 	 * @return
 	 */
-	static public  StringBuffer getCommonFields(UdsInstrument udsInstrument){
+	// EMORY change: NACC requires A4 version 2 lines to be designated as forms A4G or A4D, so
+	//   add ability to supply a suffix to formId
+	static public  StringBuffer getCommonFields(UdsInstrument udsInstrument, String formIdSuffix){
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(formatField(udsInstrument.getPacket())).append(",");
-		buffer.append(formatField(udsInstrument.getFormId())).append(",");
+		buffer.append(formatField(udsInstrument.getFormId())).append(formIdSuffix).append(",");
 		buffer.append(formatField(udsInstrument.getFormVer())).append(",");
 		buffer.append(formatField(udsInstrument.getAdcId())).append(",");
 		buffer.append(formatField(udsInstrument.getPtid())).append(",");
@@ -30,6 +32,9 @@ public class UdsUploadUtils {
 		return buffer;
 	}
 	
+	static public  StringBuffer getCommonFields(UdsInstrument udsInstrument){
+		return getCommonFields(udsInstrument, "");
+	}
 	
 	/**
 	 * Returns the fieldvalue formatted correctly for the 
