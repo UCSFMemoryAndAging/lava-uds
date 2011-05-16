@@ -195,7 +195,8 @@ public class UdsMedications2 extends UdsInstrument {
 	public List<String> getUdsUploadCsvRecords() {
 		List<String> records = new ArrayList<String>();
 		//summary record
-		StringBuffer buffer = UdsUploadUtils.getCommonFields(this);
+		// EMORY change: NACC expects the global A4 form to have formID=A4G, not A4
+		StringBuffer buffer = UdsUploadUtils.getCommonFields(this,"G");
 		buffer.append(UdsUploadUtils.formatField(getAnyMeds()));
 		records.add(buffer.toString());
 		
@@ -205,7 +206,8 @@ public class UdsMedications2 extends UdsInstrument {
 					detail.getDrugId() > 0 && 
 					!detail.getDrugId().equals(99999)){
 				String drugId = UdsUploadUtils.formatField(detail.getDrugId());
-				buffer = UdsUploadUtils.getCommonFields(this);
+				// EMORY change: NACC expects detail A4 forms to have formID=A4D, not A4
+				buffer = UdsUploadUtils.getCommonFields(this,"D");
 				buffer.append("d").append("00000", 0, 5-drugId.length()).append(drugId);
 				records.add(buffer.toString());
 			}

@@ -132,6 +132,25 @@ public class UdsCdr extends UdsInstrument {
 		this.cdrGlobLookup = cdrGlobLookup;
 	}
 
+	// EMORY change: add cdrSumSupp calculation (we display this on form as well)
+	public Float getCdrSumSupp() {
+		if (this.comport == null || this.comport < 0
+			|| this.cdrLang == null || this.cdrLang < 0)
+			return null;  // always use null (instead of -5) since this will be the initial value when first entering this form
+		else
+			return this.getComport() + this.getCdrLang();
+	}
+	
+	// EMORY change: add cdrSumSuppAndStd calculation (we display this on form as well)
+	public Float getCdrSumSuppAndStd() {
+		if (this.cdrSum == null
+			|| this.getCdrSumSupp() == null
+			|| this.cdrSum.equals((float)-5.f))
+			return null;  // always use null (instead of -5) since this will be the initial value when first entering this form
+		else
+			return this.getCdrSum() + this.getCdrSumSupp();
+	}
+	
 	public void markUnusedFields(String version) {
         if (version.equalsIgnoreCase("1")) {
        
@@ -180,15 +199,21 @@ public class UdsCdr extends UdsInstrument {
 		if(this.getInstrVer().equals("2")){
 			buffer.append(",");
 			buffer.append(UdsUploadUtils.formatField(getComport())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCdrLang()));
+			// EMORY change: see below
+			//buffer.append(UdsUploadUtils.formatField(getCdrLang()));
+			buffer.append(UdsUploadUtils.formatField(getCdrLang())).append(",");
 			
-			if(getComport() == null || getComport() < 0 || 
-				getCdrLang() == null || getCdrLang() < 0 || 
-				getCdrSum() == null || getCdrSum() < 0){
-				buffer.append("");
-			}else{
-				buffer.append(UdsUploadUtils.formatField(getComport()+getCdrLang()+getCdrSum()));
-			}
+			// EMORY change: NACC expects these two (undocumented) entries here, both cdrSumSupp and cdrSumSuppAndStd, even if blank
+			//if(getComport() == null || getComport() < 0 || 
+			//	getCdrLang() == null || getCdrLang() < 0 || 
+			//	getCdrSum() == null || getCdrSum() < 0){
+			//	buffer.append("");
+			//}else{
+			//	buffer.append(UdsUploadUtils.formatField(getComport()+getCdrLang()+getCdrSum()));
+			//}
+			buffer.append(UdsUploadUtils.formatField(getCdrSumSupp())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCdrSumSuppAndStd()));
+
 		}
 		return buffer.toString();
 	}

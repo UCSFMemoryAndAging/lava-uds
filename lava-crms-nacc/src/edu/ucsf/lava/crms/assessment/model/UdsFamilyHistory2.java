@@ -2294,8 +2294,9 @@ public class UdsFamilyHistory2 extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getDadYod())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getDadDem())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getDadOnset())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getTwin())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getTwinType())).append(",");
+			//EMORY change: follow-up visits will not submit these two Twin fields
+			//buffer.append(UdsUploadUtils.formatField(getTwin())).append(",");
+			//buffer.append(UdsUploadUtils.formatField(getTwinType())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getSibChg())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getSibs())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getSib1Yob())).append(",");
