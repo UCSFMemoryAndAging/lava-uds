@@ -29,7 +29,16 @@
 </c:import>
 
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udslabsimaging2.imaging.section"/></page:param>
+  <page:param name="section">
+  <c:choose>
+    <c:when test="${command.components['instrument'].packet == 'I'}">
+		<spring:message code="udslabsimaging2.imaging.section"/>
+  	</c:when>
+  	<c:otherwise>
+  		<spring:message code="udslabsimaging2.imaging.section.followup"/>
+  	</c:otherwise>
+  </c:choose>
+  </page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
 
@@ -80,7 +89,16 @@
 </page:applyDecorator>
 
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udslabsimaging2.specimens.section"/></page:param>
+  <page:param name="section">
+  <c:choose>
+    <c:when test="${command.components['instrument'].packet == 'I'}">
+		<spring:message code="udslabsimaging2.specimens.section"/>
+  	</c:when>
+  	<c:otherwise>
+  		<spring:message code="udslabsimaging2.specimens.section.followup"/>
+  	</c:otherwise>
+  </c:choose>
+  </page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"></page:param>
   
@@ -107,7 +125,16 @@
 
 
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udslabsimaging2.genotyping.section"/></page:param>
+  <page:param name="section">
+  <c:choose>
+    <c:when test="${command.components['instrument'].packet == 'I'}">
+		<spring:message code="udslabsimaging2.genotyping.section"/>
+  	</c:when>
+  	<c:otherwise>
+  		<spring:message code="udslabsimaging2.genotyping.section.followup"/>
+  	</c:otherwise>
+  </c:choose>
+  </page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
 <tags:tableForm>  
