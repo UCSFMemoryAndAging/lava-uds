@@ -605,16 +605,6 @@
 	<bean id="list.uds.b7.diff" parent="list.standardUds">
  		<property name="dbListName" value="udsb7diff"/>
  	</bean>
- 	
-	<bean id="list.uds.b7.cdrScale" parent="list.standardUdsDecimal">
-		<property name="query" value="GenericListValueQueryDecimal"/>
-		<property name="dbListName" value="CDRScale"/>
-	</bean>
-
-	<bean id="list.uds.b7.cdrScaleNoPoint5" parent="list.standardUdsDecimal">
-		<property name="query" value="ListValueQueryDecimalCDRScaleNoPoint5"/>
-		<property name="dbListName" value="CDRScale"/>
-	</bean>
 				
 	<bean id="list.uds.b9.fuChg" parent="list.standardUds">
  		<property name="dbListName" value="udsb9fuchg"/>
