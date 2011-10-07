@@ -49,6 +49,7 @@ This demo application illustrates the basic core features of the LAVA CRMS (Clin
 	<br/>
 	<li><b><a href="<tags:actionURL actionId="lava.defaultScope.people.defaultAction"/>">People</a></b> Tab</li>
 	<ul style="margin-left: 40px">
+		<li><b><a href="<tags:actionURL actionId="lava.defaultScope.people.findPatient.defaultAction"/>">Find Patient</a></b> - Locate Patient and research subject records</li>
 		<li><b><a href="<tags:actionURL actionId="lava.defaultScope.people.patient.defaultAction"/>">Patient Management</a></b> - Patient and research subject records</li>
 		<li><b><a href="<tags:actionURL actionId="lava.defaultScope.people.caregiver.defaultAction"/>">Caregivers</a></b> - Informants and caregivers for patients and subjects</li>
 		<li><b><a href="<tags:actionURL actionId="lava.defaultScope.people.contactLog.defaultAction"/>">Contact Log</a></b> - Record of contacts with patients/subjects or their caregivers</li>

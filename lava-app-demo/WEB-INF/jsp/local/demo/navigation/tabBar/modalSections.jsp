@@ -4,6 +4,8 @@
 	<tags:coreNavSection module="home" section="user" textCode="section.user" disabled="true"/>
 	<tags:coreNavSection module="home" section="prefs" textCode="section.prefs" lastSection="true" disabled="true"/>
 
+
+	<tags:crmsNavSection module="people" section="findPatient" textCode="section.findPatient" disabled="true" />
 	<tags:crmsNavSection module="people" section="patient" textCode="section.patient" disabled="true" />
     <tags:crmsNavSection module="people" section="caregiver" textCode="section.caregiver" disabled="true" />
   	<tags:crmsNavSection module="people" section="contactLog" textCode="section.contactLog" disabled="true" />
