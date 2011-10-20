@@ -441,7 +441,10 @@ public class UdsMilestone extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getNurseMo())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getNurseDy())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getNurseYr())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getProtocol())).append(",");
+			if (getProtocol() != null && getProtocol().equals((short)0))
+				buffer.append(UdsUploadUtils.formatField("")).append(",");
+			else
+				buffer.append(UdsUploadUtils.formatField(getProtocol())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getNpsyTest())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getNpCogImp())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getNpPhyIll())).append(",");
