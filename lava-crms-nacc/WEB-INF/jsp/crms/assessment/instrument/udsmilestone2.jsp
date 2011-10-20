@@ -138,11 +138,19 @@
 </ui:formGuide>
 
 <ui:formGuide>
+  <ui:observe elementIds="protocol" component="${componentPrefix}" forValue="^3" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+  <ui:skip elementIds="npsyTest" component="${componentPrefix}"/>
+  <ui:skip elementIds="phynData" component="${componentPrefix}"/>
+</ui:formGuide>
+
+<ui:formGuide>
+  <ui:depends elementIds="protocol" component="${componentPrefix}"/>
   <ui:observe elementIds="npsyTest" component="${componentPrefix}" forValue="^$" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:setValue elementIds="npsyTest" component="${componentPrefix}" value="0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
 </ui:formGuide>
 
 <ui:formGuide>
+  <ui:depends elementIds="protocol" component="${componentPrefix}"/>
   <ui:observe elementIds="phynData" component="${componentPrefix}" forValue="^$" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:setValue elementIds="phynData" component="${componentPrefix}" value="0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
 </ui:formGuide>
@@ -153,22 +161,26 @@
 </ui:formGuide>
 
 <ui:formGuide>
+  <ui:depends elementIds="protocol" component="${componentPrefix}"/>
   <ui:observe elementIds="npsyTest" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="npCogImp,npPhyIll,npHomen,npRefus,npOthRea" component="${componentPrefix}" unskipValue="0"/> 
 </ui:formGuide>
 
 <ui:formGuide>
+  <ui:depends elementIds="protocol" component="${componentPrefix}"/>
   <ui:depends elementIds="npsyTest" component="${componentPrefix}"/>
   <ui:observe elementIds="npOthRea" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="npOthRex" component="${componentPrefix}"/> 
 </ui:formGuide>
 
 <ui:formGuide>
+  <ui:depends elementIds="protocol" component="${componentPrefix}"/>
   <ui:observe elementIds="phynData" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="phyCog,phyIll,phyHome,phyRefus,phyOth" component="${componentPrefix}" unskipValue="0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/> 
 </ui:formGuide>
 
 <ui:formGuide>
+  <ui:depends elementIds="protocol" component="${componentPrefix}"/>
   <ui:depends elementIds="phynData" component="${componentPrefix}"/>
   <ui:observe elementIds="phyOth" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="phyOthx" component="${componentPrefix}"/> 
