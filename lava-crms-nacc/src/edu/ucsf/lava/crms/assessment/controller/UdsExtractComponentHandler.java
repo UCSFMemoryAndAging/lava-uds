@@ -28,6 +28,7 @@ import edu.ucsf.lava.core.controller.ComponentCommand;
 import edu.ucsf.lava.core.controller.LavaComponentFormAction;
 import edu.ucsf.lava.core.dao.LavaDaoFilter;
 import edu.ucsf.lava.core.list.model.LabelValueBean;
+import edu.ucsf.lava.core.reporting.model.ReportSetup;
 import edu.ucsf.lava.crms.assessment.dto.UdsExtractReportDto;
 import edu.ucsf.lava.crms.assessment.model.Instrument;
 import edu.ucsf.lava.crms.assessment.model.InstrumentConfig;
@@ -38,7 +39,6 @@ import edu.ucsf.lava.crms.assessment.model.UdsInstrumentTracking;
 import edu.ucsf.lava.crms.assessment.model.UdsUploadUtils;
 import edu.ucsf.lava.crms.assessment.model.UdsUploadable;
 import edu.ucsf.lava.crms.reporting.controller.CrmsReportComponentHandler;
-import edu.ucsf.lava.crms.reporting.model.ReportSetup;
 import edu.ucsf.lava.crms.session.CrmsSessionUtils;
 
 public class UdsExtractComponentHandler extends CrmsReportComponentHandler {
