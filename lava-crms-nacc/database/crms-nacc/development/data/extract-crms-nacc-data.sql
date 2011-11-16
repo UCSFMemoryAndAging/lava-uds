@@ -1,3 +1,4 @@
+SELECT 'DELETE from datadictionary where instance=\'lava\' and scope=\'crms-nacc\';';  
 SELECT 'DELETE from viewproperty where instance=\'lava\' and scope=\'crms-nacc\';';
 SELECT 'DELETE from hibernateproperty where instance=\'lava\' and scope=\'crms-nacc\';';  
 SELECT 'DELETE from `listvalues` where `ListID` in (SELECT `ListID` from `list` where `scope`=''crms-nacc'');';
