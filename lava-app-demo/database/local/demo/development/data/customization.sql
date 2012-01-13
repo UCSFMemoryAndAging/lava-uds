@@ -1,10 +1,19 @@
--- This script should be run after the current lava-crms-data.sql script as the latter script creates the list records
--- used within this script.
+-- This script should be run after the current lava-crms-data.sql script as that script creates the list records
+-- used by the list item records inserted in this script.
 
 -- WARNING: DO NOT commit the lava-crms-data.sql script into cvs with the list data in this script as this data is
--- app specific. 
+-- app specific.
+
+-- NOTE: in addition to app-specific data that may be in 'crms' scope, if also updating 'crms' scope metadata that is
+-- part of lava-crms, read the below
+--
+-- Because each developer has their own dev database copy of the 'crms' metadata, metadata changes are shared
+-- via the lava-crms-data.sql script in cvs, and care must be taken to make sure you have the latest metadata script
+-- before updating it with your changes.
+-- Here are steps that should be taken if you are modifying 'crms' scope data in lava-crms. 
+-- 
 -- If updating metadata (viewproperty, hibernateproperty) in lava-crms-data.sql (i.e. where scope="crms"), follow these steps:
--- 1) create a separate crms metadata update script with your metadata insert/update/delete statements
+-- 1) create a separate temporary script with your 'crms' scope metadata insert/update/delete statements
 -- 2) obtain the latest version of lava-crms-data.sql from cvs and execute it on your dev db
 -- 3) execute your crms metadata update script, created in 1), in your dev db
 -- 4) regenerate lava-crms-data.sql from your dev db:
@@ -13,6 +22,7 @@
 -- 5) commit lava-crms-data.sql 
 -- 6) now you can run this customization.sql script
 
+-- Consent Type (listName = 'ConsentType')
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'7T MRI EVAL','7T MRI EVAL (H7063-30109-02)',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ConsentType';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'ADNI','ADNI AD (H10761-27012-01)',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ConsentType';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'ADNI','ADNI MCI (H10761-27012-01)',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ConsentType';
@@ -104,7 +114,7 @@ INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) 
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'ELAN','ELAN (H42715-26479-04)',3,'2009-01-24 20:57:59' FROM `list` where `ListName`='ConsentType';
 
 
-
+-- Instrument Versions (listName = 'InstrumentVersions')
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'macdiagnosis','2.9.0',-5,'2009-01-24 20:57:59' FROM `list` where `ListName`='InstrumentVersions';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'bedsidescreen','2.9.0',-4,'2009-01-24 20:57:59' FROM `list` where `ListName`='InstrumentVersions';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'macdiagnosis','2.7.0',-4,'2009-01-24 20:57:59' FROM `list` where `ListName`='InstrumentVersions';
@@ -122,7 +132,7 @@ INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) 
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'mudsinitial','2006',1,'2009-01-24 20:57:59' FROM `list` where `ListName`='InstrumentVersions';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'normalphonescreen','11/2007',1,'2009-01-24 20:57:59' FROM `list` where `ListName`='InstrumentVersions';
 
-
+-- Project Status (listName = 'ProjectStatus')
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'CLINIC','REFERRED',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ProjectStatus';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'NORMAL SCREEN','PENDING CONTACT',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ProjectStatus';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'AUTOPSY','REFERRED',1,'2009-01-24 20:57:59' FROM `list` where `ListName`='ProjectStatus';
@@ -192,7 +202,7 @@ INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) 
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'CLINIC','Assessment',2,'2009-01-24 20:57:59' FROM `list` where `ListName`='ProjectStatusType';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'COE','Migration',2,'2009-01-24 20:57:59' FROM `list` where `ListName`='ProjectStatusType';
 
-
+-- Referral Sources (listName='Referral Sources')
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'ADRC','CHINATOWN',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ReferralSources';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'ADRC','CHINESE HOSPITAL',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ReferralSources';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'ADRC','SHE',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ReferralSources';
@@ -202,7 +212,7 @@ INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) 
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','FTD PPG',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ReferralSources';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','VA CLINIC',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ReferralSources';
 
-
+-- Staff List (listName='StaffList'
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','Levenson, B.',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='StaffList';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','Lomen-Hoerth, C.',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='StaffList';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','Yaffe, K.',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='StaffList';
@@ -213,7 +223,7 @@ INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) 
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','Weiner, M.',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='StaffList';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','Hall, J.',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='StaffList';
 
-
+-- Visit Locations (listName='VisitLocations')
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','350 - 502',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='VisitLocations';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','350 - 706 EXAM',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='VisitLocations';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','ACC',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='VisitLocations';
@@ -239,6 +249,8 @@ INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) 
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','505P #348',1,'2009-01-24 20:57:59' FROM `list` where `ListName`='VisitLocations';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'GENERAL','CHINA BASIN',1,'2009-01-24 20:57:59' FROM `list` where `ListName`='VisitLocations';
 
+
+-- Visit Types (listName='VisitType')
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'7T MRI EVAL','MB 7T MRI',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='VisitType';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'ATTN-EXEC CONTROL','BASELINE VISIT',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='VisitType';
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'CADASIL','BASELINE VISIT',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='VisitType';
