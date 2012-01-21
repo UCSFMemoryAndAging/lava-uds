@@ -2,25 +2,13 @@
 -- used by the list item records inserted in this script.
 
 -- WARNING: DO NOT commit the lava-crms-data.sql script into cvs with the list data in this script as this data is
--- app specific.
+-- app specific, even though it is in 'crms' scope.
 
 -- NOTE: in addition to app-specific data that may be in 'crms' scope, if also updating 'crms' scope metadata that is
--- part of lava-crms, read the below
---
--- Because each developer has their own dev database copy of the 'crms' metadata, metadata changes are shared
--- via the lava-crms-data.sql script in cvs, and care must be taken to make sure you have the latest metadata script
--- before updating it with your changes.
--- Here are steps that should be taken if you are modifying 'crms' scope data in lava-crms. 
--- 
--- If updating metadata (viewproperty, hibernateproperty) in lava-crms-data.sql (i.e. where scope="crms"), follow these steps:
--- 1) create a separate temporary script with your 'crms' scope metadata insert/update/delete statements
--- 2) obtain the latest version of lava-crms-data.sql from cvs and execute it on your dev db
--- 3) execute your crms metadata update script, created in 1), in your dev db
--- 4) regenerate lava-crms-data.sql from your dev db:
---    run a script modeled after lava-crms/database/crms/development/data/extract.script
---    notes: do not need to run as root. for development version, leave off "-[version]" in the output file.
--- 5) commit lava-crms-data.sql 
--- 6) now you can run this customization.sql script
+-- part of lava-crms, note that because each developer has their own dev database copy of the 'crms' metadata, metadata 
+-- changes are shared via the lava-crms-data.sql script in cvs, and care must be taken to make sure you have the latest
+-- metadata script before updating it with your changes. Again, make sure you do not pollute it with app specific
+-- metadata at crms scope.
 
 -- Consent Type (listName = 'ConsentType')
 INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'7T MRI EVAL','7T MRI EVAL (H7063-30109-02)',0,'2009-01-24 20:57:59' FROM `list` where `ListName`='ConsentType';
