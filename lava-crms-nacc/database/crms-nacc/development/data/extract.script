@@ -1,1 +1,1 @@
-mysql -s -r -u root -p [dbname] < extract-crms-nacc-data.sql > lava-crms-nacc-data-[version].sql
+mysql -s -r -u root -p lava_core < extract-crms-nacc-data.sql > lava-crms-nacc-data-extracted.sql
