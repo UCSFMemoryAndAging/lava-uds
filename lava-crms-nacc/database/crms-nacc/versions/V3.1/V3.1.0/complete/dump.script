@@ -1,0 +1,1 @@
+mysqldump -R -c --compact --tz-utc=FALSE --extended-insert=FALSE -u root -p lava_crms_nacc > lava-crms-nacc-dump.sql
