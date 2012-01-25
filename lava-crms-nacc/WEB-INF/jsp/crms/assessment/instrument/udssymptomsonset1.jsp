@@ -128,7 +128,7 @@
   <c:if test="${current == 0 || (current == 1 && componentView == 'compare')}">
 
 <%-- when packet is initial --%>
-<ui:formGuide ignoreUndo="true">
+<ui:formGuide ignoreUndoOnLoad="true" ignoreUndo="true">
   <ui:observe elementIds="packet" component="instrument" forValue="[I|^$]"/>
   <ui:skip elementIds="b9Chg" component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="decSub,decIn,decClin,cogMem,cogJudg,cogLang,cogVis,cogAttn,cogOther,cogFrst,cogMode,
@@ -139,7 +139,7 @@
 </ui:formGuide>           
 
 <%-- when packet is follow up type --%>
-<ui:formGuide ignoreUndo="true">
+<ui:formGuide ignoreUndoOnLoad="true" ignoreUndo="true">
   <ui:observe elementIds="packet" component="instrument" forValue="[T|F]"/>
   <ui:unskip elementIds="b9Chg" component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
 </ui:formGuide>           

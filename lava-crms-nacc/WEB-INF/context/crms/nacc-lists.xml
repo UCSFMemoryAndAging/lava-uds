@@ -58,6 +58,12 @@
 		</list></property>
 	</bean>     
 	
+	<bean id="list.nacc.drugLookup" parent="list.standard">
+		<property name="dbListName" value="NACCDrugList"/>
+		<property name="defaultSort" value="orderIndex"/>
+		
+	</bean>
+	
 	<bean id="list.uds.npiCodes" abstract="true" parent="list.uds.codes">
 		<property name="staticReferenceLists"><list>
 			<ref bean="list.ref.udsErrorCodes"/>

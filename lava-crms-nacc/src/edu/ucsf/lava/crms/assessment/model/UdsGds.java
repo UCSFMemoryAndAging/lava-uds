@@ -176,7 +176,8 @@ public class UdsGds extends UdsInstrument {
 	
 	public String[] getRequiredResultFields() {
 		return new String[] {
-				"noGds",
+				"noGds"
+				/* fields are allowed to be unanswered
 				"satis",
 				"dropAct",
 				"empty",
@@ -192,6 +193,7 @@ public class UdsGds extends UdsInstrument {
 				"energy",
 				"hopeless",
 				"better"
+				*/
 		};
 	}
 	
@@ -216,6 +218,67 @@ public class UdsGds extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getBetter())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getGds()));
 		return buffer.toString();
+	}
+
+	@Override
+	public void updateCalculatedFields() {
+		super.updateCalculatedFields();
+
+		// count how many questions are answered
+		short num_answered = (short)0;
+		if (this.satis != null    && (this.satis.equals((short)0) || this.satis.equals((short)1)))        num_answered++;
+		if (this.dropAct != null  && (this.dropAct.equals((short)0) || this.dropAct.equals((short)1)))    num_answered++;
+		if (this.empty != null    && (this.empty.equals((short)0) || this.empty.equals((short)1)))        num_answered++;
+		if (this.bored != null    && (this.bored.equals((short)0) || this.bored.equals((short)1)))        num_answered++;
+		if (this.spirits != null  && (this.spirits.equals((short)0) || this.spirits.equals((short)1)))    num_answered++;
+		if (this.afraid != null   && (this.afraid.equals((short)0) || this.afraid.equals((short)1)))      num_answered++;
+		if (this.happy != null    && (this.happy.equals((short)0) || this.happy.equals((short)1)))        num_answered++;
+		if (this.helpless != null && (this.helpless.equals((short)0) || this.helpless.equals((short)1)))  num_answered++;
+		if (this.stayhome != null && (this.stayhome.equals((short)0) || this.stayhome.equals((short)1)))  num_answered++;
+		if (this.memprob != null  && (this.memprob.equals((short)0) || this.memprob.equals((short)1)))    num_answered++;
+		if (this.wondrful != null && (this.wondrful.equals((short)0) || this.wondrful.equals((short)1)))  num_answered++;
+		if (this.wrthless != null && (this.wrthless.equals((short)0) || this.wrthless.equals((short)1)))  num_answered++;
+		if (this.energy != null   && (this.energy.equals((short)0) || this.energy.equals((short)1)))      num_answered++;
+		if (this.hopeless != null && (this.hopeless.equals((short)0) || this.hopeless.equals((short)1)))  num_answered++;
+		if (this.better != null   && (this.better.equals((short)0) || this.better.equals((short)1)))      num_answered++;
+		
+		// 12 is the required number of questions that must be answered to be considered complete
+		// only consider the number answered if the user never filled noGds or it was filled as completed (0)
+		if ((this.noGds == null) || this.noGds.equals((short)0)) {
+			if (num_answered < 12) { 
+				this.noGds = (short)1;  // Yes, subject was NOT able to complete the GDS
+			} else {
+				this.noGds = (short)0;  // No, subject WAS able to complete the GDS
+			}
+		}
+		
+		if (this.noGds != null
+			&& this.noGds.equals((short)1)) {
+			// then "Unable to Complete" and form says to fill in 88 for gds
+			this.gds = (short)88;
+		}
+		else {
+			// do calculation for this.gds
+			//   Allow fields to have been null, in case wasn't answered
+			short counter = (short)0;
+			if (this.satis != null    && this.satis.equals((short)1))    counter++;
+			if (this.dropAct != null  && this.dropAct.equals((short)1))  counter++;
+			if (this.empty != null    && this.empty.equals((short)1))    counter++;
+			if (this.bored != null    && this.bored.equals((short)1))    counter++;
+			if (this.spirits != null  && this.spirits.equals((short)1))  counter++;
+			if (this.afraid != null   && this.afraid.equals((short)1))   counter++;
+			if (this.happy != null    && this.happy.equals((short)1))    counter++;
+			if (this.helpless != null && this.helpless.equals((short)1)) counter++;
+			if (this.stayhome != null && this.stayhome.equals((short)1)) counter++;
+			if (this.memprob != null  && this.memprob.equals((short)1))  counter++;
+			if (this.wondrful != null && this.wondrful.equals((short)1)) counter++;
+			if (this.wrthless != null && this.wrthless.equals((short)1)) counter++;
+			if (this.energy != null   && this.energy.equals((short)1))   counter++;
+			if (this.hopeless != null && this.hopeless.equals((short)1)) counter++;
+			if (this.better != null   && this.better.equals((short)1))   counter++;
+			
+			this.gds = counter;
+		}
 	}
 
 	

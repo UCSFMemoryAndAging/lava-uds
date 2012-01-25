@@ -102,7 +102,7 @@ public class UdsMedications2 extends UdsInstrument {
 	
 	public static class UdsMedicationsDetails2 implements Serializable {
 		protected Long medDetailId;
-		protected Long drugId;
+		protected String drugId;
 		protected Long lineNum;
 		protected String generic;
 		protected String brand;
@@ -135,12 +135,12 @@ public class UdsMedications2 extends UdsInstrument {
 
 	
 
-		public Long getDrugId() {
+		public String getDrugId() {
 			return drugId;
 		}
 
 
-		public void setDrugId(Long drugId) {
+		public void setDrugId(String drugId) {
 			this.drugId = drugId;
 		}
 
@@ -202,13 +202,11 @@ public class UdsMedications2 extends UdsInstrument {
 		
 		//for each detail with a reportable drug id, add a record with the drug id formatted 'd[00000]'
 		for(UdsMedicationsDetails2 detail : getDetails()){
-			if(detail!=null && detail.getDrugId() != null && 
-					detail.getDrugId() > 0 && 
-					!detail.getDrugId().equals(99999)){
+			if(this.isUdsUploadableDetail(detail)){
 				String drugId = UdsUploadUtils.formatField(detail.getDrugId());
 				// EMORY change: NACC expects detail A4 forms to have formID=A4D, not A4
 				buffer = UdsUploadUtils.getCommonFields(this,"D");
-				buffer.append("d").append("00000", 0, 5-drugId.length()).append(drugId);
+				buffer.append(drugId);
 				records.add(buffer.toString());
 			}
 				
@@ -216,6 +214,19 @@ public class UdsMedications2 extends UdsInstrument {
 		return records;
 	}
 		
+	
+	protected boolean isUdsUploadableDetail(UdsMedicationsDetails2 detail){
+		if(detail==null) return false;
+		
+		String drugId = detail.getDrugId();
+		if(drugId==null) return false; 
+		
+		if(drugId.startsWith("d") || drugId.startsWith("R") || drugId.startsWith("S") || drugId.startsWith("N")){
+			return true;
+		}else{
+			return false;
+		}		
+	}
 
 
 	

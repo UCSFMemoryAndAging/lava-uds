@@ -4,6 +4,7 @@
 <beans>
 
 
+<import resource="nacc-id.xml"/>
 <import resource="nacc-instruments.xml"/>
 <import resource="nacc-lists.xml"/>
 <import resource="nacc-reporting.xml"/>

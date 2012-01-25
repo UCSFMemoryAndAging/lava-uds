@@ -18,7 +18,7 @@
 	       	<list-index column="LineNum"/>
 	     	<composite-element class="edu.ucsf.lava.crms.assessment.model.UdsMedications2$UdsMedicationsDetails2">
 		   		<!-- medDetailID is an identity column so do not need to insert or update -->
-		 	   <property name="drugId" column="DRUGID" type="long"/>
+		 	   <property name="drugId" column="DRUGID" type="string"/>
 		       <property name="generic" column="Generic" type="string" length="50"/>
 		       <property name="brand" column="Brand" type="string" length="50"/>
 		       <property name="notListed" column="NotListed" type="string" length="50"/>

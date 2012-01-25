@@ -24,7 +24,7 @@ import edu.ucsf.lava.crms.session.CrmsSessionUtils;
 
 
 public class UdsMedications2Handler extends UdsInstrumentHandler {
-	public static final int DATA_ENTRY_SECTION_LENGTH = 40;
+	public static final int DATA_ENTRY_SECTION_LENGTH = 50;
 	public static final String MEDICATIONS_DTO = "udsMedications2Dto";
 	
 	public UdsMedications2Handler() {
@@ -68,8 +68,8 @@ public class UdsMedications2Handler extends UdsInstrumentHandler {
 			dto.initialize(medications.getDetailsLength());
 		}
 			
-			//now copy to the Data Transfer Object
-			this.mapDtoFromModel(dto, medications);
+		//now copy to the Data Transfer Object
+		this.mapDtoFromModel(dto, medications);
 		
 
 		

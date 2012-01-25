@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!-- configure custom id mapping strategy for the UdsInstrument PTID field calculation -->
+	<bean id="udsInstrumentPtidMapping" parent="baseIdMapping" class="edu.ucsf.lava.core.id.BaseIdMapping">
+		<property name="id" value="udsinstrument_ptid"/>
+		<property name="strategy"><ref bean="udsInstrumentPtidStrategy"/></property>
+	</bean>
+	<bean id="udsInstrumentPtidStrategy" class="edu.ucsf.lava.crms.id.UdsInstrumentPtidStrategy"/>
+	
+</beans>

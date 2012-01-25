@@ -2282,8 +2282,29 @@ public class UdsFamilyHistory2 extends UdsInstrument {
 
 		}
 		else if(getPacket().equals("T") || getPacket().equals("F")){
-			buffer.append(UdsUploadUtils.formatField(getA3Chg())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getParChg())).append(",");
+			
+			// if A3chg is not checked, NACC submission expects non-empty values for the other checkboxes,
+			// but the binding may assign NULL to non-checked checkboxes
+			// So when A3chg not checked, interpret a NULL as 0 for NACC submissions, so that it is not blank
+			// When A3chg IS checked, ensure later checkboxes are assigned as empty (also expected by NACC, 
+			// according to UDS data dictionary)
+			Short a3ChgNACC,parChgNACC, sibChgNACC, kidChgNACC, relChgNACC;
+			a3ChgNACC = getA3Chg() == null ? (short)0 : getA3Chg();
+			if (a3ChgNACC.equals((short)0)) { // i.e. A3Chg not checked
+				parChgNACC = getParChg() == null ? (short)0 : getParChg();
+				sibChgNACC = getSibChg() == null ? (short)0 : getSibChg();
+				kidChgNACC = getKidChg() == null ? (short)0 : getKidChg();
+				relChgNACC = getRelChg() == null ? (short)0 : getRelChg();
+			} else { // i.e. A3Chg checked
+				// in case the value happens to be 0, ensure it is null so that empty string is added, not 0
+				parChgNACC = null;
+				sibChgNACC = null;
+				kidChgNACC = null;
+				relChgNACC = null;
+			}
+			
+			buffer.append(UdsUploadUtils.formatField(a3ChgNACC)).append(",");
+			buffer.append(UdsUploadUtils.formatField(parChgNACC)).append(",");
 			buffer.append(UdsUploadUtils.formatField(getMomYob())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getMomLiv())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getMomYod())).append(",");
@@ -2294,10 +2315,10 @@ public class UdsFamilyHistory2 extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getDadYod())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getDadDem())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getDadOnset())).append(",");
-			//EMORY change: follow-up visits will not submit these two Twin fields
+			// follow-up visits will not submit these two Twin fields
 			//buffer.append(UdsUploadUtils.formatField(getTwin())).append(",");
 			//buffer.append(UdsUploadUtils.formatField(getTwinType())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getSibChg())).append(",");
+			buffer.append(UdsUploadUtils.formatField(sibChgNACC)).append(",");
 			buffer.append(UdsUploadUtils.formatField(getSibs())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getSib1Yob())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getSib1Liv())).append(",");
@@ -2399,7 +2420,7 @@ public class UdsFamilyHistory2 extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getSib20Yod())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getSib20Dem())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getSib20Ons())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getKidChg())).append(",");
+			buffer.append(UdsUploadUtils.formatField(kidChgNACC)).append(",");
 			buffer.append(UdsUploadUtils.formatField(getKids())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getKid1Yob())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getKid1Liv())).append(",");
@@ -2476,7 +2497,7 @@ public class UdsFamilyHistory2 extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getKid15Yod())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getKid15Dem())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getKid15Ons())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getRelChg())).append(",");
+			buffer.append(UdsUploadUtils.formatField(relChgNACC)).append(",");
 			buffer.append(UdsUploadUtils.formatField(getRelsDem())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getRel1Yob())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getRel1Liv())).append(",");

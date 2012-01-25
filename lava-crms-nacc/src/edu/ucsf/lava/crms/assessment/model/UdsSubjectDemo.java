@@ -313,29 +313,40 @@ public class UdsSubjectDemo extends UdsInstrument {
 
 	
 	public String[] getRequiredResultFields() {
-		return new String[] {
-		    "inMds",
-		    "reason",
-		    "refer",
-		    "preStat",
-		    "presPart",
-		    "source",
-		    "birthMo",
-		    "birthYr",
-		    "sex",
-		    "hispanic",
-		    "hispOr",
-		    "race",
-		    "raceSec",
-		    "raceTer",
-		    "primLang",
-		    "educ",
-		    "livSit",
-		    "independ",
-		    "residenc",
-		    "mariStat",
-		    "handed"
-		};
+		// different fields are required depending on packet type
+		if (this.getPacket().equals("I")){
+			return new String[] {
+			    "inMds",
+			    "reason",
+			    "refer",
+			    "preStat",
+			    "presPart",
+			    "source",
+			    "birthMo",
+			    "birthYr",
+			    "sex",
+			    "hispanic",
+			    "hispOr",
+			    "race",
+			    "raceSec",
+			    "raceTer",
+			    "primLang",
+			    "educ",
+			    "livSit",
+			    "independ",
+			    "residenc",
+			    "mariStat",
+			    "handed" };
+		} else {
+			return new String[] {
+				"birthMo",
+				"birthYr",
+				"sex",
+				"livSit",
+				"independ",
+				"residenc",
+				"mariStat" };
+		}
 	}
 
 	

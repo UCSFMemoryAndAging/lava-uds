@@ -19,7 +19,7 @@
   <page:param name="component">${instrTypeEncoded}</page:param> 
   <page:param name="focusField">${focusField}</page:param>
   <page:param name="pageHeadingArgs">UDS NeuroPsych ${not empty alternateLanguage ? ' - ':''}${alternateLanguage}</page:param>
-  <page:param name="quicklinks">mmse,batteryInfo,logMem1a,digitFwd,digitBkwd,catFluency,<br/>,trailMaking,wais,logMem2a,boston,overall</page:param>
+  <page:param name="quicklinks">mmse,batteryInfo,logMem1a,digitFwd,<br/>,digitBkwd,catFluency,trailMaking,wais,<br/>,logMem2a,boston,overall</page:param>
    
 <page:applyDecorator name="component.instrument.content">
   <page:param name="instrTypeEncoded">${instrTypeEncoded}</page:param>

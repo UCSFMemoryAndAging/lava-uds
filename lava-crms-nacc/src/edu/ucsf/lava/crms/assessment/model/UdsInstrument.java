@@ -448,15 +448,8 @@ public class UdsInstrument extends Instrument implements UdsUploadable {
 			}
 		}
 
-		if (this.getPatient().getLastName().equals("DE-IDENTIFIED")) {
-			if (StringUtils.isNumeric(this.getPatient().getFirstName())) {
-				this.setPtid(this.getPatient().getFirstName());
-			} else {
-				this.setPtid(this.getPatient().getId().toString());
-			}
-		} else {
-			this.setPtid(this.getPatient().getId().toString());
-		}
+		// use strategy classes (possibly overridden) to determine PTID
+		this.setPtid(CoreManagerUtils.getIdManager().getEntityPropId(this, "ptid"));
 
 		Calendar calendar = Calendar.getInstance();
 		if (this.getDcDate() != null) {

@@ -210,23 +210,44 @@ public class UdsInformantDemo extends UdsInstrument {
 
 	
 	public String[] getRequiredResultFields() {
-		return new String[] {
-			"inBirMo",
-			"inBirYr",
-			"inSex",
-			"newInf",
-			"inHisp",
-			"inHispOr",
-			"inRace",
-			"inRaSec",
-			"inRaTer",
-			"inEduc",
-			"inRelTo",
-			"inLivWth",
-			"inVisits",
-			"inCalls",
-			"inRely"
-		};
+		if (this.getPacket() == null)
+			return new String[] {};
+		if (this.getPacket().equals("I")) {
+			return new String[] {
+				"inBirMo",
+				"inBirYr",
+				"inSex",
+				"inHisp",
+				"inHispOr",
+				"inRace",
+				"inRaSec",
+				"inRaTer",
+				"inEduc",
+				"inRelTo",
+				"inLivWth",
+				"inVisits",
+				"inCalls",
+				"inRely"
+			};
+		} else {
+			return new String[] {
+				"inBirMo",
+				"inBirYr",
+				"inSex",
+				"newInf",
+				"inHisp",
+				"inHispOr",
+				"inRace",
+				"inRaSec",
+				"inRaTer",
+				"inEduc",
+				"inRelTo",
+				"inLivWth",
+				"inVisits",
+				"inCalls",
+				"inRely"
+			};
+		}
 	}
 
 	public String getUdsUploadCsvRecord() {

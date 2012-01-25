@@ -132,7 +132,7 @@ public class NaccPathology extends Instrument {
 		}
 		setPtid((patient.getId()!= null)?patient.getId().toString():null);
 		setNpdod(patient.getDeathDate());
-		setNpsex(patient.getGender().shortValue());
+		setNpsex(patient.getGender() == null ? null : patient.getGender().shortValue());
 		setNpdage(patient.getAge().shortValue());
 	}
 

@@ -496,7 +496,12 @@ public class UdsHealthHistory extends UdsInstrument {
 		this.traumExt = traumExt;
 	}
 	
-		public String[] getRequiredResultFields() {
+	public String[] getRequiredResultFields() {
+		// For the year fields, only the first would be required, not all of them
+		// Reasoning: if cbStroke is Absent, everything would be filled with skip (-6)
+		// But if cbStroke is Active or Inactive, this would imply at least one must be filled,
+		// even if that value was 9999 (unknown).
+		// In all, this means the first year should always have a value.
 		return new String[] {
 				"cvHAtt",
 				"cvAFib",
@@ -507,18 +512,18 @@ public class UdsHealthHistory extends UdsInstrument {
 				"cvOthr",
 				"cbStroke",
 				"strok1Yr",
-				"strok2Yr",
-				"strok3Yr",
-				"strok4Yr",
-				"strok5Yr",
-				"strok6Yr",
+				//"strok2Yr",
+				//"strok3Yr",
+				//"strok4Yr",
+				//"strok5Yr",
+				//"strok6Yr",
 				"cbTia",
 				"tia1Yr",
-				"tia2Yr",
-				"tia3Yr",
-				"tia4Yr",
-				"tia5Yr",
-				"tia6Yr",
+				//"tia2Yr",
+				//"tia3Yr",
+				//"tia4Yr",
+				//"tia5Yr",
+				//"tia6Yr",
 				"cbOthr",
 				"pd",
 				"pdYr",

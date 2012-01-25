@@ -250,6 +250,47 @@ public class UdsHachinski extends UdsInstrument {
 		}
 		return buffer.toString();
 	}	
+
+	@Override
+	public void updateCalculatedFields() {
+		super.updateCalculatedFields();
+		
+		if ((this.abrupt == null)
+			|| (this.stepwise == null)
+			|| (this.somatic == null)
+			|| (this.emot == null)
+			|| (this.hxHyper == null)
+			|| (this.hxStroke == null)
+			|| (this.foclSym == null)
+			|| (this.foclSign == null)) {
+			
+			this.hachin = null;
+			
+		} else {
+			// calculate hachinski score
+			if (((this.abrupt.equals((short)0)) || (this.abrupt.equals((short)2)))
+				&& ((this.stepwise.equals((short)0)) || (this.stepwise.equals((short)1)))
+				&& ((this.somatic.equals((short)0)) || (this.somatic.equals((short)1)))
+				&& ((this.emot.equals((short)0)) || (this.emot.equals((short)1)))
+				&& ((this.hxHyper.equals((short)0)) || (this.hxHyper.equals((short)1)))
+				&& ((this.hxStroke.equals((short)0)) || (this.hxStroke.equals((short)2)))
+				&& ((this.foclSym.equals((short)0)) || (this.foclSym.equals((short)2)))
+				&& ((this.foclSign.equals((short)0)) || (this.foclSign.equals((short)2)))) {
+			  
+				this.hachin = (short)(this.abrupt
+								+ this.stepwise
+								+ this.somatic
+								+ this.emot
+								+ this.hxHyper
+								+ this.hxStroke
+								+ this.foclSym
+								+ this.foclSign);
+			} else {
+				// else some field is not valid, so indeterminable
+				this.hachin = (short)-5;		
+			}
+		}
+	}
 }
 
 

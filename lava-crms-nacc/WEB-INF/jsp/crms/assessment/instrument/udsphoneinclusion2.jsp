@@ -95,7 +95,7 @@
   </c:choose>
   <c:if test="${current == 0 || (current == 1 && componentView == 'compare')}">
 
-<ui:formGuide>
+<ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
   <ui:observe elementIds="other" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="otherx" component="${componentPrefix}"/>
 </ui:formGuide>
