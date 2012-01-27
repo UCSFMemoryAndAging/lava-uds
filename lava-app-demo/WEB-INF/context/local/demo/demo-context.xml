@@ -11,6 +11,8 @@ of WEB-INF/context/context-examiner.xml) and loaded into the application context
 
 <import resource="demo-home.xml"/>
 
+<import resource="demo-reporting.xml"/>
+
 <import resource="demo-security.xml"/>
 
 <import resource="demo-scheduling.xml"/>

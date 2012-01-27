@@ -15,10 +15,11 @@
     <tags:crmsNavSection module="people" section="doctor" textCode="section.doctor" />
     <tags:crmsNavSection module="people" section="task" textCode="section.task" lastSection="true"/>
   
-
-   <!-- 
-   <tags:crmsNavSection module="enrollment" section="metrics" text="Metrics" />
-    --> 
+	<tags:crmsNavSection module="protocol" section="assignment" textCode="section.assignment"/>
+	<tags:crmsNavSection module="protocol" section="scheduling" textCode="section.scheduling" disabled="true"/>
+	<tags:crmsNavSection module="protocol" section="completion" textCode="section.completion"/>
+	<tags:crmsNavSection module="protocol" section="setup" textCode="section.setup" lastSection="true" />
+ 
     
     <tags:crmsNavSection module="enrollment" section="status" textCode="section.status" />
     <tags:crmsNavSection module="enrollment" section="attachments" textCode="section.attachments" />
