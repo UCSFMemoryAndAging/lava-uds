@@ -137,8 +137,8 @@ public class UdsMedications2Handler extends UdsInstrumentHandler {
 
 	 	if (flowMode.equals("enter")
 		 		|| (flowMode.equals("enterReview") && state.getId().equals("enterReview"))) {
-		 		this.addListsToModel(model,listManager.getStaticListsForEntity("medications"));
-	 	}	 	
+		 		this.addListsToModel(model,listManager.getStaticListsForEntity("udsmedications2"));
+	 	}	 
 	 	
 	 	return model;
 	}

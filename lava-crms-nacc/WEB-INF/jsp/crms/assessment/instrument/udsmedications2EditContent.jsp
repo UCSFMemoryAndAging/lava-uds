@@ -24,14 +24,14 @@ see MedicationsHandler for reasons behind this. --%>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions">Medication Line ${iterator.index+1}</page:param>
   	<tags:contentColumn columnClass="colLeft2Col5050">
-		<tags:createField property="details[${iterator.index}].drugLookup" component="${dtoComponent}" entity="${instrTypeEncoded}" metadataName="medications.drugLookup${iterator.index != 0 ? 'Clone':''}" mode="dc"/>
-		<tags:createField property="details[${iterator.index}].drugId" component="${dtoComponent}" entity="${instrTypeEncoded}" metadataName="medications.drugId" mode="dc"/>
+		<tags:createField property="details[${iterator.index}].drugLookup" component="${dtoComponent}" entity="${instrTypeEncoded}" metadataName="udsmedications2.drugLookup${iterator.index != 0 ? 'Clone':''}" mode="dc"/>
+		<tags:createField property="details[${iterator.index}].drugId" component="${dtoComponent}" entity="${instrTypeEncoded}" metadataName="udsmedications2.drugId" mode="dc"/>
 		
 	</tags:contentColumn>
 	<tags:contentColumn columnClass="colRight2Col5050">
-		<tags:createField property="details[${iterator.index}].generic" component="${dtoComponent}" entity="${instrTypeEncoded}" metadataName="medications.generic" mode="dc"/>
-		<tags:createField property="details[${iterator.index}].brand" component="${dtoComponent}" entity="${instrTypeEncoded}" metadataName="medications.brand"  mode="dc"/>
-		<tags:createField property="details[${iterator.index}].notListed" component="${dtoComponent}" entity="${instrTypeEncoded}" metadataName="medications.notListed"  mode="dc"/>
+		<tags:createField property="details[${iterator.index}].generic" component="${dtoComponent}" entity="${instrTypeEncoded}" metadataName="udsmedications2.generic" mode="dc"/>
+		<tags:createField property="details[${iterator.index}].brand" component="${dtoComponent}" entity="${instrTypeEncoded}" metadataName="udsmedications2.brand"  mode="dc"/>
+		<tags:createField property="details[${iterator.index}].notListed" component="${dtoComponent}" entity="${instrTypeEncoded}" metadataName="udsmedications2.notListed"  mode="dc"/>
 	</tags:contentColumn>
 </page:applyDecorator>
 </c:forEach>
@@ -44,7 +44,7 @@ see MedicationsHandler for reasons behind this. --%>
 		
 function initializeMedicationFields(){
 	var key;
-	for(var i = 0; i <= 39; i++){
+	for(var i = 0; i <= 49; i++){
 		key = 'acs_textbox_udsMedications2Dto_details_' + i + '_drugLookup';
 		if (ACS[key] != null){
 			ACS[key].listWidth = 600;
@@ -85,7 +85,7 @@ initializeMedicationFields();
 </script>
 
 <%--Section 1 UITAGS --%>
-<c:forEach begin="0" end="39" var="item">
+<c:forEach begin="0" end="49" var="item">
 
 
 <%--If any meds question <> yes then all detail controls are disabled --%>
@@ -108,7 +108,7 @@ initializeMedicationFields();
 
 
 <%--Handle the notListed Field specially (only enable when DrugId = 99999) --%>
-<ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare' && item==39) || (current == 1 && item==39) ? 'true' : ''}">
+<ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare' && item==49) || (current == 1 && item==49) ? 'true' : ''}">
  	<ui:depends component="${dtoComponent}" elementIds="anyMeds"/>
 	<ui:depends component="${dtoComponent}" elementIds="details_${item}_drugLookup"/>
 	<ui:observe component="${dtoComponent}" elementIds="details_${item}_drugId" forValue="99999"/>
