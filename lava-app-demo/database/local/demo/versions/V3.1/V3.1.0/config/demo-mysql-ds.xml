@@ -1,6 +1,4 @@
-
-
-
+<!-- this is a sample datasource configuration for the JBoss application server -->
 
 <datasources>
     <local-tx-datasource>

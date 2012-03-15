@@ -20,7 +20,8 @@ Setting up the demo mysql database.
 		
 	-- the following will create two accounts for the 'demo' user; one that can be accessed
 	-- locally ('demo'@'localhost') and one that can be accessed remotely (demo which
-	-- is equivalent to 'demo'@'%')
+	-- is equivalent to 'demo'@'%' where '%' is a wildcard which means user demo can connect from 
+	   any remote host)
 	-- the above statement may only create 'demo'@'%' which can be used for remote access
 	-- use the below statement if mysql is on the same server as the web application,
 	-- it can be substituted for the create and update statements above
@@ -41,10 +42,21 @@ Setting up the demo mysql database.
 	--	if user 'demo' has both local and remote accounts, use: 
 		grant all on demo.* to demo, 'demo'@'localhost';
 	
-8) copy the demo_mysql_ds.xml file into your jboss deploy directory. 
-	--edit to use your demo database account username and password.
-	--edit to use your mysql ip address and database name...
-	--edit your local datasource bean in your spring configuration files to use the jndi name that you have assigned to the datasource in the demo_mysql_ds.xml file. 
+8) If using JBoss:
+     copy the config/demo_mysql_ds.xml file into your jboss deploy directory.
+    	--edit to use your demo database account username and password.
+	    --edit to use your mysql ip address and database name...
+	    --edit your local datasource bean in your spring configuration files to use the jndi
+	      name that you have assigned to the datasource in the demo_mysql_ds.xml file. 
+   If using Apache Tomcat:
+     copy the confix/demo.xml file into your Tomcat deploy directory, i.e.
+     conf/Catalina/locahost
+     -- edit to use the correct username, password
+     -- edit the url to use your correct server address and database name
+     -- note that the MySQL JDBC driver jar file should be in your Apache Tomcat lib directory
+        (e.g. mysql-connector-java-5.1.8-bin.jar)
+    
+      
 	
 	
 	
