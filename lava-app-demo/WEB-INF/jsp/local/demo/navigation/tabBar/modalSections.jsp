@@ -14,11 +14,6 @@
     <tags:crmsNavSection module="people" section="doctor" textCode="section.doctor" disabled="true" />
     <tags:crmsNavSection module="people" section="task" textCode="section.task" lastSection="true" disabled="true" />
   
-    <tags:crmsNavSection module="protocol" section="assignment" textCode="section.assignment" disabled="true"/>
-	<tags:crmsNavSection module="protocol" section="scheduling" textCode="section.scheduling" disabled="true"/>
-	<tags:crmsNavSection module="protocol" section="completion" textCode="section.completion" disabled="true"/>
-	<tags:crmsNavSection module="protocol" section="setup" textCode="section.setup" disabled="true" lastSection="true" />
-    
     <tags:crmsNavSection module="enrollment" section="status" textCode="section.status" disabled="true" />
     <tags:crmsNavSection module="enrollment" section="attachments" textCode="section.attachments" disabled="true" />
     <tags:crmsNavSection module="enrollment" section="consent" textCode="section.consent" lastSection="true" disabled="true" />

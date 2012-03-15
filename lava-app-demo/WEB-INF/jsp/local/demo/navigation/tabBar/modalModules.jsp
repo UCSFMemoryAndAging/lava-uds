@@ -2,7 +2,6 @@
 
 <ul>
 	<tags:crmsNavTab module="home" text="Home" disabled="true"/>
-	<tags:crmsNavTab module="protocol" text="Protocol" disabled="true"/>	
   	<tags:crmsNavTab module="people" text="People" disabled="true"/>
   	<tags:crmsNavTab module="enrollment" text="Enrollment" disabled="true"/>
   	<tags:crmsNavTab module="scheduling" text="Scheduling" disabled="true"/>
