@@ -48,7 +48,7 @@
     maxActive="50" initialSize="10" maxIdle="10" minIdle="5" maxWait="10000"
     testWhileIdle="true" validationQuery="SELECT 1"
     timeBetweenEvictionRunsMillis="60000" minEvictableIdleTimeMillis="90000"
-    username="lava_smd" password="ads1vfsmd"  
+    username="lava_demo" password="_PASSWORD_"  
     driverClassName="com.mysql.jdbc.Driver"
     url="jdbc:mysql://100.200.100.200:3306/lava_demo"/>
 
