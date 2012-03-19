@@ -43,8 +43,9 @@ This demo application illustrates the basic core features of the LAVA CRMS (Clin
 <ul style="margin-left: 30 px">
 	<li><b><a href="<tags:actionURL actionId="lava.defaultScope.mylava.defaultAction"/>">My Lava</a></b> Tab</li>
 	<ul style="margin-left: 40px">
-		<li><b><a href="<tags:actionURL actionId="lava.defaultScope.mylava.welcome.defaultAction"/>">Wecome</a></b> - This page</li>
-		<li><b><a href="<tags:actionURL actionId="lava.defaultScope.mylava.myCalendar.defaultAction"/>">My Calendar</a></b> - Scheduled subject visits for the current user</li>
+		<li><b><a href="<tags:actionURL actionId="lava.defaultScope.home.home.defaultAction"/>">Home</a></b> - This page</li>
+		<li><b><a href="<tags:actionURL actionId="lava.core.home.user.userInfo"/>">User Info</a></b> - Change Password</li>
+		<li><b><a href="<tags:actionURL actionId="lava.core.home.prefs.userPreferences"/>">User Preferences</a></b> - User preference settings</li>
 	</ul>
 	<br/>
 	<li><b><a href="<tags:actionURL actionId="lava.defaultScope.people.defaultAction"/>">People</a></b> Tab</li>
