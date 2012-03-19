@@ -41,7 +41,7 @@
 This demo application illustrates the basic core features of the LAVA CRMS (Clinical Research Management System) application development framework.  
 <br/><br/>
 <ul style="margin-left: 30 px">
-	<li><b><a href="<tags:actionURL actionId="lava.defaultScope.mylava.defaultAction"/>">My Lava</a></b> Tab</li>
+	<li><b><a href="<tags:actionURL actionId="lava.defaultScope.home.defaultAction"/>">My Lava</a></b> Tab</li>
 	<ul style="margin-left: 40px">
 		<li><b><a href="<tags:actionURL actionId="lava.defaultScope.home.home.defaultAction"/>">Home</a></b> - This page</li>
 		<li><b><a href="<tags:actionURL actionId="lava.core.home.user.userInfo"/>">User Info</a></b> - Change Password</li>
