@@ -19,7 +19,7 @@
 
   <context-param>
     <param-name>webappVersion</param-name>
-    <param-value>3.0.1.0 3/30/2009</param-value>
+    <param-value>3.1.0.0 1/27/2012</param-value>
   </context-param>
 
   <!-- Spring configuration file locations
