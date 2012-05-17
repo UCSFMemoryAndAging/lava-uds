@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    
+
+	<bean name="applicationServerDelegate" class="edu.ucsf.lava.core.environment.JBossDelegate"/>
+	
+	
+	<!-- hibernate session factory properties -->
+	<bean name="sessionFactoryHibernateProperties" class="java.util.Properties">
+		<constructor-arg><props>
+		 	<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+		 	<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</prop>
+			<prop key="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</prop>
+		 </props></constructor-arg>
+	</bean>
+	
+	<!-- jboss transaction manager configuration -->	
+	<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+
+        <property name="transactionManagerName">
+    		<value>java:/TransactionManager</value>
+    	</property>
+    	<property name="defaultTimeout">
+    		<value>90</value>
+    	</property>
+    </bean>
+    
+    <bean id="localDataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:examinerMy</value>
+		</property>
+	</bean>
+	
+
+    
+</beans>
+    
+     
+
+
+

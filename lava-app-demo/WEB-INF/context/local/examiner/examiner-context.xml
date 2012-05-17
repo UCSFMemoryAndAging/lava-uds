@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+
+<!-- this context file is imported by WEB-INF/context/context.xml (which is a copy 
+of WEB-INF/context/context-examiner.xml) and loaded into the application context -->
+
+<beans>
+
+<import resource="examiner-local.xml"/>
+
+<import resource="examiner-home.xml"/>
+
+<import resource="examiner-reporting.xml"/>
+
+<import resource="examiner-security.xml"/>
+
+<import resource="examiner-scheduling.xml"/>
+
+<import resource="examiner-env-tomcat6.xml"/>
+</beans>
+

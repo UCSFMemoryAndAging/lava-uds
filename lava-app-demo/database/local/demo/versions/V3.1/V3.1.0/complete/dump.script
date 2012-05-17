@@ -1,1 +1,0 @@
-mysqldump -R -c --comments=FALSE  --tz-utc=FALSE  -u root -p lava_demo > lava-demo-dump.sql

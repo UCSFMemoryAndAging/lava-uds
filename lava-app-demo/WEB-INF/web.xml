@@ -19,14 +19,14 @@
 
   <context-param>
     <param-name>webappVersion</param-name>
-    <param-value>3.1.0.0 1/27/2012</param-value>
+    <param-value>1.0.0.0 5/27/2012</param-value>
   </context-param>
 
   <!-- Spring configuration file locations
        /WEB-INF/lava-servlet.xml loaded by default. In addition, load the following Spring config files. -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/context/context-demo.xml</param-value>
+    <param-value>/WEB-INF/context/context-examiner.xml</param-value>
   </context-param>
   
   <context-param>
@@ -203,7 +203,7 @@
 
   <welcome-file-list>
     <welcome-file>
-      /security/local/demo/redirect.jsp
+      /security/local/examiner/redirect.jsp
     </welcome-file>
   </welcome-file-list>
 

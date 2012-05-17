@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!-- these local collection containers should be refactored out by using self-registering bean collections -->
+<!--  this configuration file contains "local" beans required by the crms or core bean definitions 
+	if there is significant configuration, then they can be moved to new specific xml config files
+	for the local instance. -->
+<beans>       
+           
+
+
+ 
+   	 <!-- move to [xxxx]-mappings.xml if any mappings defined -->
+   	 <bean id="localControllerUrlMappings" class="java.util.LinkedHashMap">
+     	<constructor-arg><map>
+        </map></constructor-arg>
+     </bean>
+
+     <!-- move to [xxxx]-mappings.xml if any mappings defined -->
+    <bean id="localFlowControllerUrlMappings" class="java.util.LinkedHashMap">
+     	<constructor-arg><map>
+     	</map></constructor-arg>
+     </bean>
+	
+     			
+     <bean id="localInstrumentGroupPrototypes" class="java.util.LinkedHashMap">
+		<constructor-arg><map>	
+		 	<entry key="UDS~Initial Assessment">
+				<list>
+					<!-- values are instrument type, not instrTypeEncoded, because need ability to 
+						create an instrument that is missing from a group prototype -->
+		   			<value>UDS Subject Demo</value>
+   					<value>UDS Informant Demo</value>
+   					<value>UDS Family History</value>
+   					<value>UDS Medications</value>
+   					<value>UDS Health History</value>
+   					<value>UDS Physical</value>
+   					<value>UDS Hachinski</value>
+   					<value>UDS UPDRS</value>
+   					<value>UDS CDR</value>
+   					<value>UDS NPI</value>
+   					<value>UDS GDS</value>
+   					<value>UDS FAQ</value>
+					<value>UDS Appraisal</value>
+   					<value>UDS Symptoms Onset</value>
+					<value>UDS NeuroPsych</value>
+					<value>UDS Diagnosis</value>
+   					<value>UDS Labs Imaging</value>
+					<value>UDS Form Checklist</value>
+		     	 </list>
+			</entry>	
+		</map></constructor-arg>
+	</bean>	
+	 				
+	<bean id="localProjectInstrumentVerifyRates" class="java.util.LinkedHashMap">
+		<constructor-arg><map>	
+		</map></constructor-arg>
+	</bean>	
+	
+	
+  	 <!-- move to [xxxx]-enrollment.xml if any prototypes defined -->
+   	<bean id="localEnrollmentStatusPrototypes" class="java.util.LinkedHashMap">
+		<constructor-arg><map>	
+		</map></constructor-arg>
+	</bean>	
+	
+
+  
+ <!-- move to [xxxx]-session.xml if any session policies defined -->
+  	 <bean id="localSessionPolicyHandlers" class="java.util.ArrayList">
+		 <constructor-arg><list>
+  			
+		</list></constructor-arg>
+	</bean>  
+</beans>
+
