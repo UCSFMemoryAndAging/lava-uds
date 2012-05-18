@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+
+<!-- this context file is imported by WEB-INF/context/context.xml (which is a copy 
+of WEB-INF/context/context-examiner.xml) and loaded into the application context -->
+
+<beans>
+
+<import resource="demo-local.xml"/>
+
+<import resource="demo-home.xml"/>
+
+<import resource="demo-security.xml"/>
+
+<import resource="demo-scheduling.xml"/>
+
+<import resource="demo-env-tomcat6.xml"/>
+</beans>
+

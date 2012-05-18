@@ -15,7 +15,7 @@
 	<classpathentry kind="lib" path="/lava-core/WEB-INF/lib/commons-digester-1.7.jar"/>
 	<classpathentry kind="lib" path="/lava-core/WEB-INF/lib/commons-fileupload.jar"/>
 	<classpathentry kind="lib" path="/lava-core/WEB-INF/lib/commons-io.jar"/>
-	<classpathentry kind="lib" path="/lava-core/WEB-INF/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/lava-core/WEB-INF/lib/commons-lang.jar"/>
 	<classpathentry kind="lib" path="/lava-core/WEB-INF/lib/commons-logging-1.0.4.jar"/>
 	<classpathentry kind="lib" path="/lava-core/WEB-INF/lib/commons-math-1.2.jar"/>
 	<classpathentry kind="lib" path="/lava-core/WEB-INF/lib/dom4j-1.6.jar"/>
