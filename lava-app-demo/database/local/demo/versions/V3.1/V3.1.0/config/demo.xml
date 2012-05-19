@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  This is the context configuration file for the Apache Tomcat application
+  server. It contains the resource definition for the database connection
+  used by the demo app. This should be modified based on your MySQL database
+  configuration. The part of the Resource name "jdbc/demo" can be modified, but
+  it must match the portion of the jndiName property in the localDataSource bean 
+  in your WEB-INF/context/local/demo/demo-env-tomcat6.xml after the
+  "java:comp/env/" portion, e.g. if your Resource name in this file is
+  "jdbc/demo" then in the localDataSource bean, the jndiName property should be
+  java:comp/env/jdbc/demo
+
+  This assumes that your web application is deployed to the Apache Tomcat
+  webapp directory (either as a war file or a war file exploded into a directory
+  structure)
+  If you want to point the context to deploy your development directory, define
+  the docBase attribute of the Context element, where docBase points to your 
+  development deployment directory,  e.g.
+  <Context docBase="/home/username/project/deploy/demo.war/" reloadable="true">
+  
+  note: in build.xml the deploy directory is defined as "instance-deploy.path" using
+        the "warName" and "deploy.path" defined in your build.properties file as follows:  
+        <property name="war.file" value="${warName}.war"/>
+        <property name="instance-deploy.path" value="${deploy.path}/${war.file}"/>         
+   
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- The contents of this file will be loaded for each web application -->
+<Context  reloadable="true">
+
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+	
+  <Resource name="jdbc/demo" auth="Container" type="javax.sql.DataSource"
+    maxActive="50" initialSize="10" maxIdle="10" minIdle="5" maxWait="10000"
+    testWhileIdle="true" validationQuery="SELECT 1"
+    timeBetweenEvictionRunsMillis="60000" minEvictableIdleTimeMillis="90000"
+    username="lava_demo" password="_PASSWORD_"  
+    driverClassName="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://100.200.100.200:3306/lava_demo"/>
+
+</Context>
