@@ -232,7 +232,17 @@
 			<bean parent="list.data"><constructor-arg value="999"/><constructor-arg value="999"/></bean>
 		</list></property>
 	</bean>	
-    
+			
+    <bean id="list.uds.ageOnsetUnknown" parent="list.uds.ageUnknown">
+		<property name="defaultMinValue" value="15"/>
+		<property name="defaultMaxValue" value="110"/>
+	</bean>
+	
+    <bean id="list.uds.ageOnsetNAUnknown" parent="list.uds.ageNAUnknown">
+		<property name="defaultMinValue" value="15"/>
+		<property name="defaultMaxValue" value="110"/>
+	</bean>	
+	
     <bean id="list.uds.yearUnknown" parent="list.uds.range">
 		<property name="defaultMinValue" value="1850"/>	
 		<property name="defaultMaxValue" value="2050"/>
