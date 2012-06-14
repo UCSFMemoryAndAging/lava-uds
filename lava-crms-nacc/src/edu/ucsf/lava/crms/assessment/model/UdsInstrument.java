@@ -10,12 +10,12 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import edu.ucsf.lava.core.dao.LavaDaoFilter;
-import edu.ucsf.lava.core.dao.LavaTypedEqualityParamHandler;
 import edu.ucsf.lava.core.list.ListManager;
 import edu.ucsf.lava.core.manager.CoreManagerUtils;
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.people.model.Patient;
+import edu.ucsf.lava.crms.scheduling.model.UdsVisit;
 import edu.ucsf.lava.crms.scheduling.model.Visit;
 
 public class UdsInstrument extends Instrument implements UdsUploadable {
@@ -478,56 +478,9 @@ public class UdsInstrument extends Instrument implements UdsUploadable {
 
 		// update packet status
 		if (this.getPtid() != null && this.getVisitNum() != null) {
-			// if this is a UDS Form Checklist (form 'Z1') then update the packet status of all other
-			// UDS instruments for the same patient and visit to be the same as the UDS Form Checklist
-			if (this.getFormId().equals(UdsFormChecklist.UDS_FORMCHECKLIST_FORMID)) {
-				LavaDaoFilter filter = newFilterInstance();
-				filter.addDaoParam(filter.daoEqualityParam("ptid", this.getPtid()));
-				filter.addParamHandler(new LavaTypedEqualityParamHandler("visitNum",Short.class));
-				filter.addDaoParam(filter.daoEqualityParam("visitNum", this.getVisitNum()));
-				filter.addDaoParam(filter.daoNot(filter.daoEqualityParam("formId", "Z1")));
-				List<UdsInstrumentTracking> udsInstrs = UdsInstrumentTracking.MANAGER.get(filter);
-				for (UdsInstrumentTracking udsInstr : udsInstrs) {
-					udsInstr.setPacketDate(this.getPacketDate());
-					udsInstr.setPacketBy(this.getPacketBy());
-					udsInstr.setPacketStatus(this.getPacketStatus());
-					udsInstr.setPacketReason(this.getPacketReason());
-					udsInstr.setPacketNotes(this.getPacketNotes());
-					udsInstr.save();
-				}
-			}
-			else {
-				// if this is NOT a UDS Form Checklist instrument, update the packet status of this 
-				// instrument based on the UDS Form Checklist instrument for this patient and visit
-				
-				// obtain the UDS Form Checklist instrument for this patient and visit
-				LavaDaoFilter filter = newFilterInstance();
-				filter.addDaoParam(filter.daoEqualityParam("ptid", this.getPtid()));
-				filter.addParamHandler(new LavaTypedEqualityParamHandler("visitNum",Short.class));
-				filter.addDaoParam(filter.daoEqualityParam("visitNum", this.getVisitNum()));
-				filter.addDaoParam(filter.daoEqualityParam("formId", "Z1"));
-				UdsInstrumentTracking udsFormChecklist = (UdsInstrumentTracking) UdsInstrumentTracking.MANAGER.getOne(filter);
-				// there is always a UDS Form Checklist instrument for this patient and visit, since
-				// a patient will always get the complete UDS set of instruments at a visit. however,
-				// in the case where the UDSVisit is edited the UDSVisit afterUpdate method propagates
-				// any visitNum and packet changes down to all of the visit's instruments. as each of these
-				// instruments is saved, this beforeUpdate method is invoked, and if a given instrument's
-				// visitNum is modified before the UDS Form Checklist's visitNum, the UDS Form Checklist
-				// will not be found
-				// note that regardless of where the UDS Form Checklist is in the order that UDSVisit is
-				// iterating over, all instruments will be involved in the packet status update, either
-				// here in the else clause if the instrument is being updated after the UDS Form Checklist,
-				// or above in the if clause if the instrument is being updated before the UDS Form Checklist
-				if (udsFormChecklist != null) {
-					this.setPacketDate(udsFormChecklist.getPacketDate());
-					this.setPacketBy(udsFormChecklist.getPacketBy());
-					this.setPacketStatus(udsFormChecklist.getPacketStatus());
-					this.setPacketReason(udsFormChecklist.getPacketReason());
-					this.setPacketNotes(udsFormChecklist.getPacketNotes());
-					// do not have to explicitly call save here since this object is in the process of
-					// being saved
-				}
-			}
+			// instead of doing the updates here, call a method of UdsVisit, to allow overriding
+			UdsVisit udsvisit = (UdsVisit)this.getVisit();
+			udsvisit.flushPacketStatus(this);
 		}
 		
 		return super.afterUpdate();
