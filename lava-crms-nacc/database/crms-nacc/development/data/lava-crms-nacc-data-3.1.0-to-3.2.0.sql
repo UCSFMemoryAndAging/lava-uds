@@ -1,5 +1,5 @@
--- change lists from the general age lists that were of range 0-120 (used to be uds.ageOnsetUnknown and uds.ageOnsetNAUnknown), but should \
-be 15-110                                                                                                                                   
+-- Emory: change lists from the general age lists that were of range 0-120 (used to be uds.ageOnsetUnknown and uds.ageOnsetNAUnknown), 
+-- but should be 15-110                                                                                                                                   
 UPDATE viewproperty SET list='uds.ageOnsetNAUnknown' WHERE instance='lava' AND scope='crms-nacc' AND entity='udsfamilyhistory1' AND propert\
 y='momOnset';
 UPDATE viewproperty SET list='uds.ageOnsetNAUnknown' WHERE instance='lava' AND scope='crms-nacc' AND entity='udsfamilyhistory1' AND propert\
@@ -27,4 +27,6 @@ UPDATE viewproperty SET list='uds.ageOnsetNAUnknown' WHERE instance='lava' AND s
 y LIKE 'decage';
 
 
-
+-- Emory: For NaccPathology, one of the listnames was different than the bean/viewproperty.  Instead of renaming it in the bean 
+-- and viewproperty, I just changed the name in the `list` table.
+UPDATE list SET ListName='NaccPathMildModerateSevere' WHERE listname='NaccPathMildModSevere';
