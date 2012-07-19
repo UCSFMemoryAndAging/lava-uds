@@ -30,3 +30,7 @@ y LIKE 'decage';
 -- Emory: For NaccPathology, one of the listnames was different than the bean/viewproperty.  Instead of renaming it in the bean 
 -- and viewproperty, I just changed the name in the `list` table.
 UPDATE list SET ListName='NaccPathMildModerateSevere' WHERE listname='NaccPathMildModSevere';
+
+-- Emory: One of the naccpathology fields was spelled wrong
+ALTER TABLE `naccpathology` CHANGE COLUMN `NPBRPARF` `NPBPARF` SMALLINT(5) NULL DEFAULT NULL;
+UPDATE viewproperty SET property='npbparf' WHERE entity='naccpathology9' AND property='npbrparf';
