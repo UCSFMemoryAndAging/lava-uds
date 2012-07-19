@@ -1,15 +1,20 @@
 package edu.ucsf.lava.crms.assessment.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
+import edu.ucsf.lava.core.list.ListManager;
+import edu.ucsf.lava.core.manager.CoreManagerUtils;
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.assessment.model.Instrument;
 import edu.ucsf.lava.crms.people.model.Patient;
 import edu.ucsf.lava.crms.scheduling.model.Visit;
 
-public class NaccPathology extends Instrument {
+public class NaccPathology extends Instrument implements UdsUploadable {
 	public static EntityManager MANAGER = new EntityBase.Manager(NaccPathology.class);
 	
 	public NaccPathology() {}
@@ -108,7 +113,7 @@ public class NaccPathology extends Instrument {
 	private String npoth3x;
 	private Short npbrfrzn;
 	private Short npbrfrm;
-	private Short npbrparf;
+	private Short npbparf;
 	private Short npcsfant;
 
 	
@@ -208,12 +213,12 @@ public class NaccPathology extends Instrument {
 		this.npbrfrzn = npbrfrzn;
 	}
 
-	public Short getNpbrparf() {
-		return npbrparf;
+	public Short getNpbparf() {
+		return npbparf;
 	}
 
-	public void setNpbrparf(Short npbrparf) {
-		this.npbrparf = npbrparf;
+	public void setNpbparf(Short npbparf) {
+		this.npbparf = npbparf;
 	}
 
 	public Short getNpcad() {
@@ -919,9 +924,118 @@ public class NaccPathology extends Instrument {
 		           "npcoth3",
 		           "npbrfrzn",
 		           "npbrfrm",
-		           "npbrparf",
+		           "npbparf",
 		           "npcsfant"};
 		return required;
 	}
 
+	// technically NaccPathology is an NP packet, not a UDS packet, but all the functionality is the same
+	// TODO: we could rename the UdsUploadable interface to NaccUploadable
+	public List<String> getUdsUploadCsvRecords() {
+		List<String> records = new ArrayList<String>();
+		records.add(getUdsUploadCsvRecord());
+		return records;
+	}
+	
+	public String getUdsUploadCsvRecord() {
+		Short adcID = null;
+		ListManager listManager = CoreManagerUtils.getListManager();
+		Map<String, String> adcCenters = listManager.getDefaultStaticList("uds.adcCenterIDs");
+		if (adcCenters.containsKey(this.getProjName())) {
+			String adcIDAsString = (String) adcCenters.get(this.getProjName());
+			try {
+				adcID = Short.valueOf(adcIDAsString);
+			} catch (NumberFormatException ex) {
+				logger.warn("NaccPathology getUdsUploadCsvRecord NumberFormatException ADCID="+ adcIDAsString);
+			}
+		}
+		
+		StringBuffer buffer = new StringBuffer("");
+		buffer.append(adcID==null ? "" : adcID.toString());
+		buffer.append(",").append(UdsUploadUtils.formatField(getPtid()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpformmo()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpformdy()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpformyr()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpid()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpsex()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpdage()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpdodmo()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpdoddy()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpdodyr()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpgross()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpnit()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcerad()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpadrda()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpocrit()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpbraak()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpneur()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpdiff()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpvasc()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNplinf()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpmicro()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNplac()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNphem()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpart()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpnec()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpscl()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpavas()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNparter()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpamy()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpoang()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpvoth()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNplewy()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNplewycs()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNppick()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcort()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpprog()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpfront()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNptau()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpftd()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpftdno()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpftdspc()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcj()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpprion()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpmajor()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpmpath1()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpmpath2()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpmpath3()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpgene()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpfhspec()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpapoe()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNptauhap()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpprnp()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpchrom()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNppnorm()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcnorm()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNppadp()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcadp()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNppad()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcad()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpplewy()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpclewy()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNppvasc()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcvasc()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNppftld()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcftld()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpphipp()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpchipp()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNppprion()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcprion()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNppoth1()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcoth1()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpoth1x()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNppoth2()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcoth2()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpoth2x()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNppoth3()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcoth3()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpoth3x()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpbrfrzn()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpbrfrm()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpbparf()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getNpcsfant()));
+		buffer.append(",").append(UdsUploadUtils.formatField(getInstrVer()));
+	
+		return buffer.toString();
+	}
 }
