@@ -34,3 +34,22 @@ UPDATE list SET ListName='NaccPathMildModerateSevere' WHERE listname='NaccPathMi
 -- Emory: One of the naccpathology fields was spelled wrong
 ALTER TABLE `naccpathology` CHANGE COLUMN `NPBRPARF` `NPBPARF` SMALLINT(5) NULL DEFAULT NULL;
 UPDATE viewproperty SET property='npbparf' WHERE entity='naccpathology9' AND property='npbrparf';
+
+-- Emory: udsneuropsych - The possible values for C1 MEMTIME should not have 95-98, according to data dictionary, for version 1 or version 2, 
+-- unlike the majority of the C1 fields.
+UPDATE viewproperty
+  SET list = 'uds.c1.memtime'
+  WHERE scope='crms-nacc' AND prefix IS NULL AND entity IN ('udsneuropsych1','udsneuropsych2') AND property='memTime';
+
+-- Emory: UdsSymptomsOnset - One of the fields was misnamed, though correct in the database (“beDep” instead of “bdDep”).  
+-- change B9's bdDep to beDep (the correct name)
+UPDATE viewproperty
+  SET messageCode='*.udssymptomsonset1.beDep',
+      property='beDep'
+  WHERE entity='udssymptomsonset1' AND property='bdDep';
+  
+UPDATE viewproperty
+  SET messageCode='*.udssymptomsonset2.beDep',
+      property='beDep'
+  WHERE entity='udssymptomsonset2' AND property='bdDep';
+  
