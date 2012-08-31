@@ -120,7 +120,7 @@
 	<field name="npoth3x" class="java.lang.String"/>
 	<field name="npbrfrzn" class="java.lang.Short"/>
 	<field name="npbrfrm" class="java.lang.Short"/>
-	<field name="npbrparf" class="java.lang.Short"/>
+	<field name="npbparf" class="java.lang.Short"/>
 	<field name="npcsfant" class="java.lang.Short"/>
 	<field name="id" class="java.lang.Long"/>
 	<field name="projName" class="java.lang.String"/>
@@ -3224,7 +3224,7 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npbrparf", $F{npbrparf}, $P{dynamicLists})]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.translatePropValueToText("naccpathology9.npbparf", $F{npbparf}, $P{dynamicLists})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -3239,7 +3239,7 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npbrparf")]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{handler}.getPropLabel("naccpathology9.npbparf")]]></textFieldExpression>
 				</textField>
 				</frame>				<frame>					<reportElement
 						x="0"

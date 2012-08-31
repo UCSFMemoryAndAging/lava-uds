@@ -99,7 +99,7 @@
        <property name="npoth3x" column="NPOTH3X" type="string" length="60"/>
        <property name="npbrfrzn" column="NPBRFRZN" type="short"/>
        <property name="npbrfrm" column="NPBRFRM" type="short"/>
-       <property name="npbrparf" column="NPBRPARF" type="short"/>
+       <property name="npbparf" column="NPBPARF" type="short"/>
        <property name="npcsfant" column="NPCSFANT" type="short"/>
 
 
