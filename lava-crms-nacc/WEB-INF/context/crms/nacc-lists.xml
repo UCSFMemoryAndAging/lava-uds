@@ -784,10 +784,13 @@
 		<property name="defaultMaxValue" value="77"/>
 	</bean>			
 	
-	<bean id="list.uds.c1.range0_85NA" parent="list.uds.c1.rangeNA">
+	<bean id="list.uds.c1.memtime" parent="list.uds.c1.rangeNA">
 		<property name="defaultMaxValue" value="85"/>
+		<!-- memtime does not use the common 95-98 values -->
+		<property name="staticReferenceLists"><list></list></property>
 		<property name="data"><list>
 						<bean parent="list.data"><constructor-arg value="88 - N/A"/><constructor-arg value="88"/></bean>
+						<!--  add additional 99 value -->
 						<bean parent="list.data"><constructor-arg value="99 - Unknown"/><constructor-arg value="99"/></bean>
 		</list></property>
 	</bean>	
