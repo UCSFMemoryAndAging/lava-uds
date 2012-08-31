@@ -162,10 +162,22 @@
   <ui:observe elementIds="mmseLan" component="${componentPrefix}" forValue="^3" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="mmseLanx" component="${componentPrefix}"/>
 </ui:formGuide>           
-<ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
+<ui:formGuide>
   <ui:observe elementIds="npsyLan" component="${componentPrefix}" forValue="^3" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="npsyLanx" component="${componentPrefix}"/>
 </ui:formGuide>           
+
+<ui:formGuide>
+  <ui:observe elementIds="trailA" component="${componentPrefix}" forValue="^995|^996|^997|^998" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+  <ui:skip elementIds="trailARR" component="${componentPrefix}"/>
+  <ui:skip elementIds="trailALI" component="${componentPrefix}"/>
+</ui:formGuide>
+<ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
+  <ui:observe elementIds="trailB" component="${componentPrefix}" forValue="^995|^996|^997|^998" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+  <ui:skip elementIds="trailBRR" component="${componentPrefix}"/>
+  <ui:skip elementIds="trailBLI" component="${componentPrefix}"/>
+</ui:formGuide>           
+
 
   </c:if>
 </c:forEach>
