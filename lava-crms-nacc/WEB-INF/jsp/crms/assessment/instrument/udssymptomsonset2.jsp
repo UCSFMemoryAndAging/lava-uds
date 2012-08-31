@@ -65,7 +65,7 @@
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"><spring:message code="udssymptomsonset2.behSymp.instructions"/></page:param>
 <tags:createField property="beApathy" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="bdDep" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="beDep" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beVHall" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beVWell" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beAHall" entity="${instrTypeEncoded}" component="${component}"/>
@@ -131,7 +131,7 @@
 <ui:formGuide>
   <ui:observe elementIds="decClin" component="${componentPrefix}" forValue="^1" negate="true" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:skip elementIds="decAge,cogMem,cogJudg,cogLang,cogVis,cogAttn,cogFluc,cogOther,cogFrst,cogMode,
-  	beApathy,bdDep,beVHall,beVWell,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beRem,beOthr,beFrst,beMode,
+  	beApathy,beDep,beVHall,beVWell,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beRem,beOthr,beFrst,beMode,
   	moGait,moFalls,moTrem,moSlow,moFrst,moMode,moMoPark,course,frstChg" component="${componentPrefix}"
   	comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
 </ui:formGuide>          

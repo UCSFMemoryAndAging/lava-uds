@@ -34,7 +34,7 @@
 	       <property name="cogMode" column="COGMODE" type="short"/>
 	       <property name="cogModex" column="COGMODEX" type="string" length="60"/>
 	       <property name="beApathy" column="BEAPATHY" type="short"/>
-	       <property name="bdDep" column="BEDEP" type="short"/>
+	       <property name="beDep" column="BEDEP" type="short"/>
 	       <property name="beVHall" column="BEVHALL" type="short"/>
 	       <property name="beVWell" column="BEVWELL" type="short"/>
 	       <property name="beAHall" column="BEAHALL" type="short"/>

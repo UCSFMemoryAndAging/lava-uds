@@ -39,7 +39,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	private Short cogMode;
 	private String cogModex;
 	private Short beApathy;
-	private Short bdDep;
+	private Short beDep;
 	private Short beVHall;
 	private Short beVWell;
 	private Short beAHall;
@@ -74,12 +74,12 @@ public class UdsSymptomsOnset extends UdsInstrument {
 		b9Chg = chg;
 	}
 
-	public Short getBdDep() {
-		return bdDep;
+	public Short getBeDep() {
+		return beDep;
 	}
 
-	public void setBdDep(Short bdDep) {
-		this.bdDep = bdDep;
+	public void setBeDep(Short beDep) {
+		this.beDep = beDep;
 	}
 
 	public Short getBeAgit() {
@@ -452,7 +452,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 					"cogFrst",
 					"cogMode",
 					"beApathy",
-					"bdDep",
+					"beDep",
 					"beVHall",
 					"beAHall",
 					"beDel",
@@ -488,7 +488,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 					"cogFrst",
 					"cogMode",
 					"beApathy",
-					"bdDep",
+					"beDep",
 					"beVHall",
 					"beVWell",
 					"beAHall",
@@ -536,7 +536,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 				buffer.append(UdsUploadUtils.formatField(getCogMode())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogModex())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getBeApathy())).append(",");
-				buffer.append(UdsUploadUtils.formatField(getBdDep())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getBeDep())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getBeVHall())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getBeAHall())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getBeDel())).append(",");
@@ -579,7 +579,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 				buffer.append(UdsUploadUtils.formatField(getCogMode())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogModex())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getBeApathy())).append(",");
-				buffer.append(UdsUploadUtils.formatField(getBdDep())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getBeDep())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getBeVHall())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getBeAHall())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getBeDel())).append(",");
@@ -623,7 +623,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getCogMode())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogModex())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getBeApathy())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getBdDep())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeDep())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getBeVHall())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getBeVWell())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getBeAHall())).append(",");

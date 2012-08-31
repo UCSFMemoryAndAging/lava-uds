@@ -73,7 +73,7 @@
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
 <tags:createField property="beApathy" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="bdDep" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="beDep" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beVHall" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beAHall" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beDel" entity="${instrTypeEncoded}" component="${component}"/>
@@ -132,7 +132,7 @@
   <ui:observe elementIds="packet" component="instrument" forValue="[I|^$]"/>
   <ui:skip elementIds="b9Chg" component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="decSub,decIn,decClin,cogMem,cogJudg,cogLang,cogVis,cogAttn,cogOther,cogFrst,cogMode,
-  	beApathy,bdDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beOthr,beFrst,beMode,
+  	beApathy,beDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beOthr,beFrst,beMode,
   	moGait,moFalls,moTrem,moSlow,moFrst,moMode,course,frstChg"
    component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>	
   <ui:unskip elementIds="decAge" component="${componentPrefix}"/>	
@@ -151,7 +151,7 @@
   <ui:ignore elementIds="packet" component="instrument" forValue="[I|^$]"/>
   <ui:observe elementIds="b9Chg" component="${componentPrefix}" forValue="^1|^$|-[0-9]" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:skip elementIds="decSub,decIn,decClin,cogMem,cogJudg,cogLang,cogVis,cogAttn,cogOther,cogFrst,cogMode,
-  	beApathy,bdDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beOthr,beFrst,beMode,
+  	beApathy,beDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beOthr,beFrst,beMode,
   	moGait,moFalls,moTrem,moSlow,moFrst,moMode,course,frstChg" component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:skip elementIds="decAge" component="${componentPrefix}"/>
 </ui:formGuide>           
@@ -170,7 +170,7 @@
   <ui:observe elementIds="b9Chg" component="${componentPrefix}" forValue="^2" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:observe elementIds="decClin" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="decSub,decIn,decClin,cogMem,cogJudg,cogLang,cogVis,cogAttn,cogOther,cogFrst,cogMode,
-  	beApathy,bdDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beOthr,beFrst,beMode,
+  	beApathy,beDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beOthr,beFrst,beMode,
   	moGait,moFalls,moTrem,moSlow,moFrst,moMode,course,frstChg" component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
 </ui:formGuide>           
 
@@ -188,7 +188,7 @@
   <ui:skip elementIds="decSub,decIn,decClin,cogFrst,cogMode,beFrst,beMode,moFrst,moMode,course,frstChg"
 	  component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:skip elementIds="decAge" component="${componentPrefix}"/>
-  <ui:unskip elementIds="cogMem,cogJudg,cogLang,cogVis,cogAttn,cogOther,beApathy,bdDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beOthr,
+  <ui:unskip elementIds="cogMem,cogJudg,cogLang,cogVis,cogAttn,cogOther,beApathy,beDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beOthr,
   	moGait,moFalls,moTrem,moSlow" component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
 </ui:formGuide>           
 
@@ -199,7 +199,7 @@
   <ui:ignore elementIds="b9Chg" component="${componentPrefix}" forValue="^2|-6" negate="true" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:observe elementIds="decClin" component="${componentPrefix}" forValue="^1" negate="true" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:skip elementIds="cogMem,cogJudg,cogLang,cogVis,cogAttn,cogOther,cogFrst,cogMode,
-  	beApathy,bdDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beOthr,beFrst,beMode,
+  	beApathy,beDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beOthr,beFrst,beMode,
   	moGait,moFalls,moTrem,moSlow,moFrst,moMode,course,frstChg" component="${componentPrefix}"
   	comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
 </ui:formGuide>          
