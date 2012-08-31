@@ -212,7 +212,7 @@
 
 			<tags:createField property="npbrfrzn" component="${component}" entity="${instrTypeEncoded}"/>
 			<tags:createField property="npbrfrm" component="${component}" entity="${instrTypeEncoded}"/>
-			<tags:createField property="npbrparf" component="${component}" entity="${instrTypeEncoded}"/>
+			<tags:createField property="npbparf" component="${component}" entity="${instrTypeEncoded}"/>
 			<tags:createField property="npcsfant" component="${component}" entity="${instrTypeEncoded}"/>
 
 </page:applyDecorator>
