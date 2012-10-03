@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import edu.ucsf.lava.core.list.ListManager;
+import edu.ucsf.lava.core.manager.CoreManagerUtils;
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.assessment.model.Instrument;
@@ -119,8 +122,20 @@ public class MdsStatus extends Instrument implements UdsUploadable{
 	}
 	
 	public String getUdsUploadCsvRecord(){
-		//TODO: need to get the correct ADCID in here somehow? 
-		StringBuffer buffer = new StringBuffer("S,S1,1,[ADCID],");
+		Short adcID = null;
+		ListManager listManager = CoreManagerUtils.getListManager();
+		Map<String, String> adcCenters = listManager.getDefaultStaticList("uds.adcCenterIDs");
+		if (adcCenters.containsKey(this.getProjName())) {
+			String adcIDAsString = (String) adcCenters.get(this.getProjName());
+			try {
+				adcID = Short.valueOf(adcIDAsString);
+			} catch (NumberFormatException ex) {
+				logger.warn("MdsStatus getUdsUploadCsvRecord NumberFormatException ADCID="+ adcIDAsString);
+			}
+		}
+		
+		StringBuffer buffer = new StringBuffer("S,S1,1,");
+		buffer.append(adcID==null ? "" : adcID.toString()).append(",");
 		buffer.append(getPatient()==null ? 
 				"" : UdsUploadUtils.formatField(getPatient().getId())).append(",");
 		if(getDcDate()==null){
