@@ -48,7 +48,24 @@
    					<value>UDS Labs Imaging</value>
 					<value>UDS Form Checklist</value>
 		     	 </list>
-			</entry>	
+			</entry>
+		 	<entry key="UDS~FTLD Assessment">
+				<list>
+   					<value>UDS FTLD Specimen Consent</value>
+   					<value>UDS FTLD Family History</value>
+   					<value>UDS FTLD UPDRS</value>
+   					<value>UDS FTLD Clin Features</value>
+   					<value>UDS FTLD Neuropsych</value>
+   					<value>UDS FTLD SNQ</value>
+   					<value>UDS FTLD SBOC</value>
+   					<value>UDS FTLD BIS</value>
+   					<value>UDS FTLD IRI</value>
+   					<value>UDS FTLD RSMS</value>
+   					<value>UDS FTLD Imaging Avail</value>
+   					<value>UDS FTLD Imaging Diag</value>
+   					<value>UDS FTLD Form Checklist</value>
+		     	 </list>
+			</entry>			
 		</map></constructor-arg>
 	</bean>	
 	 				
