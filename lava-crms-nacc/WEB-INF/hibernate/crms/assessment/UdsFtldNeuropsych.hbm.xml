@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldNeuropsych" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldneuropsych">
+			<key column="InstrID"/>		
+			<property name="ftdbentc" column="FTDBENTC" type="short"/>
+			<property name="ftdverfc" column="FTDVERFC" type="short"/>
+			<property name="ftdverfn" column="FTDVERFN" type="short"/>
+			<property name="ftdvernf" column="FTDVERNF" type="short"/>
+			<property name="ftdverlc" column="FTDVERLC" type="short"/>
+			<property name="ftdverlr" column="FTDVERLR" type="short"/>
+			<property name="ftdverln" column="FTDVERLN" type="short"/>
+			<property name="ftdvertn" column="FTDVERTN" type="short"/>
+			<property name="ftdverte" column="FTDVERTE" type="short"/>
+			<property name="ftdverti" column="FTDVERTI" type="short"/>
+			<property name="ftdworrc" column="FTDWORRC" type="short"/>
+			<property name="ftdworrs" column="FTDWORRS" type="short"/>
+			<property name="ftdworrr" column="FTDWORRR" type="short"/>
+			<property name="ftdworic" column="FTDWORIC" type="short"/>
+			<property name="ftdworis" column="FTDWORIS" type="short"/>
+			<property name="ftdworir" column="FTDWORIR" type="short"/>
+			<property name="ftdworip" column="FTDWORIP" type="short"/>
+			<property name="ftdbentd" column="FTDBENTD" type="short"/>
+			<property name="ftdbenrs" column="FTDBENRS" type="short"/>
+			<property name="ftdsemmt" column="FTDSEMMT" type="short"/>
+			<property name="ftdsemaa" column="FTDSEMAA" type="short"/>
+			<property name="ftdsemta" column="FTDSEMTA" type="short"/>
+			<property name="ftdsemsu" column="FTDSEMSU" type="short"/>
+			<property name="ftdanasw" column="FTDANASW" type="short"/>
+			<property name="ftdanaow" column="FTDANAOW" type="short"/>
+			<property name="ftdanats" column="FTDANATS" type="short"/>
+			<property name="ftdsenas" column="FTDSENAS" type="short"/>
+			<property name="ftdsenos" column="FTDSENOS" type="short"/>
+			<property name="ftdsensr" column="FTDSENSR" type="short"/>
+			<property name="ftdsenpr" column="FTDSENPR" type="short"/>
+			<property name="ftdnounc" column="FTDNOUNC" type="short"/>
+			<property name="ftdverbc" column="FTDVERBC" type="short"/>
+			<property name="ftdratio" column="FTDRATIO" type="float" precision="5" scale="2"/>
+			<property name="ftdreaas" column="FTDREAAS" type="short"/>
+			<property name="ftdreaos" column="FTDREAOS" type="short"/>
+			<property name="ftdreasr" column="FTDREASR" type="short"/>
+			<property name="ftdreapr" column="FTDREAPR" type="short"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

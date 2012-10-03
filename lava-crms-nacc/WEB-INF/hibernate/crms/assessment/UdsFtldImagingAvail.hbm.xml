@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldImagingAvail" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldimagingavail">
+			<key column="InstrID"/>		
+			<property name="ftdsmri" column="FTDSMRI" type="short"/>
+			<property name="ftdsmmo" column="FTDSMMO" type="short"/>
+			<property name="ftdsmdy" column="FTDSMDY" type="short"/>
+			<property name="ftdsmyr" column="FTDSMYR" type="short"/>
+			<property name="ftdsmdic" column="FTDSMDIC" type="short"/>
+			<property name="ftdsmdis" column="FTDSMDIS" type="string" length="60"/>
+			<property name="ftdsmadn" column="FTDSMADN" type="short"/>
+			<property name="ftdsmadv" column="FTDSMADV" type="string" length="60"/>
+			<property name="ftdsmman" column="FTDSMMAN" type="short"/>
+			<property name="ftdsmmao" column="FTDSMMAO" type="string" length="60"/>
+			<property name="ftdsmmam" column="FTDSMMAM" type="string" length="60"/>
+			<property name="ftdsmfs" column="FTDSMFS" type="short"/>
+			<property name="ftdsmfso" column="FTDSMFSO" type="string" length="60"/>
+			<property name="ftdsmqu" column="FTDSMQU" type="short"/>
+			<property name="ftdfdgpt" column="FTDFDGPT" type="short"/>
+			<property name="ftdfpmo" column="FTDFPMO" type="short"/>
+			<property name="ftdfpdy" column="FTDFPDY" type="short"/>
+			<property name="ftdfpyr" column="FTDFPYR" type="short"/>
+			<property name="ftdfddic" column="FTDFDDIC" type="short"/>
+			<property name="ftdfddid" column="FTDFDDID" type="string" length="60"/>
+			<property name="ftdfdadn" column="FTDFDADN" type="short"/>
+			<property name="ftdfdadv" column="FTDFDADV" type="string" length="60"/>
+			<property name="ftdfdman" column="FTDFDMAN" type="short"/>
+			<property name="ftdfdmao" column="FTDFDMAO" type="string" length="60"/>
+			<property name="ftdfdmam" column="FTDFDMAM" type="string" length="60"/>
+			<property name="ftdfdqu" column="FTDFDQU" type="short"/>
+			<property name="ftdamypt" column="FTDAMYPT" type="short"/>
+			<property name="ftdammo" column="FTDAMMO" type="short"/>
+			<property name="ftdamdy" column="FTDAMDY" type="short"/>
+			<property name="ftdamyr" column="FTDAMYR" type="short"/>
+			<property name="ftdamdic" column="FTDAMDIC" type="short"/>
+			<property name="ftdamdid" column="FTDAMDID" type="string" length="60"/>
+			<property name="ftdamlig" column="FTDAMLIG" type="short"/>
+			<property name="ftdamlio" column="FTDAMLIO" type="string" length="60"/>
+			<property name="ftdamadn" column="FTDAMADN" type="short"/>
+			<property name="ftdamadv" column="FTDAMADV" type="string" length="60"/>
+			<property name="ftdamman" column="FTDAMMAN" type="short"/>
+			<property name="ftdammao" column="FTDAMMAO" type="string" length="60"/>
+			<property name="ftdammam" column="FTDAMMAM" type="string" length="60"/>
+			<property name="ftdamqu" column="FTDAMQU" type="short"/>
+			<property name="ftdother" column="FTDOTHER" type="short"/>
+			<property name="ftdotdop" column="FTDOTDOP" type="short"/>
+			<property name="ftdotser" column="FTDOTSER" type="short"/>
+			<property name="ftdotcho" column="FTDOTCHO" type="short"/>
+			<property name="ftdotano" column="FTDOTANO" type="short"/>
+			<property name="ftdotans" column="FTDOTANS" type="string" length="60"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldBis" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldbis">
+			<key column="InstrID"/>		
+			<property name="ftdcpc4f" column="FTDCPC4F" type="short"/>
+			<property name="ftdworku" column="FTDWORKU" type="short"/>
+			<property name="ftdmist" column="FTDMIST" type="short"/>
+			<property name="ftdcrit" column="FTDCRIT" type="short"/>
+			<property name="ftdworr" column="FTDWORR" type="short"/>
+			<property name="ftdbad" column="FTDBAD" type="short"/>
+			<property name="ftdpoor" column="FTDPOOR" type="short"/>
+			<property name="ftdffear" column="FTDFFEAR" type="short"/>
+			<property name="ftdbist" column="FTDBIST" type="short"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

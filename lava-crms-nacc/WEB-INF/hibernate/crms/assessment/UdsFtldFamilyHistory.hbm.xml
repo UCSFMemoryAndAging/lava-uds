@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldFamilyHistory" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldfamilyhistory">
+			<key column="InstrID"/>
+			<property name="ftdaff" column="FTDAFF" type="short"/>
+			<property name="ftdmutat" column="FTDMUTAT" type="short"/>
+			<property name="ftdpmut" column="FTDPMUT" type="short"/>
+			<property name="ftdpmutx" column="FTDPMUTX" type="string" length="60"/>
+			<property name="ftdmclab" column="FTDMCLAB" type="short"/>
+			<property name="ftdmrlab" column="FTDMRLAB" type="short"/>
+			<property name="ftdmfamr" column="FTDMFAMR" type="short"/>
+			<property name="ftdmoth" column="FTDMOTH" type="short"/>
+			<property name="ftdmothx" column="FTDMOTHX" type="string" length="60"/>
+			<property name="ftdmomn" column="FTDMOMN" type="short"/>
+			<property name="ftdmomp" column="FTDMOMP" type="short"/>
+			<property name="ftdmome" column="FTDMOME" type="short"/>
+			<property name="ftdmoma" column="FTDMOMA" type="short"/>
+			<property name="ftddadn" column="FTDDADN" type="short"/>
+			<property name="ftddadp" column="FTDDADP" type="short"/>
+			<property name="ftddade" column="FTDDADE" type="short"/>
+			<property name="ftddada" column="FTDDADA" type="short"/>
+			<property name="ftdbsam" column="FTDBSAM" type="short"/>
+			<property name="ftdbsa" column="FTDBSA" type="short"/>
+			<property name="ftdnsa" column="FTDNSA" type="short"/>
+			<property name="ftdpsa" column="FTDPSA" type="short"/>
+			<property name="ftdmsa" column="FTDMSA" type="short"/>
+			<property name="ftdasa" column="FTDASA" type="short"/>
+			<property name="ftdbsbm" column="FTDBSBM" type="short"/>
+			<property name="ftdbsb" column="FTDBSB" type="short"/>
+			<property name="ftdnsb" column="FTDNSB" type="short"/>
+			<property name="ftdpsb" column="FTDPSB" type="short"/>
+			<property name="ftdmsb" column="FTDMSB" type="short"/>
+			<property name="ftdasb" column="FTDASB" type="short"/>
+			<property name="ftdbscm" column="FTDBSCM" type="short"/>
+			<property name="ftdbsc" column="FTDBSC" type="short"/>
+			<property name="ftdnsc" column="FTDNSC" type="short"/>
+			<property name="ftdpsc" column="FTDPSC" type="short"/>
+			<property name="ftdmsc" column="FTDMSC" type="short"/>
+			<property name="ftdasc" column="FTDASC" type="short"/>
+			<property name="ftdbsdm" column="FTDBSDM" type="short"/>
+			<property name="ftdbsd" column="FTDBSD" type="short"/>
+			<property name="ftdnsd" column="FTDNSD" type="short"/>
+			<property name="ftdpsd" column="FTDPSD" type="short"/>
+			<property name="ftdmsd" column="FTDMSD" type="short"/>
+			<property name="ftdasd" column="FTDASD" type="short"/>
+			<property name="ftdbsem" column="FTDBSEM" type="short"/>
+			<property name="ftdbse" column="FTDBSE" type="short"/>
+			<property name="ftdnse" column="FTDNSE" type="short"/>
+			<property name="ftdpse" column="FTDPSE" type="short"/>
+			<property name="ftdmse" column="FTDMSE" type="short"/>
+			<property name="ftdase" column="FTDASE" type="short"/>
+			<property name="ftdbsfm" column="FTDBSFM" type="short"/>
+			<property name="ftdbsf" column="FTDBSF" type="short"/>
+			<property name="ftdnsf" column="FTDNSF" type="short"/>
+			<property name="ftdpsf" column="FTDPSF" type="short"/>
+			<property name="ftdmsf" column="FTDMSF" type="short"/>
+			<property name="ftdasf" column="FTDASF" type="short"/>
+			<property name="ftdbsgm" column="FTDBSGM" type="short"/>
+			<property name="ftdbsg" column="FTDBSG" type="short"/>
+			<property name="ftdnsg" column="FTDNSG" type="short"/>
+			<property name="ftdpsg" column="FTDPSG" type="short"/>
+			<property name="ftdmsg" column="FTDMSG" type="short"/>
+			<property name="ftdasg" column="FTDASG" type="short"/>
+			<property name="ftdbshm" column="FTDBSHM" type="short"/>
+			<property name="ftdbsh" column="FTDBSH" type="short"/>
+			<property name="ftdnsh" column="FTDNSH" type="short"/>
+			<property name="ftdpsh" column="FTDPSH" type="short"/>
+			<property name="ftdmsh" column="FTDMSH" type="short"/>
+			<property name="ftdash" column="FTDASH" type="short"/>
+			<property name="ftdbsim" column="FTDBSIM" type="short"/>
+			<property name="ftdbsi" column="FTDBSI" type="short"/>
+			<property name="ftdnsi" column="FTDNSI" type="short"/>
+			<property name="ftdpsi" column="FTDPSI" type="short"/>
+			<property name="ftdmsi" column="FTDMSI" type="short"/>
+			<property name="ftdasi" column="FTDASI" type="short"/>
+			<property name="ftdbsjm" column="FTDBSJM" type="short"/>
+			<property name="ftdbsj" column="FTDBSJ" type="short"/>
+			<property name="ftdnsj" column="FTDNSJ" type="short"/>
+			<property name="ftdpsj" column="FTDPSJ" type="short"/>
+			<property name="ftdmsj" column="FTDMSJ" type="short"/>
+			<property name="ftdasj" column="FTDASJ" type="short"/>
+			<property name="ftdbskm" column="FTDBSKM" type="short"/>
+			<property name="ftdbsk" column="FTDBSK" type="short"/>
+			<property name="ftdnsk" column="FTDNSK" type="short"/>
+			<property name="ftdpsk" column="FTDPSK" type="short"/>
+			<property name="ftdmsk" column="FTDMSK" type="short"/>
+			<property name="ftdask" column="FTDASK" type="short"/>
+			<property name="ftdbslm" column="FTDBSLM" type="short"/>
+			<property name="ftdbsl" column="FTDBSL" type="short"/>
+			<property name="ftdnsl" column="FTDNSL" type="short"/>
+			<property name="ftdpsl" column="FTDPSL" type="short"/>
+			<property name="ftdmsl" column="FTDMSL" type="short"/>
+			<property name="ftdasl" column="FTDASL" type="short"/>
+			<property name="ftdbsmm" column="FTDBSMM" type="short"/>
+			<property name="ftdbsm" column="FTDBSM" type="short"/>
+			<property name="ftdnsm" column="FTDNSM" type="short"/>
+			<property name="ftdpsm" column="FTDPSM" type="short"/>
+			<property name="ftdmsm" column="FTDMSM" type="short"/>
+			<property name="ftdasm" column="FTDASM" type="short"/>
+			<property name="ftdbcam" column="FTDBCAM" type="short"/>
+			<property name="ftdbca" column="FTDBCA" type="short"/>
+			<property name="ftdnca" column="FTDNCA" type="short"/>
+			<property name="ftdpca" column="FTDPCA" type="short"/>
+			<property name="ftdmca" column="FTDMCA" type="short"/>
+			<property name="ftdaca" column="FTDACA" type="short"/>
+			<property name="ftdbcbm" column="FTDBCBM" type="short"/>
+			<property name="ftdbcb" column="FTDBCB" type="short"/>
+			<property name="ftdncb" column="FTDNCB" type="short"/>
+			<property name="ftdpcb" column="FTDPCB" type="short"/>
+			<property name="ftdmcb" column="FTDMCB" type="short"/>
+			<property name="ftdacb" column="FTDACB" type="short"/>
+			<property name="ftdbccm" column="FTDBCCM" type="short"/>
+			<property name="ftdbcc" column="FTDBCC" type="short"/>
+			<property name="ftdncc" column="FTDNCC" type="short"/>
+			<property name="ftdpcc" column="FTDPCC" type="short"/>
+			<property name="ftdmcc" column="FTDMCC" type="short"/>
+			<property name="ftdacc" column="FTDACC" type="short"/>
+			<property name="ftdbcdm" column="FTDBCDM" type="short"/>
+			<property name="ftdbcd" column="FTDBCD" type="short"/>
+			<property name="ftdncd" column="FTDNCD" type="short"/>
+			<property name="ftdpcd" column="FTDPCD" type="short"/>
+			<property name="ftdmcd" column="FTDMCD" type="short"/>
+			<property name="ftdacd" column="FTDACD" type="short"/>
+			<property name="ftdbcem" column="FTDBCEM" type="short"/>
+			<property name="ftdbce" column="FTDBCE" type="short"/>
+			<property name="ftdnce" column="FTDNCE" type="short"/>
+			<property name="ftdpce" column="FTDPCE" type="short"/>
+			<property name="ftdmce" column="FTDMCE" type="short"/>
+			<property name="ftdace" column="FTDACE" type="short"/>
+			<property name="ftdbcfm" column="FTDBCFM" type="short"/>
+			<property name="ftdbcf" column="FTDBCF" type="short"/>
+			<property name="ftdncf" column="FTDNCF" type="short"/>
+			<property name="ftdpcf" column="FTDPCF" type="short"/>
+			<property name="ftdmcf" column="FTDMCF" type="short"/>
+			<property name="ftdacf" column="FTDACF" type="short"/>
+			<property name="ftdbcgm" column="FTDBCGM" type="short"/>
+			<property name="ftdbcg" column="FTDBCG" type="short"/>
+			<property name="ftdncg" column="FTDNCG" type="short"/>
+			<property name="ftdpcg" column="FTDPCG" type="short"/>
+			<property name="ftdmcg" column="FTDMCG" type="short"/>
+			<property name="ftdacg" column="FTDACG" type="short"/>
+			<property name="ftdbchm" column="FTDBCHM" type="short"/>
+			<property name="ftdbch" column="FTDBCH" type="short"/>
+			<property name="ftdnch" column="FTDNCH" type="short"/>
+			<property name="ftdpch" column="FTDPCH" type="short"/>
+			<property name="ftdmch" column="FTDMCH" type="short"/>
+			<property name="ftdach" column="FTDACH" type="short"/>
+			<property name="ftdbcim" column="FTDBCIM" type="short"/>
+			<property name="ftdbci" column="FTDBCI" type="short"/>
+			<property name="ftdnci" column="FTDNCI" type="short"/>
+			<property name="ftdpci" column="FTDPCI" type="short"/>
+			<property name="ftdmci" column="FTDMCI" type="short"/>
+			<property name="ftdaci" column="FTDACI" type="short"/>
+			<property name="ftdbcjm" column="FTDBCJM" type="short"/>
+			<property name="ftdbcj" column="FTDBCJ" type="short"/>
+			<property name="ftdncj" column="FTDNCJ" type="short"/>
+			<property name="ftdpcj" column="FTDPCJ" type="short"/>
+			<property name="ftdmcj" column="FTDMCJ" type="short"/>
+			<property name="ftdacj" column="FTDACJ" type="short"/>
+			<property name="ftdbckm" column="FTDBCKM" type="short"/>
+			<property name="ftdbck" column="FTDBCK" type="short"/>
+			<property name="ftdnck" column="FTDNCK" type="short"/>
+			<property name="ftdpck" column="FTDPCK" type="short"/>
+			<property name="ftdmck" column="FTDMCK" type="short"/>
+			<property name="ftdack" column="FTDACK" type="short"/>
+			<property name="ftdbclm" column="FTDBCLM" type="short"/>
+			<property name="ftdbcl" column="FTDBCL" type="short"/>
+			<property name="ftdncl" column="FTDNCL" type="short"/>
+			<property name="ftdpcl" column="FTDPCL" type="short"/>
+			<property name="ftdmcl" column="FTDMCL" type="short"/>
+			<property name="ftdacl" column="FTDACL" type="short"/>
+			<property name="ftdbcmm" column="FTDBCMM" type="short"/>
+			<property name="ftdbcm" column="FTDBCM" type="short"/>
+			<property name="ftdncm" column="FTDNCM" type="short"/>
+			<property name="ftdpcm" column="FTDPCM" type="short"/>
+			<property name="ftdmcm" column="FTDMCM" type="short"/>
+			<property name="ftdacm" column="FTDACM" type="short"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

@@ -4,7 +4,6 @@
 
 <beans>
 	
-			
 	<bean id="list.udsVisit.packetType" parent="list.udsinstrument.packetType">
  		<property name="data"><list>
 			<bean parent="list.data"><constructor-arg value="N/A"/><constructor-arg value="NA"/><constructor-arg value="5"/></bean>
@@ -15,7 +14,6 @@
 		<property name="query" value="udsinstrument.formId"/>
 	</bean>
 			
-		
 	<bean id="list.ref.udsErrorCodes" parent="list.standard">
 		<property name="dbListName" value="UDSErrorCodes"/>
 	</bean>
@@ -88,6 +86,7 @@
 	<bean id="list.udsneuropsych1.codes" parent="list.uds.codes"/>
 	<bean id="list.udsdiagnosis1.codes" parent="list.uds.codes"/>
 	<bean id="list.udslabsimaging1.codes" parent="list.uds.codes"/>
+	
 	<bean id="list.udsformchecklist2.codes" parent="list.uds.codes"/>
 	<bean id="list.udssubjectdemo2.codes" parent="list.uds.codes"/>
 	<bean id="list.udsinformantdemo2.codes" parent="list.uds.codes"/>
@@ -108,7 +107,20 @@
 	<bean id="list.udslabsimaging2.codes" parent="list.uds.codes"/>
 	<bean id="list.udsphoneinclusion2.codes" parent="list.uds.codes"/>
 	<bean id="list.mdsstatus.codes" parent="list.uds.codes"/>
-				
+
+	<bean id="list.udsftldbis2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsftldclinfeatures2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsftldfamilyhistory2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsftldformchecklist2.codes" parent="list.uds.codes"/>
+	<bean id="list.udsftldimagingavail2.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldimagingdiag2.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldiri2.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldneuropsych2.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldrsms2.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldsboc2.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldsnq2.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldspecimenconsent2.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldupdrs2.codes" parent="list.uds.codes"/>
     
 	<bean id="list.uds.adcCenterIDs" parent="list.standard">
 		<property name="dbListName" value="UDSCenterIDs"/>
@@ -125,6 +137,14 @@
     <bean id="list.uds.noYesUnknown019" parent="list.standardUds">
  		<property name="dbListName" value="udsnoyesunknown019"/>
  	</bean>
+ 	
+    <bean id="list.uds.noYesNotEval019" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSnoYesNotEval019"/>
+ 	</bean>
+ 	
+    <bean id="list.uds.noYesUncertain019" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSnoYesUncertain019"/>
+ 	</bean> 	
 				
 	<bean id="list.mdsstatus.discReason" parent="list.standardUds">
  		<property name="dbListName" value="mdsstatdiscrea"/>
@@ -133,7 +153,6 @@
 	<bean id="list.mdsstatus.currentStat" parent="list.standardUds">
  		<property name="dbListName" value="mdsstatcurrentstat"/>
  	</bean>
-				
 	
 	<bean id="list.uds.m1.day" parent="list.numericRangeUds">
 		<property name="defaultMinValue" value="1"/>	
@@ -174,11 +193,9 @@
  		<property name="defaultFormat" value="label"/>
  	</bean>
 				
-				
 	<bean id="list.uds.m1.protocol" parent="list.standardUds">
  		<property name="dbListName" value="udsM1Protocol"/>
  	</bean>
-		
 	
 	<bean id="list.uds.range" abstract="true" parent="list.numericRangeUds">
 		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodesWithSkipCodes"/></property>
@@ -213,12 +230,25 @@
 
 	<bean id="list.uds.range0_30" parent="list.uds.rangeNAUnknown">
 		<property name="defaultMaxValue" value="30"/>
-	</bean>	
+	</bean>
 
-	<bean id="list.uds.range0_80" parent="list.uds.rangeNAUnknown">
+	<bean id="list.uds.range0_42" parent="list.uds.rangeNAUnknown">
+		<property name="defaultMaxValue" value="42"/>
+	</bean>
+	
+	<bean id="list.uds.range0_80" parent="list.numericRangeUds">
 		<property name="defaultMaxValue" value="80"/>
 	</bean>	
 
+	<bean id="list.uds.range0_105" parent="list.numericRangeUds">
+		<property name="defaultMaxValue" value="105"/>
+	</bean>
+
+	<bean id="list.uds.range20_240" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="20"/>
+		<property name="defaultMaxValue" value="240"/>
+	</bean>
+	
     <bean id="list.uds.ageUnknown" parent="list.uds.range">
 		<property name="defaultMaxValue" value="120"/>
 		<property name="data"><list>
@@ -249,12 +279,7 @@
 		<property name="data"><list>
 			<bean parent="list.data"><constructor-arg value="9999"/><constructor-arg value="9999"/></bean>
 		</list></property>
-	</bean>	
-    
-     
-				
-				
-				
+	</bean>
 				
 	<bean id="list.uds.noYesNA" parent="list.standardUds">
  		<property name="dbListName" value="udsNoYesNA"/>
@@ -264,7 +289,6 @@
  		<property name="dbListName" value="udsa1primreason"/>
  	</bean>
 				
-    			
     <bean id="list.uds.a1.refSource" parent="list.standardUds">
  		<property name="dbListName" value="udsa1refsource"/>
  	</bean>
@@ -272,7 +296,6 @@
     <bean id="list.uds.a1.presDis" parent="list.standardUds">
  		<property name="dbListName" value="udsa1presdis"/>
  	</bean>
-			
     			
     <bean id="list.uds.a1.presPart" parent="list.standardUds">
  		<property name="dbListName" value="udsa1prespart"/>
@@ -330,7 +353,6 @@
  		<property name="dbListName" value="udsa3twintype"/>
  	</bean>
 				 			
-				 			
 	<bean id="list.uds.a4.medUnit" parent="list.standardUds">
  		<property name="dbListName" value="udsa4medunit"/>
  		<property name="defaultFormat" value="label"/>
@@ -341,12 +363,9 @@
  		<property name="defaultFormat" value="label"/>
  	</bean>
 	
-	
-   	
    	<bean id="list.uds.a5.presence3" parent="list.standardUds">
  		<property name="dbListName" value="udsa5presence3"/>
  	</bean>
-				 	
 				 	
     <bean id="list.uds.a5.presence4" parent="list.standardUds">
  		<property name="dbListName" value="udsa5presence4"/>
@@ -364,8 +383,6 @@
  		<property name="dbListName" value="udsb202"/>
  	</bean>
  	
- 	
- 	
  	<bean id="list.uds.b3.pdNormal" parent="list.dataOnlyUds">
 		<property name="data"><list>
 			<bean parent="list.data"><constructor-arg value="0 - NOT NORMAL"/><constructor-arg value="0"/></bean>
@@ -374,8 +391,6 @@
 		<property name="defaultCodes"><ref bean="list.noCodes"/></property>
 	</bean>	
 	
-	
-
 	<bean id="list.uds.b3.speech" parent="list.dataOnlyUds">
 			<property name="data"><list>
 						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
@@ -386,7 +401,6 @@
 			</list></property>
 	</bean>
 			
-
 	<bean id="list.uds.b3.faceXp" parent="list.dataOnlyUds">
 			<property name="data"><list>
 						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
@@ -396,7 +410,6 @@
 						<bean parent="list.data"><constructor-arg value="4 - MASKED OR FIED FACIES"/><constructor-arg value="4"/></bean>
 			</list></property>
 	</bean>
-			
 		
 	<bean id="list.uds.b3.tremorAtRest" parent="list.dataOnlyUds">
 			<property name="data"><list>
@@ -472,7 +485,6 @@
 			</list></property>
 	</bean>	
 		
-			
 	<bean id="list.uds.b3.posStab" parent="list.dataOnlyUds">
 			<property name="data"><list>
 						<bean parent="list.data"><constructor-arg value="0 - NORMAL"/><constructor-arg value="0"/></bean>
@@ -494,7 +506,6 @@
 						
 			</list></property>
 	</bean>	
-			
 
 	<bean id="list.uds.b3.speechV2" parent="list.dataOnlyUds">
 			<property name="data"><list>
@@ -506,7 +517,6 @@
 						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
 			</list></property>
 	</bean>
-			
 
 	<bean id="list.uds.b3.faceXpV2" parent="list.dataOnlyUds">
 			<property name="data"><list>
@@ -518,7 +528,6 @@
 						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
 			</list></property>
 	</bean>
-			
 		
 	<bean id="list.uds.b3.tremorAtRestV2" parent="list.dataOnlyUds">
 			<property name="data"><list>
@@ -552,7 +561,6 @@
 						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
 			</list></property>
 	</bean>	
-				
 		
 	<bean id="list.uds.b3.bradykinV2" parent="list.dataOnlyUds">
 			<property name="data"><list>
@@ -564,7 +572,6 @@
 						<bean parent="list.data"><constructor-arg value="8 - UNTESTABLE"/><constructor-arg value="8"/></bean>
 			</list></property>
 	</bean>	
-	
 	
 	<bean id="list.uds.b4.cdrScale" parent="list.dataOnlyUds">
 		<property name="defaultSort" value="valueDecimal"/>
@@ -587,7 +594,6 @@
 			</list></property>
 	</bean>	
 			
-			
 	<bean id="list.uds.b5.informant" parent="list.dataOnlyUds">
 			<property name="data"><list>
 						<bean parent="list.data"><constructor-arg value="1 - Spouse"/><constructor-arg value="1"/></bean>
@@ -596,7 +602,6 @@
 					
 			</list></property>
 	</bean>	
- 		
 
 	<bean id="list.uds.b6.noGds" parent="list.dataOnlyUds">
 			<property name="data"><list>
@@ -606,9 +611,7 @@
 					
 			</list></property>
 	</bean>	
-				
 
-	    		
     <bean id="list.uds.b6.yesNoScale_NoCorrect" parent="list.standardUds">
  		<property name="dbListName" value="YesNoScale_NoCorrect"/>
  	</bean>
@@ -625,13 +628,11 @@
  		<property name="dbListName" value="udsb9fuchg"/>
  		<property name="defaultFormat" value="label"/>
  	</bean>			    		
-	
     			
     <bean id="list.uds.b9.predomCog" parent="list.standardUds">
  		<property name="dbListName" value="udsb9predomcog"/>
  		<property name="defaultFormat" value="label"/>
  	</bean>				
-    			
     		
     <bean id="list.uds.b9.predomCogV2" parent="list.standardUds">
  		<property name="dbListName" value="udsb9predomcog"/>
@@ -643,7 +644,6 @@
 	<bean id="list.uds.b9.mode" parent="list.standardUds">
  		<property name="dbListName" value="udsb9mode"/>
  	</bean>
-						
 
 	<bean id="list.uds.b9.yesNoNA" parent="list.dataOnlyUds">
 			<property name="data"><list>
@@ -652,13 +652,11 @@
 						<bean parent="list.data"><constructor-arg value="88 - N/A"/><constructor-arg value="88"/></bean>
 			</list></property>
 	</bean>	
-			
 	
 	<bean id="list.uds.b9.predomBeh" parent="list.standardUds">
  		<property name="dbListName" value="udsb9predombeh"/>
  		<property name="defaultFormat" value="label"/>
- 	</bean>				
-    			
+ 	</bean>		
 			
     <bean id="list.uds.b9.predomBehV2" parent="list.standardUds">
  		<property name="dbListName" value="udsb9predombeh"/>
@@ -671,16 +669,13 @@
  		<property name="dbListName" value="udsb9predommot"/>
  	</bean>
 				
-    
     <bean id="list.uds.b9.overall" parent="list.standardUds">
  		<property name="dbListName" value="udsb9overall"/>
  	</bean>
 					
-					
     <bean id="list.uds.b9.domain" parent="list.standardUds">
  		<property name="dbListName" value="udsb9domain"/>
  	</bean>
-						
 		
 	<bean id="list.usd.ref.c1.key95_98" parent="list.dataOnly">
 			<property name="data"><list>
@@ -703,8 +698,6 @@
 	<bean id="list.uds.c1.admin" parent="list.standardUds">
  		<property name="dbListName" value="udsc1admin"/>
  	</bean>
-	
-    
     
     <bean id="list.uds.c1.lang" parent="list.standardUds">
  		<property name="dbListName" value="udsc1lang"/>
@@ -714,11 +707,9 @@
  		<property name="dbListName" value="udsc1cogstatV2"/>
  	</bean>
     		
-    		
     <bean id="list.uds.c1.cogStat" parent="list.standardUds">
  		<property name="dbListName" value="udsc1cogstat"/>
  		<property name="defaultFormat" value="label"/>
- 		
  	</bean>
     	
     <bean id="list.uds.c1.range" abstract="true" parent="list.numericRangeUds">
@@ -735,7 +726,6 @@
     <bean id="list.uds.c1.range0_1" parent="list.uds.c1.range">
 		<property name="defaultMaxValue" value="1"/>
 	</bean>				
-    		
     
     <bean id="list.uds.c1.range0_5" parent="list.uds.c1.range">
 		<property name="defaultMaxValue" value="5"/>
@@ -748,23 +738,18 @@
     <bean id="list.uds.c1.range0_8" parent="list.uds.c1.range">
 		<property name="defaultMaxValue" value="8"/>
 	</bean>				
-    		
-    		
 				
 	<bean id="list.uds.c1.range0_12" parent="list.uds.c1.range">
 		<property name="defaultMaxValue" value="12"/>
-	</bean>				
+	</bean>		
     		
-	
 	<bean id="list.uds.c1.range0_24NA" parent="list.uds.c1.rangeNA">
 		<property name="defaultMaxValue" value="24"/>
 	</bean>				
     		
-	
 	<bean id="list.uds.c1.range0_25NA" parent="list.uds.c1.rangeNA">
 		<property name="defaultMaxValue" value="25"/>
 	</bean>	
-			
     			
     <bean id="list.uds.c1.range0_25" parent="list.uds.c1.range">
 		<property name="defaultMaxValue" value="25"/>
@@ -774,11 +759,9 @@
 		<property name="defaultMaxValue" value="30"/>
 	</bean>			
 	
-	
 	<bean id="list.uds.c1.range0_40NA" parent="list.uds.c1.rangeNA">
 		<property name="defaultMaxValue" value="40"/>
 	</bean>	
-	
 	
 	<bean id="list.uds.c1.range0_77" parent="list.uds.c1.range">
 		<property name="defaultMaxValue" value="77"/>
@@ -798,7 +781,6 @@
 	<bean id="list.uds.c1.range0_93" parent="list.uds.c1.range">
 		<property name="defaultMaxValue" value="93"/>
 	</bean>			
-	
 	
 	<bean id="list.uds.c1.range0_150" parent="list.uds.c1.range">
 		<property name="defaultMaxValue" value="150"/>
@@ -825,7 +807,6 @@
     <bean id="list.uds.d1.ifPres" parent="list.standardUds">
  		<property name="dbListName" value="udsd1ifpres"/>
  	</bean>
-						
 	
 	<bean id="list.udsinstrument.packetStatus" parent="list.standardValueNoLabel">
  		<property name="dbListName" value="UDSPacketStatus"/>
@@ -862,7 +843,6 @@
  		<property name="defaultSort" value="orderIndex"/>
  	</bean>	
 				
-	
 	<bean id="list.naccpathology9.codes" parent="list.standard">
 		<property name="staticReferenceLists">
 			<list><ref bean="list.ref.stdErrorCodes"/>
@@ -949,5 +929,209 @@
 				<property name="dbListName" value="NaccPath19"/>
 	</bean>
 
+	<!-- FTLD MODULE LISTS -->
 
+
+	<bean id="list.uds.a3f.ftdpmut" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSA3Fftdpmut"/>
+ 	</bean>
+ 	
+	<bean id="list.uds.a3f.neuroProb" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSA3FneuroProb"/>
+ 	</bean>
+
+	<bean id="list.uds.a3f.primDx" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSA3FprimDx"/>
+ 	</bean>
+ 	
+	<bean id="list.uds.a3f.methEval" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSA3FmethEval"/>
+ 	</bean>
+ 	
+ 	<bean id="list.uds.a3af.relative" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSA3aFRelative"/>
+ 	</bean>
+ 	
+	<bean id="list.uds.a3af.sibYear" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="1885"/>	
+		<property name="defaultMaxValue" value="2000"/>
+	</bean>
+ 	
+ 	<bean id="list.uds.a3af.childYear" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="1920"/>	
+		<property name="defaultMaxValue" value="2000"/>
+	</bean>
+	
+	<bean id="list.uds.b3f.sectiona01238" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSB3Fsectiona01238"/>
+ 	</bean>
+	
+	<bean id="list.uds.b3f.sectiona0123" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSB3Fsectiona0123"/>
+ 	</bean>
+ 	
+ 	<bean id="list.uds.b3f.sectiona03" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSB3Fsectiona03"/>
+ 	</bean>
+ 	
+ 	<bean id="list.uds.b3f.sectiona0128" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSB3Fsectiona0128"/>
+ 	</bean>
+ 	
+ 	<bean id="list.uds.b3f.sectionbSeverity" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSB3FsectionbSeverity"/>
+ 	</bean>
+ 	
+ 	<bean id="list.uds.b3f.sectionbType" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSB3FsectionbType"/>
+ 	</bean>
+
+	<bean id="list.uds.b9f.featuresPresent" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSB9FfeaturesPresent"/>
+ 	</bean>
+
+	<bean id="list.uds.b9f.ftdcppas" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSB9Fftdcppas"/>
+ 	</bean>
+ 	
+	<bean id="list.uds.b9f.ftdbvft" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSB9Fftdbvft"/>
+ 	</bean>
+ 	
+	<bean id="list.uds.b9f.ftdpabvf" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSB9Fftdpabvf"/>
+ 	</bean>	 	 	
+
+    <bean id="list.uds.c1f.range0_5" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="5"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_8" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="8"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_10" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="10"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_15" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="15"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_16" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="16"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_17" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="17"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_20" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="20"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_30" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="30"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_37" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="37"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_40" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="40"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_80" parent="list.uds.c1.range">
+		<property name="defaultMaxValue" value="80"/>
+	</bean>
+
+	<bean id="list.uds.c2f.reason" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC2FReason"/>
+ 	</bean>
+ 	
+	<bean id="list.uds.c3f.mainScale" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC3FMainScale"/>
+ 	</bean>
+
+	<bean id="list.uds.c3f.subScale" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC3FSubScale"/>
+ 	</bean>
+	
+	<bean id="list.uds.c4f.scale" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC4FScale"/>
+ 	</bean>
+ 	
+	<bean id="list.uds.c4f.q0" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC4FQ0"/>
+ 	</bean>
+ 	
+	<bean id="list.uds.c5f.q0" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC5FQ0"/>
+ 	</bean>
+
+	<bean id="list.uds.c5f.q0a" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC5FQ0a"/>
+ 	</bean>
+ 	
+ 	<bean id="list.uds.c5f.month" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="1"/>	
+		<property name="defaultMaxValue" value="12"/>
+	</bean>
+	
+	<bean id="list.uds.c5f.year" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="1900"/>	
+		<property name="defaultMaxValue" value="1990"/>
+	</bean>
+ 	
+ 	<bean id="list.uds.c5f.q0c" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC5FQ0c"/>
+ 	</bean>
+ 	
+ 	<bean id="list.uds.c5f.scale" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC5FScale"/>
+ 	</bean>
+ 	
+ 	<bean id="list.uds.c6f.q0" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC6FQ0"/>
+ 	</bean>
+ 	
+ 	<bean id="list.uds.c6f.scale" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSC6FScale"/>
+ 	</bean>
+ 	
+	<bean id="list.uds.e2f.day" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="1"/>	
+		<property name="defaultMaxValue" value="31"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="99"/><constructor-arg value="99"/></bean>
+		</list></property>
+	</bean>	
+    
+    <bean id="list.uds.e2f.month" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="1"/>	
+		<property name="defaultMaxValue" value="12"/>
+	</bean>	
+    
+     <bean id="list.uds.e2f.year" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="2000"/>	
+		<property name="defaultMaxValue" value="2019"/>
+	</bean>
+	
+	<bean id="list.uds.e2f.scanMan" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSE2FScanMan"/>
+ 	</bean>
+
+	<bean id="list.uds.e2f.fieldStr" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSE2FFieldStr"/>
+ 	</bean>
+
+	<bean id="list.uds.e2f.ligand" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSE2FLigand"/>
+ 	</bean>
+
+	<bean id="list.uds.z1f.reason" parent="list.standardUds">
+ 		<property name="dbListName" value="UDSZ1FReason"/>
+ 	</bean>
+ 	 	
 </beans>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldSpecimenConsent" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldspecimenconsent">
+			<key column="InstrID"/>		
+			<property name="ftdrelco" column="FTDRELCO" type="short"/>
+			<property name="ftdsibby" column="FTDSIBBY" type="short"/>
+			<property name="ftdchdby" column="FTDCHDBY" type="short"/>
+			<property name="ftdstore" column="FTDSTORE" type="short"/>
+			<property name="ftdslear" column="FTDSLEAR" type="short"/>
+			<property name="ftdcomme" column="FTDCOMME" type="short"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

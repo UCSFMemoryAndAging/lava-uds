@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldIri" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldiri">
+			<key column="InstrID"/>		
+			<property name="ftdcpc5f" column="FTDCPC5F" type="short"/>
+			<property name="ftdinsex" column="FTDINSEX" type="short"/>
+			<property name="ftdinfmo" column="FTDINFMO" type="short"/>
+			<property name="ftdinfyr" column="FTDINFYR" type="short"/>
+			<property name="ftdinfre" column="FTDINFRE" type="short"/>
+			<property name="ftdfeel" column="FTDFEEL" type="short"/>
+			<property name="ftddiff" column="FTDDIFF" type="short"/>
+			<property name="ftdsorr" column="FTDSORR" type="short"/>
+			<property name="ftdside" column="FTDSIDE" type="short"/>
+			<property name="ftdadvan" column="FTDADVAN" type="short"/>
+			<property name="ftdimag" column="FTDIMAG" type="short"/>
+			<property name="ftdmisf" column="FTDMISF" type="short"/>
+			<property name="ftdwaste" column="FTDWASTE" type="short"/>
+			<property name="ftdpity" column="FTDPITY" type="short"/>
+			<property name="ftdqtouc" column="FTDQTOUC" type="short"/>
+			<property name="ftdsides" column="FTDSIDES" type="short"/>
+			<property name="ftdsofth" column="FTDSOFTH" type="short"/>
+			<property name="ftdupset" column="FTDUPSET" type="short"/>
+			<property name="ftdcriti" column="FTDCRITI" type="short"/>
+			<property name="ftdiriec" column="FTDIRIEC" type="short"/>
+			<property name="ftdiript" column="FTDIRIPT" type="short"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

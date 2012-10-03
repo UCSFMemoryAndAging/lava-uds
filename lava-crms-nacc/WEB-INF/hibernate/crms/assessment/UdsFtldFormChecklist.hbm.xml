@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldFormChecklist" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldformchecklist">
+			<key column="InstrID"/>		
+			<property name="ftda3afs" column="FTDA3AFS" type="short"/>
+			<property name="ftda3afr" column="FTDA3AFR" type="short"/>
+			<property name="ftda3afc" column="FTDA3AFC" type="string" length="60"/>
+			<property name="ftda3fs" column="FTDA3FS" type="short"/>
+			<property name="ftda3fr" column="FTDA3FR" type="short"/>
+			<property name="ftda3fc" column="FTDA3FC" type="string" length="60"/>
+			<property name="ftdc4fs" column="FTDC4FS" type="short"/>
+			<property name="ftdc4fr" column="FTDC4FR" type="short"/>
+			<property name="ftdc4fc" column="FTDC4FC" type="string" length="60"/>
+			<property name="ftdc5fs" column="FTDC5FS" type="short"/>
+			<property name="ftdc5fr" column="FTDC5FR" type="short"/>
+			<property name="ftdc5fc" column="FTDC5FC" type="string" length="60"/>
+			<property name="ftdc6fs" column="FTDC6FS" type="short"/>
+			<property name="ftdc6fr" column="FTDC6FR" type="short"/>
+			<property name="ftdc6fc" column="FTDC6FC" type="string" length="60"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

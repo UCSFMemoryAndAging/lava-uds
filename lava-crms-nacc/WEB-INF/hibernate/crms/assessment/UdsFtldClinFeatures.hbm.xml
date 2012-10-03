@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldClinFeatures" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldclinfeatures">
+			<key column="InstrID"/>		
+			<property name="ftdppasl" column="FTDPPASL" type="short"/>
+			<property name="ftdppapo" column="FTDPPAPO" type="short"/>
+			<property name="ftdppaiw" column="FTDPPAIW" type="short"/>
+			<property name="ftdppasw" column="FTDPPASW" type="short"/>
+			<property name="ftdppapk" column="FTDPPAPK" type="short"/>
+			<property name="ftdppags" column="FTDPPAGS" type="short"/>
+			<property name="ftdppaeh" column="FTDPPAEH" type="short"/>
+			<property name="ftdppacs" column="FTDPPACS" type="short"/>
+			<property name="ftdppass" column="FTDPPASS" type="short"/>
+			<property name="ftdppasr" column="FTDPPASR" type="short"/>
+			<property name="ftdppasd" column="FTDPPASD" type="short"/>
+			<property name="ftdcppa" column="FTDCPPA" type="short"/>
+			<property name="ftdcppas" column="FTDCPPAS" type="short"/>
+			<property name="ftdbvcln" column="FTDBVCLN" type="short"/>
+			<property name="ftdbvdis" column="FTDBVDIS" type="short"/>
+			<property name="ftdbvapa" column="FTDBVAPA" type="short"/>
+			<property name="ftdbvlos" column="FTDBVLOS" type="short"/>
+			<property name="ftdbvrit" column="FTDBVRIT" type="short"/>
+			<property name="ftdbvhyp" column="FTDBVHYP" type="short"/>
+			<property name="ftdbvneu" column="FTDBVNEU" type="short"/>
+			<property name="ftdbvidl" column="FTDBVIDL" type="short"/>
+			<property name="ftdbvft" column="FTDBVFT" type="short"/>
+			<property name="ftdemgpv" column="FTDEMGPV" type="short"/>
+			<property name="ftdemgpy" column="FTDEMGPY" type="short"/>
+			<property name="ftdemgmn" column="FTDEMGMN" type="short"/>
+			<property name="ftdpabvf" column="FTDPABVF" type="short"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

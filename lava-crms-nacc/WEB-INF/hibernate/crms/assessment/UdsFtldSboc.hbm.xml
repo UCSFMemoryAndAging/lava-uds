@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldSboc" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldsboc">
+			<key column="InstrID"/>		
+			<property name="ftdself" column="FTDSELF" type="short"/>
+			<property name="ftdbadly" column="FTDBADLY" type="short"/>
+			<property name="ftddepr" column="FTDDEPR" type="short"/>
+			<property name="ftdemotd" column="FTDEMOTD" type="short"/>
+			<property name="ftdlself" column="FTDLSELF" type="short"/>
+			<property name="ftddisr" column="FTDDISR" type="short"/>
+			<property name="ftdbelch" column="FTDBELCH" type="short"/>
+			<property name="ftdgigg" column="FTDGIGG" type="short"/>
+			<property name="ftdpriv" column="FTDPRIV" type="short"/>
+			<property name="ftdnegat" column="FTDNEGAT" type="short"/>
+			<property name="ftdecomm" column="FTDECOMM" type="short"/>
+			<property name="ftdinapj" column="FTDINAPJ" type="short"/>
+			<property name="ftdfaila" column="FTDFAILA" type="short"/>
+			<property name="ftdresis" column="FTDRESIS" type="short"/>
+			<property name="ftdinter" column="FTDINTER" type="short"/>
+			<property name="ftdverba" column="FTDVERBA" type="short"/>
+			<property name="ftdphysi" column="FTDPHYSI" type="short"/>
+			<property name="ftdtopic" column="FTDTOPIC" type="short"/>
+			<property name="ftdproto" column="FTDPROTO" type="short"/>
+			<property name="ftdpreo" column="FTDPREO" type="short"/>
+			<property name="ftdfini" column="FTDFINI" type="short"/>
+			<property name="ftdacted" column="FTDACTED" type="short"/>
+			<property name="ftdabs" column="FTDABS" type="short"/>
+			<property name="ftdfeedb" column="FTDFEEDB" type="short"/>
+			<property name="ftdfrust" column="FTDFRUST" type="short"/>
+			<property name="ftdanxi" column="FTDANXI" type="short"/>
+			<property name="ftdnervo" column="FTDNERVO" type="short"/>
+			<property name="ftdndiag" column="FTDNDIAG" type="short"/>
+			<property name="ftdstimb" column="FTDSTIMB" type="short"/>
+			<property name="ftdstime" column="FTDSTIME" type="short"/>
+			<property name="ftdobjec" column="FTDOBJEC" type="short"/>
+			<property name="ftdcircu" column="FTDCIRCU" type="short"/>
+			<property name="ftdperse" column="FTDPERSE" type="short"/>
+			<property name="ftdrepea" column="FTDREPEA" type="short"/>
+			<property name="ftdanecd" column="FTDANECD" type="short"/>
+			<property name="ftddinit" column="FTDDINIT" type="short"/>
+			<property name="ftddelay" column="FTDDELAY" type="short"/>
+			<property name="ftdaddve" column="FTDADDVE" type="short"/>
+			<property name="ftdfluct" column="FTDFLUCT" type="short"/>
+			<property name="ftdlostt" column="FTDLOSTT" type="short"/>
+			<property name="ftdrepru" column="FTDREPRU" type="short"/>
+			<property name="ftdtrain" column="FTDTRAIN" type="short"/>
+			<property name="ftddiscl" column="FTDDISCL" type="short"/>
+			<property name="ftdspont" column="FTDSPONT" type="short"/>
+			<property name="ftdsponr" column="FTDSPONR" type="short"/>
+			<property name="ftdstood" column="FTDSTOOD" type="short"/>
+			<property name="ftdtouch" column="FTDTOUCH" type="short"/>
+			<property name="ftddsoci" column="FTDDSOCI" type="short"/>
+			<property name="ftdexagg" column="FTDEXAGG" type="short"/>
+			<property name="ftdsbtot" column="FTDSBTOT" type="short"/>
+			<property name="ftdsbcto" column="FTDSBCTO" type="short"/>
+			<property name="ftdlengt" column="FTDLENGT" type="short"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

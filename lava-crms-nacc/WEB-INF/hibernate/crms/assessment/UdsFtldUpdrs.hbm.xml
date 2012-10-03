@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldUpdrs" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldupdrs">
+			<key column="InstrID"/>		
+			<property name="ftdltfas" column="FTDLTFAS" type="short"/>
+			<property name="ftdlimb" column="FTDLIMB" type="short"/>
+			<property name="ftdbulb" column="FTDBULB" type="short"/>
+			<property name="ftdeye" column="FTDEYE" type="short"/>
+			<property name="ftddyst" column="FTDDYST" type="short"/>
+			<property name="ftdideo" column="FTDIDEO" type="short"/>
+			<property name="ftdalien" column="FTDALIEN" type="short"/>
+			<property name="ftdmyocl" column="FTDMYOCL" type="short"/>
+			<property name="ftdcorts" column="FTDCORTS" type="short"/>
+			<property name="ftdgsev" column="FTDGSEV" type="short"/>
+			<property name="ftdgsevx" column="FTDGSEVX" type="string" length="60"/>
+			<property name="ftdgtyp" column="FTDGTYP" type="short"/>
+			<property name="ftdgtypg" column="FTDGTYPG" type="string" length="60"/>
+			<property name="ftdgtypx" column="FTDGTYPX" type="string" length="60"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

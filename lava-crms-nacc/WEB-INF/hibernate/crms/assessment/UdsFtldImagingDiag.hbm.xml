@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldImagingDiag" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldimagingdiag">
+			<key column="InstrID"/>		
+			<property name="ftdidiag" column="FTDIDIAG" type="short"/>
+			<property name="ftdsmrio" column="FTDSMRIO" type="short"/>
+			<property name="ftdmrifa" column="FTDMRIFA" type="short"/>
+			<property name="ftdmrirf" column="FTDMRIRF" type="short"/>
+			<property name="ftdmrilf" column="FTDMRILF" type="short"/>
+			<property name="ftdmrirt" column="FTDMRIRT" type="short"/>
+			<property name="ftdmrilt" column="FTDMRILT" type="short"/>
+			<property name="ftdmrirm" column="FTDMRIRM" type="short"/>
+			<property name="ftdmrilm" column="FTDMRILM" type="short"/>
+			<property name="ftdmrirp" column="FTDMRIRP" type="short"/>
+			<property name="ftdmrilp" column="FTDMRILP" type="short"/>
+			<property name="ftdmrirb" column="FTDMRIRB" type="short"/>
+			<property name="ftdmrilb" column="FTDMRILB" type="short"/>
+			<property name="ftdmriob" column="FTDMRIOB" type="short"/>
+			<property name="ftdmrios" column="FTDMRIOS" type="string" length="60"/>
+			<property name="ftdfdgpe" column="FTDFDGPE" type="short"/>
+			<property name="ftdfdgfh" column="FTDFDGFH" type="short"/>
+			<property name="ftdfdgrf" column="FTDFDGRF" type="short"/>
+			<property name="ftdfdglf" column="FTDFDGLF" type="short"/>
+			<property name="ftdfdgrt" column="FTDFDGRT" type="short"/>
+			<property name="ftdfdglt" column="FTDFDGLT" type="short"/>
+			<property name="ftdfdgrm" column="FTDFDGRM" type="short"/>
+			<property name="ftdfdglm" column="FTDFDGLM" type="short"/>
+			<property name="ftdfdgrp" column="FTDFDGRP" type="short"/>
+			<property name="ftdfdglp" column="FTDFDGLP" type="short"/>
+			<property name="ftdfdgrb" column="FTDFDGRB" type="short"/>
+			<property name="ftdfdglb" column="FTDFDGLB" type="short"/>
+			<property name="ftdfdgoa" column="FTDFDGOA" type="short"/>
+			<property name="ftdfdgos" column="FTDFDGOS" type="string" length="60"/>
+			<property name="ftdamyp" column="FTDAMYP" type="short"/>
+			<property name="ftdamyvi" column="FTDAMYVI" type="short"/>
+			<property name="ftdamyrf" column="FTDAMYRF" type="short"/>
+			<property name="ftdamylf" column="FTDAMYLF" type="short"/>
+			<property name="ftdamyrt" column="FTDAMYRT" type="short"/>
+			<property name="ftdamylt" column="FTDAMYLT" type="short"/>
+			<property name="ftdamyrm" column="FTDAMYRM" type="short"/>
+			<property name="ftdamylm" column="FTDAMYLM" type="short"/>
+			<property name="ftdamyrp" column="FTDAMYRP" type="short"/>
+			<property name="ftdamylp" column="FTDAMYLP" type="short"/>
+			<property name="ftdamyrb" column="FTDAMYRB" type="short"/>
+			<property name="ftdamylb" column="FTDAMYLB" type="short"/>
+			<property name="ftdamyoa" column="FTDAMYOA" type="short"/>
+			<property name="ftdamyos" column="FTDAMYOS" type="string" length="60"/>
+			<property name="ftdcbfsp" column="FTDCBFSP" type="short"/>
+			<property name="ftdcbfvi" column="FTDCBFVI" type="short"/>
+			<property name="ftdcbfrf" column="FTDCBFRF" type="short"/>
+			<property name="ftdcbflf" column="FTDCBFLF" type="short"/>
+			<property name="ftdcbfrt" column="FTDCBFRT" type="short"/>
+			<property name="ftdcbflt" column="FTDCBFLT" type="short"/>
+			<property name="ftdcbfrm" column="FTDCBFRM" type="short"/>
+			<property name="ftdcbflm" column="FTDCBFLM" type="short"/>
+			<property name="ftdcbfrp" column="FTDCBFRP" type="short"/>
+			<property name="ftdcbflp" column="FTDCBFLP" type="short"/>
+			<property name="ftdcbfrb" column="FTDCBFRB" type="short"/>
+			<property name="ftdcbflb" column="FTDCBFLB" type="short"/>
+			<property name="ftdcbfoa" column="FTDCBFOA" type="short"/>
+			<property name="ftdcbfos" column="FTDCBFOS" type="string" length="60"/>
+			<property name="ftdothi" column="FTDOTHI" type="short"/>
+			<property name="ftdothis" column="FTDOTHIS" type="string" length="60"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

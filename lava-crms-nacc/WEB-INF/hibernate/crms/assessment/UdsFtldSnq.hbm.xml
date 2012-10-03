@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldSnq" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldsnq">
+			<key column="InstrID"/>		
+			<property name="ftdcpc2f" column="FTDCPC2F" type="short"/>
+			<property name="ftdhaird" column="FTDHAIRD" type="short"/>
+			<property name="ftdspit" column="FTDSPIT" type="short"/>
+			<property name="ftdnose" column="FTDNOSE" type="short"/>
+			<property name="ftdcoage" column="FTDCOAGE" type="short"/>
+			<property name="ftdcry" column="FTDCRY" type="short"/>
+			<property name="ftdcut" column="FTDCUT" type="short"/>
+			<property name="ftdytrip" column="FTDYTRIP" type="short"/>
+			<property name="ftdeatp" column="FTDEATP" type="short"/>
+			<property name="ftdtella" column="FTDTELLA" type="short"/>
+			<property name="ftdopin" column="FTDOPIN" type="short"/>
+			<property name="ftdlaugh" column="FTDLAUGH" type="short"/>
+			<property name="ftdshirt" column="FTDSHIRT" type="short"/>
+			<property name="ftdkeepm" column="FTDKEEPM" type="short"/>
+			<property name="ftdpickn" column="FTDPICKN" type="short"/>
+			<property name="ftdover" column="FTDOVER" type="short"/>
+			<property name="ftdeatr" column="FTDEATR" type="short"/>
+			<property name="ftdhairl" column="FTDHAIRL" type="short"/>
+			<property name="ftdshirw" column="FTDSHIRW" type="short"/>
+			<property name="ftdmove" column="FTDMOVE" type="short"/>
+			<property name="ftdhugs" column="FTDHUGS" type="short"/>
+			<property name="ftdloud" column="FTDLOUD" type="short"/>
+			<property name="ftdlost" column="FTDLOST" type="short"/>
+			<property name="ftdsntot" column="FTDSNTOT" type="short"/>
+			<property name="ftdsntbs" column="FTDSNTBS" type="short"/>
+			<property name="ftdsntos" column="FTDSNTOS" type="short"/>
+			<property name="ftdsnrat" column="FTDSNRAT" type="float" precision="5" scale="2"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

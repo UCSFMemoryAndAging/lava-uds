@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsFtldRsms" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsftldrsms">
+			<key column="InstrID"/>		
+			<property name="ftdcpc6f" column="FTDCPC6F" type="short"/>
+			<property name="ftdalter" column="FTDALTER" type="short"/>
+			<property name="ftdemot" column="FTDEMOT" type="short"/>
+			<property name="ftdacros" column="FTDACROS" type="short"/>
+			<property name="ftdconv" column="FTDCONV" type="short"/>
+			<property name="ftdintui" column="FTDINTUI" type="short"/>
+			<property name="ftdjoke" column="FTDJOKE" type="short"/>
+			<property name="ftdimagp" column="FTDIMAGP" type="short"/>
+			<property name="ftdinapp" column="FTDINAPP" type="short"/>
+			<property name="ftdchbeh" column="FTDCHBEH" type="short"/>
+			<property name="ftdadbeh" column="FTDADBEH" type="short"/>
+			<property name="ftdlying" column="FTDLYING" type="short"/>
+			<property name="ftdgoodf" column="FTDGOODF" type="short"/>
+			<property name="ftdregul" column="FTDREGUL" type="short"/>
+			<property name="ftdsmscr" column="FTDSMSCR" type="short"/>
+			<property name="ftdspscr" column="FTDSPSCR" type="short"/>
+			<property name="ftdrsmst" column="FTDRSMST" type="short"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
