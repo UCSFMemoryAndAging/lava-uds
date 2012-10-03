@@ -224,6 +224,32 @@ public class UdsGds extends UdsInstrument {
 	public void updateCalculatedFields() {
 		super.updateCalculatedFields();
 
+		// if the form hasn't been saved yet, then return so that GDS fields aren't calculated prematurely as num_answered=0
+		// note: updateCalculatedFields() gets called in beforeUpdate() while instruments are created from prototyped visits,
+		//   so if we do not return early, then noGds and gds get calculated, and when those are the only required fields,
+		//   then it is not seen as having missing fields (which is not our intention)
+		if ((this.getDeStatus() == null)
+			&& (this.satis == null)
+			&& (this.dropAct == null)
+			&& (this.empty == null)
+			&& (this.bored == null)
+			&& (this.spirits == null)
+			&& (this.afraid == null)
+			&& (this.happy == null)
+			&& (this.helpless == null)
+			&& (this.stayhome == null)
+			&& (this.memprob == null)
+			&& (this.wondrful == null)
+			&& (this.wrthless == null)
+			&& (this.energy == null)
+			&& (this.hopeless == null)
+			&& (this.better == null)) {
+			
+			this.noGds = null;
+			this.gds = null;
+			return;
+		}
+		
 		// count how many questions are answered
 		short num_answered = (short)0;
 		if (this.satis != null    && (this.satis.equals((short)0) || this.satis.equals((short)1)))        num_answered++;
@@ -243,13 +269,20 @@ public class UdsGds extends UdsInstrument {
 		if (this.better != null   && (this.better.equals((short)0) || this.better.equals((short)1)))      num_answered++;
 		
 		// 12 is the required number of questions that must be answered to be considered complete
-		// only consider the number answered if the user never filled noGds or it was filled as completed (0)
-		if ((this.noGds == null) || this.noGds.equals((short)0)) {
-			if (num_answered < 12) { 
-				this.noGds = (short)1;  // Yes, subject was NOT able to complete the GDS
-			} else {
-				this.noGds = (short)0;  // No, subject WAS able to complete the GDS
-			}
+		
+		// note: noGds can be recalculated purely from number of answered questions since skip
+		// logic is skipping all questions on "unable to complete".  The only way it could be
+		// different than user input is if not enough questions were answered, in which it overwrites
+		// it as "unable to complete".
+		// TODO: consider removing skip logic: we do not apply skip logic code here when it changes,
+		// so the old answers still exist until user edits the form again and saves
+		// (skip logic applied, wiping them).  One could argue we want to allow saving all questions
+		// regardless if noGds=1
+		
+		if (num_answered < 12) { 
+			this.noGds = (short)1;  // Yes, subject was NOT able to complete the GDS
+		} else {
+			this.noGds = (short)0;  // No, subject WAS able to complete the GDS
 		}
 		
 		if (this.noGds != null
