@@ -19,8 +19,15 @@
 			<entry key="UDS~Telephone Follow Up"><bean class="edu.ucsf.lava.crms.scheduling.model.UdsVisit">
 					<property name="packet" value="T"/>
 				</bean>
+			</entry>	
+			<!-- all visitTypes that will have UDS instruments must be configured here to be of type UdsVisit
+			   or there will be a ClassCastException in UdsInstrument afterUpdate -->			
+			<entry key="UDS~General Visit"><bean class="edu.ucsf.lava.crms.scheduling.model.UdsVisit">
+				</bean>
 			</entry>				
-		
+			<entry key="UDS~FTLD Assessment"><bean class="edu.ucsf.lava.crms.scheduling.model.UdsVisit">
+				</bean>
+			</entry>				
 		</map></constructor-arg>
 	</bean>	
 			
