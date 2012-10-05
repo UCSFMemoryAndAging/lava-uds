@@ -195,10 +195,17 @@
 
 <ui:formGuide>
   <ui:observe elementIds="packet" component="instrument" forValue="T" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <%-- EMORY change: a2Sub should not have been on this list --%>
+  <%-- EMORY change: a2Sub should not be skipped, but autoset to 1 instead --%>
   <ui:skip elementIds="b1Sub,b2Sub,b3Sub,b6Sub,b8Sub" component="${componentPrefix}"/>
 </ui:formGuide>
+<%-- for telephone visits, auto-set a2Sub to 1-Yes submitted and disable user interaction --%>
 <ui:formGuide>
+  <ui:observe elementIds="packet" component="instrument" forValue="T" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+  <ui:setValue elementIds="a2Sub" component="${componentPrefix}" value="1"/>
+  <ui:disable elementIds="a2Sub" component="${componentPrefix}"/>
+</ui:formGuide>
+<ui:formGuide>
+  <ui:depends elementIds="packet" component="instrument"/>
   <ui:observe elementIds="a2Sub" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="a2Not,a2Comm" component="${componentPrefix}"/>
 </ui:formGuide>
