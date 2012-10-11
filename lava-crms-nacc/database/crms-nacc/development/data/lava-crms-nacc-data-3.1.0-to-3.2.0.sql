@@ -45,6 +45,8 @@ UPDATE viewproperty
 
 -- UCSF: All data needed for FTLD module
 
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-app-demo','UDS','FTLD Assessment',0,'2012-10-02 20:57:59' FROM `list` where `ListName`='VisitType';
+
 INSERT IGNORE into instrument(instrname, tablename, formname, hasversion) values('UDS FTLD BIS','Multiple','LavaWebOnly',1);
 INSERT IGNORE into instrument(instrname, tablename, formname, hasversion) values('UDS FTLD Clin Features','Multiple','LavaWebOnly',1);
 INSERT IGNORE into instrument(instrname, tablename, formname, hasversion) values('UDS FTLD Family History','Multiple','LavaWebOnly',1);
