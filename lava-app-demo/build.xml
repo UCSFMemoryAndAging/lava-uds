@@ -71,7 +71,7 @@
 			<fileset dir="${lava-core.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 			<fileset dir="${lava-crms.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 			<fileset dir="${lava-crms-nacc.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
-			<fileset dir="${instance.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
+			<fileset dir="${instance.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project"/>
 		</copy>
 	</target>    
 	
