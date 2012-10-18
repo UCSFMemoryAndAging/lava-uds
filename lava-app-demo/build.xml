@@ -15,7 +15,7 @@
     <property name="build.folder" value="WEB-INF/classes"/>
     <property name="name" value="lava"/>
 
-	<property name="instance-deploy.path" value="${deploy.path}/${war.file}"/>
+	<property name="instance-deploy.path" value="${deploy.path}/${instanceName}.war"/>
 	
     
 	<path id="master-classpath">
