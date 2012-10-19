@@ -209,46 +209,45 @@
 			
 			
 			<entry key="UDS~FTLD Assessment"><list>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsCdr" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD Specimen Consent"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsDiagnosis" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD Family History"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory2" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD UPDRS"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFaq" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD Clin Features"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsHealthHistory" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD Neuropsych"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD SNQ"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD SBOC"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="ftldUDSInstrumentPrototype">
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldBis" parent="ftldUDSInstrumentPrototype">
 					<property name="instrType" value="UDS FTLD BIS"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD IRI"/>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldClinFeatures" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD Clin Features"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD RSMS"/>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldFamilyHistory" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD Family History"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD Imaging Avail"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD Imaging Diag"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="ftldUDSInstrumentPrototype">
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldFormChecklist" parent="ftldUDSInstrumentPrototype">
 					<property name="instrType" value="UDS FTLD Form Checklist"/>
 				</bean>
-
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldImagingAvail" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD Imaging Avail"/>
+				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldImagingDiag" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD Imaging Diag"/>
+				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldIri" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD IRI"/>
+				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldNeuropsych" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD Neuropsych"/>
+				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldRsms" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD RSMS"/>
+				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldSboc" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD SBOC"/>
+				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldSnq" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD SNQ"/>
+				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldSpecimenConsent" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD Specimen Consent"/>
+				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldUpdrs" parent="ftldUDSInstrumentPrototype">
+					<property name="instrType" value="UDS FTLD UPDRS"/>
+				</bean>
 			</list></entry>
 			
     </map></constructor-arg>
