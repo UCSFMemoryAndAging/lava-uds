@@ -4996,63 +4996,63 @@ DROP TABLE IF EXISTS `vwrptprojectvisitlist`;
 DELIMITER ;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_after_set_linkdata` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_after_set_linkdata`(user_name varchar(50), host_name varchar(25),method VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_after_set_linkdata`(user_name varchar(50), host_name varchar(25),method VARCHAR(25))
 BEGINIF method = 'VISIT' THEN  UPDATE temp_linkdata1, visit   SET temp_linkdata1.pidn = visit.PIDN, temp_linkdata1.link_date = visit.VDATE, temp_linkdata1.link_type = method   WHERE temp_linkdata1.link_id = visit.VID;ELSEIF method = 'INSTRUMENT' THEN  UPDATE temp_linkdata1, instrumenttracking   SET temp_linkdata1.pidn = instrumenttracking.PIDN, temp_linkdata1.link_date = instrumenttracking.DCDATE, temp_linkdata1.link_type = method   WHERE temp_linkdata1.link_id = instrumenttracking.InstrID;ELSE  UPDATE temp_linkdata1 SET link_type = method;END IF;CREATE TEMPORARY TABLE temp_linkdata (  pidn INTEGER NOT NULL,  link_date DATE NOT NULL,  link_id INTEGER NOT NULL,  link_type VARCHAR(50) NOT NULL);IF method = 'PIDN_DATE' THEN  INSERT INTO temp_linkdata(pidn,link_date,link_id,link_type)   SELECT pidn,link_date, min(link_id), link_type FROM temp_linkdata1 GROUP BY pidn,link_date,link_type;ELSE  INSERT INTO temp_linkdata(pidn,link_date,link_id,link_type)   SELECT pidn,link_date, link_id, link_type FROM temp_linkdata1 GROUP BY pidn,link_date,link_id,link_type;END IF;ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_after_set_pidns` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_after_set_pidns`(user_name varchar(50), host_name varchar(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_after_set_pidns`(user_name varchar(50), host_name varchar(25))
 BEGINCREATE TEMPORARY TABLE temp_pidn AS SELECT pidn FROM temp_pidn1 GROUP BY pidn;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_audit_event` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_audit_event`(user_name varchar(50),host_name varchar(25),lq_query_object varchar(100),lq_query_type varchar(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_audit_event`(user_name varchar(50),host_name varchar(25),lq_query_object varchar(100),lq_query_type varchar(25))
 BEGININSERT INTO audit_event_work (`audit_user`,`audit_host`,`audit_timestamp`,`action`,`action_event`)    VALUES(user_name,host_name,NOW(),CONCAT('lava.*.query.',lq_query_object),lq_query_type);  END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_check_user_auth` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_check_user_auth`(user_login varchar(50),host_name varchar(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_check_user_auth`(user_login varchar(50),host_name varchar(25))
 BEGINDECLARE user_id int;SELECT `UID` into user_id from `authuser` where `Login` = user_login;IF(user_id > 0) THEN  SELECT  1 as user_auth;ELSE  SELECT 0 as user_auth;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_check_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_check_version`(pModule varchar(25), pMajor integer, pMinor integer, pFix integer)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_check_version`(pModule varchar(25), pMajor integer, pMinor integer, pFix integer)
 BEGINDECLARE CurMajor integer;DECLARE CurMinor integer;DECLARE CurFix integer;DECLARE CurVersion varchar(10);DECLARE pVersion varchar(10);DECLARE version_msg varchar(500);DECLARE UpdateNeeded integer;SELECT MAX(`Major`) into CurMajor from `versionhistory` WHERE `Module` = pModule ;SELECT MAX(`Minor`) into CurMinor from `versionhistory` WHERE `Module` = pModule and `Major` = CurMajor;SELECT MAX(`Fix`) into CurFix from `versionhistory` WHERE `Module` = pModule and `Major` = CurMajor and `Minor` = CurMinor;SET pVersion = CONCAT(cast(pMajor as CHAR),'.',cast(pMinor as  CHAR),'.',cast(pFix as CHAR));SELECT MAX(`Version`) into CurVersion FROM `versionhistory` WHERE `Module` = pModule and `Major` = CurMajor and `Minor` = CurMinor and `Fix` = CurFix;SET version_msg = 'OK';IF (CurVersion IS NULL) THEN  SET version_msg = CONCAT('Invalid Module ',Module,' passed to stored procedure lq_check_version.');ELSEIF (pMajor < CurMajor) THEN	SET version_msg = CONCAT('Your application version (',pVersion,') is out of date.  The current version is (',CurVersion,'). You must upgrade your application.');ELSEIF (pMajor > CurMajor) THEN	SET version_msg = CONCAT('Your application version (',pVersion,') is more recent than the current version supported by the database.  The current version is (',CurVersion,'). You must downgrade your application.');ELSEIF (pMinor < CurMinor) THEN  SET version_msg = CONCAT('Your application version (',pVersion,') is out of date.  The current version is (',CurVersion,'). You must upgrade your application.');ELSEIF (pMinor > CurMinor) THEN	SET version_msg = CONCAT('Your application version (',pVersion,') is more recent than the current version supported by the database.  The current version is (',CurVersion,'). You must downgrade your application.');ELSEIF (pFix < CurFix) THEN  SELECT count(*) into UpdateNeeded from `versionhistory` WHERE `Module`=  pModule and `Major` >= pMajor and `Minor` >= pMinor and `Fix` > pFix  and `UpdateRequired` = 1;  IF(UpdateNeeded > 0) THEN    SET version_msg = CONCAT('Your application version (',pVersion,') is out of date.  The current version is (',CurVersion,'). You must upgrade your application.');  ELSE     SET version_msg = CONCAT('Your application version (',pVersion,') is slightly out of date.  The current version is (',CurVersion,'). You should upgrade to the current version soon.');  END IF;ELSEIF (pFix > CurFix) THEN	SET version_msg = CONCAT('Your application version (',pVersion,') is more recent than the current version supported by the database.  The current version is (',CurVersion,'). You must downgrade your application.');END IF;select version_msg as 'version_msg';END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_clear_linkdata` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_clear_linkdata`(user_name varchar(50), host_name varchar(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_clear_linkdata`(user_name varchar(50), host_name varchar(25))
 BEGINDROP TABLE IF EXISTS temp_linkdata;DROP TABLE IF EXISTS temp_linkdata1;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_clear_pidns` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_clear_pidns`(user_name varchar(50), host_name varchar(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_clear_pidns`(user_name varchar(50), host_name varchar(25))
 BEGINDROP TABLE IF EXISTS temp_pidn;DROP TABLE IF EXISTS temp_pidn1;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_all_pidns` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_all_pidns`(user_name varchar(50), host_name varchar(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_all_pidns`(user_name varchar(50), host_name varchar(25))
 BEGINSELECT pidn from patient order by pidn;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_assessment_instruments` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_assessment_instruments`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_assessment_instruments`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGINCALL lq_audit_event(user_name,host_name,'crms.assessment.instruments',query_type);	IF query_type = 'Simple' THEN	SELECT p.pidn, i.* FROM lq_view_instruments i 		INNER JOIN temp_pidn p ON (p.PIDN = i.PIDN_Instrument)       ORDER BY p.pidn, i.DCDate,i.InstrType;ELSEIF query_type = 'SimpleAllPatients' THEN	SELECT p.pidn, i.*  FROM lq_view_instruments i 		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = i.PIDN_Instrument)       ORDER BY p.pidn, i.DCDate,i.InstrType;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_enrollment_status` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_enrollment_status`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_enrollment_status`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGINCALL lq_audit_event(user_name,host_name,'crms.enrollment.status',query_type);IF query_type = 'Simple' THEN	SELECT p.pidn, e.*  FROM lq_view_enrollment e 		INNER JOIN temp_pidn p ON (p.PIDN = e.PIDN_Enrollment)       ORDER BY p.pidn, e.latestDate;ELSEIF query_type = 'SimpleAllPatients' THEN	SELECT p.pidn, e.* FROM lq_view_enrollment e 		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = e.PIDN_Enrollment)       ORDER BY p.pidn, e.latestDate;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_linkdata` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_linkdata`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_linkdata`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
     SQL SECURITY INVOKER
 BEGINIF query_type = 'VISIT' THEN	SELECT l.*, '---->' as `Visit Details`, v.* from temp_linkdata l inner join visit v on l.link_id=v.VID	ORDER BY l.pidn, l.link_date,l.link_id;ELSEIF query_type = 'INSTRUMENT' THEN 	SELECT l.*, '---->' as `Instrument Details`, i.* from temp_linkdata l inner join instrumenttracking i on l.link_id=i.InstrID	ORDER BY l.pidn, l.link_date,l.link_id;ELSE   SELECT * from temp_linkdata l  	ORDER BY l.pidn, l.link_date,l.link_id;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsappraisal` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsappraisal`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsappraisal`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -5159,7 +5159,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udscdr` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udscdr`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udscdr`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -5265,7 +5265,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsdiagnosis` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsdiagnosis`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsdiagnosis`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -5371,7 +5371,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsfamilyhistory1` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsfamilyhistory1`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsfamilyhistory1`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -5477,7 +5477,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsfamilyhistory2` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsfamilyhistory2`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsfamilyhistory2`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -5583,7 +5583,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsfamilyhistory2extended` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsfamilyhistory2extended`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsfamilyhistory2extended`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -5689,7 +5689,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsfaq` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsfaq`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsfaq`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -5795,7 +5795,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsformchecklist` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsformchecklist`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsformchecklist`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -5901,7 +5901,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsgds` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsgds`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsgds`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -6007,7 +6007,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udshachinski` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udshachinski`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udshachinski`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 	CALL lq_audit_event(user_name,host_name,'crms.nacc.udshachinski',query_type);
@@ -6109,7 +6109,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udshealthhistory` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udshealthhistory`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udshealthhistory`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udshealthhistory',query_type);
@@ -6211,7 +6211,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsinformantdemo` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsinformantdemo`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsinformantdemo`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsinformantdemo',query_type);
 	
@@ -6313,7 +6313,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udslabsimaging` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udslabsimaging`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udslabsimaging`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udslabsimaging',query_type);
 	
@@ -6415,7 +6415,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsmedications2` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsmedications2`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsmedications2`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsmedication2',query_type);
 	
@@ -6517,7 +6517,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsmilestone` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsmilestone`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsmilestone`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsmilestone',query_type);
 	
@@ -6619,7 +6619,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsneuropsych` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsneuropsych`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsneuropsych`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsneuropsych',query_type);
 	
@@ -6721,7 +6721,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsnpi` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsnpi`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsnpi`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsnpi',query_type);
 	
@@ -6823,7 +6823,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsphoneinclusion` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsphoneinclusion`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsphoneinclusion`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsphoneinclusion',query_type);
 	
@@ -6925,7 +6925,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsphysical` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsphysical`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsphysical`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsphysical',query_type);
@@ -7027,7 +7027,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udssubjectdemo` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udssubjectdemo`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udssubjectdemo`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udssubjectdemo',query_type);
 	
@@ -7129,7 +7129,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udssymptomsonset` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udssymptomsonset`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udssymptomsonset`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udssymptomsonset',query_type);
 	
@@ -7231,7 +7231,7 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsupdrs` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_nacc_udsupdrs`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_nacc_udsupdrs`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsupdrs',query_type);
 	
@@ -7333,156 +7333,156 @@ END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_objects` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_objects`(user_name varchar(50), host_name varchar(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_objects`(user_name varchar(50), host_name varchar(25))
 BEGINSELECT concat(`instance`,'_',`scope`,'_',`module`) as query_source,concat(`section`,'_',`target`) as query_object_name , `short_desc`, `standard`,`primary_link`,`secondary_link` from `query_objects`;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_patient_demographics` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_patient_demographics`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_patient_demographics`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGINCALL lq_audit_event(user_name,host_name,'crms.patient.demographics',query_type);	IF query_type = 'Simple' THEN	SELECT p.pidn, d.*  FROM lq_view_demographics d 		INNER JOIN temp_pidn p ON (p.PIDN = d.PIDN_Demographics)       ORDER BY p.pidn;ELSEIF query_type = 'SimpleAllPatients' THEN	SELECT p.pidn, d.*   FROM lq_view_demographics d  		 RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = d.PIDN_Demographics)       ORDER BY p.pidn;ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN 	 SELECT l.pidn, l.link_date,l.link_id,d.*  	 FROM temp_linkdata l INNER JOIN lq_view_demographics d ON (d.PIDN_Demographics=l.PIDN);END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_get_scheduling_visits` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_get_scheduling_visits`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_get_scheduling_visits`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGINCALL lq_audit_event(user_name,host_name,'crms.scheduling.visits',query_type);	IF query_type = 'Simple' THEN	SELECT p.pidn, v.*  FROM lq_view_visit v 		INNER JOIN temp_pidn p ON (p.PIDN = v.PIDN_visit)       ORDER BY p.pidn, v.vdate, v.vtype;ELSEIF query_type = 'SimpleAllPatients' THEN	SELECT p.pidn, v.*  FROM lq_view_visit v  		 RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = v.PIDN_visit)       ORDER BY p.pidn,v.vdate, v.vtype;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_set_linkdata` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_set_linkdata`(user_name varchar(50), host_name varchar(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_set_linkdata`(user_name varchar(50), host_name varchar(25))
 BEGINDROP TABLE IF EXISTS temp_linkdata1;DROP TABLE IF EXISTS temp_linkdata;CREATE TEMPORARY TABLE temp_linkdata1(    pidn INTEGER NOT NULL,    link_date DATE NOT NULL,    link_id INTEGER NOT NULL,    link_type varchar(25) DEFAULT NULL);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_set_linkdata_row` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_set_linkdata_row`(user_name varchar(50), host_name varchar(25),pidn integer,link_date date, link_id integer)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_set_linkdata_row`(user_name varchar(50), host_name varchar(25),pidn integer,link_date date, link_id integer)
 BEGININSERT INTO `temp_linkdata1` (`pidn`,`link_date`,`link_id`) VALUES(pidn,link_date,link_id);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_set_pidns` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_set_pidns`(user_name varchar(50), host_name varchar(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_set_pidns`(user_name varchar(50), host_name varchar(25))
 BEGINDROP TABLE IF EXISTS temp_pidn1;DROP TABLE IF EXISTS temp_pidn;CREATE TEMPORARY TABLE temp_pidn1(    pidn INTEGER NOT NULL);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `lq_set_pidns_row` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `lq_set_pidns_row`(user_name varchar(50), host_name varchar(25),pidn integer)
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `lq_set_pidns_row`(user_name varchar(50), host_name varchar(25),pidn integer)
 BEGININSERT INTO `temp_pidn1` (`pidn`) values (pidn);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsappraisal_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsappraisal_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsappraisal_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udscdr_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udscdr_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udscdr_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udscdr` SET `COMPORT`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`CDRLANG`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID = instrument_id;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsdiagnosis_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsdiagnosis_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsdiagnosis_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udsdiagnosis` SET `VASCPS`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`VASCPSIF`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH2`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH2IF`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH2X`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH3`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH3IF`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH3X`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsfamilyhistory_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsfamilyhistory_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsfamilyhistory_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;		IF new_version = "2" THEN			DELETE FROM udsfamilyhistory1 where instrId = instrument_id;		INSERT INTO udsfamilyhistory2 (InstrID) VALUES (instrument_id);		INSERT INTO udsfamilyhistorychildren2 (InstrID) VALUES (instrument_id);		INSERT INTO udsfamilyhistoryrelatives2 (InstrID) VALUES (instrument_id);			ELSEIF (new_version = '1') THEN			DELETE FROM udsfamilyhistory2 where instrId = instrument_id;		DELETE FROM udsfamilyhistorychildren2 where instrId = instrument_id;		DELETE FROM udsfamilyhistoryrelatives2 where instrId = instrument_id;		INSERT INTO UDSFamilyHistory1 (InstrID) VALUES (instrument_id);				END IF;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsfaq_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsfaq_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsfaq_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsformchecklist_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsformchecklist_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsformchecklist_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsgds_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsgds_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsgds_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udshachinski_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udshachinski_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udshachinski_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udshachinski` SET `CVDCOG`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`STROKCOG`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAG`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAG1`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAG2`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAG3`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAG4`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAGX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udshealthhistory_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udshealthhistory_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udshealthhistory_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsinformantdemo_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsinformantdemo_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsinformantdemo_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udslabsimaging_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udslabsimaging_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udslabsimaging_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsmedications_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsmedications_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsmedications_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;		IF new_version = "2" THEN			DELETE FROM udsmedicationspre1 where instrId = instrument_id;		DELETE FROM udsmedicationsnon1 where instrId = instrument_id;		DELETE FROM udsmedicationsvit1 where instrId = instrument_id;		INSERT INTO udsmedications2 (InstrID) VALUES (instrument_id);				ELSEIF (new_version = '1') THEN			DELETE FROM udsmedications2 where instrId = instrument_id;		DELETE FROM udsmedicationsdetails2 where instrId = instrument_id;		INSERT INTO udsmedicationspre1 (InstrID) VALUES (instrument_id);		INSERT INTO udsmedicationsnon1 (InstrID) VALUES (instrument_id);		INSERT INTO udsmedicationsvit1 (InstrID) VALUES (instrument_id);				END IF;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsmilestone_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsmilestone_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsmilestone_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udsmilestone` SET `REJOINED`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`PROTOCOL`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`NPREFUS`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`PHYREFUS`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`UDSACTIV`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsneuropsych_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsneuropsych_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsneuropsych_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udsneuropsych` SET `PENTAGON`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`TRAILARR`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRAILALI`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRAILBRR`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRAILBLI`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsnpi_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsnpi_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsnpi_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsphysical_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsphysical_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsphysical_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udssubjectdemo_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udssubjectdemo_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udssubjectdemo_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udssymptomsonset_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udssymptomsonset_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udssymptomsonset_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udssymptomsonset` SET `COGFLUC`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`BEVWELL`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`BEREM`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`MOMOPARK`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_udsupdrs_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_udsupdrs_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_udsupdrs_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udsupdrs` SET `SPEECHX`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`FACEXPX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRESTFAX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRESTRHX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRESTLHX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRESTRFX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRESTLFX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRACTRHX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRACTLHX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`RIGDNEX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`RIGDUPRX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`RIGDUPLX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`RIGDLORX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`RIGDLOLX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`BRADYKIX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_uds_change_version` */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER"*/;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `proc_uds_change_version`(instrument_id INT, new_version VARCHAR(25))
+/*!50003 CREATE*/ /*!50020 */ /*!50003 PROCEDURE `proc_uds_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;END IF;END */;;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
@@ -7490,167 +7490,167 @@ DELIMITER ;
 /*!50001 DROP TABLE `audit_entity`*/;
 /*!50001 DROP VIEW IF EXISTS `audit_entity`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `audit_entity` AS select `audit_entity_work`.`audit_entity_id` AS `audit_entity_id`,`audit_entity_work`.`audit_event_id` AS `audit_event_id`,`audit_entity_work`.`entity_id` AS `entity_id`,`audit_entity_work`.`entity` AS `entity`,`audit_entity_work`.`entity_type` AS `entity_type`,`audit_entity_work`.`audit_type` AS `audit_type`,`audit_entity_work`.`modified` AS `modified` from `audit_entity_work` union all select `audit_entity_history`.`audit_entity_id` AS `audit_entity_id`,`audit_entity_history`.`audit_event_id` AS `audit_event_id`,`audit_entity_history`.`entity_id` AS `entity_id`,`audit_entity_history`.`entity` AS `entity`,`audit_entity_history`.`entity_type` AS `entity_type`,`audit_entity_history`.`audit_type` AS `audit_type`,`audit_entity_history`.`modified` AS `modified` from `audit_entity_history` */;
 /*!50001 DROP TABLE `audit_event`*/;
 /*!50001 DROP VIEW IF EXISTS `audit_event`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `audit_event` AS select `audit_event_work`.`audit_event_id` AS `audit_event_id`,`audit_event_work`.`audit_user` AS `audit_user`,`audit_event_work`.`audit_host` AS `audit_host`,`audit_event_work`.`audit_timestamp` AS `audit_timestamp`,`audit_event_work`.`action` AS `action`,`audit_event_work`.`action_event` AS `action_event`,`audit_event_work`.`action_id_param` AS `action_id_param`,`audit_event_work`.`event_note` AS `event_note`,`audit_event_work`.`exception` AS `exception`,`audit_event_work`.`exception_message` AS `exception_message`,`audit_event_work`.`modified` AS `modified` from `audit_event_work` union all select `audit_event_history`.`audit_event_id` AS `audit_event_id`,`audit_event_history`.`audit_user` AS `audit_user`,`audit_event_history`.`audit_host` AS `audit_host`,`audit_event_history`.`audit_timestamp` AS `audit_timestamp`,`audit_event_history`.`action` AS `action`,`audit_event_history`.`action_event` AS `action_event`,`audit_event_history`.`action_id_param` AS `action_id_param`,`audit_event_history`.`event_note` AS `event_note`,`audit_event_history`.`exception` AS `exception`,`audit_event_history`.`exception_message` AS `exception_message`,`audit_event_history`.`modified` AS `modified` from `audit_event_history` */;
 /*!50001 DROP TABLE `audit_property`*/;
 /*!50001 DROP VIEW IF EXISTS `audit_property`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `audit_property` AS select `audit_property_work`.`audit_property_id` AS `audit_property_id`,`audit_property_work`.`audit_entity_id` AS `audit_entity_id`,`audit_property_work`.`property` AS `property`,`audit_property_work`.`index_key` AS `index_key`,`audit_property_work`.`subproperty` AS `subproperty`,`audit_property_work`.`old_value` AS `old_value`,`audit_property_work`.`new_value` AS `new_value`,`audit_property_work`.`audit_timestamp` AS `audit_timestamp`,`audit_property_work`.`modified` AS `modified` from `audit_property_work` union all select `audit_property_history`.`audit_property_id` AS `audit_property_id`,`audit_property_history`.`audit_entity_id` AS `audit_entity_id`,`audit_property_history`.`property` AS `property`,`audit_property_history`.`index_key` AS `index_key`,`audit_property_history`.`subproperty` AS `subproperty`,`audit_property_history`.`old_value` AS `old_value`,`audit_property_history`.`new_value` AS `new_value`,`audit_property_history`.`audit_timestamp` AS `audit_timestamp`,`audit_property_history`.`modified` AS `modified` from `audit_property_history` */;
 /*!50001 DROP TABLE `audit_text`*/;
 /*!50001 DROP VIEW IF EXISTS `audit_text`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `audit_text` AS select `audit_text_history`.`audit_property_id` AS `audit_property_id`,`audit_text_history`.`old_text` AS `old_text`,`audit_text_history`.`new_text` AS `new_text` from `audit_text_history` union all select `audit_text_work`.`audit_property_id` AS `audit_property_id`,`audit_text_work`.`old_text` AS `old_text`,`audit_text_work`.`new_text` AS `new_text` from `audit_text_work` */;
 /*!50001 DROP TABLE `lq_view_demographics`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_demographics`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_demographics` AS select `patient`.`PIDN` AS `PIDN_demographics`,`patient`.`DOB` AS `DOB`,`patient_age`.`AGE` AS `AGE`,`patient`.`Gender` AS `Gender`,`patient`.`Hand` AS `Hand`,`patient`.`Deceased` AS `Deceased`,`patient`.`DOD` AS `DOD`,`patient`.`PrimaryLanguage` AS `PrimaryLanguage`,`patient`.`TestingLanguage` AS `TestingLanguage`,`patient`.`TransNeeded` AS `TransNeeded`,`patient`.`TransLanguage` AS `TransLanguage` from (`patient` join `patient_age` on((`patient`.`PIDN` = `patient_age`.`PIDN`))) where (`patient`.`PIDN` > 0) */;
 /*!50001 DROP TABLE `lq_view_enrollment`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_enrollment`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_enrollment` AS select `enrollmentstatus`.`EnrollStatID` AS `EnrollStatID`,`enrollmentstatus`.`PIDN` AS `PIDN_Enrollment`,`enrollmentstatus`.`ProjName` AS `ProjName`,`enrollmentstatus`.`SubjectStudyID` AS `SubjectStudyID`,`enrollmentstatus`.`ReferralSource` AS `ReferralSource`,`enrollmentstatus`.`LatestDesc` AS `LatestDesc`,`enrollmentstatus`.`LatestDate` AS `LatestDate`,`enrollmentstatus`.`LatestNote` AS `LatestNote`,`enrollmentstatus`.`ReferredDesc` AS `ReferredDesc`,`enrollmentstatus`.`ReferredDate` AS `ReferredDate`,`enrollmentstatus`.`ReferredNote` AS `ReferredNote`,`enrollmentstatus`.`DeferredDesc` AS `DeferredDesc`,`enrollmentstatus`.`DeferredDate` AS `DeferredDate`,`enrollmentstatus`.`DeferredNote` AS `DeferredNote`,`enrollmentstatus`.`EligibleDesc` AS `EligibleDesc`,`enrollmentstatus`.`EligibleDate` AS `EligibleDate`,`enrollmentstatus`.`EligibleNote` AS `EligibleNote`,`enrollmentstatus`.`IneligibleDesc` AS `IneligibleDesc`,`enrollmentstatus`.`IneligibleDate` AS `IneligibleDate`,`enrollmentstatus`.`IneligibleNote` AS `IneligibleNote`,`enrollmentstatus`.`DeclinedDesc` AS `DeclinedDesc`,`enrollmentstatus`.`DeclinedDate` AS `DeclinedDate`,`enrollmentstatus`.`DeclinedNote` AS `DeclinedNote`,`enrollmentstatus`.`EnrolledDesc` AS `EnrolledDesc`,`enrollmentstatus`.`EnrolledDate` AS `EnrolledDate`,`enrollmentstatus`.`EnrolledNote` AS `EnrolledNote`,`enrollmentstatus`.`ExcludedDesc` AS `ExcludedDesc`,`enrollmentstatus`.`ExcludedDate` AS `ExcludedDate`,`enrollmentstatus`.`ExcludedNote` AS `ExcludedNote`,`enrollmentstatus`.`WithdrewDesc` AS `WithdrewDesc`,`enrollmentstatus`.`WithdrewDate` AS `WithdrewDate`,`enrollmentstatus`.`WithdrewNote` AS `WithdrewNote`,`enrollmentstatus`.`InactiveDesc` AS `InactiveDesc`,`enrollmentstatus`.`InactiveDate` AS `InactiveDate`,`enrollmentstatus`.`InactiveNote` AS `InactiveNote`,`enrollmentstatus`.`DeceasedDesc` AS `DeceasedDesc`,`enrollmentstatus`.`DeceasedDate` AS `DeceasedDate`,`enrollmentstatus`.`DeceasedNote` AS `DeceasedNote`,`enrollmentstatus`.`AutopsyDesc` AS `AutopsyDesc`,`enrollmentstatus`.`AutopsyDate` AS `AutopsyDate`,`enrollmentstatus`.`AutopsyNote` AS `AutopsyNote`,`enrollmentstatus`.`ClosedDesc` AS `ClosedDesc`,`enrollmentstatus`.`ClosedDate` AS `ClosedDate`,`enrollmentstatus`.`ClosedNote` AS `ClosedNote`,`enrollmentstatus`.`EnrollmentNotes` AS `EnrollmentNotes`,`enrollmentstatus`.`modified` AS `modified` from `enrollmentstatus` where (`enrollmentstatus`.`EnrollStatID` > 0) */;
 /*!50001 DROP TABLE `lq_view_instruments`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_instruments`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_instruments` AS select `i`.`InstrID` AS `InstrID`,`i`.`VID` AS `VID`,`i`.`ProjName` AS `ProjName`,`i`.`PIDN` AS `PIDN_Instrument`,`i`.`InstrType` AS `InstrType`,`i`.`InstrVer` AS `InstrVer`,`i`.`DCDate` AS `DCDate`,`i`.`DCBy` AS `DCBy`,`i`.`DCStatus` AS `DCStatus`,`i`.`DCNotes` AS `DCNotes`,`i`.`ResearchStatus` AS `ResearchStatus`,`i`.`QualityIssue` AS `QualityIssue`,`i`.`QualityIssue2` AS `QualityIssue2`,`i`.`QualityIssue3` AS `QualityIssue3`,`i`.`QualityNotes` AS `QualityNotes`,`i`.`DEDate` AS `DEDate`,`i`.`DEBy` AS `DEBy`,`i`.`DEStatus` AS `DEStatus`,`i`.`DENotes` AS `DENotes`,`i`.`DVDate` AS `DVDate`,`i`.`DVBy` AS `DVBy`,`i`.`DVStatus` AS `DVStatus`,`i`.`DVNotes` AS `DVNotes`,`i`.`latestflag` AS `latestflag`,`i`.`FieldStatus` AS `FieldStatus`,`i`.`AgeAtDC` AS `AgeAtDC`,`i`.`modified` AS `modified`,`s`.`Summary` AS `summary` from (`instrumenttracking` `i` join `instrumentsummary` `s` on((`i`.`InstrID` = `s`.`InstrID`))) where (`i`.`InstrID` > 0) */;
 /*!50001 DROP TABLE `lq_view_udsappraisal`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsappraisal`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsappraisal` AS select `t1`.`InstrID` AS `instrid`,`t2`.`NORMAL` AS `normal`,`t2`.`FOCLDEF` AS `focldef`,`t2`.`GAITDIS` AS `gaitdis`,`t2`.`EYEMOVE` AS `eyemove`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsappraisal` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Appraisal') */;
 /*!50001 DROP TABLE `lq_view_udscdr`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udscdr`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udscdr` AS select `t1`.`InstrID` AS `instrid`,`t2`.`MEMORY` AS `memory`,`t2`.`ORIENT` AS `orient`,`t2`.`JUDGEMENT` AS `judgement`,`t2`.`COMMUN` AS `commun`,`t2`.`HOMEHOBB` AS `homehobb`,`t2`.`PERSCARE` AS `perscare`,`t2`.`CDRSUM` AS `cdrsum`,`t2`.`CDRGLOB` AS `cdrglob`,`t2`.`COMPORT` AS `comport`,`t2`.`CDRLANG` AS `cdrlang`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udscdr` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS CDR') */;
 /*!50001 DROP TABLE `lq_view_udsdiagnosis`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsdiagnosis`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsdiagnosis` AS select `t1`.`InstrID` AS `instrid`,`t2`.`WHODIDDX` AS `whodiddx`,`t2`.`NORMCOG` AS `normcog`,`t2`.`DEMENTED` AS `demented`,`t2`.`MCIAMEM` AS `mciamem`,`t2`.`MCIAPLUS` AS `mciaplus`,`t2`.`MCIAPLAN` AS `mciaplan`,`t2`.`MCIAPATT` AS `mciapatt`,`t2`.`MCIAPEX` AS `mciapex`,`t2`.`MCIAPVIS` AS `mciapvis`,`t2`.`MCINON1` AS `mcinon1`,`t2`.`MCIN1LAN` AS `mcin1lan`,`t2`.`MCIN1ATT` AS `mcin1att`,`t2`.`MCIN1EX` AS `mcin1ex`,`t2`.`MCIN1VIS` AS `mcin1vis`,`t2`.`MCINON2` AS `mcinon2`,`t2`.`MCIN2LAN` AS `mcin2lan`,`t2`.`MCIN2ATT` AS `mcin2att`,`t2`.`MCIN2EX` AS `mcin2ex`,`t2`.`MCIN2VIS` AS `mcin2vis`,`t2`.`IMPNOMCI` AS `impnomci`,`t2`.`PROBAD` AS `probad`,`t2`.`PROBADIF` AS `probadif`,`t2`.`POSSAD` AS `possad`,`t2`.`POSSADIF` AS `possadif`,`t2`.`DLB` AS `dlb`,`t2`.`DLBIF` AS `dlbif`,`t2`.`VASC` AS `vasc`,`t2`.`VASCIF` AS `vascif`,`t2`.`VASCPS` AS `vascps`,`t2`.`VASCPSIF` AS `vascpsif`,`t2`.`ALCDEM` AS `alcdem`,`t2`.`ALCDEMIF` AS `alcdemif`,`t2`.`DEMUN` AS `demun`,`t2`.`DEMUNIF` AS `demunif`,`t2`.`FTD` AS `ftd`,`t2`.`FTDIF` AS `ftdif`,`t2`.`PPAPH` AS `ppaph`,`t2`.`PPAPHIF` AS `ppaphif`,`t2`.`PNAPH` AS `pnaph`,`t2`.`SEMDEMAN` AS `semdeman`,`t2`.`SEMDEMAG` AS `semdemag`,`t2`.`PPAOTHR` AS `ppaothr`,`t2`.`PSP` AS `psp`,`t2`.`PSPIF` AS `pspif`,`t2`.`CORT` AS `cort`,`t2`.`CORTIF` AS `cortif`,`t2`.`HUNT` AS `hunt`,`t2`.`HUNTIF` AS `huntif`,`t2`.`PRION` AS `prion`,`t2`.`PRIONIF` AS `prionif`,`t2`.`MEDS` AS `meds`,`t2`.`MEDSIF` AS `medsif`,`t2`.`DYSILL` AS `dysill`,`t2`.`DYSILLIF` AS `dysillif`,`t2`.`DEP` AS `dep`,`t2`.`DEPIF` AS `depif`,`t2`.`OTHPSY` AS `othpsy`,`t2`.`OTHPSYIF` AS `othpsyif`,`t2`.`DOWNS` AS `downs`,`t2`.`DOWNSIF` AS `downsif`,`t2`.`PARK` AS `park`,`t2`.`PARKIF` AS `parkif`,`t2`.`STROKE` AS `stroke`,`t2`.`STROKIF` AS `strokif`,`t2`.`HYCEPH` AS `hyceph`,`t2`.`HYCEPHIF` AS `hycephif`,`t2`.`BRNINJ` AS `brninj`,`t2`.`BRNINJIF` AS `brninjif`,`t2`.`NEOP` AS `neop`,`t2`.`NEOPIF` AS `neopif`,`t2`.`COGOTH` AS `cogoth`,`t2`.`COGOTHIF` AS `cogothif`,`t2`.`COGOTHX` AS `cogothx`,`t2`.`COGOTH2` AS `cogoth2`,`t2`.`COGOTH2IF` AS `cogoth2if`,`t2`.`COGOTH2X` AS `cogoth2x`,`t2`.`COGOTH3` AS `cogoth3`,`t2`.`COGOTH3IF` AS `cogoth3if`,`t2`.`COGOTH3X` AS `cogoth3x`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsdiagnosis` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Diagnosis') */;
 /*!50001 DROP TABLE `lq_view_udsfamilyhistory1`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsfamilyhistory1`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsfamilyhistory1` AS select `t1`.`InstrID` AS `instrid`,`t2`.`A3CHG` AS `a3chg`,`t2`.`PARCHG` AS `parchg`,`t2`.`MOMDEM` AS `momdem`,`t2`.`MOMONSET` AS `momonset`,`t2`.`MOMAGE` AS `momage`,`t2`.`MOMDAGE` AS `momdage`,`t2`.`DADDEM` AS `daddem`,`t2`.`DADONSET` AS `dadonset`,`t2`.`DADAGE` AS `dadage`,`t2`.`DADDAGE` AS `daddage`,`t2`.`SIBCHG` AS `sibchg`,`t2`.`TWIN` AS `twin`,`t2`.`TWINTYPE` AS `twintype`,`t2`.`SIBS` AS `sibs`,`t2`.`SIBSDEM` AS `sibsdem`,`t2`.`SIB1ONS` AS `sib1ons`,`t2`.`SIB1AGE` AS `sib1age`,`t2`.`SIB2ONS` AS `sib2ons`,`t2`.`SIB2AGE` AS `sib2age`,`t2`.`SIB3ONS` AS `sib3ons`,`t2`.`SIB3AGE` AS `sib3age`,`t2`.`SIB4ONS` AS `sib4ons`,`t2`.`SIB4AGE` AS `sib4age`,`t2`.`SIB5ONS` AS `sib5ons`,`t2`.`SIB5AGE` AS `sib5age`,`t2`.`SIB6ONS` AS `sib6ons`,`t2`.`SIB6AGE` AS `sib6age`,`t2`.`KIDCHG` AS `kidchg`,`t2`.`KIDS` AS `kids`,`t2`.`KIDSDEM` AS `kidsdem`,`t2`.`KIDS1ONS` AS `kids1ons`,`t2`.`KIDS1AGE` AS `kids1age`,`t2`.`KIDS2ONS` AS `kids2ons`,`t2`.`KIDS2AGE` AS `kids2age`,`t2`.`KIDS3ONS` AS `kids3ons`,`t2`.`KIDS3AGE` AS `kids3age`,`t2`.`KIDS4ONS` AS `kids4ons`,`t2`.`KIDS4AGE` AS `kids4age`,`t2`.`KIDS5ONS` AS `kids5ons`,`t2`.`KIDS5AGE` AS `kids5age`,`t2`.`KIDS6ONS` AS `kids6ons`,`t2`.`KIDS6AGE` AS `kids6age`,`t2`.`RELCHG` AS `relchg`,`t2`.`RELSDEM` AS `relsdem`,`t2`.`REL1ONS` AS `rel1ons`,`t2`.`REL1AGE` AS `rel1age`,`t2`.`REL2ONS` AS `rel2ons`,`t2`.`REL2AGE` AS `rel2age`,`t2`.`REL3ONS` AS `rel3ons`,`t2`.`REL3AGE` AS `rel3age`,`t2`.`REL4ONS` AS `rel4ons`,`t2`.`REL4AGE` AS `rel4age`,`t2`.`REL5ONS` AS `rel5ons`,`t2`.`REL5AGE` AS `rel5age`,`t2`.`REL6ONS` AS `rel6ons`,`t2`.`REL6AGE` AS `rel6age`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsfamilyhistory1` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where ((`t1`.`InstrType` = _latin1'UDS Family History') and (`t1`.`InstrVer` = _latin1'1')) */;
 /*!50001 DROP TABLE `lq_view_udsfamilyhistory2`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsfamilyhistory2`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsfamilyhistory2` AS select `t1`.`InstrID` AS `instrid`,`t2`.`MOMYOB` AS `momyob`,`t2`.`MOMLIV` AS `momliv`,`t2`.`MOMYOD` AS `momyod`,`t2`.`MOMDEM` AS `momdem`,`t2`.`MOMONSET` AS `momonset`,`t2`.`DADYOB` AS `dadyob`,`t2`.`DADLIV` AS `dadliv`,`t2`.`DADYOD` AS `dadyod`,`t2`.`DADDEM` AS `daddem`,`t2`.`DADONSET` AS `dadonset`,`t2`.`TWIN` AS `twin`,`t2`.`TWINTYPE` AS `twintype`,`t2`.`SIBS` AS `sibs`,`t2`.`SIB1YOB` AS `sib1yob`,`t2`.`SIB1LIV` AS `sib1liv`,`t2`.`SIB1YOD` AS `sib1yod`,`t2`.`SIB1DEM` AS `sib1dem`,`t2`.`SIB1ONS` AS `sib1ons`,`t2`.`SIB2YOB` AS `sib2yob`,`t2`.`SIB2LIV` AS `sib2liv`,`t2`.`SIB2YOD` AS `sib2yod`,`t2`.`SIB2DEM` AS `sib2dem`,`t2`.`SIB2ONS` AS `sib2ons`,`t2`.`SIB3YOB` AS `sib3yob`,`t2`.`SIB3LIV` AS `sib3liv`,`t2`.`SIB3YOD` AS `sib3yod`,`t2`.`SIB3DEM` AS `sib3dem`,`t2`.`SIB3ONS` AS `sib3ons`,`t2`.`SIB4YOB` AS `sib4yob`,`t2`.`SIB4LIV` AS `sib4liv`,`t2`.`SIB4YOD` AS `sib4yod`,`t2`.`SIB4DEM` AS `sib4dem`,`t2`.`SIB4ONS` AS `sib4ons`,`t2`.`SIB5YOB` AS `sib5yob`,`t2`.`SIB5LIV` AS `sib5liv`,`t2`.`SIB5YOD` AS `sib5yod`,`t2`.`SIB5DEM` AS `sib5dem`,`t2`.`SIB5ONS` AS `sib5ons`,`t2`.`SIB6YOB` AS `sib6yob`,`t2`.`SIB6LIV` AS `sib6liv`,`t2`.`SIB6YOD` AS `sib6yod`,`t2`.`SIB6DEM` AS `sib6dem`,`t2`.`SIB6ONS` AS `sib6ons`,`t2`.`SIB7YOB` AS `sib7yob`,`t2`.`SIB7LIV` AS `sib7liv`,`t2`.`SIB7YOD` AS `sib7yod`,`t2`.`SIB7DEM` AS `sib7dem`,`t2`.`SIB7ONS` AS `sib7ons`,`t2`.`SIB8YOB` AS `sib8yob`,`t2`.`SIB8LIV` AS `sib8liv`,`t2`.`SIB8YOD` AS `sib8yod`,`t2`.`SIB8DEM` AS `sib8dem`,`t2`.`SIB8ONS` AS `sib8ons`,`t2`.`SIB9YOB` AS `sib9yob`,`t2`.`SIB9LIV` AS `sib9liv`,`t2`.`SIB9YOD` AS `sib9yod`,`t2`.`SIB9DEM` AS `sib9dem`,`t2`.`SIB9ONS` AS `sib9ons`,`t2`.`SIB10YOB` AS `sib10yob`,`t2`.`SIB10LIV` AS `sib10liv`,`t2`.`SIB10YOD` AS `sib10yod`,`t2`.`SIB10DEM` AS `sib10dem`,`t2`.`SIB10ONS` AS `sib10ons`,`t3`.`KIDS` AS `kids`,`t3`.`KID1YOB` AS `kid1yob`,`t3`.`KID1LIV` AS `kid1liv`,`t3`.`KID1YOD` AS `kid1yod`,`t3`.`KID1DEM` AS `kid1dem`,`t3`.`KID1ONS` AS `kid1ons`,`t3`.`KID2YOB` AS `kid2yob`,`t3`.`KID2LIV` AS `kid2liv`,`t3`.`KID2YOD` AS `kid2yod`,`t3`.`KID2DEM` AS `kid2dem`,`t3`.`KID2ONS` AS `kid2ons`,`t3`.`KID3YOB` AS `kid3yob`,`t3`.`KID3LIV` AS `kid3liv`,`t3`.`KID3YOD` AS `kid3yod`,`t3`.`KID3DEM` AS `kid3dem`,`t3`.`KID3ONS` AS `kid3ons`,`t3`.`KID4YOB` AS `kid4yob`,`t3`.`KID4LIV` AS `kid4liv`,`t3`.`KID4YOD` AS `kid4yod`,`t3`.`KID4DEM` AS `kid4dem`,`t3`.`KID4ONS` AS `kid4ons`,`t3`.`KID5YOB` AS `kid5yob`,`t3`.`KID5LIV` AS `kid5liv`,`t3`.`KID5YOD` AS `kid5yod`,`t3`.`KID5DEM` AS `kid5dem`,`t3`.`KID5ONS` AS `kid5ons`,`t3`.`KID6YOB` AS `kid6yob`,`t3`.`KID6LIV` AS `kid6liv`,`t3`.`KID6YOD` AS `kid6yod`,`t3`.`KID6DEM` AS `kid6dem`,`t3`.`KID6ONS` AS `kid6ons`,`t3`.`KID7YOB` AS `kid7yob`,`t3`.`KID7LIV` AS `kid7liv`,`t3`.`KID7YOD` AS `kid7yod`,`t3`.`KID7DEM` AS `kid7dem`,`t3`.`KID7ONS` AS `kid7ons`,`t3`.`KID8YOB` AS `kid8yob`,`t3`.`KID8LIV` AS `kid8liv`,`t3`.`KID8YOD` AS `kid8yod`,`t3`.`KID8DEM` AS `kid8dem`,`t3`.`KID8ONS` AS `kid8ons`,`t3`.`KID9YOB` AS `kid9yob`,`t3`.`KID9LIV` AS `kid9liv`,`t3`.`KID9YOD` AS `kid9yod`,`t3`.`KID9DEM` AS `kid9dem`,`t3`.`KID9ONS` AS `kid9ons`,`t3`.`KID10YOB` AS `kid10yob`,`t3`.`KID10LIV` AS `kid10liv`,`t3`.`KID10YOD` AS `kid10yod`,`t3`.`KID10DEM` AS `kid10dem`,`t3`.`KID10ONS` AS `kid10ons`,`t4`.`RELSDEM` AS `relsdem`,`t4`.`REL1YOB` AS `rel1yob`,`t4`.`REL1LIV` AS `rel1liv`,`t4`.`REL1YOD` AS `rel1yod`,`t4`.`REL1ONS` AS `rel1ons`,`t4`.`REL2YOB` AS `rel2yob`,`t4`.`REL2LIV` AS `rel2liv`,`t4`.`REL2YOD` AS `rel2yod`,`t4`.`REL2ONS` AS `rel2ons`,`t4`.`REL3YOB` AS `rel3yob`,`t4`.`REL3LIV` AS `rel3liv`,`t4`.`REL3YOD` AS `rel3yod`,`t4`.`REL3ONS` AS `rel3ons`,`t4`.`REL4YOB` AS `rel4yob`,`t4`.`REL4LIV` AS `rel4liv`,`t4`.`REL4YOD` AS `rel4yod`,`t4`.`REL4ONS` AS `rel4ons`,`t4`.`REL5YOB` AS `rel5yob`,`t4`.`REL5LIV` AS `rel5liv`,`t4`.`REL5YOD` AS `rel5yod`,`t4`.`REL5ONS` AS `rel5ons`,`t4`.`REL6YOB` AS `rel6yob`,`t4`.`REL6LIV` AS `rel6liv`,`t4`.`REL6YOD` AS `rel6yod`,`t4`.`REL6ONS` AS `rel6ons`,`t4`.`REL7YOB` AS `rel7yob`,`t4`.`REL7LIV` AS `rel7liv`,`t4`.`REL7YOD` AS `rel7yod`,`t4`.`REL7ONS` AS `rel7ons`,`t4`.`REL8YOB` AS `rel8yob`,`t4`.`REL8LIV` AS `rel8liv`,`t4`.`REL8YOD` AS `rel8yod`,`t4`.`REL8ONS` AS `rel8ons`,`t4`.`REL9YOB` AS `rel9yob`,`t4`.`REL9LIV` AS `rel9liv`,`t4`.`REL9YOD` AS `rel9yod`,`t4`.`REL9ONS` AS `rel9ons`,`t4`.`REL10YOB` AS `rel10yob`,`t4`.`REL10LIV` AS `rel10liv`,`t4`.`REL10YOD` AS `rel10yod`,`t4`.`REL10ONS` AS `rel10ons`,`t5`.`Packet` AS `packet`,`t5`.`FormID` AS `formid`,`t5`.`FormVer` AS `formver`,`t5`.`ADCID` AS `adcid`,`t5`.`PTID` AS `ptid`,`t5`.`VisitMo` AS `visitmo`,`t5`.`VisitDay` AS `visitday`,`t5`.`VisitYr` AS `visityr`,`t5`.`VisitNum` AS `visitnum`,`t5`.`Initials` AS `initials`,`t5`.`PacketDate` AS `packetdate`,`t5`.`PacketBy` AS `packetby`,`t5`.`PacketStatus` AS `packetstatus`,`t5`.`PacketReason` AS `packetreason`,`t5`.`PacketNotes` AS `packetnotes`,`t5`.`DSDate` AS `dsdate`,`t5`.`DSBy` AS `dsby`,`t5`.`DSStatus` AS `dsstatus`,`t5`.`DSReason` AS `dsreason`,`t5`.`DSNotes` AS `dsnotes`,`t5`.`LCDate` AS `lcdate`,`t5`.`LCBy` AS `lcby`,`t5`.`LCStatus` AS `lcstatus`,`t5`.`LCReason` AS `lcreason`,`t5`.`LCNotes` AS `lcnotes` from ((((`instrumenttracking` `t1` join `udsfamilyhistory2` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udsfamilyhistorychildren2` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) join `udsfamilyhistoryrelatives2` `t4` on((`t1`.`InstrID` = `t4`.`InstrID`))) join `udstracking` `t5` on((`t1`.`InstrID` = `t5`.`InstrID`))) where ((`t1`.`InstrType` = _latin1'UDS Family History') and (`t1`.`InstrVer` = _latin1'2')) */;
 /*!50001 DROP TABLE `lq_view_udsfamilyhistory2extended`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsfamilyhistory2extended`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsfamilyhistory2extended` AS select `t1`.`InstrID` AS `instrid`,`t2`.`SIB11YOB` AS `sib11yob`,`t2`.`SIB11LIV` AS `sib11liv`,`t2`.`SIB11YOD` AS `sib11yod`,`t2`.`SIB11DEM` AS `sib11dem`,`t2`.`SIB11ONS` AS `sib11ons`,`t2`.`SIB12YOB` AS `sib12yob`,`t2`.`SIB12LIV` AS `sib12liv`,`t2`.`SIB12YOD` AS `sib12yod`,`t2`.`SIB12DEM` AS `sib12dem`,`t2`.`SIB12ONS` AS `sib12ons`,`t2`.`SIB13YOB` AS `sib13yob`,`t2`.`SIB13LIV` AS `sib13liv`,`t2`.`SIB13YOD` AS `sib13yod`,`t2`.`SIB13DEM` AS `sib13dem`,`t2`.`SIB13ONS` AS `sib13ons`,`t2`.`SIB14YOB` AS `sib14yob`,`t2`.`SIB14LIV` AS `sib14liv`,`t2`.`SIB14YOD` AS `sib14yod`,`t2`.`SIB14DEM` AS `sib14dem`,`t2`.`SIB14ONS` AS `sib14ons`,`t2`.`SIB15YOB` AS `sib15yob`,`t2`.`SIB15LIV` AS `sib15liv`,`t2`.`SIB15YOD` AS `sib15yod`,`t2`.`SIB15DEM` AS `sib15dem`,`t2`.`SIB15ONS` AS `sib15ons`,`t2`.`SIB16YOB` AS `sib16yob`,`t2`.`SIB16LIV` AS `sib16liv`,`t2`.`SIB16YOD` AS `sib16yod`,`t2`.`SIB16DEM` AS `sib16dem`,`t2`.`SIB16ONS` AS `sib16ons`,`t2`.`SIB17YOB` AS `sib17yob`,`t2`.`SIB17LIV` AS `sib17liv`,`t2`.`SIB17YOD` AS `sib17yod`,`t2`.`SIB17DEM` AS `sib17dem`,`t2`.`SIB17ONS` AS `sib17ons`,`t2`.`SIB18YOB` AS `sib18yob`,`t2`.`SIB18LIV` AS `sib18liv`,`t2`.`SIB18YOD` AS `sib18yod`,`t2`.`SIB18DEM` AS `sib18dem`,`t2`.`SIB18ONS` AS `sib18ons`,`t2`.`SIB19YOB` AS `sib19yob`,`t2`.`SIB19LIV` AS `sib19liv`,`t2`.`SIB19YOD` AS `sib19yod`,`t2`.`SIB19DEM` AS `sib19dem`,`t2`.`SIB19ONS` AS `sib19ons`,`t2`.`SIB20YOB` AS `sib20yob`,`t2`.`SIB20LIV` AS `sib20liv`,`t2`.`SIB20YOD` AS `sib20yod`,`t2`.`SIB20DEM` AS `sib20dem`,`t2`.`SIB20ONS` AS `sib20ons`,`t3`.`KID11YOB` AS `kid11yob`,`t3`.`KID11LIV` AS `kid11liv`,`t3`.`KID11YOD` AS `kid11yod`,`t3`.`KID11DEM` AS `kid11dem`,`t3`.`KID11ONS` AS `kid11ons`,`t3`.`KID12YOB` AS `kid12yob`,`t3`.`KID12LIV` AS `kid12liv`,`t3`.`KID12YOD` AS `kid12yod`,`t3`.`KID12DEM` AS `kid12dem`,`t3`.`KID12ONS` AS `kid12ons`,`t3`.`KID13YOB` AS `kid13yob`,`t3`.`KID13LIV` AS `kid13liv`,`t3`.`KID13YOD` AS `kid13yod`,`t3`.`KID13DEM` AS `kid13dem`,`t3`.`KID13ONS` AS `kid13ons`,`t3`.`KID14YOB` AS `kid14yob`,`t3`.`KID14LIV` AS `kid14liv`,`t3`.`KID14YOD` AS `kid14yod`,`t3`.`KID14DEM` AS `kid14dem`,`t3`.`KID14ONS` AS `kid14ons`,`t3`.`KID15YOB` AS `kid15yob`,`t3`.`KID15LIV` AS `kid15liv`,`t3`.`KID15YOD` AS `kid15yod`,`t3`.`KID15DEM` AS `kid15dem`,`t3`.`KID15ONS` AS `kid15ons`,`t4`.`REL11YOB` AS `rel11yob`,`t4`.`REL11LIV` AS `rel11liv`,`t4`.`REL11YOD` AS `rel11yod`,`t4`.`REL11ONS` AS `rel11ons`,`t4`.`REL12YOB` AS `rel12yob`,`t4`.`REL12LIV` AS `rel12liv`,`t4`.`REL12YOD` AS `rel12yod`,`t4`.`REL12ONS` AS `rel12ons`,`t4`.`REL13YOB` AS `rel13yob`,`t4`.`REL13LIV` AS `rel13liv`,`t4`.`REL13YOD` AS `rel13yod`,`t4`.`REL13ONS` AS `rel13ons`,`t4`.`REL14YOB` AS `rel14yob`,`t4`.`REL14LIV` AS `rel14liv`,`t4`.`REL14YOD` AS `rel14yod`,`t4`.`REL14ONS` AS `rel14ons`,`t4`.`REL15YOB` AS `rel15yob`,`t4`.`REL15LIV` AS `rel15liv`,`t4`.`REL15YOD` AS `rel15yod`,`t4`.`REL15ONS` AS `rel15ons`,`t5`.`Packet` AS `packet`,`t5`.`FormID` AS `formid`,`t5`.`FormVer` AS `formver`,`t5`.`ADCID` AS `adcid`,`t5`.`PTID` AS `ptid`,`t5`.`VisitMo` AS `visitmo`,`t5`.`VisitDay` AS `visitday`,`t5`.`VisitYr` AS `visityr`,`t5`.`VisitNum` AS `visitnum`,`t5`.`Initials` AS `initials`,`t5`.`PacketDate` AS `packetdate`,`t5`.`PacketBy` AS `packetby`,`t5`.`PacketStatus` AS `packetstatus`,`t5`.`PacketReason` AS `packetreason`,`t5`.`PacketNotes` AS `packetnotes`,`t5`.`DSDate` AS `dsdate`,`t5`.`DSBy` AS `dsby`,`t5`.`DSStatus` AS `dsstatus`,`t5`.`DSReason` AS `dsreason`,`t5`.`DSNotes` AS `dsnotes`,`t5`.`LCDate` AS `lcdate`,`t5`.`LCBy` AS `lcby`,`t5`.`LCStatus` AS `lcstatus`,`t5`.`LCReason` AS `lcreason`,`t5`.`LCNotes` AS `lcnotes` from ((((`instrumenttracking` `t1` join `udsfamilyhistory2` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udsfamilyhistorychildren2` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) join `udsfamilyhistoryrelatives2` `t4` on((`t1`.`InstrID` = `t4`.`InstrID`))) join `udstracking` `t5` on((`t1`.`InstrID` = `t5`.`InstrID`))) where ((`t1`.`InstrType` = _latin1'UDS Family History') and (`t1`.`InstrVer` = _latin1'2')) */;
 /*!50001 DROP TABLE `lq_view_udsfaq`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsfaq`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsfaq` AS select `t1`.`InstrID` AS `instrid`,`t2`.`BILLS` AS `bills`,`t2`.`TAXES` AS `taxes`,`t2`.`SHOPPING` AS `shopping`,`t2`.`GAMES` AS `games`,`t2`.`STOVE` AS `stove`,`t2`.`MEALPREP` AS `mealprep`,`t2`.`EVENTS` AS `events`,`t2`.`PAYATTN` AS `payattn`,`t2`.`REMDATES` AS `remdates`,`t2`.`TRAVEL` AS `travel`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsfaq` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS FAQ') */;
 /*!50001 DROP TABLE `lq_view_udsformchecklist`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsformchecklist`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsformchecklist` AS select `t1`.`InstrID` AS `instrid`,`t2`.`A2SUB` AS `a2sub`,`t2`.`A2NOT` AS `a2not`,`t2`.`A2COMM` AS `a2comm`,`t2`.`A3SUB` AS `a3sub`,`t2`.`A3NOT` AS `a3not`,`t2`.`A3COMM` AS `a3comm`,`t2`.`A4SUB` AS `a4sub`,`t2`.`A4NOT` AS `a4not`,`t2`.`A4COMM` AS `a4comm`,`t2`.`B1SUB` AS `b1sub`,`t2`.`B1NOT` AS `b1not`,`t2`.`B1COMM` AS `b1comm`,`t2`.`B2SUB` AS `b2sub`,`t2`.`B2NOT` AS `b2not`,`t2`.`B2COMM` AS `b2comm`,`t2`.`B3SUB` AS `b3sub`,`t2`.`B3NOT` AS `b3not`,`t2`.`B3COMM` AS `b3comm`,`t2`.`B5SUB` AS `b5sub`,`t2`.`B5NOT` AS `b5not`,`t2`.`B5COMM` AS `b5comm`,`t2`.`B6SUB` AS `b6sub`,`t2`.`B6NOT` AS `b6not`,`t2`.`B6COMM` AS `b6comm`,`t2`.`B7SUB` AS `b7sub`,`t2`.`B7NOT` AS `b7not`,`t2`.`B7COMM` AS `b7comm`,`t2`.`B8SUB` AS `b8sub`,`t2`.`B8NOT` AS `b8not`,`t2`.`B8COMM` AS `b8comm`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsformchecklist` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Form Checklist') */;
 /*!50001 DROP TABLE `lq_view_udsgds`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsgds`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsgds` AS select `t1`.`InstrID` AS `instrid`,`t2`.`NOGDS` AS `nogds`,`t2`.`SATIS` AS `satis`,`t2`.`DROPACT` AS `dropact`,`t2`.`EMPTY` AS `empty`,`t2`.`BORED` AS `bored`,`t2`.`SPIRITS` AS `spirits`,`t2`.`AFRAID` AS `afraid`,`t2`.`HAPPY` AS `happy`,`t2`.`HELPLESS` AS `helpless`,`t2`.`STAYHOME` AS `stayhome`,`t2`.`MEMPROB` AS `memprob`,`t2`.`WONDRFUL` AS `wondrful`,`t2`.`WRTHLESS` AS `wrthless`,`t2`.`ENERGY` AS `energy`,`t2`.`HOPELESS` AS `hopeless`,`t2`.`BETTER` AS `better`,`t2`.`GDS` AS `gds`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsgds` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS GDS') */;
 /*!50001 DROP TABLE `lq_view_udshachinski`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udshachinski`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udshachinski` AS select `t1`.`InstrID` AS `instrid`,`t2`.`ABRUPT` AS `abrupt`,`t2`.`STEPWISE` AS `stepwise`,`t2`.`SOMATIC` AS `somatic`,`t2`.`EMOT` AS `emot`,`t2`.`HXHYPER` AS `hxhyper`,`t2`.`HXSTROKE` AS `hxstroke`,`t2`.`FOCLSYM` AS `foclsym`,`t2`.`FOCLSIGN` AS `foclsign`,`t2`.`HACHIN` AS `hachin`,`t2`.`CVDCOG` AS `cvdcog`,`t2`.`STROKCOG` AS `strokcog`,`t2`.`CVDIMAG` AS `cvdimag`,`t2`.`CVDIMAG1` AS `cvdimag1`,`t2`.`CVDIMAG2` AS `cvdimag2`,`t2`.`CVDIMAG3` AS `cvdimag3`,`t2`.`CVDIMAG4` AS `cvdimag4`,`t2`.`CVDIMAGX` AS `cvdimagx`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udshachinski` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Hachinski') */;
 /*!50001 DROP TABLE `lq_view_udshealthhistory`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udshealthhistory`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udshealthhistory` AS select `t1`.`InstrID` AS `instrid`,`t2`.`CVHATT` AS `cvhatt`,`t2`.`CVAFIB` AS `cvafib`,`t2`.`CVANGIO` AS `cvangio`,`t2`.`CVBYPASS` AS `cvbypass`,`t2`.`CVPACE` AS `cvpace`,`t2`.`CVCHF` AS `cvchf`,`t2`.`CVOTHR` AS `cvothr`,`t2`.`CVOTHRX` AS `cvothrx`,`t2`.`CBSTROKE` AS `cbstroke`,`t2`.`STROK1YR` AS `strok1yr`,`t2`.`STROK2YR` AS `strok2yr`,`t2`.`STROK3YR` AS `strok3yr`,`t2`.`STROK4YR` AS `strok4yr`,`t2`.`STROK5YR` AS `strok5yr`,`t2`.`STROK6YR` AS `strok6yr`,`t2`.`CBTIA` AS `cbtia`,`t2`.`TIA1YR` AS `tia1yr`,`t2`.`TIA2YR` AS `tia2yr`,`t2`.`TIA3YR` AS `tia3yr`,`t2`.`TIA4YR` AS `tia4yr`,`t2`.`TIA5YR` AS `tia5yr`,`t2`.`TIA6YR` AS `tia6yr`,`t2`.`CBOTHR` AS `cbothr`,`t2`.`CBOTHRX` AS `cbothrx`,`t2`.`PD` AS `pd`,`t2`.`PDYR` AS `pdyr`,`t2`.`PDOTHR` AS `pdothr`,`t2`.`PDOTHRYR` AS `pdothryr`,`t2`.`SEIZURES` AS `seizures`,`t2`.`TRAUMBRF` AS `traumbrf`,`t2`.`TRAUMEXT` AS `traumext`,`t2`.`TRAUMCHR` AS `traumchr`,`t2`.`NCOTHR` AS `ncothr`,`t2`.`NCOTHRX` AS `ncothrx`,`t2`.`HYPERTEN` AS `hyperten`,`t2`.`HYPERCHO` AS `hypercho`,`t2`.`DIABETES` AS `diabetes`,`t2`.`B12DEF` AS `b12def`,`t2`.`THYROID` AS `thyroid`,`t2`.`INCONTU` AS `incontu`,`t2`.`INCONTF` AS `incontf`,`t2`.`DEP2YRS` AS `dep2yrs`,`t2`.`DEPOTHR` AS `depothr`,`t2`.`ALCOHOL` AS `alcohol`,`t2`.`TOBAC30` AS `tobac30`,`t2`.`TOBAC100` AS `tobac100`,`t2`.`SMOKYRS` AS `smokyrs`,`t2`.`PACKSPER` AS `packsper`,`t2`.`QUITSMOK` AS `quitsmok`,`t2`.`ABUSOTHR` AS `abusothr`,`t2`.`ABUSX` AS `abusx`,`t2`.`PSYCDIS` AS `psycdis`,`t2`.`PSYCDISX` AS `psycdisx`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udshealthhistory` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Health History') */;
 /*!50001 DROP TABLE `lq_view_udsinformantdemo`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsinformantdemo`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsinformantdemo` AS select `t1`.`InstrID` AS `instrid`,`t2`.`INBIRMO` AS `inbirmo`,`t2`.`INBIRYR` AS `inbiryr`,`t2`.`INSEX` AS `insex`,`t2`.`NEWINF` AS `newinf`,`t2`.`INHISP` AS `inhisp`,`t2`.`INHISPOR` AS `inhispor`,`t2`.`INHISPOX` AS `inhispox`,`t2`.`INRACE` AS `inrace`,`t2`.`INRACEX` AS `inracex`,`t2`.`INRASEC` AS `inrasec`,`t2`.`INRASECX` AS `inrasecx`,`t2`.`INRATER` AS `inrater`,`t2`.`INRATERX` AS `inraterx`,`t2`.`INEDUC` AS `ineduc`,`t2`.`INRELTO` AS `inrelto`,`t2`.`INRELTOX` AS `inreltox`,`t2`.`INLIVWTH` AS `inlivwth`,`t2`.`INVISITS` AS `invisits`,`t2`.`INCALLS` AS `incalls`,`t2`.`INRELY` AS `inrely`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsinformantdemo` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Informant Demo') */;
 /*!50001 DROP TABLE `lq_view_udslabsimaging`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udslabsimaging`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udslabsimaging` AS select `t1`.`InstrID` AS `instrid`,`t2`.`CTFLM` AS `ctflm`,`t2`.`CTDIG` AS `ctdig`,`t2`.`MRI1FLM` AS `mri1flm`,`t2`.`MRI1DIG` AS `mri1dig`,`t2`.`MRI2FLM` AS `mri2flm`,`t2`.`MRI2DIG` AS `mri2dig`,`t2`.`MRI3FLM` AS `mri3flm`,`t2`.`MRI3DIG` AS `mri3dig`,`t2`.`MRISPFLM` AS `mrispflm`,`t2`.`MRISPDIG` AS `mrispdig`,`t2`.`SPECTFLM` AS `spectflm`,`t2`.`SPECTDIG` AS `spectdig`,`t2`.`PETFLM` AS `petflm`,`t2`.`PETDIG` AS `petdig`,`t2`.`DNA` AS `dna`,`t2`.`CSFANTEM` AS `csfantem`,`t2`.`SERUM` AS `serum`,`t2`.`APOE` AS `apoe`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udslabsimaging` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Labs Imaging') */;
 /*!50001 DROP TABLE `lq_view_udsmedications2`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsmedications2`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsmedications2` AS select `t1`.`InstrID` AS `instrid`,`t2`.`ANYMEDS` AS `anymeds`,`t4`.`DRUGID` AS `drugid`,`t4`.`Brand` AS `brand`,`t4`.`Generic` AS `generic`,`t4`.`NotListed` AS `notlisted`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from (((`instrumenttracking` `t1` join `udsmedications2` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udsmedicationsdetails2` `t4` on((`t1`.`InstrID` = `t4`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Medications') */;
 /*!50001 DROP TABLE `lq_view_udsmilestone`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsmilestone`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsmilestone` AS select `t1`.`InstrID` AS `instrid`,`t2`.`DECEASED` AS `deceased`,`t2`.`DEATHMO` AS `deathmo`,`t2`.`DEATHDY` AS `deathdy`,`t2`.`DEATHYR` AS `deathyr`,`t2`.`AUTOPSY` AS `autopsy`,`t2`.`DISCONT` AS `discont`,`t2`.`DISCMO` AS `discmo`,`t2`.`DISCDY` AS `discdy`,`t2`.`DISCYR` AS `discyr`,`t2`.`DISCREAS` AS `discreas`,`t2`.`DISCREAX` AS `discreax`,`t2`.`REJOINED` AS `rejoined`,`t2`.`NURSEHOME` AS `nursehome`,`t2`.`NURSEMO` AS `nursemo`,`t2`.`NURSEDY` AS `nursedy`,`t2`.`NURSEYR` AS `nurseyr`,`t2`.`PROTOCOL` AS `protocol`,`t2`.`NPSYTEST` AS `npsytest`,`t2`.`NPCOGIMP` AS `npcogimp`,`t2`.`NPPHYILL` AS `npphyill`,`t2`.`NPHOMEN` AS `nphomen`,`t2`.`NPREFUS` AS `nprefus`,`t2`.`NPOTHREA` AS `npothrea`,`t2`.`NPOTHREX` AS `npothrex`,`t2`.`PHYNDATA` AS `phyndata`,`t2`.`PHYCOG` AS `phycog`,`t2`.`PHYILL` AS `phyill`,`t2`.`PHYHOME` AS `phyhome`,`t2`.`PHYREFUS` AS `phyrefus`,`t2`.`PHYOTH` AS `phyoth`,`t2`.`PHYOTHX` AS `phyothx`,`t2`.`UDSACTIV` AS `udsactiv`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsmilestone` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Milestone') */;
 /*!50001 DROP TABLE `lq_view_udsneuropsych`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsneuropsych`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsneuropsych` AS select `t1`.`InstrID` AS `instrid`,`t2`.`MMSELOC` AS `mmseloc`,`t2`.`MMSELAN` AS `mmselan`,`t2`.`MMSELANX` AS `mmselanx`,`t2`.`MMSEORDA` AS `mmseorda`,`t2`.`MMSEORLO` AS `mmseorlo`,`t2`.`PENTAGON` AS `pentagon`,`t2`.`MMSE` AS `mmse`,`t2`.`NPSYCLOC` AS `npsycloc`,`t2`.`NPSYLAN` AS `npsylan`,`t2`.`NPSYLANX` AS `npsylanx`,`t2`.`LOGIMO` AS `logimo`,`t2`.`LOGIDAY` AS `logiday`,`t2`.`LOGIYR` AS `logiyr`,`t2`.`LOGIPREV` AS `logiprev`,`t2`.`LOGIMEM` AS `logimem`,`t2`.`DIGIF` AS `digif`,`t2`.`DIGIFLEN` AS `digiflen`,`t2`.`DIGIB` AS `digib`,`t2`.`DIGIBLEN` AS `digiblen`,`t2`.`ANIMALS` AS `animals`,`t2`.`VEG` AS `veg`,`t2`.`TRAILA` AS `traila`,`t2`.`TRAILARR` AS `trailarr`,`t2`.`TRAILALI` AS `trailali`,`t2`.`TRAILB` AS `trailb`,`t2`.`TRAILBRR` AS `trailbrr`,`t2`.`TRAILBLI` AS `trailbli`,`t2`.`WAIS` AS `wais`,`t2`.`MEMUNITS` AS `memunits`,`t2`.`MEMTIME` AS `memtime`,`t2`.`BOSTON` AS `boston`,`t2`.`COGSTAT` AS `cogstat`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsneuropsych` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Neuropsych') */;
 /*!50001 DROP TABLE `lq_view_udsnpi`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsnpi`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsnpi` AS select `t1`.`InstrID` AS `instrid`,`t2`.`NPIQINF` AS `npiqinf`,`t2`.`NPIQINFX` AS `npiqinfx`,`t2`.`DEL` AS `del`,`t2`.`DELSEV` AS `delsev`,`t2`.`HALL` AS `hall`,`t2`.`HALLSEV` AS `hallsev`,`t2`.`AGIT` AS `agit`,`t2`.`AGITSEV` AS `agitsev`,`t2`.`DEPD` AS `depd`,`t2`.`DEPDSEV` AS `depdsev`,`t2`.`ANX` AS `anx`,`t2`.`ANXSEV` AS `anxsev`,`t2`.`ELAT` AS `elat`,`t2`.`ELATSEV` AS `elatsev`,`t2`.`APA` AS `apa`,`t2`.`APASEV` AS `apasev`,`t2`.`DISN` AS `disn`,`t2`.`DISNSEV` AS `disnsev`,`t2`.`IRR` AS `irr`,`t2`.`IRRSEV` AS `irrsev`,`t2`.`MOT` AS `mot`,`t2`.`MOTSEV` AS `motsev`,`t2`.`NITE` AS `nite`,`t2`.`NITESEV` AS `nitesev`,`t2`.`APP` AS `app`,`t2`.`APPSEV` AS `appsev`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsnpi` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS NPI') */;
 /*!50001 DROP TABLE `lq_view_udsphoneinclusion`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsphoneinclusion`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsphoneinclusion` AS select `t1`.`InstrID` AS `instrid`,`t2`.`TELCOG` AS `telcog`,`t2`.`TELILL` AS `telill`,`t2`.`TELHOME` AS `telhome`,`t2`.`TELREFU` AS `telrefu`,`t2`.`TELOTHR` AS `telothr`,`t2`.`TELOTHRX` AS `telothrx`,`t2`.`TELMILE` AS `telmile`,`t2`.`TELINPER` AS `telinper`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsphoneinclusion` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Phone Inclusion') */;
 /*!50001 DROP TABLE `lq_view_udsphysical`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsphysical`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsphysical` AS select `t1`.`InstrID` AS `instrid`,`t2`.`HEIGHT` AS `height`,`t2`.`WEIGHT` AS `weight`,`t2`.`BPSYS` AS `bpsys`,`t2`.`BPDIAS` AS `bpdias`,`t2`.`HRATE` AS `hrate`,`t2`.`VISION` AS `vision`,`t2`.`VISCORR` AS `viscorr`,`t2`.`VISWCORR` AS `viswcorr`,`t2`.`HEARING` AS `hearing`,`t2`.`HEARAID` AS `hearaid`,`t2`.`HEARWAID` AS `hearwaid`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udsphysical` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Physical') */;
 /*!50001 DROP TABLE `lq_view_udssubjectdemo`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udssubjectdemo`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udssubjectdemo` AS select `t1`.`InstrID` AS `instrid`,`t2`.`INMDS` AS `inmds`,`t2`.`REASON` AS `reason`,`t2`.`REASONX` AS `reasonx`,`t2`.`REFER` AS `refer`,`t2`.`REFERX` AS `referx`,`t2`.`PRESTAT` AS `prestat`,`t2`.`PRESPART` AS `prespart`,`t2`.`SOURCE` AS `source`,`t2`.`BIRTHMO` AS `birthmo`,`t2`.`BIRTHYR` AS `birthyr`,`t2`.`SEX` AS `sex`,`t2`.`HISPANIC` AS `hispanic`,`t2`.`HISPOR` AS `hispor`,`t2`.`HISPORX` AS `hisporx`,`t2`.`RACE` AS `race`,`t2`.`RACEX` AS `racex`,`t2`.`RACESEC` AS `racesec`,`t2`.`RACESECX` AS `racesecx`,`t2`.`RACETER` AS `raceter`,`t2`.`RACETERX` AS `raceterx`,`t2`.`PRIMLANG` AS `primlang`,`t2`.`PRIMLANX` AS `primlanx`,`t2`.`EDUC` AS `educ`,`t2`.`LIVSIT` AS `livsit`,`t2`.`LIVSITX` AS `livsitx`,`t2`.`INDEPEND` AS `independ`,`t2`.`RESIDENC` AS `residenc`,`t2`.`RESIDENX` AS `residenx`,`t2`.`ZIP` AS `zip`,`t2`.`MARISTAT` AS `maristat`,`t2`.`MARISTAX` AS `maristax`,`t2`.`HANDED` AS `handed`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udssubjectdemo` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Subject Demo') */;
 /*!50001 DROP TABLE `lq_view_udssymptomsonset`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udssymptomsonset`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udssymptomsonset` AS select `t1`.`InstrID` AS `instrid`,`t2`.`B9CHG` AS `b9chg`,`t2`.`DECSUB` AS `decsub`,`t2`.`DECIN` AS `decin`,`t2`.`DECCLIN` AS `decclin`,`t2`.`DECAGE` AS `decage`,`t2`.`COGMEM` AS `cogmem`,`t2`.`COGJUDG` AS `cogjudg`,`t2`.`COGLANG` AS `coglang`,`t2`.`COGVIS` AS `cogvis`,`t2`.`COGATTN` AS `cogattn`,`t2`.`COGFLUC` AS `cogfluc`,`t2`.`COGOTHR` AS `cogothr`,`t2`.`COGOTHRX` AS `cogothrx`,`t2`.`COGFRST` AS `cogfrst`,`t2`.`COGFRSTX` AS `cogfrstx`,`t2`.`COGMODE` AS `cogmode`,`t2`.`COGMODEX` AS `cogmodex`,`t2`.`BEAPATHY` AS `beapathy`,`t2`.`BEDEP` AS `bedep`,`t2`.`BEVHALL` AS `bevhall`,`t2`.`BEAHALL` AS `beahall`,`t2`.`BEVWELL` AS `bevwell`,`t2`.`BEDEL` AS `bedel`,`t2`.`BEDISIN` AS `bedisin`,`t2`.`BEIRRIT` AS `beirrit`,`t2`.`BEAGIT` AS `beagit`,`t2`.`BEPERCH` AS `beperch`,`t2`.`BEREM` AS `berem`,`t2`.`BEOTHR` AS `beothr`,`t2`.`BEOTHRX` AS `beothrx`,`t2`.`BEFRST` AS `befrst`,`t2`.`BEFRSTX` AS `befrstx`,`t2`.`BEMODE` AS `bemode`,`t2`.`BEMODEX` AS `bemodex`,`t2`.`MOGAIT` AS `mogait`,`t2`.`MOFALLS` AS `mofalls`,`t2`.`MOTREM` AS `motrem`,`t2`.`MOSLOW` AS `moslow`,`t2`.`MOFRST` AS `mofrst`,`t2`.`MOMODE` AS `momode`,`t2`.`MOMODEX` AS `momodex`,`t2`.`MOMOPARK` AS `momopark`,`t2`.`COURSE` AS `course`,`t2`.`FRSTCHG` AS `frstchg`,`t3`.`Packet` AS `packet`,`t3`.`FormID` AS `formid`,`t3`.`FormVer` AS `formver`,`t3`.`ADCID` AS `adcid`,`t3`.`PTID` AS `ptid`,`t3`.`VisitMo` AS `visitmo`,`t3`.`VisitDay` AS `visitday`,`t3`.`VisitYr` AS `visityr`,`t3`.`VisitNum` AS `visitnum`,`t3`.`Initials` AS `initials`,`t3`.`PacketDate` AS `packetdate`,`t3`.`PacketBy` AS `packetby`,`t3`.`PacketStatus` AS `packetstatus`,`t3`.`PacketReason` AS `packetreason`,`t3`.`PacketNotes` AS `packetnotes`,`t3`.`DSDate` AS `dsdate`,`t3`.`DSBy` AS `dsby`,`t3`.`DSStatus` AS `dsstatus`,`t3`.`DSReason` AS `dsreason`,`t3`.`DSNotes` AS `dsnotes`,`t3`.`LCDate` AS `lcdate`,`t3`.`LCBy` AS `lcby`,`t3`.`LCStatus` AS `lcstatus`,`t3`.`LCReason` AS `lcreason`,`t3`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udssymptomsonset` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udstracking` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS Symptoms Onset') */;
 /*!50001 DROP TABLE `lq_view_udsupdrs`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_udsupdrs`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_udsupdrs` AS select `t1`.`InstrID` AS `instrid`,`t3`.`PDNORMAL` AS `pdnormal`,`t3`.`SPEECH` AS `speech`,`t3`.`SPEECHX` AS `speechx`,`t3`.`FACEXP` AS `facexp`,`t3`.`FACEXPX` AS `facexpx`,`t3`.`TRESTFAC` AS `trestfac`,`t3`.`TRESTFAX` AS `trestfax`,`t3`.`TRESTRHD` AS `trestrhd`,`t3`.`TRESTRHX` AS `trestrhx`,`t3`.`TRESTLHD` AS `trestlhd`,`t3`.`TRESTLHX` AS `trestlhx`,`t3`.`TRESTRFT` AS `trestrft`,`t3`.`TRESTRFX` AS `trestrfx`,`t3`.`TRESTLFT` AS `trestlft`,`t3`.`TRESTLFX` AS `trestlfx`,`t3`.`TRACTRHD` AS `tractrhd`,`t3`.`TRACTRHX` AS `tractrhx`,`t3`.`TRACTLHD` AS `tractlhd`,`t3`.`TRACTLHX` AS `tractlhx`,`t3`.`RIGDNECK` AS `rigdneck`,`t3`.`RIGDNEX` AS `rigdnex`,`t3`.`RIGDUPRT` AS `rigduprt`,`t3`.`RIGDUPRX` AS `rigduprx`,`t3`.`RIGDUPLF` AS `rigduplf`,`t3`.`RIGDUPLX` AS `rigduplx`,`t3`.`RIGDLORT` AS `rigdlort`,`t3`.`RIGDLORX` AS `rigdlorx`,`t3`.`RIGDLOLF` AS `rigdlolf`,`t3`.`RIGDLOLX` AS `rigdlolx`,`t3`.`TAPSRT` AS `tapsrt`,`t3`.`TAPSRTX` AS `tapsrtx`,`t3`.`TAPSLF` AS `tapslf`,`t3`.`TAPSLFX` AS `tapslfx`,`t3`.`HANDMOVR` AS `handmovr`,`t3`.`HANDMVRX` AS `handmvrx`,`t3`.`HANDMOVL` AS `handmovl`,`t3`.`HANDMVLX` AS `handmvlx`,`t3`.`HANDALTR` AS `handaltr`,`t3`.`HANDATRX` AS `handatrx`,`t3`.`HANDALTL` AS `handaltl`,`t3`.`HANDATLX` AS `handatlx`,`t3`.`LEGRT` AS `legrt`,`t3`.`LEGRTX` AS `legrtx`,`t3`.`LEGLF` AS `leglf`,`t3`.`LEGLFX` AS `leglfx`,`t3`.`ARISING` AS `arising`,`t3`.`ARISINGX` AS `arisingx`,`t3`.`POSTURE` AS `posture`,`t3`.`POSTUREX` AS `posturex`,`t3`.`GAIT` AS `gait`,`t3`.`GAITX` AS `gaitx`,`t3`.`POSSTAB` AS `posstab`,`t3`.`POSSTABX` AS `posstabx`,`t3`.`BRADYKIN` AS `bradykin`,`t3`.`BRADYKIX` AS `bradykix`,`t2`.`Packet` AS `packet`,`t2`.`FormID` AS `formid`,`t2`.`FormVer` AS `formver`,`t2`.`ADCID` AS `adcid`,`t2`.`PTID` AS `ptid`,`t2`.`VisitMo` AS `visitmo`,`t2`.`VisitDay` AS `visitday`,`t2`.`VisitYr` AS `visityr`,`t2`.`VisitNum` AS `visitnum`,`t2`.`Initials` AS `initials`,`t2`.`PacketDate` AS `packetdate`,`t2`.`PacketBy` AS `packetby`,`t2`.`PacketStatus` AS `packetstatus`,`t2`.`PacketReason` AS `packetreason`,`t2`.`PacketNotes` AS `packetnotes`,`t2`.`DSDate` AS `dsdate`,`t2`.`DSBy` AS `dsby`,`t2`.`DSStatus` AS `dsstatus`,`t2`.`DSReason` AS `dsreason`,`t2`.`DSNotes` AS `dsnotes`,`t2`.`LCDate` AS `lcdate`,`t2`.`LCBy` AS `lcby`,`t2`.`LCStatus` AS `lcstatus`,`t2`.`LCReason` AS `lcreason`,`t2`.`LCNotes` AS `lcnotes` from ((`instrumenttracking` `t1` join `udstracking` `t2` on((`t1`.`InstrID` = `t2`.`InstrID`))) join `udsupdrs` `t3` on((`t1`.`InstrID` = `t3`.`InstrID`))) where (`t1`.`InstrType` = _latin1'UDS UPDRS') */;
 /*!50001 DROP TABLE `lq_view_visit`*/;
 /*!50001 DROP VIEW IF EXISTS `lq_view_visit`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `lq_view_visit` AS select `visit`.`VID` AS `VID`,`visit`.`PIDN` AS `PIDN_Visit`,`visit`.`ProjName` AS `ProjName`,`visit`.`VLocation` AS `VLocation`,`visit`.`VType` AS `VType`,`visit`.`VWith` AS `VWith`,`visit`.`VDate` AS `VDate`,`visit`.`VTime` AS `VTime`,`visit`.`VStatus` AS `VStatus`,`visit`.`VNotes` AS `VNotes`,`visit`.`FUMonth` AS `FUMonth`,`visit`.`FUYear` AS `FUYear`,`visit`.`FUNote` AS `FUNote`,`visit`.`WList` AS `WList`,`visit`.`WListNote` AS `WListNote`,`visit`.`WListDate` AS `WListDate`,`visit`.`VShortDesc` AS `VShortDesc`,`visit`.`AgeAtVisit` AS `AgeAtVisit`,`visit`.`modified` AS `modified` from `visit` where (`visit`.`VID` > 0) */;
 /*!50001 DROP TABLE `patient_age`*/;
 /*!50001 DROP VIEW IF EXISTS `patient_age`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `patient_age` AS select `patient`.`PIDN` AS `PIDN`,((if(isnull(date_format(`patient`.`DOD`,_utf8'%Y')),date_format(now(),_utf8'%Y'),date_format(`patient`.`DOD`,_utf8'%Y')) - date_format(`patient`.`DOB`,_utf8'%Y')) - (if(isnull(date_format(`patient`.`DOD`,_utf8'00-%m-%d')),date_format(now(),_utf8'00-%m-%d'),date_format(`patient`.`DOD`,_utf8'00-%m-%d')) < date_format(`patient`.`DOB`,_utf8'00-%m-%d'))) AS `AGE` from `patient` */;
 /*!50001 DROP TABLE `vwrptprojectpatientstatus`*/;
 /*!50001 DROP VIEW IF EXISTS `vwrptprojectpatientstatus`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `vwrptprojectpatientstatus` AS select `p`.`PIDN` AS `PIDN`,`p`.`FullNameRev` AS `FullNameRev`,`pa`.`AGE` AS `AGE`,`p`.`Gender` AS `Gender`,`lps`.`ProjName` AS `ProjName`,`lps`.`LatestDate` AS `StatusDate`,`lps`.`LatestDesc` AS `Status`,`lps`.`LatestNote` AS `StatusNote`,(case `lps`.`LatestDesc` when _utf8'ACTIVE' then 0 when _utf8'FOLLOW-UP' then 1 when _utf8'CANCELED' then 5 when _utf8'CLOSED' then 6 when _utf8'INACTIVE' then 4 when _utf8'PRE-APPOINTMENT' then 2 when _utf8'PENDING' then 3 when _utf8'ENROLLED' then 7 when _utf8'DECEASED' then 8 when _utf8'DECEASED-PERFORMED' then 9 when _utf8'DECEASED-NOT PERFORMED' then 10 when _utf8'REFERRED' then 11 when _utf8'ELIGIBLE' then 12 when _utf8'INELIGIBLE' then 13 when _utf8'WITHDREW' then 14 when _utf8'EXCLUDED' then 15 when _utf8'DECLINED' then 16 else 17 end) AS `StatusOrder`,`pu`.`Project` AS `ProjUnitDesc`,`pu`.`Project` AS `Project`,_utf8'OVERALL' AS `Unit`,1 AS `UnitOrder` from (((`patient` `p` join `enrollmentstatus` `lps` on((`p`.`PIDN` = `lps`.`PIDN`))) join `patient_age` `pa` on((`p`.`PIDN` = `pa`.`PIDN`))) join `projectunit` `pu` on((`lps`.`ProjName` = `pu`.`ProjUnitDesc`))) union select `p`.`PIDN` AS `PIDN`,`p`.`FullNameRev` AS `FullNameRev`,`pa`.`AGE` AS `AGE`,`p`.`Gender` AS `Gender`,`lps`.`ProjName` AS `ProjName`,`lps`.`LatestDate` AS `LatestDate`,`lps`.`LatestDesc` AS `LatestDesc`,`lps`.`LatestNote` AS `StatusNote`,(case `lps`.`LatestDesc` when _utf8'ACTIVE' then 0 when _utf8'FOLLOW-UP' then 1 when _utf8'CANCELED' then 5 when _utf8'CLOSED' then 6 when _utf8'INACTIVE' then 4 when _utf8'PRE-APPOINTMENT' then 2 when _utf8'PENDING' then 3 when _utf8'ENROLLED' then 7 when _utf8'DECEASED' then 8 when _utf8'DECEASED-PERFORMED' then 9 when _utf8'DECEASED-NOT PERFORMED' then 10 when _utf8'REFERRED' then 11 when _utf8'ELIGIBLE' then 12 when _utf8'INELIGIBLE' then 13 when _utf8'WITHDREW' then 14 when _utf8'EXCLUDED' then 15 when _utf8'DECLINED' then 16 else 17 end) AS `StatusOrder`,`pu`.`ProjUnitDesc` AS `ProjUnitDesc`,`pu`.`Project` AS `Project`,`pu`.`Unit` AS `Unit`,2 AS `UnitOrder` from (((`patient` `p` join `enrollmentstatus` `lps` on((`p`.`PIDN` = `lps`.`PIDN`))) join `patient_age` `pa` on((`p`.`PIDN` = `pa`.`PIDN`))) join `projectunit` `pu` on((`lps`.`ProjName` = `pu`.`ProjUnitDesc`))) where (`pu`.`Unit` is not null) */;
 /*!50001 DROP TABLE `vwrptprojectvisitlist`*/;
 /*!50001 DROP VIEW IF EXISTS `vwrptprojectvisitlist`*/;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `vwrptprojectvisitlist` AS select `p`.`PIDN` AS `PIDN`,`p`.`FullNameRev` AS `FullNameRev`,`p`.`TransLanguage` AS `TransLanguage`,`p`.`Gender` AS `Gender`,`pa`.`AGE` AS `AGE`,`v`.`VLocation` AS `VLocation`,`v`.`VType` AS `VType`,`v`.`VWith` AS `VWith`,`v`.`VDate` AS `VDate`,`v`.`VStatus` AS `VStatus`,`v`.`ProjName` AS `ProjName`,`v`.`VNotes` AS `VNotes`,cast(`v`.`VDate` as date) AS `VDateNoTime` from ((`patient` `p` join `visit` `v` on((`p`.`PIDN` = `v`.`PIDN`))) join `patient_age` `pa` on((`p`.`PIDN` = `pa`.`PIDN`))) where (not((`v`.`VStatus` like _latin1'%CANC%'))) */;
 
 INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms','0','Absent',1,'2009-05-12 14:10:57' FROM `list` where `ListName`='AbsentPresent';
