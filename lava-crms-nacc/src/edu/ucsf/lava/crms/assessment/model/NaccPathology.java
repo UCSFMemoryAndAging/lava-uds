@@ -136,7 +136,11 @@ public class NaccPathology extends Instrument implements UdsUploadable {
 			return;
 		}
 		setPtid((patient.getId()!= null)?patient.getId().toString():null);
+		//TODO: we really should not have a NpDOD field since one part may be unknown.  In meantime, set DOD first, then set the parts individually to possibly override
 		setNpdod(patient.getDeathDate());
+		setNpdodmo(patient.getDeathMonth());
+		setNpdoddy(patient.getDeathDay());
+		setNpdodyr(patient.getDeathYear());
 		setNpsex(patient.getGender() == null ? null : patient.getGender().shortValue());
 		setNpdage(patient.getAge().shortValue());
 	}
