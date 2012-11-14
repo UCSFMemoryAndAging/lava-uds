@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with util_LavaWeb_JasperEntityReport on Dec 17 2007 12:42PM -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<!-- since the only output format for this report is csv, pageHeight is ignored because page breaks
+are not output as part of csv format -->
+<jasperReport
+		 name="NaccNpExtract"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="1000"
+		 pageHeight="10"
+		 columnWidth="1000"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="AllSectionsNoDetail"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+	
+	<template>"reportStyles.jrtx"</template>
+ 
+	<field name="udsUploadCsvRecord" class="java.lang.String"/>
+	
+	<detail>
+		<!-- use height="1" because the style "dataOnlyListValue is a font of size 1. since this is a data only format,
+		    that works fine. for width "1000" is the maximum size of all the column values combined. -->
+		<band height="1"  isSplitAllowed="true" >
+			<frame>
+				<reportElement x="0" y="0" width="1000" height="1" positionType="Float" stretchType="RelativeToTallestObject"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="1000" height="1" positionType="Float" style="dataOnlyListValue"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{udsUploadCsvRecord}]]></textFieldExpression>
+				</textField>
+
+			</frame>				
+			
+		</band>
+	</detail>
+
+</jasperReport>

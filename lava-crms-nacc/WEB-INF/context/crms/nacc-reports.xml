@@ -48,6 +48,37 @@
 		</property>		
 	</bean>
 	
+	<bean name="crms/reporting/reports/naccNpExtractReport" class="edu.ucsf.lava.core.reporting.controller.LavaJasperReportsCsvView">
+		<property name="reportDataKey" value="naccNpExtractRecords"/>
+		
+		<property name="url" value="/WEB-INF/report/crms/reporting/reports/naccNpExtract.jrxml"/>
+		<property name="headers">
+			<map>
+				<entry key="Content-Disposition" value="attachment; filename=NaccNpExtract.csv"/>
+			</map>
+		</property>		
+		<property name="exporterParameters">
+			<map>
+				<!-- because we format the entire csv row for each model object as a single property of the model objects
+				 we need to fake out the normal behavior of the cvs exported which would put text delimiters around our row
+				 because it includes the field delimiter of "," we need to set the field delimiter to something that won't 
+				 show up in the output records. 
+				 
+				 The reason the entire csv row is created by the model object is because the same output file needs to 
+				 include records with variable number of fields and this was not possible given the basic functionality of 
+				 the csv exporter.
+				-->
+				<entry key="net.sf.jasperreports.engine.export.JRCsvExporterParameter.FIELD_DELIMITER" value="[###]"/>
+				<!-- override the record delimiter because the default is the system delimiter for the OS that the server 
+					is running on, e.g. Linux is newline, \n, \u000a -->
+				<!-- the following did not work because for some reason when the XML text is set on the Java class,
+				 	the backslashes are interpreted as literal characters, not escape chars. so instead, this
+				 	exporter parameter is set in the CustomJasperReportsCsvView class.
+				<entry key="net.sf.jasperreports.engine.export.JRCsvExporterParameter.RECORD_DELIMITER" value="\r\n"/>
+				-->				
+			</map>
+		</property>		
+	</bean>
 	
 	
 </beans>	

@@ -18,12 +18,16 @@
 
 	
 	<bean id="lava.crms.reporting.reports.udsExtract" parent="crmsReportFlowAction"/>
+	<bean id="lava.crms.reporting.reports.naccNpExtract" parent="crmsReportFlowAction"/>
 
 
 	<!-- subclassed report handler to add custom criteria handling -->
 	<bean id="udsExtractFormAction" parent="crmsEntityComponentFormAction"><constructor-arg><list>
     	<bean id="udsExtractHandler" class="edu.ucsf.lava.crms.assessment.controller.UdsExtractComponentHandler" parent="crmsDateCriteriaReportHandler"/>
     </list></constructor-arg></bean>		
-
+	
+	<bean id="naccNpExtractFormAction" parent="crmsEntityComponentFormAction"><constructor-arg><list>
+    	<bean id="naccNpExtractHandler" class="edu.ucsf.lava.crms.assessment.controller.NaccNpExtractComponentHandler" parent="crmsDateCriteriaReportHandler"/>
+    </list></constructor-arg></bean>	
 	
 </beans>
