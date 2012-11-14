@@ -96,8 +96,10 @@
    		</constructor-arg>
     </bean>
 	
+	<!-- naccpathology9: though UdsUploadable, it is not a UdsInstrument -->
+	<bean id="naccpathology9FormAction" parent="instrumentFormAction"/>  
+	
 	<bean id="mdsstatusFormAction" parent="udsInstrumentFormAction"/>
-	<bean id="naccpathology9FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsappraisal1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsappraisal2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udscdr1FormAction" parent="udsInstrumentFormAction"/>
