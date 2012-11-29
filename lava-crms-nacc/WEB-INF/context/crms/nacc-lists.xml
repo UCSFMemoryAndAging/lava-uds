@@ -236,7 +236,7 @@
 		<property name="defaultMaxValue" value="42"/>
 	</bean>
 	
-	<bean id="list.uds.range0_80" parent="list.numericRangeUds">
+	<bean id="list.uds.range0_80" parent="list.uds.rangeNAUnknown">
 		<property name="defaultMaxValue" value="80"/>
 	</bean>	
 
