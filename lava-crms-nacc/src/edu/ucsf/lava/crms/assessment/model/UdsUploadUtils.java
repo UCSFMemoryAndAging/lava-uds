@@ -100,6 +100,16 @@ public class UdsUploadUtils {
 	 * @param fieldValue
 	 * @return
 	 */
+	static public String formatField(Double value){
+		if(value == null || value < 0){return "";}
+		return value.toString();
+	}
+	/**
+	 * Returns the fieldvalue formatted correctly for the 
+	 * UDS CSV file format.  
+	 * @param fieldValue
+	 * @return
+	 */
 	static public String formatField(int value){
 		if( value < 0){return "";}
 		return new Integer(value).toString();
