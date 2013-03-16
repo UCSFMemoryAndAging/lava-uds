@@ -34,6 +34,7 @@ import edu.ucsf.lava.crms.assessment.model.Instrument;
 import edu.ucsf.lava.crms.assessment.model.InstrumentConfig;
 import edu.ucsf.lava.crms.assessment.model.MdsStatus;
 import edu.ucsf.lava.crms.assessment.model.UdsFormChecklist;
+import edu.ucsf.lava.crms.assessment.model.UdsFtldFormChecklist;
 import edu.ucsf.lava.crms.assessment.model.UdsInstrument;
 import edu.ucsf.lava.crms.assessment.model.UdsInstrumentTracking;
 import edu.ucsf.lava.crms.assessment.model.UdsUploadUtils;
@@ -225,6 +226,7 @@ public class UdsExtractComponentHandler extends CrmsReportComponentHandler {
  		LavaDaoFilter filterVisit;
  		boolean T_Visit;
  		UdsFormChecklist z1 = null;
+ 		UdsFtldFormChecklist z1f = null;
  		Long last_visit_id = (long)-1;
  		Iterator<Instrument> it = udsExtractInstruments.iterator();
  		while (it.hasNext()) {
@@ -241,12 +243,13 @@ public class UdsExtractComponentHandler extends CrmsReportComponentHandler {
  					filterVisit.setAlias("visit", "visit");
  					filterVisit.addDaoParam(filterVisit.daoEqualityParam("visit.id", new Long(last_visit_id)));
  					z1 = (UdsFormChecklist)UdsFormChecklist.MANAGER.getOne(filterVisit);
+ 					z1f = (UdsFtldFormChecklist)UdsFtldFormChecklist.MANAGER.getOne(filterVisit);
  				}
  				// a Z1 should always be found, and never removed; however, include a check anyway
  				if (z1 == null) continue;  // nothing to base any removal
  			
  				// if found not to be included, remove it from list
- 				if (!UdsUploadUtils.includeInstrBasedOnZ1(i, z1))
+ 				if (!UdsUploadUtils.includeInstrBasedOnZ1(i, z1, z1f))
  					it.remove();
  			}
  		}

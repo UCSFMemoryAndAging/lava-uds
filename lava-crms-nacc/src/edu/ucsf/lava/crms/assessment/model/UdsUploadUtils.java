@@ -19,7 +19,13 @@ public class UdsUploadUtils {
 	//   add ability to supply a suffix to formId
 	static public  StringBuffer getCommonFields(UdsInstrument udsInstrument, String formIdSuffix){
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(formatField(udsInstrument.getPacket())).append(",");
+		
+		// if FTLD module instrument, append "F" after packet type as required by NACC
+		if (udsInstrument.getFormId().equals("A3A") || udsInstrument.getFormId().endsWith("F"))
+			buffer.append(formatField(udsInstrument.getPacket())).append("F").append(",");
+		else
+			buffer.append(formatField(udsInstrument.getPacket())).append(",");
+		
 		buffer.append(formatField(udsInstrument.getFormId())).append(formIdSuffix).append(",");
 		buffer.append(formatField(udsInstrument.getFormVer())).append(",");
 		buffer.append(formatField(udsInstrument.getAdcId())).append(",");
@@ -241,39 +247,63 @@ public class UdsUploadUtils {
 	 * returns whether a uds instrument was explicitly assigned NOT to be included in the submission packet
 	 *   based on the Z1 form.  If Z1 has not been completed yet, it is still assumed to be included.
 	 */
-	static public boolean includeInstrBasedOnZ1(UdsInstrument i, UdsFormChecklist z1){
+	static public boolean includeInstrBasedOnZ1(UdsInstrument i, UdsFormChecklist z1, UdsFtldFormChecklist z1f){
 		if (i == null) return false;  // don't include nothing
+		
 		if (z1 == null) return true;  // i.e. no filtering is done
-		
-		// always include these
-		if (i.getFormId().equals("A1")) return true;
-		if (i.getFormId().equals("A5")) return true;
-		if (i.getFormId().equals("B4")) return true;
-		if (i.getFormId().equals("B9")) return true;
-		if (i.getFormId().equals("D1")) return true;
-		if (i.getFormId().equals("E1")) return true;
-		if (i.getFormId().equals("Z1")) return true;
-		
-		// the following are included unless Z1 *explicitly* says not to submit it
-		//   (if Z1 hadn't been filled out yet, then for now, assume it to be included)
-		if (i.getFormId().equals("A2") && (z1.getA2Sub()==null || z1.getA2Sub().equals((short)1))) return true;
-		if (i.getFormId().equals("A3") && (z1.getA3Sub()==null || z1.getA3Sub().equals((short)1))) return true;
-		if (i.getFormId().equals("A4") && (z1.getA4Sub()==null || z1.getA4Sub().equals((short)1))) return true;
-		if (i.getFormId().equals("B5") && (z1.getB5Sub()==null || z1.getB5Sub().equals((short)1))) return true;
-		if (i.getFormId().equals("B7") && (z1.getB7Sub()==null || z1.getB7Sub().equals((short)1))) return true;
-
-		// the following are included based on whether it was a telephone follow up visit
-		if (z1.getVisit().getVisitType().equals("Telephone Follow Up")) {
-			if (i.getFormId().equals("T1")) return true;			
-		} else {
-			if (i.getFormId().equals("C1")) return true;
+		else
+		{
+			// always include these
+			if (i.getFormId().equals("A1")) return true;
+			if (i.getFormId().equals("A5")) return true;
+			if (i.getFormId().equals("B4")) return true;
+			if (i.getFormId().equals("B9")) return true;
+			if (i.getFormId().equals("D1")) return true;
+			if (i.getFormId().equals("E1")) return true;
+			if (i.getFormId().equals("Z1")) return true;	
 			
 			// the following are included unless Z1 *explicitly* says not to submit it
-			if (i.getFormId().equals("B1") && (z1.getB1Sub()==null || z1.getB1Sub().equals((short)1))) return true;
-			if (i.getFormId().equals("B2") && (z1.getB2Sub()==null || z1.getB2Sub().equals((short)1))) return true;
-			if (i.getFormId().equals("B3") && (z1.getB3Sub()==null || z1.getB3Sub().equals((short)1))) return true;
-			if (i.getFormId().equals("B6") && (z1.getB6Sub()==null || z1.getB6Sub().equals((short)1))) return true;				
-			if (i.getFormId().equals("B8") && (z1.getB8Sub()==null || z1.getB8Sub().equals((short)1))) return true;
+			//   (if Z1 hadn't been filled out yet, then for now, assume it to be included)
+			if (i.getFormId().equals("A2") && (z1.getA2Sub()==null || z1.getA2Sub().equals((short)1))) return true;
+			if (i.getFormId().equals("A3") && (z1.getA3Sub()==null || z1.getA3Sub().equals((short)1))) return true;
+			if (i.getFormId().equals("A4") && (z1.getA4Sub()==null || z1.getA4Sub().equals((short)1))) return true;
+			if (i.getFormId().equals("B5") && (z1.getB5Sub()==null || z1.getB5Sub().equals((short)1))) return true;
+			if (i.getFormId().equals("B7") && (z1.getB7Sub()==null || z1.getB7Sub().equals((short)1))) return true;
+	
+			// the following are included based on whether it was a telephone follow up visit
+			if (z1.getVisit().getVisitType().equals("Telephone Follow Up")) {
+				if (i.getFormId().equals("T1")) return true;			
+			} else {
+				if (i.getFormId().equals("C1")) return true;
+				
+				// the following are included unless Z1 *explicitly* says not to submit it
+				if (i.getFormId().equals("B1") && (z1.getB1Sub()==null || z1.getB1Sub().equals((short)1))) return true;
+				if (i.getFormId().equals("B2") && (z1.getB2Sub()==null || z1.getB2Sub().equals((short)1))) return true;
+				if (i.getFormId().equals("B3") && (z1.getB3Sub()==null || z1.getB3Sub().equals((short)1))) return true;
+				if (i.getFormId().equals("B6") && (z1.getB6Sub()==null || z1.getB6Sub().equals((short)1))) return true;				
+				if (i.getFormId().equals("B8") && (z1.getB8Sub()==null || z1.getB8Sub().equals((short)1))) return true;
+			}
+		}
+
+		// FTLD Module
+		if (z1f == null) return true;
+		else
+		{
+			if (i.getFormId().equals("B3F")) return true;
+			if (i.getFormId().equals("B9F")) return true;
+			if (i.getFormId().equals("C1F")) return true;
+			if (i.getFormId().equals("C2F")) return true;
+			if (i.getFormId().equals("C3F")) return true;
+			if (i.getFormId().equals("E2F")) return true;
+			if (i.getFormId().equals("E3F")) return true;
+			if (i.getFormId().equals("Z1F")) return true;
+			
+			// included unless Z1F says not to submit
+			if (i.getFormId().equals("A3A") && (z1f.getFtda3afs()==null || z1f.getFtda3afs().equals((short)1))) return true;
+			if (i.getFormId().equals("A3F") && (z1f.getFtda3fs()==null || z1f.getFtda3fs().equals((short)1))) return true;
+			if (i.getFormId().equals("C4F") && (z1f.getFtdc4fs()==null || z1f.getFtdc4fs().equals((short)1))) return true;
+			if (i.getFormId().equals("C5F") && (z1f.getFtdc5fs()==null || z1f.getFtdc5fs().equals((short)1))) return true;
+			if (i.getFormId().equals("C6F") && (z1f.getFtdc6fs()==null || z1f.getFtdc6fs().equals((short)1))) return true;			
 		}
 		
 		// if made it through, then this instrument is not to be included
