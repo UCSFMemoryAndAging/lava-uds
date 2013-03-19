@@ -1806,4 +1806,6 @@ INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,
 INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,`dbColumn`,`dbType`,`dbLength`,`dbPrecision`,`dbScale`,`dbOrder`,`hibernateProperty`,`hibernateType`,`hibernateClass`,`hibernateNotNull`,`modified`) VALUES('lava','crms-nacc','udsftldupdrs2','ftdgtypx','udsftldupdrs','FTDGTYPX','varchar',60,NULL,NULL,15,'ftdgtypx','string',NULL,'No','2012-10-01 14:27:20');
 
 
+INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
+VALUES ('lava-crms-nacc-data','3.2.0','2012-10-12',3,2,0,0);
   

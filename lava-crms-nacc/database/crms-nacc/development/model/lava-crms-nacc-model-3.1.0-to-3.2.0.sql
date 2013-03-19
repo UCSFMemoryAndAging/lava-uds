@@ -682,3 +682,8 @@ ALTER TABLE `udsftldupdrs` ADD CONSTRAINT `udsftldupdrs__InstrID`
  REFERENCES `instrumenttracking` (`InstrID`)
  ON DELETE NO ACTION
  ON UPDATE NO ACTION, ADD INDEX `udsftldupdrs__InstrID` (`InstrID` ASC);
+
+ 
+INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
+VALUES ('lava-crms-nacc-model','3.2.0','2012-10-12',3,2,0,1);
+ 

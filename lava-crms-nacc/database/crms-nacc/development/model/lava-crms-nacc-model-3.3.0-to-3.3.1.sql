@@ -67,4 +67,6 @@ alter table udsmedicationsvit1 modify VSTS DECIMAL(12,3);
 update hibernateproperty set dbType='decimal',dbPrecision=12,dbScale=3,hibernateType='double' 
 where dbTable='udsmedicationsvit1' and  dbColumn in ('VSAS','VSBS','VSCS','VSDS','VSES','VSFS','VSGS','VSHS','VSIS','VSJS','VSKS','VSLS','VSMS','VSNS','VSOS','VSPS','VSQS','VSRS','VSSS','VSTS');
 
+INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
+VALUES ('lava-crms-nacc-model','3.3.1','2013-02-25',3,3,1,1);
  
