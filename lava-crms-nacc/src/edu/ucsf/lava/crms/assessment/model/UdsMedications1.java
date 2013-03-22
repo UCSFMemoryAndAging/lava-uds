@@ -25,7 +25,7 @@ public class UdsMedications1 extends UdsInstrument {
 
 	private Short pmeds;
 	private String pma;
-	private Long pmas;
+	private Double pmas;
 	private Short pmasu;
 	private Short pmaf;
 	private Short pmafu;
@@ -33,7 +33,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmapf;
 	private Short pmapfu;
 	private String pmb;
-	private Long pmbs;
+	private Double pmbs;
 	private Short pmbsu;
 	private Short pmbf;
 	private Short pmbfu;
@@ -41,7 +41,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmbpf;
 	private Short pmbpfu;
 	private String pmc;
-	private Long pmcs;
+	private Double pmcs;
 	private Short pmcsu;
 	private Short pmcf;
 	private Short pmcfu;
@@ -49,7 +49,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmcpf;
 	private Short pmcpfu;
 	private String pmd;
-	private Long pmds;
+	private Double pmds;
 	private Short pmdsu;
 	private Short pmdf;
 	private Short pmdfu;
@@ -57,7 +57,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmdpf;
 	private Short pmdpfu;
 	private String pme;
-	private Long pmes;
+	private Double pmes;
 	private Short pmesu;
 	private Short pmef;
 	private Short pmefu;
@@ -65,7 +65,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmepf;
 	private Short pmepfu;
 	private String pmf;
-	private Long pmfs;
+	private Double pmfs;
 	private Short pmfsu;
 	private Short pmff;
 	private Short pmffu;
@@ -73,7 +73,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmfpf;
 	private Short pmfpfu;
 	private String pmg;
-	private Long pmgs;
+	private Double pmgs;
 	private Short pmgsu;
 	private Short pmgf;
 	private Short pmgfu;
@@ -81,7 +81,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmgpf;
 	private Short pmgpfu;
 	private String pmh;
-	private Long pmhs;
+	private Double pmhs;
 	private Short pmhsu;
 	private Short pmhf;
 	private Short pmhfu;
@@ -89,7 +89,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmhpf;
 	private Short pmhpfu;
 	private String pmi;
-	private Long pmis;
+	private Double pmis;
 	private Short pmisu;
 	private Short pmif;
 	private Short pmifu;
@@ -97,7 +97,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmipf;
 	private Short pmipfu;
 	private String pmj;
-	private Long pmjs;
+	private Double pmjs;
 	private Short pmjsu;
 	private Short pmjf;
 	private Short pmjfu;
@@ -105,7 +105,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmjpf;
 	private Short pmjpfu;
 	private String pmk;
-	private Long pmks;
+	private Double pmks;
 	private Short pmksu;
 	private Short pmkf;
 	private Short pmkfu;
@@ -113,7 +113,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmkpf;
 	private Short pmkpfu;
 	private String pml;
-	private Long pmls;
+	private Double pmls;
 	private Short pmlsu;
 	private Short pmlf;
 	private Short pmlfu;
@@ -121,7 +121,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmlpf;
 	private Short pmlpfu;
 	private String pmm;
-	private Long pmms;
+	private Double pmms;
 	private Short pmmsu;
 	private Short pmmf;
 	private Short pmmfu;
@@ -129,7 +129,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmmpf;
 	private Short pmmpfu;
 	private String pmn;
-	private Long pmns;
+	private Double pmns;
 	private Short pmnsu;
 	private Short pmnf;
 	private Short pmnfu;
@@ -137,7 +137,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmnpf;
 	private Short pmnpfu;
 	private String pmo;
-	private Long pmos;
+	private Double pmos;
 	private Short pmosu;
 	private Short pmof;
 	private Short pmofu;
@@ -145,7 +145,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmopf;
 	private Short pmopfu;
 	private String pmp;
-	private Long pmps;
+	private Double pmps;
 	private Short pmpsu;
 	private Short pmpf;
 	private Short pmpfu;
@@ -153,7 +153,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmppf;
 	private Short pmppfu;
 	private String pmq;
-	private Long pmqs;
+	private Double pmqs;
 	private Short pmqsu;
 	private Short pmqf;
 	private Short pmqfu;
@@ -161,7 +161,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmqpf;
 	private Short pmqpfu;
 	private String pmr;
-	private Long pmrs;
+	private Double pmrs;
 	private Short pmrsu;
 	private Short pmrf;
 	private Short pmrfu;
@@ -169,7 +169,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmrpf;
 	private Short pmrpfu;
 	private String pms;
-	private Long pmss;
+	private Double pmss;
 	private Short pmssu;
 	private Short pmsf;
 	private Short pmsfu;
@@ -177,7 +177,7 @@ public class UdsMedications1 extends UdsInstrument {
 	private Short pmspf;
 	private Short pmspfu;
 	private String pmt;
-	private Long pmts;
+	private Double pmts;
 	private Short pmtsu;
 	private Short pmtf;
 	private Short pmtfu;
@@ -187,217 +187,239 @@ public class UdsMedications1 extends UdsInstrument {
 
 	private Short nmeds;
 	private String nma;
-	private Long nmas;
+	private Double nmas;
 	private Short nmasu;
 	private Short nmaf;
 	private Short nmafu;
 	private String nmb;
-	private Long nmbs;
+	private Double nmbs;
 	private Short nmbsu;
 	private Short nmbf;
 	private Short nmbfu;
 	private String nmc;
-	private Long nmcs;
+	private Double nmcs;
 	private Short nmcsu;
 	private Short nmcf;
 	private Short nmcfu;
 	private String nmd;
-	private Long nmds;
+	private Double nmds;
 	private Short nmdsu;
 	private Short nmdf;
 	private Short nmdfu;
 	private String nme;
-	private Long nmes;
+	private Double nmes;
 	private Short nmesu;
 	private Short nmef;
 	private Short nmefu;
 	private String nmf;
-	private Long nmfs;
+	private Double nmfs;
 	private Short nmfsu;
 	private Short nmff;
 	private Short nmffu;
 	private String nmg;
-	private Long nmgs;
+	private Double nmgs;
 	private Short nmgsu;
 	private Short nmgf;
 	private Short nmgfu;
 	private String nmh;
-	private Long nmhs;
+	private Double nmhs;
 	private Short nmhsu;
 	private Short nmhf;
 	private Short nmhfu;
 	private String nmi;
-	private Long nmis;
+	private Double nmis;
 	private Short nmisu;
 	private Short nmif;
 	private Short nmifu;
 	private String nmj;
-	private Long nmjs;
+	private Double nmjs;
 	private Short nmjsu;
 	private Short nmjf;
 	private Short nmjfu;
 	private String nmk;
-	private Long nmks;
+	private Double nmks;
 	private Short nmksu;
 	private Short nmkf;
 	private Short nmkfu;
 	private String nml;
-	private Long nmls;
+	private Double nmls;
 	private Short nmlsu;
 	private Short nmlf;
 	private Short nmlfu;
 	private String nmm;
-	private Long nmms;
+	private Double nmms;
 	private Short nmmsu;
 	private Short nmmf;
 	private Short nmmfu;
 	private String nmn;
-	private Long nmns;
+	private Double nmns;
 	private Short nmnsu;
 	private Short nmnf;
 	private Short nmnfu;
 	private String nmo;
-	private Long nmos;
+	private Double nmos;
 	private Short nmosu;
 	private Short nmof;
 	private Short nmofu;
 	private String nmp;
-	private Long nmps;
+	private Double nmps;
 	private Short nmpsu;
 	private Short nmpf;
 	private Short nmpfu;
 	private String nmq;
-	private Long nmqs;
+	private Double nmqs;
 	private Short nmqsu;
 	private Short nmqf;
 	private Short nmqfu;
 	private String nmr;
-	private Long nmrs;
+	private Double nmrs;
 	private Short nmrsu;
 	private Short nmrf;
 	private Short nmrfu;
 	private String nms;
-	private Long nmss;
+	private Double nmss;
 	private Short nmssu;
 	private Short nmsf;
 	private Short nmsfu;
 	private String nmt;
-	private Long nmts;
+	private Double nmts;
 	private Short nmtsu;
 	private Short nmtf;
 	private Short nmtfu;
 
 	private Short vitasups;
 	private String vsa;
-	private Long vsas;
+	private Double vsas;
 	private Short vsasu;
 	private Short vsaf;
 	private Short vsafu;
 	private String vsb;
-	private Long vsbs;
+	private Double vsbs;
 	private Short vsbsu;
 	private Short vsbf;
 	private Short vsbfu;
 	private String vsc;
-	private Long vscs;
+	private Double vscs;
 	private Short vscsu;
 	private Short vscf;
 	private Short vscfu;
 	private String vsd;
-	private Long vsds;
+	private Double vsds;
 	private Short vsdsu;
 	private Short vsdf;
 	private Short vsdfu;
 	private String vse;
-	private Long vses;
+	private Double vses;
 	private Short vsesu;
 	private Short vsef;
 	private Short vsefu;
 	private String vsf;
-	private Long vsfs;
+	private Double vsfs;
 	private Short vsfsu;
 	private Short vsff;
 	private Short vsffu;
 	private String vsg;
-	private Long vsgs;
+	private Double vsgs;
 	private Short vsgsu;
 	private Short vsgf;
 	private Short vsgfu;
 	private String vsh;
-	private Long vshs;
+	private Double vshs;
 	private Short vshsu;
 	private Short vshf;
 	private Short vshfu;
 	private String vsi;
-	private Long vsis;
+	private Double vsis;
 	private Short vsisu;
 	private Short vsif;
 	private Short vsifu;
 	private String vsj;
-	private Long vsjs;
+	private Double vsjs;
 	private Short vsjsu;
 	private Short vsjf;
 	private Short vsjfu;
 	private String vsk;
-	private Long vsks;
+	private Double vsks;
 	private Short vsksu;
 	private Short vskf;
 	private Short vskfu;
 	private String vsl;
-	private Long vsls;
+	private Double vsls;
 	private Short vslsu;
 	private Short vslf;
 	private Short vslfu;
 	private String vsm;
-	private Long vsms;
+	private Double vsms;
 	private Short vsmsu;
 	private Short vsmf;
 	private Short vsmfu;
 	private String vsn;
-	private Long vsns;
+	private Double vsns;
 	private Short vsnsu;
 	private Short vsnf;
 	private Short vsnfu;
 	private String vso;
-	private Long vsos;
+	private Double vsos;
 	private Short vsosu;
 	private Short vsof;
 	private Short vsofu;
 	private String vsp;
-	private Long vsps;
+	private Double vsps;
 	private Short vspsu;
 	private Short vspf;
 	private Short vspfu;
 	private String vsq;
-	private Long vsqs;
+	private Double vsqs;
 	private Short vsqsu;
 	private Short vsqf;
 	private Short vsqfu;
 	private String vsr;
-	private Long vsrs;
+	private Double vsrs;
 	private Short vsrsu;
 	private Short vsrf;
 	private Short vsrfu;
 	private String vss;
-	private Long vsss;
+	private Double vsss;
 	private Short vsssu;
 	private Short vssf;
 	private Short vssfu;
 	private String vst;
-	private Long vsts;
+	private Double vsts;
 	private Short vstsu;
 	private Short vstf;
 	private Short vstfu;
 
-	
 
-	
+	public Short getPmeds() {
+		return pmeds;
+	}
+
+	public void setPmeds(Short pmeds) {
+		this.pmeds = pmeds;
+	}
+
 	public String getPma() {
 		return pma;
 	}
 
 	public void setPma(String pma) {
 		this.pma = pma;
+	}
+
+	public Double getPmas() {
+		return pmas;
+	}
+
+	public void setPmas(Double pmas) {
+		this.pmas = pmas;
+	}
+
+	public Short getPmasu() {
+		return pmasu;
+	}
+
+	public void setPmasu(Short pmasu) {
+		this.pmasu = pmasu;
 	}
 
 	public Short getPmaf() {
@@ -440,28 +462,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmapfu = pmapfu;
 	}
 
-	public Long getPmas() {
-		return pmas;
-	}
-
-	public void setPmas(Long pmas) {
-		this.pmas = pmas;
-	}
-
-	public Short getPmasu() {
-		return pmasu;
-	}
-
-	public void setPmasu(Short pmasu) {
-		this.pmasu = pmasu;
-	}
-
 	public String getPmb() {
 		return pmb;
 	}
 
 	public void setPmb(String pmb) {
 		this.pmb = pmb;
+	}
+
+	public Double getPmbs() {
+		return pmbs;
+	}
+
+	public void setPmbs(Double pmbs) {
+		this.pmbs = pmbs;
+	}
+
+	public Short getPmbsu() {
+		return pmbsu;
+	}
+
+	public void setPmbsu(Short pmbsu) {
+		this.pmbsu = pmbsu;
 	}
 
 	public Short getPmbf() {
@@ -504,28 +526,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmbpfu = pmbpfu;
 	}
 
-	public Long getPmbs() {
-		return pmbs;
-	}
-
-	public void setPmbs(Long pmbs) {
-		this.pmbs = pmbs;
-	}
-
-	public Short getPmbsu() {
-		return pmbsu;
-	}
-
-	public void setPmbsu(Short pmbsu) {
-		this.pmbsu = pmbsu;
-	}
-
 	public String getPmc() {
 		return pmc;
 	}
 
 	public void setPmc(String pmc) {
 		this.pmc = pmc;
+	}
+
+	public Double getPmcs() {
+		return pmcs;
+	}
+
+	public void setPmcs(Double pmcs) {
+		this.pmcs = pmcs;
+	}
+
+	public Short getPmcsu() {
+		return pmcsu;
+	}
+
+	public void setPmcsu(Short pmcsu) {
+		this.pmcsu = pmcsu;
 	}
 
 	public Short getPmcf() {
@@ -568,28 +590,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmcpfu = pmcpfu;
 	}
 
-	public Long getPmcs() {
-		return pmcs;
-	}
-
-	public void setPmcs(Long pmcs) {
-		this.pmcs = pmcs;
-	}
-
-	public Short getPmcsu() {
-		return pmcsu;
-	}
-
-	public void setPmcsu(Short pmcsu) {
-		this.pmcsu = pmcsu;
-	}
-
 	public String getPmd() {
 		return pmd;
 	}
 
 	public void setPmd(String pmd) {
 		this.pmd = pmd;
+	}
+
+	public Double getPmds() {
+		return pmds;
+	}
+
+	public void setPmds(Double pmds) {
+		this.pmds = pmds;
+	}
+
+	public Short getPmdsu() {
+		return pmdsu;
+	}
+
+	public void setPmdsu(Short pmdsu) {
+		this.pmdsu = pmdsu;
 	}
 
 	public Short getPmdf() {
@@ -632,22 +654,6 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmdpfu = pmdpfu;
 	}
 
-	public Long getPmds() {
-		return pmds;
-	}
-
-	public void setPmds(Long pmds) {
-		this.pmds = pmds;
-	}
-
-	public Short getPmdsu() {
-		return pmdsu;
-	}
-
-	public void setPmdsu(Short pmdsu) {
-		this.pmdsu = pmdsu;
-	}
-
 	public String getPme() {
 		return pme;
 	}
@@ -656,12 +662,20 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pme = pme;
 	}
 
-	public Short getPmeds() {
-		return pmeds;
+	public Double getPmes() {
+		return pmes;
 	}
 
-	public void setPmeds(Short pmeds) {
-		this.pmeds = pmeds;
+	public void setPmes(Double pmes) {
+		this.pmes = pmes;
+	}
+
+	public Short getPmesu() {
+		return pmesu;
+	}
+
+	public void setPmesu(Short pmesu) {
+		this.pmesu = pmesu;
 	}
 
 	public Short getPmef() {
@@ -704,28 +718,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmepfu = pmepfu;
 	}
 
-	public Long getPmes() {
-		return pmes;
-	}
-
-	public void setPmes(Long pmes) {
-		this.pmes = pmes;
-	}
-
-	public Short getPmesu() {
-		return pmesu;
-	}
-
-	public void setPmesu(Short pmesu) {
-		this.pmesu = pmesu;
-	}
-
 	public String getPmf() {
 		return pmf;
 	}
 
 	public void setPmf(String pmf) {
 		this.pmf = pmf;
+	}
+
+	public Double getPmfs() {
+		return pmfs;
+	}
+
+	public void setPmfs(Double pmfs) {
+		this.pmfs = pmfs;
+	}
+
+	public Short getPmfsu() {
+		return pmfsu;
+	}
+
+	public void setPmfsu(Short pmfsu) {
+		this.pmfsu = pmfsu;
 	}
 
 	public Short getPmff() {
@@ -768,28 +782,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmfpfu = pmfpfu;
 	}
 
-	public Long getPmfs() {
-		return pmfs;
-	}
-
-	public void setPmfs(Long pmfs) {
-		this.pmfs = pmfs;
-	}
-
-	public Short getPmfsu() {
-		return pmfsu;
-	}
-
-	public void setPmfsu(Short pmfsu) {
-		this.pmfsu = pmfsu;
-	}
-
 	public String getPmg() {
 		return pmg;
 	}
 
 	public void setPmg(String pmg) {
 		this.pmg = pmg;
+	}
+
+	public Double getPmgs() {
+		return pmgs;
+	}
+
+	public void setPmgs(Double pmgs) {
+		this.pmgs = pmgs;
+	}
+
+	public Short getPmgsu() {
+		return pmgsu;
+	}
+
+	public void setPmgsu(Short pmgsu) {
+		this.pmgsu = pmgsu;
 	}
 
 	public Short getPmgf() {
@@ -832,28 +846,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmgpfu = pmgpfu;
 	}
 
-	public Long getPmgs() {
-		return pmgs;
-	}
-
-	public void setPmgs(Long pmgs) {
-		this.pmgs = pmgs;
-	}
-
-	public Short getPmgsu() {
-		return pmgsu;
-	}
-
-	public void setPmgsu(Short pmgsu) {
-		this.pmgsu = pmgsu;
-	}
-
 	public String getPmh() {
 		return pmh;
 	}
 
 	public void setPmh(String pmh) {
 		this.pmh = pmh;
+	}
+
+	public Double getPmhs() {
+		return pmhs;
+	}
+
+	public void setPmhs(Double pmhs) {
+		this.pmhs = pmhs;
+	}
+
+	public Short getPmhsu() {
+		return pmhsu;
+	}
+
+	public void setPmhsu(Short pmhsu) {
+		this.pmhsu = pmhsu;
 	}
 
 	public Short getPmhf() {
@@ -896,28 +910,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmhpfu = pmhpfu;
 	}
 
-	public Long getPmhs() {
-		return pmhs;
-	}
-
-	public void setPmhs(Long pmhs) {
-		this.pmhs = pmhs;
-	}
-
-	public Short getPmhsu() {
-		return pmhsu;
-	}
-
-	public void setPmhsu(Short pmhsu) {
-		this.pmhsu = pmhsu;
-	}
-
 	public String getPmi() {
 		return pmi;
 	}
 
 	public void setPmi(String pmi) {
 		this.pmi = pmi;
+	}
+
+	public Double getPmis() {
+		return pmis;
+	}
+
+	public void setPmis(Double pmis) {
+		this.pmis = pmis;
+	}
+
+	public Short getPmisu() {
+		return pmisu;
+	}
+
+	public void setPmisu(Short pmisu) {
+		this.pmisu = pmisu;
 	}
 
 	public Short getPmif() {
@@ -960,28 +974,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmipfu = pmipfu;
 	}
 
-	public Long getPmis() {
-		return pmis;
-	}
-
-	public void setPmis(Long pmis) {
-		this.pmis = pmis;
-	}
-
-	public Short getPmisu() {
-		return pmisu;
-	}
-
-	public void setPmisu(Short pmisu) {
-		this.pmisu = pmisu;
-	}
-
 	public String getPmj() {
 		return pmj;
 	}
 
 	public void setPmj(String pmj) {
 		this.pmj = pmj;
+	}
+
+	public Double getPmjs() {
+		return pmjs;
+	}
+
+	public void setPmjs(Double pmjs) {
+		this.pmjs = pmjs;
+	}
+
+	public Short getPmjsu() {
+		return pmjsu;
+	}
+
+	public void setPmjsu(Short pmjsu) {
+		this.pmjsu = pmjsu;
 	}
 
 	public Short getPmjf() {
@@ -1024,28 +1038,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmjpfu = pmjpfu;
 	}
 
-	public Long getPmjs() {
-		return pmjs;
-	}
-
-	public void setPmjs(Long pmjs) {
-		this.pmjs = pmjs;
-	}
-
-	public Short getPmjsu() {
-		return pmjsu;
-	}
-
-	public void setPmjsu(Short pmjsu) {
-		this.pmjsu = pmjsu;
-	}
-
 	public String getPmk() {
 		return pmk;
 	}
 
 	public void setPmk(String pmk) {
 		this.pmk = pmk;
+	}
+
+	public Double getPmks() {
+		return pmks;
+	}
+
+	public void setPmks(Double pmks) {
+		this.pmks = pmks;
+	}
+
+	public Short getPmksu() {
+		return pmksu;
+	}
+
+	public void setPmksu(Short pmksu) {
+		this.pmksu = pmksu;
 	}
 
 	public Short getPmkf() {
@@ -1088,28 +1102,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmkpfu = pmkpfu;
 	}
 
-	public Long getPmks() {
-		return pmks;
-	}
-
-	public void setPmks(Long pmks) {
-		this.pmks = pmks;
-	}
-
-	public Short getPmksu() {
-		return pmksu;
-	}
-
-	public void setPmksu(Short pmksu) {
-		this.pmksu = pmksu;
-	}
-
 	public String getPml() {
 		return pml;
 	}
 
 	public void setPml(String pml) {
 		this.pml = pml;
+	}
+
+	public Double getPmls() {
+		return pmls;
+	}
+
+	public void setPmls(Double pmls) {
+		this.pmls = pmls;
+	}
+
+	public Short getPmlsu() {
+		return pmlsu;
+	}
+
+	public void setPmlsu(Short pmlsu) {
+		this.pmlsu = pmlsu;
 	}
 
 	public Short getPmlf() {
@@ -1152,28 +1166,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmlpfu = pmlpfu;
 	}
 
-	public Long getPmls() {
-		return pmls;
-	}
-
-	public void setPmls(Long pmls) {
-		this.pmls = pmls;
-	}
-
-	public Short getPmlsu() {
-		return pmlsu;
-	}
-
-	public void setPmlsu(Short pmlsu) {
-		this.pmlsu = pmlsu;
-	}
-
 	public String getPmm() {
 		return pmm;
 	}
 
 	public void setPmm(String pmm) {
 		this.pmm = pmm;
+	}
+
+	public Double getPmms() {
+		return pmms;
+	}
+
+	public void setPmms(Double pmms) {
+		this.pmms = pmms;
+	}
+
+	public Short getPmmsu() {
+		return pmmsu;
+	}
+
+	public void setPmmsu(Short pmmsu) {
+		this.pmmsu = pmmsu;
 	}
 
 	public Short getPmmf() {
@@ -1216,28 +1230,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmmpfu = pmmpfu;
 	}
 
-	public Long getPmms() {
-		return pmms;
-	}
-
-	public void setPmms(Long pmms) {
-		this.pmms = pmms;
-	}
-
-	public Short getPmmsu() {
-		return pmmsu;
-	}
-
-	public void setPmmsu(Short pmmsu) {
-		this.pmmsu = pmmsu;
-	}
-
 	public String getPmn() {
 		return pmn;
 	}
 
 	public void setPmn(String pmn) {
 		this.pmn = pmn;
+	}
+
+	public Double getPmns() {
+		return pmns;
+	}
+
+	public void setPmns(Double pmns) {
+		this.pmns = pmns;
+	}
+
+	public Short getPmnsu() {
+		return pmnsu;
+	}
+
+	public void setPmnsu(Short pmnsu) {
+		this.pmnsu = pmnsu;
 	}
 
 	public Short getPmnf() {
@@ -1280,28 +1294,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmnpfu = pmnpfu;
 	}
 
-	public Long getPmns() {
-		return pmns;
-	}
-
-	public void setPmns(Long pmns) {
-		this.pmns = pmns;
-	}
-
-	public Short getPmnsu() {
-		return pmnsu;
-	}
-
-	public void setPmnsu(Short pmnsu) {
-		this.pmnsu = pmnsu;
-	}
-
 	public String getPmo() {
 		return pmo;
 	}
 
 	public void setPmo(String pmo) {
 		this.pmo = pmo;
+	}
+
+	public Double getPmos() {
+		return pmos;
+	}
+
+	public void setPmos(Double pmos) {
+		this.pmos = pmos;
+	}
+
+	public Short getPmosu() {
+		return pmosu;
+	}
+
+	public void setPmosu(Short pmosu) {
+		this.pmosu = pmosu;
 	}
 
 	public Short getPmof() {
@@ -1344,28 +1358,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmopfu = pmopfu;
 	}
 
-	public Long getPmos() {
-		return pmos;
-	}
-
-	public void setPmos(Long pmos) {
-		this.pmos = pmos;
-	}
-
-	public Short getPmosu() {
-		return pmosu;
-	}
-
-	public void setPmosu(Short pmosu) {
-		this.pmosu = pmosu;
-	}
-
 	public String getPmp() {
 		return pmp;
 	}
 
 	public void setPmp(String pmp) {
 		this.pmp = pmp;
+	}
+
+	public Double getPmps() {
+		return pmps;
+	}
+
+	public void setPmps(Double pmps) {
+		this.pmps = pmps;
+	}
+
+	public Short getPmpsu() {
+		return pmpsu;
+	}
+
+	public void setPmpsu(Short pmpsu) {
+		this.pmpsu = pmpsu;
 	}
 
 	public Short getPmpf() {
@@ -1408,28 +1422,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmppfu = pmppfu;
 	}
 
-	public Long getPmps() {
-		return pmps;
-	}
-
-	public void setPmps(Long pmps) {
-		this.pmps = pmps;
-	}
-
-	public Short getPmpsu() {
-		return pmpsu;
-	}
-
-	public void setPmpsu(Short pmpsu) {
-		this.pmpsu = pmpsu;
-	}
-
 	public String getPmq() {
 		return pmq;
 	}
 
 	public void setPmq(String pmq) {
 		this.pmq = pmq;
+	}
+
+	public Double getPmqs() {
+		return pmqs;
+	}
+
+	public void setPmqs(Double pmqs) {
+		this.pmqs = pmqs;
+	}
+
+	public Short getPmqsu() {
+		return pmqsu;
+	}
+
+	public void setPmqsu(Short pmqsu) {
+		this.pmqsu = pmqsu;
 	}
 
 	public Short getPmqf() {
@@ -1472,28 +1486,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmqpfu = pmqpfu;
 	}
 
-	public Long getPmqs() {
-		return pmqs;
-	}
-
-	public void setPmqs(Long pmqs) {
-		this.pmqs = pmqs;
-	}
-
-	public Short getPmqsu() {
-		return pmqsu;
-	}
-
-	public void setPmqsu(Short pmqsu) {
-		this.pmqsu = pmqsu;
-	}
-
 	public String getPmr() {
 		return pmr;
 	}
 
 	public void setPmr(String pmr) {
 		this.pmr = pmr;
+	}
+
+	public Double getPmrs() {
+		return pmrs;
+	}
+
+	public void setPmrs(Double pmrs) {
+		this.pmrs = pmrs;
+	}
+
+	public Short getPmrsu() {
+		return pmrsu;
+	}
+
+	public void setPmrsu(Short pmrsu) {
+		this.pmrsu = pmrsu;
 	}
 
 	public Short getPmrf() {
@@ -1536,28 +1550,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmrpfu = pmrpfu;
 	}
 
-	public Long getPmrs() {
-		return pmrs;
-	}
-
-	public void setPmrs(Long pmrs) {
-		this.pmrs = pmrs;
-	}
-
-	public Short getPmrsu() {
-		return pmrsu;
-	}
-
-	public void setPmrsu(Short pmrsu) {
-		this.pmrsu = pmrsu;
-	}
-
 	public String getPms() {
 		return pms;
 	}
 
 	public void setPms(String pms) {
 		this.pms = pms;
+	}
+
+	public Double getPmss() {
+		return pmss;
+	}
+
+	public void setPmss(Double pmss) {
+		this.pmss = pmss;
+	}
+
+	public Short getPmssu() {
+		return pmssu;
+	}
+
+	public void setPmssu(Short pmssu) {
+		this.pmssu = pmssu;
 	}
 
 	public Short getPmsf() {
@@ -1600,28 +1614,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmspfu = pmspfu;
 	}
 
-	public Long getPmss() {
-		return pmss;
-	}
-
-	public void setPmss(Long pmss) {
-		this.pmss = pmss;
-	}
-
-	public Short getPmssu() {
-		return pmssu;
-	}
-
-	public void setPmssu(Short pmssu) {
-		this.pmssu = pmssu;
-	}
-
 	public String getPmt() {
 		return pmt;
 	}
 
 	public void setPmt(String pmt) {
 		this.pmt = pmt;
+	}
+
+	public Double getPmts() {
+		return pmts;
+	}
+
+	public void setPmts(Double pmts) {
+		this.pmts = pmts;
+	}
+
+	public Short getPmtsu() {
+		return pmtsu;
+	}
+
+	public void setPmtsu(Short pmtsu) {
+		this.pmtsu = pmtsu;
 	}
 
 	public Short getPmtf() {
@@ -1664,22 +1678,13 @@ public class UdsMedications1 extends UdsInstrument {
 		this.pmtpfu = pmtpfu;
 	}
 
-	public Long getPmts() {
-		return pmts;
+	public Short getNmeds() {
+		return nmeds;
 	}
 
-	public void setPmts(Long pmts) {
-		this.pmts = pmts;
+	public void setNmeds(Short nmeds) {
+		this.nmeds = nmeds;
 	}
-
-	public Short getPmtsu() {
-		return pmtsu;
-	}
-
-	public void setPmtsu(Short pmtsu) {
-		this.pmtsu = pmtsu;
-	}
-
 
 	public String getNma() {
 		return nma;
@@ -1687,6 +1692,22 @@ public class UdsMedications1 extends UdsInstrument {
 
 	public void setNma(String nma) {
 		this.nma = nma;
+	}
+
+	public Double getNmas() {
+		return nmas;
+	}
+
+	public void setNmas(Double nmas) {
+		this.nmas = nmas;
+	}
+
+	public Short getNmasu() {
+		return nmasu;
+	}
+
+	public void setNmasu(Short nmasu) {
+		this.nmasu = nmasu;
 	}
 
 	public Short getNmaf() {
@@ -1705,28 +1726,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmafu = nmafu;
 	}
 
-	public Long getNmas() {
-		return nmas;
-	}
-
-	public void setNmas(Long nmas) {
-		this.nmas = nmas;
-	}
-
-	public Short getNmasu() {
-		return nmasu;
-	}
-
-	public void setNmasu(Short nmasu) {
-		this.nmasu = nmasu;
-	}
-
 	public String getNmb() {
 		return nmb;
 	}
 
 	public void setNmb(String nmb) {
 		this.nmb = nmb;
+	}
+
+	public Double getNmbs() {
+		return nmbs;
+	}
+
+	public void setNmbs(Double nmbs) {
+		this.nmbs = nmbs;
+	}
+
+	public Short getNmbsu() {
+		return nmbsu;
+	}
+
+	public void setNmbsu(Short nmbsu) {
+		this.nmbsu = nmbsu;
 	}
 
 	public Short getNmbf() {
@@ -1745,28 +1766,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmbfu = nmbfu;
 	}
 
-	public Long getNmbs() {
-		return nmbs;
-	}
-
-	public void setNmbs(Long nmbs) {
-		this.nmbs = nmbs;
-	}
-
-	public Short getNmbsu() {
-		return nmbsu;
-	}
-
-	public void setNmbsu(Short nmbsu) {
-		this.nmbsu = nmbsu;
-	}
-
 	public String getNmc() {
 		return nmc;
 	}
 
 	public void setNmc(String nmc) {
 		this.nmc = nmc;
+	}
+
+	public Double getNmcs() {
+		return nmcs;
+	}
+
+	public void setNmcs(Double nmcs) {
+		this.nmcs = nmcs;
+	}
+
+	public Short getNmcsu() {
+		return nmcsu;
+	}
+
+	public void setNmcsu(Short nmcsu) {
+		this.nmcsu = nmcsu;
 	}
 
 	public Short getNmcf() {
@@ -1785,28 +1806,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmcfu = nmcfu;
 	}
 
-	public Long getNmcs() {
-		return nmcs;
-	}
-
-	public void setNmcs(Long nmcs) {
-		this.nmcs = nmcs;
-	}
-
-	public Short getNmcsu() {
-		return nmcsu;
-	}
-
-	public void setNmcsu(Short nmcsu) {
-		this.nmcsu = nmcsu;
-	}
-
 	public String getNmd() {
 		return nmd;
 	}
 
 	public void setNmd(String nmd) {
 		this.nmd = nmd;
+	}
+
+	public Double getNmds() {
+		return nmds;
+	}
+
+	public void setNmds(Double nmds) {
+		this.nmds = nmds;
+	}
+
+	public Short getNmdsu() {
+		return nmdsu;
+	}
+
+	public void setNmdsu(Short nmdsu) {
+		this.nmdsu = nmdsu;
 	}
 
 	public Short getNmdf() {
@@ -1825,22 +1846,6 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmdfu = nmdfu;
 	}
 
-	public Long getNmds() {
-		return nmds;
-	}
-
-	public void setNmds(Long nmds) {
-		this.nmds = nmds;
-	}
-
-	public Short getNmdsu() {
-		return nmdsu;
-	}
-
-	public void setNmdsu(Short nmdsu) {
-		this.nmdsu = nmdsu;
-	}
-
 	public String getNme() {
 		return nme;
 	}
@@ -1849,12 +1854,20 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nme = nme;
 	}
 
-	public Short getNmeds() {
-		return nmeds;
+	public Double getNmes() {
+		return nmes;
 	}
 
-	public void setNmeds(Short nmeds) {
-		this.nmeds = nmeds;
+	public void setNmes(Double nmes) {
+		this.nmes = nmes;
+	}
+
+	public Short getNmesu() {
+		return nmesu;
+	}
+
+	public void setNmesu(Short nmesu) {
+		this.nmesu = nmesu;
 	}
 
 	public Short getNmef() {
@@ -1873,28 +1886,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmefu = nmefu;
 	}
 
-	public Long getNmes() {
-		return nmes;
-	}
-
-	public void setNmes(Long nmes) {
-		this.nmes = nmes;
-	}
-
-	public Short getNmesu() {
-		return nmesu;
-	}
-
-	public void setNmesu(Short nmesu) {
-		this.nmesu = nmesu;
-	}
-
 	public String getNmf() {
 		return nmf;
 	}
 
 	public void setNmf(String nmf) {
 		this.nmf = nmf;
+	}
+
+	public Double getNmfs() {
+		return nmfs;
+	}
+
+	public void setNmfs(Double nmfs) {
+		this.nmfs = nmfs;
+	}
+
+	public Short getNmfsu() {
+		return nmfsu;
+	}
+
+	public void setNmfsu(Short nmfsu) {
+		this.nmfsu = nmfsu;
 	}
 
 	public Short getNmff() {
@@ -1913,28 +1926,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmffu = nmffu;
 	}
 
-	public Long getNmfs() {
-		return nmfs;
-	}
-
-	public void setNmfs(Long nmfs) {
-		this.nmfs = nmfs;
-	}
-
-	public Short getNmfsu() {
-		return nmfsu;
-	}
-
-	public void setNmfsu(Short nmfsu) {
-		this.nmfsu = nmfsu;
-	}
-
 	public String getNmg() {
 		return nmg;
 	}
 
 	public void setNmg(String nmg) {
 		this.nmg = nmg;
+	}
+
+	public Double getNmgs() {
+		return nmgs;
+	}
+
+	public void setNmgs(Double nmgs) {
+		this.nmgs = nmgs;
+	}
+
+	public Short getNmgsu() {
+		return nmgsu;
+	}
+
+	public void setNmgsu(Short nmgsu) {
+		this.nmgsu = nmgsu;
 	}
 
 	public Short getNmgf() {
@@ -1953,28 +1966,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmgfu = nmgfu;
 	}
 
-	public Long getNmgs() {
-		return nmgs;
-	}
-
-	public void setNmgs(Long nmgs) {
-		this.nmgs = nmgs;
-	}
-
-	public Short getNmgsu() {
-		return nmgsu;
-	}
-
-	public void setNmgsu(Short nmgsu) {
-		this.nmgsu = nmgsu;
-	}
-
 	public String getNmh() {
 		return nmh;
 	}
 
 	public void setNmh(String nmh) {
 		this.nmh = nmh;
+	}
+
+	public Double getNmhs() {
+		return nmhs;
+	}
+
+	public void setNmhs(Double nmhs) {
+		this.nmhs = nmhs;
+	}
+
+	public Short getNmhsu() {
+		return nmhsu;
+	}
+
+	public void setNmhsu(Short nmhsu) {
+		this.nmhsu = nmhsu;
 	}
 
 	public Short getNmhf() {
@@ -1993,28 +2006,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmhfu = nmhfu;
 	}
 
-	public Long getNmhs() {
-		return nmhs;
-	}
-
-	public void setNmhs(Long nmhs) {
-		this.nmhs = nmhs;
-	}
-
-	public Short getNmhsu() {
-		return nmhsu;
-	}
-
-	public void setNmhsu(Short nmhsu) {
-		this.nmhsu = nmhsu;
-	}
-
 	public String getNmi() {
 		return nmi;
 	}
 
 	public void setNmi(String nmi) {
 		this.nmi = nmi;
+	}
+
+	public Double getNmis() {
+		return nmis;
+	}
+
+	public void setNmis(Double nmis) {
+		this.nmis = nmis;
+	}
+
+	public Short getNmisu() {
+		return nmisu;
+	}
+
+	public void setNmisu(Short nmisu) {
+		this.nmisu = nmisu;
 	}
 
 	public Short getNmif() {
@@ -2033,28 +2046,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmifu = nmifu;
 	}
 
-	public Long getNmis() {
-		return nmis;
-	}
-
-	public void setNmis(Long nmis) {
-		this.nmis = nmis;
-	}
-
-	public Short getNmisu() {
-		return nmisu;
-	}
-
-	public void setNmisu(Short nmisu) {
-		this.nmisu = nmisu;
-	}
-
 	public String getNmj() {
 		return nmj;
 	}
 
 	public void setNmj(String nmj) {
 		this.nmj = nmj;
+	}
+
+	public Double getNmjs() {
+		return nmjs;
+	}
+
+	public void setNmjs(Double nmjs) {
+		this.nmjs = nmjs;
+	}
+
+	public Short getNmjsu() {
+		return nmjsu;
+	}
+
+	public void setNmjsu(Short nmjsu) {
+		this.nmjsu = nmjsu;
 	}
 
 	public Short getNmjf() {
@@ -2073,28 +2086,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmjfu = nmjfu;
 	}
 
-	public Long getNmjs() {
-		return nmjs;
-	}
-
-	public void setNmjs(Long nmjs) {
-		this.nmjs = nmjs;
-	}
-
-	public Short getNmjsu() {
-		return nmjsu;
-	}
-
-	public void setNmjsu(Short nmjsu) {
-		this.nmjsu = nmjsu;
-	}
-
 	public String getNmk() {
 		return nmk;
 	}
 
 	public void setNmk(String nmk) {
 		this.nmk = nmk;
+	}
+
+	public Double getNmks() {
+		return nmks;
+	}
+
+	public void setNmks(Double nmks) {
+		this.nmks = nmks;
+	}
+
+	public Short getNmksu() {
+		return nmksu;
+	}
+
+	public void setNmksu(Short nmksu) {
+		this.nmksu = nmksu;
 	}
 
 	public Short getNmkf() {
@@ -2113,28 +2126,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmkfu = nmkfu;
 	}
 
-	public Long getNmks() {
-		return nmks;
-	}
-
-	public void setNmks(Long nmks) {
-		this.nmks = nmks;
-	}
-
-	public Short getNmksu() {
-		return nmksu;
-	}
-
-	public void setNmksu(Short nmksu) {
-		this.nmksu = nmksu;
-	}
-
 	public String getNml() {
 		return nml;
 	}
 
 	public void setNml(String nml) {
 		this.nml = nml;
+	}
+
+	public Double getNmls() {
+		return nmls;
+	}
+
+	public void setNmls(Double nmls) {
+		this.nmls = nmls;
+	}
+
+	public Short getNmlsu() {
+		return nmlsu;
+	}
+
+	public void setNmlsu(Short nmlsu) {
+		this.nmlsu = nmlsu;
 	}
 
 	public Short getNmlf() {
@@ -2153,28 +2166,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmlfu = nmlfu;
 	}
 
-	public Long getNmls() {
-		return nmls;
-	}
-
-	public void setNmls(Long nmls) {
-		this.nmls = nmls;
-	}
-
-	public Short getNmlsu() {
-		return nmlsu;
-	}
-
-	public void setNmlsu(Short nmlsu) {
-		this.nmlsu = nmlsu;
-	}
-
 	public String getNmm() {
 		return nmm;
 	}
 
 	public void setNmm(String nmm) {
 		this.nmm = nmm;
+	}
+
+	public Double getNmms() {
+		return nmms;
+	}
+
+	public void setNmms(Double nmms) {
+		this.nmms = nmms;
+	}
+
+	public Short getNmmsu() {
+		return nmmsu;
+	}
+
+	public void setNmmsu(Short nmmsu) {
+		this.nmmsu = nmmsu;
 	}
 
 	public Short getNmmf() {
@@ -2193,28 +2206,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmmfu = nmmfu;
 	}
 
-	public Long getNmms() {
-		return nmms;
-	}
-
-	public void setNmms(Long nmms) {
-		this.nmms = nmms;
-	}
-
-	public Short getNmmsu() {
-		return nmmsu;
-	}
-
-	public void setNmmsu(Short nmmsu) {
-		this.nmmsu = nmmsu;
-	}
-
 	public String getNmn() {
 		return nmn;
 	}
 
 	public void setNmn(String nmn) {
 		this.nmn = nmn;
+	}
+
+	public Double getNmns() {
+		return nmns;
+	}
+
+	public void setNmns(Double nmns) {
+		this.nmns = nmns;
+	}
+
+	public Short getNmnsu() {
+		return nmnsu;
+	}
+
+	public void setNmnsu(Short nmnsu) {
+		this.nmnsu = nmnsu;
 	}
 
 	public Short getNmnf() {
@@ -2233,28 +2246,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmnfu = nmnfu;
 	}
 
-	public Long getNmns() {
-		return nmns;
-	}
-
-	public void setNmns(Long nmns) {
-		this.nmns = nmns;
-	}
-
-	public Short getNmnsu() {
-		return nmnsu;
-	}
-
-	public void setNmnsu(Short nmnsu) {
-		this.nmnsu = nmnsu;
-	}
-
 	public String getNmo() {
 		return nmo;
 	}
 
 	public void setNmo(String nmo) {
 		this.nmo = nmo;
+	}
+
+	public Double getNmos() {
+		return nmos;
+	}
+
+	public void setNmos(Double nmos) {
+		this.nmos = nmos;
+	}
+
+	public Short getNmosu() {
+		return nmosu;
+	}
+
+	public void setNmosu(Short nmosu) {
+		this.nmosu = nmosu;
 	}
 
 	public Short getNmof() {
@@ -2273,28 +2286,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmofu = nmofu;
 	}
 
-	public Long getNmos() {
-		return nmos;
-	}
-
-	public void setNmos(Long nmos) {
-		this.nmos = nmos;
-	}
-
-	public Short getNmosu() {
-		return nmosu;
-	}
-
-	public void setNmosu(Short nmosu) {
-		this.nmosu = nmosu;
-	}
-
 	public String getNmp() {
 		return nmp;
 	}
 
 	public void setNmp(String nmp) {
 		this.nmp = nmp;
+	}
+
+	public Double getNmps() {
+		return nmps;
+	}
+
+	public void setNmps(Double nmps) {
+		this.nmps = nmps;
+	}
+
+	public Short getNmpsu() {
+		return nmpsu;
+	}
+
+	public void setNmpsu(Short nmpsu) {
+		this.nmpsu = nmpsu;
 	}
 
 	public Short getNmpf() {
@@ -2313,28 +2326,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmpfu = nmpfu;
 	}
 
-	public Long getNmps() {
-		return nmps;
-	}
-
-	public void setNmps(Long nmps) {
-		this.nmps = nmps;
-	}
-
-	public Short getNmpsu() {
-		return nmpsu;
-	}
-
-	public void setNmpsu(Short nmpsu) {
-		this.nmpsu = nmpsu;
-	}
-
 	public String getNmq() {
 		return nmq;
 	}
 
 	public void setNmq(String nmq) {
 		this.nmq = nmq;
+	}
+
+	public Double getNmqs() {
+		return nmqs;
+	}
+
+	public void setNmqs(Double nmqs) {
+		this.nmqs = nmqs;
+	}
+
+	public Short getNmqsu() {
+		return nmqsu;
+	}
+
+	public void setNmqsu(Short nmqsu) {
+		this.nmqsu = nmqsu;
 	}
 
 	public Short getNmqf() {
@@ -2353,28 +2366,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmqfu = nmqfu;
 	}
 
-	public Long getNmqs() {
-		return nmqs;
-	}
-
-	public void setNmqs(Long nmqs) {
-		this.nmqs = nmqs;
-	}
-
-	public Short getNmqsu() {
-		return nmqsu;
-	}
-
-	public void setNmqsu(Short nmqsu) {
-		this.nmqsu = nmqsu;
-	}
-
 	public String getNmr() {
 		return nmr;
 	}
 
 	public void setNmr(String nmr) {
 		this.nmr = nmr;
+	}
+
+	public Double getNmrs() {
+		return nmrs;
+	}
+
+	public void setNmrs(Double nmrs) {
+		this.nmrs = nmrs;
+	}
+
+	public Short getNmrsu() {
+		return nmrsu;
+	}
+
+	public void setNmrsu(Short nmrsu) {
+		this.nmrsu = nmrsu;
 	}
 
 	public Short getNmrf() {
@@ -2393,28 +2406,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmrfu = nmrfu;
 	}
 
-	public Long getNmrs() {
-		return nmrs;
-	}
-
-	public void setNmrs(Long nmrs) {
-		this.nmrs = nmrs;
-	}
-
-	public Short getNmrsu() {
-		return nmrsu;
-	}
-
-	public void setNmrsu(Short nmrsu) {
-		this.nmrsu = nmrsu;
-	}
-
 	public String getNms() {
 		return nms;
 	}
 
 	public void setNms(String nms) {
 		this.nms = nms;
+	}
+
+	public Double getNmss() {
+		return nmss;
+	}
+
+	public void setNmss(Double nmss) {
+		this.nmss = nmss;
+	}
+
+	public Short getNmssu() {
+		return nmssu;
+	}
+
+	public void setNmssu(Short nmssu) {
+		this.nmssu = nmssu;
 	}
 
 	public Short getNmsf() {
@@ -2433,28 +2446,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmsfu = nmsfu;
 	}
 
-	public Long getNmss() {
-		return nmss;
-	}
-
-	public void setNmss(Long nmss) {
-		this.nmss = nmss;
-	}
-
-	public Short getNmssu() {
-		return nmssu;
-	}
-
-	public void setNmssu(Short nmssu) {
-		this.nmssu = nmssu;
-	}
-
 	public String getNmt() {
 		return nmt;
 	}
 
 	public void setNmt(String nmt) {
 		this.nmt = nmt;
+	}
+
+	public Double getNmts() {
+		return nmts;
+	}
+
+	public void setNmts(Double nmts) {
+		this.nmts = nmts;
+	}
+
+	public Short getNmtsu() {
+		return nmtsu;
+	}
+
+	public void setNmtsu(Short nmtsu) {
+		this.nmtsu = nmtsu;
 	}
 
 	public Short getNmtf() {
@@ -2473,23 +2486,6 @@ public class UdsMedications1 extends UdsInstrument {
 		this.nmtfu = nmtfu;
 	}
 
-	public Long getNmts() {
-		return nmts;
-	}
-
-	public void setNmts(Long nmts) {
-		this.nmts = nmts;
-	}
-
-	public Short getNmtsu() {
-		return nmtsu;
-	}
-
-	public void setNmtsu(Short nmtsu) {
-		this.nmtsu = nmtsu;
-	}
-
-
 	public Short getVitasups() {
 		return vitasups;
 	}
@@ -2504,6 +2500,22 @@ public class UdsMedications1 extends UdsInstrument {
 
 	public void setVsa(String vsa) {
 		this.vsa = vsa;
+	}
+
+	public Double getVsas() {
+		return vsas;
+	}
+
+	public void setVsas(Double vsas) {
+		this.vsas = vsas;
+	}
+
+	public Short getVsasu() {
+		return vsasu;
+	}
+
+	public void setVsasu(Short vsasu) {
+		this.vsasu = vsasu;
 	}
 
 	public Short getVsaf() {
@@ -2522,28 +2534,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsafu = vsafu;
 	}
 
-	public Long getVsas() {
-		return vsas;
-	}
-
-	public void setVsas(Long vsas) {
-		this.vsas = vsas;
-	}
-
-	public Short getVsasu() {
-		return vsasu;
-	}
-
-	public void setVsasu(Short vsasu) {
-		this.vsasu = vsasu;
-	}
-
 	public String getVsb() {
 		return vsb;
 	}
 
 	public void setVsb(String vsb) {
 		this.vsb = vsb;
+	}
+
+	public Double getVsbs() {
+		return vsbs;
+	}
+
+	public void setVsbs(Double vsbs) {
+		this.vsbs = vsbs;
+	}
+
+	public Short getVsbsu() {
+		return vsbsu;
+	}
+
+	public void setVsbsu(Short vsbsu) {
+		this.vsbsu = vsbsu;
 	}
 
 	public Short getVsbf() {
@@ -2562,28 +2574,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsbfu = vsbfu;
 	}
 
-	public Long getVsbs() {
-		return vsbs;
-	}
-
-	public void setVsbs(Long vsbs) {
-		this.vsbs = vsbs;
-	}
-
-	public Short getVsbsu() {
-		return vsbsu;
-	}
-
-	public void setVsbsu(Short vsbsu) {
-		this.vsbsu = vsbsu;
-	}
-
 	public String getVsc() {
 		return vsc;
 	}
 
 	public void setVsc(String vsc) {
 		this.vsc = vsc;
+	}
+
+	public Double getVscs() {
+		return vscs;
+	}
+
+	public void setVscs(Double vscs) {
+		this.vscs = vscs;
+	}
+
+	public Short getVscsu() {
+		return vscsu;
+	}
+
+	public void setVscsu(Short vscsu) {
+		this.vscsu = vscsu;
 	}
 
 	public Short getVscf() {
@@ -2601,22 +2613,6 @@ public class UdsMedications1 extends UdsInstrument {
 	public void setVscfu(Short vscfu) {
 		this.vscfu = vscfu;
 	}
-	
-	public Long getVscs() {
-		return vscs;
-	}
-
-	public void setVscs(Long vscs) {
-		this.vscs = vscs;
-	}
-
-	public Short getVscsu() {
-		return vscsu;
-	}
-
-	public void setVscsu(Short vscsu) {
-		this.vscsu = vscsu;
-	}
 
 	public String getVsd() {
 		return vsd;
@@ -2624,6 +2620,22 @@ public class UdsMedications1 extends UdsInstrument {
 
 	public void setVsd(String vsd) {
 		this.vsd = vsd;
+	}
+
+	public Double getVsds() {
+		return vsds;
+	}
+
+	public void setVsds(Double vsds) {
+		this.vsds = vsds;
+	}
+
+	public Short getVsdsu() {
+		return vsdsu;
+	}
+
+	public void setVsdsu(Short vsdsu) {
+		this.vsdsu = vsdsu;
 	}
 
 	public Short getVsdf() {
@@ -2642,28 +2654,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsdfu = vsdfu;
 	}
 
-	public Long getVsds() {
-		return vsds;
-	}
-
-	public void setVsds(Long vsds) {
-		this.vsds = vsds;
-	}
-
-	public Short getVsdsu() {
-		return vsdsu;
-	}
-
-	public void setVsdsu(Short vsdsu) {
-		this.vsdsu = vsdsu;
-	}
-
 	public String getVse() {
 		return vse;
 	}
 
 	public void setVse(String vse) {
 		this.vse = vse;
+	}
+
+	public Double getVses() {
+		return vses;
+	}
+
+	public void setVses(Double vses) {
+		this.vses = vses;
+	}
+
+	public Short getVsesu() {
+		return vsesu;
+	}
+
+	public void setVsesu(Short vsesu) {
+		this.vsesu = vsesu;
 	}
 
 	public Short getVsef() {
@@ -2682,28 +2694,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsefu = vsefu;
 	}
 
-	public Long getVses() {
-		return vses;
-	}
-
-	public void setVses(Long vses) {
-		this.vses = vses;
-	}
-
-	public Short getVsesu() {
-		return vsesu;
-	}
-
-	public void setVsesu(Short vsesu) {
-		this.vsesu = vsesu;
-	}
-
 	public String getVsf() {
 		return vsf;
 	}
 
 	public void setVsf(String vsf) {
 		this.vsf = vsf;
+	}
+
+	public Double getVsfs() {
+		return vsfs;
+	}
+
+	public void setVsfs(Double vsfs) {
+		this.vsfs = vsfs;
+	}
+
+	public Short getVsfsu() {
+		return vsfsu;
+	}
+
+	public void setVsfsu(Short vsfsu) {
+		this.vsfsu = vsfsu;
 	}
 
 	public Short getVsff() {
@@ -2722,28 +2734,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsffu = vsffu;
 	}
 
-	public Long getVsfs() {
-		return vsfs;
-	}
-
-	public void setVsfs(Long vsfs) {
-		this.vsfs = vsfs;
-	}
-
-	public Short getVsfsu() {
-		return vsfsu;
-	}
-
-	public void setVsfsu(Short vsfsu) {
-		this.vsfsu = vsfsu;
-	}
-
 	public String getVsg() {
 		return vsg;
 	}
 
 	public void setVsg(String vsg) {
 		this.vsg = vsg;
+	}
+
+	public Double getVsgs() {
+		return vsgs;
+	}
+
+	public void setVsgs(Double vsgs) {
+		this.vsgs = vsgs;
+	}
+
+	public Short getVsgsu() {
+		return vsgsu;
+	}
+
+	public void setVsgsu(Short vsgsu) {
+		this.vsgsu = vsgsu;
 	}
 
 	public Short getVsgf() {
@@ -2762,28 +2774,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsgfu = vsgfu;
 	}
 
-	public Long getVsgs() {
-		return vsgs;
-	}
-
-	public void setVsgs(Long vsgs) {
-		this.vsgs = vsgs;
-	}
-
-	public Short getVsgsu() {
-		return vsgsu;
-	}
-
-	public void setVsgsu(Short vsgsu) {
-		this.vsgsu = vsgsu;
-	}
-
 	public String getVsh() {
 		return vsh;
 	}
 
 	public void setVsh(String vsh) {
 		this.vsh = vsh;
+	}
+
+	public Double getVshs() {
+		return vshs;
+	}
+
+	public void setVshs(Double vshs) {
+		this.vshs = vshs;
+	}
+
+	public Short getVshsu() {
+		return vshsu;
+	}
+
+	public void setVshsu(Short vshsu) {
+		this.vshsu = vshsu;
 	}
 
 	public Short getVshf() {
@@ -2802,28 +2814,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vshfu = vshfu;
 	}
 
-	public Long getVshs() {
-		return vshs;
-	}
-
-	public void setVshs(Long vshs) {
-		this.vshs = vshs;
-	}
-
-	public Short getVshsu() {
-		return vshsu;
-	}
-
-	public void setVshsu(Short vshsu) {
-		this.vshsu = vshsu;
-	}
-
 	public String getVsi() {
 		return vsi;
 	}
 
 	public void setVsi(String vsi) {
 		this.vsi = vsi;
+	}
+
+	public Double getVsis() {
+		return vsis;
+	}
+
+	public void setVsis(Double vsis) {
+		this.vsis = vsis;
+	}
+
+	public Short getVsisu() {
+		return vsisu;
+	}
+
+	public void setVsisu(Short vsisu) {
+		this.vsisu = vsisu;
 	}
 
 	public Short getVsif() {
@@ -2842,28 +2854,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsifu = vsifu;
 	}
 
-	public Long getVsis() {
-		return vsis;
-	}
-
-	public void setVsis(Long vsis) {
-		this.vsis = vsis;
-	}
-
-	public Short getVsisu() {
-		return vsisu;
-	}
-
-	public void setVsisu(Short vsisu) {
-		this.vsisu = vsisu;
-	}
-
 	public String getVsj() {
 		return vsj;
 	}
 
 	public void setVsj(String vsj) {
 		this.vsj = vsj;
+	}
+
+	public Double getVsjs() {
+		return vsjs;
+	}
+
+	public void setVsjs(Double vsjs) {
+		this.vsjs = vsjs;
+	}
+
+	public Short getVsjsu() {
+		return vsjsu;
+	}
+
+	public void setVsjsu(Short vsjsu) {
+		this.vsjsu = vsjsu;
 	}
 
 	public Short getVsjf() {
@@ -2882,28 +2894,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsjfu = vsjfu;
 	}
 
-	public Long getVsjs() {
-		return vsjs;
-	}
-
-	public void setVsjs(Long vsjs) {
-		this.vsjs = vsjs;
-	}
-
-	public Short getVsjsu() {
-		return vsjsu;
-	}
-
-	public void setVsjsu(Short vsjsu) {
-		this.vsjsu = vsjsu;
-	}
-
 	public String getVsk() {
 		return vsk;
 	}
 
 	public void setVsk(String vsk) {
 		this.vsk = vsk;
+	}
+
+	public Double getVsks() {
+		return vsks;
+	}
+
+	public void setVsks(Double vsks) {
+		this.vsks = vsks;
+	}
+
+	public Short getVsksu() {
+		return vsksu;
+	}
+
+	public void setVsksu(Short vsksu) {
+		this.vsksu = vsksu;
 	}
 
 	public Short getVskf() {
@@ -2922,28 +2934,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vskfu = vskfu;
 	}
 
-	public Long getVsks() {
-		return vsks;
-	}
-
-	public void setVsks(Long vsks) {
-		this.vsks = vsks;
-	}
-
-	public Short getVsksu() {
-		return vsksu;
-	}
-
-	public void setVsksu(Short vsksu) {
-		this.vsksu = vsksu;
-	}
-
 	public String getVsl() {
 		return vsl;
 	}
 
 	public void setVsl(String vsl) {
 		this.vsl = vsl;
+	}
+
+	public Double getVsls() {
+		return vsls;
+	}
+
+	public void setVsls(Double vsls) {
+		this.vsls = vsls;
+	}
+
+	public Short getVslsu() {
+		return vslsu;
+	}
+
+	public void setVslsu(Short vslsu) {
+		this.vslsu = vslsu;
 	}
 
 	public Short getVslf() {
@@ -2962,28 +2974,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vslfu = vslfu;
 	}
 
-	public Long getVsls() {
-		return vsls;
-	}
-
-	public void setVsls(Long vsls) {
-		this.vsls = vsls;
-	}
-
-	public Short getVslsu() {
-		return vslsu;
-	}
-
-	public void setVslsu(Short vslsu) {
-		this.vslsu = vslsu;
-	}
-
 	public String getVsm() {
 		return vsm;
 	}
 
 	public void setVsm(String vsm) {
 		this.vsm = vsm;
+	}
+
+	public Double getVsms() {
+		return vsms;
+	}
+
+	public void setVsms(Double vsms) {
+		this.vsms = vsms;
+	}
+
+	public Short getVsmsu() {
+		return vsmsu;
+	}
+
+	public void setVsmsu(Short vsmsu) {
+		this.vsmsu = vsmsu;
 	}
 
 	public Short getVsmf() {
@@ -3002,28 +3014,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsmfu = vsmfu;
 	}
 
-	public Long getVsms() {
-		return vsms;
-	}
-
-	public void setVsms(Long vsms) {
-		this.vsms = vsms;
-	}
-
-	public Short getVsmsu() {
-		return vsmsu;
-	}
-
-	public void setVsmsu(Short vsmsu) {
-		this.vsmsu = vsmsu;
-	}
-
 	public String getVsn() {
 		return vsn;
 	}
 
 	public void setVsn(String vsn) {
 		this.vsn = vsn;
+	}
+
+	public Double getVsns() {
+		return vsns;
+	}
+
+	public void setVsns(Double vsns) {
+		this.vsns = vsns;
+	}
+
+	public Short getVsnsu() {
+		return vsnsu;
+	}
+
+	public void setVsnsu(Short vsnsu) {
+		this.vsnsu = vsnsu;
 	}
 
 	public Short getVsnf() {
@@ -3042,28 +3054,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsnfu = vsnfu;
 	}
 
-	public Long getVsns() {
-		return vsns;
-	}
-
-	public void setVsns(Long vsns) {
-		this.vsns = vsns;
-	}
-
-	public Short getVsnsu() {
-		return vsnsu;
-	}
-
-	public void setVsnsu(Short vsnsu) {
-		this.vsnsu = vsnsu;
-	}
-
 	public String getVso() {
 		return vso;
 	}
 
 	public void setVso(String vso) {
 		this.vso = vso;
+	}
+
+	public Double getVsos() {
+		return vsos;
+	}
+
+	public void setVsos(Double vsos) {
+		this.vsos = vsos;
+	}
+
+	public Short getVsosu() {
+		return vsosu;
+	}
+
+	public void setVsosu(Short vsosu) {
+		this.vsosu = vsosu;
 	}
 
 	public Short getVsof() {
@@ -3082,28 +3094,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsofu = vsofu;
 	}
 
-	public Long getVsos() {
-		return vsos;
-	}
-
-	public void setVsos(Long vsos) {
-		this.vsos = vsos;
-	}
-
-	public Short getVsosu() {
-		return vsosu;
-	}
-
-	public void setVsosu(Short vsosu) {
-		this.vsosu = vsosu;
-	}
-
 	public String getVsp() {
 		return vsp;
 	}
 
 	public void setVsp(String vsp) {
 		this.vsp = vsp;
+	}
+
+	public Double getVsps() {
+		return vsps;
+	}
+
+	public void setVsps(Double vsps) {
+		this.vsps = vsps;
+	}
+
+	public Short getVspsu() {
+		return vspsu;
+	}
+
+	public void setVspsu(Short vspsu) {
+		this.vspsu = vspsu;
 	}
 
 	public Short getVspf() {
@@ -3122,28 +3134,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vspfu = vspfu;
 	}
 
-	public Long getVsps() {
-		return vsps;
-	}
-
-	public void setVsps(Long vsps) {
-		this.vsps = vsps;
-	}
-
-	public Short getVspsu() {
-		return vspsu;
-	}
-
-	public void setVspsu(Short vspsu) {
-		this.vspsu = vspsu;
-	}
-
 	public String getVsq() {
 		return vsq;
 	}
 
 	public void setVsq(String vsq) {
 		this.vsq = vsq;
+	}
+
+	public Double getVsqs() {
+		return vsqs;
+	}
+
+	public void setVsqs(Double vsqs) {
+		this.vsqs = vsqs;
+	}
+
+	public Short getVsqsu() {
+		return vsqsu;
+	}
+
+	public void setVsqsu(Short vsqsu) {
+		this.vsqsu = vsqsu;
 	}
 
 	public Short getVsqf() {
@@ -3162,28 +3174,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsqfu = vsqfu;
 	}
 
-	public Long getVsqs() {
-		return vsqs;
-	}
-
-	public void setVsqs(Long vsqs) {
-		this.vsqs = vsqs;
-	}
-
-	public Short getVsqsu() {
-		return vsqsu;
-	}
-
-	public void setVsqsu(Short vsqsu) {
-		this.vsqsu = vsqsu;
-	}
-
 	public String getVsr() {
 		return vsr;
 	}
 
 	public void setVsr(String vsr) {
 		this.vsr = vsr;
+	}
+
+	public Double getVsrs() {
+		return vsrs;
+	}
+
+	public void setVsrs(Double vsrs) {
+		this.vsrs = vsrs;
+	}
+
+	public Short getVsrsu() {
+		return vsrsu;
+	}
+
+	public void setVsrsu(Short vsrsu) {
+		this.vsrsu = vsrsu;
 	}
 
 	public Short getVsrf() {
@@ -3202,28 +3214,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vsrfu = vsrfu;
 	}
 
-	public Long getVsrs() {
-		return vsrs;
-	}
-
-	public void setVsrs(Long vsrs) {
-		this.vsrs = vsrs;
-	}
-
-	public Short getVsrsu() {
-		return vsrsu;
-	}
-
-	public void setVsrsu(Short vsrsu) {
-		this.vsrsu = vsrsu;
-	}
-
 	public String getVss() {
 		return vss;
 	}
 
 	public void setVss(String vss) {
 		this.vss = vss;
+	}
+
+	public Double getVsss() {
+		return vsss;
+	}
+
+	public void setVsss(Double vsss) {
+		this.vsss = vsss;
+	}
+
+	public Short getVsssu() {
+		return vsssu;
+	}
+
+	public void setVsssu(Short vsssu) {
+		this.vsssu = vsssu;
 	}
 
 	public Short getVssf() {
@@ -3242,28 +3254,28 @@ public class UdsMedications1 extends UdsInstrument {
 		this.vssfu = vssfu;
 	}
 
-	public Long getVsss() {
-		return vsss;
-	}
-
-	public void setVsss(Long vsss) {
-		this.vsss = vsss;
-	}
-
-	public Short getVsssu() {
-		return vsssu;
-	}
-
-	public void setVsssu(Short vsssu) {
-		this.vsssu = vsssu;
-	}
-
 	public String getVst() {
 		return vst;
 	}
 
 	public void setVst(String vst) {
 		this.vst = vst;
+	}
+
+	public Double getVsts() {
+		return vsts;
+	}
+
+	public void setVsts(Double vsts) {
+		this.vsts = vsts;
+	}
+
+	public Short getVstsu() {
+		return vstsu;
+	}
+
+	public void setVstsu(Short vstsu) {
+		this.vstsu = vstsu;
 	}
 
 	public Short getVstf() {
@@ -3281,26 +3293,6 @@ public class UdsMedications1 extends UdsInstrument {
 	public void setVstfu(Short vstfu) {
 		this.vstfu = vstfu;
 	}
-
-	public Long getVsts() {
-		return vsts;
-	}
-
-	public void setVsts(Long vsts) {
-		this.vsts = vsts;
-	}
-
-	public Short getVstsu() {
-		return vstsu;
-	}
-
-	public void setVstsu(Short vstsu) {
-		this.vstsu = vstsu;
-	}
-
-	
-	
-	
 
 	public String[] getRequiredResultFields() {
 		return new String[] {
