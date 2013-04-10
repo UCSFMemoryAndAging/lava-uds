@@ -13,9 +13,8 @@ SELECT 'DELETE from viewproperty where instance=\'lava\' and scope=\'crms-app-de
 SELECT 'DELETE from viewproperty where instance=\'demo\' and scope=\'crms-app-demo\';';
 SELECT 'DELETE from hibernateproperty where instance=\'lava\' and scope=\'crms-app-demo\';';
 -- NOTE: custom listvalues for lists whose scope is not 'crms-app-demo' (e.g. scope 'crms' lists 
--- like 'VisitType') should be included in the generated SQL script by using scope 'crms-app-demo'
--- in their listvalues records
-SELECT 'DELETE from `listvalues` where `ListID` in (SELECT `ListID` from `list` where `scope`=''crms-app-demo'');';
-SELECT 'DELETE from `list` where `scope`=''crms-app-demo'';';
+-- like 'VisitType') should have scope 'crms-app-demo'
+SELECT 'DELETE from `listvalues` where instance=\'lava\' and scope=\'crms-app-demo\';';
+SELECT 'DELETE from `list` where instance=\'lava\' and scope=\'crms-app-demo\';';
 call util_CreateMetadataInsertStatements('lava','crms-app-demo','%');
 call util_CreateMetadataInsertStatements('demo','crms-app-demo','%');
