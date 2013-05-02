@@ -28,7 +28,7 @@
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_after_set_linkdata`(user_name varchar(50), host_name varchar(25),method VARCHAR(25))
+CREATE PROCEDURE `lq_after_set_linkdata`(user_name varchar(50), host_name varchar(25),method VARCHAR(25))
 BEGIN
 IF method = 'VISIT' THEN
   UPDATE temp_linkdata1, visit 
@@ -79,7 +79,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_after_set_pidns`(user_name varchar(50), host_name varchar(25))
+CREATE PROCEDURE `lq_after_set_pidns`(user_name varchar(50), host_name varchar(25))
 BEGINCREATE TEMPORARY TABLE temp_pidn AS SELECT pidn FROM temp_pidn1 GROUP BY pidn;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -96,7 +96,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_audit_event`(user_name varchar(50),host_name varchar(25),lq_query_object varchar(100),lq_query_type varchar(25))
+CREATE PROCEDURE `lq_audit_event`(user_name varchar(50),host_name varchar(25),lq_query_object varchar(100),lq_query_type varchar(25))
 BEGININSERT INTO audit_event_work (`audit_user`,`audit_host`,`audit_timestamp`,`action`,`action_event`)    VALUES(user_name,host_name,NOW(),CONCAT('lava.*.query.',lq_query_object),lq_query_type);  END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -113,7 +113,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_authenticate_user`(user_login varchar(50),user_password varchar(50))
+CREATE PROCEDURE `lq_authenticate_user`(user_login varchar(50),user_password varchar(50))
 BEGIN 
 DECLARE user_id int;
 
@@ -143,7 +143,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_check_user_auth`(user_login varchar(50),host_name varchar(25))
+CREATE PROCEDURE `lq_check_user_auth`(user_login varchar(50),host_name varchar(25))
 BEGINDECLARE user_id int;SELECT `UID` into user_id from `authuser` where `Login` = user_login;IF(user_id > 0) THEN  SELECT  1 as user_auth;ELSE  SELECT 0 as user_auth;END IF;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -160,7 +160,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_check_version`(pModule varchar(25), pMajor integer, pMinor integer, pFix integer)
+CREATE PROCEDURE `lq_check_version`(pModule varchar(25), pMajor integer, pMinor integer, pFix integer)
 BEGINDECLARE CurMajor integer;DECLARE CurMinor integer;DECLARE CurFix integer;DECLARE CurVersion varchar(10);DECLARE pVersion varchar(10);DECLARE version_msg varchar(500);DECLARE UpdateNeeded integer;SELECT MAX(`Major`) into CurMajor from `versionhistory` WHERE `Module` = pModule ;SELECT MAX(`Minor`) into CurMinor from `versionhistory` WHERE `Module` = pModule and `Major` = CurMajor;SELECT MAX(`Fix`) into CurFix from `versionhistory` WHERE `Module` = pModule and `Major` = CurMajor and `Minor` = CurMinor;SET pVersion = CONCAT(cast(pMajor as CHAR),'.',cast(pMinor as  CHAR),'.',cast(pFix as CHAR));SELECT MAX(`Version`) into CurVersion FROM `versionhistory` WHERE `Module` = pModule and `Major` = CurMajor and `Minor` = CurMinor and `Fix` = CurFix;SET version_msg = 'OK';IF (CurVersion IS NULL) THEN  SET version_msg = CONCAT('Invalid Module ',Module,' passed to stored procedure lq_check_version.');ELSEIF (pMajor < CurMajor) THEN	SET version_msg = CONCAT('Your application version (',pVersion,') is out of date.  The current version is (',CurVersion,'). You must upgrade your application.');ELSEIF (pMajor > CurMajor) THEN	SET version_msg = CONCAT('Your application version (',pVersion,') is more recent than the current version supported by the database.  The current version is (',CurVersion,'). You must downgrade your application.');ELSEIF (pMinor < CurMinor) THEN  SET version_msg = CONCAT('Your application version (',pVersion,') is out of date.  The current version is (',CurVersion,'). You must upgrade your application.');ELSEIF (pMinor > CurMinor) THEN	SET version_msg = CONCAT('Your application version (',pVersion,') is more recent than the current version supported by the database.  The current version is (',CurVersion,'). You must downgrade your application.');ELSEIF (pFix < CurFix) THEN  SELECT count(*) into UpdateNeeded from `versionhistory` WHERE `Module`=  pModule and `Major` >= pMajor and `Minor` >= pMinor and `Fix` > pFix  and `UpdateRequired` = 1;  IF(UpdateNeeded > 0) THEN    SET version_msg = CONCAT('Your application version (',pVersion,') is out of date.  The current version is (',CurVersion,'). You must upgrade your application.');  ELSE     SET version_msg = CONCAT('Your application version (',pVersion,') is slightly out of date.  The current version is (',CurVersion,'). You should upgrade to the current version soon.');  END IF;ELSEIF (pFix > CurFix) THEN	SET version_msg = CONCAT('Your application version (',pVersion,') is more recent than the current version supported by the database.  The current version is (',CurVersion,'). You must downgrade your application.');END IF;select version_msg as 'version_msg';END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -177,7 +177,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_clear_linkdata`(user_name varchar(50), host_name varchar(25))
+CREATE PROCEDURE `lq_clear_linkdata`(user_name varchar(50), host_name varchar(25))
 BEGINDROP TABLE IF EXISTS temp_linkdata;DROP TABLE IF EXISTS temp_linkdata1;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -194,7 +194,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_clear_pidns`(user_name varchar(50), host_name varchar(25))
+CREATE PROCEDURE `lq_clear_pidns`(user_name varchar(50), host_name varchar(25))
 BEGINDROP TABLE IF EXISTS temp_pidn;DROP TABLE IF EXISTS temp_pidn1;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -211,7 +211,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_all_pidns`(user_name varchar(50), host_name varchar(25))
+CREATE PROCEDURE `lq_get_all_pidns`(user_name varchar(50), host_name varchar(25))
 BEGINSELECT pidn from patient order by pidn;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -228,7 +228,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_assessment_instruments`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_assessment_instruments`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGINCALL lq_audit_event(user_name,host_name,'crms.assessment.instruments',query_type);	IF query_type = 'Simple' THEN	SELECT p.pidn, i.* FROM lq_view_instruments i 		INNER JOIN temp_pidn p ON (p.PIDN = i.PIDN_Instrument)       ORDER BY p.pidn, i.DCDate,i.InstrType;ELSEIF query_type = 'SimpleAllPatients' THEN	SELECT p.pidn, i.*  FROM lq_view_instruments i 		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = i.PIDN_Instrument)       ORDER BY p.pidn, i.DCDate,i.InstrType;END IF;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -245,7 +245,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_enrollment_status`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_enrollment_status`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGINCALL lq_audit_event(user_name,host_name,'crms.enrollment.status',query_type);IF query_type = 'Simple' THEN	SELECT p.pidn, e.*  FROM lq_view_enrollment e 		INNER JOIN temp_pidn p ON (p.PIDN = e.PIDN_Enrollment)       ORDER BY p.pidn, e.latestDate;ELSEIF query_type = 'SimpleAllPatients' THEN	SELECT p.pidn, e.* FROM lq_view_enrollment e 		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = e.PIDN_Enrollment)       ORDER BY p.pidn, e.latestDate;END IF;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -262,7 +262,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_linkdata`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_linkdata`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
     SQL SECURITY INVOKER
 BEGINIF query_type = 'VISIT' THEN	SELECT l.*, '---->' as `Visit Details`, v.* from temp_linkdata l inner join visit v on l.link_id=v.VID	ORDER BY l.pidn, l.link_date,l.link_id;ELSEIF query_type = 'INSTRUMENT' THEN 	SELECT l.*, '---->' as `Instrument Details`, i.* from temp_linkdata l inner join instrumenttracking i on l.link_id=i.InstrID	ORDER BY l.pidn, l.link_date,l.link_id;ELSE   SELECT * from temp_linkdata l  	ORDER BY l.pidn, l.link_date,l.link_id;END IF;END ;;
 DELIMITER ;
@@ -280,7 +280,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsappraisal`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsappraisal`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -399,7 +399,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udscdr`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udscdr`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -517,7 +517,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsdiagnosis`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsdiagnosis`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -635,7 +635,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsfamilyhistory1`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsfamilyhistory1`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -753,7 +753,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsfamilyhistory2`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsfamilyhistory2`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -871,7 +871,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsfamilyhistory2extended`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsfamilyhistory2extended`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -989,7 +989,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsfaq`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsfaq`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -1107,7 +1107,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsformchecklist`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsformchecklist`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -1225,7 +1225,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsgds`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsgds`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 
@@ -1343,7 +1343,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udshachinski`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udshachinski`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 	CALL lq_audit_event(user_name,host_name,'crms.nacc.udshachinski',query_type);
@@ -1457,7 +1457,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udshealthhistory`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udshealthhistory`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udshealthhistory',query_type);
@@ -1571,7 +1571,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsinformantdemo`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsinformantdemo`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsinformantdemo',query_type);
 	
@@ -1685,7 +1685,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udslabsimaging`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udslabsimaging`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udslabsimaging',query_type);
 	
@@ -1799,7 +1799,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsmedications2`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsmedications2`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsmedication2',query_type);
 	
@@ -1913,7 +1913,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsmilestone`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsmilestone`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsmilestone',query_type);
 	
@@ -2027,7 +2027,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsneuropsych`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsneuropsych`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsneuropsych',query_type);
 	
@@ -2141,7 +2141,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsnpi`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsnpi`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsnpi',query_type);
 	
@@ -2255,7 +2255,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsphoneinclusion`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsphoneinclusion`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsphoneinclusion',query_type);
 	
@@ -2369,7 +2369,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsphysical`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsphysical`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsphysical',query_type);
@@ -2483,7 +2483,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udssubjectdemo`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udssubjectdemo`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udssubjectdemo',query_type);
 	
@@ -2597,7 +2597,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udssymptomsonset`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udssymptomsonset`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udssymptomsonset',query_type);
 	
@@ -2711,7 +2711,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_nacc_udsupdrs`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsupdrs`(user_name varchar(50), host_name varchar(50),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name,host_name,'crms.nacc.udsupdrs',query_type);
 	
@@ -2825,7 +2825,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_objects`(user_name varchar(50), host_name varchar(25))
+CREATE PROCEDURE `lq_get_objects`(user_name varchar(50), host_name varchar(25))
 BEGINSELECT concat(`instance`,'_',`scope`,'_',`module`) as query_source,concat(`section`,'_',`target`) as query_object_name , `short_desc`, `standard`,`primary_link`,`secondary_link` from `query_objects`;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2842,7 +2842,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_patient_demographics`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_patient_demographics`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGINCALL lq_audit_event(user_name,host_name,'crms.patient.demographics',query_type);	IF query_type = 'Simple' THEN	SELECT p.pidn, d.*  FROM lq_view_demographics d 		INNER JOIN temp_pidn p ON (p.PIDN = d.PIDN_Demographics)       ORDER BY p.pidn;ELSEIF query_type = 'SimpleAllPatients' THEN	SELECT p.pidn, d.*   FROM lq_view_demographics d  		 RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = d.PIDN_Demographics)       ORDER BY p.pidn;ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN 	 SELECT l.pidn, l.link_date,l.link_id,d.*  	 FROM temp_linkdata l INNER JOIN lq_view_demographics d ON (d.PIDN_Demographics=l.PIDN);END IF;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2859,7 +2859,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_get_scheduling_visits`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_scheduling_visits`(user_name varchar(50), host_name varchar(25),query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGINCALL lq_audit_event(user_name,host_name,'crms.scheduling.visits',query_type);	IF query_type = 'Simple' THEN	SELECT p.pidn, v.*  FROM lq_view_visit v 		INNER JOIN temp_pidn p ON (p.PIDN = v.PIDN_visit)       ORDER BY p.pidn, v.vdate, v.vtype;ELSEIF query_type = 'SimpleAllPatients' THEN	SELECT p.pidn, v.*  FROM lq_view_visit v  		 RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = v.PIDN_visit)       ORDER BY p.pidn,v.vdate, v.vtype;END IF;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2876,7 +2876,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_set_linkdata`(user_name varchar(50), host_name varchar(25))
+CREATE PROCEDURE `lq_set_linkdata`(user_name varchar(50), host_name varchar(25))
 BEGINDROP TABLE IF EXISTS temp_linkdata1;DROP TABLE IF EXISTS temp_linkdata;CREATE TEMPORARY TABLE temp_linkdata1(    pidn INTEGER NOT NULL,    link_date DATE NOT NULL,    link_id INTEGER NOT NULL,    link_type varchar(25) DEFAULT NULL);END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2893,7 +2893,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_set_linkdata_row`(user_name varchar(50), host_name varchar(25),pidn integer,link_date date, link_id integer)
+CREATE PROCEDURE `lq_set_linkdata_row`(user_name varchar(50), host_name varchar(25),pidn integer,link_date date, link_id integer)
 BEGININSERT INTO `temp_linkdata1` (`pidn`,`link_date`,`link_id`) VALUES(pidn,link_date,link_id);END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2910,7 +2910,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_set_pidns`(user_name varchar(50), host_name varchar(25))
+CREATE PROCEDURE `lq_set_pidns`(user_name varchar(50), host_name varchar(25))
 BEGINDROP TABLE IF EXISTS temp_pidn1;DROP TABLE IF EXISTS temp_pidn;CREATE TEMPORARY TABLE temp_pidn1(    pidn INTEGER NOT NULL);END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2927,7 +2927,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `lq_set_pidns_row`(user_name varchar(50), host_name varchar(25),pidn integer)
+CREATE PROCEDURE `lq_set_pidns_row`(user_name varchar(50), host_name varchar(25),pidn integer)
 BEGININSERT INTO `temp_pidn1` (`pidn`) values (pidn);END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2944,7 +2944,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsappraisal_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsappraisal_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END ;;
 DELIMITER ;
@@ -2962,7 +2962,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udscdr_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udscdr_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udscdr` SET `COMPORT`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`CDRLANG`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID = instrument_id;END IF;END ;;
 DELIMITER ;
@@ -2980,7 +2980,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsdiagnosis_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsdiagnosis_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udsdiagnosis` SET `VASCPS`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`VASCPSIF`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH2`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH2IF`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH2X`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH3`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH3IF`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`COGOTH3X`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END ;;
 DELIMITER ;
@@ -2998,7 +2998,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsfamilyhistory_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsfamilyhistory_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;		IF new_version = "2" THEN			DELETE FROM udsfamilyhistory1 where instrId = instrument_id;		INSERT INTO udsfamilyhistory2 (InstrID) VALUES (instrument_id);		INSERT INTO udsfamilyhistorychildren2 (InstrID) VALUES (instrument_id);		INSERT INTO udsfamilyhistoryrelatives2 (InstrID) VALUES (instrument_id);			ELSEIF (new_version = '1') THEN			DELETE FROM udsfamilyhistory2 where instrId = instrument_id;		DELETE FROM udsfamilyhistorychildren2 where instrId = instrument_id;		DELETE FROM udsfamilyhistoryrelatives2 where instrId = instrument_id;		INSERT INTO UDSFamilyHistory1 (InstrID) VALUES (instrument_id);				END IF;END IF;END ;;
 DELIMITER ;
@@ -3016,7 +3016,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsfaq_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsfaq_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END ;;
 DELIMITER ;
@@ -3034,7 +3034,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsformchecklist_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsformchecklist_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END ;;
 DELIMITER ;
@@ -3052,7 +3052,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsgds_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsgds_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END ;;
 DELIMITER ;
@@ -3070,7 +3070,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udshachinski_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udshachinski_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udshachinski` SET `CVDCOG`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`STROKCOG`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAG`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAG1`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAG2`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAG3`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAG4`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`CVDIMAGX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END ;;
 DELIMITER ;
@@ -3088,7 +3088,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udshealthhistory_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udshealthhistory_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END ;;
 DELIMITER ;
@@ -3106,7 +3106,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsinformantdemo_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsinformantdemo_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END ;;
 DELIMITER ;
@@ -3124,7 +3124,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udslabsimaging_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udslabsimaging_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END ;;
 DELIMITER ;
@@ -3142,7 +3142,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsmedications_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsmedications_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;		IF new_version = "2" THEN			DELETE FROM udsmedicationspre1 where instrId = instrument_id;		DELETE FROM udsmedicationsnon1 where instrId = instrument_id;		DELETE FROM udsmedicationsvit1 where instrId = instrument_id;		INSERT INTO udsmedications2 (InstrID) VALUES (instrument_id);				ELSEIF (new_version = '1') THEN			DELETE FROM udsmedications2 where instrId = instrument_id;		DELETE FROM udsmedicationsdetails2 where instrId = instrument_id;		INSERT INTO udsmedicationspre1 (InstrID) VALUES (instrument_id);		INSERT INTO udsmedicationsnon1 (InstrID) VALUES (instrument_id);		INSERT INTO udsmedicationsvit1 (InstrID) VALUES (instrument_id);				END IF;END IF;END ;;
 DELIMITER ;
@@ -3160,7 +3160,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsmilestone_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsmilestone_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udsmilestone` SET `REJOINED`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`PROTOCOL`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`NPREFUS`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`PHYREFUS`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`UDSACTIV`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END ;;
 DELIMITER ;
@@ -3178,7 +3178,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsneuropsych_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsneuropsych_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udsneuropsych` SET `PENTAGON`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`TRAILARR`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRAILALI`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRAILBRR`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRAILBLI`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END ;;
 DELIMITER ;
@@ -3196,7 +3196,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsnpi_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsnpi_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END ;;
 DELIMITER ;
@@ -3214,7 +3214,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsphysical_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsphysical_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END ;;
 DELIMITER ;
@@ -3232,7 +3232,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udssubjectdemo_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udssubjectdemo_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINCALL proc_uds_change_version(instrument_id,new_version);END ;;
 DELIMITER ;
@@ -3250,7 +3250,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udssymptomsonset_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udssymptomsonset_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udssymptomsonset` SET `COGFLUC`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`BEVWELL`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`BEREM`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`MOMOPARK`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END ;;
 DELIMITER ;
@@ -3268,7 +3268,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_udsupdrs_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_udsupdrs_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udsupdrs` SET `SPEECHX`=CASE WHEN new_version = '1' THEN -8 WHEN new_version = '2' THEN NULL END,		`FACEXPX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRESTFAX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRESTRHX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRESTLHX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRESTRFX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRESTLFX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRACTRHX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`TRACTLHX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`RIGDNEX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`RIGDUPRX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`RIGDUPLX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`RIGDLORX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`RIGDLOLX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END,		`BRADYKIX`=CASE WHEN new_version = '1' THEN -8  WHEN new_version = '2' THEN NULL END WHERE InstrID=instrument_id;END IF;END ;;
 DELIMITER ;
@@ -3286,7 +3286,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `proc_uds_change_version`(instrument_id INT, new_version VARCHAR(25))
+CREATE PROCEDURE `proc_uds_change_version`(instrument_id INT, new_version VARCHAR(25))
     SQL SECURITY INVOKER
 BEGINDECLARE existing_version VARCHAR(25);SELECT `InstrVer` INTO existing_version FROM `instrumenttracking` WHERE `InstrID`=instrument_id;IF existing_version <> new_version THEN 	UPDATE `instrumenttracking` SET `InstrVer`= new_version WHERE `InstrID`=instrument_id;	UPDATE `udstracking` SET `FormVer`= new_version WHERE `InstrID`=instrument_id;END IF;END ;;
 DELIMITER ;
@@ -3304,7 +3304,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_AddEntityToHibernateProperty`(EntityIn varchar (50),ScopeIn varchar(25))
+CREATE PROCEDURE `util_AddEntityToHibernateProperty`(EntityIn varchar (50),ScopeIn varchar(25))
 BEGIN
 
 INSERT INTO `hibernateproperty` (`scope`,`entity`,`property`,`dbTable`,`dbColumn`,`dbType`,`dbLength`,
@@ -3353,7 +3353,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_AddEntityToMetaData`(EntityIn varchar (50), ScopeIn varchar(25))
+CREATE PROCEDURE `util_AddEntityToMetaData`(EntityIn varchar (50), ScopeIn varchar(25))
 BEGIN
 
 INSERT INTO `viewproperty` (`messageCode`,`locale`,`instance`,`scope`,`entity`,`property`,`required`,`maxLength`,`propOrder`)
@@ -3378,7 +3378,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_AddTableToHibernateProperty`(TableNameIn varchar (50),EntityIn varchar (50),ScopeIn varchar(25))
+CREATE PROCEDURE `util_AddTableToHibernateProperty`(TableNameIn varchar (50),EntityIn varchar (50),ScopeIn varchar(25))
 BEGIN
 
 INSERT INTO `hibernateproperty` (`scope`,`entity`,`property`,`dbTable`,`dbColumn`,`dbType`,`dbLength`,
@@ -3425,7 +3425,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_AddTableToMetaData`(TableNameIn varchar (50),EntityIn varchar (50),ScopeIn varchar(25))
+CREATE PROCEDURE `util_AddTableToMetaData`(TableNameIn varchar (50),EntityIn varchar (50),ScopeIn varchar(25))
 BEGIN
 
 INSERT INTO `viewproperty` (`messageCode`,`locale`,`instance`,`scope`,`entity`,`property`,`required`,`maxLength`,`propOrder`)
@@ -3450,7 +3450,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_ColumnList`(TableName varchar(50), Pattern varchar(50))
+CREATE PROCEDURE `util_ColumnList`(TableName varchar(50), Pattern varchar(50))
 BEGIN
 
 CALL util_ColumnNameSelect('`###`,', TableName, Pattern);
@@ -3471,7 +3471,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_ColumnNameSelect`(Statement varchar (1500), TableName varchar(100), ColumnLike varchar(50))
+CREATE PROCEDURE `util_ColumnNameSelect`(Statement varchar (1500), TableName varchar(100), ColumnLike varchar(50))
 BEGIN
 
 DECLARE strToFind VARCHAR(2000);
@@ -3512,7 +3512,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_CreateLQProc`(LQ_Scope varchar(50), LQ_Section varchar(50), LQ_Target varchar(50), Instrument varchar(50), DataSource varchar(50))
+CREATE PROCEDURE `util_CreateLQProc`(LQ_Scope varchar(50), LQ_Section varchar(50), LQ_Target varchar(50), Instrument varchar(50), DataSource varchar(50))
 BEGIN
 
 SELECT CONCAT('\n',
@@ -3643,7 +3643,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_CreateLQView`(TableName varchar(50), Instrument varchar(50))
+CREATE PROCEDURE `util_CreateLQView`(TableName varchar(50), Instrument varchar(50))
 BEGIN
 
 DECLARE lqTargetName varchar(50);
@@ -3703,7 +3703,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_CreateMetadataInsertStatements`(InstanceMask varchar(50), ScopeMask varchar(50), EntityMask varchar (50))
+CREATE PROCEDURE `util_CreateMetadataInsertStatements`(InstanceMask varchar(50), ScopeMask varchar(50), EntityMask varchar (50))
 BEGIN
 
 IF InstanceMask IS NULL THEN
@@ -3835,7 +3835,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_CreateTable`(EntityIn varchar (50), ScopeIn varchar(25))
+CREATE PROCEDURE `util_CreateTable`(EntityIn varchar (50), ScopeIn varchar(25))
 BEGIN
 
 select CONCAT('DROP TABLE IF EXISTS `',db_table, '`;') from datadictionary where entity=EntityIn and scope=ScopeIn group by db_table order by db_table;
@@ -3870,7 +3870,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_FixMetadataPropertyNames`(EntityIn varchar(50))
+CREATE PROCEDURE `util_FixMetadataPropertyNames`(EntityIn varchar(50))
 BEGIN
 
 
@@ -3915,7 +3915,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_GenerateCode`(EntityIn varchar(50), ScopeIn VARCHAR(25))
+CREATE PROCEDURE `util_GenerateCode`(EntityIn varchar(50), ScopeIn VARCHAR(25))
 BEGIN
 
 CALL util_HibernateMapping(EntityIn,ScopeIn);
@@ -3940,7 +3940,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_GetCreateFieldTags`(EntityIn varchar(50), ScopeIn VARCHAR(25))
+CREATE PROCEDURE `util_GetCreateFieldTags`(EntityIn varchar(50), ScopeIn VARCHAR(25))
 BEGIN
 
 
@@ -3983,7 +3983,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_GetJavaModelProperties`(EntityIn varchar(50), ScopeIn VARCHAR(25))
+CREATE PROCEDURE `util_GetJavaModelProperties`(EntityIn varchar(50), ScopeIn VARCHAR(25))
 BEGIN
 
 SELECT CONCAT('protected ',CASE WHEN `HibernateType` IN('many-to-one','one-to-many','one-to-one') THEN `HibernateClass`
@@ -4008,7 +4008,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_GetResultFields`(EntityIn varchar(50), ScopeIn VARCHAR(25))
+CREATE PROCEDURE `util_GetResultFields`(EntityIn varchar(50), ScopeIn VARCHAR(25))
 BEGIN
 
 SELECT CONCAT('"',`property`,'",')
@@ -4032,7 +4032,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_GetUdsUploadCsvRecord`(EntityIn varchar(50), ScopeIn VARCHAR(25))
+CREATE PROCEDURE `util_GetUdsUploadCsvRecord`(EntityIn varchar(50), ScopeIn VARCHAR(25))
 BEGIN
 	
 SELECT CONCAT('buffer.append(UdsUploadUtils.formatField(get',
@@ -4057,7 +4057,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_HibernateMapping`(EntityIn varchar(50), ScopeIn Varchar(25))
+CREATE PROCEDURE `util_HibernateMapping`(EntityIn varchar(50), ScopeIn Varchar(25))
 BEGIN
 
 SELECT CONCAT('<?xml version="1.0"?>
@@ -4139,7 +4139,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_TableKeysAdd`(EntityIn varchar (50), ScopeIn varchar(25))
+CREATE PROCEDURE `util_TableKeysAdd`(EntityIn varchar (50), ScopeIn varchar(25))
 BEGIN
 
 select CONCAT('ALTER TABLE `', db_table, '` ADD CONSTRAINT `', db_table, '__instr_id`
@@ -4165,7 +4165,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`demo`@`localhost` PROCEDURE `util_TableKeysDrop`(EntityIn varchar (50), ScopeIn varchar(25))
+CREATE PROCEDURE `util_TableKeysDrop`(EntityIn varchar (50), ScopeIn varchar(25))
 BEGIN
 
 select CONCAT('ALTER TABLE `', db_table, '` DROP FOREIGN KEY `', db_table, '__instr_id`;
