@@ -175,7 +175,7 @@
 </ui:formGuide>           
 
 <ui:formGuide >
-  <ui:depends elementsIds="packet" component="instrument"/>
+  <ui:depends elementIds="packet" component="instrument"/>
   <ui:observe elementIds="decClin" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="decAge" component="${componentPrefix}"/>
 </ui:formGuide>           
