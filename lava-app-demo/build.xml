@@ -116,7 +116,7 @@
     <target name="deploy-reload" depends="deploy,reload"/>
 	
 	<!-- package into a .war file per the Servlet Spec. -->
-	<target name="package-war" depends="deploy" description="Package web app into [instance].war">
+	<target name="package-war" depends="compile-all,deploy" description="Package web app into [instance].war">
 
 		<!-- note that the Ant war task could also be used for packaging. -->
 		<jar destfile="${packagedWar.file}">
