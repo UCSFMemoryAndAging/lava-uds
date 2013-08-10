@@ -7,6 +7,7 @@ import edu.ucsf.lava.core.dao.LavaTypedEqualityParamHandler;
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.assessment.model.UdsFormChecklist;
+import edu.ucsf.lava.crms.assessment.model.UdsFtldFormChecklist;
 import edu.ucsf.lava.crms.assessment.model.UdsInstrument;
 import edu.ucsf.lava.crms.assessment.model.UdsInstrumentTracking;
 import edu.ucsf.lava.crms.scheduling.model.Visit;
@@ -71,14 +72,14 @@ public class UdsVisit extends Visit {
 	public void flushPacketStatus(UdsInstrument instrUpdated) {
 		// instrUpdated is the instrument that was just updated
 		
-		// if this is a UDS Form Checklist (form 'Z1') then update the packet status of all other
+		// if this is a UDS Form Checklist (form 'Z1' or 'Z1F') then update the packet status of all other
 		// UDS instruments for the same patient and visit to be the same as the UDS Form Checklist
-		if (instrUpdated.getFormId().equals(UdsFormChecklist.UDS_FORMCHECKLIST_FORMID)) {
+		if (instrUpdated.getFormId().equals(UdsFormChecklist.UDS_FORMCHECKLIST_FORMID)
+		    || instrUpdated.getFormId().equals(UdsFtldFormChecklist.UDS_FTLD_FORMCHECKLIST_FORMID)) {
 			LavaDaoFilter filter = newFilterInstance();
-			filter.addDaoParam(filter.daoEqualityParam("ptid", instrUpdated.getPtid()));
-			filter.addParamHandler(new LavaTypedEqualityParamHandler("visitNum",Short.class));
-			filter.addDaoParam(filter.daoEqualityParam("visitNum", this.getVisitNum()));
-			filter.addDaoParam(filter.daoNot(filter.daoEqualityParam("formId", "Z1")));
+			filter.setAlias("visit","visit");
+			filter.addDaoParam(filter.daoEqualityParam("visit.id", this.getId()));
+			filter.addDaoParam(filter.daoNot(filter.daoEqualityParam("formId", this.getVisitType().equals("FTLD Assessment") ? UdsFtldFormChecklist.UDS_FTLD_FORMCHECKLIST_FORMID : UdsFormChecklist.UDS_FORMCHECKLIST_FORMID)));
 			List<UdsInstrumentTracking> udsInstrs = UdsInstrumentTracking.MANAGER.get(filter);
 			for (UdsInstrumentTracking udsInstr : udsInstrs) {
 				udsInstr.setPacketDate(instrUpdated.getPacketDate());
@@ -95,10 +96,8 @@ public class UdsVisit extends Visit {
 			
 			// obtain the UDS Form Checklist instrument for this patient and visit
 			LavaDaoFilter filter = newFilterInstance();
-			filter.addDaoParam(filter.daoEqualityParam("ptid", instrUpdated.getPtid()));
-			filter.addParamHandler(new LavaTypedEqualityParamHandler("visitNum",Short.class));
-			filter.addDaoParam(filter.daoEqualityParam("visitNum", this.getVisitNum()));
-			filter.addDaoParam(filter.daoEqualityParam("formId", "Z1"));
+			filter.addDaoParam(filter.daoEqualityParam("id", this.getId()));
+			filter.addDaoParam(filter.daoEqualityParam("formId", (this.getVisitType().equals("FTLD Assessment") ? UdsFtldFormChecklist.UDS_FTLD_FORMCHECKLIST_FORMID : UdsFormChecklist.UDS_FORMCHECKLIST_FORMID)));
 			UdsInstrumentTracking udsFormChecklist = (UdsInstrumentTracking) UdsInstrumentTracking.MANAGER.getOne(filter);
 			// there is always a UDS Form Checklist instrument for this patient and visit, since
 			// a patient will always get the complete UDS set of instruments at a visit. however,
