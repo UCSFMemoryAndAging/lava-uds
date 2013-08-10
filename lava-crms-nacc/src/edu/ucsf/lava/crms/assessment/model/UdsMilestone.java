@@ -322,7 +322,7 @@ public class UdsMilestone extends UdsInstrument {
 	}
 	public String[] getRequiredResultFields(String version) {
 		String[] required = new String[]{};
-		
+		// note: "other" fields are not required, yet NACC alerts us
 		if (version.equalsIgnoreCase("2")) {
 			required = new String[] {
 					   "deceased",
@@ -335,7 +335,6 @@ public class UdsMilestone extends UdsInstrument {
 			           "discDy",
 			           "discYr",
 			           "discReas",
-			           "discReax",
 			           "rejoined",
 			           "nurseHome",
 			           "nurseMo",
@@ -348,14 +347,12 @@ public class UdsMilestone extends UdsInstrument {
 			           "npHomen",
 			           "npRefus",
 			           "npOthRea",
-			           "npOthRex",
 			           "phynData",
 			           "phyCog",
 			           "phyIll",
 			           "phyHome",
 			           "phyRefus",
-			           "phyOth",
-			           "phyOthx"};
+			           "phyOth"};
 		}
 		else if (version.equalsIgnoreCase("1")) {
 			required = new String[] {
@@ -364,13 +361,11 @@ public class UdsMilestone extends UdsInstrument {
 			           "npPhyIll",
 			           "npHomen",
 			           "npOthRea",
-			           "npOthRex",
 			           "phynData",
 			           "phyCog",
 			           "phyIll",
 			           "phyHome",
 			           "phyOth",
-			           "phyOthx",
 			           "nurseHome",
 			           "nurseMo",
 			           "nurseDy",
@@ -380,7 +375,6 @@ public class UdsMilestone extends UdsInstrument {
 			           "discDy",
 			           "discYr",
 			           "discReas",
-			           "discReax",
 			           "deceased",
 			           "deathMo",
 			           "deathDy",
