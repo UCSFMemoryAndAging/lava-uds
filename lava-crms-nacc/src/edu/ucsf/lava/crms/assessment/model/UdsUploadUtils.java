@@ -250,9 +250,7 @@ public class UdsUploadUtils {
 	static public boolean includeInstrBasedOnZ1(UdsInstrument i, UdsFormChecklist z1, UdsFtldFormChecklist z1f){
 		if (i == null) return false;  // don't include nothing
 		
-		if (z1 == null) return true;  // i.e. no filtering is done
-		else
-		{
+		if (z1 != null) {
 			// always include these
 			if (i.getFormId().equals("A1")) return true;
 			if (i.getFormId().equals("A5")) return true;
@@ -283,12 +281,12 @@ public class UdsUploadUtils {
 				if (i.getFormId().equals("B6") && (z1.getB6Sub()==null || z1.getB6Sub().equals((short)1))) return true;				
 				if (i.getFormId().equals("B8") && (z1.getB8Sub()==null || z1.getB8Sub().equals((short)1))) return true;
 			}
+			
+			// if made it through, then this instrument is not to be included
+			return false;
 		}
-
 		// FTLD Module
-		if (z1f == null) return true;
-		else
-		{
+		else if (z1f != null) {
 			if (i.getFormId().equals("B3F")) return true;
 			if (i.getFormId().equals("B9F")) return true;
 			if (i.getFormId().equals("C1F")) return true;
@@ -303,10 +301,12 @@ public class UdsUploadUtils {
 			if (i.getFormId().equals("A3F") && (z1f.getFtda3fs()==null || z1f.getFtda3fs().equals((short)1))) return true;
 			if (i.getFormId().equals("C4F") && (z1f.getFtdc4fs()==null || z1f.getFtdc4fs().equals((short)1))) return true;
 			if (i.getFormId().equals("C5F") && (z1f.getFtdc5fs()==null || z1f.getFtdc5fs().equals((short)1))) return true;
-			if (i.getFormId().equals("C6F") && (z1f.getFtdc6fs()==null || z1f.getFtdc6fs().equals((short)1))) return true;			
+			if (i.getFormId().equals("C6F") && (z1f.getFtdc6fs()==null || z1f.getFtdc6fs().equals((short)1))) return true;
+			
+			// if made it through, then this instrument is not to be included
+			return false;
 		}
 		
-		// if made it through, then this instrument is not to be included
-		return false;
+		return true;  // i.e. no filtering is done (b/c form checklist not created/completed yet)
 	}
 }
