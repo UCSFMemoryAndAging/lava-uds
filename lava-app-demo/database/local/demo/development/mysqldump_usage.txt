@@ -1,0 +1,17 @@
+Recommended procedure for creating a mysqldump of a database (perhaps to transfer latest production db
+to dev for testing, or to get a dump to another developer)
+
+1) Use the following switches and generate the dump file:
+mysqldump -R -c --comments=FALSE  --tz-utc=FALSE  -u demo -p demo > dumpfile.sql
+ 
+2) Modify the dump file to remove the DEFINER everywhere so that the dump can be restored by a different database user.
+Edit the dump .sql file and replace all occurences of DEFINER=...  with blank
+e.g.
+DEFINER=`demo`@`localhost`
+ 
+note: good link on the DEFINER issue with mysqldump and many ways to remove it
+http://dbperf.wordpress.com/2010/04/12/removing-definer-from-mysql-dump/
+ 
+3) Create a new database, load the dump file and test the app
+
+ 
