@@ -1,13 +1,16 @@
 Recommended procedure for creating a mysqldump of a database (perhaps to transfer latest production db
 to dev for testing, or to get a dump to another developer)
 
-1) Use the following switches and generate the dump file:
+1) Generate the dump file:
+1a) Use the following switches:
 mysqldump -R -c --comments=FALSE  --tz-utc=FALSE  -u demo -p demo > demodump.sql
 --routines == -R
 --complete-insert == -c   Use complete INSERT statements that include column names.
 --comments=FALSE   Write additional information in the dump file such as program version, server version, and host.
                    This option is enabled by default.
 --tz-utc=FALSE    This option enables TIMESTAMP columns to be dumped and reloaded between servers in different time zones.
+ 
+1b) Do NOT run mysqldump as root. No reason to do that.
  
  
 2) Modify the dump file to remove the DEFINER everywhere so that the dump can be restored by a different database user.
@@ -17,6 +20,7 @@ DEFINER=`demo`@`localhost`
  
 note: good link on the DEFINER issue with mysqldump and many ways to remove it
 http://dbperf.wordpress.com/2010/04/12/removing-definer-from-mysql-dump/
+
  
 3) Create a new database, load the dump file and test the app
 
