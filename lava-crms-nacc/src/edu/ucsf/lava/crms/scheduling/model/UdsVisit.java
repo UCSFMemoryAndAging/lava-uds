@@ -3,14 +3,14 @@ package edu.ucsf.lava.crms.scheduling.model;
 import java.util.List;
 
 import edu.ucsf.lava.core.dao.LavaDaoFilter;
-import edu.ucsf.lava.core.dao.LavaTypedEqualityParamHandler;
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
+import edu.ucsf.lava.core.model.EntityManagerBase;
 import edu.ucsf.lava.crms.assessment.model.UdsFormChecklist;
 import edu.ucsf.lava.crms.assessment.model.UdsFtldFormChecklist;
 import edu.ucsf.lava.crms.assessment.model.UdsInstrument;
 import edu.ucsf.lava.crms.assessment.model.UdsInstrumentTracking;
-import edu.ucsf.lava.crms.scheduling.model.Visit;
+import edu.ucsf.lava.crms.people.model.Patient;
 
 public class UdsVisit extends Visit {
 
@@ -82,6 +82,17 @@ public class UdsVisit extends Visit {
 			filter.addDaoParam(filter.daoNot(filter.daoEqualityParam("formId", this.getVisitType().equals("FTLD Assessment") ? UdsFtldFormChecklist.UDS_FTLD_FORMCHECKLIST_FORMID : UdsFormChecklist.UDS_FORMCHECKLIST_FORMID)));
 			List<UdsInstrumentTracking> udsInstrs = UdsInstrumentTracking.MANAGER.get(filter);
 			for (UdsInstrumentTracking udsInstr : udsInstrs) {
+				// at this point the Patient property of udsInstr is a hibernateProxy so materialize the Patient 
+				// in case Patient properties are needed (e.g. the instrument save could set the UdsInstrument ptid
+				// to an IdManager value derived from the Patient (or subclass)
+				// trick is that if the DAO materialize method is called on the HibernateProxy, even though the
+				// Patient is materialized upon return will still be a HibernateProxy, so have to call the DAO 
+				// directly
+				// i.e. this does not work: Patient p = (Patient) udsInstr.getPatient().materializeProxy();
+				EntityManagerBase entityManager = new EntityManagerBase();
+				Patient p = (Patient) entityManager.materializeProxy(udsInstr.getPatient());
+				udsInstr.setPatient(p);
+				
 				udsInstr.setPacketDate(instrUpdated.getPacketDate());
 				udsInstr.setPacketBy(instrUpdated.getPacketBy());
 				udsInstr.setPacketStatus(instrUpdated.getPacketStatus());
