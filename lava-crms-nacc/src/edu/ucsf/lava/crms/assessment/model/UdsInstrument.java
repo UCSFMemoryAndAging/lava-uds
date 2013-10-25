@@ -478,9 +478,13 @@ public class UdsInstrument extends Instrument implements UdsUploadable {
 
 		// update packet status
 		if (this.getPtid() != null && this.getVisitNum() != null) {
-			// instead of doing the updates here, call a method of UdsVisit, to allow overriding
-			UdsVisit udsvisit = (UdsVisit)this.getVisit();
-			udsvisit.flushPacketStatus(this);
+			// note that not all UDS instruments will belong to a UdsVisit. a UDS instrument can be added
+			// to any type of Visit
+			if (UdsVisit.class.isInstance(this.getVisit())) {
+				// instead of doing the updates here, call a method of UdsVisit, to allow overriding
+				UdsVisit udsvisit = (UdsVisit)this.getVisit();
+				udsvisit.flushPacketStatus(this);
+			}
 		}
 		
 		return super.afterUpdate();
