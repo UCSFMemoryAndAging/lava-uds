@@ -46,7 +46,7 @@
 <tags:listRow>
 	<tags:componentListColumnHeader component="${component}"  label="Action" width="11%"/>
 	<tags:componentListColumnHeader component="${component}"  label="Patient" width="19%" sort="patient.fullNameRevNoSuffix"/>
-	<tags:componentListColumnHeader component="${component}"  label="Measure"width="12%" sort="formId"/>
+	<tags:componentListColumnHeader component="${component}"  label="Measure" width="12%" sort="formId"/>
 	<tags:componentListColumnHeader component="${component}"  label="Collection" width="13%" sort="dcDate"/>
 	<tags:componentListColumnHeader component="${component}"  label="Data Entry" width="13%" sort="deDate"/>
 	<tags:componentListColumnHeader component="${component}"  label="Validation" width="13%" sort="dvDate"/>
