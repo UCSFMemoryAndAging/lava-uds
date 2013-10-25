@@ -33,5 +33,12 @@ public UdsInstrumentTracking() {}
 		super(p, v, projName, instrType, dcDate, dcStatus);
 	}
 	
+	// LOGICCHECKS
+	public boolean ignoreLogicCheckUponUpdate() {
+		// ignore this instrument when represented as UdsInstrumentTracking; when the case, we would
+		// not want a saving of this entity to affect the logic checks from subclasses of UdsInstrument
+		// (i.e. the real data)
+		return true;
+	}
 
 }

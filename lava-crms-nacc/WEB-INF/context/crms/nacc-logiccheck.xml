@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!-- configure custom logiccheck mapping strategy for NACC data -->
+	<bean id="naccLogicCheckMapping" parent="baseLogiccheckMapping" class="edu.ucsf.lava.core.logiccheck.BaseLogicCheckMapping">
+		<property name="id" value="crms-nacc"/>
+		<property name="strategy"><ref bean="naccLogicCheckStrategy"/></property>
+	</bean>
+	<bean id="naccLogicCheckStrategy" class="edu.ucsf.lava.crms.logiccheck.NaccLogicCheckStrategy"/>
+	
+	<!-- add NACC instruments as entities to be logic checked -->
+	
+	<bean id="lcNaccPathology" parent="logicCheckEntityConfig">
+		<property name="entityName" value="NaccPathology"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.NaccPathology</value></property>
+	</bean>	
+	
+	<bean id="lcMdsStatus" parent="logicCheckEntityConfig">
+		<property name="entityName" value="MdsStatus"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.MdsStatus</value></property>
+	</bean>			
+	
+	<bean id="lcUdsAppraisal" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsAppraisal"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsAppraisal</value></property>
+	</bean>		 			
+	 		
+	<bean id="lcUdsCdr" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsCdr"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsCdr</value></property>
+	</bean>		 			
+	
+	<bean id="lcUdsDiagnosis" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsDiagnosis"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsDiagnosis</value></property>
+	</bean>		 			
+	
+	<bean id="lcUdsFamilyHistory1" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsFamilyHistory1"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory1</value></property>
+	</bean>		 			
+	
+	<bean id="lcUdsFamilyHistory2" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsFamilyHistory2"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory2</value></property>
+	</bean>		 			
+
+	<bean id="lcUdsFaq" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsFaq"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFaq</value></property>
+	</bean>		 			
+	 			
+	<bean id="lcUdsFormChecklist" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsFormChecklist"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFormChecklist</value></property>
+	</bean>		 			
+
+	<bean id="lcUdsGds" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsGds"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsGds</value></property>
+	</bean>		 			
+	 
+	<bean id="lcUdsHachinski" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsHachinski"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsHachinski</value></property>
+	</bean>		 			
+
+	<bean id="lcUdsHealthHistory" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsHealthHistory"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsHealthHistory</value></property>
+	</bean>	
+ 			
+	<bean id="lcUdsInformantDemo" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsInformantDemo"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsInformantDemo</value></property>
+	</bean>		 			
+
+	<bean id="lcUdsLabsImaging" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsLabsImaging"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsLabsImaging</value></property>
+	</bean>		 			
+ 			
+	 
+	 <bean id="lcUdsMedications1" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsMedications1"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsMedications1</value></property>
+	</bean>		 		
+ 
+ 	 <bean id="lcUdsMedications2" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsMedications2"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsMedications2</value></property>
+	</bean>					
+
+	<bean id="lcUdsMilestone" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsMilestone"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsMilestone</value></property>
+	</bean>	
+	
+	<bean id="lcUdsNeuroPsych" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsNeuroPsych"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsNeuroPsych</value></property>
+	</bean>		 			
+	
+	<bean id="lcUdsNpi" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsNpi"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsNpi</value></property>
+	</bean>		 			
+	
+	<bean id="lcUdsPhoneInclusion" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsPhoneInclusion"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsPhoneInclusion</value></property>
+	</bean>		 			
+	
+	<bean id="lcUdsPhysical" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsPhysical"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsPhysical</value></property>
+	</bean>		 			
+	
+	<bean id="lcUdsSubjectDemo" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsSubjectDemo"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsSubjectDemo</value></property>
+	</bean>		 			
+	
+	<bean id="lcUdsSymptomsOnset" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsSymptomsOnset"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsSymptomsOnset</value></property>
+	</bean>		 			
+	
+	<bean id="lcUdsUpdrs" parent="logicCheckEntityConfig">
+		<property name="entityName" value="UdsUpdrs"/>
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsUpdrs</value></property>
+	</bean>
+	
+</beans>
