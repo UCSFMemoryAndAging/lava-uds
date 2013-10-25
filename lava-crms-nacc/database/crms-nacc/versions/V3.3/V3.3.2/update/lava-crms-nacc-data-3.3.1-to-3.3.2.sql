@@ -14,9 +14,9 @@ instance='lava' AND scope='crms-nacc');
 UPDATE listvalues SET ValueDesc='Subacute(&lt;=6 months)' WHERE
 ListID=@LISTID AND ValueKey='2';
 
---- ****************************************************************************************
---- UCSF fix bug that prevented from entering a drug that was not listed in UDS Medications2
---- ****************************************************************************************
+-- ****************************************************************************************
+-- UCSF fix bug that prevented from entering a drug that was not listed in UDS Medications2
+-- ****************************************************************************************
 UPDATE viewproperty SET attributes = NULL WHERE entity='udsmedications2' AND property='notListed';
 
 
