@@ -1,4 +1,4 @@
-Update to emorypatch_20130604_logicchecks_emory.sql:
+-- Update to logicchecks_emory.sql:
 
 -- Emory has confirmed that this 4xxx error code (normally suggesting telephone visit) is
 --   applied to initial and in-person follow-up
