@@ -13,7 +13,11 @@ public class UdsFtldSnq extends UdsInstrument {
 	public static final int UDS_C2F_ERROR_CODE_CANNOT_CALCULATE = 88;
 	public static final int NUM_ITEMS = 22;
 	public static final double UDS_C2F_ERROR_CODE_CANNOT_CALCULATE_DECIMAL = 88.88;
-
+	public static final Short YES = Short.valueOf((short)1);
+	public static final Short NO = Short.valueOf((short)0);
+	//NACC's coding convention has CORRECT = 0
+	public static final Short CORRECT = Short.valueOf((short)0);
+	public static final Short INCORRECT = Short.valueOf((short)1);
 	public static final String UDS_FTLD_SNQ_FORMID = "C2F";
 	public UdsFtldSnq() {}
 	
@@ -332,23 +336,137 @@ public class UdsFtldSnq extends UdsInstrument {
 
 		super.beforeUpdate();
 				
-		this.ftdsntot = CalcUtils.add(new Short[] {this.ftdhaird, this.ftdspit, this.ftdnose, this.ftdcoage, this.ftdcry, this.ftdcut, this.ftdytrip, this.ftdeatp, this.ftdtella, this.ftdopin, this.ftdlaugh, this.ftdshirt, this.ftdkeepm, this.ftdpickn, this.ftdover, this.ftdeatr, this.ftdhairl, this.ftdshirw, this.ftdmove, this.ftdhugs, this.ftdloud, this.ftdlost}).shortValue();
+		//Fields to hold if the response was correct or incorrect
+		Short ftdhairdC;
+		Short ftdspitC;
+		Short ftdnoseC;
+		Short ftdcoageC;
+		Short ftdcryC;
+		Short ftdcutC;
+		Short ftdytripC;
+		Short ftdeatpC;
+		Short ftdtellaC;
+		Short ftdopinC;
+		Short ftdlaughC;
+		Short ftdshirtC;
+		Short ftdkeepmC;
+		Short ftdpicknC;
+		Short ftdoverC;
+		Short ftdeatrC;
+		Short ftdhairlC;
+		Short ftdshirwC;
+		Short ftdmoveC;
+		Short ftdhugsC;
+		Short ftdloudC;
+		Short ftdlostC;
+		
+		if (this.ftdhaird.equals(UdsFtldSnq.NO)) ftdhairdC=UdsFtldSnq.CORRECT;
+		else if (this.ftdhaird.equals(UdsFtldSnq.YES)) ftdhairdC=UdsFtldSnq.INCORRECT;
+		else ftdhairdC=this.ftdhaird;
+
+		if (this.ftdspit.equals(UdsFtldSnq.NO)) ftdspitC=UdsFtldSnq.CORRECT;
+		else if (this.ftdspit.equals(UdsFtldSnq.YES)) ftdspitC=UdsFtldSnq.INCORRECT;
+		else ftdspitC=this.ftdspit;
+		
+		if (this.ftdnose.equals(UdsFtldSnq.YES)) ftdnoseC=UdsFtldSnq.CORRECT;
+		else if (this.ftdnose.equals(UdsFtldSnq.NO)) ftdnoseC=UdsFtldSnq.INCORRECT;
+		else ftdnoseC=this.ftdnose;
+		
+		if (this.ftdcoage.equals(UdsFtldSnq.NO)) ftdcoageC=UdsFtldSnq.CORRECT;
+		else if (this.ftdcoage.equals(UdsFtldSnq.YES)) ftdcoageC=UdsFtldSnq.INCORRECT;
+		else ftdcoageC=this.ftdcoage;
+		
+		if (this.ftdcry.equals(UdsFtldSnq.YES)) ftdcryC=UdsFtldSnq.CORRECT;
+		else if (this.ftdcry.equals(UdsFtldSnq.NO)) ftdcryC=UdsFtldSnq.INCORRECT;
+		else ftdcryC=this.ftdcry;
+		
+		if (this.ftdcut.equals(UdsFtldSnq.NO)) ftdcutC=UdsFtldSnq.CORRECT;
+		else if (this.ftdcut.equals(UdsFtldSnq.YES)) ftdcutC=UdsFtldSnq.INCORRECT;
+		else ftdcutC=this.ftdcut;
+		
+		if (this.ftdytrip.equals(UdsFtldSnq.YES)) ftdytripC=UdsFtldSnq.CORRECT;
+		else if (this.ftdytrip.equals(UdsFtldSnq.NO)) ftdytripC=UdsFtldSnq.INCORRECT;
+		else ftdytripC=this.ftdytrip;
+		
+		if (this.ftdeatp.equals(UdsFtldSnq.NO)) ftdeatpC=UdsFtldSnq.CORRECT;
+		else if (this.ftdeatp.equals(UdsFtldSnq.YES)) ftdeatpC=UdsFtldSnq.INCORRECT;
+		else ftdeatpC=this.ftdeatp;
+		
+		if (this.ftdtella.equals(UdsFtldSnq.YES)) ftdtellaC=UdsFtldSnq.CORRECT;
+		else if (this.ftdtella.equals(UdsFtldSnq.NO)) ftdtellaC=UdsFtldSnq.INCORRECT;
+		else ftdtellaC=this.ftdtella;
+		
+		if (this.ftdopin.equals(UdsFtldSnq.YES)) ftdopinC=UdsFtldSnq.CORRECT;
+		else if (this.ftdhaird.equals(UdsFtldSnq.NO)) ftdopinC=UdsFtldSnq.INCORRECT;
+		else ftdopinC=this.ftdopin;
+		
+		if (this.ftdlaugh.equals(UdsFtldSnq.NO)) ftdlaughC=UdsFtldSnq.CORRECT;
+		else if (this.ftdlaugh.equals(UdsFtldSnq.YES)) ftdlaughC=UdsFtldSnq.INCORRECT;
+		else ftdlaughC=this.ftdlaugh;
+		
+		if (this.ftdshirt.equals(UdsFtldSnq.NO)) ftdshirtC=UdsFtldSnq.CORRECT;
+		else if (this.ftdshirt.equals(UdsFtldSnq.YES)) ftdshirtC=UdsFtldSnq.INCORRECT;
+		else ftdshirtC=this.ftdshirt;
+		
+		if (this.ftdkeepm.equals(UdsFtldSnq.YES)) ftdkeepmC=UdsFtldSnq.CORRECT;
+		else if (this.ftdkeepm.equals(UdsFtldSnq.NO)) ftdkeepmC=UdsFtldSnq.INCORRECT;
+		else ftdkeepmC=this.ftdkeepm;
+		
+		if (this.ftdpickn.equals(UdsFtldSnq.NO)) ftdpicknC=UdsFtldSnq.CORRECT;
+		else if (this.ftdpickn.equals(UdsFtldSnq.YES)) ftdpicknC=UdsFtldSnq.INCORRECT;
+		else ftdpicknC=this.ftdpickn;
+		
+		if (this.ftdover.equals(UdsFtldSnq.NO)) ftdoverC=UdsFtldSnq.CORRECT;
+		else if (this.ftdover.equals(UdsFtldSnq.YES)) ftdoverC=UdsFtldSnq.INCORRECT;
+		else ftdoverC=this.ftdover;
+		
+		if (this.ftdeatr.equals(UdsFtldSnq.YES)) ftdeatrC=UdsFtldSnq.CORRECT;
+		else if (this.ftdeatr.equals(UdsFtldSnq.NO)) ftdeatrC=UdsFtldSnq.INCORRECT;
+		else ftdeatrC=this.ftdeatr;
+		
+		if (this.ftdhairl.equals(UdsFtldSnq.YES)) ftdhairlC=UdsFtldSnq.CORRECT;
+		else if (this.ftdhairl.equals(UdsFtldSnq.NO)) ftdhairlC=UdsFtldSnq.INCORRECT;
+		else ftdhairlC=this.ftdhairl;
+		
+		if (this.ftdshirw.equals(UdsFtldSnq.YES)) ftdshirwC=UdsFtldSnq.CORRECT;
+		else if (this.ftdshirw.equals(UdsFtldSnq.NO)) ftdshirwC=UdsFtldSnq.INCORRECT;
+		else ftdshirwC=this.ftdshirw;
+		
+		if (this.ftdmove.equals(UdsFtldSnq.NO)) ftdmoveC=UdsFtldSnq.CORRECT;
+		else if (this.ftdmove.equals(UdsFtldSnq.YES)) ftdmoveC=UdsFtldSnq.INCORRECT;
+		else ftdmoveC=this.ftdmove;
+
+		if (this.ftdhugs.equals(UdsFtldSnq.NO)) ftdhugsC=UdsFtldSnq.CORRECT;
+		else if (this.ftdhugs.equals(UdsFtldSnq.YES)) ftdhugsC=UdsFtldSnq.INCORRECT;
+		else ftdhugsC=this.ftdhugs;
+		
+		if (this.ftdloud.equals(UdsFtldSnq.NO)) ftdloudC=UdsFtldSnq.CORRECT;
+		else if (this.ftdloud.equals(UdsFtldSnq.YES)) ftdloudC=UdsFtldSnq.INCORRECT;
+		else ftdloudC=this.ftdloud;
+
+		if (this.ftdlost.equals(UdsFtldSnq.YES)) ftdlostC=UdsFtldSnq.CORRECT;
+		else if (this.ftdlost.equals(UdsFtldSnq.NO)) ftdlostC=UdsFtldSnq.INCORRECT;
+		else ftdlostC=this.ftdlost;
+
+		//Score calculation uses correct/incorrect values instead of responses
+		this.ftdsntot = CalcUtils.add(new Short[] {ftdhairdC, ftdspitC, ftdnoseC, ftdcoageC, ftdcryC, ftdcutC, ftdytripC, ftdeatpC, ftdtellaC, ftdopinC, ftdlaughC, ftdshirtC, ftdkeepmC, ftdpicknC, ftdoverC, ftdeatrC, ftdhairlC, ftdshirwC, ftdmoveC, ftdhugsC, ftdloudC, ftdlostC}).shortValue();
 		if (this.ftdsntot == CalcUtils.ERROR_CODE_CANNOT_CALCULATE) this.ftdsntot = UDS_C2F_ERROR_CODE_CANNOT_CALCULATE;
 		else this.ftdsntot = (short) (NUM_ITEMS - this.ftdsntot);
 		
-		this.ftdsntbs = CalcUtils.add(new Short[] {this.ftdhaird, this.ftdspit, this.ftdcoage, this.ftdcut, this.ftdeatp, this.ftdlaugh, this.ftdshirt, this.ftdpickn, this.ftdover, this.ftdmove, this.ftdhugs, this.ftdloud}).shortValue();
+		this.ftdsntbs = CalcUtils.add(new Short[] {ftdhairdC, ftdspitC, ftdcoageC, ftdcutC, ftdeatpC, ftdlaughC, ftdshirtC, ftdpicknC, ftdoverC, ftdmoveC, ftdhugsC, ftdloudC}).shortValue();
 		if (this.ftdsntbs == CalcUtils.ERROR_CODE_CANNOT_CALCULATE) this.ftdsntbs = UDS_C2F_ERROR_CODE_CANNOT_CALCULATE;
 
-		this.ftdsntos = CalcUtils.add(new Short[] {this.ftdnose, this.ftdcry, this.ftdytrip, this.ftdtella, this.ftdopin, this.ftdkeepm, this.ftdeatr, this.ftdhairl, this.ftdshirw, this.ftdlost}).shortValue();
+		this.ftdsntos = CalcUtils.add(new Short[] {ftdnoseC, ftdcryC, ftdytripC, ftdtellaC, ftdopinC, ftdkeepmC, ftdeatrC, ftdhairlC, ftdshirwC, ftdlostC}).shortValue();
 		if (this.ftdsntos == CalcUtils.ERROR_CODE_CANNOT_CALCULATE) this.ftdsntos = UDS_C2F_ERROR_CODE_CANNOT_CALCULATE;
 		
+		//Yes/No Ratio Score uses response values
 		Short numTotal = CalcUtils.count(new Short[] {this.ftdhaird, this.ftdspit, this.ftdnose, this.ftdcoage, this.ftdcry, this.ftdcut, this.ftdytrip, this.ftdeatp, this.ftdtella, this.ftdopin, this.ftdlaugh, this.ftdshirt, this.ftdkeepm, this.ftdpickn, this.ftdover, this.ftdeatr, this.ftdhairl, this.ftdshirw, this.ftdmove, this.ftdhugs, this.ftdloud, this.ftdlost});
 		Short numYes = CalcUtils.count(new Short[] {this.ftdhaird, this.ftdspit, this.ftdnose, this.ftdcoage, this.ftdcry, this.ftdcut, this.ftdytrip, this.ftdeatp, this.ftdtella, this.ftdopin, this.ftdlaugh, this.ftdshirt, this.ftdkeepm, this.ftdpickn, this.ftdover, this.ftdeatr, this.ftdhairl, this.ftdshirw, this.ftdmove, this.ftdhugs, this.ftdloud, this.ftdlost}, new Short[] {1});		
 		Short numNo = CalcUtils.count(new Short[] {this.ftdhaird, this.ftdspit, this.ftdnose, this.ftdcoage, this.ftdcry, this.ftdcut, this.ftdytrip, this.ftdeatp, this.ftdtella, this.ftdopin, this.ftdlaugh, this.ftdshirt, this.ftdkeepm, this.ftdpickn, this.ftdover, this.ftdeatr, this.ftdhairl, this.ftdshirw, this.ftdmove, this.ftdhugs, this.ftdloud, this.ftdlost}, new Short[] {0});
 		
 		if (numTotal==NUM_ITEMS && numYes!=0 && numNo!=0) this.ftdsnrat = numYes.floatValue() / numNo.floatValue();
 		else this.ftdsnrat = (float) UDS_C2F_ERROR_CODE_CANNOT_CALCULATE_DECIMAL;		
-		
+				
 	}
 	
 }
