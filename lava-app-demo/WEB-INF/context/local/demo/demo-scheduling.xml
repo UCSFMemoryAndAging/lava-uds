@@ -26,6 +26,7 @@
 				</bean>
 			</entry>				
 			<entry key="UDS~FTLD Assessment"><bean class="edu.ucsf.lava.crms.scheduling.model.UdsVisit">
+					<property name="packet" value="IF"/>
 				</bean>
 			</entry>				
 		</map></constructor-arg>
@@ -46,6 +47,7 @@
 	</bean>
 	
 	<bean id="ftldUDSInstrumentPrototype" abstract="true" parent="abstractInstrumentPrototype">
+			<property name="packet" value="IF"/>
 	</bean>
 	
 	<!--  a ProjectName-Visittype:Instrument bean map injected into the assessmentService -->
