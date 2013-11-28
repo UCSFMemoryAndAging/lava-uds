@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+<!-- actions -->
+	
+
+	
+<!-- form action definitions -->
+
+	<bean id="udsSwitchInstrumentGroupHandler" 
+		class="edu.ucsf.lava.crms.assessment.controller.UdsSwitchInstrumentGroupHandler" 
+		parent="switchInstrumentGroupHandler"/>
+		
+    <bean id="switchableUdsInstrumentFormAction" parent="crmsInstrumentComponentFormAction">
+    	<constructor-arg><list>
+     		<bean parent="udsInstrumentHandler"/>
+      		<bean class="edu.ucsf.lava.crms.assessment.controller.VisitInstrumentsHandler" parent="crmsHandler"/>
+      		<!-- SWITCHABLE: handle the events in navigation list too -->
+     		<ref bean="udsSwitchInstrumentGroupHandler"/>
+   		</list></constructor-arg>
+    </bean>
+	
+    <!-- udsmedication2 has a different handler than the rest of UDS -->
+    <bean id="switchableUdsmedications2FormAction" parent="crmsInstrumentComponentFormAction">
+		<constructor-arg><list>
+			<bean parent="udsMedications2Handler"/>
+			<bean class="edu.ucsf.lava.crms.assessment.controller.VisitInstrumentsHandler" parent="crmsHandler"/>
+			<!-- SWITCHABLE: handle the events in navigation list -->
+			<ref bean="udsSwitchInstrumentGroupHandler"/>
+		</list></constructor-arg>
+	</bean>
+	
+	<!--  replace all lava-crms-nacc instrument form action with switchable one -->
+    <bean id="udsInstrumentHandler" class="edu.ucsf.lava.crms.assessment.controller.UdsSwitchableInstrumentHandler" parent="baseEntityInstrumentHandler" abstract="true"/>
+	<bean id="udsMedications2Handler" class="edu.ucsf.lava.crms.assessment.controller.UdsSwitchableMedications2Handler" parent="crmsHandler" abstract="true"/>
+	<bean id="udsInstrumentFormAction" parent="switchableUdsInstrumentFormAction"/>
+	<bean id="udsmedications2FormAction" parent="switchableUdsmedications2FormAction"/>
+	
+</beans>

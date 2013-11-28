@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+<!-- actions -->
+
+	<!-- We wish the visitInstruments list to create a UdsInstrumentTracking list if a Uds Visit -->
+  	<bean id="lava.crms.scheduling.visit.udsVisitInstruments" parent="crmsInstrumentListFlowAction">
+		<property name="customizedFlow"><value>lava.crms.scheduling.visit.visitInstruments</value></property>
+	</bean>
+
+<!-- form actions -->
+
+	<bean id="udsVisitInstrumentsFormAction" parent="crmsListComponentFormAction"><constructor-arg><list>
+		<bean class="edu.ucsf.lava.crms.assessment.controller.UdsVisitInstrumentsHandler" parent="crmsHandler"/>
+		<ref bean="instrumentGroupHandler"/>
+	</list></constructor-arg></bean> 
+	
+</beans>
