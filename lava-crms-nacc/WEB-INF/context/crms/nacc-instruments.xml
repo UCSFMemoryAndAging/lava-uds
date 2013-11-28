@@ -5,11 +5,14 @@
 
 <!-- actions -->
 	
+	<bean id="udsInstrumentListFlowAction" abstract="true" parent="crmsInstrumentListFlowAction"/>
+	<bean id="udsPatientSectionInstrumentListAction" abstract="true" parent="crmsPatientSectionInstrumentListAction"/>
+	<bean id="udsSectionInstrumentListAction" abstract="true" parent="crmsSectionInstrumentListAction"/>
 	
-	<bean id="lava.crms.assessment.uds.patientUdsInstruments" parent="crmsPatientSectionInstrumentListAction"/>
-	<bean id="lava.crms.assessment.uds.projectUdsInstruments" parent="crmsSectionInstrumentListAction"/>
-	<bean id="lava.crms.assessment.uds.patientUdsSubmissions" parent="crmsInstrumentListFlowAction"/>
-	<bean id="lava.crms.assessment.uds.projectUdsSubmissions" parent="crmsInstrumentListFlowAction"/>
+	<bean id="lava.crms.assessment.uds.patientUdsInstruments" parent="udsPatientSectionInstrumentListAction"/>
+	<bean id="lava.crms.assessment.uds.projectUdsInstruments" parent="udsSectionInstrumentListAction"/>
+	<bean id="lava.crms.assessment.uds.patientUdsSubmissions" parent="udsInstrumentListFlowAction"/>
+	<bean id="lava.crms.assessment.uds.projectUdsSubmissions" parent="udsInstrumentListFlowAction"/>
 	
 	<bean id="lava.crms.assessment.instrument.mdsstatus" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.naccpathology9" parent="crmsInstrumentFlowAction"/>
@@ -86,6 +89,7 @@
 	</bean>
 	
 	<bean id="udsInstrumentHandler" class="edu.ucsf.lava.crms.assessment.controller.UdsInstrumentHandler" parent="baseEntityInstrumentHandler" abstract="true"/>		
+	<bean id="udsMedications2Handler" class="edu.ucsf.lava.crms.assessment.controller.UdsMedications2Handler" parent="crmsHandler" abstract="true"/>
 	
 	<bean id="udsInstrumentFormAction" parent="crmsInstrumentComponentFormAction">
     	<constructor-arg>
@@ -137,8 +141,11 @@
 	<bean id="udslabsimaging2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsmedications1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsmedications2FormAction" parent="crmsInstrumentComponentFormAction">
-		<constructor-arg><list><bean class="edu.ucsf.lava.crms.assessment.controller.UdsMedications2Handler" parent="crmsHandler"/></list></constructor-arg>
-	</bean>
+    	<constructor-arg><list>
+			<bean parent="udsMedications2Handler"/>
+	      	<bean class="edu.ucsf.lava.crms.assessment.controller.VisitInstrumentsHandler" parent="crmsHandler"/>
+		</list></constructor-arg>
+    </bean>
 	<bean id="udsmilestone1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsmilestone2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsneuropsych1FormAction" parent="udsInstrumentFormAction"/>

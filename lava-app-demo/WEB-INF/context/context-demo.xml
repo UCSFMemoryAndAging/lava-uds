@@ -13,8 +13,13 @@
 	<!-- lava/crms/crms-context.xml imports all crms lava bean definitions -->
 	<import resource="crms/crms-context.xml"/>
 
+	<!-- import for lava-crms-ignav package -->
+	<import resource="crms/crms-ignav-context.xml"/>
 
 	<import resource="crms/nacc-context.xml"/>
+
+	<!-- import for lava-crms-ignav-nacc package -->
+	<import resource="crms/crms-ignav-nacc-context.xml"/>
 
 	<!-- local/demo/demo-context.xml imports all local demo1 bean definitions -->
 	<import resource="local/demo/demo-context.xml"/>

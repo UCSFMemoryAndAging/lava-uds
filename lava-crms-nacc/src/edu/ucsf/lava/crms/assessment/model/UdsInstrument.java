@@ -63,6 +63,12 @@ public class UdsInstrument extends Instrument implements UdsUploadable {
 		this.setFormVer(CURRENT_UDS_VERSION);
 	}
 
+	@Override
+	public String getInstrTypeExt() {
+		// allows users to more quickly identify forms using form id and form name
+		return (this.getFormId() != null ? this.getFormId() : new String("")) + ": "+this.getInstrType();
+	}
+	
 	// returns an alternate language string if the form is not an english form
 	public String getAlternateLanguage() {
 		if (this.formId != null && this.formId.endsWith("S")) {

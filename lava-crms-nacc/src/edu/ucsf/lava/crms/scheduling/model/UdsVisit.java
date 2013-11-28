@@ -11,6 +11,9 @@ import edu.ucsf.lava.crms.assessment.model.UdsFtldFormChecklist;
 import edu.ucsf.lava.crms.assessment.model.UdsInstrument;
 import edu.ucsf.lava.crms.assessment.model.UdsInstrumentTracking;
 import edu.ucsf.lava.crms.people.model.Patient;
+import edu.ucsf.lava.crms.assessment.model.UdsMilestone;
+import edu.ucsf.lava.crms.assessment.model.UdsUploadUtils;
+import edu.ucsf.lava.crms.scheduling.model.Visit;
 
 public class UdsVisit extends Visit {
 
@@ -133,7 +136,108 @@ public class UdsVisit extends Visit {
 		}
 	}
 	
+	public String getSubmissionStatusZ1() {
+		// it is likely that Z1 submission status would represent the entire packet's submission status
+		//  refer to your ADRC's submission policy before using this to represent the packet submission status
+		
+		LavaDaoFilter filterZ1 = UdsFormChecklist.MANAGER.newFilterInstance();
+		filterZ1.addDaoParam(filterZ1.daoEqualityParam("visit.id",this.getId()));
+		filterZ1.setAlias("visit","visit");
+		UdsFormChecklist z1 = (UdsFormChecklist)UdsFormChecklist.MANAGER.getOne(filterZ1);
+		
+		if (z1 == null)
+			return "No Z1 form";
+		else
+			return z1.getPacketStatus();
+	}
 	
+	// used by ignav to determine whether to packet is ready for submission
+	// TODO: TQR: my guess is that this could be cleaned up (refactored), having done it quite a while ago
+	public boolean getPacketComplete() {
+		boolean logiccheck_problem;
+		
+		LavaDaoFilter filter = UdsInstrumentTracking.MANAGER.newFilterInstance();
+		filter.addDaoParam(filter.daoEqualityParam("visit.id",this.getId()));
+		filter.setAlias("visit","visit");
+		List<UdsInstrumentTracking> visitInstruments = UdsInstrumentTracking.MANAGER.get(filter);
+		
+		if (this.getVisitType().equals("Milestone")) {
+			for(UdsInstrumentTracking i : visitInstruments) {
+				if (i.getDeStatus() == null || !i.getDeStatus().equals("Complete")
+					|| i.getDcStatus() == null || !i.getDcStatus().equals("Complete")
+				    || i.hasMissingOrIncompleteFields()
+				    || (i.getLcStatus() != null
+				    	&& i.getLcStatus().equals("Failed")))
+					return false;
+				if (i.getInstrType().equals("UDS Milestone")) { // should always be the case
+					// check if milestone has no useful info (e.g. if said nothing changed)
+					filter = UdsMilestone.MANAGER.newFilterInstance();
+					filter.setAlias("visit","visit");
+					filter.addDaoParam(filter.daoEqualityParam("visit.id",this.getId()));
+					UdsMilestone m1 = (UdsMilestone)UdsMilestone.MANAGER.getOne(filter);
+					if (m1.getInstrVer().equals("1")) continue;  // TODO: analyze version 1 fields for completeness
+					if ((m1.getDeceased() == null || m1.getDeceased().equals((short)0))
+						&& (m1.getDiscont() == null || m1.getDiscont().equals((short)0))
+						&& (m1.getRejoined() == null || m1.getRejoined().equals((short)0))
+						&& (m1.getNurseHome() == null || m1.getNurseHome().equals((short)0))
+						&& (m1.getProtocol() == null || m1.getProtocol().equals((short)0))
+						) 
+						return false;
+				}
+			}
+			return true;
+		} else if (this.getVisitType().equals("Initial Assessment")
+				   || this.getVisitType().equals("Follow Up Assessment")
+				   || this.getVisitType().equals("Telephone Follow Up")) {
+			
+			// the Z1 form determines which forms will not be a part of the packet
+			// for each form in the packet, ensure its data is "complete", else return false
+			
+			// find the real data for Z1 (not just the UdsInstrumentTracking part)
+			LavaDaoFilter filterZ1 = UdsFormChecklist.MANAGER.newFilterInstance();
+			filterZ1.addDaoParam(filterZ1.daoEqualityParam("visit.id",this.getId()));
+			filterZ1.setAlias("visit","visit");
+			UdsFormChecklist z1 = (UdsFormChecklist)UdsFormChecklist.MANAGER.getOne(filterZ1);
+	 		UdsFtldFormChecklist z1f = (UdsFtldFormChecklist)UdsFtldFormChecklist.MANAGER.getOne(filterZ1);
+			
+			// for each form in the packet, check if supposed to be complete
+			for(UdsInstrumentTracking i : visitInstruments) {
+				logiccheck_problem = (i.getLcStatus() != null && i.getLcStatus().equals("Failed"));
+				
+				// The following forms are exceptions:
+				// 	 Z1, A1, A5, B4, B9, C1, D1, E1
+				// From NACC: "NACC expects and intends that all UDS forms will be attempted on all subjects, but we
+				// realize this may be impossible when the patient is terminally ill, or when there is no
+				// informant, or for other reasons.  NACC requires that Forms Z1, A1, A5, B4, B9, C1, D1, and E1
+				// be submitted for a subject to be included in the UDS database, even though these forms
+				// may include some missing data."
+				if (i.getFormId() == "Z1" || i.getFormId() == "A1" || i.getFormId() == "A5"
+					 || i.getFormId() == "B4" || i.getFormId() == "B9" || i.getFormId() == "C1"
+					 || i.getFormId() == "D1" || i.getFormId() == "E1"
+					 || i.getFormId() == "Z1F" || i.getFormId() == "B3F" || i.getFormId() == "B9F"
+					 || i.getFormId() == "C1F" || i.getFormId() == "C2F" || i.getFormId() == "C3F"
+					 || i.getFormId() == "E2F" || i.getFormId() == "E3F") {
+					// always included (based on the reading above, even if there were incomplete/missing values),
+					// so just check if *attempted* to have been completed (DEStatus="Complete" means it was saved)
+					if (!i.getDeStatus().equals("Complete") || logiccheck_problem)
+						return false;
+				} else {
+					if (UdsUploadUtils.includeInstrBasedOnZ1(i, z1, z1f)
+						&& (i.getDeStatus() == null || !i.getDeStatus().equals("Complete")
+							|| i.getDcStatus() == null || !i.getDcStatus().equals("Complete")
+							|| i.hasMissingOrIncompleteFields()
+							|| logiccheck_problem))
+						return false;
+				}
+			}
+			
+			// if made it through, then all included instruments are complete without logiccheck problems
+			return true;
+		} else {
+			return true;  // any unconsidered visit types will always return true
+		}
+		
+	}
 	
 	
 	

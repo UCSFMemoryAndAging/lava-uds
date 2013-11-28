@@ -9,7 +9,10 @@
 	<property name="lava-crms.path" value="${workspace.path}/lava-crms"/>
 	<property name="lava-crms-nacc.path" value="${workspace.path}/lava-crms-nacc"/>
 	<property name="instance.path" value="${workspace.path}/lava-app-${instanceName}"/>
-	
+	<!-- EMORY: add lava-crms-ignav projects to test using demo -->
+	<property name="lava-crms-ignav.path" value="${workspace.path}/lava-crms-ignav"/>
+	<property name="lava-crms-ignav-nacc.path" value="${workspace.path}/lava-crms-ignav-nacc"/>
+			
     <property name="src.folder" value="src"/>
     <property name="lib.folder" value="WEB-INF/lib"/>
     <property name="build.folder" value="WEB-INF/classes"/>
@@ -60,8 +63,10 @@
                deprecation="false" optimize="false" failonerror="true">
             <src path="${lava-core.path}/${src.folder}"/>
         	<src path="${lava-crms.path}/${src.folder}"/>
+        	<src path="${lava-crms-ignav.path}/${src.folder}"/>
            	<src path="${lava-crms-nacc.path}/${src.folder}"/>
-           	<src path="${instance.path}/${src.folder}"/>
+        	<src path="${lava-crms-ignav-nacc.path}/${src.folder}"/>
+        	<src path="${instance.path}/${src.folder}"/>
             <classpath refid="master-classpath"/>
         </javac>
     </target>
@@ -72,7 +77,9 @@
 		<copy todir="${instance-deploy.path}" preservelastmodified="true" verbose="true">
 			<fileset dir="${lava-core.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 			<fileset dir="${lava-crms.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
+			<fileset dir="${lava-crms-ignav.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 			<fileset dir="${lava-crms-nacc.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
+			<fileset dir="${lava-crms-ignav-nacc.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 			<fileset dir="${instance.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project"/>
 		</copy>
 	</target>    
@@ -97,7 +104,7 @@
 			<fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-mvc.properties"/>		
 		</concat>
 		<concat destfile="${instance-deploy.path}/WEB-INF/i18n/metadata.properties" append="false">
-		      <fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-metadata.properties"/>		
+		    <fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-metadata.properties"/>		
 		</concat>
 		<concat destfile="${instance-deploy.path}/WEB-INF/i18n/custom.properties" append="false">
 			<fileset dir="${instance-deploy.path}/WEB-INF/i18n/source" includes="*-custom.properties"/>		
