@@ -5,11 +5,6 @@
 <c:set var="instrTypeEncoded">${param.entity}</c:set>
 <c:set var="instrMode">${param.instrMode}</c:set>
 
-component=${component}
-cview=${componentView}
-ite=${instrTypeEncoded}
-modeA=${instrMode}
-
 <page:applyDecorator name="component.instrument.section">
   <page:param name="section"><spring:message code="${instrTypeEncoded}${param.alternateLanguage}.pageTitle"/></page:param>
   <page:param name="view">${componentView}</page:param>
