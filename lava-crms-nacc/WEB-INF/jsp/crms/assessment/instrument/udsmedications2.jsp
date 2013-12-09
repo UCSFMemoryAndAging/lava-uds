@@ -28,13 +28,13 @@
 <c:import url="/WEB-INF/jsp/crms/assessment/instrument/udsCommon.jsp">
 	<c:param name="entity" value="${instrTypeEncoded}"/>
 	<c:param name="view" value="${componentView}"/>
-	<c:param name="component" value="${component}"/>
+	<c:param name="component" value="${componentView == 'enter' ? 'udsMedications2Dto' : component}"/>
 </c:import>
 
 <c:choose>
 	<c:when test="${componentView == 'enter'}">
 		<c:import url="/WEB-INF/jsp/crms/assessment/instrument/udsmedications2EditContent.jsp">
-			<c:param name="component">${component}</c:param>
+			<c:param name="component">udsMedications2Dto</c:param>
 			<c:param name="componentView">${componentView}</c:param>
 			<c:param name="instrTypeEncoded">${instrTypeEncoded}</c:param>	
 			
