@@ -29,6 +29,7 @@
 	<c:param name="entity" value="${instrTypeEncoded}"/>
 	<c:param name="view" value="${componentView}"/>
 	<c:param name="component" value="${componentView == 'enter' ? 'udsMedications2Dto' : component}"/>
+	<c:param name="instrMode" value="${componentView == 'enter' ? 'dc' : ''}"/> 
 </c:import>
 
 <c:choose>

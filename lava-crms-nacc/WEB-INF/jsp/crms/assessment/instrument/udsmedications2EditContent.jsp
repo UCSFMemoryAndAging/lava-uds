@@ -8,7 +8,7 @@
 see MedicationsHandler for reasons behind this. this is why this jsp does not include the assessment/
 instrument/include.jsp 
 udsMedicationsDto is passed in as param.component --%>
-<c:set var="dtoComponent" value="component"/>
+<c:set var="dtoComponent" value="${component}"/>
 
 <page:applyDecorator name="component.instrument.section">
   <page:param name="sectionId">details</page:param>

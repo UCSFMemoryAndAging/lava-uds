@@ -3,19 +3,25 @@
 <c:set var="component">${param.component}</c:set>
 <c:set var="componentView">${param.view}</c:set>
 <c:set var="instrTypeEncoded">${param.entity}</c:set>
+<c:set var="instrMode">${param.instrMode}</c:set>
+
+component=${component}
+cview=${componentView}
+ite=${instrTypeEncoded}
+modeA=${instrMode}
 
 <page:applyDecorator name="component.instrument.section">
   <page:param name="section"><spring:message code="${instrTypeEncoded}${param.alternateLanguage}.pageTitle"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
 <tags:contentColumn columnClass="colLeft2Col5050">
-<tags:createField property="packet" component="${component}" entity="udsinstrument"/>
-<tags:createField property="formId" component="${component}" entity="udsinstrument"/>
-<tags:createField property="formVer" component="${component}" entity="udsinstrument"/>
+<tags:createField property="packet" component="${component}" entity="udsinstrument" mode="${instrMode}"/>
+<tags:createField property="formId" component="${component}" entity="udsinstrument" mode="${instrMode}"/>
+<tags:createField property="formVer" component="${component}" entity="udsinstrument" mode="${instrMode}"/>
 </tags:contentColumn>
 <tags:contentColumn columnClass="colRight2Col5050">
-<tags:createField property="visitNum" component="${component}" entity="udsinstrument"/>
-<tags:createField property="initials" component="${component}" entity="udsinstrument"/>
+<tags:createField property="visitNum" component="${component}" entity="udsinstrument" mode="${instrMode}"/>
+<tags:createField property="initials" component="${component}" entity="udsinstrument" mode="${instrMode}"/>
 </tags:contentColumn>
 </page:applyDecorator>
 
