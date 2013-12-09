@@ -189,7 +189,7 @@
 <ui:formGuide>
   <ui:observe elementIds="discont" component="${componentPrefix}" forValue="^1"/>
   <ui:unskip elementIds="discMo,discDy,discYr" component="${componentPrefix}" /> 
-  <ui:unskip elementIds="discReas"component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/> 
+  <ui:unskip elementIds="discReas" component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/> 
 </ui:formGuide>
 
 <ui:formGuide>
@@ -207,7 +207,7 @@
   </c:if>
 </c:forEach>
 </c:if>
-
+ 
 </page:applyDecorator>    
 </page:applyDecorator>    
 	    
