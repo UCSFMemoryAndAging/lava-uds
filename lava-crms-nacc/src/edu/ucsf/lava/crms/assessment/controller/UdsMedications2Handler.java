@@ -58,41 +58,43 @@ public class UdsMedications2Handler extends UdsInstrumentHandler {
 		// due to automatic persistence of dirty objects, and do not want the change property of the
 		// priorMedications entity modified. instead, modify the change property on the DTO after the
 		// priorMedications values have been transferred to it.
-		UdsMedications2 dto = this.createUdsMedications2Dto(); // method to allow override by custom subclasses
-		
-		
-		if(flowMode.equals("enterReview")){
-			dto.initialize(this.DATA_ENTRY_SECTION_LENGTH);
-		}
-		else {
-			dto.initialize(medications.getDetailsLength());
-		}
-			
-		//now copy to the Data Transfer Object
-		this.mapDtoFromModel(dto, medications);
-		
 
-		
-		// populate the model as necessary for the view
-		
-		if (flowMode.equals("enterReview")) {
-			//put detail records in the model
-			backingObjects.put(this.MEDICATIONS_DTO, dto);
-		}
-		else {
-			// the view flow displays the medications as a readonly list, using PagedListHolder structures, so 
-			// set those up here.
-			// use the DTO rather than priorMedications or medications, because if priorMedications values are being 
-			// used, the change property was modified in the DTO, not in priorMedications which would then result
-			// in the undesireable effect of automatic persistence of the priorMedications entity with modified
-			// change property values
+		// editStatus does not require the DTO. just editing the instrument status fields.		
+		String currentFlowState = context.getCurrentState().getId();
+		if (!currentFlowState.equals("editStatus")) {
+			UdsMedications2 dto = this.createUdsMedications2Dto(); // method to allow override by custom subclasses
 			
-			ScrollablePagedListHolder details = (ScrollablePagedListHolder) new ScrollablePagedListHolder();
-			details.setPageSize(50);
-			backingObjects.put("details", details);
-			details.setSourceFromEntityList(dto.getDetails());
+			if(flowMode.equals("enterReview")){
+				dto.initialize(this.DATA_ENTRY_SECTION_LENGTH);
+			}
+			else {
+				dto.initialize(medications.getDetailsLength());
+			}
+				
+			//now copy to the Data Transfer Object
+			this.mapDtoFromModel(dto, medications);
+		
+			// populate the model as necessary for the view
 	
-			backingObjects.put(this.MEDICATIONS_DTO, dto);
+			if (flowMode.equals("enterReview")) {
+				//put detail records in the model
+				backingObjects.put(this.MEDICATIONS_DTO, dto);
+			}
+			else {
+				// the view flow displays the medications as a readonly list, using PagedListHolder structures, so 
+				// set those up here.
+				// use the DTO rather than priorMedications or medications, because if priorMedications values are being 
+				// used, the change property was modified in the DTO, not in priorMedications which would then result
+				// in the undesireable effect of automatic persistence of the priorMedications entity with modified
+				// change property values
+				
+				ScrollablePagedListHolder details = (ScrollablePagedListHolder) new ScrollablePagedListHolder();
+				details.setPageSize(50);
+				backingObjects.put("details", details);
+				details.setSourceFromEntityList(dto.getDetails());
+		
+				backingObjects.put(this.MEDICATIONS_DTO, dto);
+			}
 		}
 		
 		return backingObjects;
@@ -149,7 +151,12 @@ public class UdsMedications2Handler extends UdsInstrumentHandler {
 	protected Event doSave(RequestContext context, Object command, BindingResult errors) throws Exception {
 		UdsMedications2 medications = (UdsMedications2) ((ComponentCommand)command).getComponents().get(INSTRUMENT);
 		UdsMedications2 dto = (UdsMedications2) ((ComponentCommand)command).getComponents().get(MEDICATIONS_DTO);
-		this.mapModelFromDto(medications, dto); // method to allow override by custom subclasses
+		
+		String currentFlowState = context.getCurrentState().getId();
+		// editStatus does not require the DTO		
+		if (!currentFlowState.equals("editStatus")) {
+			this.mapModelFromDto(medications, dto); // method to allow override by custom subclasses
+		}
 		
 		// the review mode of the enterReview flow displays the medications as a readonly list, using PagedListHolder 
 		// structures, so set those up here (note: do not use the DTO as done for view flow in getBackingObjects,
@@ -181,9 +188,16 @@ public class UdsMedications2Handler extends UdsInstrumentHandler {
 	
 	// EMORY change:
 	@Override
-	public String getBindingComponentString() {
+	public String getBindingComponentString(RequestContext context) {
 		// allow binding of UdsMedications' DTO object, not just the default 'instrument'
-		return MEDICATIONS_DTO;
+		String currentFlowState = context.getCurrentState().getId();
+		// editStatus does not require the DTO so use the 'instrument command component		
+		if (currentFlowState.equals("editStatus")) {
+			return "instrument";
+		}
+		else {
+			return MEDICATIONS_DTO;
+		}
 	}
 	
 	
