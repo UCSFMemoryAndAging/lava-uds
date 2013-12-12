@@ -280,8 +280,8 @@ public class UdsFtldClinFeatures extends UdsInstrument {
 			"ftdbvft",
 			"ftdemgpv",
 			"ftdemgpy",
-			"ftdemgmn",
-			"ftdpabvf"
+			"ftdemgmn"
+			//"ftdpabvf" not required since subject may only have one diagnosis in which case this question doesn't make sense
 		};
 	}
 	
