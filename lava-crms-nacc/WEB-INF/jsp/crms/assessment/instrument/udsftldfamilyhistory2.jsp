@@ -8,7 +8,7 @@
 <%-- instrument-specific focusField setting (include.jsp has common focusField settings) --%>
 <c:choose>
 	<c:when test="${componentView == 'doubleEnter' || componentView == 'compare'}">
-		<c:set var="focusField" value="ftdaff"/>
+		<c:set var="focusField" value="ftdfa3f1"/>
 	</c:when>
 </c:choose>	
 
@@ -29,22 +29,58 @@
 	<c:param name="component" value="${component}"/>
 </c:import>
 
-
 <page:applyDecorator name="component.instrument.section">
   	<page:param name="sectionId">family</page:param> 
   	<page:param name="sectionNameKey">udsftldfamilyhistory2.family.section</page:param> 
   	<page:param name="view">${componentView}</page:param>
   	<page:param name="instructions"> </page:param>
 
-	<tags:createField property="ftdaff" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="ftdmutat" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="ftdpmut" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="ftdpmutx" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="ftdmclab" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="ftdmrlab" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="ftdmfamr" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="ftdmoth" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="ftdmothx" component="${component}" entity="${instrTypeEncoded}"/>
+  	<tags:tableForm>
+		<tags:listRow>
+			<tags:listColumnHeader width="75%"/>
+			<tags:listColumnHeader width="25%"/>
+		</tags:listRow>  	
+		<tags:listRow>
+			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.family.ftdfa3f1" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdfa3f1" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>  	
+		<tags:listRow>
+			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.family.ftdaff" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdaff" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.family.ftdmutat" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdmutat" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.family.ftdpmut" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdpmut" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.family.ftdpmutx" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdpmutx" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.family.ftdmclab" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdmclab" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.family.ftdmrlab" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdmrlab" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.family.ftdmfamr" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdmfamr" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.family.ftdmoth" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdmoth" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.family.ftdmothx" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdmothx" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>		
+	</tags:tableForm>
 </page:applyDecorator>
 
 
@@ -56,11 +92,22 @@
 
   	<tags:tableForm>  
 		<tags:listRow>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.parents.labelHeader" width="12%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.parents.npHeader" width="22%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.parents.pdHeader" width="22%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.parents.moeHeader" width="22%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.parents.aooHeader" width="22%"/>
+			<tags:listColumnHeader width="12%"/>
+			<tags:listColumnHeader width="22%"/>
+			<tags:listColumnHeader width="22%"/>
+			<tags:listColumnHeader width="22%"/>
+			<tags:listColumnHeader width="22%"/>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell colspan="4"><tags:outputText textKey="udsftldfamilyhistory2.parents.ftdfa3f2" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdfa3f2" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.parents.labelHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.parents.npHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.parents.pdHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.parents.moeHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.parents.aooHeader"/>
 		</tags:listRow>
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.parents.mother" inline="false"/></tags:listCell>
@@ -86,14 +133,26 @@
   	<page:param name="view">${componentView}</page:param>
   	<page:param name="instructions"> </page:param>
 
-  	<tags:tableForm>  
+  	<tags:tableForm>
 		<tags:listRow>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.labelHeader" width="5%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.bmyHeader" width="23%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.npHeader" width="18%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.pdHeader" width="18%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.moeHeader" width="18%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.aooHeader" width="18%"/>
+			<tags:listColumnHeader width="5%"/>
+			<tags:listColumnHeader width="23%"/>
+			<tags:listColumnHeader width="18%"/>
+			<tags:listColumnHeader width="18%"/>
+			<tags:listColumnHeader width="18%"/>
+			<tags:listColumnHeader width="18%"/>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell colspan="5"><tags:outputText textKey="udsftldfamilyhistory2.siblings.ftdfa3f3" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdfa3f3" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>  	
+		<tags:listRow>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.labelHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.bmyHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.npHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.pdHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.moeHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.siblings.aooHeader"/>
 		</tags:listRow>
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.siblings.sibling3a" inline="false"/></tags:listCell>
@@ -211,12 +270,24 @@
 
   	<tags:tableForm>
 		<tags:listRow>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.labelHeader" width="5%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.bmyHeader" width="23%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.npHeader" width="18%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.pdHeader" width="18%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.moeHeader" width="18%"/>
-			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.aooHeader" width="18%"/>
+			<tags:listColumnHeader width="5%"/>
+			<tags:listColumnHeader width="23%"/>
+			<tags:listColumnHeader width="18%"/>
+			<tags:listColumnHeader width="18%"/>
+			<tags:listColumnHeader width="18%"/>
+			<tags:listColumnHeader width="18%"/>
+		</tags:listRow>
+		<tags:listRow>
+			<tags:listCell colspan="5"><tags:outputText textKey="udsftldfamilyhistory2.children.ftdfa3f4" inline="false"/></tags:listCell>
+			<tags:listCell><tags:createField property="ftdfa3f4" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+		</tags:listRow>  	
+		<tags:listRow>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.labelHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.bmyHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.npHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.pdHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.moeHeader"/>
+			<tags:listColumnHeader labelKey="udsftldfamilyhistory2.children.aooHeader"/>
 		</tags:listRow>  		
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsftldfamilyhistory2.children.child4a" inline="false"/></tags:listCell>
@@ -348,24 +419,55 @@
   <c:if test="${current == 0 || (current == 1 && componentView == 'compare')}">
 
 
+
 <ui:formGuide>
-  <ui:observe elementIds="ftdaff" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="ftdmutat,ftdpmut,ftdpmutx,ftdmclab,ftdmrlab,ftdmfamr,ftdmoth,ftdmothx,ftdmomn,ftdmomp,ftdmome,ftdmoma,ftddadn,ftddadp,ftddade,ftddada,ftdbsam,ftdbsa,ftdnsa,ftdpsa,ftdmsa,ftdasa,ftdbsbm,ftdbsb,ftdnsb,ftdpsb,ftdmsb,ftdasb,ftdbscm,ftdbsc,ftdnsc,ftdpsc,ftdmsc,ftdasc,ftdbsdm,ftdbsd,ftdnsd,ftdpsd,ftdmsd,ftdasd,ftdbsem,ftdbse,ftdnse,ftdpse,ftdmse,ftdase,ftdbsfm,ftdbsf,ftdnsf,ftdpsf,ftdmsf,ftdasf,ftdbsgm,ftdbsg,ftdnsg,ftdpsg,ftdmsg,ftdasg,ftdbshm,ftdbsh,ftdnsh,ftdpsh,ftdmsh,ftdash,ftdbsim,ftdbsi,ftdnsi,ftdpsi,ftdmsi,ftdasi,ftdbsjm,ftdbsj,ftdnsj,ftdpsj,ftdmsj,ftdasj,ftdbskm,ftdbsk,ftdnsk,ftdpsk,ftdmsk,ftdask,ftdbslm,ftdbsl,ftdnsl,ftdpsl,ftdmsl,ftdasl,ftdbsmm,ftdbsm,ftdnsm,ftdpsm,ftdmsm,ftdasm,ftdbcam,ftdbca,ftdnca,ftdpca,ftdmca,ftdaca,ftdbcbm,ftdbcb,ftdncb,ftdpcb,ftdmcb,ftdacb,ftdbccm,ftdbcc,ftdncc,ftdpcc,ftdmcc,ftdacc,ftdbcdm,ftdbcd,ftdncd,ftdpcd,ftdmcd,ftdacd,ftdbcem,ftdbce,ftdnce,ftdpce,ftdmce,ftdace,ftdbcfm,ftdbcf,ftdncf,ftdpcf,ftdmcf,ftdacf,ftdbcgm,ftdbcg,ftdncg,ftdpcg,ftdmcg,ftdacg,ftdbchm,ftdbch,ftdnch,ftdpch,ftdmch,ftdach,ftdbcim,ftdbci,ftdnci,ftdpci,ftdmci,ftdaci,ftdbcjm,ftdbcj,ftdncj,ftdpcj,ftdmcj,ftdacj,ftdbckm,ftdbck,ftdnck,ftdpck,ftdmck,ftdack,ftdbclm,ftdbcl,ftdncl,ftdpcl,ftdmcl,ftdacl,ftdbcmm,ftdbcm,ftdncm,ftdpcm,ftdmcm,ftdacm" component="${componentPrefix}"/>
+	<ui:observe elementIds="packet" component="instrument" forValue="^F"/>
+	<ui:unskip elementIds="ftdfa3f1,ftdfa3f2,ftdfa3f3,ftdfa3f4" component="${componentPrefix}"/>
 </ui:formGuide>
 
 <ui:formGuide>
-  <ui:observe elementIds="ftdmutat" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="ftdpmut,ftdpmutx,ftdmclab,ftdmrlab,ftdmfamr,ftdmoth,ftdmothx" component="${componentPrefix}"/>
+	<ui:ignore elementIds="packet" forValue="^F" component="instrument" />
+	<ui:observe elementIds="ftdaff" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+	<ui:unskip elementIds="ftdmutat,ftdpmut,ftdpmutx,ftdmclab,ftdmrlab,ftdmfamr,ftdmoth,ftdmothx,ftdmomn,ftdmomp,ftdmome,ftdmoma,ftddadn,ftddadp,ftddade,ftddada,ftdbsam,ftdbsa,ftdnsa,ftdpsa,ftdmsa,ftdasa,ftdbsbm,ftdbsb,ftdnsb,ftdpsb,ftdmsb,ftdasb,ftdbscm,ftdbsc,ftdnsc,ftdpsc,ftdmsc,ftdasc,ftdbsdm,ftdbsd,ftdnsd,ftdpsd,ftdmsd,ftdasd,ftdbsem,ftdbse,ftdnse,ftdpse,ftdmse,ftdase,ftdbsfm,ftdbsf,ftdnsf,ftdpsf,ftdmsf,ftdasf,ftdbsgm,ftdbsg,ftdnsg,ftdpsg,ftdmsg,ftdasg,ftdbshm,ftdbsh,ftdnsh,ftdpsh,ftdmsh,ftdash,ftdbsim,ftdbsi,ftdnsi,ftdpsi,ftdmsi,ftdasi,ftdbsjm,ftdbsj,ftdnsj,ftdpsj,ftdmsj,ftdasj,ftdbskm,ftdbsk,ftdnsk,ftdpsk,ftdmsk,ftdask,ftdbslm,ftdbsl,ftdnsl,ftdpsl,ftdmsl,ftdasl,ftdbsmm,ftdbsm,ftdnsm,ftdpsm,ftdmsm,ftdasm,ftdbcam,ftdbca,ftdnca,ftdpca,ftdmca,ftdaca,ftdbcbm,ftdbcb,ftdncb,ftdpcb,ftdmcb,ftdacb,ftdbccm,ftdbcc,ftdncc,ftdpcc,ftdmcc,ftdacc,ftdbcdm,ftdbcd,ftdncd,ftdpcd,ftdmcd,ftdacd,ftdbcem,ftdbce,ftdnce,ftdpce,ftdmce,ftdace,ftdbcfm,ftdbcf,ftdncf,ftdpcf,ftdmcf,ftdacf,ftdbcgm,ftdbcg,ftdncg,ftdpcg,ftdmcg,ftdacg,ftdbchm,ftdbch,ftdnch,ftdpch,ftdmch,ftdach,ftdbcim,ftdbci,ftdnci,ftdpci,ftdmci,ftdaci,ftdbcjm,ftdbcj,ftdncj,ftdpcj,ftdmcj,ftdacj,ftdbckm,ftdbck,ftdnck,ftdpck,ftdmck,ftdack,ftdbclm,ftdbcl,ftdncl,ftdpcl,ftdmcl,ftdacl,ftdbcmm,ftdbcm,ftdncm,ftdpcm,ftdmcm,ftdacm" component="${componentPrefix}"/>
 </ui:formGuide>
 
 <ui:formGuide>
-  <ui:observe elementIds="ftdpmut" component="${componentPrefix}" forValue="^8" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="ftdpmutx" component="${componentPrefix}"/>
+	<ui:observe elementIds="ftdmutat" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+	<ui:unskip elementIds="ftdpmut,ftdpmutx,ftdmclab,ftdmrlab,ftdmfamr,ftdmoth,ftdmothx" component="${componentPrefix}"/>
+</ui:formGuide>
+
+<ui:formGuide>
+	<ui:observe elementIds="ftdpmut" component="${componentPrefix}" forValue="^8" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+	<ui:unskip elementIds="ftdpmutx" component="${componentPrefix}"/>
+</ui:formGuide>
+
+<ui:formGuide>
+	<ui:observe elementIds="ftdmoth" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+	<ui:unskip elementIds="ftdmothx" component="${componentPrefix}"/>
+</ui:formGuide>
+
+<ui:formGuide>
+	<ui:ignore elementIds="packet" forValue="^F" negate="true" component="instrument" />
+	<ui:observe elementIds="ftdfa3f1" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+	<ui:skip elementIds="ftdaff,ftdmutat,ftdpmut,ftdpmutx,ftdmclab,ftdmrlab,ftdmfamr,ftdmoth,ftdmothx" component="${componentPrefix}"/>
+</ui:formGuide>
+
+<ui:formGuide>
+	<ui:ignore elementIds="packet" forValue="^F" negate="true" component="instrument" />
+	<ui:observe elementIds="ftdfa3f2" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+	<ui:skip elementIds="ftdmomn,ftdmomp,ftdmome,ftdmoma,ftddadn,ftddadp,ftddade,ftddada" component="${componentPrefix}"/>
+</ui:formGuide>
+
+<ui:formGuide>
+	<ui:ignore elementIds="packet" forValue="^F" negate="true" component="instrument" />
+	<ui:observe elementIds="ftdfa3f3" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+	<ui:skip elementIds="ftdbsam,ftdbsa,ftdnsa,ftdpsa,ftdmsa,ftdasa,ftdbsbm,ftdbsb,ftdnsb,ftdpsb,ftdmsb,ftdasb,ftdbscm,ftdbsc,ftdnsc,ftdpsc,ftdmsc,ftdasc,ftdbsdm,ftdbsd,ftdnsd,ftdpsd,ftdmsd,ftdasd,ftdbsem,ftdbse,ftdnse,ftdpse,ftdmse,ftdase,ftdbsfm,ftdbsf,ftdnsf,ftdpsf,ftdmsf,ftdasf,ftdbsgm,ftdbsg,ftdnsg,ftdpsg,ftdmsg,ftdasg,ftdbshm,ftdbsh,ftdnsh,ftdpsh,ftdmsh,ftdash,ftdbsim,ftdbsi,ftdnsi,ftdpsi,ftdmsi,ftdasi,ftdbsjm,ftdbsj,ftdnsj,ftdpsj,ftdmsj,ftdasj,ftdbskm,ftdbsk,ftdnsk,ftdpsk,ftdmsk,ftdask,ftdbslm,ftdbsl,ftdnsl,ftdpsl,ftdmsl,ftdasl,ftdbsmm,ftdbsm,ftdnsm,ftdpsm,ftdmsm,ftdasm" component="${componentPrefix}"/>
 </ui:formGuide>
 
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
-  <ui:observe elementIds="ftdmoth" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="ftdmothx" component="${componentPrefix}"/>
+	<ui:ignore elementIds="packet" forValue="^F" negate="true" component="instrument" />
+	<ui:observe elementIds="ftdfa3f4" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+	<ui:skip elementIds="ftdbcam,ftdbca,ftdnca,ftdpca,ftdmca,ftdaca,ftdbcbm,ftdbcb,ftdncb,ftdpcb,ftdmcb,ftdacb,ftdbccm,ftdbcc,ftdncc,ftdpcc,ftdmcc,ftdacc,ftdbcdm,ftdbcd,ftdncd,ftdpcd,ftdmcd,ftdacd,ftdbcem,ftdbce,ftdnce,ftdpce,ftdmce,ftdace,ftdbcfm,ftdbcf,ftdncf,ftdpcf,ftdmcf,ftdacf,ftdbcgm,ftdbcg,ftdncg,ftdpcg,ftdmcg,ftdacg,ftdbchm,ftdbch,ftdnch,ftdpch,ftdmch,ftdach,ftdbcim,ftdbci,ftdnci,ftdpci,ftdmci,ftdaci,ftdbcjm,ftdbcj,ftdncj,ftdpcj,ftdmcj,ftdacj,ftdbckm,ftdbck,ftdnck,ftdpck,ftdmck,ftdack,ftdbclm,ftdbcl,ftdncl,ftdpcl,ftdmcl,ftdacl,ftdbcmm,ftdbcm,ftdncm,ftdpcm,ftdmcm,ftdacm" component="${componentPrefix}"/>
 </ui:formGuide>
 
   </c:if>

@@ -16,6 +16,7 @@
 		
 		<join table="udsftldfamilyhistory">
 			<key column="InstrID"/>
+			<property name="ftdfa3f1" column="FTDFA3F1" type="short"/>
 			<property name="ftdaff" column="FTDAFF" type="short"/>
 			<property name="ftdmutat" column="FTDMUTAT" type="short"/>
 			<property name="ftdpmut" column="FTDPMUT" type="short"/>
@@ -25,6 +26,7 @@
 			<property name="ftdmfamr" column="FTDMFAMR" type="short"/>
 			<property name="ftdmoth" column="FTDMOTH" type="short"/>
 			<property name="ftdmothx" column="FTDMOTHX" type="string" length="60"/>
+			<property name="ftdfa3f2" column="FTDFA3F2" type="short"/>
 			<property name="ftdmomn" column="FTDMOMN" type="short"/>
 			<property name="ftdmomp" column="FTDMOMP" type="short"/>
 			<property name="ftdmome" column="FTDMOME" type="short"/>
@@ -33,6 +35,7 @@
 			<property name="ftddadp" column="FTDDADP" type="short"/>
 			<property name="ftddade" column="FTDDADE" type="short"/>
 			<property name="ftddada" column="FTDDADA" type="short"/>
+			<property name="ftdfa3f3" column="FTDFA3F3" type="short"/>
 			<property name="ftdbsam" column="FTDBSAM" type="short"/>
 			<property name="ftdbsa" column="FTDBSA" type="short"/>
 			<property name="ftdnsa" column="FTDNSA" type="short"/>
@@ -111,6 +114,7 @@
 			<property name="ftdpsm" column="FTDPSM" type="short"/>
 			<property name="ftdmsm" column="FTDMSM" type="short"/>
 			<property name="ftdasm" column="FTDASM" type="short"/>
+			<property name="ftdfa3f4" column="FTDFA3F4" type="short"/>
 			<property name="ftdbcam" column="FTDBCAM" type="short"/>
 			<property name="ftdbca" column="FTDBCA" type="short"/>
 			<property name="ftdnca" column="FTDNCA" type="short"/>
