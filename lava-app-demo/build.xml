@@ -5,13 +5,13 @@
 
     <property name="war.file" value="${warName}.war"/>
   
-    <property name="lava-core.path" value="${workspace.path}/lava-core"/>
-	<property name="lava-crms.path" value="${workspace.path}/lava-crms"/>
-	<property name="lava-crms-nacc.path" value="${workspace.path}/lava-crms-nacc"/>
-	<property name="instance.path" value="${workspace.path}/lava-app-${instanceName}"/>
+    <property name="lava-core.path" value="${workspace.path}/lava/lava-core"/>
+	<property name="lava-crms.path" value="${workspace.path}/lava/lava-crms"/>
+	<property name="lava-crms-nacc.path" value="${workspace.path}/lava-uds/lava-crms-nacc"/>
+	<property name="instance.path" value="${workspace.path}/lava-uds/lava-app-${instanceName}"/>
 	<!-- EMORY: add lava-crms-ignav projects to test using demo -->
-	<property name="lava-crms-ignav.path" value="${workspace.path}/lava-crms-ignav"/>
-	<property name="lava-crms-ignav-nacc.path" value="${workspace.path}/lava-crms-ignav-nacc"/>
+	<property name="lava-crms-ignav.path" value="${workspace.path}/lava/lava-crms-ignav"/>
+	<property name="lava-crms-ignav-nacc.path" value="${workspace.path}/lava-uds/lava-crms-ignav-nacc"/>
 			
     <property name="src.folder" value="src"/>
     <property name="lib.folder" value="WEB-INF/lib"/>
