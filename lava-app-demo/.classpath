@@ -39,5 +39,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/lava-crms"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/lava-crms-nacc"/>
 	<classpathentry kind="lib" path="/lava-core/tomcatlibs/servlet-api.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/lava-crms-ignav"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/lava-crms-ignav-nacc"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
