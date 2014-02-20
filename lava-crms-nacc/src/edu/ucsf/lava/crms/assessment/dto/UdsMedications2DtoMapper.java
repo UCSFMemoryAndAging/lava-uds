@@ -91,6 +91,10 @@ public class UdsMedications2DtoMapper extends BaseDtoMapper {
 		// not calling BaseDtoMapper.mapModelFromDto because the details properties have to be
 		// mapped in a custom way as done below
 		// only have to map the properties which are editable in the collect flow back to the model
+		m.setPacket(dto.getPacket());
+		m.setFormId(dto.getFormId());
+		m.setVisitNum(dto.getVisitNum());
+		m.setInitials(dto.getInitials());
 		m.setAnyMeds(dto.getAnyMeds());
 		
 		// even though mapping is done, redo the mapping of the details, because it is a custom thing:
