@@ -16,6 +16,7 @@
 	
 	<bean id="lava.crms.assessment.instrument.mdsstatus" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.naccpathology9" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.naccpathology10" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsappraisal1" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsappraisal2" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udscdr1" parent="crmsInstrumentFlowAction"/>
@@ -102,6 +103,7 @@
 	
 	<!-- naccpathology9: though UdsUploadable, it is not a UdsInstrument -->
 	<bean id="naccpathology9FormAction" parent="instrumentFormAction"/>  
+	<bean id="naccpathology10FormAction" parent="instrumentFormAction"/>  
 	
 	<bean id="mdsstatusFormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsappraisal1FormAction" parent="udsInstrumentFormAction"/>
@@ -173,9 +175,14 @@
 	<bean id="naccpathology9" parent="instrumentConfig">
 		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.NaccPathology</value></property>
 		<property name="supportedFlows"><value>enter,print</value></property>
+	</bean>		
+
+	<bean id="naccpathology10" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.NaccPathology</value></property>
+		<property name="supportedFlows"><value>enter,print</value></property>
 		<property name="currentVersionAlias"><value>naccpathology</value></property>
 	</bean>		
-	
+		
 	<bean id="udsappraisal1" parent="instrumentConfig">
 			<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsAppraisal</value></property>
 			<property name="supportedFlows"><value>enter</value></property>

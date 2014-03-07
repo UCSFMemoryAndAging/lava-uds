@@ -101,8 +101,137 @@
        <property name="npbrfrm" column="NPBRFRM" type="short"/>
        <property name="npbparf" column="NPBPARF" type="short"/>
        <property name="npcsfant" column="NPCSFANT" type="short"/>
-
-
+	   
+	   <property name="nppmih" column="NPPMIH" type="float" precision="4" scale="1"/>
+       <property name="npfix" column="NPFIX" type="short"/>
+       <property name="npfixx" column="NPFIXX" type="string" length="30"/>
+       <property name="npwbrwt" column="NPWBRWT" type="short"/>
+       <property name="npwbrf" column="NPWBRF" type="short"/>
+       <property name="npgrcca" column="NPGRCCA" type="short"/>
+       <property name="npgrla" column="NPGRLA" type="short"/>
+       <property name="npgrha" column="NPGRHA" type="short"/>
+       <property name="npgrsnh" column="NPGRSNH" type="short"/>
+       <property name="npgrlch" column="NPGRLCH" type="short"/>
+       <property name="nptan" column="NPTAN" type="short"/>
+       <property name="nptanx" column="NPTANX" type="string" length="30"/>
+       <property name="npaban" column="NPABAN" type="short"/>
+       <property name="npabanx" column="NPABANX" type="string" length="30"/>
+       <property name="npasan" column="NPASAN" type="short"/>
+       <property name="npasanx" column="NPASANX" type="string" length="30"/>
+       <property name="nptdpan" column="NPTDPAN" type="short"/>
+       <property name="nptdpanx" column="NPTDPANX" type="string" length="30"/>
+       <property name="nphismb" column="NPHISMB" type="short"/>
+       <property name="nphisg" column="NPHISG" type="short"/>
+       <property name="nphisss" column="NPHISSS" type="short"/>
+       <property name="nphist" column="NPHIST" type="short"/>
+       <property name="nphiso" column="NPHISO" type="short"/>
+       <property name="nphisox" column="NPHISOX" type="string" length="30"/>
+       <property name="npthal" column="NPTHAL" type="short"/>
+       <property name="npadnc" column="NPADNC" type="short"/>
+       <property name="npinf" column="NPINF" type="short"/>
+       <property name="npinf1a" column="NPINF1A" type="short"/>
+       <property name="npinf1b" column="NPINF1B" type="float" precision="3" scale="1"/>
+       <property name="npinf1d" column="NPINF1D" type="float" precision="3" scale="1"/>
+       <property name="npinf1f" column="NPINF1F" type="float" precision="3" scale="1"/>
+       <property name="npinf2a" column="NPINF2A" type="short"/>
+       <property name="npinf2b" column="NPINF2B" type="float" precision="3" scale="1"/>
+       <property name="npinf2d" column="NPINF2D" type="float" precision="3" scale="1"/>
+       <property name="npinf2f" column="NPINF2F" type="float" precision="3" scale="1"/>
+       <property name="npinf3a" column="NPINF3A" type="short"/>
+       <property name="npinf3b" column="NPINF3B" type="float" precision="3" scale="1"/>
+       <property name="npinf3d" column="NPINF3D" type="float" precision="3" scale="1"/>
+       <property name="npinf3f" column="NPINF3F" type="float" precision="3" scale="1"/>
+       <property name="npinf4a" column="NPINF4A" type="short"/>
+       <property name="npinf4b" column="NPINF4B" type="float" precision="3" scale="1"/>
+       <property name="npinf4d" column="NPINF4D" type="float" precision="3" scale="1"/>
+       <property name="npinf4f" column="NPINF4F" type="float" precision="3" scale="1"/>
+       <property name="nphemo" column="NPHEMO" type="short"/>
+       <property name="nphemo1" column="NPHEMO1" type="short"/>
+       <property name="nphemo2" column="NPHEMO2" type="short"/>
+       <property name="nphemo3" column="NPHEMO3" type="short"/>
+       <property name="npold" column="NPOLD" type="short"/>
+       <property name="npold1" column="NPOLD1" type="short"/>
+       <property name="npold2" column="NPOLD2" type="short"/>
+       <property name="npold3" column="NPOLD3" type="short"/>
+       <property name="npold4" column="NPOLD4" type="short"/>
+       <property name="npoldd" column="NPOLDD" type="short"/>
+       <property name="npoldd1" column="NPOLDD1" type="short"/>
+       <property name="npoldd2" column="NPOLDD2" type="short"/>
+       <property name="npoldd3" column="NPOLDD3" type="short"/>
+       <property name="npoldd4" column="NPOLDD4" type="short"/>
+       <property name="npwmr" column="NPWMR" type="short"/>
+       <property name="nppath" column="NPPATH" type="short"/>
+       <property name="nppath2" column="NPPATH2" type="short"/>
+       <property name="nppath3" column="NPPATH3" type="short"/>
+       <property name="nppath4" column="NPPATH4" type="short"/>
+       <property name="nppath5" column="NPPATH5" type="short"/>
+       <property name="nppath6" column="NPPATH6" type="short"/>
+       <property name="nppath7" column="NPPATH7" type="short"/>
+       <property name="nppath8" column="NPPATH8" type="short"/>
+       <property name="nppath9" column="NPPATH9" type="short"/>
+       <property name="nppath10" column="NPPATH10" type="short"/>
+       <property name="nppath11" column="NPPATH11" type="short"/>
+       <property name="nppatho" column="NPPATHO" type="short"/>
+       <property name="nppathox" column="NPPATHOX" type="string" length="30"/>
+       <property name="nplbod" column="NPLBOD" type="short"/>
+       <property name="npnloss" column="NPNLOSS" type="short"/>
+       <property name="nphipscl" column="NPHIPSCL" type="short"/>
+       <property name="nptdpa" column="NPTDPA" type="short"/>
+       <property name="nptdpb" column="NPTDPB" type="short"/>
+       <property name="nptdpc" column="NPTDPC" type="short"/>
+       <property name="nptdpd" column="NPTDPD" type="short"/>
+       <property name="nptdpe" column="NPTDPE" type="short"/>
+       <property name="npftdtau" column="NPFTDTAU" type="short"/>
+       <property name="npftdt2" column="NPFTDT2" type="short"/>
+       <property name="npftdt5" column="NPFTDT5" type="short"/>
+       <property name="npftdt6" column="NPFTDT6" type="short"/>
+       <property name="npftdt7" column="NPFTDT7" type="short"/>
+       <property name="npftdt8" column="NPFTDT8" type="short"/>
+       <property name="npftdt9" column="NPFTDT9" type="short"/>
+       <property name="npftdt10" column="NPFTDT10" type="short"/>
+       <property name="npftdtdp" column="NPFTDTDP" type="short"/>
+       <property name="npalsmnd" column="NPALSMND" type="short"/>
+       <property name="npoftd" column="NPOFTD" type="short"/>
+       <property name="npoftd1" column="NPOFTD1" type="short"/>
+       <property name="npoftd2" column="NPOFTD2" type="short"/>
+       <property name="npoftd3" column="NPOFTD3" type="short"/>
+       <property name="npoftd4" column="NPOFTD4" type="short"/>
+       <property name="npoftd5" column="NPOFTD5" type="short"/>
+       <property name="nppdxa" column="NPPDXA" type="short"/>
+       <property name="nppdxb" column="NPPDXB" type="short"/>
+       <property name="nppdxc" column="NPPDXC" type="short"/>
+       <property name="nppdxd" column="NPPDXD" type="short"/>
+       <property name="nppdxe" column="NPPDXE" type="short"/>
+       <property name="nppdxf" column="NPPDXF" type="short"/>
+       <property name="nppdxg" column="NPPDXG" type="short"/>
+       <property name="nppdxh" column="NPPDXH" type="short"/>
+       <property name="nppdxi" column="NPPDXI" type="short"/>
+       <property name="nppdxj" column="NPPDXJ" type="short"/>
+       <property name="nppdxk" column="NPPDXK" type="short"/>
+       <property name="nppdxl" column="NPPDXL" type="short"/>
+       <property name="nppdxm" column="NPPDXM" type="short"/>
+       <property name="nppdxn" column="NPPDXN" type="short"/>
+       <property name="nppdxo" column="NPPDXO" type="short"/>
+       <property name="nppdxp" column="NPPDXP" type="short"/>
+       <property name="nppdxq" column="NPPDXQ" type="short"/>
+       <property name="nppdxr" column="NPPDXR" type="short"/>
+       <property name="nppdxrx" column="NPPDXRX" type="string" length="30"/>
+       <property name="nppdxs" column="NPPDXS" type="short"/>
+       <property name="nppdxsx" column="NPPDXSX" type="string" length="30"/>
+       <property name="nppdxt" column="NPPDXT" type="short"/>
+       <property name="nppdxtx" column="NPPDXTX" type="string" length="30"/>
+       <property name="npbnka" column="NPBNKA" type="short"/>
+       <property name="npbnkb" column="NPBNKB" type="short"/>
+       <property name="npbnkc" column="NPBNKC" type="short"/>
+       <property name="npbnkd" column="NPBNKD" type="short"/>
+       <property name="npbnke" column="NPBNKE" type="short"/>
+       <property name="npbnkf" column="NPBNKF" type="short"/>
+       <property name="npbnkg" column="NPBNKG" type="short"/>
+       <property name="npfaut" column="NPFAUT" type="short"/>
+       <property name="npfaut1" column="NPFAUT1" type="string" length="60"/>
+       <property name="npfaut2" column="NPFAUT2" type="string" length="60"/>
+       <property name="npfaut3" column="NPFAUT3" type="string" length="60"/>
+       <property name="npfaut4" column="NPFAUT4" type="string" length="60"/>
 
 		
 		</join>	
