@@ -1795,7 +1795,7 @@ public class UdsFtldFamilyHistory extends UdsInstrument {
 		
 		StringBuffer buffer = UdsUploadUtils.getCommonFields(this);
 		
-		if(getPacket().equals("I")){
+		if(getPacket().equals("IF")){
 			buffer.append(UdsUploadUtils.formatField(getFtdaff())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getFtdmutat())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getFtdpmut())).append(",");
@@ -1970,7 +1970,7 @@ public class UdsFtldFamilyHistory extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getFtdmcm())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getFtdacm()));
 		}
-		else if(getPacket().equals("F")) {
+		else if(getPacket().equals("FF")) {
 			buffer.append(UdsUploadUtils.formatField(getFtdfa3f1())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getFtdaff())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getFtdmutat())).append(",");
