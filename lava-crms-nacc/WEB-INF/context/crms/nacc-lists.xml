@@ -931,6 +931,248 @@
 				<property name="dbListName" value="NaccPath19"/>
 	</bean>
 
+	<bean id="list.ref.udsNPErrors" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="8 - N/A"/><constructor-arg value="8"/></bean>
+			<bean parent="list.data"><constructor-arg value="9 - Missing/Unknown"/><constructor-arg value="9"/></bean>
+		</list></property>
+	</bean>
+	
+	<bean id="list.naccpathology10.codes" parent="list.standard">
+		<property name="staticReferenceLists">
+			<list><ref bean="list.ref.stdErrorCodes"/>
+		</list></property>
+	</bean>     
+		
+	
+	<bean id="list.naccpathology10.decimalRange0_99" parent="list.decimalRange">
+		<property name="defaultMinValue" value="0"/>	
+		<property name="defaultMaxValue" value="99.9"/>
+	</bean>	
+		
+	<bean id="list.naccpathology10.ques8" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="1 - Formalin"/><constructor-arg value="1"/></bean>
+			<bean parent="list.data"><constructor-arg value="2 - Paraformaldehyde"/><constructor-arg value="2"/></bean>
+			<bean parent="list.data"><constructor-arg value="7 - Other"/><constructor-arg value="7"/></bean>
+		</list></property>
+	</bean>	
+	
+	<bean id="list.naccpathology10.brainWeight" parent="list.numericRange">
+		<property name="defaultMinValue" value="100"/>	
+		<property name="defaultMaxValue" value="2500"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="9999 - Unknown"/><constructor-arg value="9999"/></bean>
+		</list></property>
+	</bean>	
+	
+	<bean id="list.naccpathology10.ques9b" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="1 - Fresh"/><constructor-arg value="1"/></bean>
+			<bean parent="list.data"><constructor-arg value="2 - Fixed"/><constructor-arg value="2"/></bean>
+			<bean parent="list.data"><constructor-arg value="8 - N/A"/><constructor-arg value="8"/></bean>
+		</list></property>
+	</bean>	
+				
+	<bean id="list.naccpathology10.mildModSev" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - None"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Mild"/><constructor-arg value="1"/></bean>
+			<bean parent="list.data"><constructor-arg value="2 - Moderate"/><constructor-arg value="2"/></bean>
+			<bean parent="list.data"><constructor-arg value="3 - Severe"/><constructor-arg value="3"/></bean>
+		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>
+	</bean>	
+
+	<bean id="list.naccpathology10.noneYes" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - None"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Yes"/><constructor-arg value="1"/></bean>
+		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>
+	</bean>	
+
+	<bean id="list.naccpathology10.ques10a" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="1 - Non-phospho specific"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - PHF1"/><constructor-arg value="2"/></bean>
+			<bean parent="list.data"><constructor-arg value="3 - CP13"/><constructor-arg value="3"/></bean>
+    		<bean parent="list.data"><constructor-arg value="4 - AT8"/><constructor-arg value="4"/></bean>
+    		<bean parent="list.data"><constructor-arg value="7 - Other"/><constructor-arg value="7"/></bean>
+			<bean parent="list.data"><constructor-arg value="8 - Not assessed"/><constructor-arg value="8"/></bean>
+		</list></property>
+	</bean>	
+	
+	<bean id="list.naccpathology10.ques10b" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="1 - 4G8"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - 10D5"/><constructor-arg value="2"/></bean>
+    		<bean parent="list.data"><constructor-arg value="7 - Other"/><constructor-arg value="7"/></bean>
+			<bean parent="list.data"><constructor-arg value="8 - Not assessed"/><constructor-arg value="8"/></bean>
+		</list></property>
+	</bean>	
+	
+	<bean id="list.naccpathology10.ques10c" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="1 - Non-phospho specific (e.g., LB509)"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Phospho-specific (e.g., pSYN#64)"/><constructor-arg value="2"/></bean>
+    		<bean parent="list.data"><constructor-arg value="7 - Other"/><constructor-arg value="7"/></bean>
+			<bean parent="list.data"><constructor-arg value="8 - Not assessed"/><constructor-arg value="8"/></bean>
+		</list></property>
+	</bean>					
+
+	<bean id="list.naccpathology10.ques10d" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="1 - Non-phospho specific"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Phospho-specific"/><constructor-arg value="2"/></bean>
+    		<bean parent="list.data"><constructor-arg value="7 - Other"/><constructor-arg value="7"/></bean>
+			<bean parent="list.data"><constructor-arg value="8 - Not assessed"/><constructor-arg value="8"/></bean>
+		</list></property>
+	</bean>		
+
+	<bean id="list.naccpathology10.ques11a" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - Phase 0 (A0)"/><constructor-arg value="0"/></bean>
+			<bean parent="list.data"><constructor-arg value="1 - Phase 1 (A1)"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Phase 2 (A1)"/><constructor-arg value="2"/></bean>
+			<bean parent="list.data"><constructor-arg value="3 - Phase 3 (A2)"/><constructor-arg value="3"/></bean>
+    		<bean parent="list.data"><constructor-arg value="4 - Phase 4 (A3)"/><constructor-arg value="4"/></bean>
+    		<bean parent="list.data"><constructor-arg value="5 - Phase 5 (A3)"/><constructor-arg value="5"/></bean>
+			<bean parent="list.data"><constructor-arg value="7 - Other"/><constructor-arg value="7"/></bean>
+			<bean parent="list.data"><constructor-arg value="8 - Not assessed"/><constructor-arg value="8"/></bean>
+		</list></property>
+	</bean>	
+
+	<bean id="list.naccpathology10.ques11b" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - Stage 0   (B0)"/><constructor-arg value="0"/></bean>
+			<bean parent="list.data"><constructor-arg value="1 - Stage I   (B1)"/><constructor-arg value="1"/></bean>
+   			<bean parent="list.data"><constructor-arg value="2 - Stage II  (B1)"/><constructor-arg value="2"/></bean>
+			<bean parent="list.data"><constructor-arg value="3 - Stage III (B2)"/><constructor-arg value="3"/></bean>
+   			<bean parent="list.data"><constructor-arg value="4 - Stage IV  (B3)"/><constructor-arg value="4"/></bean>
+   			<bean parent="list.data"><constructor-arg value="5 - Stage V  (B3)"/><constructor-arg value="5"/></bean>
+   			<bean parent="list.data"><constructor-arg value="6 - Stage VI  (B3)"/><constructor-arg value="6"/></bean>
+			<bean parent="list.data"><constructor-arg value="7 - The presence of a tauopathy (other than aging/AD) precludes Braak staging"/><constructor-arg value="7"/></bean>
+		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>
+	</bean>	
+
+	<bean id="list.naccpathology10.ques11c" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No neuritic plaques       (C0)"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Sparse neuritic plaques   (C1)"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Moderate neuritic plaques (C2)"/><constructor-arg value="2"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="3 - Frequent neuritic plaques (C3)"/><constructor-arg value="3"/></bean>
+ 		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>
+	</bean>		
+
+	<bean id="list.naccpathology10.ques11d" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - Not AD"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Low ADNC"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Intermediate ADNC"/><constructor-arg value="2"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="3 - High ADNC"/><constructor-arg value="3"/></bean>
+ 		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>	
+	</bean>		
+						
+	<bean id="list.naccpathology10.ques11e1" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No diffuse plaques"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Sparse diffuse plaques"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Moderate diffuse plaques"/><constructor-arg value="2"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="3 - Severe diffuse plaques"/><constructor-arg value="3"/></bean>
+ 		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>	
+	</bean>		
+
+	<bean id="list.naccpathology10.noYes" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Yes"/><constructor-arg value="1"/></bean>
+ 		</list></property>
+	</bean>	
+
+		<bean id="list.naccpathology10.noYesUnkMissing" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Yes"/><constructor-arg value="1"/></bean>
+ 		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>	
+	</bean>		
+
+	<bean id="list.naccpathology10.noYesMissing" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Yes"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="9 - Missing/unknown"/><constructor-arg value="9"/></bean>
+    	</list></property>
+	</bean>						
+			
+	<bean id="list.naccpathology10.zeroOneTwoThree" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2"/><constructor-arg value="2"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="3 or more"/><constructor-arg value="3"/></bean>
+ 		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>	
+	</bean>		
+	
+	<bean id="list.naccpathology10.ques13" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Brainstem predominant"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Limbic (transitional)"/><constructor-arg value="2"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="3 - Neocortical (diffuse)"/><constructor-arg value="3"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="4 - Amygdala predominant"/><constructor-arg value="4"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="5 - Olfactory bulb"/><constructor-arg value="5"/></bean>
+ 		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>	
+	</bean>		
+	
+	<bean id="list.naccpathology10.ques15" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - None"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Unilateral"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Bilateral"/><constructor-arg value="2"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="3 - Present but laterality not assessed"/><constructor-arg value="3"/></bean>
+ 		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>	
+	</bean>			
+	
+	<bean id="list.naccpathology10.ques17d" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Yes, with TDP-43 inclusions in motor neurons"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Yes, with FUS inclusions in motor neurons"/><constructor-arg value="2"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="3 - Yes, with SOD1 inclusions in motor neurons"/><constructor-arg value="3"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="4 - Yes, with other inclusions"/><constructor-arg value="4"/></bean>
+ 			<bean parent="list.data"><constructor-arg value="5 - Yes, with no specific inclusions"/><constructor-arg value="5"/></bean>
+ 		</list></property>
+		<property name="staticReferenceLists"><list><ref bean="list.ref.udsNPErrors"/></list></property>	
+	</bean>					
+
+	<bean id="list.naccpathology10.numericRange0_87" parent="list.numericRange">
+		<property name="defaultMinValue" value="0"/>	
+		<property name="defaultMaxValue" value="87"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="88 - N/A"/><constructor-arg value="88"/></bean>
+    		<bean parent="list.data"><constructor-arg value="99 - Unknown"/><constructor-arg value="99"/></bean>
+ 		</list></property>
+	</bean>	
+
+	<bean id="list.naccpathology10.decimalRange0_20" parent="list.decimalRange">
+		<property name="defaultMinValue" value="0"/>	
+		<property name="defaultMaxValue" value="20"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="88 - N/A"/><constructor-arg value="88"/></bean>
+    		<bean parent="list.data"><constructor-arg value="99 - Unknown"/><constructor-arg value="99"/></bean>
+ 		</list></property>
+	</bean>			
+   		
+
 	<!-- FTLD MODULE LISTS -->
 
 
