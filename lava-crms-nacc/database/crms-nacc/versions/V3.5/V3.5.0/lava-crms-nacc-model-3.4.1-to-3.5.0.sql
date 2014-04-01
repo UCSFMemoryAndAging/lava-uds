@@ -1,4 +1,4 @@
-INSERT INTO `listvalues` (`ListID`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'naccpathology','10',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,instance,scope,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','naccpathology','10',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
 /*Update NACC Pathology to version 10*/
 ALTER TABLE naccpathology
 ADD COLUMN NPPMIH decimal(4,1) NULL,
