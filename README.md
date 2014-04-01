@@ -19,8 +19,7 @@ The following projects are contained in "lava-uds":
 
 The notion of project also translates directly to an Eclipse project (the Eclipse IDE is recommended for LAVA development). 
 
-LAVA 
-Refer to the "lava" repository for more information about the LAVA web application framework.
+Refer to the "lava" https://github.com/UCSFMemoryAndAging/lava.git repository for more information about the LAVA web application framework.
 
 
 
