@@ -28,6 +28,12 @@
     <tags:crmsNavSection module="assessment" section="uds" textCode="section.uds" lastSection="true" disabled="true" />
     
    	<tags:crmsNavSection module="reporting" section="reports" textCode="section.reports" lastSection="true" disabled="true" />
+
+  	<!--  note that even though these are crms actions they use coreNavSection because they do not
+   		have Patient Context -->
+    <tags:coreNavSection module="importing" section="importing" textCode="section.import" disabled="true" />
+    <tags:coreNavSection module="importing" section="log" textCode="section.log" disabled="true" />
+    <tags:coreNavSection module="importing" section="template" textCode="section.template" lastSection="true" disabled="true" />
     
     <tags:coreNavSection module="admin" section="session" textCode="section.session" disabled="true" />
     <tags:coreNavSection module="admin" section="auth" textCode="section.auth" lastSection="true" disabled="true" />
