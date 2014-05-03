@@ -35,9 +35,9 @@
    	
    	<!--  note that even though these are crms actions they use coreNavSection because they do not
    		have Patient Context -->
-    <tags:coreNavSection module="importing" section="importing" textCode="section.import"/>
-    <tags:coreNavSection module="importing" section="log" textCode="section.log"/>
-    <tags:coreNavSection module="importing" section="template" textCode="section.template" lastSection="true"/>
+    <tags:coreNavSection module="importer" section="import" textCode="section.import" startMode="edit"/>
+    <tags:coreNavSection module="importer" section="log" textCode="section.log"/>
+    <tags:coreNavSection module="importer" section="definition" textCode="section.definition" lastSection="true"/>
    	
     <tags:coreNavSection module="admin" section="session" textCode="section.session" />
     <tags:coreNavSection module="admin" section="auth" textCode="section.auth" lastSection="true"/>
