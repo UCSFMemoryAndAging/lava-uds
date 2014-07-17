@@ -18,4 +18,5 @@ SELECT 'DELETE from hibernateproperty where instance=\'lava\' and scope=\'crms-a
 SELECT 'DELETE from `listvalues` where instance=\'lava\' and scope=\'crms-app-demo\';';
 SELECT 'DELETE from `list` where instance=\'lava\' and scope=\'crms-app-demo\';';
 call util_CreateMetadataInsertStatements('lava','crms-app-demo','%');
-call util_CreateMetadataInsertStatements('demo','crms-app-demo','%');
+call util_CreateMetadataInsertStatements('demo','core','%');
+call util_CreateMetadataInsertStatements('demo','crms','%');
