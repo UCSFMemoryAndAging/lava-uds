@@ -11,13 +11,11 @@ Installation:
         <src path="${lava-crms-uds3.path}/${src.folder}" />
     Add the following to build.xml under the 'copy' tag:
         <fileset dir="${lava-crms-uds3.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*" />
-
-
-
+    Source all of the .sql files to create tables and viewproperty entries.
 
 
 Known issues
 
-Columns that declare NULL fields:
+Columns that allow NULL fields (currently setting to 0):
   ClinicianAssessment: ARTUPEX
   HealthHistory: ARTHUPEX, ARTHLOEX, ARTHSPIN, ARTHUNK
