@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSClinicianAssessment3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsclinicianassessment3">
+      <key column="InstrID"/>
+            <property name="cancer" column="CANCER" type="int" />
+            <property name="cancsite" column="CANCSITE" type="string" length="60"/>
+            <property name="cancact" column="CANCACT" type="int" />
+            <property name="diabet" column="DIABET" type="int" />
+            <property name="myoinf" column="MYOINF" type="int" />
+            <property name="conghrt" column="CONGHRT" type="int" />
+            <property name="afibrill" column="AFIBRILL" type="int" />
+            <property name="hypert" column="HYPERT" type="int" />
+            <property name="angina" column="ANGINA" type="int" />
+            <property name="hypchol" column="HYPCHOL" type="int" />
+            <property name="vb12def" column="VB12DEF" type="int" />
+            <property name="thydis" column="THYDIS" type="int" />
+            <property name="arth" column="ARTH" type="int" />
+            <property name="artype" column="ARTYPE" type="int" />
+            <property name="artypex" column="ARTYPEX" type="string" length="60"/>
+            <property name="artupex" column="ARTUPEX" type="int" />
+            <property name="artloex" column="ARTLOEX" type="int" />
+            <property name="artspin" column="ARTSPIN" type="int" />
+            <property name="artunkn" column="ARTUNKN" type="int" />
+            <property name="urineinc" column="URINEINC" type="int" />
+            <property name="bowlinc" column="BOWLINC" type="int" />
+            <property name="sleepap" column="SLEEPAP" type="int" />
+            <property name="remdis" column="REMDIS" type="int" />
+            <property name="hyposom" column="HYPOSOM" type="int" />
+            <property name="sleepoth" column="SLEEPOTH" type="int" />
+            <property name="sleepotx" column="SLEEPOTX" type="string" length="60"/>
+            <property name="angiocp" column="ANGIOCP" type="int" />
+            <property name="angiopci" column="ANGIOPCI" type="int" />
+            <property name="pacemake" column="PACEMAKE" type="int" />
+            <property name="hvalve" column="HVALVE" type="int" />
+            <property name="othcond" column="OTHCOND" type="int" />
+            <property name="othcondx" column="OTHCONDX" type="string" length="60"/>
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

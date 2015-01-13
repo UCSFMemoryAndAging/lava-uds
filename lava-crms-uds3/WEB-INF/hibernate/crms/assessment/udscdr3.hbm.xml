@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSCDR3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udscdr3">
+      <key column="InstrID"/>
+            <property name="memory" column="MEMORY" type="float" precision="2" scale="1" />
+            <property name="orient" column="ORIENT" type="float" precision="2" scale="1" />
+            <property name="judgment" column="JUDGMENT" type="float" precision="2" scale="1" />
+            <property name="commun" column="COMMUN" type="float" precision="2" scale="1" />
+            <property name="homehobb" column="HOMEHOBB" type="float" precision="2" scale="1" />
+            <property name="perscare" column="PERSCARE" type="float" precision="2" scale="1" />
+            <property name="cdrsum" column="CDRSUM" type="float" precision="3" scale="1" />
+            <property name="cdrglob" column="CDRGLOB" type="float" precision="2" scale="1" />
+            <property name="comport" column="COMPORT" type="float" precision="2" scale="1" />
+            <property name="cdrlang" column="CDRLANG" type="float" precision="2" scale="1" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

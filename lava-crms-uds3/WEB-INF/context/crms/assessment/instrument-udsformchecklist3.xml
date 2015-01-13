@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udsformchecklist3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udsformchecklist3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udsformchecklist3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udsformchecklist3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSFormChecklist3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udsformchecklist3</value></property>
+  </bean>
+
+
+
+
+
+</beans>
+

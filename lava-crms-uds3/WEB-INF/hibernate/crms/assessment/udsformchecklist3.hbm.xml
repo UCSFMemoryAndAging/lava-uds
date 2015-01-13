@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSFormChecklist3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsformchecklist3">
+      <key column="InstrID"/>
+            <property name="a2sub" column="A2SUB" type="int" />
+            <property name="a2not" column="A2NOT" type="int" />
+            <property name="a2comm" column="A2COMM" type="string" length="60"/>
+            <property name="a3sub" column="A3SUB" type="int" />
+            <property name="a3not" column="A3NOT" type="int" />
+            <property name="a3comm" column="A3COMM" type="string" length="60"/>
+            <property name="a4sub" column="A4SUB" type="int" />
+            <property name="a4not" column="A4NOT" type="int" />
+            <property name="a4comm" column="A4COMM" type="string" length="60"/>
+            <property name="b1sub" column="B1SUB" type="int" />
+            <property name="b1not" column="B1NOT" type="int" />
+            <property name="b1comm" column="B1COMM" type="string" length="60"/>
+            <property name="b5sub" column="B5SUB" type="int" />
+            <property name="b5not" column="B5NOT" type="int" />
+            <property name="b5comm" column="B5COMM" type="string" length="60"/>
+            <property name="b6sub" column="B6SUB" type="int" />
+            <property name="b6not" column="B6NOT" type="int" />
+            <property name="b6comm" column="B6COMM" type="string" length="60"/>
+            <property name="b7sub" column="B7SUB" type="int" />
+            <property name="b7not" column="B7NOT" type="int" />
+            <property name="b7comm" column="B7COMM" type="string" length="60"/>
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSHealthHistory3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udshealthhistory3">
+      <key column="InstrID"/>
+            <property name="tobac30" column="TOBAC30" type="int" />
+            <property name="tobac100" column="TOBAC100" type="int" />
+            <property name="smokyrs" column="SMOKYRS" type="int" />
+            <property name="packsper" column="PACKSPER" type="int" />
+            <property name="quitsmok" column="QUITSMOK" type="int" />
+            <property name="alcoccas" column="ALCOCCAS" type="int" />
+            <property name="alcfreq" column="ALCFREQ" type="int" />
+            <property name="cvhatt" column="CVHATT" type="int" />
+            <property name="hattmult" column="HATTMULT" type="int" />
+            <property name="hattyear" column="HATTYEAR" type="int" />
+            <property name="cvafib" column="CVAFIB" type="int" />
+            <property name="cvangio" column="CVANGIO" type="int" />
+            <property name="cvbypass" column="CVBYPASS" type="int" />
+            <property name="cvpacdef" column="CVPACDEF" type="int" />
+            <property name="cvchf" column="CVCHF" type="int" />
+            <property name="cvangina" column="CVANGINA" type="int" />
+            <property name="cvhvalve" column="CVHVALVE" type="int" />
+            <property name="cvothr" column="CVOTHR" type="int" />
+            <property name="cvothrx" column="CVOTHRX" type="string" length="60"/>
+            <property name="cbstroke" column="CBSTROKE" type="int" />
+            <property name="strokmul" column="STROKMUL" type="int" />
+            <property name="strokyr" column="STROKYR" type="int" />
+            <property name="cbtia" column="CBTIA" type="int" />
+            <property name="tiamult" column="TIAMULT" type="int" />
+            <property name="tiayear" column="TIAYEAR" type="int" />
+            <property name="pd" column="PD" type="int" />
+            <property name="pdyr" column="PDYR" type="int" />
+            <property name="pdothr" column="PDOTHR" type="int" />
+            <property name="pdothryr" column="PDOTHRYR" type="int" />
+            <property name="seizures" column="SEIZURES" type="int" />
+            <property name="tbi" column="TBI" type="int" />
+            <property name="tbibrief" column="TBIBRIEF" type="int" />
+            <property name="tbiexten" column="TBIEXTEN" type="int" />
+            <property name="tbiwolos" column="TBIWOLOS" type="int" />
+            <property name="tbiyear" column="TBIYEAR" type="int" />
+            <property name="diabetes" column="DIABETES" type="int" />
+            <property name="diabtype" column="DIABTYPE" type="int" />
+            <property name="hyperten" column="HYPERTEN" type="int" />
+            <property name="hypercho" column="HYPERCHO" type="int" />
+            <property name="b12def" column="B12DEF" type="int" />
+            <property name="thyroid" column="THYROID" type="int" />
+            <property name="arthrit" column="ARTHRIT" type="int" />
+            <property name="arthtype" column="ARTHTYPE" type="int" />
+            <property name="arthtypx" column="ARTHTYPX" type="string" length="60"/>
+            <property name="arthupex" column="ARTHUPEX" type="int" />
+            <property name="arthloex" column="ARTHLOEX" type="int" />
+            <property name="arthspin" column="ARTHSPIN" type="int" />
+            <property name="arthunk" column="ARTHUNK" type="int" />
+            <property name="incontu" column="INCONTU" type="int" />
+            <property name="incontf" column="INCONTF" type="int" />
+            <property name="apnea" column="APNEA" type="int" />
+            <property name="rbd" column="RBD" type="int" />
+            <property name="insomn" column="INSOMN" type="int" />
+            <property name="othsleep" column="OTHSLEEP" type="int" />
+            <property name="othsleex" column="OTHSLEEX" type="string" length="60"/>
+            <property name="alcohol" column="ALCOHOL" type="int" />
+            <property name="abusothr" column="ABUSOTHR" type="int" />
+            <property name="abusx" column="ABUSX" type="string" length="60"/>
+            <property name="ptsd" column="PTSD" type="int" />
+            <property name="bipolar" column="BIPOLAR" type="int" />
+            <property name="schiz" column="SCHIZ" type="int" />
+            <property name="dep2yrs" column="DEP2YRS" type="int" />
+            <property name="depothr" column="DEPOTHR" type="int" />
+            <property name="anxiety" column="ANXIETY" type="int" />
+            <property name="ocd" column="OCD" type="int" />
+            <property name="npsydev" column="NPSYDEV" type="int" />
+            <property name="psycdis" column="PSYCDIS" type="int" />
+            <property name="psycdisx" column="PSYCDISX" type="string" length="60"/>
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSPhysical3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsphysical3">
+      <key column="InstrID"/>
+            <property name="height" column="HEIGHT" type="float" precision="4" scale="1" />
+            <property name="weight" column="WEIGHT" type="int" />
+            <property name="bpsys" column="BPSYS" type="int" />
+            <property name="bpdias" column="BPDIAS" type="int" />
+            <property name="hrate" column="HRATE" type="int" />
+            <property name="vision" column="VISION" type="int" />
+            <property name="viscorr" column="VISCORR" type="int" />
+            <property name="viswcorr" column="VISWCORR" type="int" />
+            <property name="hearing" column="HEARING" type="int" />
+            <property name="hearaid" column="HEARAID" type="int" />
+            <property name="hearwaid" column="HEARWAID" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

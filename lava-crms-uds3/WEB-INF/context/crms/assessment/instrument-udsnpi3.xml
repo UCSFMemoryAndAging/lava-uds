@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udsnpi3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udsnpi3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udsnpi3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udsnpi3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSNPI3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udsnpi3</value></property>
+  </bean>
+
+
+  <bean id="list.uds3.udsnpi3.MMSU" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Mild (noticeable, but not a significant change)"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Moderate (significant, but not a dramatic change)"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Severe (very marked or prominent a dra- matic change)"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+
+
+</beans>
+

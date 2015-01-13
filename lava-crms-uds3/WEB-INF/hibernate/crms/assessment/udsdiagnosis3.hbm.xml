@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSDiagnosis3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsdiagnosis3">
+      <key column="InstrID"/>
+            <property name="dxmethod" column="DXMETHOD" type="int" />
+            <property name="normcog" column="NORMCOG" type="int" />
+            <property name="demented" column="DEMENTED" type="int" />
+            <property name="amndem" column="AMNDEM" type="int" />
+            <property name="pca" column="PCA" type="int" />
+            <property name="ppasyn" column="PPASYN" type="int" />
+            <property name="ppasynt" column="PPASYNT" type="int" />
+            <property name="ftdsyn" column="FTDSYN" type="int" />
+            <property name="lbdsyn" column="LBDSYN" type="int" />
+            <property name="namndem" column="NAMNDEM" type="int" />
+            <property name="mciamem" column="MCIAMEM" type="int" />
+            <property name="mciaplus" column="MCIAPLUS" type="int" />
+            <property name="mciaplan" column="MCIAPLAN" type="int" />
+            <property name="mciapatt" column="MCIAPATT" type="int" />
+            <property name="mciapex" column="MCIAPEX" type="int" />
+            <property name="mciapvis" column="MCIAPVIS" type="int" />
+            <property name="mcinon1" column="MCINON1" type="int" />
+            <property name="mcin1lan" column="MCIN1LAN" type="int" />
+            <property name="mcin1att" column="MCIN1ATT" type="int" />
+            <property name="mcin1ex" column="MCIN1EX" type="int" />
+            <property name="mcin1vis" column="MCIN1VIS" type="int" />
+            <property name="mcinon2" column="MCINON2" type="int" />
+            <property name="mcin2lan" column="MCIN2LAN" type="int" />
+            <property name="mcin2att" column="MCIN2ATT" type="int" />
+            <property name="mcin2ex" column="MCIN2EX" type="int" />
+            <property name="mcin2vis" column="MCIN2VIS" type="int" />
+            <property name="impnomci" column="IMPNOMCI" type="int" />
+            <property name="amylpet" column="AMYLPET" type="int" />
+            <property name="amylcsf" column="AMYLCSF" type="int" />
+            <property name="fdgad" column="FDGAD" type="int" />
+            <property name="hippatr" column="HIPPATR" type="int" />
+            <property name="taupetad" column="TAUPETAD" type="int" />
+            <property name="csftau" column="CSFTAU" type="int" />
+            <property name="fdgftld" column="FDGFTLD" type="int" />
+            <property name="tpetftld" column="TPETFTLD" type="int" />
+            <property name="mrftld" column="MRFTLD" type="int" />
+            <property name="datscan" column="DATSCAN" type="int" />
+            <property name="othbiom" column="OTHBIOM" type="int" />
+            <property name="othbiomx" column="OTHBIOMX" type="string" length="60"/>
+            <property name="imaglinf" column="IMAGLINF" type="int" />
+            <property name="imaglac" column="IMAGLAC" type="int" />
+            <property name="imagmach" column="IMAGMACH" type="int" />
+            <property name="imagmich" column="IMAGMICH" type="int" />
+            <property name="imagmwmh" column="IMAGMWMH" type="int" />
+            <property name="imagewmh" column="IMAGEWMH" type="int" />
+            <property name="admut" column="ADMUT" type="int" />
+            <property name="ftldmut" column="FTLDMUT" type="int" />
+            <property name="othmut" column="OTHMUT" type="int" />
+            <property name="othmutx" column="OTHMUTX" type="string" length="60"/>
+            <property name="alzdis" column="ALZDIS" type="int" />
+            <property name="alzdisif" column="ALZDISIF" type="int" />
+            <property name="lbdis" column="LBDIS" type="int" />
+            <property name="lbdif" column="LBDIF" type="int" />
+            <property name="park" column="PARK" type="int" />
+            <property name="msa" column="MSA" type="int" />
+            <property name="msaif" column="MSAIF" type="int" />
+            <property name="psp" column="PSP" type="int" />
+            <property name="pspif" column="PSPIF" type="int" />
+            <property name="cort" column="CORT" type="int" />
+            <property name="cortif" column="CORTIF" type="int" />
+            <property name="ftldmo" column="FTLDMO" type="int" />
+            <property name="ftldmoif" column="FTLDMOIF" type="int" />
+            <property name="ftldnos" column="FTLDNOS" type="int" />
+            <property name="ftldnoif" column="FTLDNOIF" type="int" />
+            <property name="ftldsubt" column="FTLDSUBT" type="int" />
+            <property name="ftldsubx" column="FTLDSUBX" type="string" length="60"/>
+            <property name="cvd" column="CVD" type="int" />
+            <property name="cvdif" column="CVDIF" type="int" />
+            <property name="prevstk" column="PREVSTK" type="int" />
+            <property name="strokcog" column="STROKCOG" type="int" />
+            <property name="prevtia" column="PREVTIA" type="int" />
+            <property name="esstrem" column="ESSTREM" type="int" />
+            <property name="esstreif" column="ESSTREIF" type="int" />
+            <property name="downs" column="DOWNS" type="int" />
+            <property name="downsif" column="DOWNSIF" type="int" />
+            <property name="hunt" column="HUNT" type="int" />
+            <property name="huntif" column="HUNTIF" type="int" />
+            <property name="prion" column="PRION" type="int" />
+            <property name="prionif" column="PRIONIF" type="int" />
+            <property name="brninj" column="BRNINJ" type="int" />
+            <property name="brninjif" column="BRNINJIF" type="int" />
+            <property name="brnincte" column="BRNINCTE" type="int" />
+            <property name="hyceph" column="HYCEPH" type="int" />
+            <property name="hycephif" column="HYCEPHIF" type="int" />
+            <property name="epilep" column="EPILEP" type="int" />
+            <property name="epilepif" column="EPILEPIF" type="int" />
+            <property name="neop" column="NEOP" type="int" />
+            <property name="neopif" column="NEOPIF" type="int" />
+            <property name="neopstat" column="NEOPSTAT" type="int" />
+            <property name="hiv" column="HIV" type="int" />
+            <property name="hivif" column="HIVIF" type="int" />
+            <property name="othcog" column="OTHCOG" type="int" />
+            <property name="othcogif" column="OTHCOGIF" type="int" />
+            <property name="othcogx" column="OTHCOGX" type="string" length="60"/>
+            <property name="dep" column="DEP" type="int" />
+            <property name="depif" column="DEPIF" type="int" />
+            <property name="deptreat" column="DEPTREAT" type="int" />
+            <property name="bipoldx" column="BIPOLDX" type="int" />
+            <property name="bipoldif" column="BIPOLDIF" type="int" />
+            <property name="schizop" column="SCHIZOP" type="int" />
+            <property name="schizoif" column="SCHIZOIF" type="int" />
+            <property name="anxiet" column="ANXIET" type="int" />
+            <property name="anxietif" column="ANXIETIF" type="int" />
+            <property name="delir" column="DELIR" type="int" />
+            <property name="delirif" column="DELIRIF" type="int" />
+            <property name="ptsddx" column="PTSDDX" type="int" />
+            <property name="ptsddxif" column="PTSDDXIF" type="int" />
+            <property name="othpsy" column="OTHPSY" type="int" />
+            <property name="othpsyif" column="OTHPSYIF" type="int" />
+            <property name="othpsyx" column="OTHPSYX" type="string" length="60"/>
+            <property name="alcdem" column="ALCDEM" type="int" />
+            <property name="alcdemif" column="ALCDEMIF" type="int" />
+            <property name="alcabuse" column="ALCABUSE" type="int" />
+            <property name="impsub" column="IMPSUB" type="int" />
+            <property name="impsubif" column="IMPSUBIF" type="int" />
+            <property name="dysill" column="DYSILL" type="int" />
+            <property name="dysillif" column="DYSILLIF" type="int" />
+            <property name="meds" column="MEDS" type="int" />
+            <property name="medsif" column="MEDSIF" type="int" />
+            <property name="cogoth" column="COGOTH" type="int" />
+            <property name="cogoth1f" column="COGOTH1F" type="int" />
+            <property name="cogothx" column="COGOTHX" type="string" length="60"/>
+            <property name="cogoth2" column="COGOTH2" type="int" />
+            <property name="cogoth2f" column="COGOTH2F" type="int" />
+            <property name="cogoth2x" column="COGOTH2X" type="string" length="60"/>
+            <property name="cogoth3" column="COGOTH3" type="int" />
+            <property name="cogoth3f" column="COGOTH3F" type="int" />
+            <property name="cogoth3x" column="COGOTH3X" type="string" length="60"/>
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

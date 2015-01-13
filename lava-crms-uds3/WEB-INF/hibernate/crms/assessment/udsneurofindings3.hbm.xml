@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSNeuroFindings3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsneurofindings3">
+      <key column="InstrID"/>
+            <property name="normexam" column="NORMEXAM" type="int" />
+            <property name="parksign" column="PARKSIGN" type="int" />
+            <property name="resttrl" column="RESTTRL" type="int" />
+            <property name="resttrr" column="RESTTRR" type="int" />
+            <property name="slowingl" column="SLOWINGL" type="int" />
+            <property name="slowingr" column="SLOWINGR" type="int" />
+            <property name="rigidl" column="RIGIDL" type="int" />
+            <property name="rigidr" column="RIGIDR" type="int" />
+            <property name="brady" column="BRADY" type="int" />
+            <property name="parkgait" column="PARKGAIT" type="int" />
+            <property name="postinst" column="POSTINST" type="int" />
+            <property name="cvdsigns" column="CVDSIGNS" type="int" />
+            <property name="cortdef" column="CORTDEF" type="int" />
+            <property name="gaitapra" column="GAITAPRA" type="int" />
+            <property name="cvdmotl" column="CVDMOTL" type="int" />
+            <property name="cvdmotr" column="CVDMOTR" type="int" />
+            <property name="cortvisl" column="CORTVISL" type="int" />
+            <property name="cortvisr" column="CORTVISR" type="int" />
+            <property name="somatl" column="SOMATL" type="int" />
+            <property name="somatr" column="SOMATR" type="int" />
+            <property name="cvdataxl" column="CVDATAXL" type="int" />
+            <property name="cvdataxr" column="CVDATAXR" type="int" />
+            <property name="postcort" column="POSTCORT" type="int" />
+            <property name="pspcbs" column="PSPCBS" type="int" />
+            <property name="eyepsp" column="EYEPSP" type="int" />
+            <property name="dyspsp" column="DYSPSP" type="int" />
+            <property name="axialpsp" column="AXIALPSP" type="int" />
+            <property name="gaitpsp" column="GAITPSP" type="int" />
+            <property name="apraxsp" column="APRAXSP" type="int" />
+            <property name="apraxl" column="APRAXL" type="int" />
+            <property name="apraxr" column="APRAXR" type="int" />
+            <property name="cortsenl" column="CORTSENL" type="int" />
+            <property name="cortsenr" column="CORTSENR" type="int" />
+            <property name="ataxl" column="ATAXL" type="int" />
+            <property name="ataxr" column="ATAXR" type="int" />
+            <property name="alienlml" column="ALIENLML" type="int" />
+            <property name="alienlmr" column="ALIENLMR" type="int" />
+            <property name="dystonl" column="DYSTONL" type="int" />
+            <property name="dystonr" column="DYSTONR" type="int" />
+            <property name="alsfind" column="ALSFIND" type="int" />
+            <property name="gaitnph" column="GAITNPH" type="int" />
+            <property name="othneur" column="OTHNEUR" type="int" />
+            <property name="othneurx" column="OTHNEURX" type="string" length="60"/>
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

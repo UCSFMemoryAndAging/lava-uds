@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udsphysical3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udsphysical3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udsphysical3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udsphysical3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSPhysical3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udsphysical3</value></property>
+  </bean>
+
+
+  <bean id="list.uds3.udsphysical3.WEIGHT" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="50"/>
+    <property name="defaultMaxValue" value="400"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Not assessed"/>
+        <constructor-arg value="888"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsphysical3.BPSYS" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="70"/>
+    <property name="defaultMaxValue" value="230"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Not assessed"/>
+        <constructor-arg value="888"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsphysical3.BPDIAS" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="30"/>
+    <property name="defaultMaxValue" value="140"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Not assessed"/>
+        <constructor-arg value="888"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsphysical3.HRATE" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="33"/>
+    <property name="defaultMaxValue" value="160"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Not assessed"/>
+        <constructor-arg value="888"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+
+
+</beans>
+

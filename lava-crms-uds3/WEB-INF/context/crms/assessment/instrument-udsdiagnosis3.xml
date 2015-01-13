@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udsdiagnosis3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udsdiagnosis3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udsdiagnosis3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udsdiagnosis3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSDiagnosis3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udsdiagnosis3</value></property>
+  </bean>
+
+
+  <bean id="list.uds3.udsdiagnosis3.DXMETHOD" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="A single clinician"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="A formal consensus panel"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other (two or more clinicians or informal group)"/>
+        <constructor-arg value="3"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsdiagnosis3.AbsPres" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Absent"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Present"/>
+        <constructor-arg value="1"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsdiagnosis3.PPASYNT" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Meets criteria for semantic PPA"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Meets criteria for logopenic PPA"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Meets criteria for nonfluent/ agrammatic PPA"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="PPA other/not otherwise specified"/>
+        <constructor-arg value="4"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsdiagnosis3.AMYLPET" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="No"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown/not assessed"/>
+        <constructor-arg value="8"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsdiagnosis3.EtiologyIf" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Primary"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Contributing"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Non-contributing"/>
+        <constructor-arg value="3"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsdiagnosis3.FTLDSUBT" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Tauopathy"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="TDP-43 proteinopathy"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsdiagnosis3.NEOPSTAT" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Benign"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Malignant"/>
+        <constructor-arg value="2"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsdiagnosis3.DEPTREAT" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Untreated"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Treated with medications or counseling"/>
+        <constructor-arg value="1"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+
+
+</beans>
+

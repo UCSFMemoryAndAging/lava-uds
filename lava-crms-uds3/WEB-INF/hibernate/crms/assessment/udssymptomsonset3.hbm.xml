@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSSymptomsOnset3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udssymptomsonset3">
+      <key column="InstrID"/>
+            <property name="decsub" column="DECSUB" type="int" />
+            <property name="decin" column="DECIN" type="int" />
+            <property name="decclcog" column="DECCLCOG" type="int" />
+            <property name="cogmem" column="COGMEM" type="int" />
+            <property name="cogori" column="COGORI" type="int" />
+            <property name="cogjudg" column="COGJUDG" type="int" />
+            <property name="coglang" column="COGLANG" type="int" />
+            <property name="cogvis" column="COGVIS" type="int" />
+            <property name="cogattn" column="COGATTN" type="int" />
+            <property name="cogfluc" column="COGFLUC" type="int" />
+            <property name="cogflago" column="COGFLAGO" type="int" />
+            <property name="cogothr" column="COGOTHR" type="int" />
+            <property name="cogothrx" column="COGOTHRX" type="string" length="60"/>
+            <property name="cogfpred" column="COGFPRED" type="int" />
+            <property name="cogfprex" column="COGFPREX" type="string" length="60"/>
+            <property name="cogmode" column="COGMODE" type="int" />
+            <property name="cogmodex" column="COGMODEX" type="string" length="60"/>
+            <property name="decage" column="DECAGE" type="int" />
+            <property name="decclbe" column="DECCLBE" type="int" />
+            <property name="beapathy" column="BEAPATHY" type="int" />
+            <property name="bedep" column="BEDEP" type="int" />
+            <property name="bevhall" column="BEVHALL" type="int" />
+            <property name="bevwell" column="BEVWELL" type="int" />
+            <property name="bevhago" column="BEVHAGO" type="int" />
+            <property name="beahall" column="BEAHALL" type="int" />
+            <property name="bedel" column="BEDEL" type="int" />
+            <property name="bedisin" column="BEDISIN" type="int" />
+            <property name="beirrit" column="BEIRRIT" type="int" />
+            <property name="beagit" column="BEAGIT" type="int" />
+            <property name="beperch" column="BEPERCH" type="int" />
+            <property name="berem" column="BEREM" type="int" />
+            <property name="beremago" column="BEREMAGO" type="int" />
+            <property name="beanx" column="BEANX" type="int" />
+            <property name="beothr" column="BEOTHR" type="int" />
+            <property name="beothrx" column="BEOTHRX" type="string" length="60"/>
+            <property name="befpred" column="BEFPRED" type="int" />
+            <property name="befpredx" column="BEFPREDX" type="string" length="60"/>
+            <property name="bemode" column="BEMODE" type="int" />
+            <property name="bemodex" column="BEMODEX" type="string" length="60"/>
+            <property name="beage" column="BEAGE" type="int" />
+            <property name="decclmot" column="DECCLMOT" type="int" />
+            <property name="mogait" column="MOGAIT" type="int" />
+            <property name="mofalls" column="MOFALLS" type="int" />
+            <property name="motrem" column="MOTREM" type="int" />
+            <property name="moslow" column="MOSLOW" type="int" />
+            <property name="mofrst" column="MOFRST" type="int" />
+            <property name="momode" column="MOMODE" type="int" />
+            <property name="momodex" column="MOMODEX" type="string" length="60"/>
+            <property name="momopark" column="MOMOPARK" type="int" />
+            <property name="parkage" column="PARKAGE" type="int" />
+            <property name="momoals" column="MOMOALS" type="int" />
+            <property name="alsage" column="ALSAGE" type="int" />
+            <property name="moage" column="MOAGE" type="int" />
+            <property name="course" column="COURSE" type="int" />
+            <property name="frstchg" column="FRSTCHG" type="int" />
+            <property name="lbdeval" column="LBDEVAL" type="int" />
+            <property name="ftldeval" column="FTLDEVAL" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

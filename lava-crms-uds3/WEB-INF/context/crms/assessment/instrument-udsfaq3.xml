@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udsfaq3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udsfaq3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udsfaq3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udsfaq3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSFAQ3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udsfaq3</value></property>
+  </bean>
+
+
+  <bean id="list.uds3.udsfaq3.Difficulty" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Normal"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Has difficulty, but does by self"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Requires assistance"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Dependent"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Not applicable (e.g., never did)"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+
+
+</beans>
+

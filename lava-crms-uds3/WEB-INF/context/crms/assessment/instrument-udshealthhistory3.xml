@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udshealthhistory3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udshealthhistory3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udshealthhistory3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udshealthhistory3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSHealthHistory3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udshealthhistory3</value></property>
+  </bean>
+
+
+  <bean id="list.uds3.udshealthhistory3.SMOKYRS" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="87"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="99"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.PACKSPER" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="1 cigarette to less than 1/2 pack"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="½ pack to less than 1 pack"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="1 pack to 1½ packs"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="1½ packs to 2 packs"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="More than two packs"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.QUITSMOK" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="8"/>
+    <property name="defaultMaxValue" value="110"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="N/A"/>
+        <constructor-arg value="888"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="999"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.ALCFREQ" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Less than once a month"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="About once a month"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="About once a week"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="A few times a week"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Daily or almost daily"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.CondPresence" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Absent"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Recent/Active"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Remote/Inactive"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.PD" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Absent"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Recent/Active"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.TBIBRIEF" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="No"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Single"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Repeated/multiple"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.DIABTYPE" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Type 1"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Type 2"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other type (diabetes insipidus, latent au- toimmune diabetes/type 1.5, gestational diabetes)"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.ARTHTYPE" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Rheumatoid"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Osteoarthritis"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.ARTHUPEX" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value=""/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Upper Extremity"/>
+        <constructor-arg value="1"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.ARTHLOEX" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value=""/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Lower Extremity"/>
+        <constructor-arg value="1"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.ARTHSPIN" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value=""/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Spine"/>
+        <constructor-arg value="1"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udshealthhistory3.ARTHUNK" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value=""/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="1"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+
+
+</beans>
+

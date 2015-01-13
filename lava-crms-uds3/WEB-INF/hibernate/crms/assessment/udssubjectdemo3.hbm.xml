@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSSubjectDemo3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udssubjectdemo3">
+      <key column="InstrID"/>
+            <property name="reason" column="REASON" type="int" />
+            <property name="refersc" column="REFERSC" type="int" />
+            <property name="learned" column="LEARNED" type="int" />
+            <property name="prestat" column="PRESTAT" type="int" />
+            <property name="prespart" column="PRESPART" type="int" />
+            <property name="sourcenw" column="SOURCENW" type="int" />
+            <property name="birthmo" column="BIRTHMO" type="int" />
+            <property name="birthyr" column="BIRTHYR" type="int" />
+            <property name="sex" column="SEX" type="int" />
+            <property name="hispanic" column="HISPANIC" type="int" />
+            <property name="hispor" column="HISPOR" type="int" />
+            <property name="hisporx" column="HISPORX" type="string" length="60"/>
+            <property name="race" column="RACE" type="int" />
+            <property name="racex" column="RACEX" type="string" length="60"/>
+            <property name="racesec" column="RACESEC" type="int" />
+            <property name="racesecx" column="RACESECX" type="string" length="60"/>
+            <property name="raceter" column="RACETER" type="int" />
+            <property name="raceterx" column="RACETERX" type="string" length="60"/>
+            <property name="primlang" column="PRIMLANG" type="int" />
+            <property name="primlanx" column="PRIMLANX" type="string" length="60"/>
+            <property name="educ" column="EDUC" type="int" />
+            <property name="maristat" column="MARISTAT" type="int" />
+            <property name="livsitua" column="LIVSITUA" type="int" />
+            <property name="independ" column="INDEPEND" type="int" />
+            <property name="residenc" column="RESIDENC" type="int" />
+            <property name="zip" column="ZIP" type="string" length="3"/>
+            <property name="handed" column="HANDED" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

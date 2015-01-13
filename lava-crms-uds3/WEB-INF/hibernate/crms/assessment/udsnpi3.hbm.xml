@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSNPI3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsnpi3">
+      <key column="InstrID"/>
+            <property name="npiqinf" column="NPIQINF" type="int" />
+            <property name="npiqinfx" column="NPIQINFX" type="string" length="60"/>
+            <property name="del" column="DEL" type="int" />
+            <property name="delsev" column="DELSEV" type="int" />
+            <property name="hall" column="HALL" type="int" />
+            <property name="hallsev" column="HALLSEV" type="int" />
+            <property name="agit" column="AGIT" type="int" />
+            <property name="agitsev" column="AGITSEV" type="int" />
+            <property name="depd" column="DEPD" type="int" />
+            <property name="depdsev" column="DEPDSEV" type="int" />
+            <property name="anx" column="ANX" type="int" />
+            <property name="anxsev" column="ANXSEV" type="int" />
+            <property name="elat" column="ELAT" type="int" />
+            <property name="elatsev" column="ELATSEV" type="int" />
+            <property name="apa" column="APA" type="int" />
+            <property name="apasev" column="APASEV" type="int" />
+            <property name="disn" column="DISN" type="int" />
+            <property name="disnsev" column="DISNSEV" type="int" />
+            <property name="irr" column="IRR" type="int" />
+            <property name="irrsev" column="IRRSEV" type="int" />
+            <property name="mot" column="MOT" type="int" />
+            <property name="motsev" column="MOTSEV" type="int" />
+            <property name="nite" column="NITE" type="int" />
+            <property name="nitesev" column="NITESEV" type="int" />
+            <property name="app" column="APP" type="int" />
+            <property name="appsev" column="APPSEV" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

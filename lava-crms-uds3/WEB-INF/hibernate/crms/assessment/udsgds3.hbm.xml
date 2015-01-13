@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSGDS3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsgds3">
+      <key column="InstrID"/>
+            <property name="nogds" column="NOGDS" type="int" />
+            <property name="satis" column="SATIS" type="int" />
+            <property name="dropact" column="DROPACT" type="int" />
+            <property name="empty" column="EMPTY" type="int" />
+            <property name="bored" column="BORED" type="int" />
+            <property name="spirits" column="SPIRITS" type="int" />
+            <property name="afraid" column="AFRAID" type="int" />
+            <property name="happy" column="HAPPY" type="int" />
+            <property name="helpless" column="HELPLESS" type="int" />
+            <property name="stayhome" column="STAYHOME" type="int" />
+            <property name="memprob" column="MEMPROB" type="int" />
+            <property name="wondrful" column="WONDRFUL" type="int" />
+            <property name="wrthless" column="WRTHLESS" type="int" />
+            <property name="energy" column="ENERGY" type="int" />
+            <property name="hopeless" column="HOPELESS" type="int" />
+            <property name="better" column="BETTER" type="int" />
+            <property name="gds" column="GDS" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

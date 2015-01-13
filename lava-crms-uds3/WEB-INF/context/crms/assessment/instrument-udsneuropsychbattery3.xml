@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udsneuropsychbattery3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udsneuropsychbattery3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udsneuropsychbattery3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udsneuropsychbattery3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSNeuropsychBattery3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udsneuropsychbattery3</value></property>
+  </bean>
+
+
+  <bean id="list.uds3.udsneuropsychbattery3.MOCALOC" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="In ADC or Clinic"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="In Home"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="In-person - other"/>
+        <constructor-arg value="3"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.Language" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="English"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Spanish"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other"/>
+        <constructor-arg value="3"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.MOCATOTS" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="30"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Item not administered"/>
+        <constructor-arg value="88"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.MOCATRAI" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="1"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.MOCANAMI" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="3"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.MOCAREGI" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="10"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.MOCADIGI" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="2"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.MOCARECN" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="5"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.MOCARECC" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="5"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Not applicable"/>
+        <constructor-arg value="88"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.NPSYCLOC" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="In ADC or clinic"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="In home"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="In person — other"/>
+        <constructor-arg value="3"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.CRAFTVRS" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="44"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.CRAFTURS" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="25"/>
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.UDSBENTC" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="17"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.DIGFORCT" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="14"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.DIGFORSL" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="0 3-9"/>
+        <constructor-arg value="0"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.DIGBACLS" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="0 2-8"/>
+        <constructor-arg value="0"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.ANIMALS" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="77"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.TRAILA" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="150"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="995"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="996"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="997"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="998"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.TRAILARR" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="40"/>
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.TRAILALI" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="24"/>
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.TRAILB" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="300"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="995"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="996"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="997"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="998"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.CRAFTDTI" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="85"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="99"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.MINTTOTS" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="32"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.MINTTOTW" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="32"/>
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.MINTSCNC" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="32"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Not applicable"/>
+        <constructor-arg value="88"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.UDSVERFC" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="40"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Physical problem"/>
+        <constructor-arg value="95"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive/behavior problem"/>
+        <constructor-arg value="96"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other problem"/>
+        <constructor-arg value="97"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Verbal refusal"/>
+        <constructor-arg value="98"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.UDSVERTN" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="80"/>
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.UDSVERTE" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="30"/>
+  </bean>
+  <bean id="list.uds3.udsneuropsychbattery3.COGSTAT" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Better than normal for age"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Normal for age"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="One or two test scores abnormal"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Three or more scores are abnormal or lower than expected"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Clinican unable to render opinion"/>
+        <constructor-arg value="0"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+
+
+</beans>
+

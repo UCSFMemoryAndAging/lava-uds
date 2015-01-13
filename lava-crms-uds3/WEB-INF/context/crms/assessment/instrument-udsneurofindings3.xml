@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udsneurofindings3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udsneurofindings3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udsneurofindings3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udsneurofindings3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSNeuroFindings3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udsneurofindings3</value></property>
+  </bean>
+
+
+  <bean id="list.uds3.udsneurofindings3.NORMEXAM" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="No abnormal findings"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes — abnormal findings were consistent with syndromes listed in Questions 2-8"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes — abnormal findings were consistent with age-associated changes or irrelevant to dementing disorders (e.g., Bell’s palsy)"/>
+        <constructor-arg value="2"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+
+
+</beans>
+

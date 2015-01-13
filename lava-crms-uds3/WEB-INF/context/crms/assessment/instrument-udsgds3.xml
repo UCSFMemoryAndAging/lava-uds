@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udsgds3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udsgds3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udsgds3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udsgds3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSGDS3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udsgds3</value></property>
+  </bean>
+
+
+  <bean id="list.uds3.udsgds3.NOGDS" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Able to complete (box not checked)"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Not able to complete (box checked)"/>
+        <constructor-arg value="1"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsgds3.YesNoDna" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="No"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Did not answer"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsgds3.NoYesDna" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="No"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Did not answer"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsgds3.GDS" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="15"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Did not complete"/>
+        <constructor-arg value="88"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+
+
+</beans>
+

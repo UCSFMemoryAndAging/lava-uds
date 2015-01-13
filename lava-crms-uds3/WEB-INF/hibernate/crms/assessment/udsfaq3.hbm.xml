@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSFAQ3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsfaq3">
+      <key column="InstrID"/>
+            <property name="bills" column="BILLS" type="int" />
+            <property name="taxes" column="TAXES" type="int" />
+            <property name="shopping" column="SHOPPING" type="int" />
+            <property name="games" column="GAMES" type="int" />
+            <property name="stove" column="STOVE" type="int" />
+            <property name="mealprep" column="MEALPREP" type="int" />
+            <property name="events" column="EVENTS" type="int" />
+            <property name="payattn" column="PAYATTN" type="int" />
+            <property name="remdates" column="REMDATES" type="int" />
+            <property name="travel" column="TRAVEL" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

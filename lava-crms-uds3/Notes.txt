@@ -1,0 +1,23 @@
+Installation:
+  Put lava-crms-uds3 in your workspace.
+  Add the following to your context-<appname>.xml
+        <import resource="crms/uds3-context.xml"/>
+  build.xml
+    Update your build.xml for UTF-8.  Add the following attr to the javac tag:
+        encoding='UTF-8'
+    Add the following to build.xml under the project tag.
+        <property name="lava-crms-uds3.path" value="${workspace.path}/lava-crms-uds3" />
+    Add the following to build.xml under the javac tag:
+        <src path="${lava-crms-uds3.path}/${src.folder}" />
+    Add the following to build.xml under the 'copy' tag:
+        <fileset dir="${lava-crms-uds3.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*" />
+
+
+
+
+
+Known issues
+
+Columns that declare NULL fields:
+  ClinicianAssessment: ARTUPEX
+  HealthHistory: ARTHUPEX, ARTHLOEX, ARTHSPIN, ARTHUNK

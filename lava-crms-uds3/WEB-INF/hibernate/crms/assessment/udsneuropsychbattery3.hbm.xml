@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSNeuropsychBattery3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsneuropsychbattery3">
+      <key column="InstrID"/>
+            <property name="mocacomp" column="MOCACOMP" type="int" />
+            <property name="mocareas" column="MOCAREAS" type="int" />
+            <property name="mocaloc" column="MOCALOC" type="int" />
+            <property name="mocalan" column="MOCALAN" type="int" />
+            <property name="mocalanx" column="MOCALANX" type="string" length="60"/>
+            <property name="mocavis" column="MOCAVIS" type="int" />
+            <property name="mocahear" column="MOCAHEAR" type="int" />
+            <property name="mocatots" column="MOCATOTS" type="int" />
+            <property name="mocatrai" column="MOCATRAI" type="int" />
+            <property name="mocacube" column="MOCACUBE" type="int" />
+            <property name="mocacloc" column="MOCACLOC" type="int" />
+            <property name="mocaclon" column="MOCACLON" type="int" />
+            <property name="mocacloh" column="MOCACLOH" type="int" />
+            <property name="mocanami" column="MOCANAMI" type="int" />
+            <property name="mocaregi" column="MOCAREGI" type="int" />
+            <property name="mocadigi" column="MOCADIGI" type="int" />
+            <property name="mocalett" column="MOCALETT" type="int" />
+            <property name="mocaser7" column="MOCASER7" type="int" />
+            <property name="mocarepe" column="MOCAREPE" type="int" />
+            <property name="mocaflue" column="MOCAFLUE" type="int" />
+            <property name="mocaabst" column="MOCAABST" type="int" />
+            <property name="mocarecn" column="MOCARECN" type="int" />
+            <property name="mocarecc" column="MOCARECC" type="int" />
+            <property name="mocarecr" column="MOCARECR" type="int" />
+            <property name="mocaordt" column="MOCAORDT" type="int" />
+            <property name="mocaormo" column="MOCAORMO" type="int" />
+            <property name="mocaoryr" column="MOCAORYR" type="int" />
+            <property name="mocaordy" column="MOCAORDY" type="int" />
+            <property name="mocaorpl" column="MOCAORPL" type="int" />
+            <property name="mocaorct" column="MOCAORCT" type="int" />
+            <property name="npsycloc" column="NPSYCLOC" type="int" />
+            <property name="npsylan" column="NPSYLAN" type="int" />
+            <property name="npsylanx" column="NPSYLANX" type="string" length="60"/>
+            <property name="craftvrs" column="CRAFTVRS" type="int" />
+            <property name="crafturs" column="CRAFTURS" type="int" />
+            <property name="udsbentc" column="UDSBENTC" type="int" />
+            <property name="digforct" column="DIGFORCT" type="int" />
+            <property name="digforsl" column="DIGFORSL" type="int" />
+            <property name="digbacct" column="DIGBACCT" type="int" />
+            <property name="digbacls" column="DIGBACLS" type="int" />
+            <property name="animals" column="ANIMALS" type="int" />
+            <property name="veg" column="VEG" type="int" />
+            <property name="traila" column="TRAILA" type="int" />
+            <property name="trailarr" column="TRAILARR" type="int" />
+            <property name="trailali" column="TRAILALI" type="int" />
+            <property name="trailb" column="TRAILB" type="int" />
+            <property name="trailbrr" column="TRAILBRR" type="int" />
+            <property name="trailbli" column="TRAILBLI" type="int" />
+            <property name="craftdvr" column="CRAFTDVR" type="int" />
+            <property name="craftdre" column="CRAFTDRE" type="int" />
+            <property name="craftdti" column="CRAFTDTI" type="int" />
+            <property name="craftcue" column="CRAFTCUE" type="int" />
+            <property name="udsbentd" column="UDSBENTD" type="int" />
+            <property name="udsbenrs" column="UDSBENRS" type="int" />
+            <property name="minttots" column="MINTTOTS" type="int" />
+            <property name="minttotw" column="MINTTOTW" type="int" />
+            <property name="mintscng" column="MINTSCNG" type="int" />
+            <property name="mintscnc" column="MINTSCNC" type="int" />
+            <property name="mintpcng" column="MINTPCNG" type="int" />
+            <property name="mintpcnc" column="MINTPCNC" type="int" />
+            <property name="udsverfc" column="UDSVERFC" type="int" />
+            <property name="udsverfn" column="UDSVERFN" type="int" />
+            <property name="udsvernf" column="UDSVERNF" type="int" />
+            <property name="udsverlc" column="UDSVERLC" type="int" />
+            <property name="udsverlr" column="UDSVERLR" type="int" />
+            <property name="udsverln" column="UDSVERLN" type="int" />
+            <property name="udsvertn" column="UDSVERTN" type="int" />
+            <property name="udsverte" column="UDSVERTE" type="int" />
+            <property name="udsverti" column="UDSVERTI" type="int" />
+            <property name="cogstat" column="COGSTAT" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

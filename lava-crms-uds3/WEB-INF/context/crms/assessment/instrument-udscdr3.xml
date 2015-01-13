@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udscdr3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udscdr3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udscdr3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udscdr3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSCDR3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udscdr3</value></property>
+  </bean>
+
+</beans>
+

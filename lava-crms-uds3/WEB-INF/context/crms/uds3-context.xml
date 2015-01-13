@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- this context file is referenced by WEB-INF/context/context.xml and loaded into the application context -->
+<beans>
+  <import resource="lists-common.xml"/>
+
+  <import resource="assessment/instrument-udscdr3.xml" />
+<!--
+  <import resource="assessment/instrument-udsneurofindings3.xml" />
+  <import resource="assessment/instrument-udsclinicianassessment3.xml" />
+  <import resource="assessment/instrument-udsneuropsychbattery3.xml" />
+  <import resource="assessment/instrument-udsdiagnosis3.xml" />
+  <import resource="assessment/instrument-udsnpi3.xml" />
+  <import resource="assessment/instrument-udsfaq3.xml" />
+  <import resource="assessment/instrument-udsphysical3.xml" />
+  <import resource="assessment/instrument-udsformchecklist3.xml" />
+  <import resource="assessment/instrument-udssubjectdemo3.xml" />
+  <import resource="assessment/instrument-udsgds3.xml" />
+  <import resource="assessment/instrument-udssymptomsonset3.xml" />
+  <import resource="assessment/instrument-udshealthhistory3.xml" />
+-->
+</beans>
+
