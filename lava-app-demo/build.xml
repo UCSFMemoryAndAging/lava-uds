@@ -59,7 +59,7 @@
 
     <target name="compile" description="Compile all modified java source files into the deploy build folder">
         <mkdir dir="${instance-deploy.path}/${build.folder}"/>
-        <javac destdir="${instance-deploy.path}/${build.folder}" target="1.5" debug="true"
+        <javac destdir="${instance-deploy.path}/${build.folder}" target="1.6" debug="true"
                deprecation="false" optimize="false" failonerror="true">
             <src path="${lava-core.path}/${src.folder}"/>
         	<src path="${lava-crms.path}/${src.folder}"/>
