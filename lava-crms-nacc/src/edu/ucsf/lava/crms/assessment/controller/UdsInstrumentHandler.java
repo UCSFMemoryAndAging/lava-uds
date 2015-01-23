@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.validation.BindingResult;
 import org.springframework.webflow.execution.RequestContext;
 
-import edu.ucsf.lava.crms.assessment.controller.cbt.FileLoader;
+import edu.ucsf.lava.crms.assessment.controller.upload.FileLoader;
 
 public class UdsInstrumentHandler extends InstrumentHandler {
 
