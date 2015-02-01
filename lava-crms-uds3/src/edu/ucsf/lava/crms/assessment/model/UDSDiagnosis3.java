@@ -88,8 +88,10 @@ public class UDSDiagnosis3 extends Instrument{
   private Integer cvd;
   private Integer cvdif;
   private Integer prevstk;
-  private Integer strokcog;
-  private Integer prevtia;
+  private Integer strokedec;
+  private Integer stkimag;
+  private Integer infnetw;
+  private Integer infwmh;
   private Integer esstrem;
   private Integer esstreif;
   private Integer downs;
@@ -633,18 +635,32 @@ public class UDSDiagnosis3 extends Instrument{
     this.prevstk=prevstk;
   }
 
-  public Integer getStrokcog() {
-    return strokcog;
+  public Integer getStrokedec() {
+    return strokedec;
   }
-  public void setStrokcog(Integer strokcog) {
-    this.strokcog=strokcog;
+  public void setStrokedec(Integer strokedec) {
+    this.strokedec=strokedec;
   }
 
-  public Integer getPrevtia() {
-    return prevtia;
+  public Integer getStkimag() {
+    return stkimag;
   }
-  public void setPrevtia(Integer prevtia) {
-    this.prevtia=prevtia;
+  public void setStkimag(Integer stkimag) {
+    this.stkimag=stkimag;
+  }
+
+  public Integer getInfnetw() {
+    return infnetw;
+  }
+  public void setInfnetw(Integer infnetw) {
+    this.infnetw=infnetw;
+  }
+
+  public Integer getInfwmh() {
+    return infwmh;
+  }
+  public void setInfwmh(Integer infwmh) {
+    this.infwmh=infwmh;
   }
 
   public Integer getEsstrem() {
@@ -1119,8 +1135,10 @@ public class UDSDiagnosis3 extends Instrument{
       "cvd",
       "cvdif",
       "prevstk",
-      "strokcog",
-      "prevtia",
+      "strokedec",
+      "stkimag",
+      "infnetw",
+      "infwmh",
       "esstrem",
       "esstreif",
       "downs",

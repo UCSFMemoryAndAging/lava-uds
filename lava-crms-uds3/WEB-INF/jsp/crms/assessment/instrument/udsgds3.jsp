@@ -23,39 +23,39 @@
       <page:param name="view">${componentView}</page:param>
       <page:param name="instructions"> </page:param> 
 
-      <tags:createField property="nogds" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="nogds" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="satis" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="satis" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="dropact" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="dropact" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="empty" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="empty" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="bored" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="bored" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="spirits" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="spirits" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="afraid" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="afraid" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="happy" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="happy" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="helpless" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="helpless" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="stayhome" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="stayhome" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="memprob" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="memprob" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="wondrful" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="wondrful" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="wrthless" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="wrthless" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="energy" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="energy" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="hopeless" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="hopeless" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="better" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="better" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="gds" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="gds" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
     </page:applyDecorator>
 

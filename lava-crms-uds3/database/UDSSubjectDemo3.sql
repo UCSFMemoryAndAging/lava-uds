@@ -3,6 +3,8 @@ delete from viewproperty where entity="udssubjectdemo3";
 delete from instrument where InstrName="UDS Subject Demo 3";
 drop table if exists udssubjectdemo3;
 
+
+
 -- Initialize table
 CREATE TABLE udssubjectdemo3 (
   InstrID int(10) NOT NULL,
@@ -88,7 +90,7 @@ set messageCode='*.udssubjectdemo3.birthmo', locale='en', instance='lava',
   scope='ucdlava', entity='udssubjectdemo3', property='birthmo',
   required='No', proporder='7', attributes='', quickHelp='', 
   label="Subject’s month of birth:", context="r",
-  list="list.uds3.udssubjectdemo3.month", style="scale";
+  list="list.uds3.common.month", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssubjectdemo3.birthyr', locale='en', instance='lava', 

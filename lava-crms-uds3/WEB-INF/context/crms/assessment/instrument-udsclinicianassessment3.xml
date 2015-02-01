@@ -32,18 +32,6 @@
       </bean> 
     </list></property> 
   </bean>
-  <bean id="list.uds3.udsclinicianassessment3.CANCACT" parent="list.numericRangeUds"> 
-    <property name="data"><list> 
-      <bean parent="list.data">
-        <constructor-arg value="Recent/active"/>
-        <constructor-arg value="1"/>
-      </bean> 
-      <bean parent="list.data">
-        <constructor-arg value="Remote/inactive"/>
-        <constructor-arg value="2"/>
-      </bean> 
-    </list></property> 
-  </bean>
   <bean id="list.uds3.udsclinicianassessment3.DIABET" parent="list.numericRangeUds"> 
     <property name="data"><list> 
       <bean parent="list.data">

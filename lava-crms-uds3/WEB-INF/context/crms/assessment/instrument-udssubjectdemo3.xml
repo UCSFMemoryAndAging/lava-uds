@@ -68,10 +68,6 @@
       </bean> 
     </list></property> 
   </bean>
-  <bean id="list.uds3.udssubjectdemo3.month" parent="list.numericRangeUds">
-    <property name="defaultMinValue" value="1"/>
-    <property name="defaultMaxValue" value="12"/>
-  </bean>
   <bean id="list.uds3.udssubjectdemo3.LEARNED" parent="list.numericRangeUds"> 
     <property name="data"><list> 
       <bean parent="list.data">

@@ -77,8 +77,10 @@ CREATE TABLE udsdiagnosis3 (
     `CVD` UNMAPPED TYPE
     `CVDIF` UNMAPPED TYPE
     `PREVSTK` UNMAPPED TYPE
-    `STROKCOG` UNMAPPED TYPE
-    `PREVTIA` UNMAPPED TYPE
+    `STROKEDEC` UNMAPPED TYPE
+    `STKIMAG` UNMAPPED TYPE
+    `INFNETW` UNMAPPED TYPE
+    `INFWMH` UNMAPPED TYPE
     `ESSTREM` UNMAPPED TYPE
     `ESSTREIF` UNMAPPED TYPE
     `DOWNS` UNMAPPED TYPE
@@ -155,7 +157,7 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.normcog', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='normcog',
   required='No', proporder='2', attributes='', quickHelp='', 
-  label="Does the subject have normal cognition (global CDR=0 and/or neuropsychological testing withing normal range) and normal behavior?:", context="r",
+  label="Does the subject have normal cognition and normal behavior?:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
@@ -358,7 +360,7 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.hippatr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='hippatr',
   required='No', proporder='31', attributes='', quickHelp='', 
-  label="Biomarker findings — abnormal hippocampal atrophy:", context="r",
+  label="Biomarker findings — hippocampal atrophy:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
@@ -625,411 +627,425 @@ set messageCode='*.udsdiagnosis3.prevstk', locale='en', instance='lava',
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsdiagnosis3.strokcog', locale='en', instance='lava', 
-  scope='ucdlava', entity='udsdiagnosis3', property='strokcog',
+set messageCode='*.udsdiagnosis3.strokedec', locale='en', instance='lava', 
+  scope='ucdlava', entity='udsdiagnosis3', property='strokedec',
   required='No', proporder='70', attributes='', quickHelp='', 
   label="Temporal relationship between stroke and cognitive decline?:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsdiagnosis3.prevtia', locale='en', instance='lava', 
-  scope='ucdlava', entity='udsdiagnosis3', property='prevtia',
+set messageCode='*.udsdiagnosis3.stkimag', locale='en', instance='lava', 
+  scope='ucdlava', entity='udsdiagnosis3', property='stkimag',
   required='No', proporder='71', attributes='', quickHelp='', 
-  label="Previous transient ischemic attack:", context="r",
-  list="list.uds3.common.noyes01", style="scale";
+  label="Confirmation of stroke by neuroimaging?:", context="r",
+  list="uds3.udsdiagnosis3.ImagEv", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udsdiagnosis3.infnetw', locale='en', instance='lava', 
+  scope='ucdlava', entity='udsdiagnosis3', property='infnetw',
+  required='No', proporder='72', attributes='', quickHelp='', 
+  label="Is there imaging evidence of cystic infarction in cognitive network(s)?:", context="r",
+  list="uds3.udsdiagnosis3.ImagEv", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udsdiagnosis3.infwmh', locale='en', instance='lava', 
+  scope='ucdlava', entity='udsdiagnosis3', property='infwmh',
+  required='No', proporder='73', attributes='', quickHelp='', 
+  label="Is there imaging evidence of cystic infarction, imaging evidence of extensive WMH (CHS grade 7–8), and impairment in executive function?:", context="r",
+  list="uds3.udsdiagnosis3.ImagEv", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.esstrem', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='esstrem',
-  required='No', proporder='72', attributes='', quickHelp='', 
+  required='No', proporder='74', attributes='', quickHelp='', 
   label="Essential tremor:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.esstreif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='esstreif',
-  required='No', proporder='73', attributes='', quickHelp='', 
+  required='No', proporder='75', attributes='', quickHelp='', 
   label="Essential tremor, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.downs', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='downs',
-  required='No', proporder='74', attributes='', quickHelp='', 
+  required='No', proporder='76', attributes='', quickHelp='', 
   label="Down syndrome:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.downsif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='downsif',
-  required='No', proporder='75', attributes='', quickHelp='', 
+  required='No', proporder='77', attributes='', quickHelp='', 
   label="Down syndrome, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.hunt', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='hunt',
-  required='No', proporder='76', attributes='', quickHelp='', 
+  required='No', proporder='78', attributes='', quickHelp='', 
   label="Huntington’s disease:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.huntif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='huntif',
-  required='No', proporder='77', attributes='', quickHelp='', 
+  required='No', proporder='79', attributes='', quickHelp='', 
   label="Huntington’s disease, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.prion', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='prion',
-  required='No', proporder='78', attributes='', quickHelp='', 
+  required='No', proporder='80', attributes='', quickHelp='', 
   label="Prion disease (CJD, other):", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.prionif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='prionif',
-  required='No', proporder='79', attributes='', quickHelp='', 
+  required='No', proporder='81', attributes='', quickHelp='', 
   label="Prion disease (CJD, other), primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.brninj', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='brninj',
-  required='No', proporder='80', attributes='', quickHelp='', 
+  required='No', proporder='82', attributes='', quickHelp='', 
   label="Traumatic brain injury:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.brninjif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='brninjif',
-  required='No', proporder='81', attributes='', quickHelp='', 
+  required='No', proporder='83', attributes='', quickHelp='', 
   label="Traumatic brain injury, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.brnincte', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='brnincte',
-  required='No', proporder='82', attributes='', quickHelp='', 
+  required='No', proporder='84', attributes='', quickHelp='', 
   label="If Present, does the subject have symptoms consistent with chronic traumatic encephalopathy?:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.hyceph', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='hyceph',
-  required='No', proporder='83', attributes='', quickHelp='', 
+  required='No', proporder='85', attributes='', quickHelp='', 
   label="Normal-pressure hydrocephalus:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.hycephif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='hycephif',
-  required='No', proporder='84', attributes='', quickHelp='', 
+  required='No', proporder='86', attributes='', quickHelp='', 
   label="Normal-pressure hydrocephalus, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.epilep', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='epilep',
-  required='No', proporder='85', attributes='', quickHelp='', 
+  required='No', proporder='87', attributes='', quickHelp='', 
   label="Epilepsy:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.epilepif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='epilepif',
-  required='No', proporder='86', attributes='', quickHelp='', 
+  required='No', proporder='88', attributes='', quickHelp='', 
   label="Epilepsy, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.neop', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='neop',
-  required='No', proporder='87', attributes='', quickHelp='', 
+  required='No', proporder='89', attributes='', quickHelp='', 
   label="CNS neoplasm:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.neopif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='neopif',
-  required='No', proporder='88', attributes='', quickHelp='', 
+  required='No', proporder='90', attributes='', quickHelp='', 
   label="CNS neoplasm, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.neopstat', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='neopstat',
-  required='No', proporder='89', attributes='', quickHelp='', 
+  required='No', proporder='91', attributes='', quickHelp='', 
   label="CNS neoplasm, Benign or Malignant?:", context="r",
   list="uds3.udsdiagnosis3.NEOPSTAT", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.hiv', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='hiv',
-  required='No', proporder='90', attributes='', quickHelp='', 
+  required='No', proporder='92', attributes='', quickHelp='', 
   label="Human immunodeficiency virus (HIV):", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.hivif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='hivif',
-  required='No', proporder='91', attributes='', quickHelp='', 
+  required='No', proporder='93', attributes='', quickHelp='', 
   label="Human immunodeficiency virus (HIV), primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.othcog', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='othcog',
-  required='No', proporder='92', attributes='', quickHelp='', 
+  required='No', proporder='94', attributes='', quickHelp='', 
   label="Cognitive impairment due to other neurologic, genetic, or infectious conditions not listed above:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.othcogif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='othcogif',
-  required='No', proporder='93', attributes='', quickHelp='', 
+  required='No', proporder='95', attributes='', quickHelp='', 
   label="Cognitive impairment due to other neurologic, genetic, or infectious conditions not listed above, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.othcogx', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='othcogx',
-  required='No', proporder='94', attributes='', quickHelp='', 
+  required='No', proporder='96', attributes='', quickHelp='', 
   label="Cognitive impairment due to other neurologic, genetic, or infectious conditions not listed above, If Present, specify::", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.dep', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='dep',
-  required='No', proporder='95', attributes='', quickHelp='', 
+  required='No', proporder='97', attributes='', quickHelp='', 
   label="Active depression:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.depif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='depif',
-  required='No', proporder='96', attributes='', quickHelp='', 
+  required='No', proporder='98', attributes='', quickHelp='', 
   label="Active depression, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.deptreat', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='deptreat',
-  required='No', proporder='97', attributes='', quickHelp='', 
+  required='No', proporder='99', attributes='', quickHelp='', 
   label="If Present, select one::", context="r",
   list="uds3.udsdiagnosis3.DEPTREAT", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.bipoldx', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='bipoldx',
-  required='No', proporder='98', attributes='', quickHelp='', 
+  required='No', proporder='100', attributes='', quickHelp='', 
   label="Bipolar disorder:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.bipoldif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='bipoldif',
-  required='No', proporder='99', attributes='', quickHelp='', 
+  required='No', proporder='101', attributes='', quickHelp='', 
   label="Bipolar disorder, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.schizop', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='schizop',
-  required='No', proporder='100', attributes='', quickHelp='', 
+  required='No', proporder='102', attributes='', quickHelp='', 
   label="Schizophrenia or other psychosis:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.schizoif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='schizoif',
-  required='No', proporder='101', attributes='', quickHelp='', 
+  required='No', proporder='103', attributes='', quickHelp='', 
   label="Schizophrenia or other psychosis, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.anxiet', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='anxiet',
-  required='No', proporder='102', attributes='', quickHelp='', 
+  required='No', proporder='104', attributes='', quickHelp='', 
   label="Anxiety disorder:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.anxietif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='anxietif',
-  required='No', proporder='103', attributes='', quickHelp='', 
+  required='No', proporder='105', attributes='', quickHelp='', 
   label="Anxiety disorder, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.delir', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='delir',
-  required='No', proporder='104', attributes='', quickHelp='', 
+  required='No', proporder='106', attributes='', quickHelp='', 
   label="Delirium present:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.delirif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='delirif',
-  required='No', proporder='105', attributes='', quickHelp='', 
-  label="Delirium present, primary or contributing:", context="r",
+  required='No', proporder='107', attributes='', quickHelp='', 
+  label="Delirium, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.ptsddx', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='ptsddx',
-  required='No', proporder='106', attributes='', quickHelp='', 
+  required='No', proporder='108', attributes='', quickHelp='', 
   label="Post-traumatic stress disorder (PTSD):", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.ptsddxif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='ptsddxif',
-  required='No', proporder='107', attributes='', quickHelp='', 
+  required='No', proporder='109', attributes='', quickHelp='', 
   label="Post-traumatic stress disorder (PTSD), primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.othpsy', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='othpsy',
-  required='No', proporder='108', attributes='', quickHelp='', 
+  required='No', proporder='110', attributes='', quickHelp='', 
   label="Other psychiatric disease:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.othpsyif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='othpsyif',
-  required='No', proporder='109', attributes='', quickHelp='', 
+  required='No', proporder='111', attributes='', quickHelp='', 
   label="Other psychiatric disease, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.othpsyx', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='othpsyx',
-  required='No', proporder='110', attributes='', quickHelp='', 
+  required='No', proporder='112', attributes='', quickHelp='', 
   label="Other psychiatric disease, If Present, specify::", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.alcdem', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='alcdem',
-  required='No', proporder='111', attributes='', quickHelp='', 
+  required='No', proporder='113', attributes='', quickHelp='', 
   label="Cognitive impairment due to alcohol abuse:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.alcdemif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='alcdemif',
-  required='No', proporder='112', attributes='', quickHelp='', 
+  required='No', proporder='114', attributes='', quickHelp='', 
   label="Cognitive impairment due to alcohol abuse, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.alcabuse', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='alcabuse',
-  required='No', proporder='113', attributes='', quickHelp='', 
+  required='No', proporder='115', attributes='', quickHelp='', 
   label="Current alcohol abuse::", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.impsub', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='impsub',
-  required='No', proporder='114', attributes='', quickHelp='', 
+  required='No', proporder='116', attributes='', quickHelp='', 
   label="Cognitive impairment due to other substance abuse:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.impsubif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='impsubif',
-  required='No', proporder='115', attributes='', quickHelp='', 
+  required='No', proporder='117', attributes='', quickHelp='', 
   label="Cognitive impairment due to other substance abuse, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.dysill', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='dysill',
-  required='No', proporder='116', attributes='', quickHelp='', 
+  required='No', proporder='118', attributes='', quickHelp='', 
   label="Cognitive impairment due to systemic disease/medical illness:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.dysillif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='dysillif',
-  required='No', proporder='117', attributes='', quickHelp='', 
+  required='No', proporder='119', attributes='', quickHelp='', 
   label="Cognitive impairment due to systemic disease/ medical illness, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.meds', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='meds',
-  required='No', proporder='118', attributes='', quickHelp='', 
+  required='No', proporder='120', attributes='', quickHelp='', 
   label="Cognitive impairment due to medications:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.medsif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='medsif',
-  required='No', proporder='119', attributes='', quickHelp='', 
+  required='No', proporder='121', attributes='', quickHelp='', 
   label="Cognitive impairment due to medications, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.cogoth', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='cogoth',
-  required='No', proporder='120', attributes='', quickHelp='', 
+  required='No', proporder='122', attributes='', quickHelp='', 
   label="Cognitive impairment NOS:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.cogoth1f', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='cogoth1f',
-  required='No', proporder='121', attributes='', quickHelp='', 
+  required='No', proporder='123', attributes='', quickHelp='', 
   label="Cognitive impairment NOS, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.cogothx', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='cogothx',
-  required='No', proporder='122', attributes='', quickHelp='', 
+  required='No', proporder='124', attributes='', quickHelp='', 
   label="Cognitive impairment NOS, If Present, specify::", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.cogoth2', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='cogoth2',
-  required='No', proporder='123', attributes='', quickHelp='', 
+  required='No', proporder='125', attributes='', quickHelp='', 
   label="Cognitive impairment NOS:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.cogoth2f', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='cogoth2f',
-  required='No', proporder='124', attributes='', quickHelp='', 
+  required='No', proporder='126', attributes='', quickHelp='', 
   label="Cognitive impairment NOS, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.cogoth2x', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='cogoth2x',
-  required='No', proporder='125', attributes='', quickHelp='', 
+  required='No', proporder='127', attributes='', quickHelp='', 
   label="Cognitive impairment NOS, If Present, specify::", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.cogoth3', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='cogoth3',
-  required='No', proporder='126', attributes='', quickHelp='', 
+  required='No', proporder='128', attributes='', quickHelp='', 
   label="Cognitive impairment NOS:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.cogoth3f', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='cogoth3f',
-  required='No', proporder='127', attributes='', quickHelp='', 
+  required='No', proporder='129', attributes='', quickHelp='', 
   label="Cognitive impairment NOS, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.cogoth3x', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='cogoth3x',
-  required='No', proporder='128', attributes='', quickHelp='', 
+  required='No', proporder='130', attributes='', quickHelp='', 
   label="Cognitive impairment NOS, If Present, specify::", context="r", maxLength="6", style="string";
 
 

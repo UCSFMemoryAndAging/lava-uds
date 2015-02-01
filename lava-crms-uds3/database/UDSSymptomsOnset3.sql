@@ -91,7 +91,7 @@ insert into viewproperty
 set messageCode='*.udssymptomsonset3.decclcog', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='decclcog',
   required='No', proporder='3', attributes='', quickHelp='', 
-  label="Based on the clinician’s judgment, is the subject currently experiencing meaningful impairment in cognition or difficulty in managing his/her affairs?:", context="r",
+  label="Based on the clinician’s judgment, is the subject currently experiencing meaningful impairment in cognition?:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
@@ -181,7 +181,7 @@ set messageCode='*.udssymptomsonset3.cogmode', locale='en', instance='lava',
   scope='ucdlava', entity='udssymptomsonset3', property='cogmode',
   required='No', proporder='16', attributes='', quickHelp='', 
   label="Mode of onset of cognitive symptoms:", context="r",
-  list="uds3.udssymptomsonset3.COGMODE", style="scale";
+  list="uds3.udssymptomsonset3.MODE", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.cogmodex', locale='en', instance='lava', 
@@ -332,7 +332,7 @@ set messageCode='*.udssymptomsonset3.bemode', locale='en', instance='lava',
   scope='ucdlava', entity='udssymptomsonset3', property='bemode',
   required='No', proporder='38', attributes='', quickHelp='', 
   label="Mode of onset of behavioral symptoms:", context="r",
-  list="uds3.udssymptomsonset3.COGMODE", style="scale";
+  list="uds3.udssymptomsonset3.MODE", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.bemodex', locale='en', instance='lava', 
@@ -394,7 +394,7 @@ set messageCode='*.udssymptomsonset3.momode', locale='en', instance='lava',
   scope='ucdlava', entity='udssymptomsonset3', property='momode',
   required='No', proporder='47', attributes='', quickHelp='', 
   label="Mode of onset of motor symptoms:", context="r",
-  list="uds3.udssymptomsonset3.MOMODE", style="scale";
+  list="uds3.udssymptomsonset3.MODE", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.momodex', locale='en', instance='lava', 

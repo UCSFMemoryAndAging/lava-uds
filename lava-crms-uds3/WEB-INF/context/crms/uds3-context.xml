@@ -4,8 +4,8 @@
 <beans>
   <import resource="lists-common.xml"/>
 
+  <import resource="assessment/instrument-udsfamilyhistory3.xml" />
   <import resource="assessment/instrument-udscdr3.xml" />
-<!--
   <import resource="assessment/instrument-udsneurofindings3.xml" />
   <import resource="assessment/instrument-udsclinicianassessment3.xml" />
   <import resource="assessment/instrument-udsneuropsychbattery3.xml" />
@@ -18,6 +18,5 @@
   <import resource="assessment/instrument-udsgds3.xml" />
   <import resource="assessment/instrument-udssymptomsonset3.xml" />
   <import resource="assessment/instrument-udshealthhistory3.xml" />
--->
 </beans>
 

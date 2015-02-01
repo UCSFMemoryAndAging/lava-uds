@@ -83,8 +83,10 @@
             <property name="cvd" column="CVD" type="int" />
             <property name="cvdif" column="CVDIF" type="int" />
             <property name="prevstk" column="PREVSTK" type="int" />
-            <property name="strokcog" column="STROKCOG" type="int" />
-            <property name="prevtia" column="PREVTIA" type="int" />
+            <property name="strokedec" column="STROKEDEC" type="int" />
+            <property name="stkimag" column="STKIMAG" type="int" />
+            <property name="infnetw" column="INFNETW" type="int" />
+            <property name="infwmh" column="INFWMH" type="int" />
             <property name="esstrem" column="ESSTREM" type="int" />
             <property name="esstreif" column="ESSTREIF" type="int" />
             <property name="downs" column="DOWNS" type="int" />

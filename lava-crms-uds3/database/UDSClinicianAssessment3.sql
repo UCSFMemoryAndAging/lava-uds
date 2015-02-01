@@ -10,7 +10,6 @@ CREATE TABLE udsclinicianassessment3 (
   InstrID int(10) NOT NULL,
     `CANCER` UNMAPPED TYPE
     `CANCSITE` varchar(60) DEFAULT NULL,
-    `CANCACT` UNMAPPED TYPE
     `DIABET` UNMAPPED TYPE
     `MYOINF` UNMAPPED TYPE
     `CONGHRT` UNMAPPED TYPE
@@ -38,6 +37,8 @@ CREATE TABLE udsclinicianassessment3 (
     `ANGIOPCI` UNMAPPED TYPE
     `PACEMAKE` UNMAPPED TYPE
     `HVALVE` UNMAPPED TYPE
+    `ANTIENC` UNMAPPED TYPE
+    `ANTIENCX` varchar(60) DEFAULT NULL,
     `OTHCOND` UNMAPPED TYPE
     `OTHCONDX` varchar(60) DEFAULT NULL,
 
@@ -62,210 +63,216 @@ set messageCode='*.udsclinicianassessment3.cancsite', locale='en', instance='lav
   label="Cancer primary site specification:", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
-set messageCode='*.udsclinicianassessment3.cancact', locale='en', instance='lava', 
-  scope='ucdlava', entity='udsclinicianassessment3', property='cancact',
-  required='No', proporder='3', attributes='', quickHelp='', 
-  label="Cancer status:", context="r",
-  list="uds3.udsclinicianassessment3.CANCACT", style="scale";
-
-insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.diabet', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='diabet',
-  required='No', proporder='4', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — diabetes:", context="r",
+  required='No', proporder='3', attributes='', quickHelp='', 
+  label="diabetes:", context="r",
   list="uds3.udsclinicianassessment3.DIABET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.myoinf', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='myoinf',
-  required='No', proporder='5', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — myocardial infarct:", context="r",
+  required='No', proporder='4', attributes='', quickHelp='', 
+  label="myocardial infarct:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.conghrt', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='conghrt',
-  required='No', proporder='6', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — congestive heart failure:", context="r",
+  required='No', proporder='5', attributes='', quickHelp='', 
+  label="congestive heart failure:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.afibrill', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='afibrill',
-  required='No', proporder='7', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — Atrial fibrillation:", context="r",
+  required='No', proporder='6', attributes='', quickHelp='', 
+  label="Atrial fibrillation:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.hypert', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='hypert',
-  required='No', proporder='8', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — hypertension:", context="r",
+  required='No', proporder='7', attributes='', quickHelp='', 
+  label="hypertension:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.angina', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='angina',
-  required='No', proporder='9', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — angina:", context="r",
+  required='No', proporder='8', attributes='', quickHelp='', 
+  label="angina:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.hypchol', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='hypchol',
-  required='No', proporder='10', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — hypercholesterolemia:", context="r",
+  required='No', proporder='9', attributes='', quickHelp='', 
+  label="hypercholesterolemia:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.vb12def', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='vb12def',
-  required='No', proporder='11', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — B12 deficiency:", context="r",
+  required='No', proporder='10', attributes='', quickHelp='', 
+  label="B12 deficiency:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.thydis', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='thydis',
-  required='No', proporder='12', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — thyroid disease:", context="r",
+  required='No', proporder='11', attributes='', quickHelp='', 
+  label="thyroid disease:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.arth', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='arth',
-  required='No', proporder='13', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — arthritis:", context="r",
+  required='No', proporder='12', attributes='', quickHelp='', 
+  label="arthritis:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.artype', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='artype',
-  required='No', proporder='14', attributes='', quickHelp='', 
+  required='No', proporder='13', attributes='', quickHelp='', 
   label="Arthritis type:", context="r",
   list="uds3.udsclinicianassessment3.ARTYPE", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.artypex', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='artypex',
-  required='No', proporder='15', attributes='', quickHelp='', 
+  required='No', proporder='14', attributes='', quickHelp='', 
   label="Other arthritis type specification:", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.artupex', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='artupex',
-  required='No', proporder='16', attributes='', quickHelp='', 
+  required='No', proporder='15', attributes='', quickHelp='', 
   label="Arthritis region affected — upper extremity:", context="r",
   list="uds3.udsclinicianassessment3.ARTUPEX", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.artloex', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='artloex',
-  required='No', proporder='17', attributes='', quickHelp='', 
+  required='No', proporder='16', attributes='', quickHelp='', 
   label="Arthritis region affected — lower extremity:", context="r",
   list="uds3.udsclinicianassessment3.ARTUPEX", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.artspin', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='artspin',
-  required='No', proporder='18', attributes='', quickHelp='', 
+  required='No', proporder='17', attributes='', quickHelp='', 
   label="Arthritis region affected — Spine:", context="r",
   list="uds3.udsclinicianassessment3.ARTUPEX", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.artunkn', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='artunkn',
-  required='No', proporder='19', attributes='', quickHelp='', 
+  required='No', proporder='18', attributes='', quickHelp='', 
   label="Arthritis region affected — unknown:", context="r",
   list="uds3.udsclinicianassessment3.ARTUPEX", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.urineinc', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='urineinc',
-  required='No', proporder='20', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — incontinence, urinary:", context="r",
+  required='No', proporder='19', attributes='', quickHelp='', 
+  label="incontinence, urinary:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.bowlinc', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='bowlinc',
-  required='No', proporder='21', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — Incontinence, bowel:", context="r",
+  required='No', proporder='20', attributes='', quickHelp='', 
+  label="Incontinence, bowel:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.sleepap', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='sleepap',
-  required='No', proporder='22', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — Sleep apnea:", context="r",
+  required='No', proporder='21', attributes='', quickHelp='', 
+  label="Sleep apnea:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.remdis', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='remdis',
-  required='No', proporder='23', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — REM sleep behavior disorder (RBD):", context="r",
+  required='No', proporder='22', attributes='', quickHelp='', 
+  label="REM sleep behavior disorder (RBD):", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.hyposom', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='hyposom',
-  required='No', proporder='24', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — hyposomnia/insomnia:", context="r",
+  required='No', proporder='23', attributes='', quickHelp='', 
+  label="hyposomnia/insomnia:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.sleepoth', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='sleepoth',
-  required='No', proporder='25', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — other sleep disorder:", context="r",
+  required='No', proporder='24', attributes='', quickHelp='', 
+  label="other sleep disorder:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.sleepotx', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='sleepotx',
-  required='No', proporder='26', attributes='', quickHelp='', 
+  required='No', proporder='25', attributes='', quickHelp='', 
   label="Other sleep disorder specification:", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.angiocp', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='angiocp',
-  required='No', proporder='27', attributes='', quickHelp='', 
-  label="If condition is present, please check Yes — carotid procedure: angioplasty, endarterectomy, or stent:", context="r",
+  required='No', proporder='26', attributes='', quickHelp='', 
+  label="Carotid procedure: angioplasty, endarterectomy, or stent:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.angiopci', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='angiopci',
-  required='No', proporder='28', attributes='', quickHelp='', 
-  label="If condition is present, please check Yes — percutaneous coronary intervention: angioplasty and/or stent:", context="r",
+  required='No', proporder='27', attributes='', quickHelp='', 
+  label="Percutaneous coronary intervention: angioplasty and/or stent:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.pacemake', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='pacemake',
-  required='No', proporder='29', attributes='', quickHelp='', 
-  label="If condition is present, please check Yes — procedure: pacemaker and/or defibrillator:", context="r",
+  required='No', proporder='28', attributes='', quickHelp='', 
+  label="Procedure: pacemaker and/or defibrillator:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.hvalve', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='hvalve',
-  required='No', proporder='30', attributes='', quickHelp='', 
-  label="If condition is present, please check Yes — procedure: heart valve replacement or repair:", context="r",
+  required='No', proporder='29', attributes='', quickHelp='', 
+  label="Procedure: heart valve replacement or repair:", context="r",
   list="uds3.common.NoYesNa", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udsclinicianassessment3.antienc', locale='en', instance='lava', 
+  scope='ucdlava', entity='udsclinicianassessment3', property='antienc',
+  required='No', proporder='30', attributes='', quickHelp='', 
+  label="Antibody-mediated encephalopathy:", context="r",
+  list="uds3.common.NoYesNa", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udsclinicianassessment3.antiencx', locale='en', instance='lava', 
+  scope='ucdlava', entity='udsclinicianassessment3', property='antiencx',
+  required='No', proporder='31', attributes='', quickHelp='', 
+  label="Antibody-mediated encephalopathy, specify:", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.othcond', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='othcond',
-  required='No', proporder='31', attributes='', quickHelp='', 
-  label="If condition is present (even if successfully treated), please check Yes — other medical conditions or procedures not listed above:", context="r",
+  required='No', proporder='32', attributes='', quickHelp='', 
+  label="Other medical conditions or procedures not listed above:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.othcondx', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='othcondx',
-  required='No', proporder='32', attributes='', quickHelp='', 
+  required='No', proporder='33', attributes='', quickHelp='', 
   label="Other medical conditions specification:", context="r", maxLength="6", style="string";
 
 

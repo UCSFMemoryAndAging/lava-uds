@@ -16,7 +16,6 @@
       <key column="InstrID"/>
             <property name="cancer" column="CANCER" type="int" />
             <property name="cancsite" column="CANCSITE" type="string" length="60"/>
-            <property name="cancact" column="CANCACT" type="int" />
             <property name="diabet" column="DIABET" type="int" />
             <property name="myoinf" column="MYOINF" type="int" />
             <property name="conghrt" column="CONGHRT" type="int" />
@@ -44,6 +43,8 @@
             <property name="angiopci" column="ANGIOPCI" type="int" />
             <property name="pacemake" column="PACEMAKE" type="int" />
             <property name="hvalve" column="HVALVE" type="int" />
+            <property name="antienc" column="ANTIENC" type="int" />
+            <property name="antiencx" column="ANTIENCX" type="string" length="60"/>
             <property name="othcond" column="OTHCOND" type="int" />
             <property name="othcondx" column="OTHCONDX" type="string" length="60"/>
     </join>

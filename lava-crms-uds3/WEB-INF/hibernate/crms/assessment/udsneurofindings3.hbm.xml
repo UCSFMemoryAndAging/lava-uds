@@ -27,15 +27,13 @@
             <property name="postinst" column="POSTINST" type="int" />
             <property name="cvdsigns" column="CVDSIGNS" type="int" />
             <property name="cortdef" column="CORTDEF" type="int" />
-            <property name="gaitapra" column="GAITAPRA" type="int" />
+            <property name="sivdfind" column="SIVDFIND" type="int" />
             <property name="cvdmotl" column="CVDMOTL" type="int" />
             <property name="cvdmotr" column="CVDMOTR" type="int" />
             <property name="cortvisl" column="CORTVISL" type="int" />
             <property name="cortvisr" column="CORTVISR" type="int" />
             <property name="somatl" column="SOMATL" type="int" />
             <property name="somatr" column="SOMATR" type="int" />
-            <property name="cvdataxl" column="CVDATAXL" type="int" />
-            <property name="cvdataxr" column="CVDATAXR" type="int" />
             <property name="postcort" column="POSTCORT" type="int" />
             <property name="pspcbs" column="PSPCBS" type="int" />
             <property name="eyepsp" column="EYEPSP" type="int" />
@@ -53,6 +51,8 @@
             <property name="alienlmr" column="ALIENLMR" type="int" />
             <property name="dystonl" column="DYSTONL" type="int" />
             <property name="dystonr" column="DYSTONR" type="int" />
+            <property name="myocllt" column="MYOCLLT" type="int" />
+            <property name="myoclrt" column="MYOCLRT" type="int" />
             <property name="alsfind" column="ALSFIND" type="int" />
             <property name="gaitnph" column="GAITNPH" type="int" />
             <property name="othneur" column="OTHNEUR" type="int" />

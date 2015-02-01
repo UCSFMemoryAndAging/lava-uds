@@ -23,47 +23,47 @@
       <page:param name="view">${componentView}</page:param>
       <page:param name="instructions"> </page:param> 
 
-      <tags:createField property="a2sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="a2sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="a2not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="a2not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="a2comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="a2comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="a3sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="a3sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="a3not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="a3not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="a3comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="a3comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="a4sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="a4sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="a4not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="a4not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="a4comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="a4comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b1sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b1sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b1not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b1not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b1comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b1comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b5sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b5sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b5not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b5not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b5comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b5comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b6sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b6sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b6not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b6not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b6comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b6comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b7sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b7sub" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b7not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b7not" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="b7comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="b7comm" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
     </page:applyDecorator>
 

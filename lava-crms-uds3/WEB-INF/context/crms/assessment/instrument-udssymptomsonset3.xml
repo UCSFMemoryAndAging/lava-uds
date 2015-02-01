@@ -88,18 +88,18 @@
       </bean> 
     </list></property> 
   </bean>
-  <bean id="list.uds3.udssymptomsonset3.COGMODE" parent="list.numericRangeUds"> 
+  <bean id="list.uds3.udssymptomsonset3.MODE" parent="list.numericRangeUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
-        <constructor-arg value="Gradual (&amp;gt; 6 months)"/>
+        <constructor-arg value="Gradual"/>
         <constructor-arg value="1"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="Subacute (&amp;lt;= 6 months)"/>
+        <constructor-arg value="Subacute"/>
         <constructor-arg value="2"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="Abrupt (within days)"/>
+        <constructor-arg value="Abrupt"/>
         <constructor-arg value="3"/>
       </bean> 
       <bean parent="list.data">
@@ -186,30 +186,6 @@
       </bean> 
       <bean parent="list.data">
         <constructor-arg value="Slowness"/>
-        <constructor-arg value="4"/>
-      </bean> 
-      <bean parent="list.data">
-        <constructor-arg value="Unknown"/>
-        <constructor-arg value="99"/>
-      </bean> 
-    </list></property> 
-  </bean>
-  <bean id="list.uds3.udssymptomsonset3.MOMODE" parent="list.numericRangeUds"> 
-    <property name="data"><list> 
-      <bean parent="list.data">
-        <constructor-arg value="Gradual (&amp;gt; 6 months)"/>
-        <constructor-arg value="1"/>
-      </bean> 
-      <bean parent="list.data">
-        <constructor-arg value="Subacute (&amp;lt;= 6 months)"/>
-        <constructor-arg value="2"/>
-      </bean> 
-      <bean parent="list.data">
-        <constructor-arg value="Abrupt (within days)"/>
-        <constructor-arg value="3"/>
-      </bean> 
-      <bean parent="list.data">
-        <constructor-arg value="Other"/>
         <constructor-arg value="4"/>
       </bean> 
       <bean parent="list.data">

@@ -21,7 +21,6 @@ public class UDSClinicianAssessment3 extends Instrument{
   // note: id inherited from Instrument
   private Integer cancer;
   private String cancsite;
-  private Integer cancact;
   private Integer diabet;
   private Integer myoinf;
   private Integer conghrt;
@@ -49,6 +48,8 @@ public class UDSClinicianAssessment3 extends Instrument{
   private Integer angiopci;
   private Integer pacemake;
   private Integer hvalve;
+  private Integer antienc;
+  private String antiencx;
   private Integer othcond;
   private String othcondx;
 
@@ -66,13 +67,6 @@ public class UDSClinicianAssessment3 extends Instrument{
   }
   public void setCancsite(String cancsite) {
     this.cancsite=cancsite;
-  }
-
-  public Integer getCancact() {
-    return cancact;
-  }
-  public void setCancact(Integer cancact) {
-    this.cancact=cancact;
   }
 
   public Integer getDiabet() {
@@ -264,6 +258,20 @@ public class UDSClinicianAssessment3 extends Instrument{
     this.hvalve=hvalve;
   }
 
+  public Integer getAntienc() {
+    return antienc;
+  }
+  public void setAntienc(Integer antienc) {
+    this.antienc=antienc;
+  }
+
+  public String getAntiencx() {
+    return antiencx;
+  }
+  public void setAntiencx(String antiencx) {
+    this.antiencx=antiencx;
+  }
+
   public Integer getOthcond() {
     return othcond;
   }
@@ -284,7 +292,6 @@ public class UDSClinicianAssessment3 extends Instrument{
     required = new String[] {
       "cancer",
       "cancsite",
-      "cancact",
       "diabet",
       "myoinf",
       "conghrt",
@@ -312,6 +319,8 @@ public class UDSClinicianAssessment3 extends Instrument{
       "angiopci",
       "pacemake",
       "hvalve",
+      "antienc",
+      "antiencx",
       "othcond",
       "othcondx"
     };

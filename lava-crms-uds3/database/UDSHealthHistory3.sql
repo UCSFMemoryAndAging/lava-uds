@@ -539,14 +539,14 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.npsydev', locale='en', instance='lava', 
   scope='ucdlava', entity='udshealthhistory3', property='npsydev',
   required='No', proporder='66', attributes='', quickHelp='', 
-  label="Developmental neuropsychiatric disorders (e.g., autism spectrum disorder [ASD], attention-deficit hyperactivity disorder [ADHD], dyslexia):", context="r",
+  label="Developmental neuropsychiatric disorders (e.g., ASD, ADHD, dyslexia):", context="r",
   list="uds3.udshealthhistory3.CondPresence", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.psycdis', locale='en', instance='lava', 
   scope='ucdlava', entity='udshealthhistory3', property='psycdis',
   required='No', proporder='67', attributes='', quickHelp='', 
-  label="Other psychiatric disordersl:", context="r",
+  label="Other psychiatric disorders:", context="r",
   list="uds3.udshealthhistory3.CondPresence", style="scale";
 
 insert into viewproperty 

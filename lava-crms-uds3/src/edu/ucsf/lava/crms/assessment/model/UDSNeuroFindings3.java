@@ -32,15 +32,13 @@ public class UDSNeuroFindings3 extends Instrument{
   private Integer postinst;
   private Integer cvdsigns;
   private Integer cortdef;
-  private Integer gaitapra;
+  private Integer sivdfind;
   private Integer cvdmotl;
   private Integer cvdmotr;
   private Integer cortvisl;
   private Integer cortvisr;
   private Integer somatl;
   private Integer somatr;
-  private Integer cvdataxl;
-  private Integer cvdataxr;
   private Integer postcort;
   private Integer pspcbs;
   private Integer eyepsp;
@@ -58,6 +56,8 @@ public class UDSNeuroFindings3 extends Instrument{
   private Integer alienlmr;
   private Integer dystonl;
   private Integer dystonr;
+  private Integer myocllt;
+  private Integer myoclrt;
   private Integer alsfind;
   private Integer gaitnph;
   private Integer othneur;
@@ -156,11 +156,11 @@ public class UDSNeuroFindings3 extends Instrument{
     this.cortdef=cortdef;
   }
 
-  public Integer getGaitapra() {
-    return gaitapra;
+  public Integer getSivdfind() {
+    return sivdfind;
   }
-  public void setGaitapra(Integer gaitapra) {
-    this.gaitapra=gaitapra;
+  public void setSivdfind(Integer sivdfind) {
+    this.sivdfind=sivdfind;
   }
 
   public Integer getCvdmotl() {
@@ -203,20 +203,6 @@ public class UDSNeuroFindings3 extends Instrument{
   }
   public void setSomatr(Integer somatr) {
     this.somatr=somatr;
-  }
-
-  public Integer getCvdataxl() {
-    return cvdataxl;
-  }
-  public void setCvdataxl(Integer cvdataxl) {
-    this.cvdataxl=cvdataxl;
-  }
-
-  public Integer getCvdataxr() {
-    return cvdataxr;
-  }
-  public void setCvdataxr(Integer cvdataxr) {
-    this.cvdataxr=cvdataxr;
   }
 
   public Integer getPostcort() {
@@ -338,6 +324,20 @@ public class UDSNeuroFindings3 extends Instrument{
     this.dystonr=dystonr;
   }
 
+  public Integer getMyocllt() {
+    return myocllt;
+  }
+  public void setMyocllt(Integer myocllt) {
+    this.myocllt=myocllt;
+  }
+
+  public Integer getMyoclrt() {
+    return myoclrt;
+  }
+  public void setMyoclrt(Integer myoclrt) {
+    this.myoclrt=myoclrt;
+  }
+
   public Integer getAlsfind() {
     return alsfind;
   }
@@ -383,15 +383,13 @@ public class UDSNeuroFindings3 extends Instrument{
       "postinst",
       "cvdsigns",
       "cortdef",
-      "gaitapra",
+      "sivdfind",
       "cvdmotl",
       "cvdmotr",
       "cortvisl",
       "cortvisr",
       "somatl",
       "somatr",
-      "cvdataxl",
-      "cvdataxr",
       "postcort",
       "pspcbs",
       "eyepsp",
@@ -409,6 +407,8 @@ public class UDSNeuroFindings3 extends Instrument{
       "alienlmr",
       "dystonl",
       "dystonr",
+      "myocllt",
+      "myoclrt",
       "alsfind",
       "gaitnph",
       "othneur",

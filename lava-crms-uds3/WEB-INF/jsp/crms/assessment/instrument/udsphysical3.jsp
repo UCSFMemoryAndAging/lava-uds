@@ -23,27 +23,27 @@
       <page:param name="view">${componentView}</page:param>
       <page:param name="instructions"> </page:param> 
 
-      <tags:createField property="height" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="height" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="weight" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="weight" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="bpsys" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="bpsys" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="bpdias" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="bpdias" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="hrate" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="hrate" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="vision" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="vision" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="viscorr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="viscorr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="viswcorr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="viswcorr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="hearing" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="hearing" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="hearaid" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="hearaid" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
-      <tags:createField property="hearwaid" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
+      <tags:createField property="hearwaid" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
 
     </page:applyDecorator>
 
