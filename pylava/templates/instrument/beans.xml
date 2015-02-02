@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.{{ instr.tname }}.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.{{ instr.tname }}" parent="crmsInstrumentFlowAction"/>
+  <bean id="{{ instr.tname }}FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="{{ instr.tname }}" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.{{ instr.jname }}</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>{{ instr.tname }}</value></property>
+  </bean>
+
+{% autoescape off %}
+{{ instr.getListStr }}
+{% endautoescape %}
+
+</beans>
+

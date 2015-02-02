@@ -1,0 +1,4 @@
+Column:    {{ col.name }}
+Label:     {{ col.label }}
+Datatype:  {{ col.dtype }}
+Range:     {{ col.codingRange }}

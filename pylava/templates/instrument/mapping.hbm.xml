@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.{{ instr.jname }}" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="{{ instr.tname }}">
+      <key column="InstrID"/>
+{% autoescape off %}{% for col in instr.columns %}      {{ col.getHibLine }}
+{% endfor %}{% endautoescape %}    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,8 @@
+  <bean id="list.{{ list.name }}" parent="list.standardUds">
+    <property name="data"><list>
+{% for k,v in list.values.items %}      <bean parent="list.data">
+        <constructor-arg value="{{ v }}"/>
+        <constructor-arg value="{{ k }}"/>
+      </bean>
+{% endfor %}    </list></property>
+  </bean>

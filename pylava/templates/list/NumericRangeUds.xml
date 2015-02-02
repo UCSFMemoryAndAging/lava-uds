@@ -1,0 +1,10 @@
+  <bean id="list.{{ list.name }}" parent="list.numericRangeUds"> {% ifnotequal list.minimum None %}
+    <property name="defaultMinValue" value="{{ list.minimum }}"/>{% endifnotequal %}{% ifnotequal list.maximum None %}
+    <property name="defaultMaxValue" value="{{ list.maximum }}"/>{% endifnotequal %}{% if list.values %}
+    <property name="data"><list> {% for k,v in list.values.items %}
+      <bean parent="list.data">
+        <constructor-arg value="{{ v }}"/>
+        <constructor-arg value="{{ k }}"/>
+      </bean> {% endfor %}
+    </list></property> {% endif %}
+  </bean>
