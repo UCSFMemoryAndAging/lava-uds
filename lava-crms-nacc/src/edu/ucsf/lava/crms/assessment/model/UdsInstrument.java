@@ -437,7 +437,7 @@ public class UdsInstrument extends Instrument implements UdsUploadable {
 	 * 
 	 * 2) set the PTID, VisitMo, VisitDay, VisitYr
 	 * 
-	 * 3) update the packet status based on the packet status of the 
+	 * in afterUpdate: update the packet status based on the packet status of the 
 	 *    UDS Form Checklist for this patient and visit
 	 */
 	public void beforeUpdate() {
