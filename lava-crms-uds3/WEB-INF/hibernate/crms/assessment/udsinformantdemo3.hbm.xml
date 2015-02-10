@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSInformantDemo3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsinformantdemo3">
+      <key column="InstrID"/>
+            <property name="inbirmo" column="INBIRMO" type="int" />
+            <property name="inbiryr" column="INBIRYR" type="int" />
+            <property name="insex" column="INSEX" type="int" />
+            <property name="newinf" column="NEWINF" type="int" />
+            <property name="inhisp" column="INHISP" type="int" />
+            <property name="inhispor" column="INHISPOR" type="int" />
+            <property name="inhispox" column="INHISPOX" type="string" length="60"/>
+            <property name="inrace" column="INRACE" type="int" />
+            <property name="inracex" column="INRACEX" type="string" length="60"/>
+            <property name="inrasec" column="INRASEC" type="int" />
+            <property name="inrasecx" column="INRASECX" type="string" length="60"/>
+            <property name="inrater" column="INRATER" type="int" />
+            <property name="inraterx" column="INRATERX" type="string" length="60"/>
+            <property name="ineduc" column="INEDUC" type="int" />
+            <property name="inrelto" column="INRELTO" type="int" />
+            <property name="inknown" column="INKNOWN" type="int" />
+            <property name="inlivwth" column="INLIVWTH" type="int" />
+            <property name="invisits" column="INVISITS" type="int" />
+            <property name="incalls" column="INCALLS" type="int" />
+            <property name="inrely" column="INRELY" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udsmilestone3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udsmilestone3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udsmilestone3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udsmilestone3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSMilestone3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udsmilestone3</value></property>
+  </bean>
+
+
+  <bean id="list.uds3.udsmilestone3.PROTOCOL" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Annual UDS follow-up by telephone"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Minimal contact"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Annual in-person UDS follow-up"/>
+        <constructor-arg value="3"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsmilestone3.checkbox" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="No (box is not checked)"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes (box is checked)"/>
+        <constructor-arg value="1"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsmilestone3.FTLDREAS" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="ADC decision"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Subject/informant refused"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Informant not available"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other, specify below"/>
+        <constructor-arg value="4"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsmilestone3.AUTOPSY" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="No ADC autopsy expected"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="An ADC autopsy has been done; data submitted or pending"/>
+        <constructor-arg value="1"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsmilestone3.DROPREAS" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="ADC decision or protocol"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Subject or co-participant asked to be dropped"/>
+        <constructor-arg value="2"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+
+
+</beans>
+

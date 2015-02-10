@@ -2,18 +2,30 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-    <bean id="list.uds3.common.noyes01" parent="list.standardUds">
-      <property name="data"><list>
-        <bean parent="list.data">
-            <constructor-arg value="No"/>
-            <constructor-arg value="0"/>
-        </bean>
-        <bean parent="list.data">
-            <constructor-arg value="Yes"/>
-            <constructor-arg value="1"/>
-        </bean>
-      </list></property>
-    </bean>
+  <bean id="list.uds3.common.noyes01" parent="list.standardUds">
+    <property name="data"><list>
+      <bean parent="list.data">
+          <constructor-arg value="No"/>
+          <constructor-arg value="0"/>
+      </bean>
+      <bean parent="list.data">
+          <constructor-arg value="Yes"/>
+          <constructor-arg value="1"/>
+      </bean>
+    </list></property>
+  </bean>
+
+  <bean id="list.uds3.common.day" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="1"/>
+    <property name="defaultMaxValue" value="31"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="99"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
   <bean id="list.uds3.common.year" parent="list.numericRangeUds"> 
     <property name="defaultMinValue" value="1875"/>
     <property name="defaultMaxValue" value="2015"/>

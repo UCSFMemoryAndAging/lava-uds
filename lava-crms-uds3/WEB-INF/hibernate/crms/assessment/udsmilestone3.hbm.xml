@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >]>
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UDSMilestone3" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+
+    <join table="udsmilestone3">
+      <key column="InstrID"/>
+            <property name="changemo" column="CHANGEMO" type="int" />
+            <property name="changedy" column="CHANGEDY" type="int" />
+            <property name="changeyr" column="CHANGEYR" type="int" precision="10" scale="0" />
+            <property name="protocol" column="PROTOCOL" type="int" />
+            <property name="aconsent" column="ACONSENT" type="int" />
+            <property name="recogim" column="RECOGIM" type="int" />
+            <property name="rephyill" column="REPHYILL" type="int" />
+            <property name="rerefuse" column="REREFUSE" type="int" />
+            <property name="renavail" column="RENAVAIL" type="int" />
+            <property name="renurse" column="RENURSE" type="int" />
+            <property name="nursemo" column="NURSEMO" type="int" />
+            <property name="nursedy" column="NURSEDY" type="int" />
+            <property name="nurseyr" column="NURSEYR" type="int" precision="10" scale="0" />
+            <property name="rejoin" column="REJOIN" type="int" />
+            <property name="ftlddisc" column="FTLDDISC" type="int" />
+            <property name="ftldreas" column="FTLDREAS" type="int" />
+            <property name="ftldreax" column="FTLDREAX" type="string" length="60"/>
+            <property name="deceased" column="DECEASED" type="int" />
+            <property name="discont" column="DISCONT" type="int" />
+            <property name="deathmo" column="DEATHMO" type="int" />
+            <property name="deathdy" column="DEATHDY" type="int" />
+            <property name="deathyr" column="DEATHYR" type="int" precision="10" scale="0" />
+            <property name="autopsy" column="AUTOPSY" type="int" />
+            <property name="discmo" column="DISCMO" type="int" />
+            <property name="discdy" column="DISCDY" type="int" />
+            <property name="discr" column="DISCR" type="int" precision="10" scale="0" />
+            <property name="dropreas" column="DROPREAS" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>

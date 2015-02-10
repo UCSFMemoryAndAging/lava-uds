@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="list.udsinformantdemo3.codes" parent="list.uds.codes"/>
+  <bean id="lava.crms.assessment.instrument.udsinformantdemo3" parent="crmsInstrumentFlowAction"/>
+  <bean id="udsinformantdemo3FormAction" parent="udsInstrumentFormAction"/>
+  <bean id="udsinformantdemo3" parent="instrumentConfig">
+    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UDSInformantDemo3</value></property>
+    <property name="supportedFlows"><value>enter</value></property>
+    <property name="currentVersionAlias"><value>udsinformantdemo3</value></property>
+  </bean>
+
+
+  <bean id="list.uds3.udsinformantdemo3.INBIRYR" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="1875"/>
+    <property name="defaultMaxValue" value="2010"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9999"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.coparticipantdemographics.INHISPOR" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Mexican, Chicano, or Mexican-American"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Puerto Rican"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Cuban"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Dominican"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Central American"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="South American"/>
+        <constructor-arg value="6"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other (specify)"/>
+        <constructor-arg value="50"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="99"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsinformantdemo3.INRATER" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="White"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Black or African American"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="American Indian or Alaska Native"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Native Hawaiian or Other Pacific Islander"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Asian"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other"/>
+        <constructor-arg value="50"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="None Reported"/>
+        <constructor-arg value="88"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="99"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsinformantdemo3.INRELTO" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Spouse, partner, or companion"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Child"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Sibling"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other relative"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Friend, neighbor, or someone known through family,friends,work,or community"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Paid caregiver, health care provider, or clinician"/>
+        <constructor-arg value="6"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsinformantdemo3.INKNOWN" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="0"/>
+    <property name="defaultMaxValue" value="120"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="999"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsinformantdemo3.INVISITS" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Daily"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="At least 3 times per week"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Weekly"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="At least 3 times per month"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Monthly"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Less than once a month"/>
+        <constructor-arg value="6"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  <bean id="list.uds3.udsinformantdemo3.INCALLS" parent="list.numericRangeUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Daily"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="At least 3 times per week"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Weekly"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Monthly"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Less than once a month"/>
+        <constructor-arg value="6"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+
+
+</beans>
+

@@ -18,5 +18,7 @@
   <import resource="assessment/instrument-udsgds3.xml" />
   <import resource="assessment/instrument-udssymptomsonset3.xml" />
   <import resource="assessment/instrument-udshealthhistory3.xml" />
+  <import resource="assessment/instrument-udsinformantdemo3.xml" />
+  <import resource="assessment/instrument-udsmilestone3.xml" />
 </beans>
 

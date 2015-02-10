@@ -169,11 +169,197 @@
     </list></property> 
   </bean>
   <bean id="list.uds3.udsfamilyhistory3.PrimDx" parent="list.numericRangeUds"> 
-    <property name="defaultMinValue" value="40"/>
-    <property name="defaultMaxValue" value="490"/>
     <property name="data"><list> 
       <bean parent="list.data">
-        <constructor-arg value="Unknown"/>
+        <constructor-arg value="040  Mild cognitive impairment (MCI), not otherwise specified"/>
+        <constructor-arg value="40"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="041  MCI - amnestic, single domain"/>
+        <constructor-arg value="41"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="042  MCI - multiple domain with amnesia"/>
+        <constructor-arg value="42"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="043  MCI - single domain nonamnestic"/>
+        <constructor-arg value="43"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="044  MCI - multiple domain nonamnestic"/>
+        <constructor-arg value="44"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="045  Impaired, but not MCI"/>
+        <constructor-arg value="45"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="050  Alzheimer’s disease dementia"/>
+        <constructor-arg value="50"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="070  Dementia with Lewy bodies"/>
+        <constructor-arg value="70"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="080  Vascular cognitive impairment or dementia"/>
+        <constructor-arg value="80"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="100  Impairment due to alcohol abuse"/>
+        <constructor-arg value="100"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="110  Dementia of undetermined etiology"/>
+        <constructor-arg value="110"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="120  Behavioral variant frontotemporal dementia"/>
+        <constructor-arg value="120"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="130  Primary progressive aphasia, semantic variant"/>
+        <constructor-arg value="130"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="131  Primary progressive aphasia, nonfluent/agrammatic variant"/>
+        <constructor-arg value="131"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="132  Primary progressive aphasia, logopenic variant"/>
+        <constructor-arg value="132"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="133  Primary progressive aphasia, not otherwise specified"/>
+        <constructor-arg value="133"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="140  Clinical progressive supranuclear palsy"/>
+        <constructor-arg value="140"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="150  Clinical corticobasal syndrome/corticobasal degeneration"/>
+        <constructor-arg value="150"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="160  Huntington’s disease"/>
+        <constructor-arg value="160"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="170  Clinical prion disease"/>
+        <constructor-arg value="170"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="180  Cognitive dysfunction from medications"/>
+        <constructor-arg value="180"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="190  Cognitive dysfunction from medical illness"/>
+        <constructor-arg value="190"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="200  Depression"/>
+        <constructor-arg value="200"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="210  Other major psychiatric illness"/>
+        <constructor-arg value="210"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="220  Down syndrome"/>
+        <constructor-arg value="220"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="230  Parkinson’s disease"/>
+        <constructor-arg value="230"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="240  Stroke"/>
+        <constructor-arg value="240"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="250  Hydrocephalus"/>
+        <constructor-arg value="250"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="260  Traumatic brain injury"/>
+        <constructor-arg value="260"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="270  CNS neoplasm"/>
+        <constructor-arg value="270"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="280  Other"/>
+        <constructor-arg value="280"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="310  Amyotrophic lateral sclerosis"/>
+        <constructor-arg value="310"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="320  Multiple sclerosis"/>
+        <constructor-arg value="320"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="400  Alzheimer’s disease neuropathology"/>
+        <constructor-arg value="400"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="410  Lewy body disease neuropathology"/>
+        <constructor-arg value="410"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="420  Gross infarct(s) neuropathology"/>
+        <constructor-arg value="420"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="421  Hemorrhage(s) neuropathology"/>
+        <constructor-arg value="421"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="422  Other cerebrovascular disease neuropathology"/>
+        <constructor-arg value="422"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="430  ALS/MND"/>
+        <constructor-arg value="430"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="431  FTLD with Tau pathology - Pick’s disease"/>
+        <constructor-arg value="431"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="432  FTLD with Tau pathology - CBD"/>
+        <constructor-arg value="432"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="433  FTLD with Tau pathology - PSP"/>
+        <constructor-arg value="433"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="434  FTLD with Tau pathology - argyrophyllic grains"/>
+        <constructor-arg value="434"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="435  FTLD with Tau pathology - other"/>
+        <constructor-arg value="435"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="436  FTLD with TDP-43"/>
+        <constructor-arg value="436"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="439  FTLD other (FTLD-FUS, FTLD-UPS, FTLD NOS)"/>
+        <constructor-arg value="439"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="490  Other neuropathologic diagnosis not listed above"/>
+        <constructor-arg value="490"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="999  Specific diagnosis unknown "/>
         <constructor-arg value="999"/>
       </bean> 
     </list></property> 
