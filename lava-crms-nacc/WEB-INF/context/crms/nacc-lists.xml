@@ -6,7 +6,7 @@
 	
 	<bean id="list.udsVisit.packetType" parent="list.udsinstrument.packetType">
  		<property name="data"><list>
-			<bean parent="list.data"><constructor-arg value="N/A"/><constructor-arg value="NA"/><constructor-arg value="5"/></bean>
+			<bean parent="list.data"><constructor-arg value="N/A"/><constructor-arg value="NA"/><constructor-arg value="5" type="java.lang.Integer"/></bean>
 		</list></property>
  	</bean>	
 	

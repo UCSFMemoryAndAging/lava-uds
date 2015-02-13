@@ -59,7 +59,7 @@
 
     <target name="compile" description="Compile all modified java source files into the deploy build folder">
         <mkdir dir="${instance-deploy.path}/${build.folder}"/>
-        <javac destdir="${instance-deploy.path}/${build.folder}" target="1.5" debug="true"
+        <javac destdir="${instance-deploy.path}/${build.folder}" target="1.6" debug="true"
                deprecation="false" optimize="false" failonerror="true">
             <src path="${lava-core.path}/${src.folder}"/>
         	<src path="${lava-crms.path}/${src.folder}"/>
@@ -77,10 +77,17 @@
 		<copy todir="${instance-deploy.path}" preservelastmodified="true" verbose="true">
 			<fileset dir="${lava-core.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 			<fileset dir="${lava-crms.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
-			<fileset dir="${lava-crms-ignav.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 			<fileset dir="${lava-crms-nacc.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
-			<fileset dir="${lava-crms-ignav-nacc.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 			<fileset dir="${instance.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project"/>
+		</copy>
+
+		<!-- ignav is based on some files replacing the core/crms files of the same name, even if the core/crms
+			files are dated later such that no copy would take place without the overwrite attribute set true.
+			so this is a special copy for ignav with overwrite="true". this means that any changes made to the
+			core/crms version of the file should be made to the ignav version, since the ignav version will be used -->
+		<copy todir="${instance-deploy.path}" preservelastmodified="true" verbose="true" overwrite="true">
+			<fileset dir="${lava-crms-ignav.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
+			<fileset dir="${lava-crms-ignav-nacc.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 		</copy>
 	</target>    
 	

@@ -9,7 +9,7 @@ import org.springframework.webflow.execution.RequestContext;
 import edu.ucsf.lava.core.action.ActionUtils;
 import edu.ucsf.lava.core.controller.ComponentCommand;
 import edu.ucsf.lava.crms.assessment.controller.UdsInstrumentHandler;
-import edu.ucsf.lava.crms.assessment.controller.cbt.FileLoader;
+import edu.ucsf.lava.crms.assessment.controller.upload.FileLoader;
 import edu.ucsf.lava.crms.assessment.model.Instrument;
 
 // UdsInstrumentHandler extends InstrumentHandler, not SwitchableInstrumentHandler,
