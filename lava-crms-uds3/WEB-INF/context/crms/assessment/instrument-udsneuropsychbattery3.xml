@@ -178,7 +178,7 @@
         <constructor-arg value="2"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="In person — other"/>
+        <constructor-arg value="In person - other"/>
         <constructor-arg value="3"/>
       </bean> 
     </list></property> 

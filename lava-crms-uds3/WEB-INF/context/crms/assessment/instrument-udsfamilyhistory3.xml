@@ -195,7 +195,7 @@
         <constructor-arg value="45"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="050  Alzheimer’s disease dementia"/>
+        <constructor-arg value="050  Alzheimer&#39;s disease dementia"/>
         <constructor-arg value="50"/>
       </bean> 
       <bean parent="list.data">
@@ -243,7 +243,7 @@
         <constructor-arg value="150"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="160  Huntington’s disease"/>
+        <constructor-arg value="160  Huntington&#39;s disease"/>
         <constructor-arg value="160"/>
       </bean> 
       <bean parent="list.data">
@@ -271,7 +271,7 @@
         <constructor-arg value="220"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="230  Parkinson’s disease"/>
+        <constructor-arg value="230  Parkinson&#39;s disease"/>
         <constructor-arg value="230"/>
       </bean> 
       <bean parent="list.data">
@@ -303,7 +303,7 @@
         <constructor-arg value="320"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="400  Alzheimer’s disease neuropathology"/>
+        <constructor-arg value="400  Alzheimer&#39;s disease neuropathology"/>
         <constructor-arg value="400"/>
       </bean> 
       <bean parent="list.data">
@@ -327,7 +327,7 @@
         <constructor-arg value="430"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="431  FTLD with Tau pathology - Pick’s disease"/>
+        <constructor-arg value="431  FTLD with Tau pathology - Pick&#39;s disease"/>
         <constructor-arg value="431"/>
       </bean> 
       <bean parent="list.data">

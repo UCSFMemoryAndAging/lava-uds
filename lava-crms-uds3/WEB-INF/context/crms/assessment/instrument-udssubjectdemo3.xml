@@ -83,7 +83,7 @@
         <constructor-arg value="3"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="Another organizations’s media appeal or website"/>
+        <constructor-arg value="Another organizations&#39;s media appeal or website"/>
         <constructor-arg value="4"/>
       </bean> 
       <bean parent="list.data">

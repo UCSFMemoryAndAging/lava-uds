@@ -19,11 +19,11 @@
         <constructor-arg value="0"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="Yes — abnormal findings were consistent with syndromes listed in Questions 2-8"/>
+        <constructor-arg value="Yes - abnormal findings were consistent with syndromes listed in Questions 2-8"/>
         <constructor-arg value="1"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="Yes — abnormal findings were consistent with age-associated changes or irrelevant to dementing disorders (e.g., Bell’s palsy)"/>
+        <constructor-arg value="Yes - abnormal findings were consistent with age-associated changes or irrelevant to dementing disorders (e.g., Bell&#39;s palsy)"/>
         <constructor-arg value="2"/>
       </bean> 
     </list></property> 

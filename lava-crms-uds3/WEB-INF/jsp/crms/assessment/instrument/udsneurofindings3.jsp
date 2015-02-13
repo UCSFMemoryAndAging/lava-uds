@@ -23,91 +23,91 @@
       <page:param name="view">${componentView}</page:param>
       <page:param name="instructions"> </page:param> 
 
-      <tags:createField property="normexam" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="normexam" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="parksign" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="parksign" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="resttrl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="resttrl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="resttrr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="resttrr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="slowingl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="slowingl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="slowingr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="slowingr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="rigidl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="rigidl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="rigidr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="rigidr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="brady" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="brady" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="parkgait" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="parkgait" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="postinst" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="postinst" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="cvdsigns" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="cvdsigns" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="cortdef" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="cortdef" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="sivdfind" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="sivdfind" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="cvdmotl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="cvdmotl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="cvdmotr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="cvdmotr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="cortvisl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="cortvisl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="cortvisr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="cortvisr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="somatl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="somatl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="somatr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="somatr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="postcort" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="postcort" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="pspcbs" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="pspcbs" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="eyepsp" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="eyepsp" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="dyspsp" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="dyspsp" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="axialpsp" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="axialpsp" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="gaitpsp" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="gaitpsp" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="apraxsp" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="apraxsp" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="apraxl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="apraxl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="apraxr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="apraxr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="cortsenl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="cortsenl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="cortsenr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="cortsenr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="ataxl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="ataxl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="ataxr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="ataxr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="alienlml" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="alienlml" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="alienlmr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="alienlmr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="dystonl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="dystonl" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="dystonr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="dystonr" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="myocllt" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="myocllt" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="myoclrt" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="myoclrt" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="alsfind" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="alsfind" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="gaitnph" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="gaitnph" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="othneur" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="othneur" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
-      <tags:createField property="othneurx" component="${component}" entity="${instrTypeEncoded}" labelAlignment="left"/>
+      <tags:createField property="othneurx" component="${component}" entity="${instrTypeEncoded}" labelAlignment="top"/>
 
     </page:applyDecorator>
 

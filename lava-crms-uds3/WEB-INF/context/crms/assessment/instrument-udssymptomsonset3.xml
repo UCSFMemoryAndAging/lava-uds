@@ -59,7 +59,7 @@
         <constructor-arg value="2"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="Executive function — judgment, planning, problem-solving"/>
+        <constructor-arg value="Executive function - judgment, planning, problem-solving"/>
         <constructor-arg value="3"/>
       </bean> 
       <bean parent="list.data">
