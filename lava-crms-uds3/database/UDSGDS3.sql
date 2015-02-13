@@ -1,3 +1,18 @@
+delete instrumentnotes 
+from instrumenttracking join instrumentnotes using (InstrID) 
+where InstrType="UDS GDS 3";
+
+delete instrumentsummary 
+from instrumenttracking join instrumentsummary using (InstrID) 
+where InstrType="UDS GDS 3";
+
+delete udsgds3 
+from instrumenttracking join udsgds3 using (InstrID) 
+where InstrType="UDS GDS 3";
+
+delete from instrumenttracking 
+where InstrType="UDS GDS 3";
+
 delete from hibernateproperty where entity="udsgds3";
 delete from viewproperty where entity="udsgds3";
 delete from instrument where InstrName="UDS GDS 3";
@@ -8,23 +23,23 @@ drop table if exists udsgds3;
 -- Initialize table
 CREATE TABLE udsgds3 (
   InstrID int(10) NOT NULL,
-    `NOGDS` UNMAPPED TYPE
-    `SATIS` UNMAPPED TYPE
-    `DROPACT` UNMAPPED TYPE
-    `EMPTY` UNMAPPED TYPE
-    `BORED` UNMAPPED TYPE
-    `SPIRITS` UNMAPPED TYPE
-    `AFRAID` UNMAPPED TYPE
-    `HAPPY` UNMAPPED TYPE
-    `HELPLESS` UNMAPPED TYPE
-    `STAYHOME` UNMAPPED TYPE
-    `MEMPROB` UNMAPPED TYPE
-    `WONDRFUL` UNMAPPED TYPE
-    `WRTHLESS` UNMAPPED TYPE
-    `ENERGY` UNMAPPED TYPE
-    `HOPELESS` UNMAPPED TYPE
-    `BETTER` UNMAPPED TYPE
-    `GDS` UNMAPPED TYPE
+    `NOGDS` smallint(5) DEFAULT NULL,
+    `SATIS` smallint(5) DEFAULT NULL,
+    `DROPACT` smallint(5) DEFAULT NULL,
+    `EMPTY` smallint(5) DEFAULT NULL,
+    `BORED` smallint(5) DEFAULT NULL,
+    `SPIRITS` smallint(5) DEFAULT NULL,
+    `AFRAID` smallint(5) DEFAULT NULL,
+    `HAPPY` smallint(5) DEFAULT NULL,
+    `HELPLESS` smallint(5) DEFAULT NULL,
+    `STAYHOME` smallint(5) DEFAULT NULL,
+    `MEMPROB` smallint(5) DEFAULT NULL,
+    `WONDRFUL` smallint(5) DEFAULT NULL,
+    `WRTHLESS` smallint(5) DEFAULT NULL,
+    `ENERGY` smallint(5) DEFAULT NULL,
+    `HOPELESS` smallint(5) DEFAULT NULL,
+    `BETTER` smallint(5) DEFAULT NULL,
+    `GDS` smallint(5) DEFAULT NULL,
 
   PRIMARY KEY (`InstrID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -37,7 +52,7 @@ insert into viewproperty
 set messageCode='*.udsgds3.nogds', locale='en', instance='lava', 
   scope='ucdlava', entity='udsgds3', property='nogds',
   required='No', proporder='1', attributes='', quickHelp='', 
-  label="Check this box if the subject is not able to complete the GDS, based on the clinician’s best judgment:", context="r",
+  label="Check this box if the subject is not able to complete the GDS, based on the clinician's best judgment:", context="r",
   list="uds3.udsgds3.NOGDS", style="scale";
 
 insert into viewproperty 

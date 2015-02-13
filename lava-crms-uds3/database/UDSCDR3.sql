@@ -1,3 +1,18 @@
+delete instrumentnotes 
+from instrumenttracking join instrumentnotes using (InstrID) 
+where InstrType="UDS CDR 3";
+
+delete instrumentsummary 
+from instrumenttracking join instrumentsummary using (InstrID) 
+where InstrType="UDS CDR 3";
+
+delete udscdr3 
+from instrumenttracking join udscdr3 using (InstrID) 
+where InstrType="UDS CDR 3";
+
+delete from instrumenttracking 
+where InstrType="UDS CDR 3";
+
 delete from hibernateproperty where entity="udscdr3";
 delete from viewproperty where entity="udscdr3";
 delete from instrument where InstrName="UDS CDR 3";

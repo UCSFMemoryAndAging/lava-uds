@@ -1,3 +1,18 @@
+delete instrumentnotes 
+from instrumenttracking join instrumentnotes using (InstrID) 
+where InstrType="UDS FAQ 3";
+
+delete instrumentsummary 
+from instrumenttracking join instrumentsummary using (InstrID) 
+where InstrType="UDS FAQ 3";
+
+delete udsfaq3 
+from instrumenttracking join udsfaq3 using (InstrID) 
+where InstrType="UDS FAQ 3";
+
+delete from instrumenttracking 
+where InstrType="UDS FAQ 3";
+
 delete from hibernateproperty where entity="udsfaq3";
 delete from viewproperty where entity="udsfaq3";
 delete from instrument where InstrName="UDS FAQ 3";
@@ -8,16 +23,16 @@ drop table if exists udsfaq3;
 -- Initialize table
 CREATE TABLE udsfaq3 (
   InstrID int(10) NOT NULL,
-    `BILLS` UNMAPPED TYPE
-    `TAXES` UNMAPPED TYPE
-    `SHOPPING` UNMAPPED TYPE
-    `GAMES` UNMAPPED TYPE
-    `STOVE` UNMAPPED TYPE
-    `MEALPREP` UNMAPPED TYPE
-    `EVENTS` UNMAPPED TYPE
-    `PAYATTN` UNMAPPED TYPE
-    `REMDATES` UNMAPPED TYPE
-    `TRAVEL` UNMAPPED TYPE
+    `BILLS` smallint(5) DEFAULT NULL,
+    `TAXES` smallint(5) DEFAULT NULL,
+    `SHOPPING` smallint(5) DEFAULT NULL,
+    `GAMES` smallint(5) DEFAULT NULL,
+    `STOVE` smallint(5) DEFAULT NULL,
+    `MEALPREP` smallint(5) DEFAULT NULL,
+    `EVENTS` smallint(5) DEFAULT NULL,
+    `PAYATTN` smallint(5) DEFAULT NULL,
+    `REMDATES` smallint(5) DEFAULT NULL,
+    `TRAVEL` smallint(5) DEFAULT NULL,
 
   PRIMARY KEY (`InstrID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

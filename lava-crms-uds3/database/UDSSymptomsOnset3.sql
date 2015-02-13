@@ -1,3 +1,18 @@
+delete instrumentnotes 
+from instrumenttracking join instrumentnotes using (InstrID) 
+where InstrType="UDS Symptoms Onset 3";
+
+delete instrumentsummary 
+from instrumenttracking join instrumentsummary using (InstrID) 
+where InstrType="UDS Symptoms Onset 3";
+
+delete udssymptomsonset3 
+from instrumenttracking join udssymptomsonset3 using (InstrID) 
+where InstrType="UDS Symptoms Onset 3";
+
+delete from instrumenttracking 
+where InstrType="UDS Symptoms Onset 3";
+
 delete from hibernateproperty where entity="udssymptomsonset3";
 delete from viewproperty where entity="udssymptomsonset3";
 delete from instrument where InstrName="UDS Symptoms Onset 3";
@@ -8,63 +23,63 @@ drop table if exists udssymptomsonset3;
 -- Initialize table
 CREATE TABLE udssymptomsonset3 (
   InstrID int(10) NOT NULL,
-    `DECSUB` UNMAPPED TYPE
-    `DECIN` UNMAPPED TYPE
-    `DECCLCOG` UNMAPPED TYPE
-    `COGMEM` UNMAPPED TYPE
-    `COGORI` UNMAPPED TYPE
-    `COGJUDG` UNMAPPED TYPE
-    `COGLANG` UNMAPPED TYPE
-    `COGVIS` UNMAPPED TYPE
-    `COGATTN` UNMAPPED TYPE
-    `COGFLUC` UNMAPPED TYPE
-    `COGFLAGO` UNMAPPED TYPE
-    `COGOTHR` UNMAPPED TYPE
+    `DECSUB` smallint(5) DEFAULT NULL,
+    `DECIN` smallint(5) DEFAULT NULL,
+    `DECCLCOG` smallint(5) DEFAULT NULL,
+    `COGMEM` smallint(5) DEFAULT NULL,
+    `COGORI` smallint(5) DEFAULT NULL,
+    `COGJUDG` smallint(5) DEFAULT NULL,
+    `COGLANG` smallint(5) DEFAULT NULL,
+    `COGVIS` smallint(5) DEFAULT NULL,
+    `COGATTN` smallint(5) DEFAULT NULL,
+    `COGFLUC` smallint(5) DEFAULT NULL,
+    `COGFLAGO` smallint(5) DEFAULT NULL,
+    `COGOTHR` smallint(5) DEFAULT NULL,
     `COGOTHRX` varchar(60) DEFAULT NULL,
-    `COGFPRED` UNMAPPED TYPE
+    `COGFPRED` smallint(5) DEFAULT NULL,
     `COGFPREX` varchar(60) DEFAULT NULL,
-    `COGMODE` UNMAPPED TYPE
+    `COGMODE` smallint(5) DEFAULT NULL,
     `COGMODEX` varchar(60) DEFAULT NULL,
-    `DECAGE` UNMAPPED TYPE
-    `DECCLBE` UNMAPPED TYPE
-    `BEAPATHY` UNMAPPED TYPE
-    `BEDEP` UNMAPPED TYPE
-    `BEVHALL` UNMAPPED TYPE
-    `BEVWELL` UNMAPPED TYPE
-    `BEVHAGO` UNMAPPED TYPE
-    `BEAHALL` UNMAPPED TYPE
-    `BEDEL` UNMAPPED TYPE
-    `BEDISIN` UNMAPPED TYPE
-    `BEIRRIT` UNMAPPED TYPE
-    `BEAGIT` UNMAPPED TYPE
-    `BEPERCH` UNMAPPED TYPE
-    `BEREM` UNMAPPED TYPE
-    `BEREMAGO` UNMAPPED TYPE
-    `BEANX` UNMAPPED TYPE
-    `BEOTHR` UNMAPPED TYPE
+    `DECAGE` smallint(5) DEFAULT NULL,
+    `DECCLBE` smallint(5) DEFAULT NULL,
+    `BEAPATHY` smallint(5) DEFAULT NULL,
+    `BEDEP` smallint(5) DEFAULT NULL,
+    `BEVHALL` smallint(5) DEFAULT NULL,
+    `BEVWELL` smallint(5) DEFAULT NULL,
+    `BEVHAGO` smallint(5) DEFAULT NULL,
+    `BEAHALL` smallint(5) DEFAULT NULL,
+    `BEDEL` smallint(5) DEFAULT NULL,
+    `BEDISIN` smallint(5) DEFAULT NULL,
+    `BEIRRIT` smallint(5) DEFAULT NULL,
+    `BEAGIT` smallint(5) DEFAULT NULL,
+    `BEPERCH` smallint(5) DEFAULT NULL,
+    `BEREM` smallint(5) DEFAULT NULL,
+    `BEREMAGO` smallint(5) DEFAULT NULL,
+    `BEANX` smallint(5) DEFAULT NULL,
+    `BEOTHR` smallint(5) DEFAULT NULL,
     `BEOTHRX` varchar(60) DEFAULT NULL,
-    `BEFPRED` UNMAPPED TYPE
+    `BEFPRED` smallint(5) DEFAULT NULL,
     `BEFPREDX` varchar(60) DEFAULT NULL,
-    `BEMODE` UNMAPPED TYPE
+    `BEMODE` smallint(5) DEFAULT NULL,
     `BEMODEX` varchar(60) DEFAULT NULL,
-    `BEAGE` UNMAPPED TYPE
-    `DECCLMOT` UNMAPPED TYPE
-    `MOGAIT` UNMAPPED TYPE
-    `MOFALLS` UNMAPPED TYPE
-    `MOTREM` UNMAPPED TYPE
-    `MOSLOW` UNMAPPED TYPE
-    `MOFRST` UNMAPPED TYPE
-    `MOMODE` UNMAPPED TYPE
+    `BEAGE` smallint(5) DEFAULT NULL,
+    `DECCLMOT` smallint(5) DEFAULT NULL,
+    `MOGAIT` smallint(5) DEFAULT NULL,
+    `MOFALLS` smallint(5) DEFAULT NULL,
+    `MOTREM` smallint(5) DEFAULT NULL,
+    `MOSLOW` smallint(5) DEFAULT NULL,
+    `MOFRST` smallint(5) DEFAULT NULL,
+    `MOMODE` smallint(5) DEFAULT NULL,
     `MOMODEX` varchar(60) DEFAULT NULL,
-    `MOMOPARK` UNMAPPED TYPE
-    `PARKAGE` UNMAPPED TYPE
-    `MOMOALS` UNMAPPED TYPE
-    `ALSAGE` UNMAPPED TYPE
-    `MOAGE` UNMAPPED TYPE
-    `COURSE` UNMAPPED TYPE
-    `FRSTCHG` UNMAPPED TYPE
-    `LBDEVAL` UNMAPPED TYPE
-    `FTLDEVAL` UNMAPPED TYPE
+    `MOMOPARK` smallint(5) DEFAULT NULL,
+    `PARKAGE` smallint(5) DEFAULT NULL,
+    `MOMOALS` smallint(5) DEFAULT NULL,
+    `ALSAGE` smallint(5) DEFAULT NULL,
+    `MOAGE` smallint(5) DEFAULT NULL,
+    `COURSE` smallint(5) DEFAULT NULL,
+    `FRSTCHG` smallint(5) DEFAULT NULL,
+    `LBDEVAL` smallint(5) DEFAULT NULL,
+    `FTLDEVAL` smallint(5) DEFAULT NULL,
 
   PRIMARY KEY (`InstrID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -84,14 +99,14 @@ insert into viewproperty
 set messageCode='*.udssymptomsonset3.decin', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='decin',
   required='No', proporder='2', attributes='', quickHelp='', 
-  label="Does the co-participant report a decline in subject’s memory (relative to previously attained abilities)?:", context="r",
+  label="Does the co-participant report a decline in subject's memory (relative to previously attained abilities)?:", context="r",
   list="uds3.udssymptomsonset3.DECIN", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.decclcog', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='decclcog',
   required='No', proporder='3', attributes='', quickHelp='', 
-  label="Based on the clinician’s judgment, is the subject currently experiencing meaningful impairment in cognition?:", context="r",
+  label="Based on the clinician's judgment, is the subject currently experiencing meaningful impairment in cognition?:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
@@ -112,7 +127,7 @@ insert into viewproperty
 set messageCode='*.udssymptomsonset3.cogjudg', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='cogjudg',
   required='No', proporder='6', attributes='', quickHelp='', 
-  label="Indicate whether the subject currently is meaningfully impaired, relative to previously attained abilities, in executive function — judgment, planning, or problem-solving:", context="r",
+  label="Indicate whether the subject currently is meaningfully impaired, relative to previously attained abilities, in executive function - judgment, planning, or problem-solving:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
@@ -167,14 +182,14 @@ insert into viewproperty
 set messageCode='*.udssymptomsonset3.cogfpred', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='cogfpred',
   required='No', proporder='14', attributes='', quickHelp='', 
-  label="Indicate the predominant symptom that was first recognized as a decline in the subject’s cognition:", context="r",
+  label="Indicate the predominant symptom that was first recognized as a decline in the subject's cognition:", context="r",
   list="uds3.udssymptomsonset3.COGFPRED", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.cogfprex', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='cogfprex',
   required='No', proporder='15', attributes='', quickHelp='', 
-  label="Specification for Other predominant symptom first recognized as a decline in the subject’s cognition:", context="r", maxLength="6", style="string";
+  label="Specification for Other predominant symptom first recognized as a decline in the subject's cognition:", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.cogmode', locale='en', instance='lava', 
@@ -193,35 +208,35 @@ insert into viewproperty
 set messageCode='*.udssymptomsonset3.decage', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='decage',
   required='No', proporder='18', attributes='', quickHelp='', 
-  label="Based on clinician’s assessment, at what age did the cognitive decline begin? (The clinician must use his/her best judgment to estimate an age of onset.):", context="r",
+  label="Based on clinician's assessment, at what age did the cognitive decline begin? (The clinician must use his/her best judgment to estimate an age of onset.):", context="r",
   list="uds3.udssymptomsonset3.SymptomAge", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.decclbe', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='decclbe',
   required='No', proporder='19', attributes='', quickHelp='', 
-  label="Based on clinician’s judgment, is the subject currently experiencing any kind of behavioral symptoms?:", context="r",
+  label="Based on clinician's judgment, is the subject currently experiencing any kind of behavioral symptoms?:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.beapathy', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='beapathy',
   required='No', proporder='20', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Apathy, withdrawal:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Apathy, withdrawal:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.bedep', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='bedep',
   required='No', proporder='21', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Depressed mood:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Depressed mood:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.bevhall', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='bevhall',
   required='No', proporder='22', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Psychosis — Visual hallucinations:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Psychosis - Visual hallucinations:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
@@ -242,49 +257,49 @@ insert into viewproperty
 set messageCode='*.udssymptomsonset3.beahall', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='beahall',
   required='No', proporder='25', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Psychosis — Auditory hallucinations:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Psychosis - Auditory hallucinations:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.bedel', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='bedel',
   required='No', proporder='26', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Psychosis — Abnormal, false, or delusional beliefs:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Psychosis - Abnormal, false, or delusional beliefs:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.bedisin', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='bedisin',
   required='No', proporder='27', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Disinhibition:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Disinhibition:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.beirrit', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='beirrit',
   required='No', proporder='28', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Irritability:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Irritability:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.beagit', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='beagit',
   required='No', proporder='29', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Agitation:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Agitation:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.beperch', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='beperch',
   required='No', proporder='30', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Personality change:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Personality change:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.berem', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='berem',
   required='No', proporder='31', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — REM sleep behavior disorder:", context="r",
+  label="Subject currently manifests meaningful change in behavior - REM sleep behavior disorder:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
@@ -298,34 +313,34 @@ insert into viewproperty
 set messageCode='*.udssymptomsonset3.beanx', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='beanx',
   required='No', proporder='33', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Anxiety:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Anxiety:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.beothr', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='beothr',
   required='No', proporder='34', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Other:", context="r",
+  label="Subject currently manifests meaningful change in behavior - Other:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.beothrx', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='beothrx',
   required='No', proporder='35', attributes='', quickHelp='', 
-  label="Subject currently manifests meaningful change in behavior — Other, specify:", context="r", maxLength="6", style="string";
+  label="Subject currently manifests meaningful change in behavior - Other, specify:", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.befpred', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='befpred',
   required='No', proporder='36', attributes='', quickHelp='', 
-  label="Indicate the predominant symptom that was first recognized as a decline in the subject’s behavior:", context="r",
+  label="Indicate the predominant symptom that was first recognized as a decline in the subject's behavior:", context="r",
   list="uds3.udssymptomsonset3.BEFPRED", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.befpredx', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='befpredx',
   required='No', proporder='37', attributes='', quickHelp='', 
-  label="Specification of other predominant symptom that was first recognized as a decline in the subject’s behavior:", context="r", maxLength="6", style="string";
+  label="Specification of other predominant symptom that was first recognized as a decline in the subject's behavior:", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.bemode', locale='en', instance='lava', 
@@ -344,49 +359,49 @@ insert into viewproperty
 set messageCode='*.udssymptomsonset3.beage', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='beage',
   required='No', proporder='40', attributes='', quickHelp='', 
-  label="Based on the clinician’s assessment, at what age did the behavioral symptoms begin? (The clinician must use his/her best judgment to estimate an age of onset.):", context="r",
+  label="Based on the clinician's assessment, at what age did the behavioral symptoms begin? (The clinician must use his/her best judgment to estimate an age of onset.):", context="r",
   list="uds3.udssymptomsonset3.SymptomAge", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.decclmot', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='decclmot',
   required='No', proporder='41', attributes='', quickHelp='', 
-  label="Based on clinician’s judgement, is the subject currently experiencing any motor symptoms?:", context="r",
+  label="Based on clinician's judgement, is the subject currently experiencing any motor symptoms?:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.mogait', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='mogait',
   required='No', proporder='42', attributes='', quickHelp='', 
-  label="Indicate whether the subject currently has meaningful changes in motor function — Gait disorder:", context="r",
+  label="Indicate whether the subject currently has meaningful changes in motor function - Gait disorder:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.mofalls', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='mofalls',
   required='No', proporder='43', attributes='', quickHelp='', 
-  label="Indicate whether the subject currently has meaningful changes in motor function — Falls:", context="r",
+  label="Indicate whether the subject currently has meaningful changes in motor function - Falls:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.motrem', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='motrem',
   required='No', proporder='44', attributes='', quickHelp='', 
-  label="Indicate whether the subject currently has meaningful changes in motor function — Tremor:", context="r",
+  label="Indicate whether the subject currently has meaningful changes in motor function - Tremor:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.moslow', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='moslow',
   required='No', proporder='45', attributes='', quickHelp='', 
-  label="Indicate whether the subject currently has meaningful changes in motor function — Slowness:", context="r",
+  label="Indicate whether the subject currently has meaningful changes in motor function - Slowness:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.mofrst', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='mofrst',
   required='No', proporder='46', attributes='', quickHelp='', 
-  label="Indicate the predominant symptom that was first recognized as a decline in the subject’s motor function:", context="r",
+  label="Indicate the predominant symptom that was first recognized as a decline in the subject's motor function:", context="r",
   list="uds3.udssymptomsonset3.MOFRST", style="scale";
 
 insert into viewproperty 
@@ -434,7 +449,7 @@ insert into viewproperty
 set messageCode='*.udssymptomsonset3.moage', locale='en', instance='lava', 
   scope='ucdlava', entity='udssymptomsonset3', property='moage',
   required='No', proporder='53', attributes='', quickHelp='', 
-  label="Based on clinician’s assessment, at what age did the motor changes begin? (The clinician must use his/her best judgement to estimate an age of onset.):", context="r",
+  label="Based on clinician's assessment, at what age did the motor changes begin? (The clinician must use his/her best judgement to estimate an age of onset.):", context="r",
   list="uds3.udssymptomsonset3.SymptomAge", style="scale";
 
 insert into viewproperty 

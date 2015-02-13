@@ -1,3 +1,18 @@
+delete instrumentnotes 
+from instrumenttracking join instrumentnotes using (InstrID) 
+where InstrType="UDS NPI 3";
+
+delete instrumentsummary 
+from instrumenttracking join instrumentsummary using (InstrID) 
+where InstrType="UDS NPI 3";
+
+delete udsnpi3 
+from instrumenttracking join udsnpi3 using (InstrID) 
+where InstrType="UDS NPI 3";
+
+delete from instrumenttracking 
+where InstrType="UDS NPI 3";
+
 delete from hibernateproperty where entity="udsnpi3";
 delete from viewproperty where entity="udsnpi3";
 delete from instrument where InstrName="UDS NPI 3";
@@ -8,32 +23,32 @@ drop table if exists udsnpi3;
 -- Initialize table
 CREATE TABLE udsnpi3 (
   InstrID int(10) NOT NULL,
-    `NPIQINF` UNMAPPED TYPE
+    `NPIQINF` smallint(5) DEFAULT NULL,
     `NPIQINFX` varchar(60) DEFAULT NULL,
-    `DEL` UNMAPPED TYPE
-    `DELSEV` UNMAPPED TYPE
-    `HALL` UNMAPPED TYPE
-    `HALLSEV` UNMAPPED TYPE
-    `AGIT` UNMAPPED TYPE
-    `AGITSEV` UNMAPPED TYPE
-    `DEPD` UNMAPPED TYPE
-    `DEPDSEV` UNMAPPED TYPE
-    `ANX` UNMAPPED TYPE
-    `ANXSEV` UNMAPPED TYPE
-    `ELAT` UNMAPPED TYPE
-    `ELATSEV` UNMAPPED TYPE
-    `APA` UNMAPPED TYPE
-    `APASEV` UNMAPPED TYPE
-    `DISN` UNMAPPED TYPE
-    `DISNSEV` UNMAPPED TYPE
-    `IRR` UNMAPPED TYPE
-    `IRRSEV` UNMAPPED TYPE
-    `MOT` UNMAPPED TYPE
-    `MOTSEV` UNMAPPED TYPE
-    `NITE` UNMAPPED TYPE
-    `NITESEV` UNMAPPED TYPE
-    `APP` UNMAPPED TYPE
-    `APPSEV` UNMAPPED TYPE
+    `DEL` smallint(5) DEFAULT NULL,
+    `DELSEV` smallint(5) DEFAULT NULL,
+    `HALL` smallint(5) DEFAULT NULL,
+    `HALLSEV` smallint(5) DEFAULT NULL,
+    `AGIT` smallint(5) DEFAULT NULL,
+    `AGITSEV` smallint(5) DEFAULT NULL,
+    `DEPD` smallint(5) DEFAULT NULL,
+    `DEPDSEV` smallint(5) DEFAULT NULL,
+    `ANX` smallint(5) DEFAULT NULL,
+    `ANXSEV` smallint(5) DEFAULT NULL,
+    `ELAT` smallint(5) DEFAULT NULL,
+    `ELATSEV` smallint(5) DEFAULT NULL,
+    `APA` smallint(5) DEFAULT NULL,
+    `APASEV` smallint(5) DEFAULT NULL,
+    `DISN` smallint(5) DEFAULT NULL,
+    `DISNSEV` smallint(5) DEFAULT NULL,
+    `IRR` smallint(5) DEFAULT NULL,
+    `IRRSEV` smallint(5) DEFAULT NULL,
+    `MOT` smallint(5) DEFAULT NULL,
+    `MOTSEV` smallint(5) DEFAULT NULL,
+    `NITE` smallint(5) DEFAULT NULL,
+    `NITESEV` smallint(5) DEFAULT NULL,
+    `APP` smallint(5) DEFAULT NULL,
+    `APPSEV` smallint(5) DEFAULT NULL,
 
   PRIMARY KEY (`InstrID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -157,14 +172,14 @@ insert into viewproperty
 set messageCode='*.udsnpi3.disn', locale='en', instance='lava', 
   scope='ucdlava', entity='udsnpi3', property='disn',
   required='No', proporder='17', attributes='', quickHelp='', 
-  label="DISINHIBITION: Does the patient seem to act impulsively? For example, does the patient talk to strangers as if he or she knows them, or does the patient say things that may hurt people’s feelings?:", context="r",
+  label="DISINHIBITION: Does the patient seem to act impulsively? For example, does the patient talk to strangers as if he or she knows them, or does the patient say things that may hurt people's feelings?:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsnpi3.disnsev', locale='en', instance='lava', 
   scope='ucdlava', entity='udsnpi3', property='disnsev',
   required='No', proporder='18', attributes='', quickHelp='', 
-  label="If DISINHIBITION, rate severity::", context="r",
+  label="If DISINHIBITION, rate severity:", context="r",
   list="uds3.udsnpi3.MMSU", style="scale";
 
 insert into viewproperty 
@@ -206,7 +221,7 @@ insert into viewproperty
 set messageCode='*.udsnpi3.nitesev', locale='en', instance='lava', 
   scope='ucdlava', entity='udsnpi3', property='nitesev',
   required='No', proporder='24', attributes='', quickHelp='', 
-  label="If NIGHTTIME BEHAVIORS, rate severity::", context="r",
+  label="If NIGHTTIME BEHAVIORS, rate severity:", context="r",
   list="uds3.udsnpi3.MMSU", style="scale";
 
 insert into viewproperty 
@@ -220,7 +235,7 @@ insert into viewproperty
 set messageCode='*.udsnpi3.appsev', locale='en', instance='lava', 
   scope='ucdlava', entity='udsnpi3', property='appsev',
   required='No', proporder='26', attributes='', quickHelp='', 
-  label="If APPETITE AND EATING, rate severity::", context="r",
+  label="If APPETITE AND EATING, rate severity:", context="r",
   list="uds3.udsnpi3.MMSU", style="scale";
 
 

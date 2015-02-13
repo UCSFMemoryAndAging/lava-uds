@@ -1,3 +1,18 @@
+delete instrumentnotes 
+from instrumenttracking join instrumentnotes using (InstrID) 
+where InstrType="UDS Diagnosis 3";
+
+delete instrumentsummary 
+from instrumenttracking join instrumentsummary using (InstrID) 
+where InstrType="UDS Diagnosis 3";
+
+delete udsdiagnosis3 
+from instrumenttracking join udsdiagnosis3 using (InstrID) 
+where InstrType="UDS Diagnosis 3";
+
+delete from instrumenttracking 
+where InstrType="UDS Diagnosis 3";
+
 delete from hibernateproperty where entity="udsdiagnosis3";
 delete from viewproperty where entity="udsdiagnosis3";
 delete from instrument where InstrName="UDS Diagnosis 3";
@@ -8,135 +23,135 @@ drop table if exists udsdiagnosis3;
 -- Initialize table
 CREATE TABLE udsdiagnosis3 (
   InstrID int(10) NOT NULL,
-    `DXMETHOD` UNMAPPED TYPE
-    `NORMCOG` UNMAPPED TYPE
-    `DEMENTED` UNMAPPED TYPE
-    `AMNDEM` UNMAPPED TYPE
-    `PCA` UNMAPPED TYPE
-    `PPASYN` UNMAPPED TYPE
-    `PPASYNT` UNMAPPED TYPE
-    `FTDSYN` UNMAPPED TYPE
-    `LBDSYN` UNMAPPED TYPE
-    `NAMNDEM` UNMAPPED TYPE
-    `MCIAMEM` UNMAPPED TYPE
-    `MCIAPLUS` UNMAPPED TYPE
-    `MCIAPLAN` UNMAPPED TYPE
-    `MCIAPATT` UNMAPPED TYPE
-    `MCIAPEX` UNMAPPED TYPE
-    `MCIAPVIS` UNMAPPED TYPE
-    `MCINON1` UNMAPPED TYPE
-    `MCIN1LAN` UNMAPPED TYPE
-    `MCIN1ATT` UNMAPPED TYPE
-    `MCIN1EX` UNMAPPED TYPE
-    `MCIN1VIS` UNMAPPED TYPE
-    `MCINON2` UNMAPPED TYPE
-    `MCIN2LAN` UNMAPPED TYPE
-    `MCIN2ATT` UNMAPPED TYPE
-    `MCIN2EX` UNMAPPED TYPE
-    `MCIN2VIS` UNMAPPED TYPE
-    `IMPNOMCI` UNMAPPED TYPE
-    `AMYLPET` UNMAPPED TYPE
-    `AMYLCSF` UNMAPPED TYPE
-    `FDGAD` UNMAPPED TYPE
-    `HIPPATR` UNMAPPED TYPE
-    `TAUPETAD` UNMAPPED TYPE
-    `CSFTAU` UNMAPPED TYPE
-    `FDGFTLD` UNMAPPED TYPE
-    `TPETFTLD` UNMAPPED TYPE
-    `MRFTLD` UNMAPPED TYPE
-    `DATSCAN` UNMAPPED TYPE
-    `OTHBIOM` UNMAPPED TYPE
+    `DXMETHOD` smallint(5) DEFAULT NULL,
+    `NORMCOG` smallint(5) DEFAULT NULL,
+    `DEMENTED` smallint(5) DEFAULT NULL,
+    `AMNDEM` smallint(5) DEFAULT NULL,
+    `PCA` smallint(5) DEFAULT NULL,
+    `PPASYN` smallint(5) DEFAULT NULL,
+    `PPASYNT` smallint(5) DEFAULT NULL,
+    `FTDSYN` smallint(5) DEFAULT NULL,
+    `LBDSYN` smallint(5) DEFAULT NULL,
+    `NAMNDEM` smallint(5) DEFAULT NULL,
+    `MCIAMEM` smallint(5) DEFAULT NULL,
+    `MCIAPLUS` smallint(5) DEFAULT NULL,
+    `MCIAPLAN` smallint(5) DEFAULT NULL,
+    `MCIAPATT` smallint(5) DEFAULT NULL,
+    `MCIAPEX` smallint(5) DEFAULT NULL,
+    `MCIAPVIS` smallint(5) DEFAULT NULL,
+    `MCINON1` smallint(5) DEFAULT NULL,
+    `MCIN1LAN` smallint(5) DEFAULT NULL,
+    `MCIN1ATT` smallint(5) DEFAULT NULL,
+    `MCIN1EX` smallint(5) DEFAULT NULL,
+    `MCIN1VIS` smallint(5) DEFAULT NULL,
+    `MCINON2` smallint(5) DEFAULT NULL,
+    `MCIN2LAN` smallint(5) DEFAULT NULL,
+    `MCIN2ATT` smallint(5) DEFAULT NULL,
+    `MCIN2EX` smallint(5) DEFAULT NULL,
+    `MCIN2VIS` smallint(5) DEFAULT NULL,
+    `IMPNOMCI` smallint(5) DEFAULT NULL,
+    `AMYLPET` smallint(5) DEFAULT NULL,
+    `AMYLCSF` smallint(5) DEFAULT NULL,
+    `FDGAD` smallint(5) DEFAULT NULL,
+    `HIPPATR` smallint(5) DEFAULT NULL,
+    `TAUPETAD` smallint(5) DEFAULT NULL,
+    `CSFTAU` smallint(5) DEFAULT NULL,
+    `FDGFTLD` smallint(5) DEFAULT NULL,
+    `TPETFTLD` smallint(5) DEFAULT NULL,
+    `MRFTLD` smallint(5) DEFAULT NULL,
+    `DATSCAN` smallint(5) DEFAULT NULL,
+    `OTHBIOM` smallint(5) DEFAULT NULL,
     `OTHBIOMX` varchar(60) DEFAULT NULL,
-    `IMAGLINF` UNMAPPED TYPE
-    `IMAGLAC` UNMAPPED TYPE
-    `IMAGMACH` UNMAPPED TYPE
-    `IMAGMICH` UNMAPPED TYPE
-    `IMAGMWMH` UNMAPPED TYPE
-    `IMAGEWMH` UNMAPPED TYPE
-    `ADMUT` UNMAPPED TYPE
-    `FTLDMUT` UNMAPPED TYPE
-    `OTHMUT` UNMAPPED TYPE
+    `IMAGLINF` smallint(5) DEFAULT NULL,
+    `IMAGLAC` smallint(5) DEFAULT NULL,
+    `IMAGMACH` smallint(5) DEFAULT NULL,
+    `IMAGMICH` smallint(5) DEFAULT NULL,
+    `IMAGMWMH` smallint(5) DEFAULT NULL,
+    `IMAGEWMH` smallint(5) DEFAULT NULL,
+    `ADMUT` smallint(5) DEFAULT NULL,
+    `FTLDMUT` smallint(5) DEFAULT NULL,
+    `OTHMUT` smallint(5) DEFAULT NULL,
     `OTHMUTX` varchar(60) DEFAULT NULL,
-    `ALZDIS` UNMAPPED TYPE
-    `ALZDISIF` UNMAPPED TYPE
-    `LBDIS` UNMAPPED TYPE
-    `LBDIF` UNMAPPED TYPE
-    `PARK` UNMAPPED TYPE
-    `MSA` UNMAPPED TYPE
-    `MSAIF` UNMAPPED TYPE
-    `PSP` UNMAPPED TYPE
-    `PSPIF` UNMAPPED TYPE
-    `CORT` UNMAPPED TYPE
-    `CORTIF` UNMAPPED TYPE
-    `FTLDMO` UNMAPPED TYPE
-    `FTLDMOIF` UNMAPPED TYPE
-    `FTLDNOS` UNMAPPED TYPE
-    `FTLDNOIF` UNMAPPED TYPE
-    `FTLDSUBT` UNMAPPED TYPE
+    `ALZDIS` smallint(5) DEFAULT NULL,
+    `ALZDISIF` smallint(5) DEFAULT NULL,
+    `LBDIS` smallint(5) DEFAULT NULL,
+    `LBDIF` smallint(5) DEFAULT NULL,
+    `PARK` smallint(5) DEFAULT NULL,
+    `MSA` smallint(5) DEFAULT NULL,
+    `MSAIF` smallint(5) DEFAULT NULL,
+    `PSP` smallint(5) DEFAULT NULL,
+    `PSPIF` smallint(5) DEFAULT NULL,
+    `CORT` smallint(5) DEFAULT NULL,
+    `CORTIF` smallint(5) DEFAULT NULL,
+    `FTLDMO` smallint(5) DEFAULT NULL,
+    `FTLDMOIF` smallint(5) DEFAULT NULL,
+    `FTLDNOS` smallint(5) DEFAULT NULL,
+    `FTLDNOIF` smallint(5) DEFAULT NULL,
+    `FTLDSUBT` smallint(5) DEFAULT NULL,
     `FTLDSUBX` varchar(60) DEFAULT NULL,
-    `CVD` UNMAPPED TYPE
-    `CVDIF` UNMAPPED TYPE
-    `PREVSTK` UNMAPPED TYPE
-    `STROKEDEC` UNMAPPED TYPE
-    `STKIMAG` UNMAPPED TYPE
-    `INFNETW` UNMAPPED TYPE
-    `INFWMH` UNMAPPED TYPE
-    `ESSTREM` UNMAPPED TYPE
-    `ESSTREIF` UNMAPPED TYPE
-    `DOWNS` UNMAPPED TYPE
-    `DOWNSIF` UNMAPPED TYPE
-    `HUNT` UNMAPPED TYPE
-    `HUNTIF` UNMAPPED TYPE
-    `PRION` UNMAPPED TYPE
-    `PRIONIF` UNMAPPED TYPE
-    `BRNINJ` UNMAPPED TYPE
-    `BRNINJIF` UNMAPPED TYPE
-    `BRNINCTE` UNMAPPED TYPE
-    `HYCEPH` UNMAPPED TYPE
-    `HYCEPHIF` UNMAPPED TYPE
-    `EPILEP` UNMAPPED TYPE
-    `EPILEPIF` UNMAPPED TYPE
-    `NEOP` UNMAPPED TYPE
-    `NEOPIF` UNMAPPED TYPE
-    `NEOPSTAT` UNMAPPED TYPE
-    `HIV` UNMAPPED TYPE
-    `HIVIF` UNMAPPED TYPE
-    `OTHCOG` UNMAPPED TYPE
-    `OTHCOGIF` UNMAPPED TYPE
+    `CVD` smallint(5) DEFAULT NULL,
+    `CVDIF` smallint(5) DEFAULT NULL,
+    `PREVSTK` smallint(5) DEFAULT NULL,
+    `STROKEDEC` smallint(5) DEFAULT NULL,
+    `STKIMAG` smallint(5) DEFAULT NULL,
+    `INFNETW` smallint(5) DEFAULT NULL,
+    `INFWMH` smallint(5) DEFAULT NULL,
+    `ESSTREM` smallint(5) DEFAULT NULL,
+    `ESSTREIF` smallint(5) DEFAULT NULL,
+    `DOWNS` smallint(5) DEFAULT NULL,
+    `DOWNSIF` smallint(5) DEFAULT NULL,
+    `HUNT` smallint(5) DEFAULT NULL,
+    `HUNTIF` smallint(5) DEFAULT NULL,
+    `PRION` smallint(5) DEFAULT NULL,
+    `PRIONIF` smallint(5) DEFAULT NULL,
+    `BRNINJ` smallint(5) DEFAULT NULL,
+    `BRNINJIF` smallint(5) DEFAULT NULL,
+    `BRNINCTE` smallint(5) DEFAULT NULL,
+    `HYCEPH` smallint(5) DEFAULT NULL,
+    `HYCEPHIF` smallint(5) DEFAULT NULL,
+    `EPILEP` smallint(5) DEFAULT NULL,
+    `EPILEPIF` smallint(5) DEFAULT NULL,
+    `NEOP` smallint(5) DEFAULT NULL,
+    `NEOPIF` smallint(5) DEFAULT NULL,
+    `NEOPSTAT` smallint(5) DEFAULT NULL,
+    `HIV` smallint(5) DEFAULT NULL,
+    `HIVIF` smallint(5) DEFAULT NULL,
+    `OTHCOG` smallint(5) DEFAULT NULL,
+    `OTHCOGIF` smallint(5) DEFAULT NULL,
     `OTHCOGX` varchar(60) DEFAULT NULL,
-    `DEP` UNMAPPED TYPE
-    `DEPIF` UNMAPPED TYPE
-    `DEPTREAT` UNMAPPED TYPE
-    `BIPOLDX` UNMAPPED TYPE
-    `BIPOLDIF` UNMAPPED TYPE
-    `SCHIZOP` UNMAPPED TYPE
-    `SCHIZOIF` UNMAPPED TYPE
-    `ANXIET` UNMAPPED TYPE
-    `ANXIETIF` UNMAPPED TYPE
-    `DELIR` UNMAPPED TYPE
-    `DELIRIF` UNMAPPED TYPE
-    `PTSDDX` UNMAPPED TYPE
-    `PTSDDXIF` UNMAPPED TYPE
-    `OTHPSY` UNMAPPED TYPE
-    `OTHPSYIF` UNMAPPED TYPE
+    `DEP` smallint(5) DEFAULT NULL,
+    `DEPIF` smallint(5) DEFAULT NULL,
+    `DEPTREAT` smallint(5) DEFAULT NULL,
+    `BIPOLDX` smallint(5) DEFAULT NULL,
+    `BIPOLDIF` smallint(5) DEFAULT NULL,
+    `SCHIZOP` smallint(5) DEFAULT NULL,
+    `SCHIZOIF` smallint(5) DEFAULT NULL,
+    `ANXIET` smallint(5) DEFAULT NULL,
+    `ANXIETIF` smallint(5) DEFAULT NULL,
+    `DELIR` smallint(5) DEFAULT NULL,
+    `DELIRIF` smallint(5) DEFAULT NULL,
+    `PTSDDX` smallint(5) DEFAULT NULL,
+    `PTSDDXIF` smallint(5) DEFAULT NULL,
+    `OTHPSY` smallint(5) DEFAULT NULL,
+    `OTHPSYIF` smallint(5) DEFAULT NULL,
     `OTHPSYX` varchar(60) DEFAULT NULL,
-    `ALCDEM` UNMAPPED TYPE
-    `ALCDEMIF` UNMAPPED TYPE
-    `ALCABUSE` UNMAPPED TYPE
-    `IMPSUB` UNMAPPED TYPE
-    `IMPSUBIF` UNMAPPED TYPE
-    `DYSILL` UNMAPPED TYPE
-    `DYSILLIF` UNMAPPED TYPE
-    `MEDS` UNMAPPED TYPE
-    `MEDSIF` UNMAPPED TYPE
-    `COGOTH` UNMAPPED TYPE
-    `COGOTH1F` UNMAPPED TYPE
+    `ALCDEM` smallint(5) DEFAULT NULL,
+    `ALCDEMIF` smallint(5) DEFAULT NULL,
+    `ALCABUSE` smallint(5) DEFAULT NULL,
+    `IMPSUB` smallint(5) DEFAULT NULL,
+    `IMPSUBIF` smallint(5) DEFAULT NULL,
+    `DYSILL` smallint(5) DEFAULT NULL,
+    `DYSILLIF` smallint(5) DEFAULT NULL,
+    `MEDS` smallint(5) DEFAULT NULL,
+    `MEDSIF` smallint(5) DEFAULT NULL,
+    `COGOTH` smallint(5) DEFAULT NULL,
+    `COGOTH1F` smallint(5) DEFAULT NULL,
     `COGOTHX` varchar(60) DEFAULT NULL,
-    `COGOTH2` UNMAPPED TYPE
-    `COGOTH2F` UNMAPPED TYPE
+    `COGOTH2` smallint(5) DEFAULT NULL,
+    `COGOTH2F` smallint(5) DEFAULT NULL,
     `COGOTH2X` varchar(60) DEFAULT NULL,
-    `COGOTH3` UNMAPPED TYPE
-    `COGOTH3F` UNMAPPED TYPE
+    `COGOTH3` smallint(5) DEFAULT NULL,
+    `COGOTH3F` smallint(5) DEFAULT NULL,
     `COGOTH3X` varchar(60) DEFAULT NULL,
 
   PRIMARY KEY (`InstrID`)
@@ -150,7 +165,7 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.dxmethod', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='dxmethod',
   required='No', proporder='1', attributes='', quickHelp='', 
-  label="Diagnosis method — Responses in this form are based on diagnosis by::", context="r",
+  label="Diagnosis method - Responses in this form are based on diagnosis by::", context="r",
   list="uds3.udsdiagnosis3.DXMETHOD", style="scale";
 
 insert into viewproperty 
@@ -234,28 +249,28 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.mciaplan', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mciaplan',
   required='No', proporder='13', attributes='', quickHelp='', 
-  label="Amnestic MCI, multiple domains — language:", context="r",
+  label="Amnestic MCI, multiple domains - language:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.mciapatt', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mciapatt',
   required='No', proporder='14', attributes='', quickHelp='', 
-  label="Amnestic MCI, multiple domains — attention:", context="r",
+  label="Amnestic MCI, multiple domains - attention:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.mciapex', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mciapex',
   required='No', proporder='15', attributes='', quickHelp='', 
-  label="Amnestic MCI, multiple domains — executive:", context="r",
+  label="Amnestic MCI, multiple domains - executive:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.mciapvis', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mciapvis',
   required='No', proporder='16', attributes='', quickHelp='', 
-  label="Amnestic MCI, multiple domains — visuospatial:", context="r",
+  label="Amnestic MCI, multiple domains - visuospatial:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
@@ -269,28 +284,28 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.mcin1lan', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mcin1lan',
   required='No', proporder='18', attributes='', quickHelp='', 
-  label="Non-Amnestic MCI-single domain — language:", context="r",
+  label="Non-Amnestic MCI-single domain - language:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.mcin1att', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mcin1att',
   required='No', proporder='19', attributes='', quickHelp='', 
-  label="Non-Amnestic MCI-single domain — attention:", context="r",
+  label="Non-Amnestic MCI-single domain - attention:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.mcin1ex', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mcin1ex',
   required='No', proporder='20', attributes='', quickHelp='', 
-  label="Non-Amnestic MCI-single domain — Executive:", context="r",
+  label="Non-Amnestic MCI-single domain - Executive:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.mcin1vis', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mcin1vis',
   required='No', proporder='21', attributes='', quickHelp='', 
-  label="Non-Amnestic MCI-single domain — Visuospatial:", context="r",
+  label="Non-Amnestic MCI-single domain - Visuospatial:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
@@ -304,28 +319,28 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.mcin2lan', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mcin2lan',
   required='No', proporder='23', attributes='', quickHelp='', 
-  label="Non-Amnestic MCI-multiple domains — language:", context="r",
+  label="Non-Amnestic MCI-multiple domains - language:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.mcin2att', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mcin2att',
   required='No', proporder='24', attributes='', quickHelp='', 
-  label="Non-Amnestic MCI-multiple domains — attention:", context="r",
+  label="Non-Amnestic MCI-multiple domains - attention:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.mcin2ex', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mcin2ex',
   required='No', proporder='25', attributes='', quickHelp='', 
-  label="Non-Amnestic MCI-multiple domains — executive:", context="r",
+  label="Non-Amnestic MCI-multiple domains - executive:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.mcin2vis', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mcin2vis',
   required='No', proporder='26', attributes='', quickHelp='', 
-  label="Non-Amnestic MCI-multiple domains — visuospatial:", context="r",
+  label="Non-Amnestic MCI-multiple domains - visuospatial:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
@@ -339,77 +354,77 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.amylpet', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='amylpet',
   required='No', proporder='28', attributes='', quickHelp='', 
-  label="Biomarker findings — abnormally elevated amyloid on PET:", context="r",
+  label="Biomarker findings - abnormally elevated amyloid on PET:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.amylcsf', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='amylcsf',
   required='No', proporder='29', attributes='', quickHelp='', 
-  label="Biomarker findings — abnormally low amyloid in CSF:", context="r",
+  label="Biomarker findings - abnormally low amyloid in CSF:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.fdgad', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='fdgad',
   required='No', proporder='30', attributes='', quickHelp='', 
-  label="Biomarker finngs — FDGPET pattern of AD:", context="r",
+  label="Biomarker finngs - FDGPET pattern of AD:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.hippatr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='hippatr',
   required='No', proporder='31', attributes='', quickHelp='', 
-  label="Biomarker findings — hippocampal atrophy:", context="r",
+  label="Biomarker findings - hippocampal atrophy:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.taupetad', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='taupetad',
   required='No', proporder='32', attributes='', quickHelp='', 
-  label="Biomarker findings — Tau PET evidence for AD:", context="r",
+  label="Biomarker findings - Tau PET evidence for AD:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.csftau', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='csftau',
   required='No', proporder='33', attributes='', quickHelp='', 
-  label="Biomarker findings — abnormally elevated CSF tau or ptau:", context="r",
+  label="Biomarker findings - abnormally elevated CSF tau or ptau:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.fdgftld', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='fdgftld',
   required='No', proporder='34', attributes='', quickHelp='', 
-  label="Biomarker findings — FDG-PET evidence for frontal or anterior temporal hypometabolism for FTLD:", context="r",
+  label="Biomarker findings - FDG-PET evidence for frontal or anterior temporal hypometabolism for FTLD:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.tpetftld', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='tpetftld',
   required='No', proporder='35', attributes='', quickHelp='', 
-  label="Biomarker findings — Tau PET evidence for FTLD:", context="r",
+  label="Biomarker findings - Tau PET evidence for FTLD:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.mrftld', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='mrftld',
   required='No', proporder='36', attributes='', quickHelp='', 
-  label="Biomarker findings — structural MR evidence for frontal or anterior temporal atrophy for FTLD:", context="r",
+  label="Biomarker findings - structural MR evidence for frontal or anterior temporal atrophy for FTLD:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.datscan', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='datscan',
   required='No', proporder='37', attributes='', quickHelp='', 
-  label="Biomarker findings — dopamine transporter scan (DATscan) evidence of Lewy body disease:", context="r",
+  label="Biomarker findings - dopamine transporter scan (DATscan) evidence of Lewy body disease:", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.othbiom', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='othbiom',
   required='No', proporder='38', attributes='', quickHelp='', 
-  label="Biomarker findings — other:", context="r",
+  label="Biomarker findings - other:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
@@ -422,42 +437,42 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.imaglinf', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='imaglinf',
   required='No', proporder='40', attributes='', quickHelp='', 
-  label="Imaging findings — large vessel infarct(s):", context="r",
+  label="Imaging findings - large vessel infarct(s):", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.imaglac', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='imaglac',
   required='No', proporder='41', attributes='', quickHelp='', 
-  label="Imaging findings — lacunar infarct(s):", context="r",
+  label="Imaging findings - lacunar infarct(s):", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.imagmach', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='imagmach',
   required='No', proporder='42', attributes='', quickHelp='', 
-  label="Imaging findings — macrohemorrhage(s):", context="r",
+  label="Imaging findings - macrohemorrhage(s):", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.imagmich', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='imagmich',
   required='No', proporder='43', attributes='', quickHelp='', 
-  label="Imaging findings — microhemorrhage(s):", context="r",
+  label="Imaging findings - microhemorrhage(s):", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.imagmwmh', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='imagmwmh',
   required='No', proporder='44', attributes='', quickHelp='', 
-  label="Imaging findings — moderate white-matter hyperintensity (CHS score 5-6):", context="r",
+  label="Imaging findings - moderate white-matter hyperintensity (CHS score 5-6):", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.imagewmh', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='imagewmh',
   required='No', proporder='45', attributes='', quickHelp='', 
-  label="Imaging findings — extensive white-matter hyperintensity (CHS score 7-8):", context="r",
+  label="Imaging findings - extensive white-matter hyperintensity (CHS score 7-8):", context="r",
   list="uds3.udsdiagnosis3.AMYLPET", style="scale";
 
 insert into viewproperty 
@@ -491,14 +506,14 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.alzdis', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='alzdis',
   required='No', proporder='50', attributes='', quickHelp='', 
-  label="Alzheimer’s disease:", context="r",
+  label="Alzheimer's disease:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.alzdisif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='alzdisif',
   required='No', proporder='51', attributes='', quickHelp='', 
-  label="Alzheimer’s disease, primary or contributing:", context="r",
+  label="Alzheimer's disease, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 
@@ -651,7 +666,7 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.infwmh', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='infwmh',
   required='No', proporder='73', attributes='', quickHelp='', 
-  label="Is there imaging evidence of cystic infarction, imaging evidence of extensive WMH (CHS grade 7–8), and impairment in executive function?:", context="r",
+  label="Is there imaging evidence of cystic infarction, imaging evidence of extensive WMH (CHS grade 7-8), and impairment in executive function?:", context="r",
   list="uds3.udsdiagnosis3.ImagEv", style="scale";
 
 insert into viewproperty 
@@ -686,14 +701,14 @@ insert into viewproperty
 set messageCode='*.udsdiagnosis3.hunt', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='hunt',
   required='No', proporder='78', attributes='', quickHelp='', 
-  label="Huntington’s disease:", context="r",
+  label="Huntington's disease:", context="r",
   list="uds3.udsdiagnosis3.AbsPres", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsdiagnosis3.huntif', locale='en', instance='lava', 
   scope='ucdlava', entity='udsdiagnosis3', property='huntif',
   required='No', proporder='79', attributes='', quickHelp='', 
-  label="Huntington’s disease, primary or contributing:", context="r",
+  label="Huntington's disease, primary or contributing:", context="r",
   list="uds3.udsdiagnosis3.EtiologyIf", style="scale";
 
 insert into viewproperty 

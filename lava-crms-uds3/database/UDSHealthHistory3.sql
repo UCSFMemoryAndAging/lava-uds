@@ -1,3 +1,18 @@
+delete instrumentnotes 
+from instrumenttracking join instrumentnotes using (InstrID) 
+where InstrType="UDS Health History 3";
+
+delete instrumentsummary 
+from instrumenttracking join instrumentsummary using (InstrID) 
+where InstrType="UDS Health History 3";
+
+delete udshealthhistory3 
+from instrumenttracking join udshealthhistory3 using (InstrID) 
+where InstrType="UDS Health History 3";
+
+delete from instrumenttracking 
+where InstrType="UDS Health History 3";
+
 delete from hibernateproperty where entity="udshealthhistory3";
 delete from viewproperty where entity="udshealthhistory3";
 delete from instrument where InstrName="UDS Health History 3";
@@ -8,73 +23,73 @@ drop table if exists udshealthhistory3;
 -- Initialize table
 CREATE TABLE udshealthhistory3 (
   InstrID int(10) NOT NULL,
-    `TOBAC30` UNMAPPED TYPE
-    `TOBAC100` UNMAPPED TYPE
-    `SMOKYRS` UNMAPPED TYPE
-    `PACKSPER` UNMAPPED TYPE
-    `QUITSMOK` UNMAPPED TYPE
-    `ALCOCCAS` UNMAPPED TYPE
-    `ALCFREQ` UNMAPPED TYPE
-    `CVHATT` UNMAPPED TYPE
-    `HATTMULT` UNMAPPED TYPE
-    `HATTYEAR` UNMAPPED TYPE
-    `CVAFIB` UNMAPPED TYPE
-    `CVANGIO` UNMAPPED TYPE
-    `CVBYPASS` UNMAPPED TYPE
-    `CVPACDEF` UNMAPPED TYPE
-    `CVCHF` UNMAPPED TYPE
-    `CVANGINA` UNMAPPED TYPE
-    `CVHVALVE` UNMAPPED TYPE
-    `CVOTHR` UNMAPPED TYPE
+    `TOBAC30` smallint(5) DEFAULT NULL,
+    `TOBAC100` smallint(5) DEFAULT NULL,
+    `SMOKYRS` smallint(5) DEFAULT NULL,
+    `PACKSPER` smallint(5) DEFAULT NULL,
+    `QUITSMOK` smallint(5) DEFAULT NULL,
+    `ALCOCCAS` smallint(5) DEFAULT NULL,
+    `ALCFREQ` smallint(5) DEFAULT NULL,
+    `CVHATT` smallint(5) DEFAULT NULL,
+    `HATTMULT` smallint(5) DEFAULT NULL,
+    `HATTYEAR` smallint(5) DEFAULT NULL,
+    `CVAFIB` smallint(5) DEFAULT NULL,
+    `CVANGIO` smallint(5) DEFAULT NULL,
+    `CVBYPASS` smallint(5) DEFAULT NULL,
+    `CVPACDEF` smallint(5) DEFAULT NULL,
+    `CVCHF` smallint(5) DEFAULT NULL,
+    `CVANGINA` smallint(5) DEFAULT NULL,
+    `CVHVALVE` smallint(5) DEFAULT NULL,
+    `CVOTHR` smallint(5) DEFAULT NULL,
     `CVOTHRX` varchar(60) DEFAULT NULL,
-    `CBSTROKE` UNMAPPED TYPE
-    `STROKMUL` UNMAPPED TYPE
-    `STROKYR` UNMAPPED TYPE
-    `CBTIA` UNMAPPED TYPE
-    `TIAMULT` UNMAPPED TYPE
-    `TIAYEAR` UNMAPPED TYPE
-    `PD` UNMAPPED TYPE
-    `PDYR` UNMAPPED TYPE
-    `PDOTHR` UNMAPPED TYPE
-    `PDOTHRYR` UNMAPPED TYPE
-    `SEIZURES` UNMAPPED TYPE
-    `TBI` UNMAPPED TYPE
-    `TBIBRIEF` UNMAPPED TYPE
-    `TBIEXTEN` UNMAPPED TYPE
-    `TBIWOLOS` UNMAPPED TYPE
-    `TBIYEAR` UNMAPPED TYPE
-    `DIABETES` UNMAPPED TYPE
-    `DIABTYPE` UNMAPPED TYPE
-    `HYPERTEN` UNMAPPED TYPE
-    `HYPERCHO` UNMAPPED TYPE
-    `B12DEF` UNMAPPED TYPE
-    `THYROID` UNMAPPED TYPE
-    `ARTHRIT` UNMAPPED TYPE
-    `ARTHTYPE` UNMAPPED TYPE
+    `CBSTROKE` smallint(5) DEFAULT NULL,
+    `STROKMUL` smallint(5) DEFAULT NULL,
+    `STROKYR` smallint(5) DEFAULT NULL,
+    `CBTIA` smallint(5) DEFAULT NULL,
+    `TIAMULT` smallint(5) DEFAULT NULL,
+    `TIAYEAR` smallint(5) DEFAULT NULL,
+    `PD` smallint(5) DEFAULT NULL,
+    `PDYR` smallint(5) DEFAULT NULL,
+    `PDOTHR` smallint(5) DEFAULT NULL,
+    `PDOTHRYR` smallint(5) DEFAULT NULL,
+    `SEIZURES` smallint(5) DEFAULT NULL,
+    `TBI` smallint(5) DEFAULT NULL,
+    `TBIBRIEF` smallint(5) DEFAULT NULL,
+    `TBIEXTEN` smallint(5) DEFAULT NULL,
+    `TBIWOLOS` smallint(5) DEFAULT NULL,
+    `TBIYEAR` smallint(5) DEFAULT NULL,
+    `DIABETES` smallint(5) DEFAULT NULL,
+    `DIABTYPE` smallint(5) DEFAULT NULL,
+    `HYPERTEN` smallint(5) DEFAULT NULL,
+    `HYPERCHO` smallint(5) DEFAULT NULL,
+    `B12DEF` smallint(5) DEFAULT NULL,
+    `THYROID` smallint(5) DEFAULT NULL,
+    `ARTHRIT` smallint(5) DEFAULT NULL,
+    `ARTHTYPE` smallint(5) DEFAULT NULL,
     `ARTHTYPX` varchar(60) DEFAULT NULL,
-    `ARTHUPEX` UNMAPPED TYPE
-    `ARTHLOEX` UNMAPPED TYPE
-    `ARTHSPIN` UNMAPPED TYPE
-    `ARTHUNK` UNMAPPED TYPE
-    `INCONTU` UNMAPPED TYPE
-    `INCONTF` UNMAPPED TYPE
-    `APNEA` UNMAPPED TYPE
-    `RBD` UNMAPPED TYPE
-    `INSOMN` UNMAPPED TYPE
-    `OTHSLEEP` UNMAPPED TYPE
+    `ARTHUPEX` smallint(5) DEFAULT NULL,
+    `ARTHLOEX` smallint(5) DEFAULT NULL,
+    `ARTHSPIN` smallint(5) DEFAULT NULL,
+    `ARTHUNK` smallint(5) DEFAULT NULL,
+    `INCONTU` smallint(5) DEFAULT NULL,
+    `INCONTF` smallint(5) DEFAULT NULL,
+    `APNEA` smallint(5) DEFAULT NULL,
+    `RBD` smallint(5) DEFAULT NULL,
+    `INSOMN` smallint(5) DEFAULT NULL,
+    `OTHSLEEP` smallint(5) DEFAULT NULL,
     `OTHSLEEX` varchar(60) DEFAULT NULL,
-    `ALCOHOL` UNMAPPED TYPE
-    `ABUSOTHR` UNMAPPED TYPE
+    `ALCOHOL` smallint(5) DEFAULT NULL,
+    `ABUSOTHR` smallint(5) DEFAULT NULL,
     `ABUSX` varchar(60) DEFAULT NULL,
-    `PTSD` UNMAPPED TYPE
-    `BIPOLAR` UNMAPPED TYPE
-    `SCHIZ` UNMAPPED TYPE
-    `DEP2YRS` UNMAPPED TYPE
-    `DEPOTHR` UNMAPPED TYPE
-    `ANXIETY` UNMAPPED TYPE
-    `OCD` UNMAPPED TYPE
-    `NPSYDEV` UNMAPPED TYPE
-    `PSYCDIS` UNMAPPED TYPE
+    `PTSD` smallint(5) DEFAULT NULL,
+    `BIPOLAR` smallint(5) DEFAULT NULL,
+    `SCHIZ` smallint(5) DEFAULT NULL,
+    `DEP2YRS` smallint(5) DEFAULT NULL,
+    `DEPOTHR` smallint(5) DEFAULT NULL,
+    `ANXIETY` smallint(5) DEFAULT NULL,
+    `OCD` smallint(5) DEFAULT NULL,
+    `NPSYDEV` smallint(5) DEFAULT NULL,
+    `PSYCDIS` smallint(5) DEFAULT NULL,
     `PSYCDISX` varchar(60) DEFAULT NULL,
 
   PRIMARY KEY (`InstrID`)
@@ -262,7 +277,7 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.pd', locale='en', instance='lava', 
   scope='ucdlava', entity='udshealthhistory3', property='pd',
   required='No', proporder='26', attributes='', quickHelp='', 
-  label="Parkinson’s disease (PD):", context="r",
+  label="Parkinson's disease (PD):", context="r",
   list="uds3.udshealthhistory3.PD", style="scale";
 
 insert into viewproperty 
@@ -422,14 +437,14 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.incontu', locale='en', instance='lava', 
   scope='ucdlava', entity='udshealthhistory3', property='incontu',
   required='No', proporder='49', attributes='', quickHelp='', 
-  label="Incontinence —- Urinary:", context="r",
+  label="Incontinence - Urinary:", context="r",
   list="uds3.udshealthhistory3.CondPresence", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.incontf', locale='en', instance='lava', 
   scope='ucdlava', entity='udshealthhistory3', property='incontf',
   required='No', proporder='50', attributes='', quickHelp='', 
-  label="Incontinence — Bowel:", context="r",
+  label="Incontinence - Bowel:", context="r",
   list="uds3.udshealthhistory3.CondPresence", style="scale";
 
 insert into viewproperty 

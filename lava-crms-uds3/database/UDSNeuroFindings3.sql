@@ -1,3 +1,18 @@
+delete instrumentnotes 
+from instrumenttracking join instrumentnotes using (InstrID) 
+where InstrType="UDS Neuro Findings 3";
+
+delete instrumentsummary 
+from instrumenttracking join instrumentsummary using (InstrID) 
+where InstrType="UDS Neuro Findings 3";
+
+delete udsneurofindings3 
+from instrumenttracking join udsneurofindings3 using (InstrID) 
+where InstrType="UDS Neuro Findings 3";
+
+delete from instrumenttracking 
+where InstrType="UDS Neuro Findings 3";
+
 delete from hibernateproperty where entity="udsneurofindings3";
 delete from viewproperty where entity="udsneurofindings3";
 delete from instrument where InstrName="UDS Neuro Findings 3";
@@ -8,48 +23,48 @@ drop table if exists udsneurofindings3;
 -- Initialize table
 CREATE TABLE udsneurofindings3 (
   InstrID int(10) NOT NULL,
-    `NORMEXAM` UNMAPPED TYPE
-    `PARKSIGN` UNMAPPED TYPE
-    `RESTTRL` UNMAPPED TYPE
-    `RESTTRR` UNMAPPED TYPE
-    `SLOWINGL` UNMAPPED TYPE
-    `SLOWINGR` UNMAPPED TYPE
-    `RIGIDL` UNMAPPED TYPE
-    `RIGIDR` UNMAPPED TYPE
-    `BRADY` UNMAPPED TYPE
-    `PARKGAIT` UNMAPPED TYPE
-    `POSTINST` UNMAPPED TYPE
-    `CVDSIGNS` UNMAPPED TYPE
-    `CORTDEF` UNMAPPED TYPE
-    `SIVDFIND` UNMAPPED TYPE
-    `CVDMOTL` UNMAPPED TYPE
-    `CVDMOTR` UNMAPPED TYPE
-    `CORTVISL` UNMAPPED TYPE
-    `CORTVISR` UNMAPPED TYPE
-    `SOMATL` UNMAPPED TYPE
-    `SOMATR` UNMAPPED TYPE
-    `POSTCORT` UNMAPPED TYPE
-    `PSPCBS` UNMAPPED TYPE
-    `EYEPSP` UNMAPPED TYPE
-    `DYSPSP` UNMAPPED TYPE
-    `AXIALPSP` UNMAPPED TYPE
-    `GAITPSP` UNMAPPED TYPE
-    `APRAXSP` UNMAPPED TYPE
-    `APRAXL` UNMAPPED TYPE
-    `APRAXR` UNMAPPED TYPE
-    `CORTSENL` UNMAPPED TYPE
-    `CORTSENR` UNMAPPED TYPE
-    `ATAXL` UNMAPPED TYPE
-    `ATAXR` UNMAPPED TYPE
-    `ALIENLML` UNMAPPED TYPE
-    `ALIENLMR` UNMAPPED TYPE
-    `DYSTONL` UNMAPPED TYPE
-    `DYSTONR` UNMAPPED TYPE
-    `MYOCLLT` UNMAPPED TYPE
-    `MYOCLRT` UNMAPPED TYPE
-    `ALSFIND` UNMAPPED TYPE
-    `GAITNPH` UNMAPPED TYPE
-    `OTHNEUR` UNMAPPED TYPE
+    `NORMEXAM` smallint(5) DEFAULT NULL,
+    `PARKSIGN` smallint(5) DEFAULT NULL,
+    `RESTTRL` smallint(5) DEFAULT NULL,
+    `RESTTRR` smallint(5) DEFAULT NULL,
+    `SLOWINGL` smallint(5) DEFAULT NULL,
+    `SLOWINGR` smallint(5) DEFAULT NULL,
+    `RIGIDL` smallint(5) DEFAULT NULL,
+    `RIGIDR` smallint(5) DEFAULT NULL,
+    `BRADY` smallint(5) DEFAULT NULL,
+    `PARKGAIT` smallint(5) DEFAULT NULL,
+    `POSTINST` smallint(5) DEFAULT NULL,
+    `CVDSIGNS` smallint(5) DEFAULT NULL,
+    `CORTDEF` smallint(5) DEFAULT NULL,
+    `SIVDFIND` smallint(5) DEFAULT NULL,
+    `CVDMOTL` smallint(5) DEFAULT NULL,
+    `CVDMOTR` smallint(5) DEFAULT NULL,
+    `CORTVISL` smallint(5) DEFAULT NULL,
+    `CORTVISR` smallint(5) DEFAULT NULL,
+    `SOMATL` smallint(5) DEFAULT NULL,
+    `SOMATR` smallint(5) DEFAULT NULL,
+    `POSTCORT` smallint(5) DEFAULT NULL,
+    `PSPCBS` smallint(5) DEFAULT NULL,
+    `EYEPSP` smallint(5) DEFAULT NULL,
+    `DYSPSP` smallint(5) DEFAULT NULL,
+    `AXIALPSP` smallint(5) DEFAULT NULL,
+    `GAITPSP` smallint(5) DEFAULT NULL,
+    `APRAXSP` smallint(5) DEFAULT NULL,
+    `APRAXL` smallint(5) DEFAULT NULL,
+    `APRAXR` smallint(5) DEFAULT NULL,
+    `CORTSENL` smallint(5) DEFAULT NULL,
+    `CORTSENR` smallint(5) DEFAULT NULL,
+    `ATAXL` smallint(5) DEFAULT NULL,
+    `ATAXR` smallint(5) DEFAULT NULL,
+    `ALIENLML` smallint(5) DEFAULT NULL,
+    `ALIENLMR` smallint(5) DEFAULT NULL,
+    `DYSTONL` smallint(5) DEFAULT NULL,
+    `DYSTONR` smallint(5) DEFAULT NULL,
+    `MYOCLLT` smallint(5) DEFAULT NULL,
+    `MYOCLRT` smallint(5) DEFAULT NULL,
+    `ALSFIND` smallint(5) DEFAULT NULL,
+    `GAITNPH` smallint(5) DEFAULT NULL,
+    `OTHNEUR` smallint(5) DEFAULT NULL,
     `OTHNEURX` varchar(60) DEFAULT NULL,
 
   PRIMARY KEY (`InstrID`)
@@ -77,42 +92,42 @@ insert into viewproperty
 set messageCode='*.udsneurofindings3.resttrl', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='resttrl',
   required='No', proporder='3', attributes='', quickHelp='', 
-  label="Resting tremor — left arm:", context="r",
+  label="Resting tremor - left arm:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.resttrr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='resttrr',
   required='No', proporder='4', attributes='', quickHelp='', 
-  label="Resting tremor — right arm:", context="r",
+  label="Resting tremor - right arm:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.slowingl', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='slowingl',
   required='No', proporder='5', attributes='', quickHelp='', 
-  label="Slowing of fine motor movements — left side:", context="r",
+  label="Slowing of fine motor movements - left side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.slowingr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='slowingr',
   required='No', proporder='6', attributes='', quickHelp='', 
-  label="Slowing of fine motor movements — right side:", context="r",
+  label="Slowing of fine motor movements - right side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.rigidl', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='rigidl',
   required='No', proporder='7', attributes='', quickHelp='', 
-  label="Rigidity — left arm:", context="r",
+  label="Rigidity - left arm:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.rigidr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='rigidr',
   required='No', proporder='8', attributes='', quickHelp='', 
-  label="Rigidity — right arm:", context="r",
+  label="Rigidity - right arm:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
@@ -161,49 +176,49 @@ insert into viewproperty
 set messageCode='*.udsneurofindings3.cvdmotl', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='cvdmotl',
   required='No', proporder='15', attributes='', quickHelp='', 
-  label="Motor (may include weakness of combination of face, arm, and leg; reflex changes, etc.) — left side:", context="r",
+  label="Motor (weakness, reflex changes, etc.) - left side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.cvdmotr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='cvdmotr',
   required='No', proporder='16', attributes='', quickHelp='', 
-  label="Motor (may include weakness of combination of face, arm, and leg; reflex changes, etc.) — right side:", context="r",
+  label="Motor (weakness, reflex changes, etc.) - right side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.cortvisl', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='cortvisl',
   required='No', proporder='17', attributes='', quickHelp='', 
-  label="Cortical visual field loss — left side:", context="r",
+  label="Cortical visual field loss - left side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.cortvisr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='cortvisr',
   required='No', proporder='18', attributes='', quickHelp='', 
-  label="Cortical visual field loss — right side:", context="r",
+  label="Cortical visual field loss - right side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.somatl', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='somatl',
   required='No', proporder='19', attributes='', quickHelp='', 
-  label="Somatosensory loss — left side:", context="r",
+  label="Somatosensory loss - left side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.somatr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='somatr',
   required='No', proporder='20', attributes='', quickHelp='', 
-  label="Somatosensory loss — right side:", context="r",
+  label="Somatosensory loss - right side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.postcort', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='postcort',
   required='No', proporder='21', attributes='', quickHelp='', 
-  label="Higher cortical visual problem suggesting posterior cortical atrophy (e.g., prosopagnosia, simultagnosia, Balint’s syndrome) or apraxia of gaze:", context="r",
+  label="Higher cortical visual problem suggesting posterior cortical atrophy (e.g., prosopagnosia, simultagnosia, Balint's syndrome) or apraxia of gaze:", context="r",
   list="list.uds3.common.noyes01", style="scale";
 
 insert into viewproperty 
@@ -252,14 +267,14 @@ insert into viewproperty
 set messageCode='*.udsneurofindings3.apraxl', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='apraxl',
   required='No', proporder='28', attributes='', quickHelp='', 
-  label="Apraxia — left side:", context="r",
+  label="Apraxia - left side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.apraxr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='apraxr',
   required='No', proporder='29', attributes='', quickHelp='', 
-  label="Apraxia — right side:", context="r",
+  label="Apraxia - right side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
@@ -273,63 +288,63 @@ insert into viewproperty
 set messageCode='*.udsneurofindings3.cortsenr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='cortsenr',
   required='No', proporder='31', attributes='', quickHelp='', 
-  label="Cortical sensory deficits — right side:", context="r",
+  label="Cortical sensory deficits - right side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.ataxl', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='ataxl',
   required='No', proporder='32', attributes='', quickHelp='', 
-  label="Ataxia — left side:", context="r",
+  label="Ataxia - left side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.ataxr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='ataxr',
   required='No', proporder='33', attributes='', quickHelp='', 
-  label="Ataxia — right side:", context="r",
+  label="Ataxia - right side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.alienlml', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='alienlml',
   required='No', proporder='34', attributes='', quickHelp='', 
-  label="Alien limb — left side:", context="r",
+  label="Alien limb - left side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.alienlmr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='alienlmr',
   required='No', proporder='35', attributes='', quickHelp='', 
-  label="Alien limb — right side:", context="r",
+  label="Alien limb - right side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.dystonl', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='dystonl',
   required='No', proporder='36', attributes='', quickHelp='', 
-  label="Dystonia — left side:", context="r",
+  label="Dystonia - left side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.dystonr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='dystonr',
   required='No', proporder='37', attributes='', quickHelp='', 
-  label="Dystonia — right side:", context="r",
+  label="Dystonia - right side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.myocllt', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='myocllt',
   required='No', proporder='38', attributes='', quickHelp='', 
-  label="Myoclonus — left side:", context="r",
+  label="Myoclonus - left side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsneurofindings3.myoclrt', locale='en', instance='lava', 
   scope='ucdlava', entity='udsneurofindings3', property='myoclrt',
   required='No', proporder='39', attributes='', quickHelp='', 
-  label="Myoclonus — right side:", context="r",
+  label="Myoclonus - right side:", context="r",
   list="uds3.common.NoYesNa", style="scale";
 
 insert into viewproperty 

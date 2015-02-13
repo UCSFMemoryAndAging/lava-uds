@@ -381,14 +381,14 @@ insert into viewproperty
 set messageCode='*.udsfamilyhistory3.fothmuso', locale='en', instance='lava', 
   scope='ucdlava', entity='udsfamilyhistory3', property='fothmuso',
   required='No', proporder='12', attributes='', quickHelp='', 
-  label="Source of evidence for other mutation::", context="r",
+  label="Source of evidence for other mutation:", context="r",
   list="uds3.udsfamilyhistory3.FADMUSO", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fothmusx', locale='en', instance='lava', 
   scope='ucdlava', entity='udsfamilyhistory3', property='fothmusx',
   required='No', proporder='13', attributes='', quickHelp='', 
-  label="If other, specify::", context="r", maxLength="6", style="string";
+  label="If other, specify:", context="r", maxLength="6", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.mommob', locale='en', instance='lava', 

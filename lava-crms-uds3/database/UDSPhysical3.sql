@@ -1,3 +1,18 @@
+delete instrumentnotes 
+from instrumenttracking join instrumentnotes using (InstrID) 
+where InstrType="UDS Physical 3";
+
+delete instrumentsummary 
+from instrumenttracking join instrumentsummary using (InstrID) 
+where InstrType="UDS Physical 3";
+
+delete udsphysical3 
+from instrumenttracking join udsphysical3 using (InstrID) 
+where InstrType="UDS Physical 3";
+
+delete from instrumenttracking 
+where InstrType="UDS Physical 3";
+
 delete from hibernateproperty where entity="udsphysical3";
 delete from viewproperty where entity="udsphysical3";
 delete from instrument where InstrName="UDS Physical 3";
@@ -9,16 +24,16 @@ drop table if exists udsphysical3;
 CREATE TABLE udsphysical3 (
   InstrID int(10) NOT NULL,
     `HEIGHT` decimal(4,1) DEFAULT NULL,
-    `WEIGHT` UNMAPPED TYPE
-    `BPSYS` UNMAPPED TYPE
-    `BPDIAS` UNMAPPED TYPE
-    `HRATE` UNMAPPED TYPE
-    `VISION` UNMAPPED TYPE
-    `VISCORR` UNMAPPED TYPE
-    `VISWCORR` UNMAPPED TYPE
-    `HEARING` UNMAPPED TYPE
-    `HEARAID` UNMAPPED TYPE
-    `HEARWAID` UNMAPPED TYPE
+    `WEIGHT` smallint(5) DEFAULT NULL,
+    `BPSYS` smallint(5) DEFAULT NULL,
+    `BPDIAS` smallint(5) DEFAULT NULL,
+    `HRATE` smallint(5) DEFAULT NULL,
+    `VISION` smallint(5) DEFAULT NULL,
+    `VISCORR` smallint(5) DEFAULT NULL,
+    `VISWCORR` smallint(5) DEFAULT NULL,
+    `HEARING` smallint(5) DEFAULT NULL,
+    `HEARAID` smallint(5) DEFAULT NULL,
+    `HEARWAID` smallint(5) DEFAULT NULL,
 
   PRIMARY KEY (`InstrID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -31,7 +46,7 @@ insert into viewproperty
 set messageCode='*.udsphysical3.height', locale='en', instance='lava', 
   scope='ucdlava', entity='udsphysical3', property='height',
   required='No', proporder='1', attributes='', quickHelp='', 
-  label="Subject height (inches)::", context="r", maxLength="6", size="6"
+  label="Subject height (inches):", context="r", maxLength="6", size="6"
 , style="scale";
 
 insert into viewproperty 
@@ -66,7 +81,7 @@ insert into viewproperty
 set messageCode='*.udsphysical3.vision', locale='en', instance='lava', 
   scope='ucdlava', entity='udsphysical3', property='vision',
   required='No', proporder='6', attributes='', quickHelp='', 
-  label="Without corrective lenses, is the subject’s vision functionally normal?:", context="r",
+  label="Without corrective lenses, is the subject's vision functionally normal?:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
@@ -80,14 +95,14 @@ insert into viewproperty
 set messageCode='*.udsphysical3.viswcorr', locale='en', instance='lava', 
   scope='ucdlava', entity='udsphysical3', property='viswcorr',
   required='No', proporder='8', attributes='', quickHelp='', 
-  label="If yes, is the subject’s vision functionally normal with corrective lenses?:", context="r",
+  label="If yes, is the subject's vision functionally normal with corrective lenses?:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsphysical3.hearing', locale='en', instance='lava', 
   scope='ucdlava', entity='udsphysical3', property='hearing',
   required='No', proporder='9', attributes='', quickHelp='', 
-  label="Without a hearing aid(s), is the subject’s hearing functionally normal?:", context="r",
+  label="Without a hearing aid(s), is the subject's hearing functionally normal?:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 insert into viewproperty 
@@ -101,7 +116,7 @@ insert into viewproperty
 set messageCode='*.udsphysical3.hearwaid', locale='en', instance='lava', 
   scope='ucdlava', entity='udsphysical3', property='hearwaid',
   required='No', proporder='11', attributes='', quickHelp='', 
-  label="If yes, is the subject’s hearing functionally normal with a hearing aid(s)?:", context="r",
+  label="If yes, is the subject's hearing functionally normal with a hearing aid(s)?:", context="r",
   list="list.uds3.common.noyesunknown", style="scale";
 
 

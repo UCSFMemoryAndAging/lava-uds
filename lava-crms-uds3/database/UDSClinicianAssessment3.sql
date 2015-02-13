@@ -1,3 +1,18 @@
+delete instrumentnotes 
+from instrumenttracking join instrumentnotes using (InstrID) 
+where InstrType="UDS Clinician Assessment 3";
+
+delete instrumentsummary 
+from instrumenttracking join instrumentsummary using (InstrID) 
+where InstrType="UDS Clinician Assessment 3";
+
+delete udsclinicianassessment3 
+from instrumenttracking join udsclinicianassessment3 using (InstrID) 
+where InstrType="UDS Clinician Assessment 3";
+
+delete from instrumenttracking 
+where InstrType="UDS Clinician Assessment 3";
+
 delete from hibernateproperty where entity="udsclinicianassessment3";
 delete from viewproperty where entity="udsclinicianassessment3";
 delete from instrument where InstrName="UDS Clinician Assessment 3";
@@ -8,38 +23,38 @@ drop table if exists udsclinicianassessment3;
 -- Initialize table
 CREATE TABLE udsclinicianassessment3 (
   InstrID int(10) NOT NULL,
-    `CANCER` UNMAPPED TYPE
+    `CANCER` smallint(5) DEFAULT NULL,
     `CANCSITE` varchar(60) DEFAULT NULL,
-    `DIABET` UNMAPPED TYPE
-    `MYOINF` UNMAPPED TYPE
-    `CONGHRT` UNMAPPED TYPE
-    `AFIBRILL` UNMAPPED TYPE
-    `HYPERT` UNMAPPED TYPE
-    `ANGINA` UNMAPPED TYPE
-    `HYPCHOL` UNMAPPED TYPE
-    `VB12DEF` UNMAPPED TYPE
-    `THYDIS` UNMAPPED TYPE
-    `ARTH` UNMAPPED TYPE
-    `ARTYPE` UNMAPPED TYPE
+    `DIABET` smallint(5) DEFAULT NULL,
+    `MYOINF` smallint(5) DEFAULT NULL,
+    `CONGHRT` smallint(5) DEFAULT NULL,
+    `AFIBRILL` smallint(5) DEFAULT NULL,
+    `HYPERT` smallint(5) DEFAULT NULL,
+    `ANGINA` smallint(5) DEFAULT NULL,
+    `HYPCHOL` smallint(5) DEFAULT NULL,
+    `VB12DEF` smallint(5) DEFAULT NULL,
+    `THYDIS` smallint(5) DEFAULT NULL,
+    `ARTH` smallint(5) DEFAULT NULL,
+    `ARTYPE` smallint(5) DEFAULT NULL,
     `ARTYPEX` varchar(60) DEFAULT NULL,
-    `ARTUPEX` UNMAPPED TYPE
-    `ARTLOEX` UNMAPPED TYPE
-    `ARTSPIN` UNMAPPED TYPE
-    `ARTUNKN` UNMAPPED TYPE
-    `URINEINC` UNMAPPED TYPE
-    `BOWLINC` UNMAPPED TYPE
-    `SLEEPAP` UNMAPPED TYPE
-    `REMDIS` UNMAPPED TYPE
-    `HYPOSOM` UNMAPPED TYPE
-    `SLEEPOTH` UNMAPPED TYPE
+    `ARTUPEX` smallint(5) DEFAULT NULL,
+    `ARTLOEX` smallint(5) DEFAULT NULL,
+    `ARTSPIN` smallint(5) DEFAULT NULL,
+    `ARTUNKN` smallint(5) DEFAULT NULL,
+    `URINEINC` smallint(5) DEFAULT NULL,
+    `BOWLINC` smallint(5) DEFAULT NULL,
+    `SLEEPAP` smallint(5) DEFAULT NULL,
+    `REMDIS` smallint(5) DEFAULT NULL,
+    `HYPOSOM` smallint(5) DEFAULT NULL,
+    `SLEEPOTH` smallint(5) DEFAULT NULL,
     `SLEEPOTX` varchar(60) DEFAULT NULL,
-    `ANGIOCP` UNMAPPED TYPE
-    `ANGIOPCI` UNMAPPED TYPE
-    `PACEMAKE` UNMAPPED TYPE
-    `HVALVE` UNMAPPED TYPE
-    `ANTIENC` UNMAPPED TYPE
+    `ANGIOCP` smallint(5) DEFAULT NULL,
+    `ANGIOPCI` smallint(5) DEFAULT NULL,
+    `PACEMAKE` smallint(5) DEFAULT NULL,
+    `HVALVE` smallint(5) DEFAULT NULL,
+    `ANTIENC` smallint(5) DEFAULT NULL,
     `ANTIENCX` varchar(60) DEFAULT NULL,
-    `OTHCOND` UNMAPPED TYPE
+    `OTHCOND` smallint(5) DEFAULT NULL,
     `OTHCONDX` varchar(60) DEFAULT NULL,
 
   PRIMARY KEY (`InstrID`)
@@ -149,28 +164,28 @@ insert into viewproperty
 set messageCode='*.udsclinicianassessment3.artupex', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='artupex',
   required='No', proporder='15', attributes='', quickHelp='', 
-  label="Arthritis region affected — upper extremity:", context="r",
+  label="Arthritis region affected - upper extremity:", context="r",
   list="uds3.udsclinicianassessment3.ARTUPEX", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.artloex', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='artloex',
   required='No', proporder='16', attributes='', quickHelp='', 
-  label="Arthritis region affected — lower extremity:", context="r",
+  label="Arthritis region affected - lower extremity:", context="r",
   list="uds3.udsclinicianassessment3.ARTUPEX", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.artspin', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='artspin',
   required='No', proporder='17', attributes='', quickHelp='', 
-  label="Arthritis region affected — Spine:", context="r",
+  label="Arthritis region affected - Spine:", context="r",
   list="uds3.udsclinicianassessment3.ARTUPEX", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsclinicianassessment3.artunkn', locale='en', instance='lava', 
   scope='ucdlava', entity='udsclinicianassessment3', property='artunkn',
   required='No', proporder='18', attributes='', quickHelp='', 
-  label="Arthritis region affected — unknown:", context="r",
+  label="Arthritis region affected - unknown:", context="r",
   list="uds3.udsclinicianassessment3.ARTUPEX", style="scale";
 
 insert into viewproperty 
