@@ -20,23 +20,30 @@
 	       <property name="decSub" column="DECSUB" type="short"/>
 	       <property name="decIn" column="DECIN" type="short"/>
 	       <property name="decClin" column="DECCLIN" type="short"/>
+	       <property name="decClCog" column="DECCLCOG" type="short"/>
 	       <property name="decAge" column="DECAGE" type="short"/>
 	       <property name="cogMem" column="COGMEM" type="short"/>
+	       <property name="cogOri" column="COGORI" type="short"/>
 	       <property name="cogJudg" column="COGJUDG" type="short"/>
 	       <property name="cogLang" column="COGLANG" type="short"/>
 	       <property name="cogVis" column="COGVIS" type="short"/>
 	       <property name="cogAttn" column="COGATTN" type="short"/>
 	       <property name="cogFluc" column="COGFLUC" type="short"/>
+			<property name="cogFlAgO" column="COGFLAGO" type="short" />
 	       <property name="cogOther" column="COGOTHR" type="short"/>
 	       <property name="cogOthrx" column="COGOTHRX" type="string" length="60"/>
 	       <property name="cogFrst" column="COGFRST" type="short"/>
 	       <property name="cogFrstx" column="COGFRSTX" type="string" length="60"/>
+	       <property name="cogFPred" column="COGFPRED" type="short"/>
+	       <property name="cogFPrex" column="COGFPREX" type="string" length="60"/>
 	       <property name="cogMode" column="COGMODE" type="short"/>
 	       <property name="cogModex" column="COGMODEX" type="string" length="60"/>
+	       <property name="decClBe" column="DECCLBE" type="short"/>
 	       <property name="beApathy" column="BEAPATHY" type="short"/>
 	       <property name="beDep" column="BEDEP" type="short"/>
 	       <property name="beVHall" column="BEVHALL" type="short"/>
 	       <property name="beVWell" column="BEVWELL" type="short"/>
+	       <property name="beVHAgO" column="BEVHAGO" type="short"/>
 	       <property name="beAHall" column="BEAHALL" type="short"/>
 	       <property name="beDel" column="BEDEL" type="short"/>
 	       <property name="beDisin" column="BEDISIN" type="short"/>
@@ -44,12 +51,18 @@
 	       <property name="beAgit" column="BEAGIT" type="short"/>
 	       <property name="bePerCh" column="BEPERCH" type="short"/>
 	       <property name="beRem" column="BEREM" type="short"/>
+	       <property name="beRemAgO" column="BEREMAGO" type="short"/>
+	       <property name="beAnx" column="BEANX" type="short"/>
 	       <property name="beOthr" column="BEOTHR" type="short"/>
 	       <property name="beOthrx" column="BEOTHRX" type="string" length="60"/>
 	       <property name="beFrst" column="BEFRST" type="short"/>
 	       <property name="beFrstx" column="BEFRSTX" type="string" length="60"/>
+	       <property name="beFPred" column="BEFPRED" type="short"/>
+	       <property name="beFPredx" column="BEFPREDX" type="string" length="60"/>
 	       <property name="beMode" column="BEMODE" type="short"/>
 	       <property name="beModex" column="BEMODEX" type="string" length="60"/>
+	       <property name="beAge" column="BEAGE" type="short"/>
+	       <property name="decClMot" column="DECCLMOT" type="short"/>
 	       <property name="moGait" column="MOGAIT" type="short"/>
 	       <property name="moFalls" column="MOFALLS" type="short"/>
 	       <property name="moTrem" column="MOTREM" type="short"/>
@@ -58,8 +71,14 @@
 	       <property name="moMode" column="MOMODE" type="short"/>
 	       <property name="moModex" column="MOMODEX" type="string" length="60"/>
 	       <property name="moMoPark" column="MOMOPARK" type="short"/>
+	       <property name="parkAge" column="PARKAGE" type="short"/>
+	       <property name="moMoAls" column="MOMOALS" type="short"/>
+	       <property name="alsAge" column="ALSAGE" type="short"/>
+	       <property name="moAge" column="MOAGE" type="short"/>
 	       <property name="course" column="COURSE" type="short"/>
 	       <property name="frstChg" column="FRSTCHG" type="short"/>
+	       <property name="lbdEval" column="LBDEVAL" type="short"/>
+	       <property name="ftldEval" column="FTLDEVAL" type="short"/>
 			</join>	
 		
         &instrInclude2;

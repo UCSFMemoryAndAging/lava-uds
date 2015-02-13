@@ -2,11 +2,18 @@ package edu.ucsf.lava.crms.assessment.model;
 
 import java.util.Date;
 
+import org.springframework.util.StringUtils;
+
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.people.model.Patient;
 import edu.ucsf.lava.crms.scheduling.model.Visit;
 
+/**
+ * As of UDS 3.0 the name of the form was changed from "A2: Informant Demographics" to 
+ * "A2: Co-participant Demographics". However the content is largely the same so this same underlying
+ * model class is used. 
+ */
 public class UdsInformantDemo extends UdsInstrument {
 	
 	public static EntityManager MANAGER = new EntityBase.Manager(UdsInformantDemo.class);
@@ -37,8 +44,9 @@ public class UdsInformantDemo extends UdsInstrument {
 	private Short inRaTer;
 	private String inRaTerx;
 	private Short inEduc;
-	private Short inRelTo;
-	private String inRelTox;
+	private Short inRelTo; // UDS3 recoded
+	private String inRelTox; // UDS3 removed
+	private Short inKnown; // UDS3 new
 	private Short inLivWth;
 	private Short inVisits;
 	private Short inCalls;
@@ -206,14 +214,23 @@ public class UdsInformantDemo extends UdsInstrument {
 	public void setNewInf(Short newInf) {
 		this.newInf = newInf;
 	}
-
-
 	
-	public String[] getRequiredResultFields() {
+	public Short getInKnown() {
+		return inKnown;
+	}
+
+	public void setInKnown(Short inKnown) {
+		this.inKnown = inKnown;
+	}
+
+	public String[] getRequiredResultFields(String version) {
+		String[] required;
+		
 		if (this.getPacket() == null)
 			return new String[] {};
+		
 		if (this.getPacket().equals("I")) {
-			return new String[] {
+			required = new String[] {
 				"inBirMo",
 				"inBirYr",
 				"inSex",
@@ -230,7 +247,7 @@ public class UdsInformantDemo extends UdsInstrument {
 				"inRely"
 			};
 		} else {
-			return new String[] {
+			required = new String[] {
 				"inBirMo",
 				"inBirYr",
 				"inSex",
@@ -248,7 +265,25 @@ public class UdsInformantDemo extends UdsInstrument {
 				"inRely"
 			};
 		}
+		
+		if (version.equals("3")){
+			// new var added in UDS 3
+			required = StringUtils.concatenateStringArrays(required, new String[]{"inKnown"});
+		}
+		
+		return required;
 	}
+
+	
+	public void markUnusedFields(String version) {
+		if(version.equals("1") || (version.equals("2"))) {
+			this.inKnown = (short)-8;
+		}
+		else if (version.equals("3"))  {
+			this.inRelTox = "-8";
+		}
+	}
+	
 
 	public String getUdsUploadCsvRecord() {
 		if(getPacket()==null){return "";}
@@ -269,7 +304,12 @@ public class UdsInformantDemo extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getInRaTerx())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getInEduc())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getInRelTo())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getInRelTox())).append(",");
+			if (getInstrVer().equals("1") || getInstrVer().equals("2")) {
+				buffer.append(UdsUploadUtils.formatField(getInRelTox())).append(",");
+			}
+			if (getInstrVer().equals("3")) {
+				buffer.append(UdsUploadUtils.formatField(getInKnown())).append(",");
+			}
 			buffer.append(UdsUploadUtils.formatField(getInLivWth())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getInVisits())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getInCalls())).append(",");
@@ -291,7 +331,12 @@ public class UdsInformantDemo extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getInRaTerx())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getInEduc())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getInRelTo())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getInRelTox())).append(",");
+			if (getInstrVer().equals("1") || getInstrVer().equals("2")) {
+				buffer.append(UdsUploadUtils.formatField(getInRelTox())).append(",");
+			}
+			if (getInstrVer().equals("3")) {
+				buffer.append(UdsUploadUtils.formatField(getInKnown())).append(",");
+			}
 			buffer.append(UdsUploadUtils.formatField(getInLivWth())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getInVisits())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getInCalls())).append(",");

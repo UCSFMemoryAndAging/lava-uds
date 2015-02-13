@@ -18,58 +18,92 @@ public class UdsHealthHistory extends UdsInstrument {
 		this.setFormId(UDS_HEALTHHISTORY_FORMID);
 	}
 	
-	// note: id inherited from Instrument
-	private Short cvHAtt;
-	private Short cvAFib;
-	private Short cvAngio;
-	private Short cvBypass;
-	private Short cvPace;
-	private Short cvChf;
-	private Short cvOthr;
-	private String cvOthrx;
-	private Short cbStroke;
-	private Short strok1Yr;
-	private Short strok2Yr;
-	private Short strok3Yr;
-	private Short strok4Yr;
-	private Short strok5Yr;
-	private Short strok6Yr;
-	private Short cbTia;
-	private Short tia1Yr;
-	private Short tia2Yr;
-	private Short tia3Yr;
-	private Short tia4Yr;
-	private Short tia5Yr;
-	private Short tia6Yr;
-	private Short cbOthr;
-	private String cbOthrx;
-	private Short pd;
-	private Short pdYr;
-	private Short pdOthr;
-	private Short pdOthrYr;
-	private Short seizures;
-	private Short traumBrf;
-	private Short traumExt;
-	private Short traumChr;
-	private Short ncOthr;
-	private String ncOthrx;
-	private Short hyperten;
-	private Short hyperCho;
-	private Short diabetes;
-	private Short b12Def;
-	private Short thyroid;
-	private Short incontU;
-	private Short incontF;
-	private Short dep2Yrs;
-	private Short depOthr;
-	private Short alcohol;
 	private Short tobac30;
 	private Short tobac100;
 	private Short smokYrs;
 	private Short packsPer;
 	private Short quitSmok;
+	private Short alcoCcas; // UDS3 new
+	private Short alcFreq; // UDS3 new
+	private Short cvHAtt;
+	private Short hattMult; // UDS3 new
+	private Short hattYear; // UDS3 new
+	private Short cvAFib;
+	private Short cvAngio;
+	private Short cvBypass;
+	private Short cvPace; // UDS3 replaced by cvPacDef
+	private Short cvPacDef; // UDS new var replaced cvPace
+	private Short cvChf;
+	private Short cvAngina; // UDS3 new
+	private Short cvHValve; // UDS3 new
+	private Short cvOthr;
+	private String cvOthrx;
+	private Short cbStroke;
+	private Short strokMul; // UDS3 new
+	private Short strokYr; // UDS3 new
+	private Short strok1Yr; // UDS3 removed
+	private Short strok2Yr; // UDS3 removed
+	private Short strok3Yr; // UDS3 removed
+	private Short strok4Yr; // UDS3 removed
+	private Short strok5Yr; // UDS3 removed
+	private Short strok6Yr; // UDS3 removed
+	private Short cbTia;
+	private Short tiaMult; // UDS new
+	private Short tiaYear; // UDS new
+	private Short tia1Yr; // UDS3 removed
+	private Short tia2Yr; // UDS3 removed
+	private Short tia3Yr; // UDS3 removed
+	private Short tia4Yr; // UDS3 removed
+	private Short tia5Yr; // UDS3 removed
+	private Short tia6Yr; // UDS3 removed
+	private Short cbOthr; // UDS3 removed
+	private String cbOthrx; // UDS3 removed
+	private Short pd;
+	private Short pdYr;
+	private Short pdOthr;
+	private Short pdOthrYr;
+	private Short seizures;
+	private Short tbi;
+	private Short tbiBrief;
+	private Short tbiExten;
+	private Short tbiWolos;
+	private Short tbiYear;
+	private Short traumBrf; // UDS removed
+	private Short traumExt; // UDS3 removed
+	private Short traumChr; // UDS3 removed
+	private Short ncOthr; // UDS3 removed
+	private String ncOthrx; // UDS3 removed
+	private Short diabetes;
+	private Short diabType; // UDS new
+	private Short hyperten;
+	private Short hyperCho;
+	private Short b12Def;
+	private Short thyroid;
+	private Short arthrit; // UDS3 new
+	private Short arthType; // UDS3 new
+	private String arthTypx; // UDS3 new
+	private Short arthUpEx; // UDS3 new
+	private Short arthLoEx; // UDS3 new
+	private Short arthSpin; // UDS3 new
+	private Short arthUnk; // UDS3 new
+	private Short incontU;
+	private Short incontF;
+	private Short apnea; // UDS3 new
+	private Short rbd; // UDS3 new
+	private Short insomn; // UDS3 new
+	private Short othSleep; // UDS3 new
+	private String othSleex; // UDS3 new
+	private Short alcohol;
 	private Short abusOthr;
 	private String abusx;
+	private Short ptsd; // UDS3 new
+	private Short bipolar; // UDS3 new
+	private Short schiz; // UDS3 new
+	private Short dep2Yrs;
+	private Short depOthr;
+	private Short anxiety; // UDS3 new
+	private Short ocd; // UD3 new
+	private Short npsyDev; // UDS3 new
 	private Short psycDis;
 	private String psycDisx;
 	
@@ -496,121 +530,561 @@ public class UdsHealthHistory extends UdsInstrument {
 		this.traumExt = traumExt;
 	}
 	
-	public String[] getRequiredResultFields() {
+	public Short getAlcoCcas() {
+		return alcoCcas;
+	}
+
+	public void setAlcoCcas(Short alcoCcas) {
+		this.alcoCcas = alcoCcas;
+	}
+
+	public Short getAlcFreq() {
+		return alcFreq;
+	}
+
+	public void setAlcFreq(Short alcFreq) {
+		this.alcFreq = alcFreq;
+	}
+
+	public Short getHattMult() {
+		return hattMult;
+	}
+
+	public void setHattMult(Short hattMult) {
+		this.hattMult = hattMult;
+	}
+
+	public Short getHattYear() {
+		return hattYear;
+	}
+
+	public void setHattYear(Short hattYear) {
+		this.hattYear = hattYear;
+	}
+
+	public Short getCvPacDef() {
+		return cvPacDef;
+	}
+
+	public void setCvPacDef(Short cvPacDef) {
+		this.cvPacDef = cvPacDef;
+	}
+
+	public Short getCvAngina() {
+		return cvAngina;
+	}
+
+	public void setCvAngina(Short cvAngina) {
+		this.cvAngina = cvAngina;
+	}
+
+	public Short getCvHValve() {
+		return cvHValve;
+	}
+
+	public void setCvHValve(Short cvHValve) {
+		this.cvHValve = cvHValve;
+	}
+
+	public Short getStrokMul() {
+		return strokMul;
+	}
+
+	public void setStrokMul(Short strokMul) {
+		this.strokMul = strokMul;
+	}
+
+	public Short getStrokYr() {
+		return strokYr;
+	}
+
+	public void setStrokYr(Short strokYr) {
+		this.strokYr = strokYr;
+	}
+
+	public Short getTiaMult() {
+		return tiaMult;
+	}
+
+	public void setTiaMult(Short tiaMult) {
+		this.tiaMult = tiaMult;
+	}
+
+	public Short getTiaYear() {
+		return tiaYear;
+	}
+
+	public void setTiaYear(Short tiaYear) {
+		this.tiaYear = tiaYear;
+	}
+
+	public Short getTbi() {
+		return tbi;
+	}
+
+	public void setTbi(Short tbi) {
+		this.tbi = tbi;
+	}
+
+	public Short getTbiBrief() {
+		return tbiBrief;
+	}
+
+	public void setTbiBrief(Short tbiBrief) {
+		this.tbiBrief = tbiBrief;
+	}
+
+	public Short getTbiExten() {
+		return tbiExten;
+	}
+
+	public void setTbiExten(Short tbiExten) {
+		this.tbiExten = tbiExten;
+	}
+
+	public Short getTbiWolos() {
+		return tbiWolos;
+	}
+
+	public void setTbiWolos(Short tbiWolos) {
+		this.tbiWolos = tbiWolos;
+	}
+
+	public Short getTbiYear() {
+		return tbiYear;
+	}
+
+	public void setTbiYear(Short tbiYear) {
+		this.tbiYear = tbiYear;
+	}
+
+	public Short getDiabType() {
+		return diabType;
+	}
+
+	public void setDiabType(Short diabType) {
+		this.diabType = diabType;
+	}
+
+	public Short getArthrit() {
+		return arthrit;
+	}
+
+	public void setArthrit(Short arthrit) {
+		this.arthrit = arthrit;
+	}
+
+	public Short getArthType() {
+		return arthType;
+	}
+
+	public void setArthType(Short arthType) {
+		this.arthType = arthType;
+	}
+
+	public String getArthTypx() {
+		return arthTypx;
+	}
+
+	public void setArthTypx(String arthTypx) {
+		this.arthTypx = arthTypx;
+	}
+
+	public Short getArthUpEx() {
+		return arthUpEx;
+	}
+
+	public void setArthUpEx(Short arthUpEx) {
+		this.arthUpEx = arthUpEx;
+	}
+
+	public Short getArthLoEx() {
+		return arthLoEx;
+	}
+
+	public void setArthLoEx(Short arthLoEx) {
+		this.arthLoEx = arthLoEx;
+	}
+
+	public Short getArthSpin() {
+		return arthSpin;
+	}
+
+	public void setArthSpin(Short arthSpin) {
+		this.arthSpin = arthSpin;
+	}
+
+	public Short getArthUnk() {
+		return arthUnk;
+	}
+
+	public void setArthUnk(Short arthUnk) {
+		this.arthUnk = arthUnk;
+	}
+
+	public Short getApnea() {
+		return apnea;
+	}
+
+	public void setApnea(Short apnea) {
+		this.apnea = apnea;
+	}
+	
+	public Short getRbd() {
+		return rbd;
+	}
+
+	public void setRbd(Short rbd) {
+		this.rbd = rbd;
+	}
+
+	public Short getInsomn() {
+		return insomn;
+	}
+
+	public void setInsomn(Short insomn) {
+		this.insomn = insomn;
+	}
+
+	public Short getOthSleep() {
+		return othSleep;
+	}
+
+	public void setOthSleep(Short othSleep) {
+		this.othSleep = othSleep;
+	}
+
+	public String getOthSleex() {
+		return othSleex;
+	}
+
+	public void setOthSleex(String othSleex) {
+		this.othSleex = othSleex;
+	}
+
+	public Short getPtsd() {
+		return ptsd;
+	}
+
+	public void setPtsd(Short ptsd) {
+		this.ptsd = ptsd;
+	}
+
+	public Short getBipolar() {
+		return bipolar;
+	}
+
+	public void setBipolar(Short bipolar) {
+		this.bipolar = bipolar;
+	}
+
+	public Short getSchiz() {
+		return schiz;
+	}
+
+	public void setSchiz(Short schiz) {
+		this.schiz = schiz;
+	}
+
+	public Short getAnxiety() {
+		return anxiety;
+	}
+
+	public void setAnxiety(Short anxiety) {
+		this.anxiety = anxiety;
+	}
+
+	public Short getOcd() {
+		return ocd;
+	}
+
+	public void setOcd(Short ocd) {
+		this.ocd = ocd;
+	}
+
+	public Short getNpsyDev() {
+		return npsyDev;
+	}
+
+	public void setNpsyDev(Short npsyDev) {
+		this.npsyDev = npsyDev;
+	}
+	
+	public void markUnusedFields(String version) {
+		if(version.equals("1") || version.equals("2")){
+			
+			//TODO put all UDS3 new here
+			
+			
+			
+		}
+		else if(version.equals("3")){
+			
+			//TODO put all UDS3 removed / replaced here
+			
+			
+			
+		}
+	}
+
+	public String[] getRequiredResultFields(String version) {
 		// For the year fields, only the first would be required, not all of them
 		// Reasoning: if cbStroke is Absent, everything would be filled with skip (-6)
 		// But if cbStroke is Active or Inactive, this would imply at least one must be filled,
 		// even if that value was 9999 (unknown).
 		// In all, this means the first year should always have a value.
-		return new String[] {
-				"cvHAtt",
-				"cvAFib",
-				"cvAngio",
-				"cvBypass",
-				"cvPace",
-				"cvChf",
-				"cvOthr",
-				"cbStroke",
-				"strok1Yr",
-				//"strok2Yr",
-				//"strok3Yr",
-				//"strok4Yr",
-				//"strok5Yr",
-				//"strok6Yr",
-				"cbTia",
-				"tia1Yr",
-				//"tia2Yr",
-				//"tia3Yr",
-				//"tia4Yr",
-				//"tia5Yr",
-				//"tia6Yr",
-				"cbOthr",
-				"pd",
-				"pdYr",
-				"pdOthr",
-				"pdOthrYr",
-				"seizures",
-				"traumBrf",
-				"traumExt",
-				"traumChr",
-				"ncOthr",
-				"hyperten",
-				"hyperCho",
-				"diabetes",
-				"b12Def",
-				"thyroid",
-				"incontU",
-				"incontF",
-				"dep2Yrs",
-				"depOthr",
-				"alcohol",
-				"tobac30",
-				"tobac100",
-				"smokYrs",
-				"packsPer",
-				"quitSmok",
-				"abusOthr",
-				"psycDis"
-		};
+		if (version.equals("3")) {
+			return new String[] {
+					"tobac30",
+					"tobac100",
+					"smokYrs",
+					"packsPer",
+					"quitSmok",
+					"alcoCcas",
+					"alcFreq",
+					"cvHAtt",
+					"hattMult",
+					"hattYear",
+					"cvAFib",
+					"cvAngio",
+					"cvBypass",
+					"cvPacDef",
+					"cvChf",
+					"cvAngina",
+					"cvHValve",
+					"cvOthr",
+					"cbStroke",
+					"strokMul",
+					"strokYr",
+					"cbTia",
+					"tiaMult",
+					"tiaYear",
+					"pd",
+					"pdYr",
+					"pdOthr",
+					"pdOthrYr",
+					"seizures",
+					"tbi",
+					"tbiBrief",
+					"tbiExten",
+					"tbiWolos",
+					"tbiYear",
+					"diabetes",
+					"diabType",
+					"hyperten",
+					"hyperCho",
+					"b12Def",
+					"thyroid",
+					"arthrit",
+					"arthType",
+					"arthTypx",
+					"arthUpEx",
+					"arthLoEx",
+					"arthSpin",
+					"arthUnk",
+					"incontU",
+					"incontF",
+					"apnea",
+					"rbd",
+					"insomn",
+					"othSleep",
+					"alcohol",
+					"abusOthr",
+					"ptsd",
+					"bipolar",
+					"schiz",
+					"dep2Yrs",
+					"depOthr",
+					"anxiety",
+					"ocd",
+					"npsyDev",
+					"psycDis"
+			};
+		}
+		else {
+			return new String[] {
+					"cvHAtt",
+					"cvAFib",
+					"cvAngio",
+					"cvBypass",
+					"cvPace",
+					"cvChf",
+					"cvOthr",
+					"cbStroke",
+					"strok1Yr",
+					//"strok2Yr",
+					//"strok3Yr",
+					//"strok4Yr",
+					//"strok5Yr",
+					//"strok6Yr",
+					"cbTia",
+					"tia1Yr",
+					//"tia2Yr",
+					//"tia3Yr",
+					//"tia4Yr",
+					//"tia5Yr",
+					//"tia6Yr",
+					"cbOthr",
+					"pd",
+					"pdYr",
+					"pdOthr",
+					"pdOthrYr",
+					"seizures",
+					"traumBrf",
+					"traumExt",
+					"traumChr",
+					"ncOthr",
+					"hyperten",
+					"hyperCho",
+					"diabetes",
+					"b12Def",
+					"thyroid",
+					"incontU",
+					"incontF",
+					"dep2Yrs",
+					"depOthr",
+					"alcohol",
+					"tobac30",
+					"tobac100",
+					"smokYrs",
+					"packsPer",
+					"quitSmok",
+					"abusOthr",
+					"psycDis"
+			};
+		}
 	}
 
 		
 	public String getUdsUploadCsvRecord() {
 		StringBuffer buffer = UdsUploadUtils.getCommonFields(this);
-		buffer.append(UdsUploadUtils.formatField(getCvHAtt())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCvAFib())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCvAngio())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCvBypass())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCvPace())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCvChf())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCvOthr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCvOthrx())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCbStroke())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getStrok1Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getStrok2Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getStrok3Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getStrok4Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getStrok5Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getStrok6Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCbTia())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTia1Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTia2Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTia3Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTia4Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTia5Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTia6Yr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCbOthr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCbOthrx())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getPd())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getPdYr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getPdOthr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getPdOthrYr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getSeizures())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTraumBrf())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTraumExt())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTraumChr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getNcOthr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getNcOthrx())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getHyperten())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getHyperCho())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getDiabetes())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getB12Def())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getThyroid())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getIncontU())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getIncontF())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getDep2Yrs())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getDepOthr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getAlcohol())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTobac30())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getTobac100())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getSmokYrs())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getPacksPer())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getQuitSmok())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getAbusOthr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getAbusx())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getPsycDis())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getPsycDisx()));
-		return buffer.toString();
+		if (getInstrVer().equals("3")) {
+			buffer.append(UdsUploadUtils.formatField(getTobac30())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTobac100())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getSmokYrs())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPacksPer())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getQuitSmok())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAlcoCcas())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAlcFreq())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvHAtt())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getHattMult())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getHattYear())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvAFib())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvAngio())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvBypass())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvPacDef())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvChf())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvAngina())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvHValve())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvOthrx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCbStroke())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getStrokMul())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getStrokYr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCbTia())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTiaMult())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTiaYear())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPd())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPdYr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPdOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPdOthrYr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getSeizures())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTbi())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTbiBrief())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTbiExten())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTbiWolos())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTbiYear())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDiabetes())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDiabType())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getHyperten())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getHyperCho())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getB12Def())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getThyroid())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getArthrit())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getArthType())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getArthTypx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getArthUpEx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getArthLoEx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getArthSpin())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getArthUnk())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getIncontU())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getIncontF())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getApnea())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getRbd())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getInsomn())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getOthSleep())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getOthSleex())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAlcohol())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAbusOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAbusx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPtsd())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBipolar())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getSchiz())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDep2Yrs())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDepOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAnxiety())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getOcd())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getNpsyDev())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPsycDis())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPsycDisx()));
+			return buffer.toString();
+		}
+		else {
+			buffer.append(UdsUploadUtils.formatField(getCvHAtt())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvAFib())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvAngio())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvBypass())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvPace())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvChf())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCvOthrx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCbStroke())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getStrok1Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getStrok2Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getStrok3Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getStrok4Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getStrok5Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getStrok6Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCbTia())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTia1Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTia2Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTia3Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTia4Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTia5Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTia6Yr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCbOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCbOthrx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPd())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPdYr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPdOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPdOthrYr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getSeizures())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTraumBrf())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTraumExt())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTraumChr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getNcOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getNcOthrx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getHyperten())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getHyperCho())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDiabetes())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getB12Def())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getThyroid())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getIncontU())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getIncontF())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDep2Yrs())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDepOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAlcohol())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTobac30())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getTobac100())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getSmokYrs())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPacksPer())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getQuitSmok())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAbusOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAbusx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPsycDis())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getPsycDisx()));
+			return buffer.toString();
+		}
 	}
 
 
