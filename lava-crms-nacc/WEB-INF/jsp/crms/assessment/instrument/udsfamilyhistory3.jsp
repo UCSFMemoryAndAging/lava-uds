@@ -10,7 +10,7 @@ doing double enter / compare, visitNum is not a double enter property so set the
 the first double enter property here --%>
 <c:if test="${componentView == 'doubleEnter' || componentView == 'compare'}">
 	<c:choose>
-		<c:when test="${packetType == 'I'}">
+		<c:when test="${packetType == 'I' || empty packetType}">
 			<c:set  var="focusField" value="afffamm"/>
 		</c:when>
 		<c:when test="${packetType == 'F' || packetType == 'T'}">
@@ -19,10 +19,12 @@ the first double enter property here --%>
 	</c:choose>	
 </c:if>
 
+<c:set var="controlMode" value="lv"/>
+<c:if test="${componentView == 'enter' || componentView == 'doubleEnter' || componentView == 'compare'}">
+	<c:set var="controlMode" value="le"/>
+</c:if>	
 
-
-<%-- OT: TODO: in java markUnusedFields initial vs. followup --%>
-<%-- in subject demographics jsp the skip logic should only be for initial, not followup  --%>
+<%-- TODO: in java markUnusedFields initial vs. followup --%>
 
 
 
@@ -50,7 +52,7 @@ the first double enter property here --%>
   	<page:param name="view">${componentView}</page:param>
   	<page:param name="instructions"> </page:param>
   	
-		<c:if test="${packetType == 'I'}">
+		<c:if test="${packetType == 'I' || empty packetType}">
 			<tags:createField property="afffamm" component="${component}" entity="${instrTypeEncoded}"/>
 			<%-- this is a hidden newinfmut field required for skip logic --%>
 			<tags:createField property="nwinfmut" component="${component}" entity="initial.${instrTypeEncoded}"/>
@@ -91,31 +93,31 @@ the first double enter property here --%>
   	<page:param name="instructions"></page:param>
 	<tags:tableForm>  
 		<tags:listRow>
-			<tags:listColumnHeader labelKey="&nbps;" width="10%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.birthHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.dageHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.neurHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.prdxHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.moeHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.ageoHeader" width="15%"/>
+			<tags:listColumnHeader label="&nbsp;" width="8%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.birthHeader" width="18%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.dageHeader" width="10%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.neurHeader" width="18%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.prdxHeader" width="18%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.moeHeader" width="18%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.ageoHeader" width="10%"/>
 		</tags:listRow>
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsfamilyhistory2.parents.mother" inline="false"/></tags:listCell>
-			<tags:listCell><tags:createField property="mommob,momyob" separator="/" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="momdage" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="momneur" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="momprdx" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="mommoe" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="momageo" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+			<tags:listCell><tags:createField property="mommob,momyob" separator="/" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="momdage" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="momneur" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="momprdx" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="mommoe" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="momageo" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsfamilyhistory2.parents.father" inline="false"/></tags:listCell>
-			<tags:listCell><tags:createField property="dadmob,dadyob" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="daddage" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="dadneur" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="dadprdx" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="dadmoe" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="dadageo" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+			<tags:listCell><tags:createField property="dadmob,dadyob" separator="/" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="daddage" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="dadneur" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="dadprdx" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="dadmoe" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="dadageo" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 	</tags:tableForm>
 </page:applyDecorator>
@@ -138,26 +140,26 @@ the first double enter property here --%>
   	<page:param name="sectionId">anonymous</page:param> 
   	<page:param name="view">${componentView}</page:param>
   	<page:param name="instructions"> </page:param>  	
-  	<tags:tableForm>  
+  	<tags:tableForm> 
 		<tags:listRow>
-			<tags:listColumnHeader labelKey="&nbsp;" width="10%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.birthHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.dageHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.neurHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.prdxHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.moeHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.ageoHeader" width="15%"/>
+			<tags:listColumnHeader label="&nbsp;" width="10%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.birthHeader" width="10%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.dageHeader" width="10%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.neurHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.prdxHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.moeHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.ageoHeader" width="10%"/>
 		</tags:listRow>
 
 		<c:forEach begin="1" end="20" var="item">
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsfamilyhistory2.siblings.sibling${item}" inline="false"/></tags:listCell>
-			<tags:listCell><tags:createField property="sib${item}mob,sib${item}yob" separator="/" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="sib${item}agd" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="sib${item}neu" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="sib${item}pdx" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="sib${item}moe" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="sib${item}ago" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+			<tags:listCell><tags:createField property="sib${item}mob,sib${item}yob" separator="/" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="sib${item}agd" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="sib${item}neu" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="sib${item}pdx" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="sib${item}moe" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="sib${item}ago" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		</c:forEach>
 	</tags:tableForm>
@@ -185,24 +187,24 @@ the first double enter property here --%>
   	<tags:tableForm>  
   	
 		<tags:listRow>
-			<tags:listColumnHeader labelKey="&nbsp;" width="10%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.birthHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.dageHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.neurHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.prdxHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.moeHeader" width="15%"/>
-			<tags:listColumnHeader labelKey="udsfamilyhistory3.ageoHeader" width="15%"/>
+			<tags:listColumnHeader label="&nbsp;" width="10%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.birthHeader" width="10%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.dageHeader" width="10%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.neurHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.prdxHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.moeHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsfamilyhistory3.ageoHeader" width="10%"/>
 		</tags:listRow>
 
 		<c:forEach begin="1" end="15" var="item">
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsfamilyhistory2.children.child${item}" inline="false"/></tags:listCell>
-			<tags:listCell><tags:createField property="kid${item}mob,kid${item}yob" separator="/" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="kid${item}agd" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="kid${item}neu" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="kid${item}pdx" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="kid${item}moe" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
-			<tags:listCell><tags:createField property="kid${item}ago" entity="${instrTypeEncoded}" component="${component}"/></tags:listCell>
+			<tags:listCell><tags:createField property="kid${item}mob,kid${item}yob" separator="/" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="kid${item}agd" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="kid${item}neu" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="kid${item}pdx" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="kid${item}moe" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="kid${item}ago" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		</c:forEach>
 	</tags:tableForm>

@@ -1,6 +1,5 @@
 <%@ include file="/WEB-INF/jsp/includes/include.jsp" %>
 <c:set var="instrTypeEncoded" value="udssubjectdemo3"/>
-<c:set var="uds2MetadataEntity" value="udssubjectdemo2"/>
 
 <c:import url="/WEB-INF/jsp/crms/assessment/instrument/include.jsp">
 	<c:param name="instrTypeEncoded" value="${instrTypeEncoded}"/>
@@ -15,7 +14,7 @@ doing double enter / compare, visitNum is not a double enter property so set the
 the first double enter property here --%>
 <c:if test="${componentView == 'doubleEnter' || componentView == 'compare'}">
 	<c:choose>
-		<c:when test="${packetType == 'I'}">
+		<c:when test="${packetType == 'I' || empty packetType}">
 			<c:set  var="focusField" value="reason"/>
 		</c:when>
 		<c:when test="${packetType == 'F' || packetType == 'T'}">
@@ -46,43 +45,43 @@ the first double enter property here --%>
   <page:param name="section"><spring:message code="udssubjectdemo2.1-20.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
-<c:if test="${packetType == 'I'}">
+<c:if test="${packetType == 'I' || empty packetType}">
 	<tags:createField property="reason" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="referSc" component="${component}" optionsAlignment="groupTopVertical"/>
+	<tags:createField property="referSc" component="${component}" entity="${instrTypeEncoded}"/>
 	<tags:createField property="learned" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="preStat" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="presPart" component="${component}" entity="${uds2MetadataEntity}"/>
+	<tags:createField property="preStat" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="presPart" component="${component}" entity="${instrTypeEncoded}"/>
 	<tags:createField property="sourceNw" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="birthMo,birthYr" separator="/" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="sex" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="hispanic" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="hispOr" component="${component}" optionsAlignment="groupTopVertical" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="hispOrx" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="race" component="${component}" optionsAlignment="groupTopVertical" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="racex" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="raceSec" component="${component}" optionsAlignment="groupTopVertical" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="raceSecx" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="raceTer" component="${component}" optionsAlignment="groupTopVertical" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="raceTerx" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="primLang" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="primLanx" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="educ" component="${component}" entity="${uds2MetadataEntity}"/>
+	<tags:createField property="birthMo,birthYr" separator="/" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="sex" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="hispanic" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="hispOr" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="hispOrx" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="race" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="racex" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="raceSec" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="raceSecx" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="raceTer" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="raceTerx" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="primLang" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="primLanx" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="educ" component="${component}" entity="${instrTypeEncoded}"/>
 	<tags:createField property="mariStat" component="${component}" entity="${instrTypeEncoded}"/>
 	<tags:createField property="livSitua" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="independ" component="${component}" optionsAlignment="groupTopVertical" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="residenc" component="${component}" optionsAlignment="groupTopVertical" entity="${instrTypeEncoded}"/>
-	<tags:createField property="zip" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="handed" component="${component}" entity="${uds2MetadataEntity}"/>
+	<tags:createField property="independ" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="residenc" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="zip" component="${component}" entity="${instrTypeEncoded}"/>
+	<tags:createField property="handed" component="${component}" entity="${instrTypeEncoded}"/>
 </c:if>
 
 <c:if test="${packetType == 'F' || packetType == 'T'}">
-	<tags:createField property="birthMo,birthYr" separator="/" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="mariStat" component="${component}"" entity="${instrTypeEncoded}"/>
-	<tags:createField property="sex" component="${component}" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="livSitua" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="independ" component="${component}" optionsAlignment="groupTopVertical" entity="${uds2MetadataEntity}"/>
-	<tags:createField property="residenc" component="${component}" optionsAlignment="groupTopVertical" entity="${instrTypeEncoded}"/>
-	<tags:createField property="zip" component="${component}" entity="${uds2MetadataEntity}"/>
+	<tags:createField property="birthMo,birthYr" separator="/" component="${component}" entity="followup.${instrTypeEncoded}"/>
+	<tags:createField property="mariStat" component="${component}" entity="followup.${instrTypeEncoded}"/>
+	<tags:createField property="sex" component="${component}" entity="followup.${instrTypeEncoded}"/>
+	<tags:createField property="livSitua" component="${component}" entity="followup.${instrTypeEncoded}"/>
+	<tags:createField property="independ" component="${component}" entity="followup.${instrTypeEncoded}"/>
+	<tags:createField property="residenc" component="${component}" entity="followup.${instrTypeEncoded}"/>
+	<tags:createField property="zip" component="${component}" entity="followup.${instrTypeEncoded}"/>
 </c:if>
 
 </page:applyDecorator>
@@ -92,10 +91,10 @@ the first double enter property here --%>
 <c:forEach begin="0" end="1" var="current">
   <c:choose>
     <c:when test="${componentView == 'doubleEnter' || (componentView == 'compare' && current == 1)}">
-      <c:set var="componentPrefix" value="compareInstrument"/>
+      <c:set var="component" value="compareInstrument"/>
     </c:when>
     <c:otherwise>
-      <c:set var="componentPrefix" value="instrument"/>
+      <c:set var="component" value="instrument"/>
     </c:otherwise>
   </c:choose>
   <c:if test="${current == 0 || (current == 1 && componentView == 'compare')}">
@@ -107,38 +106,44 @@ the first double enter property here --%>
 
 <ui:formGuide>
   <ui:ignore elementIds="packet" component="instrument" forValue="[F|T]"/>
-  <ui:observe elementIds="hispanic" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="hispOr" component="${componentPrefix}"/> 
+  <ui:observe elementIds="referSc" component="${component}" forValue="^1|^2"/>
+  <ui:unskip elementIds="learned" component="${component}"/> 
 </ui:formGuide>
 
 <ui:formGuide>
   <ui:ignore elementIds="packet" component="instrument" forValue="[F|T]"/>
-  <ui:observe elementIds="hispOr" component="${componentPrefix}" forValue="^50" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="hispOrx" component="${componentPrefix}"/> 
+  <ui:observe elementIds="hispanic" component="${component}" forValue="^1" />
+  <ui:unskip elementIds="hispOr" component="${component}"/> 
 </ui:formGuide>
 
 <ui:formGuide>
   <ui:ignore elementIds="packet" component="instrument" forValue="[F|T]"/>
-  <ui:observe elementIds="race" component="${componentPrefix}" forValue="^50" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="racex" component="${componentPrefix}"/> 
+  <ui:observe elementIds="hispOr" component="${component}" forValue="^50" />
+  <ui:unskip elementIds="hispOrx" component="${component}"/> 
 </ui:formGuide>
 
 <ui:formGuide>
   <ui:ignore elementIds="packet" component="instrument" forValue="[F|T]"/>
-  <ui:observe elementIds="raceSec" component="${componentPrefix}" forValue="^50" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="raceSecx" component="${componentPrefix}"/> 
+  <ui:observe elementIds="race" component="${component}" forValue="^50" />
+  <ui:unskip elementIds="racex" component="${component}"/> 
 </ui:formGuide>
 
 <ui:formGuide>
   <ui:ignore elementIds="packet" component="instrument" forValue="[F|T]"/>
-  <ui:observe elementIds="raceTer" component="${componentPrefix}" forValue="^50" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="raceTerx" component="${componentPrefix}"/> 
+  <ui:observe elementIds="raceSec" component="${component}" forValue="^50" />
+  <ui:unskip elementIds="raceSecx" component="${component}"/> 
+</ui:formGuide>
+
+<ui:formGuide>
+  <ui:ignore elementIds="packet" component="instrument" forValue="[F|T]"/>
+  <ui:observe elementIds="raceTer" component="${component}" forValue="^50" />
+  <ui:unskip elementIds="raceTerx" component="${component}"/> 
 </ui:formGuide>
 
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
   <ui:ignore elementIds="packet" component="instrument" forValue="[F|T]"/>
-  <ui:observe elementIds="primLang" component="${componentPrefix}" forValue="^8" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="primLanx" component="${componentPrefix}"/> 
+  <ui:observe elementIds="primLang" component="${component}" forValue="^8" />
+  <ui:unskip elementIds="primLanx" component="${component}"/> 
 </ui:formGuide>
 
   </c:if>

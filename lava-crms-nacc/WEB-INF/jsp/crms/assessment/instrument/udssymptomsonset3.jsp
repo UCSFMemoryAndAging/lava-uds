@@ -53,14 +53,14 @@
 <tags:createField property="cogVis" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogAttn" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogFluc" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogFlAgO" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cogFlAgO" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogOther" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogOthrx" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogFPred" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cogFPred" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogFPrex" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogMode" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogModex" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="decAge" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}"/>
+<tags:createField property="decAge" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="behSymp" linkTextKey="top.quicklink"/>
@@ -73,7 +73,7 @@
 <tags:createField property="beDep" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beVHall" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beVWell" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="beVHAgO" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}"/>
+<tags:createField property="beVHAgO" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beAHall" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beDel" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beDisin" entity="${instrTypeEncoded}" component="${component}"/>
@@ -81,15 +81,15 @@
 <tags:createField property="beAgit" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="bePerCh" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beRem" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="beRemAgO" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}"/>
+<tags:createField property="beRemAgO" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beAnx" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beOthr" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beOthrx" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="beFPred" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}" optionsAlignment="groupTopVertical"/>
+<tags:createField property="beFPred" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}" optionsAlignment="groupTopVertical"/>
 <tags:createField property="beFPredx" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beMode" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beModex" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="beAge" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}"/>
+<tags:createField property="beAge" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="motSymp" linkTextKey="top.quicklink"/>
@@ -102,14 +102,14 @@
 <tags:createField property="moFalls" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="moTrem" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="moSlow" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="moFrst" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}"/>
+<tags:createField property="moFrst" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="moMode" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="moModex" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="moMoPark" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="parkAge" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}"/>
+<tags:createField property="parkAge" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="moMoAls" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="alsAge" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}"/>
-<tags:createField property="moAge" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}instrTypeEncoded}" component="${component}"/>
+<tags:createField property="alsAge" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="moAge" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="overall" linkTextKey="top.quicklink"/>
@@ -143,9 +143,9 @@
   <c:if test="${current == 0 || (current == 1 && componentView == 'compare')}">
 
 
-PUT BACK IN TO DEFAULT TO FOLLOWUP PACKET ??
+<%--
 MUST RELOAD ON PACKET TYPE CHANGE B/C DIFF METADATA (dropdown lists for ageOfOnset have 777 code in followup)
-
+ --%>
 
 <ui:formGuide>
   <ui:observe elementIds="decClin" component="${componentPrefix}" forValue="^1" negate="true" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>

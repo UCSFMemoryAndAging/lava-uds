@@ -85,52 +85,52 @@ gives it style hidden) --%>
 
 <ui:formGuide>
   <ui:observe elementIds="packet" component="instrument" forValue="[F|T]"/>
-  <ui:unskip elementIds="newInf" component="${component}" 
+  <ui:unskip elementIds="newInf" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
   <ui:ignore elementIds="packet" component="instrument" forValue="[F|T]"/>
   <%-- when followUp unchecked --%>
-  <ui:unskip elementIds="inHisp,inHispOr,inRace,inRaSec,inRaTer,inEduc" component="${component}" 
+  <ui:unskip elementIds="inHisp,inHispOr,inRace,inRaSec,inRaTer,inEduc" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
   <ui:ignore elementIds="packet" component="instrument" forValue="I"/>
-  <ui:observe elementIds="newInf" component="${component}" forValue="^1"
+  <ui:observe elementIds="newInf" component="${component}" forValue="^1"/>
   <%-- when followUp checked and newInf Yes --%>
-  <ui:unskip elementIds="inHisp,inHispOr,inRace,inRaSec,inRaTer,inEduc" component="${component}" 
+  <ui:unskip elementIds="inHisp,inHispOr,inRace,inRaSec,inRaTer,inEduc" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
   <ui:depends elementIds="packet" component="instrument"/>
-  <ui:depends elementIds="newInf" component="${component}"
-  <ui:observe elementIds="inHisp" component="${component}" forValue="^1"
-  <ui:unskip elementIds="inHispOr" component="${component}" 
+  <ui:depends elementIds="newInf" component="${component}"/>
+  <ui:observe elementIds="inHisp" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="inHispOr" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
   <ui:depends elementIds="packet" component="instrument"/>
-  <ui:depends elementIds="newInf" component="${component}"
-  <ui:observe elementIds="inHispOr" component="${component}" forValue="^50"
+  <ui:depends elementIds="newInf" component="${component}"/>
+  <ui:observe elementIds="inHispOr" component="${component}" forValue="^50"/>
   <ui:unskip elementIds="inHispOx" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide>
   <ui:depends elementIds="packet" component="instrument"/>
-  <ui:depends elementIds="newInf" component="${component}"
-  <ui:observe elementIds="inRace" component="${component}" forValue="^50"
+  <ui:depends elementIds="newInf" component="${component}"/>
+  <ui:observe elementIds="inRace" component="${component}" forValue="^50"/>
   <ui:unskip elementIds="inRacex" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide>
   <ui:depends elementIds="packet" component="instrument"/>
-  <ui:depends elementIds="newInf" component="${component}"
-  <ui:observe elementIds="inRaSec" component="${component}" forValue="^50"
+  <ui:depends elementIds="newInf" component="${component}"/>
+  <ui:observe elementIds="inRaSec" component="${component}" forValue="^50"/>
   <ui:unskip elementIds="inRaSecx" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide>
   <ui:depends elementIds="packet" component="instrument"/>
-  <ui:depends elementIds="newInf" component="${component}"
-  <ui:observe elementIds="inRaTer" component="${component}" forValue="^50"
+  <ui:depends elementIds="newInf" component="${component}"/>
+  <ui:observe elementIds="inRaTer" component="${component}" forValue="^50"/>
   <ui:unskip elementIds="inRaTerx" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
   <ui:depends elementIds="packet" component="instrument"/>
-  <ui:observe elementIds="inLivWth" component="${component}" forValue="^0"
+  <ui:observe elementIds="inLivWth" component="${component}" forValue="^0"/>
   <ui:unskip elementIds="inVisits,inCalls" component="${component}"/> 
 </ui:formGuide>
   </c:if>

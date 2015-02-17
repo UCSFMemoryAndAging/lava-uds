@@ -20,8 +20,8 @@ public class UdsHealthHistory extends UdsInstrument {
 	
 	private Short tobac30;
 	private Short tobac100;
-	private Short smokYrs;
-	private Short packsPer;
+	private Short smokYrs; // UDS3 recode
+	private Short packsPer; // UDS3 packsPer
 	private Short quitSmok;
 	private Short alcoCcas; // UDS3 new
 	private Short alcFreq; // UDS3 new
@@ -63,11 +63,11 @@ public class UdsHealthHistory extends UdsInstrument {
 	private Short pdOthr;
 	private Short pdOthrYr;
 	private Short seizures;
-	private Short tbi;
-	private Short tbiBrief;
-	private Short tbiExten;
-	private Short tbiWolos;
-	private Short tbiYear;
+	private Short tbi; // UDS3 new
+	private Short tbiBrief; // UDS3 new
+	private Short tbiExten; // UDS3 new
+	private Short tbiWolos; // UDS3 new
+	private Short tbiYear; // UDS3 new
 	private Short traumBrf; // UDS removed
 	private Short traumExt; // UDS3 removed
 	private Short traumChr; // UDS3 removed

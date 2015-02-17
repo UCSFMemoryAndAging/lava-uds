@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+
+<beans>
+	
+	<bean id="list.udssubjectdemo3.codes" parent="list.uds.codes"/>
+	<bean id="list.udscoparticipantdemo3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsfamilyhistory3.codes" parent="list.uds.codes"/>
+	<bean id="list.udshealthhistory3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsneuroexam3.codes" parent="list.uds.codes"/>
+	<bean id="list.udssymptomsonset3.codes" parent="list.uds.codes"/>
+
+  <bean id="list.uds.subjectdemo3.REASON" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="To participate in a research study"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="To have a clinical evaluation"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Both"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.subjectdemo3.REFERSC" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Self-referral"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Non-professional contact"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="ADC participant referral"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="ADC clinician, staff, or investigator referral"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Nurse, doctor, or other health care provider"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other research clinician/staff/investigator"/>
+        <constructor-arg value="6"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+ 
+  <bean id="list.uds.subjectdemo3.LEARNED" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="ADC advertisement"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="News article or TV program"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Conference or community event"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Another organizations’s media appeal or website"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.subjectdemo3.SOURCENW" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Primarily ADC-funded"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Subject is supported primarily by a non- ADC study"/>
+        <constructor-arg value="2"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.subjectdemo3.birthMo" parent="list.numericRangeUds">
+	<property name="defaultMinValue" value="1"/>	
+	<property name="defaultMaxValue" value="12"/>
+  </bean>	
+  
+  <bean id="list.uds.subjectdemo3.birthYr" parent="list.numericRangeUds">
+	<property name="defaultMinValue" value="1900"/>	
+	<property name="defaultMaxValue" value="2015"/>
+  </bean>	
+
+  <bean id="list.uds.subjectdemo3.MARISTAT" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Married"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Widowed"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Divorced"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Separated"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Never married (or marriage was annulled)"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Living as married/domestic partner"/>
+        <constructor-arg value="6"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.subjectdemo3.LIVSITUA" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Lives alone"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Lives with one other person: a spouse or partner"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Lives with one other person: a relative, friend, or roommate"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Lives with caregiver who is not spouse/partner, relative, or friend"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Lives with a group (related or not related) in a private residence"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Lives in a group home (e.g., assisted living, nursing home, convent)"/>
+        <constructor-arg value="6"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.subjectdemo3.RESIDENC" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Single- or multi-family private residence (apartment, condo, house)"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Retirement community or independent group living"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Assisted living, adult family home, or boarding home"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Skilled nursing facility, nursing home, hospital, or hospice"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+    <bean id="list.uds.subjectdemo3.raceNone" parent="list.dataOnlyUds">
+		<property name="staticReferenceLists"><list>
+			<ref bean="list.uds.a1.race"/>
+		</list></property>
+    	<property name="data"><list> 
+		      <bean parent="list.data">
+        		<constructor-arg value="None reported"/>
+        		<constructor-arg value="88"/>
+      		</bean> 
+    	</list></property> 
+  	</bean>
+  
+  
+	<bean id="list.uds.coparticipantdemo3.relation" parent="list.dataOnlyUds"> 
+		<property name="data"><list> 
+	    	<bean parent="list.data">
+    		    <constructor-arg value="Spouse, partner or companion (include ex-spouse, ex-partner, fiance(e), boyfriend, girlfriend)"/>
+        		<constructor-arg value="1"/>
+			</bean> 
+			<bean parent="list.data">
+    	    	<constructor-arg value="Child (by blood or through marriage or adoption)"/>
+        		<constructor-arg value="2"/>
+      		</bean> 
+      		<bean parent="list.data">
+       	 		<constructor-arg value="Sibling (by blood or through marriage or adoption)"/>
+        		<constructor-arg value="3"/>
+	    	</bean> 
+      		<bean parent="list.data">
+       	 		<constructor-arg value="Other relative (by blood or through marriage or adoption)"/>
+        		<constructor-arg value="4"/>
+	    	</bean> 
+      		<bean parent="list.data">
+       	 		<constructor-arg value="Friend, neighbor, or someone known through family, friends, work, or community (e.g. church)"/>
+        		<constructor-arg value="5"/>
+	    	</bean> 
+    		<bean parent="list.data">
+        		<constructor-arg value="Paid caregiver, health care provider, or clinician"/>
+	        	<constructor-arg value="6"/>
+	    	</bean> 
+	    </list></property> 
+	</bean>
+  
+	<bean id="list.uds.coparticipantdemo3.inKnown" parent="list.numericRangeUds"> 
+    	<property name="defaultMinValue" value="0"/>
+    	<property name="defaultMaxValue" value="115"/>
+    	<property name="data"><list> 
+      		<bean parent="list.data">
+        		<constructor-arg value="Unknown"/>
+        		<constructor-arg value="999"/>
+      		</bean> 
+    	</list></property> 
+	</bean>
+  				 	
+  <bean id="list.uds.familyhistory3.FADMUT" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="No"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes, APP"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes, PS-1 (PSEN 1)"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes, PS-2 (PSEN 2)"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes, Other (specify)"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown whether mutation exists"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.familyhistory3.FADMUSO" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Family report (no test documentation available)"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Commercial test documentation"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Research lab test documentation"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other (specify)"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.familyhistory3.FFTDMUT" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="No"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes, MAPT"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes, PGRN"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes, C9orf72"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes, FUS"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes, Other (specify)"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown whether mutation exists"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  
+<!-- using uds.yearUnknown for all these  
+  <bean id="list.uds.familyhistory3.FamAdultYOB" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="1875"/>
+    <property name="defaultMaxValue" value="2015"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="9999"/>
+        <constructor-arg value="9999"/>
+      </bean> 
+    </list></property> 
+  </bean>
+-->  
+  
+  <bean id="list.uds.familyhistory3.AgeOfDeath" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="0"/>
+    <property name="defaultMaxValue" value="110"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="N/A"/>
+        <constructor-arg value="888"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="999"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.familyhistory3.NEURPROB" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognitive impairment/behavior change"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Parkinsonism"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="ALS"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other neurologic condition such as multiple sclerosis or stroke"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="N/A, no neurological problem or psychiatric condition"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.familyhistory3.PrimDx" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="040  Mild cognitive impairment (MCI), not otherwise specified"/>
+        <constructor-arg value="40"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="041  MCI - amnestic, single domain"/>
+        <constructor-arg value="41"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="042  MCI - multiple domain with amnesia"/>
+        <constructor-arg value="42"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="043  MCI - single domain nonamnestic"/>
+        <constructor-arg value="43"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="044  MCI - multiple domain nonamnestic"/>
+        <constructor-arg value="44"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="045  Impaired, but not MCI"/>
+        <constructor-arg value="45"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="050  Alzheimer’s disease dementia"/>
+        <constructor-arg value="50"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="070  Dementia with Lewy bodies"/>
+        <constructor-arg value="70"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="080  Vascular cognitive impairment or dementia"/>
+        <constructor-arg value="80"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="100  Impairment due to alcohol abuse"/>
+        <constructor-arg value="100"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="110  Dementia of undetermined etiology"/>
+        <constructor-arg value="110"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="120  Behavioral variant frontotemporal dementia"/>
+        <constructor-arg value="120"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="130  Primary progressive aphasia, semantic variant"/>
+        <constructor-arg value="130"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="131  Primary progressive aphasia, nonfluent/agrammatic variant"/>
+        <constructor-arg value="131"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="132  Primary progressive aphasia, logopenic variant"/>
+        <constructor-arg value="132"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="133  Primary progressive aphasia, not otherwise specified"/>
+        <constructor-arg value="133"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="140  Clinical progressive supranuclear palsy"/>
+        <constructor-arg value="140"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="150  Clinical corticobasal syndrome/corticobasal degeneration"/>
+        <constructor-arg value="150"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="160  Huntington’s disease"/>
+        <constructor-arg value="160"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="170  Clinical prion disease"/>
+        <constructor-arg value="170"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="180  Cognitive dysfunction from medications"/>
+        <constructor-arg value="180"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="190  Cognitive dysfunction from medical illness"/>
+        <constructor-arg value="190"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="200  Depression"/>
+        <constructor-arg value="200"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="210  Other major psychiatric illness"/>
+        <constructor-arg value="210"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="220  Down syndrome"/>
+        <constructor-arg value="220"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="230  Parkinson’s disease"/>
+        <constructor-arg value="230"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="240  Stroke"/>
+        <constructor-arg value="240"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="250  Hydrocephalus"/>
+        <constructor-arg value="250"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="260  Traumatic brain injury"/>
+        <constructor-arg value="260"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="270  CNS neoplasm"/>
+        <constructor-arg value="270"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="280  Other"/>
+        <constructor-arg value="280"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="310  Amyotrophic lateral sclerosis"/>
+        <constructor-arg value="310"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="320  Multiple sclerosis"/>
+        <constructor-arg value="320"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="400  Alzheimer’s disease neuropathology"/>
+        <constructor-arg value="400"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="410  Lewy body disease neuropathology"/>
+        <constructor-arg value="410"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="420  Gross infarct(s) neuropathology"/>
+        <constructor-arg value="420"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="421  Hemorrhage(s) neuropathology"/>
+        <constructor-arg value="421"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="422  Other cerebrovascular disease neuropathology"/>
+        <constructor-arg value="422"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="430  ALS/MND"/>
+        <constructor-arg value="430"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="431  FTLD with Tau pathology - Pick’s disease"/>
+        <constructor-arg value="431"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="432  FTLD with Tau pathology - CBD"/>
+        <constructor-arg value="432"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="433  FTLD with Tau pathology - PSP"/>
+        <constructor-arg value="433"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="434  FTLD with Tau pathology - argyrophyllic grains"/>
+        <constructor-arg value="434"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="435  FTLD with Tau pathology - other"/>
+        <constructor-arg value="435"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="436  FTLD with TDP-43"/>
+        <constructor-arg value="436"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="439  FTLD other (FTLD-FUS, FTLD-UPS, FTLD NOS)"/>
+        <constructor-arg value="439"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="490  Other neuropathologic diagnosis not listed above"/>
+        <constructor-arg value="490"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="999  Specific diagnosis unknown "/>
+        <constructor-arg value="999"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  
+  <bean id="list.uds.familyhistory3.EvalMethod" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Autopsy"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Examination"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Medical record review from formal dementia evaluation"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Review of general medical records AND co-participant and/or subject telephone interview"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Review of general medical records only"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Subject and/or co-participant telephone interview"/>
+        <constructor-arg value="6"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Family report"/>
+        <constructor-arg value="7"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.familyhistory3.FamAgeOfOnset" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="15"/>
+    <property name="defaultMaxValue" value="110"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="999"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.familyhistory3.SIBS" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="20"/>
+  </bean>
+  
+  <bean id="list.uds.familyhistory3.KIDS" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="15"/>
+  </bean>
+  
+<!-- using uds.yearUnknown for all these  
+  <bean id="list.uds.familyhistory3.FamChildYOB" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="1910"/>
+    <property name="defaultMaxValue" value="2015"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="9999"/>
+        <constructor-arg value="9999"/>
+      </bean> 
+    </list></property> 
+  </bean>
+-->
+
+  <bean id="list.uds.healthhistory3.SMOKYRS" parent="list.numericRangeUds"> 
+    <property name="defaultMaxValue" value="80"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="99"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.healthhistory3.PACKSPER" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="1 cigarette to less than 1/2 pack"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="½ pack to less than 1 pack"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="1 pack to 1½ packs"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="1½ packs to 2 packs"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="More than two packs"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.healthhistory3.ALCFREQ" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Less than once a month"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="About once a month"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="About once a week"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="A few times a week"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Daily or almost daily"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+  <bean id="list.uds.healthhistory3.TBI" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="No"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Single"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Repeated/multiple"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.healthhistory3.DIABTYPE" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Type 1"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Type 2"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other type (diabetes insipidus, latent au- toimmune diabetes/type 1.5, gestational diabetes)"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.healthhistory3.ARTHTYPE" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Rheumatoid"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Osteoarthritis"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.symptomsonset3.DECSUB" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="No"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Could not be assessed/subject too impaired"/>
+        <constructor-arg value="8"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.symptomsonset3.DECIN" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="No"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Yes"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="There is no co-participant"/>
+        <constructor-arg value="8"/>
+      </bean> 
+    </list></property> 
+  </bean>
+ 	
+    <bean id="list.uds.symptomsonset3.ageOfOnsetI" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="15"/>	
+		<property name="defaultMaxValue" value="115"/>
+	</bean>
+ 		
+    <bean id="list.uds.symptomsonset3.ageOfOnsetF" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="15"/>	
+		<property name="defaultMaxValue" value="115"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="Provided at Prior Visit"/><constructor-arg value="777"/></bean>
+		</list></property>
+	</bean>
+	
+  <bean id="list.uds.symptomsonset3.BEVHAGOI" parent="list.dataOnlyUds"> 
+  	<property name="staticReferenceLists"><list>
+		<ref bean="list.uds.symptomsonset3.ageOfOnsetI"/>
+	</list></property>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="N/A, not well-formed"/>
+        <constructor-arg value="888"/>
+      </bean> 
+    </list></property> 
+  </bean>
+    			
+  <bean id="list.uds.symptomsonset3.BEVHAGOF" parent="list.dataOnlyUds"> 
+  	<property name="staticReferenceLists"><list>
+		<ref bean="list.uds.symptomsonset3.ageOfOnsetF"/>
+	</list></property>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="N/A, not well-formed"/>
+        <constructor-arg value="888"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+  <bean id="list.uds.symptomsonset3.COGFPREDI" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Memory"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Orientation"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Executive function — judgment, planning, problem-solving"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Language"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Visuospatial function"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Attention/concentration"/>
+        <constructor-arg value="6"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Fluctuating cognition"/>
+        <constructor-arg value="7"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other (specify)"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="99"/>
+      </bean> 
+    </list></property> 
+  </bean>
+ 	
+  <bean id="list.uds.symptomsonset3.COGFPREDF" parent="list.uds.symptomsonset3.COGFPREDI"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Assessed at previous UDS visit"/>
+        <constructor-arg value="0"/>
+      </bean> 
+    </list></property> 
+  </bean>
+ 	
+  <bean id="list.uds.symptomsonset3.MODE" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Gradual"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Subacute"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Abrupt"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other (specify)"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="99"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+  <bean id="list.uds.symptomsonset3.BEFPREDI" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Apathy / withdrawal"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Depressed mood"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Psychosis"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Disinhibition"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Irritability"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Agitation"/>
+        <constructor-arg value="6"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Personality change"/>
+        <constructor-arg value="7"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="REM sleep behavior disorder"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Anxiety"/>
+        <constructor-arg value="9"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Other (specify)"/>
+        <constructor-arg value="10"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="99"/>
+      </bean> 
+    </list></property> 
+  </bean>
+ 	
+  <bean id="list.uds.symptomsonset3.BEFPREDF" parent="list.dataOnlyUds"> 
+  	<property name="staticReferenceLists"><list>
+		<ref bean="list.uds.symptomsonset3.BEFPREDI"/>
+	</list></property>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Assessed at previous UDS visit"/>
+        <constructor-arg value="0"/>
+      </bean> 
+    </list></property> 
+  </bean>
+ 	
+   <bean id="list.uds.symptomsonset3.MOFRSTI" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Gait disorder"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Falls"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Tremor"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Slowness"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="99"/>
+      </bean> 
+    </list></property> 
+  </bean>
+ 				
+  <bean id="list.uds.symptomsonset3.MOFRSTF" parent="list.dataOnlyUds"> 
+  	<property name="staticReferenceLists"><list>
+		<ref bean="list.uds.symptomsonset3.MOFRSTI"/>
+	</list></property>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Assessed at previous UDS visit"/>
+        <constructor-arg value="0"/>
+      </bean> 
+    </list></property> 
+  </bean>
+ 	
+  <bean id="list.uds.symptomsonset3.COURSE" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Gradually progressive"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Stepwise"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Static"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Fluctuating"/>
+        <constructor-arg value="4"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Improved"/>
+        <constructor-arg value="5"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="N/A"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+					
+  <bean id="list.uds.symptomsonset3.FRSTCHG" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Cognition"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Behavior"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Motor function"/>
+        <constructor-arg value="3"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="N/A"/>
+        <constructor-arg value="8"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+		
+</beans>

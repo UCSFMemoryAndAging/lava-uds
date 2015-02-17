@@ -14,14 +14,14 @@ import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.people.model.Patient;
 import edu.ucsf.lava.crms.scheduling.model.Visit;
 
-public class UDSFamilyHistory3 extends UdsInstrument{
-  public static EntityManager MANAGER = new EntityBase.Manager(UDSFamilyHistory3.class);
+public class UdsFamilyHistory3 extends UdsInstrument{
+  public static EntityManager MANAGER = new EntityBase.Manager(UdsFamilyHistory3.class);
   public static final String UDS_FAMILY_HISTORY_FORMID = "A3";
  
-  public UDSFamilyHistory3() {}
+  public UdsFamilyHistory3() {}
   
   /* constructor for adding new instruments. do instrument-specific initialization here. */
-  public UDSFamilyHistory3(Patient p, Visit v, String projName, String instrType, Date dcDate, String dcStatus) {
+  public UdsFamilyHistory3(Patient p, Visit v, String projName, String instrType, Date dcDate, String dcStatus) {
     super(p,v,projName,instrType,dcDate,dcStatus);
 	this.setFormId(UDS_FAMILY_HISTORY_FORMID);		
   }

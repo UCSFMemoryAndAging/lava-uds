@@ -1,6 +1,3 @@
-delete from hibernateproperty where entity="udsfamilyhistory3";
-delete from viewproperty where entity="udsfamilyhistory3";
-
 DROP TABLE IF EXISTS udsfamilyhistory3;
 
 -- Initialize table
@@ -289,18 +286,20 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
+delete from viewproperty where entity="udsfamilyhistory3";
+
 -- Add columns to viewproperty table
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.afffamm', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='afffamm',
   required='No', proporder='1', attributes='', quickHelp='', 
-  label="Are there affected first-degree relatives?:", context="r",
-  list="list.uds.noYesUnknown019", style="scale";
+  label="1. Are there affected first-order relatives?", context="r",
+  list="uds.noYesUnknown019", style="scale";
 
 -- hidden version for initial visit  
 insert into viewproperty 
 set messageCode='initial.udsfamilyhistory3.nwinfmut', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsfamilyhistory3', property='nwinfmut',
+  scope='crms-nacc', prefix='initial', entity='udsfamilyhistory3', property='nwinfmut',
   required='No', proporder='1', attributes='', quickHelp='', 
   context="h",
   style="scale";
@@ -309,91 +308,91 @@ insert into viewproperty
 set messageCode='*.udsfamilyhistory3.nwinfmut', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='newinfmut',
   required='No', proporder='1', attributes='', quickHelp='', 
-  label="Since the last visit, is new information available concerning genetic mutations?", context="r",
-  list="list.uds.noYesUnknown019", style="scale";
+  label="1. Since the last visit, is new information available concerning genetic mutations?", context="r",
+  list="uds.noYesUnknown019", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fadmut', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fadmut',
   required='No', proporder='2', attributes='', quickHelp='', 
-  label="In this family, is there evidence for an AD mutation? If Yes, select predominant mutation.:", context="r",
+  label="2a. In this family, is there evidence for an AD mutation? If Yes, select predominant mutation.", context="r",
   list="uds.familyhistory3.FADMUT", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fadmutx', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fadmutx',
-  required='No', proporder='3', attributes='', quickHelp='', 
-  label="If Yes, Other (specify):", context="r", maxLength="6", style="string";
+  required='No', proporder='3', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="If Yes, Other (specify):", context="i", size="60", maxLength="60", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fadmuso', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fadmuso',
   required='No', proporder='4', attributes='', quickHelp='', 
-  label="Source of evidence for AD mutation:", context="r",
+  label="2b. Source of evidence for AD mutation", context="r",
   list="uds.familyhistory3.FADMUSO", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fadmusox', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fadmusox',
-  required='No', proporder='5', attributes='', quickHelp='', 
-  label="If other, specify:", context="r", maxLength="6", style="string";
+  required='No', proporder='5', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="If other, specify:", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fftdmut', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fftdmut',
   required='No', proporder='6', attributes='', quickHelp='', 
-  label="In this family, is there evidence for an FTLD mutation? If Yes, select predominant mutation.:", context="r",
+  label="3a. In this family, is there evidence for an FTLD mutation? If Yes, select predominant mutation.", context="r",
   list="uds.familyhistory3.FFTDMUT", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fftdmutx', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fftdmutx',
-  required='No', proporder='7', attributes='', quickHelp='', 
-  label="If Yes, Other (specify):", context="r", maxLength="6", style="string";
+  required='No', proporder='7', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="If Yes, Other (specify)", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fftdmuso', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fftdmuso',
   required='No', proporder='8', attributes='', quickHelp='', 
-  label="Source of evidence for FTLD mutation:", context="r",
+  label="3b. Source of evidence for FTLD mutation", context="r",
   list="uds.familyhistory3.FADMUSO", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fftdmusx', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fftdmusx',
-  required='No', proporder='9', attributes='', quickHelp='', 
-  label="If other, specify:", context="r", maxLength="6", style="string";
+  required='No', proporder='9', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='',
+  label="If other, specify", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fothmut', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fothmut',
   required='No', proporder='10', attributes='', quickHelp='', 
-  label="In this family, is there evidence for a mutation other than an AD or FTLD mutation?:", context="r",
+  label="4a. In this family, is there evidence for a mutation other than an AD or FTLD mutation?", context="r",
   list="uds.noYesUnknown019", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fothmutx', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fothmutx',
-  required='No', proporder='11', attributes='', quickHelp='', 
-  label="If Yes, specify:", context="r", maxLength="6", style="string";
+  required='No', proporder='11', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="If Yes, specify", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fothmuso', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fothmuso',
   required='No', proporder='12', attributes='', quickHelp='', 
-  label="Source of evidence for other mutation::", context="r",
+  label="4b. Source of evidence for other mutation", context="r",
   list="uds.familyhistory3.FADMUSO", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.fothmusx', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='fothmusx',
-  required='No', proporder='13', attributes='', quickHelp='', 
-  label="If other, specify::", context="r", maxLength="6", style="string";
+  required='No', proporder='13', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="If other, specify", context="i", maxLength="60", size="60", style="string";
 
 -- hidden version for initial visit  
 insert into viewproperty 
 set messageCode='initial.udsfamilyhistory3.nwinfpar', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsfamilyhistory3', property='nwinfpar',
+  scope='crms-nacc', prefix='initial', entity='udsfamilyhistory3', property='nwinfpar',
   required='No', proporder='1', attributes='', quickHelp='', 
   context="h",
   style="scale";
@@ -403,117 +402,117 @@ set messageCode='*.udsfamilyhistory3.nwinfpar', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='newinfpar',
   required='No', proporder='1', attributes='', quickHelp='', 
   label="Since the last visit, is new information available concerning the status of the subject's biological mother or father?", context="r",
-  list="list.uds.noYes01", style="scale";
+  list="uds.noYes01", style="scale";
   
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.mommob', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='mommob',
   required='No', proporder='14', attributes='', quickHelp='', 
-  label="Mother Birth month:", context="r",
+  label="Mother Birth month and year", context="r", size="5",
   list="uds.m1.month", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.momyob', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='momyob',
   required='No', proporder='15', attributes='', quickHelp='', 
-  label="Mother Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  label="Mother Birth year", context="r", size="5",
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.momdage', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='momdage',
   required='No', proporder='16', attributes='', quickHelp='', 
-  label="Mother Age at death:", context="r",
+  label="Mother Age at death", context="r", size="7",
   list="uds.familyhistory3.AgeOfDeath", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.momneur', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='momneur',
   required='No', proporder='17', attributes='', quickHelp='', 
-  label="Mother Neurological problem:", context="r",
+  label="Mother Neurological problem", context="r", size="17",
   list="uds.familyhistory3.NEURPROB", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.momprdx', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='momprdx',
   required='No', proporder='18', attributes='', quickHelp='', 
-  label="Mother Primary diagnosis:", context="r",
+  label="Mother Primary diagnosis", context="r", size="17",
   list="uds.familyhistory3.PrimDx", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.mommoe', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='mommoe',
   required='No', proporder='19', attributes='', quickHelp='', 
-  label="Mother Method of evaluation:", context="r",
+  label="Mother Method of evaluation", context="r", size="17",
   list="uds.familyhistory3.EvalMethod", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.momageo', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='momageo',
   required='No', proporder='20', attributes='', quickHelp='', 
-  label="Mother Age of onset:", context="r",
+  label="Mother Age of onset", context="r", size="7",
   list="uds.familyhistory3.FamAgeOfOnset", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.dadmob', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='dadmob',
   required='No', proporder='21', attributes='', quickHelp='', 
-  label="Father Birth month:", context="r",
+  label="Father Birth month and year", context="r", size="5",
   list="uds.m1.month", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.dadyob', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='dadyob',
   required='No', proporder='22', attributes='', quickHelp='', 
-  label="Father Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  label="Father Birth year", context="r", size="5",
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.daddage', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='daddage',
   required='No', proporder='23', attributes='', quickHelp='', 
-  label="Father Age at death:", context="r",
+  label="Father Age at death", context="r", size="7",
   list="uds.familyhistory3.AgeOfDeath", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.dadneur', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='dadneur',
   required='No', proporder='24', attributes='', quickHelp='', 
-  label="Father Neurological problem:", context="r",
+  label="Father Neurological problem", context="r", size="17",
   list="uds.familyhistory3.NEURPROB", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.dadprdx', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='dadprdx',
   required='No', proporder='25', attributes='', quickHelp='', 
-  label="Father Primary diagnosis:", context="r",
+  label="Father Primary diagnosis", context="r", size="17",
   list="uds.familyhistory3.PrimDx", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.dadmoe', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='dadmoe',
   required='No', proporder='26', attributes='', quickHelp='', 
-  label="Father Method of evaluation:", context="r",
+  label="Father Method of evaluation", context="r", size="17",
   list="uds.familyhistory3.EvalMethod", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.dadageo', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='dadageo',
   required='No', proporder='27', attributes='', quickHelp='', 
-  label="Father Age of onset:", context="r",
+  label="Father Age of onset", context="r", size="7",
   list="uds.familyhistory3.FamAgeOfOnset", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sibs', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='sibs',
   required='No', proporder='28', attributes='', quickHelp='', 
-  label="Number of full siblings?:", context="r",
+  label="Number of full siblings?", context="r",
   list="uds.familyhistory3.SIBS", style="scale";
 
 -- hidden version for initial visit  
 insert into viewproperty 
 set messageCode='initial.udsfamilyhistory3.nwinfsib', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsfamilyhistory3', property='nwinfsib',
+  scope='crms-nacc', prefix='initial', entity='udsfamilyhistory3', property='nwinfsib',
   required='No', proporder='1', attributes='', quickHelp='', 
   context="h",
   style="scale";
@@ -523,7 +522,7 @@ set messageCode='*.udsfamilyhistory3.nwinfsib', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='newinfsib',
   required='No', proporder='1', attributes='', quickHelp='', 
   label="Since the last visit, is new information available concerning the status of the subject's siblings?", context="r",
-  list="list.uds.noYes01", style="scale";
+  list="uds.noYes01", style="scale";
   
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib1mob', locale='en', instance='lava', 
@@ -537,7 +536,7 @@ set messageCode='*.udsfamilyhistory3.sib1yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib1yob',
   required='No', proporder='30', attributes='', quickHelp='', 
   label="Sibling 1 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib1agd', locale='en', instance='lava', 
@@ -571,7 +570,7 @@ insert into viewproperty
 set messageCode='*.udsfamilyhistory3.sib1ago', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib1ago',
   required='No', proporder='35', attributes='', quickHelp='', 
-  label="Sibling 1 Age of onset:", context="r",
+  label="Sibling 1 Age of onset:", context="r", size="10",
   list="uds.familyhistory3.FamAgeOfOnset", style="scale";
 
 insert into viewproperty 
@@ -586,7 +585,7 @@ set messageCode='*.udsfamilyhistory3.sib2yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib2yob',
   required='No', proporder='37', attributes='', quickHelp='', 
   label="Sibling 2 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib2agd', locale='en', instance='lava', 
@@ -635,7 +634,7 @@ set messageCode='*.udsfamilyhistory3.sib3yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib3yob',
   required='No', proporder='44', attributes='', quickHelp='', 
   label="Sibling 3 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib3agd', locale='en', instance='lava', 
@@ -684,7 +683,7 @@ set messageCode='*.udsfamilyhistory3.sib4yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib4yob',
   required='No', proporder='51', attributes='', quickHelp='', 
   label="Sibling 4 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib4agd', locale='en', instance='lava', 
@@ -733,7 +732,7 @@ set messageCode='*.udsfamilyhistory3.sib5yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib5yob',
   required='No', proporder='58', attributes='', quickHelp='', 
   label="Sibling 5 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib5agd', locale='en', instance='lava', 
@@ -782,7 +781,7 @@ set messageCode='*.udsfamilyhistory3.sib6yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib6yob',
   required='No', proporder='65', attributes='', quickHelp='', 
   label="Sibling 6 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib6agd', locale='en', instance='lava', 
@@ -831,7 +830,7 @@ set messageCode='*.udsfamilyhistory3.sib7yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib7yob',
   required='No', proporder='72', attributes='', quickHelp='', 
   label="Sibling 7 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib7agd', locale='en', instance='lava', 
@@ -865,7 +864,7 @@ insert into viewproperty
 set messageCode='*.udsfamilyhistory3.sib7ago', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib7ago',
   required='No', proporder='77', attributes='', quickHelp='', 
-  label="Sibling 7 Age of onset:", context="r",
+  label="Sibling 7 Age of onset:", context="r", 
   list="uds.familyhistory3.FamAgeOfOnset", style="scale";
 
 insert into viewproperty 
@@ -880,7 +879,7 @@ set messageCode='*.udsfamilyhistory3.sib8yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib8yob',
   required='No', proporder='79', attributes='', quickHelp='', 
   label="Sibling 8 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib8agd', locale='en', instance='lava', 
@@ -929,7 +928,7 @@ set messageCode='*.udsfamilyhistory3.sib9yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib9yob',
   required='No', proporder='86', attributes='', quickHelp='', 
   label="Sibling 9 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib9agd', locale='en', instance='lava', 
@@ -978,7 +977,7 @@ set messageCode='*.udsfamilyhistory3.sib10yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib10yob',
   required='No', proporder='93', attributes='', quickHelp='', 
   label="Sibling 10 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib10agd', locale='en', instance='lava', 
@@ -1027,7 +1026,7 @@ set messageCode='*.udsfamilyhistory3.sib11yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib11yob',
   required='No', proporder='100', attributes='', quickHelp='', 
   label="Sibling 11 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib11agd', locale='en', instance='lava', 
@@ -1076,7 +1075,7 @@ set messageCode='*.udsfamilyhistory3.sib12yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib12yob',
   required='No', proporder='107', attributes='', quickHelp='', 
   label="Sibling 12 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib12agd', locale='en', instance='lava', 
@@ -1125,7 +1124,7 @@ set messageCode='*.udsfamilyhistory3.sib13yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib13yob',
   required='No', proporder='114', attributes='', quickHelp='', 
   label="Sibling 13 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib13agd', locale='en', instance='lava', 
@@ -1174,7 +1173,7 @@ set messageCode='*.udsfamilyhistory3.sib14yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib14yob',
   required='No', proporder='121', attributes='', quickHelp='', 
   label="Sibling 14 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib14agd', locale='en', instance='lava', 
@@ -1223,7 +1222,7 @@ set messageCode='*.udsfamilyhistory3.sib15yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib15yob',
   required='No', proporder='128', attributes='', quickHelp='', 
   label="Sibling 15 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib15agd', locale='en', instance='lava', 
@@ -1272,7 +1271,7 @@ set messageCode='*.udsfamilyhistory3.sib16yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib16yob',
   required='No', proporder='135', attributes='', quickHelp='', 
   label="Sibling 16 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib16agd', locale='en', instance='lava', 
@@ -1321,7 +1320,7 @@ set messageCode='*.udsfamilyhistory3.sib17yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib17yob',
   required='No', proporder='142', attributes='', quickHelp='', 
   label="Sibling 17 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib17agd', locale='en', instance='lava', 
@@ -1370,7 +1369,7 @@ set messageCode='*.udsfamilyhistory3.sib18yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib18yob',
   required='No', proporder='149', attributes='', quickHelp='', 
   label="Sibling 18 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib18agd', locale='en', instance='lava', 
@@ -1419,7 +1418,7 @@ set messageCode='*.udsfamilyhistory3.sib19yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib19yob',
   required='No', proporder='156', attributes='', quickHelp='', 
   label="Sibling 19 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib19agd', locale='en', instance='lava', 
@@ -1468,7 +1467,7 @@ set messageCode='*.udsfamilyhistory3.sib20yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='sib20yob',
   required='No', proporder='163', attributes='', quickHelp='', 
   label="Sibling 20 Birth year:", context="r",
-  list="uds.familyhistory3.FamAdultYOB", style="scale";
+  list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.sib20agd', locale='en', instance='lava', 
@@ -1515,7 +1514,7 @@ set messageCode='*.udsfamilyhistory3.kids', locale='en', instance='lava',
 -- hidden version for initial visit  
 insert into viewproperty 
 set messageCode='initial.udsfamilyhistory3.nwinfkid', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsfamilyhistory3', property='nwinfkid',
+  scope='crms-nacc', prefix='initial', entity='udsfamilyhistory3', property='nwinfkid',
   required='No', proporder='1', attributes='', quickHelp='', 
   context="h",
   style="scale";
@@ -1525,7 +1524,7 @@ set messageCode='*.udsfamilyhistory3.nwinfkid', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='newinfkid',
   required='No', proporder='1', attributes='', quickHelp='', 
   label="Since the last visit, is new information available concerning the status of the subject's biological children?", context="r",
-  list="list.uds.noYes01", style="scale";
+  list="uds.noYes01", style="scale";
   
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid1mob', locale='en', instance='lava', 
@@ -1539,7 +1538,7 @@ set messageCode='*.udsfamilyhistory3.kid1yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid1yob',
   required='No', proporder='171', attributes='', quickHelp='', 
   label="Child 1 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid1agd', locale='en', instance='lava', 
@@ -1588,7 +1587,7 @@ set messageCode='*.udsfamilyhistory3.kid2yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid2yob',
   required='No', proporder='178', attributes='', quickHelp='', 
   label="Child 2 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid2agd', locale='en', instance='lava', 
@@ -1637,7 +1636,7 @@ set messageCode='*.udsfamilyhistory3.kid3yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid3yob',
   required='No', proporder='185', attributes='', quickHelp='', 
   label="Child 3 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid3agd', locale='en', instance='lava', 
@@ -1686,7 +1685,7 @@ set messageCode='*.udsfamilyhistory3.kid4yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid4yob',
   required='No', proporder='192', attributes='', quickHelp='', 
   label="Child 4 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid4agd', locale='en', instance='lava', 
@@ -1735,7 +1734,7 @@ set messageCode='*.udsfamilyhistory3.kid5yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid5yob',
   required='No', proporder='199', attributes='', quickHelp='', 
   label="Child 5 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid5agd', locale='en', instance='lava', 
@@ -1784,7 +1783,7 @@ set messageCode='*.udsfamilyhistory3.kid6yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid6yob',
   required='No', proporder='206', attributes='', quickHelp='', 
   label="Child 6 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid6agd', locale='en', instance='lava', 
@@ -1833,7 +1832,7 @@ set messageCode='*.udsfamilyhistory3.kid7yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid7yob',
   required='No', proporder='213', attributes='', quickHelp='', 
   label="Child 7 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid7agd', locale='en', instance='lava', 
@@ -1882,7 +1881,7 @@ set messageCode='*.udsfamilyhistory3.kid8yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid8yob',
   required='No', proporder='220', attributes='', quickHelp='', 
   label="Child 8 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid8agd', locale='en', instance='lava', 
@@ -1931,7 +1930,7 @@ set messageCode='*.udsfamilyhistory3.kid9yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid9yob',
   required='No', proporder='227', attributes='', quickHelp='', 
   label="Child 9 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid9agd', locale='en', instance='lava', 
@@ -1980,7 +1979,7 @@ set messageCode='*.udsfamilyhistory3.kid10yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid10yob',
   required='No', proporder='234', attributes='', quickHelp='', 
   label="Child 10 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid10agd', locale='en', instance='lava', 
@@ -2029,7 +2028,7 @@ set messageCode='*.udsfamilyhistory3.kid11yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid11yob',
   required='No', proporder='241', attributes='', quickHelp='', 
   label="Child 11 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid11agd', locale='en', instance='lava', 
@@ -2078,7 +2077,7 @@ set messageCode='*.udsfamilyhistory3.kid12yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid12yob',
   required='No', proporder='248', attributes='', quickHelp='', 
   label="Child 12 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid12agd', locale='en', instance='lava', 
@@ -2127,7 +2126,7 @@ set messageCode='*.udsfamilyhistory3.kid13yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid13yob',
   required='No', proporder='255', attributes='', quickHelp='', 
   label="Child 13 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid13agd', locale='en', instance='lava', 
@@ -2176,7 +2175,7 @@ set messageCode='*.udsfamilyhistory3.kid14yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid14yob',
   required='No', proporder='262', attributes='', quickHelp='', 
   label="Child 14 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid14agd', locale='en', instance='lava', 
@@ -2225,7 +2224,7 @@ set messageCode='*.udsfamilyhistory3.kid15yob', locale='en', instance='lava',
   scope='crms-nacc', entity='udsfamilyhistory3', property='kid15yob',
   required='No', proporder='269', attributes='', quickHelp='', 
   label="Child 15 Birth year:", context="r",
-  list="uds.familyhistory3.FamChildYOB", style="scale";
+  list="uds.yearKnown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udsfamilyhistory3.kid15agd', locale='en', instance='lava', 

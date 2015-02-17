@@ -348,6 +348,16 @@ public class UdsSubjectDemo extends UdsInstrument {
 	public void markUnusedFields(String version) {
 		if(version.equalsIgnoreCase("3")){
 			this.inMds = this.refer = this.source = this.livSit = (short)-8;
+			this.reasonx = this.referx = this.mariStax = livSitx = residenx = "-8";
+			if (this.getPacket() != null && !this.getPacket().equals("I")) {
+				// PROBLEM is that this is called when this instrument is added and at that time do not know whether the packet will
+				// be initial or followup, so these to not get marked. if the form is data entered as followup these values are
+				// not required so just remain null and are saved as null. this is ok for the NACC since the "initial packet only" 
+				// fields do not get submitted anyway, but for LAVA Query would be clearer if they were marked as unused instead of null
+				this.reason = this.referSc = this.learned = this.preStat = this.presPart = this.sourceNw = this.hispanic
+				= this.hispOr = this.race = this.raceSec = this.raceTer = this.primLang = this.educ = this.handed = (short)-8;
+				this.hispOrx = this.racex = this.raceSecx = this.raceTerx = this.primLanx = "-8";
+			}
 		}
 	}
 

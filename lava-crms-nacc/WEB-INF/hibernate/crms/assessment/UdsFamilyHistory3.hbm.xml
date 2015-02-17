@@ -10,7 +10,7 @@
 
 <hibernate-mapping>
 
-  <class name="edu.ucsf.lava.crms.assessment.model.UDSFamilyHistory3" table="instrumenttracking" select-before-update="true">
+  <class name="edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory3" table="instrumenttracking" select-before-update="true">
 
     &instrInclude;
 	&udsInstrInclude;

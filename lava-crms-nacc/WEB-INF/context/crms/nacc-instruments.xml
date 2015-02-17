@@ -117,7 +117,7 @@
 	<bean id="udsappraisal2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udscdr1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udscdr2FormAction" parent="udsInstrumentFormAction"/>
-	<bean id="udscoparticipant3FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udscoparticipantdemo3FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsdiagnosis1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsdiagnosis2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsfamilyhistory1FormAction" parent="udsInstrumentFormAction"/>
@@ -484,7 +484,6 @@
 	<bean id="udssubjectdemo2" parent="instrumentConfig">
 		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsSubjectDemo</value></property>
 		<property name="supportedFlows"><value>enter</value></property>
-		<property name="currentVersionAlias"><value>udssubjectdemo</value></property>
 	</bean>		 			
 	
 	<bean id="udssubjectdemo3" parent="instrumentConfig">

@@ -1,4 +1,3 @@
-DELETE FROM viewproperty where entity="udscoparticipantdemo3";
 -- only allow users to create new UDS 3.0 instruments. the only way to create a UDS 2.0 instrument is through Change Version
 DELETE FROM instrument where InstrName='UDS Informant Demo';
 DELETE FROM instrument where InstrName='UDS Co-Participant Demo';
@@ -13,49 +12,283 @@ INSERT INTO instrument (InstrName, TableName, FormName, HasVersion) VALUES ('UDS
 
 -- not using UDS 2 metadata because text changed from "informant" to "co-participant"
 -- note: need separate metadata record for followup because item numbers different   
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inBirMo','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inBirMo','Co-Participant Demographics','r','numeric','No','1. Co-Participant\'s month/year of birth <i>(mm/yyyy)</i>',NULL,2,2,0,'','',NULL,5,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inBirMo','en','lava','crms-nacc','followup','udscoparticipantdemo3','inBirMo','Co-Participant Demographics','r','numeric','No','1. Co-Participant\'s month/year of birth <i>(mm/yyyy)</i>',NULL,2,2,0,NULL,NULL,NULL,5,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inBirYr','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inBirYr','Co-Participant Demographics','r','numeric','No','',NULL,4,4,0,'','',NULL,6,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inBirYr','en','lava','crms-nacc','followup','udscoparticipantdemo3','inBirYr','Co-Participant Demographics','r','numeric','No',NULL,NULL,4,4,0,NULL,NULL,NULL,6,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inSex','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inSex','Co-Participant Demographics','r','scale','No','2. Co-Participant\'s sex',NULL,NULL,NULL,0,'','uds.gender',NULL,7,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inSex','en','lava','crms-nacc','followup','udscoparticipantdemo3','inSex','Co-Participant Demographics','r','scale','No','2. Co-Participant\'s sex',NULL,NULL,NULL,0,NULL,'uds.gender',NULL,7,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.newInf','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','newInf','Co-Participant Demographics','h','scale','No',NULL,NULL,NULL,NULL,0,'',NULL,NULL,8,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.newInf','en','lava','crms-nacc','followup','udscoparticipantdemo3','newInf','Co-Participant Demographics','r','scale','No','3. Is this a new co-participant? (If no, skip to \'relationship with the subject\' item)',NULL,NULL,NULL,0,NULL,'uds.noYes01',NULL,8,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inHisp','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inHisp','Co-Participant Demographics','r','scale','No','3a. Does the co-participant report being of Hispanic/Latino ethnicity',NULL,NULL,NULL,0,'','uds.noYesUnknown019',NULL,9,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inHisp','en','lava','crms-nacc','followup','udscoparticipantdemo3','inHisp','Co-Participant Demographics','r','scale','No','4a. Does the co-participant report being of Hispanic/Latino ethnicity',NULL,NULL,NULL,0,NULL,'uds.noYesUnknown019',NULL,9,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inHispOr','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inHispOr','Co-Participant Demographics','r','scale','No','3b. If yes, what are the co-participant\'s reported origins',NULL,NULL,NULL,0,'','uds.a1.hispanic',NULL,10,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inHispOr','en','lava','crms-nacc','followup','udscoparticipantdemo3','inHispOr','Co-Participant Demographics','r','scale','No','4b. If yes, what are the co-participant\'s reported origins',NULL,NULL,NULL,0,NULL,'uds.a1.hispanic',NULL,10,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inHispOx','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inHispOx','Co-Participant Demographics','i','string','No','if other (specify):',NULL,NULL,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"','',NULL,11,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inHispOx','en','lava','crms-nacc','followup','udscoparticipantdemo3','inHispOx','Co-Participant Demographics','i','string','No','if other (specify):',NULL,NULL,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,11,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inRace','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inRace','Co-Participant Demographics','r','scale','No','4. What does the co-participant report as his/her primary race',NULL,NULL,NULL,0,'','uds.a1.race',NULL,12,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inRace','en','lava','crms-nacc','followup','udscoparticipantdemo3','inRace','Co-Participant Demographics','r','scale','No','5. What does the co-participant report as his/her primary race',NULL,NULL,NULL,0,NULL,'uds.a1.race',NULL,12,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inRacex','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inRacex','Co-Participant Demographics','i','string','No','if other (specify):',NULL,NULL,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"','',NULL,13,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inRacex','en','lava','crms-nacc','followup','udscoparticipantdemo3','inRacex','Co-Participant Demographics','i','string','No','if other (specify):',NULL,NULL,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,13,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inRaSec','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inRaSec','Co-Participant Demographics','r','scale','No','5. What does the co-participant report as his/her secondary race',NULL,NULL,NULL,0,'','uds.a1.race2',NULL,14,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inRaSec','en','lava','crms-nacc','followup','udscoparticipantdemo3','inRaSec','Co-Participant Demographics','r','scale','No','6. What does the co-participant report as his/her secondary race',NULL,NULL,NULL,0,NULL,'uds.a1.race2',NULL,14,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inRaSecx','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inRaSecx','Co-Participant Demographics','i','string','No','if other (specify):',NULL,NULL,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"','',NULL,15,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inRaSecx','en','lava','crms-nacc','followup','udscoparticipantdemo3','inRaSecx','Co-Participant Demographics','i','string','No','if other (specify):',NULL,NULL,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,15,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inRaTer','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inRaTer','Co-Participant Demographics','r','scale','No','6. What does the co-participant report as his/her tertiary race',NULL,NULL,NULL,0,'','uds.a1.race2',NULL,16,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inRaTer','en','lava','crms-nacc','followup','udscoparticipantdemo3','inRaTer','Co-Participant Demographics','r','scale','No','7. What does the co-participant report as his/her tertiary race',NULL,NULL,NULL,0,NULL,'uds.a1.race2',NULL,16,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inRaTerx','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inRaTerx','Co-Participant Demographics','i','string','No','if other (specify):',NULL,NULL,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"','',NULL,17,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inRaTerx','en','lava','crms-nacc','followup','udscoparticipantdemo3','inRaTerx','Co-Participant Demographics','i','string','No','if other (specify):',NULL,NULL,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,17,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inEduc','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inEduc','Co-Participant Demographics','r','range','No','7. Co-Participant\'s years of education',NULL,NULL,NULL,0,'','uds.range0_30',NULL,18,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inEduc','en','lava','crms-nacc','followup','udscoparticipantdemo3','inEduc','Co-Participant Demographics','r','range','No','8. Co-Participant\'s years of education',NULL,NULL,NULL,0,NULL,'uds.range0_30',NULL,18,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inRelTo','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inRelTo','Co-Participant Demographics','r','scale','No','8. What is the co-participant\'s relationship to the subject',NULL,NULL,NULL,0,'','uds.coparticipantdemo3.relation',NULL,19,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inRelTo','en','lava','crms-nacc','followup','udscoparticipantdemo3','inRelTo','Co-Participant Demographics','r','scale','No','9. What is the co-participant\'s relationship to the subject',NULL,NULL,NULL,0,NULL,'uds.coparticipantdemo3.relation',NULL,19,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inRelTox','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inRelTox','Co-Participant Demographics','i','string','No','if other (specify):',NULL,NULL,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"','',NULL,20,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inRelTox','en','lava','crms-nacc','followup','udscoparticipantdemo3','inRelTox','Co-Participant Demographics','i','string','No','if other (specify):',NULL,NULL,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,20,NULL,'2009-01-24 21:28:51');
--- new UDS 3.0 variable: inKnown
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inKnown','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inKnown','Co-Participant Demographics','r','scale','No','8a. How long has co-participant known subject?',NULL,NULL,NULL,0,'','uds.coparticipantdemo3.inKnown',NULL,19,'','2015-02-06');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inKnown','en','lava','crms-nacc','followup','udscoparticipantdemo3','inKnown','Co-Participant Demographics','r','scale','No','9a. How long has co-participant known subject?',NULL,NULL,NULL,0,NULL,'uds.coparticipantdemo3.inKnown',NULL,19,NULL,'2015-02-06');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inLivWth','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inLivWth','Co-Participant Demographics','r','scale','No','9. Does the co-participant live with the subject',NULL,NULL,NULL,0,'','uds.noYes01',NULL,21,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inLivWth','en','lava','crms-nacc','followup','udscoparticipantdemo3','inLivWth','Co-Participant Demographics','r','scale','No','10. Does the co-participant live with the subject',NULL,NULL,NULL,0,NULL,'uds.noYes01',NULL,21,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inVisits','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inVisits','Co-Participant Demographics','r','scale','No','9a. If no, approximate frequency of in-person visits',NULL,NULL,NULL,0,'','uds.a2.freq',NULL,22,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inVisits','en','lava','crms-nacc','followup','udscoparticipantdemo3','inVisits','Co-Participant Demographics','r','scale','No','10a. If no, approximate frequency of in-person visits',NULL,NULL,NULL,0,NULL,'uds.a2.freq',NULL,22,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inCalls','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inCalls','Co-Participant Demographics','r','scale','No','9b. If no, approximate frequency of telephone contact',NULL,NULL,NULL,0,'','uds.a2.freq',NULL,23,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inCalls','en','lava','crms-nacc','followup','udscoparticipantdemo3','inCalls','Co-Participant Demographics','r','scale','No','10b. If no, approximate frequency of telephone contact',NULL,NULL,NULL,0,NULL,'uds.a2.freq',NULL,23,NULL,'2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscoparticipantdemo3.inRely','en','lava','crms-nacc',NULL,'udscoparticipantdemo3','inRely','Co-Participant Demographics','r','scale','No','10. Is there a question about the co-participant\'s reliability',NULL,NULL,NULL,0,'','uds.noYes01',NULL,24,'','2009-01-24 21:28:51');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('followup.udscoparticipantdemo3.inRely','en','lava','crms-nacc','followup','udscoparticipantdemo3','inRely','Co-Participant Demographics','r','scale','No','11. Is there a question about the co-participant\'s reliability',NULL,NULL,NULL,0,NULL,'uds.noYes01',NULL,24,NULL,'2009-01-24 21:28:51');
+DELETE FROM viewproperty where entity="udscoparticipantdemo3";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inBirMo', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inBirMo',
+  required='No', proporder='1', attributes='', quickHelp='', size="3",
+  label="1. Co-participant's month and year of birth (MM/YYYY) (99/9999 = unknown)", context="r",
+  list="uds.subjectdemo3.birthMo", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inBirYr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inBirYr',
+  required='No', proporder='2', attributes='', quickHelp='', 
+  label="1. Co-participant's year of birth", context="r", size="3",
+  list="uds.subjectdemo3.birthYr", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inSex', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inSex',
+  required='No', proporder='3', attributes='', quickHelp='', 
+  label="2. Co-participant's sex", context="r",
+  list="uds.gender", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.newInf', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='newInf',
+  required='No', proporder='4', attributes='', quickHelp='', 
+  label="Is this a new co-participant - i.e., one who was not a co-participant at any past UDS visit?", context="h",
+  list="uds.noYes01", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inHisp', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inHisp',
+  required='No', proporder='5', attributes='', quickHelp='', 
+  label="3. Does the co-participant report being of Hispanic/ Latino ethnicity (i.e., having origins from mainly Spanish-speaking Latin American country), regardless of race?", context="r",
+  list="uds.noYesUnknown019", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inHispOr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inHispOr',
+  required='No', proporder='6', attributes='', quickHelp='', 
+  label="3a. If yes, what are the co-participant's reported origins?", context="r",
+  list="uds.a1.hispanic", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inHispOx', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inHispOx',
+  required='No', proporder='7', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="Other (specify)", context="i", maxLength="60", size="60", style="string";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inRace', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRace',
+  required='No', proporder='8', attributes='', quickHelp='', 
+  label="4. What does the co-participant report as his or her race?", context="r",
+  list="uds.a1.race", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inRacex', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRacex',
+  required='No', proporder='9', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="Other (specify)", context="i", maxLength="60", size="60", style="string";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inRaSec', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRaSec',
+  required='No', proporder='10', attributes='', quickHelp='', 
+  label="5. What additional race does co-participant report?", context="r",
+  list="uds.subjectdemo3.raceNone", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inRaSecx', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRaSecx',
+  required='No', proporder='11', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="Other (specify)", context="i", maxLength="60", size="60", style="string";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inRaTer', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRaTer',
+  required='No', proporder='12', attributes='', quickHelp='', 
+  label="6. What additional race, beyond those reported in Questions 4 and 5, does the co-participant report?", context="r",
+  list="uds.subjectdemo3.raceNone", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inRaTerx', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRaTerx',
+  required='No', proporder='13', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="Other (specify)", context="i", maxLength="60", size="60", style="string";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inEduc', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inEduc',
+  required='No', proporder='14', attributes='', quickHelp='', 
+  label="7. Co-participant's years of education", context="r",
+  list="uds.range0_30", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inRelTo', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRelTo',
+  required='No', proporder='15', attributes='', quickHelp='', 
+  label="8. What is co-participant's relationship to subject?", context="r",
+  list="uds.coparticipantdemo3.relation", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inKnown', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inKnown',
+  required='No', proporder='16', attributes='', quickHelp='', 
+  label="8a. How long has the co-participant known the subject?", context="r",
+  list="uds.coparticipantdemo3.inKnown", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inLivWth', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inLivWth',
+  required='No', proporder='17', attributes='', quickHelp='', 
+  label="9. Does the co-participant live with the subject?", context="r",
+  list="uds.noYes01", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inVisits', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inVisits',
+  required='No', proporder='18', attributes='', quickHelp='', 
+  label="9a. If no, approximate frequency of in-person visits?", context="r",
+  list="uds.a2.freq", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inCalls', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inCalls',
+  required='No', proporder='19', attributes='', quickHelp='', 
+  label="9b. If no, approximate frequency of telephone contact?", context="r",
+  list="uds.a2.freq", style="scale";
+
+insert into viewproperty 
+set messageCode='*.udscoparticipantdemo3.inRely', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRely',
+  required='No', proporder='20', attributes='', quickHelp='', 
+  label="10. Is there a question about the co-participant's reliability?", context="r",
+  list="uds.noYes01", style="scale";
+
+-- followup metadata (item numbering differs, a little text differs, newInf is not hidden)
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inBirMo', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inBirMo',
+  required='No', proporder='1', attributes='', quickHelp='', size="3", 
+  label="1. Co-participant's month and year of birth (MM/YYYY) (99/9999 = unknown)", context="r",
+  list="uds.subjectdemo3.birthMo", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inBirYr', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inBirYr',
+  required='No', proporder='2', attributes='', quickHelp='',  size="3",
+  label="Co-participant's year of birth", context="r",
+  list="uds.subjectdemo3.birthYr", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inSex', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inSex',
+  required='No', proporder='3', attributes='', quickHelp='', 
+  label="2. Co-participant's sex", context="r",
+  list="uds.gender", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.newInf', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='newInf',
+  required='No', proporder='4', attributes='', quickHelp='', 
+  label="3. Is this a new co-participant - i.e., one who was not a co-participant at any past UDS visit?", context="r",
+  list="uds.noYes01", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inHisp', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inHisp',
+  required='No', proporder='5', attributes='', quickHelp='', 
+  label="4. Does the co-participant report being of Hispanic/ Latino ethnicity (i.e., having origins from mainly Spanish-speaking Latin American country), regardless of race?", context="r",
+  list="uds.noYesUnknown019", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inHispOr', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inHispOr',
+  required='No', proporder='6', attributes='', quickHelp='', 
+  label="4a. If yes, what are the co-participant's reported origins?", context="r",
+  list="uds.a1.hispanic", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inHispOx', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inHispOx',
+  required='No', proporder='7', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="Other (specify)", context="i", maxLength="60", size="60", style="string";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inRace', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRace',
+  required='No', proporder='8', attributes='', quickHelp='', 
+  label="5. What does the co-participant report as his or her race?", context="r",
+  list="uds.a1.race", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inRacex', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRacex',
+  required='No', proporder='9', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="Other (specify)", context="i", maxLength="60", size="60", style="string";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inRaSec', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRaSec',
+  required='No', proporder='10', attributes='', quickHelp='', 
+  label="6. What additional race does co-participant report?", context="r",
+  list="uds.subjectdemo3.raceNone", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inRaSecx', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRaSecx',
+  required='No', proporder='11', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="Other (specify)", context="i", maxLength="60", size="60", style="string";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inRaTer', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRaTer',
+  required='No', proporder='12', attributes='', quickHelp='', 
+  label="7. What additional race, beyond those reported in Questions 5 and 6, does the co-participant report?", context="r",
+  list="uds.subjectdemo3.raceNone", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inRaTerx', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRaTerx',
+  required='No', proporder='13', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="Other (specify)", context="i", maxLength="60", size="60", style="string";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inEduc', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inEduc',
+  required='No', proporder='14', attributes='', quickHelp='', 
+  label="8. Co-participant's years of education", context="r",
+  list="uds.range0_30", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inRelTo', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRelTo',
+  required='No', proporder='15', attributes='', quickHelp='', 
+  label="9. What is co-participant's relationship to subject?", context="r",
+  list="uds.coparticipantdemo3.relation", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inKnown', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inKnown',
+  required='No', proporder='16', attributes='', quickHelp='', 
+  label="9a. How long has the co-participant known the subject?", context="r",
+  list="uds.coparticipantdemo3.inKnown", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inLivWth', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inLivWth',
+  required='No', proporder='17', attributes='', quickHelp='', 
+  label="10. Does the co-participant live with the subject?", context="r",
+  list="uds.noYes01", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inVisits', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inVisits',
+  required='No', proporder='18', attributes='', quickHelp='', 
+  label="10a. If no, approximate frequency of in-person visits?", context="r",
+  list="uds.a2.freq", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inCalls', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inCalls',
+  required='No', proporder='19', attributes='', quickHelp='', 
+  label="10b. If no, approximate frequency of telephone contact?", context="r",
+  list="uds.a2.freq", style="scale";
+
+insert into viewproperty 
+set messageCode='followup.udscoparticipantdemo3.inRely', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRely',
+  required='No', proporder='20', attributes='', quickHelp='', 
+  label="11. Is there a question about the co-participant's reliability?", context="r",
+  list="uds.noYes01", style="scale";
+
+
+
   
 
 
