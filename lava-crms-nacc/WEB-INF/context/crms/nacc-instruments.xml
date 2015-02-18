@@ -51,6 +51,7 @@
 	<bean id="lava.crms.assessment.instrument.udshachinski2" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udshealthhistory1" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udshealthhistory2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udshealthhistory3" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsinformantdemo1" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsinformantdemo2" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udslabsimaging1" parent="crmsInstrumentFlowAction"/>
@@ -146,6 +147,7 @@
 	<bean id="udshachinski2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udshealthhistory1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udshealthhistory2FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udshealthhistory3FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsinformantdemo1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsinformantdemo2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udslabsimaging1FormAction" parent="udsInstrumentFormAction"/>
@@ -379,6 +381,11 @@
 	</bean>	
 		 			
 	<bean id="udshealthhistory2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsHealthHistory</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+	</bean>		 			
+
+	<bean id="udshealthhistory3" parent="instrumentConfig">
 		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsHealthHistory</value></property>
 		<property name="supportedFlows"><value>enter</value></property>
 		<property name="currentVersionAlias"><value>udshealthhistory</value></property>

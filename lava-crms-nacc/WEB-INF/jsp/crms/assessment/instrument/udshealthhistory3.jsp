@@ -1,6 +1,5 @@
 <%@ include file="/WEB-INF/jsp/includes/include.jsp" %>
 <c:set var="instrTypeEncoded" value="udshealthhistory3"/>
-<c:set var="uds2MetadataEntity" value="udshealthhistory2"/>
 
 <c:import url="/WEB-INF/jsp/crms/assessment/instrument/include.jsp">
 	<c:param name="instrTypeEncoded" value="${instrTypeEncoded}"/>
@@ -18,7 +17,7 @@
   <page:param name="component">${instrTypeEncoded}</page:param> 
   <page:param name="focusField">${focusField}</page:param>
   <page:param name="pageHeadingArgs">UDS Health History</page:param>
-  <page:param name="quicklinks">cardio,cerebro,parkinson,otherNeuro,mediMeta,<br/>,depression,subAbuPsych</page:param>
+  <page:param name="quicklinks">smoking,cardio,cerebro,neurologic,medical,subAbuse,psychiatric</page:param>
    
 <page:applyDecorator name="component.instrument.content">
   <page:param name="instrTypeEncoded">${instrTypeEncoded}</page:param>
@@ -35,44 +34,43 @@
   <page:param name="section"><spring:message code="udshealthhistory3.smoking.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
-<tags:createField property="tobac30" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="tobac100" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="tobac30" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="tobac100" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="smokYrs" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="packsPer" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="quitSmok" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="quitSmok" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="alcoCcas" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="alcFreq" entity="${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="cardio" linkTextKey="top.quicklink"/>
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udshealthhistory2.cardio.section"/></page:param>
+  <page:param name="section"><spring:message code="udshealthhistory3.cardio.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
-<tags:createField property="cvHAtt" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="cvHAtt" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="hattMult" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="hattYear" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cvAFib" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="cvAngio" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="cvBypass" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="cvAFib" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cvAngio" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cvBypass" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cvPacDef" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cvChf" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="cvChf" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cvAngina" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cvHValve" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cvOthr" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="cvOthrx" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="cvOthr" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cvOthrx" entity="${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="cerebro" linkTextKey="top.quicklink"/>
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udshealthhistory2.cerebro.section"/></page:param>
+  <page:param name="section"><spring:message code="udshealthhistory3.cerebro.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
-<tags:createField property="cbStroke" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="cbStroke" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="strokMul" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="strokYr" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cbTia" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="cbOthr" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cbTia" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="tiaMult" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="tiaYear" entity="${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
@@ -82,11 +80,11 @@
   <page:param name="section"><spring:message code="udshealthhistory3.neurologic.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
-<tags:createField property="pd" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="pdYr" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="pdOthr" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="pdOthrYr" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="seizures" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="pd" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="pdYr" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="pdOthr" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="pdOthrYr" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="seizures" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="tbi" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="tbiBrief" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="tbiExten" entity="${instrTypeEncoded}" component="${component}"/>
@@ -94,25 +92,17 @@
 <tags:createField property="tbiYear" entity="${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
 
-<tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="otherneuro" linkTextKey="top.quicklink"/>
-<page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udshealthhistory2.otherNeuro.section"/></page:param>
-  <page:param name="view">${componentView}</page:param>
-  <page:param name="instructions"> </page:param>
-
-</page:applyDecorator>
-
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="medical" linkTextKey="top.quicklink"/>
 <page:applyDecorator name="component.instrument.section">
   <page:param name="section"><spring:message code="udshealthhistory3.medical.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
-<tags:createField property="diabetes" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="diabetes" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="diabType" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="hyperten" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="hyperCho" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="b12Def" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="thyroid" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="hyperten" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="hyperCho" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="b12Def" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="thyroid" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="arthrit" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="arthType" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="arthTypx" entity="${instrTypeEncoded}" component="${component}"/>
@@ -120,8 +110,8 @@
 <tags:createField property="arthLoEx" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="arthSpin" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="arthUnk" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="incontU" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="incontF" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="incontU" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="incontF" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="apnea" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="rbd" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="insomn" entity="${instrTypeEncoded}" component="${component}"/>
@@ -134,9 +124,9 @@
   <page:param name="section"><spring:message code="udshealthhistory3.subAbuse.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
-<tags:createField property="alcohol" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="abusOthr" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="abusx" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="alcohol" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="abusOthr" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="abusx" entity="${instrTypeEncoded}" component="${component}" labelStyle="longLeft"/>
 </page:applyDecorator>
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="psychiatric" linkTextKey="top.quicklink"/>
@@ -147,69 +137,87 @@
 <tags:createField property="ptsd" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="bipolar" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="schiz" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="dep2Yrs" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="depOthr" entity="${uds2MetadataEntity}" component="${component}"/>
+<tags:createField property="dep2Yrs" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="depOthr" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="anxiety" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="ocd" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="npsyDev" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="psycDis" entity="${uds2MetadataEntity}" component="${component}"/>
-<tags:createField property="psycDisx" entity="${uds2MetadataEntity}" component="${component}"/>
-</page:applyDecorator>
-
-<page:applyDecorator name="component.instrument.section">
-	<page:param name="sectionId">anonymous</page:param>
-	<page:param name="view">${componentView}</page:param>
-	<page:param name="instructions"> </page:param>
-	<tags:createField property="notes['udshealthhistory']" entity="${instrTypeEncoded}" component="${component}" metadataName="instrument.sectionNote" labelAlignment="top" dataStyle="instrNote"/>
+<tags:createField property="psycDis" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="psycDisx" entity="${instrTypeEncoded}" component="${component}" labelStyle="longLeft"/>
 </page:applyDecorator>
 
 <c:if test="${componentMode != 'vw'}">
 <c:forEach begin="0" end="1" var="current">
   <c:choose>
     <c:when test="${componentView == 'doubleEnter' || (componentView == 'compare' && current == 1)}">
-      <c:set var="componentPrefix" value="compareInstrument"/>
+      <c:set var="component" value="compareInstrument"/>
     </c:when>
     <c:otherwise>
-      <c:set var="componentPrefix" value="instrument"/>
+      <c:set var="component" value="instrument"/>
     </c:otherwise>
   </c:choose>
   <c:if test="${current == 0 || (current == 1 && componentView == 'compare')}">
 
 <ui:formGuide>
-  <ui:observe elementIds="cvOthr" component="${componentPrefix}" forValue="^1|^2" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="cvOthrx" component="${componentPrefix}"/> 
+  <ui:observe elementIds="tobac100" component="${component}" forValue="1"/>
+  <ui:unskip elementIds="smokYrs,packsPer,quitSmok" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide>
-  <ui:observe elementIds="cbStroke" component="${componentPrefix}" forValue="^1|^2" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="strok1Yr,strok2Yr,strok3Yr,strok4Yr,strok5Yr,strok6Yr" component="${componentPrefix}"/> 
+  <ui:observe elementIds="alcoCcas" component="${component}" forValue="1"/>
+  <ui:unskip elementIds="alcFreq" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide>
-  <ui:observe elementIds="cbTia" component="${componentPrefix}" forValue="^1|^2" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="tia1Yr,tia2Yr,tia3Yr,tia4Yr,tia5Yr,tia6Yr" component="${componentPrefix}"/> 
+  <ui:observe elementIds="cvHAtt" component="${component}" forValue="1|2"/>
+  <ui:unskip elementIds="hattMult,hattYear" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide>
-  <ui:observe elementIds="cbOthr" component="${componentPrefix}" forValue="^1|^2" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="cbOthrx" component="${componentPrefix}"/> 
+  <ui:observe elementIds="cvOthr" component="${component}" forValue="^1|^2"/>
+  <ui:unskip elementIds="cvOthrx" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide>
-  <ui:observe elementIds="pd" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="pdYr" component="${componentPrefix}"/> 
+  <ui:observe elementIds="cbStroke" component="${component}" forValue="1|2"/>
+  <ui:unskip elementIds="strokMul,strokYr" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide>
-  <ui:observe elementIds="pdOthr" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="pdOthrYr" component="${componentPrefix}"/> 
+  <ui:observe elementIds="cbTia" component="${component}" forValue="1|2"/>
+  <ui:unskip elementIds="tiaMult,tiaYear" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide>
-  <ui:observe elementIds="ncOthr" component="${componentPrefix}" forValue="^1|^2" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="ncOthrx" component="${componentPrefix}"/> 
+  <ui:observe elementIds="pd" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="pdYr" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide>
-  <ui:observe elementIds="abusOthr" component="${componentPrefix}" forValue="^1|^2" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="abusx" component="${componentPrefix}"/> 
+  <ui:observe elementIds="pdOthr" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="pdOthrYr" component="${component}"/> 
+</ui:formGuide>
+<ui:formGuide>
+  <ui:observe elementIds="tbi" component="${component}" forValue="1|2"/>
+  <ui:unskip elementIds="tbiBrief,tbiExten,tbiWolos,tbiYear" component="${component}"/> 
+</ui:formGuide>
+<ui:formGuide>
+  <ui:observe elementIds="diabetes" component="${component}" forValue="1|2"/>
+  <ui:unskip elementIds="diabType" component="${component}"/> 
+</ui:formGuide>
+<ui:formGuide>
+  <ui:observe elementIds="arthrit" component="${component}" forValue="1|2"/>
+  <ui:unskip elementIds="arthType,arthUpEx,arthLoEx,arthSpin,arthUnk" component="${component}"/> 
+</ui:formGuide>
+<ui:formGuide>
+	<ui:depends elementIds="arthrit" component="${component}"/>
+  <ui:observe elementIds="arthType" component="${component}" forValue="3"/>
+  <ui:unskip elementIds="arthTypx" component="${component}"/> 
+</ui:formGuide>
+<ui:formGuide>
+  <ui:observe elementIds="othSleep" component="${component}" forValue="^1|^2"/>
+  <ui:unskip elementIds="othSleex" component="${component}"/> 
+</ui:formGuide>
+<ui:formGuide>
+  <ui:observe elementIds="abusOthr" component="${component}" forValue="1|2"/>
+  <ui:unskip elementIds="abusx" component="${component}"/> 
 </ui:formGuide>
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
-  <ui:observe elementIds="psycDis" component="${componentPrefix}" forValue="^1|^2" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="psycDisx" component="${componentPrefix}"/> 
+  <ui:observe elementIds="psycDis" component="${component}" forValue="^1|^2"/>
+  <ui:unskip elementIds="psycDisx" component="${component}"/> 
 </ui:formGuide>
 
   </c:if>

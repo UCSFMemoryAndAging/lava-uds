@@ -814,16 +814,20 @@ public class UdsHealthHistory extends UdsInstrument {
 		if(version.equals("1") || version.equals("2")){
 			
 			//TODO put all UDS3 new here
-			
-			
-			
+			this.alcoCcas = this.alcFreq = this.hattMult = this.hattYear = this.cvPacDef = this.cvAngina = this.cvHValve = this.strokMul
+				= this.strokYr = this.tiaMult = this.tiaYear = this.tbi = this.tbiBrief = this.tbiExten = this.tbiWolos = this.tbiYear
+				= this.diabType = this.arthrit = this.arthType = this.arthUpEx = this.arthLoEx = this.arthSpin = this.arthUnk 
+				= this.apnea = this.rbd = this.insomn = this.othSleep = this.ptsd = this.bipolar = this.schiz = this.anxiety
+				= this.ocd = this.npsyDev = (short)-8; 
+				
+			this.arthTypx = this.othSleex = "-8";
 		}
 		else if(version.equals("3")){
-			
-			//TODO put all UDS3 removed / replaced here
-			
-			
-			
+			this.cvPace = this.strok1Yr = this.strok2Yr = this.strok3Yr = this.strok4Yr = this.strok5Yr = this.strok6Yr
+				= this.tia1Yr = this.tia2Yr = this.tia3Yr = this.tia4Yr = this.tia5Yr = this.tia6Yr = this.cbOthr
+				= this.traumBrf = this.traumExt = this.traumChr = this.ncOthr = (short)-8;
+				
+			this.cbOthrx = this.ncOthrx = "-8";
 		}
 	}
 

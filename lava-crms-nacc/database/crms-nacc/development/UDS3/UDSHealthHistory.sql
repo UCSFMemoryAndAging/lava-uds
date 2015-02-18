@@ -68,7 +68,7 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.smokYrs', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='smokYrs',
   required='No', proporder='3', attributes='', quickHelp='', 
-  label="1c. Total years smoked", context="r",
+  label="1c. Total years smoked (99 = unknown)", context="r",
   list="uds.healthhistory3.SMOKYRS", style="scale";
 
 -- recode
@@ -83,7 +83,7 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.quitSmok', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='quitSmok',
   required='No', proporder='5', attributes='', quickHelp='', 
-  label="1e. If the subject quit smoking, specify age at which he/she last smoked (i.e., quit)", context="r",
+  label="1e. If the subject quit smoking, specify age at which he/she last smoked (i.e., quit) (888 = N/A, 999 = unknown)", context="r",
   list="uds.ageNAUnknown", style="scale";
  
 -- new
@@ -103,7 +103,7 @@ set messageCode='*.udshealthhistory3.alcFreq', locale='en', instance='lava',
   list="uds.healthhistory3.ALCFREQ", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udshealthhistory3.cvhatt', locale='en', instance='lava', 
+set messageCode='*.udshealthhistory3.cvHAtt', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='cvHAtt',
   required='No', proporder='8', attributes='', quickHelp='', 
   label="2a. Heart attack/cardiac arrest", context="r",
@@ -114,7 +114,7 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.hattMult', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='hattMult',
   required='No', proporder='9', attributes='', quickHelp='', 
-  label="2a1. More than one heart attack?", context="r",
+  label="2a1. More than one heart attack?", context="r", indentLevel=1,
   list="uds.noYesUnknown019", style="scale";
 
 -- new
@@ -122,7 +122,7 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.hattYear', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='hattYear',
   required='No', proporder='10', attributes='', quickHelp='', 
-  label="2a2. Year of most recent heart attack", context="r",
+  label="2a2. Year of most recent heart attack (9999 = unknown)", context="r", indentLevel=1,
   list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
@@ -186,7 +186,7 @@ set messageCode='*.udshealthhistory3.cvOthr', locale='en', instance='lava',
 
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.cvOthrx', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udshealthhistory3', property='cvOthrx',
+  scope='crms-nacc', entity='udshealthhistory3', property='cvOthrx', indentLevel=1,
   required='No', proporder='19', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other cardiovascular disease (specify)", context="i", maxLength="60", size="60", style="string";
 
@@ -210,7 +210,7 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.strokYr', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='strokYr',
   required='No', proporder='22', attributes='', quickHelp='', 
-  label="3a2. Year of most recent stroke", context="r", indentLevel="1",
+  label="3a2. Year of most recent stroke (9999 = unknown)", context="r", indentLevel="1",
   list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
@@ -233,35 +233,35 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.tiaYear', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='tiaYear',
   required='No', proporder='25', attributes='', quickHelp='', 
-  label="3b2. Year of most recent TIA", context="r", indentLevel="1",
+  label="3b2. Year of most recent TIA (9999 = unknown)", context="r", indentLevel="1",
   list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.pd', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='pd',
   required='No', proporder='26', attributes='', quickHelp='', 
-  label="4a. Parkinson’s disease (PD)", context="r",
+  label="4a. Parkinson's disease (PD)", context="r",
   list="uds.a5.presence3", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.pdYr', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='pdYr',
   required='No', proporder='27', attributes='', quickHelp='', 
-  label="4a1. Year of PD diagnosis", context="r",
+  label="4a1. Year of PD diagnosis (9999 = unknown)", context="r", indentLevel=1,
   list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.pdOthr', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='pdOthr',
   required='No', proporder='28', attributes='', quickHelp='', 
-  label="4b. Other parkinsonian disorder", context="r",
+  label="4b. Other parkinsonian disorder (e.g. PSP, CBD)", context="r",
   list="uds.a5.presence3", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.pdOthrYr', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='pdOthrYr',
-  required='No', proporder='29', attributes='', quickHelp='', 
-  label="4b1. Year of parkinsonian disorder diagnosis", context="r",
+  required='No', proporder='29', attributes='', quickHelp='', indentLevel=1,
+  label="4b1. Year of parkinsonian disorder diagnosis (9999 = unknown)", context="r",
   list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
@@ -308,7 +308,7 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.tbiYear', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='tbiYear',
   required='No', proporder='35', attributes='', quickHelp='',  indentLevel="1",
-  label="4d4. Year of most recent TBI", context="r",
+  label="4d4. Year of most recent TBI (9999 = unknown)", context="r",
   list="uds.yearUnknown", style="scale";
 
 insert into viewproperty 
@@ -364,7 +364,7 @@ set messageCode='*.udshealthhistory3.arthrit', locale='en', instance='lava',
 
 -- new
 insert into viewproperty 
-set messageCode='*.udshealthhistory3.arthtType', locale='en', instance='lava', 
+set messageCode='*.udshealthhistory3.arthType', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='arthType',
   required='No', proporder='43', attributes='', quickHelp='',   indentLevel="1",
   label="5f1. Type of arthritis", context="r",
@@ -374,8 +374,8 @@ set messageCode='*.udshealthhistory3.arthtType', locale='en', instance='lava',
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.arthTypx', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='arthTypx',  indentLevel="1",
-  required='No', proporder='44', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)', quickHelp='', 
-  label="Other (specify)", context="r", maxLength="60", style="string";
+  required='No', proporder='44', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
+  label="Other (specify)", context="i", maxLength="60", size="60", style="string";
 
 -- new
 insert into viewproperty 
@@ -413,14 +413,14 @@ insert into viewproperty
 set messageCode='*.udshealthhistory3.incontU', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='incontU',
   required='No', proporder='49', attributes='', quickHelp='', 
-  label="5g. Incontinence —- Urinary", context="r",
+  label="5g. Incontinence - Urinary", context="r",
   list="uds.a5.presence4", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.incontF', locale='en', instance='lava', 
   scope='crms-nacc', entity='udshealthhistory3', property='incontF',
   required='No', proporder='50', attributes='', quickHelp='', 
-  label="5h. Incontinence — Bowel", context="r",
+  label="5h. Incontinence - Bowel", context="r",
   list="uds.a5.presence4", style="scale";
 
 -- new
@@ -458,8 +458,8 @@ set messageCode='*.udshealthhistory3.othSleep', locale='en', instance='lava',
 -- new
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.othSleex', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udshealthhistory3', property='othSleex',
-  required='No', proporder='55', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)', quickHelp='', 
+  scope='crms-nacc', entity='udshealthhistory3', property='othSleex', indentLevel=1,
+  required='No', proporder='55', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="If recent, specify", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
@@ -478,8 +478,8 @@ set messageCode='*.udshealthhistory3.abusOthr', locale='en', instance='lava',
 
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.abusx', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udshealthhistory3', property='abusx',
-  required='No', proporder='58', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)', quickHelp='', 
+  scope='crms-nacc', entity='udshealthhistory3', property='abusx', indentLevel=1,
+  required='No', proporder='58', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="6b1. If Question 6b = 1 (Recent/active) or 2 (Remote/ inactive), then specify abused substance(s)", context="i", maxLength="60", size="60", style="string";
 
 -- new
@@ -549,12 +549,12 @@ set messageCode='*.udshealthhistory3.psycDis', locale='en', instance='lava',
   scope='crms-nacc', entity='udshealthhistory3', property='psycDis',
   required='No', proporder='67', attributes='', quickHelp='', 
   label="7h. Other psychiatric disorders", context="r",
-  list="uds.a5.presences4", style="scale";
+  list="uds.a5.presence4", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udshealthhistory3.psycDisx', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udshealthhistory3', property='psycDisx',
-  required='No', proporder='68', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)', quickHelp='', 
+  scope='crms-nacc', entity='udshealthhistory3', property='psycDisx', indentLevel=1,
+  required='No', proporder='68', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="7h1. If recent/active or remote/ inactive, specify disorder", context="i", maxLength="60", size="60", style="string";
 
    

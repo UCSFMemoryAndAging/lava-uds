@@ -105,7 +105,7 @@ insert into viewproperty
 set messageCode='followup.udssymptomsonset3.cogFlAgO', locale='en', instance='lava', 
   scope='crms-nacc', prefix='followup', entity='udssymptomsonset3', property='cogFlAgO',
   required='No', proporder='11', attributes='', quickHelp='', 
-  label="At what age did the fluctuating cognition begin?:", context="r",
+  label="At what age did the fluctuating cognition begin? (777 = Provided at Prior Visit)", context="r",
   list="uds.symptomsonset3.ageOfOnsetF", style="scale";
 
 insert into viewproperty 
@@ -165,7 +165,7 @@ insert into viewproperty
 set messageCode='followup.udssymptomsonset3.decAge', locale='en', instance='lava', 
   scope='crms-nacc', prefix='followup', entity='udssymptomsonset3', property='decAge',
   required='No', proporder='18', attributes='', quickHelp='', 
-  label="7. Based on clinician's assessment, at what age did the cognitive decline begin? (The clinician must use his/her best judgment to estimate an age of onset.):", context="r",
+  label="7. Based on clinician's assessment, at what age did the cognitive decline begin? (The clinician must use his/her best judgment to estimate an age of onset.)  (777 = Provided at Prior Visit)", context="r",
   list="uds.symptomsonset3.ageOfOnsetF.SymptomAge", style="scale";
 
 insert into viewproperty 
@@ -207,14 +207,14 @@ insert into viewproperty
 set messageCode='*.udssymptomsonset3.beVHAgO', locale='en', instance='lava', 
   scope='crms-nacc', entity='udssymptomsonset3', property='beVHAgO',
   required='No', proporder='24', attributes='', quickHelp='', 
-  label="9c1b. If well-formed, clear-cut visual hallucinations, at what age did these hallucinations begin?:", context="r",
+  label="9c1b. If well-formed, clear-cut visual hallucinations, at what age did these hallucinations begin? (888 = N/A, not well-formed)", context="r",
   list="uds3.udssymptomsonset3.BEVHAGOI", style="scale";
 
 insert into viewproperty 
 set messageCode='followup.udssymptomsonset3.beVHAgO', locale='en', instance='lava', 
   scope='crms-nacc', prefix='followup', entity='udssymptomsonset3', property='beVHAgO',
   required='No', proporder='24', attributes='', quickHelp='', 
-  label="9c1b. If well-formed, clear-cut visual hallucinations, at what age did these hallucinations begin?:", context="r",
+  label="9c1b. If well-formed, clear-cut visual hallucinations, at what age did these hallucinations begin?  (777 = Provided at Prior Visit, 888 = N/A, not well-formed)", context="r",
   list="uds3.udssymptomsonset3.BEVHAGOF", style="scale";
 
 insert into viewproperty 
@@ -277,7 +277,7 @@ insert into viewproperty
 set messageCode='followup.udssymptomsonset3.beRemAgO', locale='en', instance='lava', 
   scope='crms-nacc', prefix='followup', entity='udssymptomsonset3', property='beRemAgO',
   required='No', proporder='32', attributes='', quickHelp='', 
-  label="REM sleep behavior disorder, age of onset", context="r",
+  label="REM sleep behavior disorder, age of onset (777 = Provided at Prior Visit)", context="r",
   list="uds.symptomsonset3.ageOfOnsetF", style="scale";
 
 insert into viewproperty 
@@ -344,7 +344,7 @@ insert into viewproperty
 set messageCode='followup.udssymptomsonset3.beAge', locale='en', instance='lava', 
   scope='crms-nacc', prefix='followup', entity='udssymptomsonset3', property='beAge',
   required='No', proporder='40', attributes='', quickHelp='', 
-  label="12. Based on the clinician's assessment, at what age did the behavioral symptoms begin? (The clinician must use his/her best judgment to estimate an age of onset.):", context="r",
+  label="12. Based on the clinician's assessment, at what age did the behavioral symptoms begin? (The clinician must use his/her best judgment to estimate an age of onset.) (777 = Provided at Prior Visit)", context="r",
   list="uds.symptomsonset3.ageOfOnsetF", style="scale";
 
 insert into viewproperty 
@@ -427,7 +427,7 @@ insert into viewproperty
 set messageCode='followup.udssymptomsonset3.parkAge', locale='en', instance='lava', 
   scope='crms-nacc', prefix='followup', entity='udssymptomsonset3', property='parkAge',
   required='No', proporder='50', attributes='', quickHelp='', 
-  label="17a. If yes, at what age did the motor symptoms suggestive of parkinsonism begin?", context="r",
+  label="17a. If yes, at what age did the motor symptoms suggestive of parkinsonism begin? (777 = Provided at Prior Visit)", context="r",
   list="uds.symptomsonset3.ageOfOnsetF", style="scale";
 
 insert into viewproperty 
@@ -448,7 +448,7 @@ insert into viewproperty
 set messageCode='followup.udssymptomsonset3.alsAge', locale='en', instance='lava', 
   scope='crms-nacc', prefix="followup", entity='udssymptomsonset3', property='alsAge',
   required='No', proporder='52', attributes='', quickHelp='', 
-  label="18a. If yes, at what age did the motor symptoms suggestive of ALS begin?", context="r",
+  label="18a. If yes, at what age did the motor symptoms suggestive of ALS begin? (777 = Provided at Prior Visit)", context="r",
   list="uds.symptomsonset3.ageOfOnsetF", style="scale";
 
 insert into viewproperty 
@@ -462,7 +462,7 @@ insert into viewproperty
 set messageCode='followup.udssymptomsonset3.moAge', locale='en', instance='lava', 
   scope='crms-nacc', prefix="followup", entity='udssymptomsonset3', property='moAge',
   required='No', proporder='53', attributes='', quickHelp='', 
-  label="19. Based on clinician's assessment, at what age did the motor changes begin? (The clinician must use his/her best judgement to estimate an age of onset.):", context="r",
+  label="19. Based on clinician's assessment, at what age did the motor changes begin? (The clinician must use his/her best judgement to estimate an age of onset.) (777 = Provided at Prior Visit)", context="r",
   list="uds.symptomsonset3.ageOfOnsetF", style="scale";
 
 insert into viewproperty 

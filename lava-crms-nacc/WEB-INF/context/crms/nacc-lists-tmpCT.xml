@@ -84,7 +84,7 @@
         <constructor-arg value="3"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="Another organizations’s media appeal or website"/>
+        <constructor-arg value="Another organizations's media appeal or website"/>
         <constructor-arg value="4"/>
       </bean> 
       <bean parent="list.data">
@@ -259,7 +259,9 @@
     	<property name="defaultMaxValue" value="115"/>
     	<property name="data"><list> 
       		<bean parent="list.data">
-        		<constructor-arg value="Unknown"/>
+      			<!-- for numeric range lists, codes should be the numeric value, not the text -->
+      			<!-- 999 = Unknown -->
+        		<constructor-arg value="999"/>
         		<constructor-arg value="999"/>
       		</bean> 
     	</list></property> 
@@ -371,11 +373,13 @@
     <property name="defaultMaxValue" value="110"/>
     <property name="data"><list> 
       <bean parent="list.data">
-        <constructor-arg value="N/A"/>
+      	<!-- 888 = N/A -->
+        <constructor-arg value="888"/>
         <constructor-arg value="888"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="Unknown"/>
+      	<!-- 999 = Unknown -->
+        <constructor-arg value="999"/>
         <constructor-arg value="999"/>
       </bean> 
     </list></property> 
@@ -441,7 +445,7 @@
         <constructor-arg value="45"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="050  Alzheimer’s disease dementia"/>
+        <constructor-arg value="050  Alzheimer's disease dementia"/>
         <constructor-arg value="50"/>
       </bean> 
       <bean parent="list.data">
@@ -489,7 +493,7 @@
         <constructor-arg value="150"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="160  Huntington’s disease"/>
+        <constructor-arg value="160  Huntington's disease"/>
         <constructor-arg value="160"/>
       </bean> 
       <bean parent="list.data">
@@ -517,7 +521,7 @@
         <constructor-arg value="220"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="230  Parkinson’s disease"/>
+        <constructor-arg value="230  Parkinson's disease"/>
         <constructor-arg value="230"/>
       </bean> 
       <bean parent="list.data">
@@ -549,7 +553,7 @@
         <constructor-arg value="320"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="400  Alzheimer’s disease neuropathology"/>
+        <constructor-arg value="400  Alzheimer's disease neuropathology"/>
         <constructor-arg value="400"/>
       </bean> 
       <bean parent="list.data">
@@ -573,7 +577,7 @@
         <constructor-arg value="430"/>
       </bean> 
       <bean parent="list.data">
-        <constructor-arg value="431  FTLD with Tau pathology - Pick’s disease"/>
+        <constructor-arg value="431  FTLD with Tau pathology - Pick's disease"/>
         <constructor-arg value="431"/>
       </bean> 
       <bean parent="list.data">
@@ -650,7 +654,8 @@
     <property name="defaultMaxValue" value="110"/>
     <property name="data"><list> 
       <bean parent="list.data">
-        <constructor-arg value="Unknown"/>
+      	<!-- numeric range lists should use code not text. Unknown = 999 -->
+        <constructor-arg value="999"/>
         <constructor-arg value="999"/>
       </bean> 
     </list></property> 
@@ -681,7 +686,8 @@
     <property name="defaultMaxValue" value="80"/>
     <property name="data"><list> 
       <bean parent="list.data">
-        <constructor-arg value="Unknown"/>
+      	<!-- Unknown = 99 -->
+        <constructor-arg value="99"/>
         <constructor-arg value="99"/>
       </bean> 
     </list></property> 
@@ -851,7 +857,8 @@
 		<property name="defaultMinValue" value="15"/>	
 		<property name="defaultMaxValue" value="115"/>
 		<property name="data"><list>
-			<bean parent="list.data"><constructor-arg value="Provided at Prior Visit"/><constructor-arg value="777"/></bean>
+			<!-- Provided at Prior Visit = 777 -->
+			<bean parent="list.data"><constructor-arg value="777"/><constructor-arg value="777"/></bean>
 		</list></property>
 	</bean>
 	
@@ -861,7 +868,8 @@
 	</list></property>
     <property name="data"><list> 
       <bean parent="list.data">
-        <constructor-arg value="N/A, not well-formed"/>
+      	<!-- N/A, not well-formed = 888 -->
+        <constructor-arg value="888"/>
         <constructor-arg value="888"/>
       </bean> 
     </list></property> 
@@ -873,7 +881,8 @@
 	</list></property>
     <property name="data"><list> 
       <bean parent="list.data">
-        <constructor-arg value="N/A, not well-formed"/>
+      	<!-- N/A, not well-formed = 888 -->
+        <constructor-arg value="888"/>
         <constructor-arg value="888"/>
       </bean> 
     </list></property> 
