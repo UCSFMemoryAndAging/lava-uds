@@ -118,6 +118,7 @@
 	<bean id="udsappraisal2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udscdr1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udscdr2FormAction" parent="udsInstrumentFormAction"/>
+	<!-- succeeds udsinformantdemo2 -->
 	<bean id="udscoparticipantdemo3FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsdiagnosis1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsdiagnosis2FormAction" parent="udsInstrumentFormAction"/>
@@ -161,6 +162,7 @@
     </bean>
 	<bean id="udsmilestone1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsmilestone2FormAction" parent="udsInstrumentFormAction"/>
+	<!-- succeeds udsappraisal2 -->
 	<bean id="udsneuroexam3FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsneuropsych1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsneuropsych2FormAction" parent="udsInstrumentFormAction"/>
@@ -202,6 +204,7 @@
 			<property name="supportedFlows"><value>enter</value></property>
 	</bean>		 			
 	
+	<!-- note that the UDS 3.0 instrument is udsneuroexam3 to accurately reflect new form name -->
 	<bean id="udsappraisal2" parent="instrumentConfig">
 		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsAppraisal</value></property>
 		<property name="supportedFlows"><value>enter</value></property>
@@ -396,7 +399,7 @@
 		<property name="supportedFlows"><value>enter</value></property>
 	</bean>		 			
 
-	<!-- note that in UDS 3.0 the instrument config is udscoparticipantdemo3 -->
+	<!-- note that the UDS 3.0 instrument is udscoparticipantdemo3 to accurately reflect the new form name -->
 	<bean id="udsinformantdemo2" parent="instrumentConfig">
 		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsInformantDemo</value></property>
 		<property name="supportedFlows"><value>enter</value></property>
