@@ -21,8 +21,8 @@ public class UdsHealthHistory extends UdsInstrument {
 	private Short tobac30;
 	private Short tobac100;
 	private Short smokYrs; // UDS3 recode
-	private Short packsPer; // UDS3 packsPer
 	private Short quitSmok;
+	private Short packsPer; // UDS3 packsPer
 	private Short alcoCcas; // UDS3 new
 	private Short alcFreq; // UDS3 new
 	private Short cvHAtt;
@@ -812,8 +812,6 @@ public class UdsHealthHistory extends UdsInstrument {
 	
 	public void markUnusedFields(String version) {
 		if(version.equals("1") || version.equals("2")){
-			
-			//TODO put all UDS3 new here
 			this.alcoCcas = this.alcFreq = this.hattMult = this.hattYear = this.cvPacDef = this.cvAngina = this.cvHValve = this.strokMul
 				= this.strokYr = this.tiaMult = this.tiaYear = this.tbi = this.tbiBrief = this.tbiExten = this.tbiWolos = this.tbiYear
 				= this.diabType = this.arthrit = this.arthType = this.arthUpEx = this.arthLoEx = this.arthSpin = this.arthUnk 
