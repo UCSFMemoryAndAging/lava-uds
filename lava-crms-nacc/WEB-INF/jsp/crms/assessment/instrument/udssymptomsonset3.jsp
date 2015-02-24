@@ -35,16 +35,16 @@
 <page:applyDecorator name="component.instrument.section">
   <page:param name="section"><spring:message code="udssymptomsonset3.memory.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
-  <page:param name="instructions"><spring:message code="udssymptomsonset2.memComp.instructions"/></page:param>
+  <page:param name="instructions"></page:param>
 <tags:createField property="decSub" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="decIn" entity="${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="cogSymp" linkTextKey="top.quicklink"/>
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udssymptomsonset2.cogSymp.section"/></page:param>
+  <page:param name="section"><spring:message code="udssymptomsonset3.cogSymp.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
-  <page:param name="instructions"><spring:message code="udssymptomsonset2.cogSymp.instructions"/></page:param>
+  <page:param name="instructions"></page:param>
 <tags:createField property="decClCog" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogMem" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogOri" entity="${instrTypeEncoded}" component="${component}"/>
@@ -54,7 +54,7 @@
 <tags:createField property="cogAttn" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogFluc" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogFlAgO" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOther" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cogOthr" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogOthrx" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogFPred" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogFPrex" entity="${instrTypeEncoded}" component="${component}"/>
@@ -65,9 +65,9 @@
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="behSymp" linkTextKey="top.quicklink"/>
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udssymptomsonset2.behSymp.section"/></page:param>
+  <page:param name="section"><spring:message code="udssymptomsonset3.behSymp.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
-  <page:param name="instructions"><spring:message code="udssymptomsonset2.behSymp.instructions"/></page:param>
+  <page:param name="instructions"></page:param>
 <tags:createField property="decClBe" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beApathy" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="beDep" entity="${instrTypeEncoded}" component="${component}"/>
@@ -94,9 +94,9 @@
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="motSymp" linkTextKey="top.quicklink"/>
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udssymptomsonset2.motSymp.section"/></page:param>
+  <page:param name="section"><spring:message code="udssymptomsonset3.motSymp.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
-  <page:param name="instructions"><spring:message code="udssymptomsonset2.motSymp.instructions"/></page:param>
+  <page:param name="instructions"></page:param>
 <tags:createField property="decClMot" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="moGait" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="moFalls" entity="${instrTypeEncoded}" component="${component}"/>
@@ -114,9 +114,9 @@
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="overall" linkTextKey="top.quicklink"/>
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udssymptomsonset2.overall.section"/></page:param>
+  <page:param name="section"><spring:message code="udssymptomsonset3.overall.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
-  <page:param name="instructions"> </page:param>
+  <page:param name="instructions"></page:param>
 <tags:createField property="course" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="frstChg" entity="${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
@@ -134,61 +134,125 @@
 <c:forEach begin="0" end="1" var="current">
   <c:choose>
     <c:when test="${componentView == 'doubleEnter' || (componentView == 'compare' && current == 1)}">
-      <c:set var="componentPrefix" value="compareInstrument"/>
+      <c:set var="component" value="compareInstrument"/>
     </c:when>
     <c:otherwise>
-      <c:set var="componentPrefix" value="instrument"/>
+      <c:set var="component" value="instrument"/>
     </c:otherwise>
   </c:choose>
   <c:if test="${current == 0 || (current == 1 && componentView == 'compare')}">
 
 
-<%--
-MUST RELOAD ON PACKET TYPE CHANGE B/C DIFF METADATA (dropdown lists for ageOfOnset have 777 code in followup)
- --%>
+<%-- must reload on packet type change b/c different metadata (e.g. dropdown lists for age of onset have 777 code
+in followup. --%>
+<ui:formGuide ignoreDoOnLoad="true">
+   	<ui:observe elementIds="instrument_packet" forValue=".+|^$"/>
+   	<ui:submitForm form="${instrTypeEncoded}" event="instrument__reRender"/>
+</ui:formGuide>
 
 <ui:formGuide>
-  <ui:observe elementIds="decClin" component="${componentPrefix}" forValue="^1" negate="true" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:skip elementIds="decAge,cogMem,cogJudg,cogLang,cogVis,cogAttn,cogFluc,cogOther,cogFrst,cogMode,
-  	beApathy,beDep,beVHall,beVWell,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beRem,beOthr,beFrst,beMode,
-  	moGait,moFalls,moTrem,moSlow,moFrst,moMode,moMoPark,course,frstChg" component="${componentPrefix}"
-  	comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-</ui:formGuide>          
+  <ui:observe elementIds="decClCog" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="cogMem,cogOri,cogJudg,cogLang,cogVis,cogAttn,cogFluc,cogOthr,cogFPred,cogMode,decAge" component="${component}"/>
+</ui:formGuide>        
 
+<ui:formGuide>
+  <ui:depends elementIds="decClCog" component="${component}"/>
+  <ui:observe elementIds="cogFluc" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="cogFlAgO" component="${component}"/>
+</ui:formGuide>        
+
+<ui:formGuide>
+  <ui:observe elementIds="cogOthr" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="cogOthrx" component="${component}"/>
+</ui:formGuide>           
+
+<ui:formGuide>
+  <ui:depends elementIds="decClCog" component="${component}"/>
+  <ui:observe elementIds="cogFPred" component="${component}" forValue="^8"/>
+  <ui:unskip elementIds="cogFPrex" component="${component}"/>
+</ui:formGuide>        
+
+<ui:formGuide>
+  <ui:depends elementIds="decClCog" component="${component}"/>
+  <ui:observe elementIds="cogMode" component="${component}" forValue="^4"/>
+  <ui:unskip elementIds="cogModex" component="${component}"/>
+</ui:formGuide>        
 
 
 <ui:formGuide>
-  <ui:observe elementIds="beVHall" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="beVWell" component="${componentPrefix}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+  <ui:observe elementIds="decClBe" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="beApathy,beDep,beVHall,beAHall,beDel,beDisin,beIrrit,beAgit,bePerCh,beRem,beAnx,beOthr,beFPred,beMode,beAge" component="${component}"/>
+</ui:formGuide>        
+
+<ui:formGuide>
+  <ui:depends elementIds="decClBe" component="${component}"/>
+  <ui:observe elementIds="beVHall" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="beVWell" component="${component}"/>
 </ui:formGuide>       
-  
+
+<%-- 3 scenarios for setting beVHAgO so just have 3 tag sets which do the 3 scenarios on do and ignore undo --%>  
+<ui:formGuide ignoreUndoOnLoad="true" ignoreUndo="true">
+  <ui:depends elementIds="decClBe,beVHall" component="${component}"/>
+  <ui:observe elementIds="beVWell" component="${component}" forValue="^1"/>
+  <ui:enable elementIds="beVHAgO" component="${component}"/>
+</ui:formGuide>        
+<ui:formGuide ignoreUndoOnLoad="true" ignoreUndo="true">
+  <ui:depends elementIds="decClBe,beVHall" component="${component}"/>
+  <ui:observe elementIds="beVWell" component="${component}" forValue="^0|^9"/>
+  <ui:disable elementIds="beVHAgO" component="${component}"/>
+  <ui:setValue elementIds="beVHAgO" component="${component}" value="888"/>
+</ui:formGuide>       
+<ui:formGuide ignoreUndoOnLoad="true" ignoreUndo="true">
+  <ui:depends elementIds="decClBe,beVHall" component="${component}"/>
+  <ui:observe elementIds="beVWell" component="${component}" forValue="-[0-9]"/>
+  <ui:skip elementIds="beVHAgO" component="${component}"/>
+</ui:formGuide>   
+
 <ui:formGuide>
-  <ui:observe elementIds="cogOther" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="cogOthrx" component="${componentPrefix}"/>
-</ui:formGuide>           
+  <ui:depends elementIds="decClBe" component="${component}"/>
+  <ui:observe elementIds="beRem" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="beRemAgO" component="${component}"/>
+</ui:formGuide>        
+
 <ui:formGuide>
-  <ui:observe elementIds="cogFrst" component="${componentPrefix}" forValue="^6" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="cogFrstx" component="${componentPrefix}"/>
-</ui:formGuide>           
+  <ui:depends elementIds="decClBe" component="${component}"/>
+  <ui:observe elementIds="beOthr" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="beOthrx" component="${component}"/>
+</ui:formGuide>
+           
 <ui:formGuide>
-  <ui:observe elementIds="cogMode" component="${componentPrefix}" forValue="^4" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="cogModex" component="${componentPrefix}"/>
-</ui:formGuide>           
+  <ui:depends elementIds="decClBe" component="${component}"/>
+  <ui:observe elementIds="beFPred" component="${component}" forValue="^10$"/>
+  <ui:unskip elementIds="beFPredx" component="${component}"/>
+</ui:formGuide>
+           
 <ui:formGuide>
-   <ui:observe elementIds="beOthr" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="beOthrx" component="${componentPrefix}"/>
-</ui:formGuide>           
+  <ui:depends elementIds="decClBe" component="${component}"/>
+  <ui:observe elementIds="beMode" component="${component}" forValue="^4"/>
+  <ui:unskip elementIds="beModex" component="${component}"/>
+</ui:formGuide>
+           
 <ui:formGuide>
-  <ui:observe elementIds="beFrst" component="${componentPrefix}" forValue="^8$" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="beFrstx" component="${componentPrefix}"/>
-</ui:formGuide>           
+  <ui:observe elementIds="decClMot" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="moGait,moFalls,moTrem,moSlow,moFrst,moMode,moMoPark,moMoAls,moAge" component="${component}"/>
+</ui:formGuide>        
+
 <ui:formGuide>
-  <ui:observe elementIds="beMode" component="${componentPrefix}" forValue="^4" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="beModex" component="${componentPrefix}"/>
-</ui:formGuide>           
+  <ui:depends elementIds="decClMot" component="${component}"/>
+  <ui:observe elementIds="moMode" component="${component}" forValue="^4"/>
+  <ui:unskip elementIds="moModex" component="${component}"/>
+</ui:formGuide>
+
+<ui:formGuide>
+  <ui:depends elementIds="decClMot" component="${component}"/>
+  <ui:observe elementIds="moMoPark" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="parkAge" component="${component}"/>
+</ui:formGuide>
+
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
-  <ui:observe elementIds="moMode" component="${componentPrefix}" forValue="^4" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:unskip elementIds="moModex" component="${componentPrefix}"/>
+  <ui:depends elementIds="decClMot" component="${component}"/>
+  <ui:observe elementIds="moMoAls" component="${component}" forValue="^1"/>
+  <ui:unskip elementIds="alsAge" component="${component}"/>
 </ui:formGuide>
 
   </c:if>
