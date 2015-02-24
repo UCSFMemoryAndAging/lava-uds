@@ -53,17 +53,17 @@
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
 
-still have to do Hibernate mapping
-skip logic
-put in Git!!!
-
-	<tags:createField property="parksign" component="${component}" entity="${instrTypeEncoded}"/>
-	
 	<tags:tableForm>  
 		<tags:listRow>
-			<tags:listColumnHeader label="&nbsp;" width="80%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.leftHeader" width="10%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.rightHeader" width="10%"/>
+			<tags:listCell width="80%"><tags:outputText textKey="${instrTypeEncoded}.parksign.label" inline="false"/></tags:listCell>
+			<tags:listCell width="20%"><tags:createField property="parksign" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
+		</tags:listRow>
+	</tags:tableForm>	
+	<tags:tableForm>  
+		<tags:listRow>
+			<tags:listColumnHeader label="&nbsp;" width="60%"/>
+			<tags:listColumnHeader labelKey="udsneuroexam3.leftHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsneuroexam3.rightHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsneuroexam3.resting" inline="false"/></tags:listCell>
@@ -84,8 +84,8 @@ put in Git!!!
 	
 	<tags:tableForm>  
 		<tags:listRow>
-			<tags:listColumnHeader label="&nbps;" width="80%"/>
-			<tags:listColumnHeader label="&nbps;" width="20%"/>
+			<tags:listColumnHeader label="&nbsp;" width="80%"/>
+			<tags:listColumnHeader labelKey="udsneuroexam3.presentHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsneuroexam3.brady" inline="false"/></tags:listCell>
@@ -101,11 +101,16 @@ put in Git!!!
 		</tags:listRow>
 	</tags:tableForm>	
 	
-	<tags:createField property="cvdsigns" component="${component}" entity="${instrTypeEncoded}"/>
-	
+	<div class="verticalSpace30">&nbsp;</div>
 	<tags:tableForm>  
 		<tags:listRow>
-			<tags:listColumnHeader label="&nbps;" width="80%"/>
+			<tags:listCell width="80%"><tags:outputText textKey="${instrTypeEncoded}.cvdsigns.label" inline="false"/></tags:listCell>
+			<tags:listCell width="20%"><tags:createField property="cvdsigns" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
+		</tags:listRow>
+	</tags:tableForm>	
+	<tags:tableForm>  
+		<tags:listRow>
+			<tags:listColumnHeader label="&nbsp;" width="80%"/>
 			<tags:listColumnHeader labelKey="udsneuroexam3.presentHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
@@ -120,9 +125,9 @@ put in Git!!!
 
 	<tags:tableForm>  
 		<tags:listRow>
-			<tags:listColumnHeader labelKey="udsneuroexam3.parkSignsHeader" width="80%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.leftHeader" width="10%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.rightHeader" width="10%"/>
+			<tags:listColumnHeader label="&nbsp;" width="60%"/>
+			<tags:listColumnHeader labelKey="udsneuroexam3.leftHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsneuroexam3.rightHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsneuroexam3.motor" inline="false"/></tags:listCell>
@@ -132,7 +137,7 @@ put in Git!!!
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsneuroexam3.corticalLoss" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="cortvisl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
-			<tags:listCell><tags:createField property="cortvisr component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="cortvisr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsneuroexam3.somatosensory" inline="false"/></tags:listCell>
@@ -141,13 +146,24 @@ put in Git!!!
 		</tags:listRow>
 	</tags:tableForm>	
 
-	<tags:createField property="postcort" component="${component}" entity="${instrTypeEncoded}"/>
-
-	<tags:createField property="pspcbs" component="${component}" entity="${instrTypeEncoded}"/>
-
+	<div class="verticalSpace30">&nbsp;</div>
 	<tags:tableForm>  
 		<tags:listRow>
-			<tags:listColumnHeader label="&nbps;" width="80%"/>
+			<tags:listCell width="80%"><tags:outputText textKey="${instrTypeEncoded}.postcort.label" inline="false"/></tags:listCell>
+			<tags:listCell width="20%"><tags:createField property="postcort" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
+		</tags:listRow>
+	</tags:tableForm>	
+
+	<div class="verticalSpace30">&nbsp;</div>
+	<tags:tableForm>  
+		<tags:listRow>
+			<tags:listCell width="80%"><tags:outputText textKey="${instrTypeEncoded}.pspcbs.label" inline="false"/></tags:listCell>
+			<tags:listCell width="20%"><tags:createField property="pspcbs" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
+		</tags:listRow>
+	</tags:tableForm>	
+	<tags:tableForm>  
+		<tags:listRow>
+			<tags:listColumnHeader label="&nbsp;" width="80%"/>
 			<tags:listColumnHeader labelKey="udsneuroexam3.presentHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
@@ -174,9 +190,9 @@ put in Git!!!
 
 	<tags:tableForm>  
 		<tags:listRow>
-			<tags:listColumnHeader label="&nbsp;" width="80%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.leftHeader" width="10%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.rightHeader" width="10%"/>
+			<tags:listColumnHeader label="&nbsp;" width="60%"/>
+			<tags:listColumnHeader labelKey="udsneuroexam3.leftHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsneuroexam3.rightHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsneuroexam3.apraxiaCBS" inline="false"/></tags:listCell>
@@ -205,15 +221,40 @@ put in Git!!!
 		</tags:listRow>
 		<tags:listRow>
 			<tags:listCell><tags:outputText textKey="udsneuroexam3.myoclonus" inline="false"/></tags:listCell>
-			<tags:listCell><tags:createField property="myocll" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
-			<tags:listCell><tags:createField property="myoclr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="myocllt" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
+			<tags:listCell><tags:createField property="myoclrt" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 	</tags:tableForm>	
 	
-	<tags:createField property="alsfind" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="gaitnph" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="othneur" component="${component}" entity="${instrTypeEncoded}"/>
-	<tags:createField property="othneurx" component="${component}" entity="${instrTypeEncoded}"/>
+	<div class="verticalSpace30">&nbsp;</div>
+	<tags:tableForm>  
+		<tags:listRow>
+			<tags:listCell width="80%"><tags:outputText textKey="${instrTypeEncoded}.alsfind.label" inline="false"/></tags:listCell>
+			<tags:listCell width="20%"><tags:createField property="alsfind" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
+		</tags:listRow>
+	</tags:tableForm>	
+	
+	<div class="verticalSpace30">&nbsp;</div>
+	<tags:tableForm>  
+		<tags:listRow>
+			<tags:listCell width="80%"><tags:outputText textKey="${instrTypeEncoded}.gaitnph.label" inline="false"/></tags:listCell>
+			<tags:listCell width="20%"><tags:createField property="gaitnph" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
+		</tags:listRow>
+	</tags:tableForm>	
+
+	<div class="verticalSpace30">&nbsp;</div>
+	<tags:tableForm>  
+		<tags:listRow>
+			<tags:listCell width="80%"><tags:outputText textKey="${instrTypeEncoded}.othneur.label" inline="false"/></tags:listCell>
+			<tags:listCell width="20%"><tags:createField property="othneur" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
+		</tags:listRow>
+	</tags:tableForm>	
+	<tags:tableForm>  
+		<tags:listRow>
+			<tags:listCell width="50%"><tags:outputText textKey="${instrTypeEncoded}.othneurx.label" inline="true" indent="true"/></tags:listCell>
+			<tags:listCell width="50%"><tags:createField property="othneurx" entity="${instrTypeEncoded}" component="${component}" mode="${controlMode}"/></tags:listCell>
+		</tags:listRow>
+	</tags:tableForm>	
 
 </page:applyDecorator>
 
@@ -230,7 +271,35 @@ put in Git!!!
   </c:choose>
   <c:if test="${current == 0 || (current == 1 && componentView == 'compare')}">
 
+<ui:formGuide >
+  <ui:observe elementIds="normexam" component="${component}" forValue="1"/>
+  <ui:unskip elementIds="parksign,cvdsigns,postcort,pspcbs,alsfind,gaitnph" component="${component}"/>	
+</ui:formGuide>      
+  
+<ui:formGuide >
+  <ui:observe elementIds="normexam" component="${component}" forValue="1|2"/>
+  <ui:unskip elementIds="othneur" component="${component}"/>	
+</ui:formGuide>      
+
+<ui:formGuide >
+  <ui:observe elementIds="parksign" component="${component}" forValue="1"/>
+  <ui:unskip elementIds="resttrl,resttrr,slowingl,slowingr,rigidl,rigidr,brady,parkgait,postinst" component="${component}"/>	
+</ui:formGuide>      
+
+<ui:formGuide >
+  <ui:observe elementIds="cvdsigns" component="${component}" forValue="1"/>
+  <ui:unskip elementIds="cortdef,sivdfind,cvdmotl,cvdmotr,cortvisl,cortvisr,somatl,somatr" component="${component}"/>	
+</ui:formGuide>      
+
+<ui:formGuide >
+  <ui:observe elementIds="pspcbs" component="${component}" forValue="1"/>
+  <ui:unskip elementIds="eyepsp,dyspsp,axialpsp,gaitpsp,apraxsp,apraxl,apraxr,cortsenl,cortsenr,ataxl,ataxr,alienlml,alienlmr,dystonl,dystonr,myocllt,myoclrt" component="${component}"/>	
+</ui:formGuide>      
+
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
+	<ui:depends elementIds="normexam" component="${component}"/>
+	<ui:observe elementIds="othneur" component="${component}" forValue="1"/>
+	<ui:unskip elementIds="othneurx" component="${component}"/> 
 </ui:formGuide>
   </c:if>
 </c:forEach>
