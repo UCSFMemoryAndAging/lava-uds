@@ -125,20 +125,6 @@ the first double enter property here --%>
 			</tags:listRowGroup>	
 		</tags:tableForm>
 		
-<%--		
-		<tags:createField property="fadmut" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fadmutx" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fadmuso" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fadmusox" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fftdmut" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fftdmutx" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fftdmuso" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fftdmusx" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fothmut" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fothmutx" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fothmuso" component="${component}" entity="${instrTypeEncoded}"/>
-		<tags:createField property="fothmusx" component="${component}" entity="${instrTypeEncoded}"/>
- --%>		
 </page:applyDecorator>
 
 <c:if test="${packetType == 'I' || empty packetType}">
