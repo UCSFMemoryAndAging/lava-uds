@@ -30,7 +30,7 @@
 	       <property name="cogAttn" column="COGATTN" type="short"/>
 	       <property name="cogFluc" column="COGFLUC" type="short"/>
 			<property name="cogFlAgO" column="COGFLAGO" type="short" />
-	       <property name="cogOther" column="COGOTHR" type="short"/>
+	       <property name="cogOthr" column="COGOTHR" type="short"/>
 	       <property name="cogOthrx" column="COGOTHRX" type="string" length="60"/>
 	       <property name="cogFrst" column="COGFRST" type="short"/>
 	       <property name="cogFrstx" column="COGFRSTX" type="string" length="60"/>

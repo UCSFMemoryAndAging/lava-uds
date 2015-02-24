@@ -34,7 +34,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	private Short cogAttn;
 	private Short cogFluc;
 	private Short cogFlAgO; // UDS3 new (fluctuating cognition age of onset)
-	private Short cogOther;
+	private Short cogOthr;
 	private String cogOthrx;
 	private Short cogFrst; // UDS3 replaced by cogFPred
 	private String cogFrstx; // UDS3 replaced by cogFPrex
@@ -277,12 +277,12 @@ public class UdsSymptomsOnset extends UdsInstrument {
 		this.cogModex = cogModex;
 	}
 
-	public Short getCogOther() {
-		return cogOther;
+	public Short getCogOthr() {
+		return cogOthr;
 	}
 
-	public void setCogOther(Short cogOther) {
-		this.cogOther = cogOther;
+	public void setCogOthr(Short cogOthr) {
+		this.cogOthr = cogOthr;
 	}
 
 	public String getCogOthrx() {
@@ -626,7 +626,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 					"cogLang",
 					"cogVis",
 					"cogAttn",
-					"cogOther",
+					"cogOthr",
 					"cogFrst",
 					"cogMode",
 					"beApathy",
@@ -662,7 +662,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 					"cogVis",
 					"cogAttn",
 					"cogFluc",
-					"cogOther",
+					"cogOthr",
 					"cogFrst",
 					"cogMode",
 					"beApathy",
@@ -703,7 +703,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 					"cogAttn",
 					"cogFluc",
 					"cogFlAgO",
-					"cogOther",
+					"cogOthr",
 					"cogFPred",
 					"cogMode",
 					"decClBe",
@@ -760,7 +760,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 				buffer.append(UdsUploadUtils.formatField(getCogLang())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogVis())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
-				buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrst())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrstx())).append(",");
@@ -803,7 +803,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 				buffer.append(UdsUploadUtils.formatField(getCogLang())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogVis())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
-				buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrst())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrstx())).append(",");
@@ -847,7 +847,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getCogVis())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFluc())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFrst())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFrstx())).append(",");
@@ -892,7 +892,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFluc())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFlAgO())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFPred())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFPrex())).append(",");
