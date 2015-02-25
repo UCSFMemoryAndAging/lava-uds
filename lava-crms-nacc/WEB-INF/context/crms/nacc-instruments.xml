@@ -54,6 +54,7 @@
 	<bean id="lava.crms.assessment.instrument.udslabsimaging2" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsmedications1" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsmedications2" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsmedications3" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsmilestone1" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsmilestone2" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsneuropsych1" parent="crmsInstrumentFlowAction"/>
@@ -143,6 +144,12 @@
 	<bean id="udslabsimaging2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsmedications1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsmedications2FormAction" parent="crmsInstrumentComponentFormAction">
+    	<constructor-arg><list>
+			<bean parent="udsMedications2Handler"/>
+	      	<bean class="edu.ucsf.lava.crms.assessment.controller.VisitInstrumentsHandler" parent="crmsHandler"/>
+		</list></constructor-arg>
+    </bean>
+	<bean id="udsmedications3FormAction" parent="crmsInstrumentComponentFormAction">
     	<constructor-arg><list>
 			<bean parent="udsMedications2Handler"/>
 	      	<bean class="edu.ucsf.lava.crms.assessment.controller.VisitInstrumentsHandler" parent="crmsHandler"/>
@@ -388,6 +395,12 @@
 	</bean>		 		
 		
 	<bean id="udsmedications2" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsMedications2</value></property>
+		<property name="supportedFlows"><value>enterReview</value></property>
+		<property name="verify"><value>false</value></property>
+	</bean>		 			
+	
+	<bean id="udsmedications3" parent="instrumentConfig">
 		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsMedications2</value></property>
 		<property name="supportedFlows"><value>enterReview</value></property>
 		<property name="verify"><value>false</value></property>

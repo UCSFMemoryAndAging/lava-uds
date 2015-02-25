@@ -15,7 +15,7 @@ udsMedicationsDto is passed in as param.component --%>
   <page:param name="sectionNameKey">udsmedications2.details.section</page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"><spring:message code="udsmedications2.details.instructions"/></page:param>
-	<tags:createField property="anyMeds" entity="${instrTypeEncoded}" component="${dtoComponent}" mode="dc"/>
+	<tags:createField property="anyMeds" entity="${instrTypeEncoded}" component="${dtoComponent}" metadataName="udsmedications2.anyMeds" mode="dc"/>
 </page:applyDecorator>
 
 <c:forEach items="${command.components[dtoComponent].details}" var="detail" varStatus="iterator">
