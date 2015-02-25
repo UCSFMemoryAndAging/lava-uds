@@ -195,6 +195,7 @@ in followup. --%>
   <ui:depends elementIds="decClBe,beVHall" component="${component}"/>
   <ui:observe elementIds="beVWell" component="${component}" forValue="^1"/>
   <ui:enable elementIds="beVHAgO" component="${component}"/>
+  <ui:setValue elementIds="beVHAgO" component="${component}" value=""/>
 </ui:formGuide>        
 <ui:formGuide ignoreUndoOnLoad="true" ignoreUndo="true">
   <ui:depends elementIds="decClBe,beVHall" component="${component}"/>
