@@ -95,6 +95,83 @@
    	       	<property name="cogOth3" column="COGOTH3" type="short"/>
 	       	<property name="cogOth3If" column="COGOTH3IF" type="short"/>
 	       	<property name="cogOth3x" column="COGOTH3X" type="string" length="60"/>
+	       	
+	       	<!-- following fields are new for version 3 -->
+			<property name="dxmethod" column="DXMETHOD" type="short"/>
+			<property name="amndem" column="AMNDEM" type="short"/>
+			<property name="pca" column="PCA" type="short"/>
+			<property name="ppasyn" column="PPASYN" type="short"/>
+			<property name="ppasynt" column="PPASYNT" type="short"/>
+			<property name="ftdsyn" column="FTDSYN" type="short"/>
+			<property name="lbdsyn" column="LBDSYN" type="short"/>
+			<property name="namndem" column="NAMNDEM" type="short"/>
+			<property name="amylpet" column="AMYLPET" type="short"/>
+			<property name="amylcsf" column="AMYLCSF" type="short"/>
+			<property name="fdgad" column="FDGAD" type="short"/>
+			<property name="hippatr" column="HIPPATR" type="short"/>
+			<property name="taupetad" column="TAUPETAD" type="short"/>
+			<property name="csftau" column="CSFTAU" type="short"/>
+			<property name="fdgftld" column="FDGFTLD" type="short"/>
+			<property name="tpetftld" column="TPETFTLD" type="short"/>
+			<property name="mrftld" column="MRFTLD" type="short"/>
+			<property name="datscan" column="DATSCAN" type="short"/>
+			<property name="othbiom" column="OTHBIOM" type="short"/>
+			<property name="othbiomx" column="OTHBIOMX" type="string" length="60"/>
+			<property name="imaglinf" column="IMAGLINF" type="short"/>
+			<property name="imaglac" column="IMAGLAC" type="short"/>
+			<property name="imagmach" column="IMAGMACH" type="short"/>
+			<property name="imagmich" column="IMAGMICH" type="short"/>
+			<property name="imagmwmh" column="IMAGMWMH" type="short"/>
+			<property name="imagewmh" column="IMAGEWMH" type="short"/>
+			<property name="admut" column="ADMUT" type="short"/>
+			<property name="ftldmut" column="FTLDMUT" type="short"/>
+			<property name="othmut" column="OTHMUT" type="short"/>
+			<property name="othmutx" column="OTHMUTX" type="string" length="60"/>
+			<property name="alzdis" column="ALZDIS" type="short"/>
+			<property name="alzdisif" column="ALZDISIF" type="short"/>
+			<property name="lbdis" column="LBDIS" type="short"/>
+			<property name="lbdif" column="LBDIF" type="short"/>
+			<property name="msa" column="MSA" type="short"/>
+			<property name="msaif" column="MSAIF" type="short"/>
+			<property name="ftldmo" column="FTLDMO" type="short"/>
+			<property name="ftldmoif" column="FTLDMOIF" type="short"/>
+			<property name="ftldnos" column="FTLDNOS" type="short"/>
+			<property name="ftldnoif" column="FTLDNOIF" type="short"/>
+			<property name="ftldsubt" column="FTLDSUBT" type="short"/>
+			<property name="ftldsubx" column="FTLDSUBX" type="string" length="60"/>
+			<property name="cvd" column="CVD" type="short"/>
+			<property name="cvdif" column="CVDIF" type="short"/>
+			<property name="prevstk" column="PREVSTK" type="short"/>
+			<property name="strokdec" column="STROKDEC" type="short"/>
+			<property name="stkimag" column="STKIMAG" type="short"/>
+			<property name="infnetw" column="INFNETW" type="short"/>
+			<property name="infwmh" column="INFWMH" type="short"/>
+			<property name="esstrem" column="ESSTREM" type="short"/>
+			<property name="esstreif" column="ESSTREIF" type="short"/>
+			<property name="brnincte" column="BRNINCTE" type="short"/>
+			<property name="epilep" column="EPILEP" type="short"/>
+			<property name="epilepif" column="EPILEPIF" type="short"/>
+			<property name="neopstat" column="NEOPSTAT" type="short"/>
+			<property name="hiv" column="HIV" type="short"/>
+			<property name="hivif" column="HIVIF" type="short"/>
+			<property name="othcog" column="OTHCOG" type="short"/>
+			<property name="othcogif" column="OTHCOGIF" type="short"/>
+			<property name="othcogx" column="OTHCOGX" type="string" length="60"/>
+			<property name="deptreat" column="DEPTREAT" type="short"/>
+			<property name="bipoldx" column="BIPOLDX" type="short"/>
+			<property name="bipoldif" column="BIPOLDIF" type="short"/>
+			<property name="schizop" column="SCHIZOP" type="short"/>
+			<property name="schizoif" column="SCHIZOIF" type="short"/>
+			<property name="anxiet" column="ANXIET" type="short"/>
+			<property name="anxietif" column="ANXIETIF" type="short"/>
+			<property name="delir" column="DELIR" type="short"/>
+			<property name="delirif" column="DELIRIF" type="short"/>
+			<property name="ptsddx" column="PTSDDX" type="short"/>
+			<property name="ptsddxif" column="PTSDDXIF" type="short"/>
+			<property name="othpsyx" column="OTHPSYX" type="string" length="60"/>
+			<property name="alcabuse" column="ALCABUSE" type="short"/>
+			<property name="impsub" column="IMPSUB" type="short"/>
+			<property name="impsubif" column="IMPSUBIF" type="short"/>	       	
 			</join>	
 
         &instrInclude2;

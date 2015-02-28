@@ -53,7 +53,21 @@ public class UdsMilestone extends UdsInstrument {
 	private String phyOthx;
 	private Short udsActiv;
 
-	
+	// new fields for version 3
+	private Short changemo;
+	private Short changedy;
+	private Short changeyr;
+	private Short aconsent;
+	private Short recogim;
+	private Short rephyill;
+	private Short rerefuse;
+	private Short renavail;
+	private Short renurse;
+	private Short rejoin;
+	private Short ftlddisc;
+	private Short ftldreas;
+	private String ftldreax;
+	private Short dropreas;	
 	
 	public Short getAutopsy() {
 		return autopsy;
@@ -309,21 +323,166 @@ public class UdsMilestone extends UdsInstrument {
 
 	public void setUdsActiv(Short udsActiv) {
 		this.udsActiv = udsActiv;
+	}	
+	
+	public Short getChangemo() {
+		return changemo;
 	}
 
-	
+	public void setChangemo(Short changemo) {
+		this.changemo = changemo;
+	}
+
+	public Short getChangedy() {
+		return changedy;
+	}
+
+	public void setChangedy(Short changedy) {
+		this.changedy = changedy;
+	}
+
+	public Short getChangeyr() {
+		return changeyr;
+	}
+
+	public void setChangeyr(Short changeyr) {
+		this.changeyr = changeyr;
+	}
+
+	public Short getAconsent() {
+		return aconsent;
+	}
+
+	public void setAconsent(Short aconsent) {
+		this.aconsent = aconsent;
+	}
+
+	public Short getRecogim() {
+		return recogim;
+	}
+
+	public void setRecogim(Short recogim) {
+		this.recogim = recogim;
+	}
+
+	public Short getRephyill() {
+		return rephyill;
+	}
+
+	public void setRephyill(Short rephyill) {
+		this.rephyill = rephyill;
+	}
+
+	public Short getRerefuse() {
+		return rerefuse;
+	}
+
+	public void setRerefuse(Short rerefuse) {
+		this.rerefuse = rerefuse;
+	}
+
+	public Short getRenavail() {
+		return renavail;
+	}
+
+	public void setRenavail(Short renavail) {
+		this.renavail = renavail;
+	}
+
+	public Short getRenurse() {
+		return renurse;
+	}
+
+	public void setRenurse(Short renurse) {
+		this.renurse = renurse;
+	}
+
+	public Short getRejoin() {
+		return rejoin;
+	}
+
+	public void setRejoin(Short rejoin) {
+		this.rejoin = rejoin;
+	}
+
+	public Short getFtlddisc() {
+		return ftlddisc;
+	}
+
+	public void setFtlddisc(Short ftlddisc) {
+		this.ftlddisc = ftlddisc;
+	}
+
+	public Short getFtldreas() {
+		return ftldreas;
+	}
+
+	public void setFtldreas(Short ftldreas) {
+		this.ftldreas = ftldreas;
+	}
+
+	public String getFtldreax() {
+		return ftldreax;
+	}
+
+	public void setFtldreax(String ftldreax) {
+		this.ftldreax = ftldreax;
+	}
+
+	public Short getDropreas() {
+		return dropreas;
+	}
+
+	public void setDropreas(Short dropreas) {
+		this.dropreas = dropreas;
+	}
+
 	public void markUnusedFields(String version) {
         if (version.equalsIgnoreCase("1")) {
-       		this.protocol = this.rejoined = this.npRefus = this.phyRefus = (short)-8;    
-   		}else if (version.equalsIgnoreCase("2")){
-   			this.udsActiv = (short)-8;
+        	this.rejoined = this.protocol = this.npRefus = this.phyRefus = this.changemo = this.changedy = this.changeyr = this.aconsent = this.recogim = this.rephyill = this.rerefuse = this.renavail = this.renurse = this.rejoin = this.ftlddisc = this.ftldreas = this.dropreas = (short) -8;
+        	this.ftldreax = "-8";
+   		} else if (version.equalsIgnoreCase("2")) {
+   			this.udsActiv = this.changemo = this.changedy = this.changeyr = this.aconsent = this.recogim = this.rephyill = this.rerefuse = this.renavail = this.renurse = this.rejoin = this.ftlddisc = this.ftldreas = this.dropreas = (short) -8;   			
+   			this.ftldreax = "-8";
+   		} else if (version.equalsIgnoreCase("3")) {
+   			this.discReas = this.rejoined = this.nurseHome = this.npsyTest = this.npCogImp = this.npPhyIll = this.npHomen = this.npRefus = this.npOthRea = this.phynData = this.phyCog = this.phyIll = this.phyHome = this.phyRefus = this.phyOth = this.udsActiv = (short) -8;
+   			this.discReax = this.npOthRex = this.phyOthx = "-8";
    		}
-        
 	}
 	public String[] getRequiredResultFields(String version) {
 		String[] required = new String[]{};
 		// note: "other" fields are not required, yet NACC alerts us
-		if (version.equalsIgnoreCase("2")) {
+		if (version.equalsIgnoreCase("3")) {
+			required = new String[] {
+					"changemo",
+					"changedy",
+					"changeyr",
+					"protocol",
+					"aconsent",
+					"recogim",
+					"rephyill",
+					"rerefuse",
+					"renavail",
+					"renurse",
+					"nurseMo",
+					"nurseDy",
+					"nurseYr",
+					"rejoin",
+					"ftlddisc",
+					"ftldreas",
+					"ftldreax",
+					"deceased",
+					"discont",
+					"deathMo",
+					"deathDy",
+					"deathYr",
+					"autopsy",
+					"discMo",
+					"discDy",
+					"discYr",
+					"dropreas"};
+		}		
+		else if (version.equalsIgnoreCase("2")) {
 			required = new String[] {
 					   "deceased",
 			           "deathMo",
@@ -453,6 +612,34 @@ public class UdsMilestone extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getPhyRefus())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getPhyOth())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getPhyOthx()));
+		} else if (getInstrVer().equals("3")) {
+			buffer.append(UdsUploadUtils.formatField(getChangemo())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getChangedy())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getChangeyr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getProtocol())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAconsent())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getRecogim())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getRephyill())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getRerefuse())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getRenavail())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getRenurse())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getNurseMo())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getNurseDy())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getNurseYr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getRejoin())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtlddisc())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtldreas())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtldreax())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDeceased())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDiscont())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDeathMo())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDeathDy())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDeathYr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAutopsy())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDiscMo())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDiscDy())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDiscYr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDropreas())).append(",");
 		}
 		return buffer.toString();
 	}	

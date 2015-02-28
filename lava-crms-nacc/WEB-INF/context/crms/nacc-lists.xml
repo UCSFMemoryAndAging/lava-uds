@@ -123,6 +123,13 @@
     <bean id="list.udsftldsnq2.codes" parent="list.uds.codes"/>
     <bean id="list.udsftldspecimenconsent2.codes" parent="list.uds.codes"/>
     <bean id="list.udsftldupdrs2.codes" parent="list.uds.codes"/>
+
+	<bean id="list.udsdiagnosis3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsformchecklist3.codes" parent="list.uds.codes"/>    
+	<bean id="list.udsmedicalconditions3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsmilestone3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsneuropsychmoca3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsphoneinclusion3.codes" parent="list.uds.codes"/>	    
     
 	<bean id="list.uds.adcCenterIDs" parent="list.standard">
 		<property name="dbListName" value="UDSCenterIDs"/>
@@ -148,6 +155,14 @@
  		<property name="dbListName" value="UDSnoYesUncertain019"/>
  	</bean> 	
 				
+    <bean id="list.uds.noYesNotAssessed018" parent="list.numericRangeUds">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean>
+			<bean parent="list.data"><constructor-arg value="1 - Yes"/><constructor-arg value="1"/></bean>
+			<bean parent="list.data"><constructor-arg value="8 - Not assessed"/><constructor-arg value="8"/></bean>			
+		</list></property>
+ 	</bean> 	
+
 	<bean id="list.mdsstatus.discReason" parent="list.standardUds">
  		<property name="dbListName" value="mdsstatdiscrea"/>
  	</bean>
@@ -198,7 +213,38 @@
 	<bean id="list.uds.m1.protocol" parent="list.standardUds">
  		<property name="dbListName" value="udsM1Protocol"/>
  	</bean>
-	
+
+	<bean id="list.uds.v3.m1.protocol" parent="list.dataOnlyUds">
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="1 - Annual UDS follow-up by telephone"/><constructor-arg value="1"/></bean>		
+			<bean parent="list.data"><constructor-arg value="2 - Minimal contact"/><constructor-arg value="2"/></bean> 
+			<bean parent="list.data"><constructor-arg value="3 - Annual in-person UDS follow-up"/><constructor-arg value="3"/></bean> 
+		</list></property> 
+ 	</bean>
+
+	<bean id="list.uds.m1.ftldreas" parent="list.dataOnlyUds">
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="1 - ADC decision"/><constructor-arg value="1"/></bean>		
+			<bean parent="list.data"><constructor-arg value="2 - Subject/informant refused"/><constructor-arg value="2"/></bean> 
+			<bean parent="list.data"><constructor-arg value="3 - Informant not available"/><constructor-arg value="3"/></bean> 
+			<bean parent="list.data"><constructor-arg value="4 - Other, specify below"/><constructor-arg value="4"/></bean>
+		</list></property> 
+ 	</bean>
+
+	<bean id="list.uds.m1.autopsy" parent="list.dataOnlyUds">
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="0 - No ADC autopsy expected"/><constructor-arg value="0"/></bean>		
+			<bean parent="list.data"><constructor-arg value="1 - An ADC autopsy has been done; data submitted or pending"/><constructor-arg value="1"/></bean> 
+		</list></property> 
+ 	</bean>
+
+	<bean id="list.uds.v3.m1.dropreas" parent="list.dataOnlyUds">
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="1 - ADC decision or protocol"/><constructor-arg value="1"/></bean>		
+			<bean parent="list.data"><constructor-arg value="2 - Subject or co-participant asked to be dropped"/><constructor-arg value="2"/></bean>  
+		</list></property> 
+ 	</bean>
+
 	<bean id="list.uds.range" abstract="true" parent="list.numericRangeUds">
 		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodesWithSkipCodes"/></property>
 		<property name="defaultMinValue" value="0"/>	
@@ -222,35 +268,59 @@
 		<property name="defaultMaxValue" value="3"/>
 	</bean>	
 
-	<bean id="list.uds.range0_20" parent="list.uds.rangeUnknown">
-		<property name="defaultMaxValue" value="20"/>
-	</bean>	
-
-	<bean id="list.uds.range0_20NA" parent="list.uds.rangeNAUnknown">
-		<property name="defaultMaxValue" value="20"/>
-	</bean>	
-
-	<bean id="list.uds.range0_30" parent="list.uds.rangeNAUnknown">
-		<property name="defaultMaxValue" value="30"/>
-	</bean>
-
-	<bean id="list.uds.range0_42" parent="list.uds.rangeNAUnknown">
-		<property name="defaultMaxValue" value="42"/>
+	<bean id="list.uds.range0_15" parent="list.uds.range">
+		<property name="defaultMaxValue" value="15"/>
 	</bean>
 	
-	<bean id="list.uds.range0_80" parent="list.uds.rangeNAUnknown">
-		<property name="defaultMaxValue" value="80"/>
+	<bean id="list.uds.range0_24" parent="list.uds.range">
+		<property name="defaultMaxValue" value="24"/>
+	</bean>
+
+	<bean id="list.uds.range0_25" parent="list.uds.range">
+		<property name="defaultMaxValue" value="25"/>
 	</bean>	
 
-	<bean id="list.uds.range0_105" parent="list.numericRangeUds">
+	<bean id="list.uds.range0_30" parent="list.uds.range">
+		<property name="defaultMaxValue" value="30"/>
+	</bean>	
+	
+	<bean id="list.uds.range0_32" parent="list.uds.range">
+		<property name="defaultMaxValue" value="32"/>
+	</bean>	
+
+	<bean id="list.uds.range0_40" parent="list.uds.range">
+		<property name="defaultMaxValue" value="40"/>
+	</bean>	
+
+	<bean id="list.uds.range0_42" parent="list.uds.range">
+		<property name="defaultMaxValue" value="42"/>
+	</bean>
+
+	<bean id="list.uds.range0_80" parent="list.uds.range">
+		<property name="defaultMaxValue" value="80"/>
+	</bean>		
+
+	<bean id="list.uds.range0_105" parent="list.uds.range">
 		<property name="defaultMaxValue" value="105"/>
 	</bean>
 
-	<bean id="list.uds.range20_240" parent="list.numericRangeUds">
+	<bean id="list.uds.range20_240" parent="list.uds.range">
 		<property name="defaultMinValue" value="20"/>
 		<property name="defaultMaxValue" value="240"/>
 	</bean>
-	
+
+	<bean id="list.uds.rangeUnknown0_20" parent="list.uds.rangeUnknown">
+		<property name="defaultMaxValue" value="20"/>
+	</bean>	
+
+	<bean id="list.uds.rangeNAUnknown0_30" parent="list.uds.rangeNAUnknown">
+		<property name="defaultMaxValue" value="30"/>
+	</bean>
+		
+	<bean id="list.uds.rangeNAUnknown0_80" parent="list.uds.rangeNAUnknown">
+		<property name="defaultMaxValue" value="80"/>
+	</bean>	
+
     <bean id="list.uds.ageUnknown" parent="list.uds.range">
 		<property name="defaultMaxValue" value="120"/>
 		<property name="data"><list>
@@ -794,6 +864,210 @@
 		<property name="staticReferenceLists"><list><ref bean="list.usd.ref.c1.key995_998"/></list></property>
 	</bean>			
 
+	<bean id="list.uds.ref.c2.key95_98" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="95 - Physical problem"/><constructor-arg value="95"/></bean>
+			<bean parent="list.data"><constructor-arg value="96 - Cognitive/behavior problem"/><constructor-arg value="96"/></bean>
+			<bean parent="list.data"><constructor-arg value="97 - Other problem"/><constructor-arg value="97"/></bean>
+			<bean parent="list.data"><constructor-arg value="98 - Verbal refusal"/><constructor-arg value="98"/></bean>
+		</list></property>
+	</bean>	
+
+	<bean id="list.uds.ref.c2.key995_998" parent="list.dataOnly">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="995 - Physical problem"/><constructor-arg value="995"/></bean>
+			<bean parent="list.data"><constructor-arg value="996 - Cognitive/behavior problem"/><constructor-arg value="996"/></bean>
+			<bean parent="list.data"><constructor-arg value="997 - Other problem"/><constructor-arg value="997"/></bean>
+			<bean parent="list.data"><constructor-arg value="998 - Verbal refusal"/><constructor-arg value="998"/></bean>
+		</list></property>
+	</bean>	
+
+    <bean id="list.uds.c2.range" abstract="true" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="0"/>	
+		<property name="staticReferenceLists"><list><ref bean="list.uds.ref.c2.key95_98"/></list></property>
+	</bean>					
+
+	<bean id="list.uds.c2.range_NA" abstract="true" parent="list.numericRangeUds">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="88 - Not applicable"/><constructor-arg value="88"/></bean>
+		</list></property>
+	</bean>		
+
+    <bean id="list.uds.c2.range0_1" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="1"/>
+	</bean>				
+
+    <bean id="list.uds.c2.range0_2" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="2"/>
+	</bean>				
+
+    <bean id="list.uds.c2.range0_3" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="3"/>
+	</bean>				
+
+    <bean id="list.uds.c2.range0_5" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="5"/>
+	</bean>
+	
+	<bean id="list.uds.c2.range0_5_NA" parent="list.uds.c2.range_NA">
+		<property name="defaultMaxValue" value="5"/>
+	</bean>	
+
+    <bean id="list.uds.c2.range0_10" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="10"/>
+	</bean>				
+
+    <bean id="list.uds.c2.range0_14" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="14"/>
+	</bean>				
+
+    <bean id="list.uds.c2.range0_17" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="17"/>
+	</bean>				
+
+    <bean id="list.uds.c2.range0_30_noadmin" parent="list.numericRangeUds">
+		<property name="defaultMaxValue" value="30"/>
+		<property name="data"><list><bean parent="list.data"><constructor-arg value="88 - Item not administered"/><constructor-arg value="88"/></bean></list></property> 
+	</bean>				
+
+    <bean id="list.uds.c2.range0_32" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="32"/>
+	</bean>				
+
+    <bean id="list.uds.c2.range0_32_na" parent="list.numericRangeUds">
+		<property name="defaultMaxValue" value="32"/>
+		<property name="data"><list><bean parent="list.data"><constructor-arg value="88 - Not applicable"/><constructor-arg value="88"/></bean></list></property> 
+	</bean>				
+
+    <bean id="list.uds.c2.range0_40" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="40"/>
+	</bean>				
+
+    <bean id="list.uds.c2.range0_44" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="44"/>
+	</bean>				
+
+    <bean id="list.uds.c2.range0_77" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="77"/>
+	</bean>				
+
+    <bean id="list.uds.c2.range0_85_unknown" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="85"/>
+		<property name="data"><list><bean parent="list.data"><constructor-arg value="99 - Unknown"/><constructor-arg value="99"/></bean></list></property> 
+	</bean>				
+
+	<bean id="list.uds.c2.range0_150" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="150"/>
+		<property name="staticReferenceLists"><list><ref bean="list.uds.ref.c2.key995_998"/></list></property>
+	</bean>			
+
+	<bean id="list.uds.c2.range0_300" parent="list.uds.c2.range">
+		<property name="defaultMaxValue" value="300"/>
+		<property name="staticReferenceLists"><list><ref bean="list.uds.ref.c2.key995_998"/></list></property>
+	</bean>			
+
+    <bean id="list.uds.c2.loc" parent="list.dataOnlyUds">
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="1 - In ADC or Clinic"/><constructor-arg value="1"/></bean> 
+			<bean parent="list.data"><constructor-arg value="2 - In Home"/><constructor-arg value="2"/></bean> 
+			<bean parent="list.data"><constructor-arg value="3 - In-person - other"/><constructor-arg value="3"/></bean>  
+		</list></property> 
+ 	</bean>
+
+    <bean id="list.uds.c2.lan" parent="list.dataOnlyUds">
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="1 - English"/><constructor-arg value="1"/></bean> 
+			<bean parent="list.data"><constructor-arg value="2 - Spanish"/><constructor-arg value="2"/></bean> 
+			<bean parent="list.data"><constructor-arg value="3 - Other"/><constructor-arg value="3"/></bean>  
+		</list></property> 
+ 	</bean>
+
+    <bean id="list.uds.c2.digforsl" parent="list.numericRangeUds">
+		<property name="data"><list><bean parent="list.data"><constructor-arg value="0"/><constructor-arg value="0"/></bean></list></property>
+		<property name="defaultMinValue" value="3"/>
+		<property name="defaultMaxValue" value="9"/>			
+	</bean>					
+
+    <bean id="list.uds.c2.digbacls" parent="list.numericRangeUds">
+		<property name="data"><list><bean parent="list.data"><constructor-arg value="0"/><constructor-arg value="0"/></bean></list></property>
+		<property name="defaultMinValue" value="2"/>
+		<property name="defaultMaxValue" value="8"/>			
+	</bean>					
+
+    <bean id="list.uds.c2.cogstat" parent="list.dataOnlyUds">
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="0 - Clinician unable to render opinion"/><constructor-arg value="0"/></bean>		
+			<bean parent="list.data"><constructor-arg value="1 - Better than normal for age"/><constructor-arg value="1"/></bean> 
+			<bean parent="list.data"><constructor-arg value="2 - Normal for age"/><constructor-arg value="2"/></bean> 
+			<bean parent="list.data"><constructor-arg value="3 - One or two test scores abnormal"/><constructor-arg value="3"/></bean>
+			<bean parent="list.data"><constructor-arg value="4 - Three or more scores are abnormal or lower than expected"/><constructor-arg value="4"/></bean>
+		</list></property> 
+ 	</bean>
+
+	<bean id="list.uds.d1.dxmethod" parent="list.dataOnlyUds"> 
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="1 - A single clinician"/><constructor-arg value="1"/></bean> 
+			<bean parent="list.data"><constructor-arg value="2 - A formal consensus panel"/><constructor-arg value="2"/></bean> 
+			<bean parent="list.data"><constructor-arg value="3 - Other (two or more clinicians or informal group)"/><constructor-arg value="3"/></bean>  
+		</list></property> 
+	</bean>
+
+	<bean id="list.uds.d1.ppasynt" parent="list.dataOnlyUds"> 
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="1 - Meets criteria for semantic PPA"/><constructor-arg value="1"/></bean>
+			<bean parent="list.data"><constructor-arg value="2 - Meets criteria for logopenic PPA"/><constructor-arg value="2"/></bean>
+			<bean parent="list.data"><constructor-arg value="3 - Meets criteria for nonfluent/agrammatic PPA"/><constructor-arg value="3"/></bean>
+			<bean parent="list.data"><constructor-arg value="4 - PPA other/not otherwise specified"/><constructor-arg value="4"/></bean>
+		</list></property> 
+	</bean>
+	
+	<bean id="list.uds.d1.noYesUnknownNotAssessed018" parent="list.dataOnlyUds">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Yes"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="8 - Unknown/not assessed"/><constructor-arg value="8"/></bean>
+    	</list></property>
+	</bean>						
+	
+	<bean id="list.uds.d1.noYesUnknownNotAssessed019" parent="list.dataOnlyUds">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Yes"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="9 - Unknown/not assessed"/><constructor-arg value="9"/></bean>
+    	</list></property>
+	</bean>						
+
+	<bean id="list.uds.d1.noYesUnknownNoImaging019" parent="list.dataOnlyUds">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Yes"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="9 - Unknown, no relevant imaging data available"/><constructor-arg value="9"/></bean>
+    	</list></property>
+	</bean>						
+	
+	<bean id="list.uds.d1.ftldsubt" parent="list.dataOnlyUds">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="1 - Tauopathy"/><constructor-arg value="1"/></bean>
+			<bean parent="list.data"><constructor-arg value="2 - TDP-43 proteinopathy"/><constructor-arg value="2"/></bean>
+			<bean parent="list.data"><constructor-arg value="3 - Other"/><constructor-arg value="3"/></bean>
+			<bean parent="list.data"><constructor-arg value="9 - Unknown"/><constructor-arg value="9"/></bean>	
+    	</list></property>
+	</bean>						
+	
+	<bean id="list.uds.d1.neopstat" parent="list.dataOnlyUds">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="1 - Benign"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Malignant"/><constructor-arg value="2"/></bean>
+    	</list></property>
+	</bean>							
+	
+	<bean id="list.uds.d1.deptreat" parent="list.dataOnlyUds">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="0 - Untreated"/><constructor-arg value="0"/></bean>
+    		<bean parent="list.data"><constructor-arg value="1 - Treated with medication and/or counseling"/><constructor-arg value="1"/></bean>
+    	</list></property>
+	</bean>							
+
     <bean id="list.uds.d1.response" parent="list.standardUds">
  		<property name="dbListName" value="udsd1response"/>
  	</bean>
@@ -809,6 +1083,34 @@
     <bean id="list.uds.d1.ifPres" parent="list.standardUds">
  		<property name="dbListName" value="udsd1ifpres"/>
  	</bean>
+	
+	<bean id="list.uds.d2.cancer" parent="list.dataOnlyUds"> 
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean> 
+			<bean parent="list.data"><constructor-arg value="1 - Yes, primary/non-metastatic"/><constructor-arg value="1"/></bean> 
+			<bean parent="list.data"><constructor-arg value="2 - Yes, metastatic"/><constructor-arg value="2"/></bean> 
+			<bean parent="list.data"><constructor-arg value="8 - Not assessed"/><constructor-arg value="8"/></bean> 
+		</list></property> 
+	</bean>
+	
+	<bean id="list.uds.d2.diabet" parent="list.dataOnlyUds"> 
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="0 - No"/><constructor-arg value="0"/></bean> 
+			<bean parent="list.data"><constructor-arg value="1 - Yes, Type I"/><constructor-arg value="1"/></bean> 
+			<bean parent="list.data"><constructor-arg value="2 - Yes, Type II"/><constructor-arg value="2"/></bean> 
+			<bean parent="list.data"><constructor-arg value="3 - Yes, other type"/><constructor-arg value="3"/></bean> 
+			<bean parent="list.data"><constructor-arg value="9 - Not assessed or unknown"/><constructor-arg value="9"/></bean> 
+		</list></property> 
+	</bean>
+	
+	<bean id="list.uds.d2.artype" parent="list.dataOnlyUds"> 
+		<property name="data"><list> 
+			<bean parent="list.data"><constructor-arg value="1 - Rheumatoid"/><constructor-arg value="1"/></bean> 
+			<bean parent="list.data"><constructor-arg value="2 - Osteoarthritis"/><constructor-arg value="2"/></bean> 
+			<bean parent="list.data"><constructor-arg value="3 - Other (specify)"/><constructor-arg value="3"/></bean> 
+			<bean parent="list.data"><constructor-arg value="9 - Unknown"/><constructor-arg value="9"/></bean> 
+		</list></property> 
+	</bean>
 	
 	<bean id="list.udsinstrument.packetStatus" parent="list.standardValueNoLabel">
  		<property name="dbListName" value="UDSPacketStatus"/>
