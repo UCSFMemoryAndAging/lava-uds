@@ -37,7 +37,7 @@ set messageCode='*.udssubjectdemo3.preStat', locale='en', instance='lava',
   list="uds.a1.presDis", style="scale";
 
 -- fix typo in list  
-update listvalues set valuedesc = 'Initial evaluation only' where valuekey = 1 and listid in 
+update listvalues set valuedesc = 'Initial evaluation only' where valuekey = '1' and listid in 
 (select listid from list where listname = 'udsa1prespart');
   
 insert into viewproperty 
