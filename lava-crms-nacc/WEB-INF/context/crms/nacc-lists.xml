@@ -668,7 +668,7 @@
  		<property name="dbListName" value="udsa2freq"/>
  	</bean>
  	
-	<bean id="list.uds.a2.relation" parent="list.dataOnlyUdsValueConcatLabel"> 
+	<bean id="list.uds.a2.relation3" parent="list.dataOnlyUdsValueConcatLabel"> 
 		<property name="data"><list> 
 	    	<bean parent="list.data">
     		    <constructor-arg value="Spouse, partner or companion (include ex-spouse, ex-partner, fiance(e), boyfriend, girlfriend)"/>
@@ -1832,7 +1832,7 @@
     </list></property> 
   </bean>
  	
-  <bean id="list.uds.b9.mode" parent="list.dataOnlyUdsValueConcatLabel"> 
+  <bean id="list.uds.b9.modeNoNA" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Gradual"/>
