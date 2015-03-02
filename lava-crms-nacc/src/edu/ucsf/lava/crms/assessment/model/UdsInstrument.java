@@ -22,7 +22,7 @@ public class UdsInstrument extends Instrument implements UdsUploadable {
 
 	public static EntityManager MANAGER = new EntityBase.Manager(UdsInstrument.class);
 
-	public static final String CURRENT_UDS_VERSION = "2";
+	public static final String CURRENT_UDS_VERSION = "3";
 	private String packet;
 	private String formId;
 	private String formVer;

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsMedicalConditions" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsmedicalconditions">
+			<key column="InstrID"/>		
+			<property name="cancer" column="CANCER" type="short"/>
+			<property name="cancsite" column="CANCSITE" type="string" length="60"/>
+			<property name="diabet" column="DIABET" type="short"/>
+			<property name="myoinf" column="MYOINF" type="short"/>
+			<property name="conghrt" column="CONGHRT" type="short"/>
+			<property name="afibrill" column="AFIBRILL" type="short"/>
+			<property name="hypert" column="HYPERT" type="short"/>
+			<property name="angina" column="ANGINA" type="short"/>
+			<property name="hypchol" column="HYPCHOL" type="short"/>
+			<property name="vb12def" column="VB12DEF" type="short"/>
+			<property name="thydis" column="THYDIS" type="short"/>
+			<property name="arth" column="ARTH" type="short"/>
+			<property name="artype" column="ARTYPE" type="short"/>
+			<property name="artypex" column="ARTYPEX" type="string" length="60"/>
+			<property name="artupex" column="ARTUPEX" type="short"/>
+			<property name="artloex" column="ARTLOEX" type="short"/>
+			<property name="artspin" column="ARTSPIN" type="short"/>
+			<property name="artunkn" column="ARTUNKN" type="short"/>
+			<property name="urineinc" column="URINEINC" type="short"/>
+			<property name="bowlinc" column="BOWLINC" type="short"/>
+			<property name="sleepap" column="SLEEPAP" type="short"/>
+			<property name="remdis" column="REMDIS" type="short"/>
+			<property name="hyposom" column="HYPOSOM" type="short"/>
+			<property name="sleepoth" column="SLEEPOTH" type="short"/>
+			<property name="sleepotx" column="SLEEPOTX" type="string" length="60"/>
+			<property name="angiocp" column="ANGIOCP" type="short"/>
+			<property name="angiopci" column="ANGIOPCI" type="short"/>
+			<property name="pacemake" column="PACEMAKE" type="short"/>
+			<property name="hvalve" column="HVALVE" type="short"/>
+			<property name="antienc" column="ANTIENC" type="short"/>
+			<property name="antiencx" column="ANTIENCX" type="string" length="60"/>
+			<property name="othcond" column="OTHCOND" type="short"/>
+			<property name="othcondx" column="OTHCONDX" type="string" length="60"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>

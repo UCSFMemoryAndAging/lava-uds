@@ -19,7 +19,51 @@
 	       	<property name="foclDef" column="FOCLDEF" type="short"/>
 	       	<property name="gaitDis" column="GAITDIS" type="short"/>
 	       	<property name="eyeMove" column="EYEMOVE" type="short"/>
-			</join>	
+	       	<!-- UDS 3 properties -->
+	       	<property name="normexam" column="NORMEXAM" type="short"/>
+	       	<property name="parksign" column="PARKSIGN" type="short"/>
+	       	<property name="resttrl" column="RESTTRL" type="short"/>
+	       	<property name="resttrr" column="RESTTRR" type="short"/>
+	       	<property name="slowingl" column="SLOWINGL" type="short"/>
+	       	<property name="slowingr" column="SLOWINGR" type="short"/>
+	       	<property name="rigidl" column="RIGIDL" type="short"/>
+	       	<property name="rigidr" column="RIGIDR" type="short"/>
+	       	<property name="brady" column="BRADY" type="short"/>
+	       	<property name="parkgait" column="PARKGAIT" type="short"/>
+	       	<property name="postinst" column="POSTINST" type="short"/>
+	       	<property name="cvdsigns" column="CVDSIGNS" type="short"/>
+	       	<property name="cortdef" column="CORTDEF" type="short"/>
+	       	<property name="sivdfind" column="SIVDFIND" type="short"/>
+	       	<property name="cvdmotl" column="CVDMOTL" type="short"/>
+	       	<property name="cvdmotr" column="CVDMOTR" type="short"/>
+	       	<property name="cortvisl" column="CORTVISL" type="short"/>
+	       	<property name="cortvisr" column="CORTVISR" type="short"/>
+	       	<property name="somatl" column="SOMATL" type="short"/>
+	       	<property name="somatr" column="SOMATR" type="short"/>
+	       	<property name="postcort" column="POSTCORT" type="short"/>
+	       	<property name="pspcbs" column="PSPCBS" type="short"/>
+	       	<property name="eyepsp" column="EYEPSP" type="short"/>
+	       	<property name="dyspsp" column="DYSPSP" type="short"/>
+	       	<property name="axialpsp" column="AXIALPSP" type="short"/>
+	       	<property name="gaitpsp" column="GAITPSP" type="short"/>
+	       	<property name="apraxsp" column="APRAXSP" type="short"/>
+	       	<property name="apraxl" column="APRAXL" type="short"/>
+	       	<property name="apraxr" column="APRAXR" type="short"/>
+	       	<property name="cortsenl" column="CORTSENL" type="short"/>
+	       	<property name="cortsenr" column="CORTSENR" type="short"/>
+	       	<property name="ataxl" column="ATAXL" type="short"/>
+	       	<property name="ataxr" column="ATAXR" type="short"/>
+	       	<property name="alienlml" column="ALIENLML" type="short"/>
+	       	<property name="alienlmr" column="ALIENLMR" type="short"/>
+	       	<property name="dystonl" column="DYSTONL" type="short"/>
+	       	<property name="dystonr" column="DYSTONR" type="short"/>
+	       	<property name="myocllt" column="MYOCLLT" type="short"/>
+	       	<property name="myoclrt" column="MYOCLRT" type="short"/>
+	       	<property name="alsfind" column="ALSFIND" type="short"/>
+	       	<property name="gaitnph" column="GAITNPH" type="short"/>
+	       	<property name="othneur" column="OTHNEUR" type="short"/>
+	       	<property name="othneurx" column="OTHNEURX" type="string" length="60"/>
+		</join>	
 
         &instrInclude2;
         

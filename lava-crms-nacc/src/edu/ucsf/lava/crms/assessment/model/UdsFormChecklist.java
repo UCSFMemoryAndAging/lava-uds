@@ -289,7 +289,40 @@ public class UdsFormChecklist extends UdsInstrument {
 	public void setB8Comm(String comm) {
 		b8Comm = comm;
 	}
+	
+	public void beforeUpdate() {
+		super.beforeUpdate();
 
+		if (getInstrVer().equalsIgnoreCase("3")) {
+			if (getPacket() != null && getPacket().equals("T")) {
+				this.a2Sub = (short) -8;
+				this.a2Not = (short) -8;
+				this.a2Comm = "-8";
+				this.b1Sub = (short) -8;
+				this.b1Not = (short) -8;
+				this.b1Comm = "-8";
+				this.b2Sub = (short) -8;
+				this.b2Not = (short) -8;
+				this.b2Comm = "-8";
+				this.b3Sub = (short) -8;
+				this.b3Not = (short) -8;
+				this.b3Comm = "-8";
+				this.b6Sub = (short) -8;
+				this.b6Not = (short) -8;
+				this.b6Comm = "-8";
+				this.b8Sub = (short) -8;
+				this.b8Not = (short) -8;
+				this.b8Comm = "-8";
+			} else if (getPacket() != null && (getPacket().equals("I") || getPacket().equals("F"))) {
+				this.b2Sub = (short) -8;
+				this.b2Not = (short) -8;
+				this.b2Comm = "-8";
+				this.b3Sub = (short) -8;
+				this.b3Not = (short) -8;
+				this.b3Comm = "-8";
+			}			
+   		}
+	}	
 	
 	public String[] getRequiredResultFields() {
 		return new String[] {
@@ -320,11 +353,10 @@ public class UdsFormChecklist extends UdsInstrument {
 	
 
 	public String getUdsUploadCsvRecord() {
-		if(getPacket()==null){return "";}
-		
+		if(getPacket()==null) { return ""; }
 		StringBuffer buffer = UdsUploadUtils.getCommonFields(this);
-		if(getPacket().equals("T")){
-			
+		
+		if (getPacket().equals("T")) {
 			buffer.append(UdsUploadUtils.formatField(getA3Sub())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getA3Not())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getA3Comm())).append(",");
@@ -337,43 +369,70 @@ public class UdsFormChecklist extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getB7Sub())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getB7Not())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getB7Comm()));
+			return buffer.toString();
 		}
-		else if(getPacket().equals("I") || getPacket().equals("F")){
-			buffer.append(UdsUploadUtils.formatField(getA2Sub())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getA2Not())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getA2Comm())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getA3Sub())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getA3Not())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getA3Comm())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getA4Sub())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getA4Not())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getA4Comm())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB1Sub())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB1Not())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB1Comm())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB2Sub())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB2Not())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB2Comm())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB3Sub())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB3Not())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB3Comm())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB5Sub())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB5Not())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB5Comm())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB6Sub())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB6Not())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB6Comm())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB7Sub())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB7Not())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB7Comm())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB8Sub())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB8Not())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getB8Comm()));
-		}
-	return buffer.toString();
+		
+		if (this.getInstrVer().equals("1") || this.getInstrVer().equals("2")) {	
+			if(getPacket().equals("I") || getPacket().equals("F")) {
+				buffer.append(UdsUploadUtils.formatField(getA2Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA2Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA2Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA3Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA3Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA3Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA4Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA4Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA4Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB1Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB1Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB1Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB2Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB2Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB2Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB3Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB3Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB3Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB5Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB5Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB5Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB6Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB6Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB6Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB7Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB7Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB7Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB8Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB8Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB8Comm()));
+			}
+		} else if (this.getInstrVer().equals("3")) {	
+			if(getPacket().equals("I") || getPacket().equals("F")) {
+				buffer.append(UdsUploadUtils.formatField(getA2Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA2Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA2Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA3Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA3Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA3Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA4Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA4Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getA4Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB1Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB1Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB1Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB5Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB5Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB5Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB6Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB6Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB6Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB7Sub())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB7Not())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB7Comm())).append(",");
+			}
+		}		
+		
+		return buffer.toString();
 	}
-	
-	
 	
 }
 

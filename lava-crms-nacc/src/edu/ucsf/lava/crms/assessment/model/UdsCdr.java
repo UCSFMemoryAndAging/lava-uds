@@ -153,14 +153,13 @@ public class UdsCdr extends UdsInstrument {
 	
 	public void markUnusedFields(String version) {
         if (version.equalsIgnoreCase("1")) {
-       
  			this.comport = this.cdrLang = (float)-8.0;    
-   			}
+		}
 	}
 	public String[] getRequiredResultFields(String version) {
 		String[] required = new String[]{};
 		
-		if (version.equalsIgnoreCase("1")) {
+		if (version.equals("1")) {
 			required = new String[] {
 				"memory",
 				"orient",
@@ -169,7 +168,18 @@ public class UdsCdr extends UdsInstrument {
 				"homeHobb",
 				"persCare"};
 		}
-		else if (version.equalsIgnoreCase("2")) {
+		else if (version.equals("2")) {
+			required = new String[] {
+				"memory",
+				"orient",
+				"judgement",
+				"commun",
+				"homeHobb",
+				"persCare",
+				"comport",
+				"cdrLang"};
+		}
+		else if (version.equals("3")) {
 			required = new String[] {
 				"memory",
 				"orient",
@@ -196,7 +206,7 @@ public class UdsCdr extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getCdrSum())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getCdrGlob()));
 		
-		if(this.getInstrVer().equals("2")){
+		if(this.getInstrVer().equals("2") || this.getInstrVer().equals("3")){
 			buffer.append(",");
 			buffer.append(UdsUploadUtils.formatField(getComport())).append(",");
 			// EMORY change: see below

@@ -24,20 +24,20 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	private Short b9Chg;
 	private Short decSub;
 	private Short decIn;
-	private Short decClin;
-	private Short decAge;
+	private Short decClin; // UDS3 removed, replaced by decClCog
 	private Short cogMem;
 	private Short cogJudg;
 	private Short cogLang;
 	private Short cogVis;
 	private Short cogAttn;
 	private Short cogFluc;
-	private Short cogOther;
+	private Short cogOthr;
 	private String cogOthrx;
-	private Short cogFrst;
-	private String cogFrstx;
+	private Short cogFrst; // UDS3 replaced by cogFPred
+	private String cogFrstx; // UDS3 replaced by cogFPrex
 	private Short cogMode;
 	private String cogModex;
+	private Short decAge; // UDS3 moved from item 3 to item 7 
 	private Short beApathy;
 	private Short beDep;
 	private Short beVHall;
@@ -51,8 +51,8 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	private Short beRem;
 	private Short beOthr;
 	private String beOthrx;
-	private Short beFrst;
-	private String beFrstx;
+	private Short beFrst; // UDS3 replaced by beFPred
+	private String beFrstx; // UDS3 replaced by beFPredX  
 	private Short beMode;
 	private String beModex;
 	private Short moGait;
@@ -66,6 +66,28 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	private Short course;
 	private Short frstChg;
 
+	// new variables UDS 3
+	private Short decClCog; // UDS 3 new (cognitive symptoms gateway question)
+	private Short cogOri; // UDS new
+	private Short cogFlAgO; // UDS3 new (fluctuating cognition age of onset)
+	private Short cogFPred; // UDS3 replaced cogFrst, recoded
+	private String cogFPrex; // UDS3 replaced cogFrstx
+	private Short decClBe; // UDS3 new (behavioral symptoms gateway question)
+	private Short beVHAgO; // UDS3 new (visual hallucinations age of onset)
+	private Short beRemAgO; // UDS3 new (REM sleep behavior disorder age of onset)
+	private Short beAnx; // UDS3 new (anxiety)
+	private Short beFPred; // UDS3 replaced beFrst (behavior first predominant symptom), recoded
+	private String beFPredx; // UDS3 replaced beFrstx
+	private Short beAge; // UDS3 new (behavioral symptoms age of onset)
+	private Short decClMot; // UDS3 new (motor symptoms gateway question)
+	private Short parkAge; // UDS3 new
+	private Short moMoAls; // UDS3 new
+	private Short alsAge; // UDS3 new
+	private Short moAge; // UDS3 new
+	private Short lbdEval; // UDS3 new
+	private Short ftldEval; // UDS3 new
+	
+	
 	public Short getB9Chg() {
 		return b9Chg;
 	}
@@ -258,12 +280,12 @@ public class UdsSymptomsOnset extends UdsInstrument {
 		this.cogModex = cogModex;
 	}
 
-	public Short getCogOther() {
-		return cogOther;
+	public Short getCogOthr() {
+		return cogOthr;
 	}
 
-	public void setCogOther(Short cogOther) {
-		this.cogOther = cogOther;
+	public void setCogOthr(Short cogOthr) {
+		this.cogOthr = cogOthr;
 	}
 
 	public String getCogOthrx() {
@@ -388,8 +410,6 @@ public class UdsSymptomsOnset extends UdsInstrument {
 		this.moTrem = moTrem;
 	}
 
-
-
 	public Short getBeRem() {
 		return beRem;
 	}
@@ -421,18 +441,179 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	public void setMoMoPark(Short moMoPark) {
 		this.moMoPark = moMoPark;
 	}
-
 	
-	
-	public void markUnusedFields(String version) {
-        if (version.equalsIgnoreCase("1")) {
-       
- 			this.cogFluc = this.beVWell = this.beRem = this.moMoPark = (short)-8;    
-   		}else if (version.equalsIgnoreCase("2")){
-   			this.b9Chg = (short)-8;
-   		}
-        
+	public Short getDecClCog() {
+		return decClCog;
 	}
+
+	public void setDecClCog(Short decClCog) {
+		this.decClCog = decClCog;
+	}
+
+	public Short getCogOri() {
+		return cogOri;
+	}
+
+	public void setCogOri(Short cogOri) {
+		this.cogOri = cogOri;
+	}
+
+	public Short getCogFlAgO() {
+		return cogFlAgO;
+	}
+
+	public void setCogFlAgO(Short cogFlAgO) {
+		this.cogFlAgO = cogFlAgO;
+	}
+
+	public Short getCogFPred() {
+		return cogFPred;
+	}
+
+	public void setCogFPred(Short cogFPred) {
+		this.cogFPred = cogFPred;
+	}
+
+	public String getCogFPrex() {
+		return cogFPrex;
+	}
+
+	public void setCogFPrex(String cogFPrex) {
+		this.cogFPrex = cogFPrex;
+	}
+
+	public Short getDecClBe() {
+		return decClBe;
+	}
+
+	public void setDecClBe(Short decClBe) {
+		this.decClBe = decClBe;
+	}
+
+	public Short getBeVHAgO() {
+		return beVHAgO;
+	}
+
+	public void setBeVHAgO(Short beVHAgO) {
+		this.beVHAgO = beVHAgO;
+	}
+
+	public Short getBeRemAgO() {
+		return beRemAgO;
+	}
+
+	public void setBeRemAgO(Short beRemAgO) {
+		this.beRemAgO = beRemAgO;
+	}
+
+	public Short getBeAnx() {
+		return beAnx;
+	}
+
+	public void setBeAnx(Short beAnx) {
+		this.beAnx = beAnx;
+	}
+
+	public Short getBeFPred() {
+		return beFPred;
+	}
+
+	public void setBeFPred(Short beFPred) {
+		this.beFPred = beFPred;
+	}
+
+	public String getBeFPredx() {
+		return beFPredx;
+	}
+
+	public void setBeFPredx(String beFPredx) {
+		this.beFPredx = beFPredx;
+	}
+
+	public Short getBeAge() {
+		return beAge;
+	}
+
+	public void setBeAge(Short beAge) {
+		this.beAge = beAge;
+	}
+
+	public Short getDecClMot() {
+		return decClMot;
+	}
+
+	public void setDecClMot(Short decClMot) {
+		this.decClMot = decClMot;
+	}
+
+	public Short getParkAge() {
+		return parkAge;
+	}
+
+	public void setParkAge(Short parkAge) {
+		this.parkAge = parkAge;
+	}
+
+	public Short getMoMoAls() {
+		return moMoAls;
+	}
+
+	public void setMoMoAls(Short moMoAls) {
+		this.moMoAls = moMoAls;
+	}
+
+	public Short getAlsAge() {
+		return alsAge;
+	}
+
+	public void setAlsAge(Short alsAge) {
+		this.alsAge = alsAge;
+	}
+
+	public Short getMoAge() {
+		return moAge;
+	}
+
+	public void setMoAge(Short moAge) {
+		this.moAge = moAge;
+	}
+
+	public Short getLbdEval() {
+		return lbdEval;
+	}
+
+	public void setLbdEval(Short lbdEval) {
+		this.lbdEval = lbdEval;
+	}
+
+	public Short getFtldEval() {
+		return ftldEval;
+	}
+
+	public void setFtldEval(Short ftldEval) {
+		this.ftldEval = ftldEval;
+	}
+
+	public void markUnusedFields(String version) {
+        if (version.equals("1") || version.equals("2")) {
+        	if (version.equals("1")) {
+        		this.cogFluc = this.beVWell = this.beRem = this.moMoPark = (short)-8;
+        	}
+   			else if (version.equals("2")){
+   				this.b9Chg = (short)-8;
+   			}
+        	// version 3 properties
+        	this.decClCog = this.cogOri = this.cogFlAgO = this.cogFPred = this.decClBe = this.beVHAgO = this.beRemAgO = this.beAnx = this.beFPred = this.beAge
+   				= this.decClMot = this.parkAge = this.moMoAls = this.alsAge = this.moAge = this.lbdEval = this.ftldEval = (short) -8;
+   			this.cogFPrex = this.beFPredx = "-8";
+		}
+   		else if (version.equals("3")){
+   			this.b9Chg = (short)-8;
+   			this.decClin = this.cogFrst = this.beFrst = (short) -8; 
+   			this.cogFrstx = this.beFrstx = "-8";
+   		}
+	}
+	
 	public String[] getRequiredResultFields(String version) {
 		String[] required = new String[]{};
 		
@@ -448,7 +629,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 					"cogLang",
 					"cogVis",
 					"cogAttn",
-					"cogOther",
+					"cogOthr",
 					"cogFrst",
 					"cogMode",
 					"beApathy",
@@ -484,7 +665,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 					"cogVis",
 					"cogAttn",
 					"cogFluc",
-					"cogOther",
+					"cogOthr",
 					"cogFrst",
 					"cogMode",
 					"beApathy",
@@ -511,6 +692,59 @@ public class UdsSymptomsOnset extends UdsInstrument {
 					"course",
 					"frstChg"};
 		}
+		else if (version.equals("3")) {
+			required = new String[] {
+					"decSub",
+					"decIn",
+					"decClCog",
+					"decAge",
+					"cogMem",
+					"cogOri",
+					"cogJudg",
+					"cogLang",
+					"cogVis",
+					"cogAttn",
+					"cogFluc",
+					"cogFlAgO",
+					"cogOthr",
+					"cogFPred",
+					"cogMode",
+					"decClBe",
+					"beApathy",
+					"beDep",
+					"beVHall",
+					"beVWell",
+					"beVHAgO",
+					"beAHall",
+					"beDel",
+					"beDisin",
+					"beIrrit",
+					"beAgit",
+					"bePerCh",
+					"beRem",
+					"beRemAgO",
+					"beAnx",
+					"beOthr",
+					"beFPred",
+					"beMode",
+					"beAge",
+					"decClMot",
+					"moGait",
+					"moFalls",
+					"moTrem",
+					"moSlow",
+					"moFrst",
+					"moMode",
+					"moMoPark",
+					"parkAge",
+					"moMoAls",
+					"alsAge",
+					"moAge",
+					"course",
+					"frstChg",
+					"lbdEval",
+					"ftldEval"};
+		}
 		return required;
 	}
 	
@@ -529,7 +763,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 				buffer.append(UdsUploadUtils.formatField(getCogLang())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogVis())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
-				buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrst())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrstx())).append(",");
@@ -572,7 +806,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 				buffer.append(UdsUploadUtils.formatField(getCogLang())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogVis())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
-				buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrst())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrstx())).append(",");
@@ -616,7 +850,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getCogVis())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFluc())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFrst())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFrstx())).append(",");
@@ -649,7 +883,67 @@ public class UdsSymptomsOnset extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getMoMoPark())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCourse())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getFrstChg()));
+		}else if(getInstrVer().equals("3")){
+			buffer.append(UdsUploadUtils.formatField(getDecSub())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDecIn())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDecClCog())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogMem())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogOri())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogJudg())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogLang())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogVis())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogFluc())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogFlAgO())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogFPred())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogFPrex())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogMode())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogModex())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDecAge())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDecClBe())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeApathy())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeDep())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeVHall())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeVWell())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeVHAgO())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeAHall())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeDel())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeDisin())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeIrrit())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeAgit())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBePerCh())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeRem())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeRemAgO())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeAnx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeOthrx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeFPred())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeFPredx())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeMode())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeModex())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getBeAge())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDecClMot())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMoGait())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMoFalls())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMoTrem())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMoSlow())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMoFrst())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMoMode())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMoModex())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMoMoPark())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getParkAge())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMoMoAls())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAlsAge())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMoAge())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCourse())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFrstChg())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getLbdEval())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtldEval()));
 		}
+		
+		
 		return buffer.toString();
 	}	
 	

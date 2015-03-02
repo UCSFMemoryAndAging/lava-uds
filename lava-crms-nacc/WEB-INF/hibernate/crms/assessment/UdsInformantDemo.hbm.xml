@@ -9,6 +9,9 @@
     
 <hibernate-mapping>
 
+	<!-- As of UDS 3.0 the name of the form was changed from "A2: Informant Demographics" to 
+ 		"A2: Co-participant Demographics". However the content is largely the same so this same underlying
+		model class is used. -->
 	<class name="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" table="instrumenttracking" select-before-update="true">
 
 		&instrInclude;
@@ -33,6 +36,7 @@
 	       <property name="inRelTo" column="INRELTO" type="short"/>
 	       <property name="inRelTox" column="INRELTOX" type="string" length="60"/>
 	       <property name="inLivWth" column="INLIVWTH" type="short"/>
+	       <property name="inKnown" column="INKNOWN" type="short"/>
 	       <property name="inVisits" column="INVISITS" type="short"/>
 	       <property name="inCalls" column="INCALLS" type="short"/>
 	       <property name="inRely" column="INRELY" type="short"/>

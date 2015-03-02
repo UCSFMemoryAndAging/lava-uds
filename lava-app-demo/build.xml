@@ -10,8 +10,10 @@
 	<property name="lava-crms-nacc.path" value="${workspace.path}/lava-uds/lava-crms-nacc"/>
 	<property name="instance.path" value="${workspace.path}/lava-uds/lava-app-${instanceName}"/>
 	<!-- EMORY: add lava-crms-ignav projects to test using demo -->
+<!--	
 	<property name="lava-crms-ignav.path" value="${workspace.path}/lava/lava-crms-ignav"/>
 	<property name="lava-crms-ignav-nacc.path" value="${workspace.path}/lava-uds/lava-crms-ignav-nacc"/>
+-->	
 			
     <property name="src.folder" value="src"/>
     <property name="lib.folder" value="WEB-INF/lib"/>
@@ -63,9 +65,13 @@
                deprecation="false" optimize="false" failonerror="true">
             <src path="${lava-core.path}/${src.folder}"/>
         	<src path="${lava-crms.path}/${src.folder}"/>
+        	<!--
         	<src path="${lava-crms-ignav.path}/${src.folder}"/>
+        	-->
            	<src path="${lava-crms-nacc.path}/${src.folder}"/>
+        	<!--
         	<src path="${lava-crms-ignav-nacc.path}/${src.folder}"/>
+        	-->
         	<src path="${instance.path}/${src.folder}"/>
             <classpath refid="master-classpath"/>
         </javac>
@@ -85,10 +91,12 @@
 			files are dated later such that no copy would take place without the overwrite attribute set true.
 			so this is a special copy for ignav with overwrite="true". this means that any changes made to the
 			core/crms version of the file should be made to the ignav version, since the ignav version will be used -->
+		<!--
 		<copy todir="${instance-deploy.path}" preservelastmodified="true" verbose="true" overwrite="true">
 			<fileset dir="${lava-crms-ignav.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 			<fileset dir="${lava-crms-ignav-nacc.path}" excludes="**/CVS/**,database/**,src/**,**/*.class,bin/**,.classpath,.project,build.*"/>
 		</copy>
+		-->
 	</target>    
 	
 	<target name="merge-decorator-files" description="merge all decorator files from different scopes and projects" depends="copy">

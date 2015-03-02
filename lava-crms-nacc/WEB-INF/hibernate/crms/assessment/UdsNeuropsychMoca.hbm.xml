@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+    
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+       
+<hibernate-mapping>
+
+	<class name="edu.ucsf.lava.crms.assessment.model.UdsNeuropsychMoca" table="instrumenttracking" select-before-update="true">
+
+		&instrInclude;
+		&udsInstrInclude;
+		
+		<join table="udsneuropsychmoca">
+			<key column="InstrID"/>		
+			<property name="mocacomp" column="MOCACOMP" type="short"/>
+			<property name="mocareas" column="MOCAREAS" type="short"/>
+			<property name="mocaloc" column="MOCALOC" type="short"/>
+			<property name="mocalan" column="MOCALAN" type="short"/>
+			<property name="mocalanx" column="MOCALANX" type="string" length="60"/>
+			<property name="mocavis" column="MOCAVIS" type="short"/>
+			<property name="mocahear" column="MOCAHEAR" type="short"/>
+			<property name="mocatots" column="MOCATOTS" type="short"/>
+			<property name="mocatrai" column="MOCATRAI" type="short"/>
+			<property name="mocacube" column="MOCACUBE" type="short"/>
+			<property name="mocacloc" column="MOCACLOC" type="short"/>
+			<property name="mocaclon" column="MOCACLON" type="short"/>
+			<property name="mocacloh" column="MOCACLOH" type="short"/>
+			<property name="mocanami" column="MOCANAMI" type="short"/>
+			<property name="mocaregi" column="MOCAREGI" type="short"/>
+			<property name="mocadigi" column="MOCADIGI" type="short"/>
+			<property name="mocalett" column="MOCALETT" type="short"/>
+			<property name="mocaser7" column="MOCASER7" type="short"/>
+			<property name="mocarepe" column="MOCAREPE" type="short"/>
+			<property name="mocaflue" column="MOCAFLUE" type="short"/>
+			<property name="mocaabst" column="MOCAABST" type="short"/>
+			<property name="mocarecn" column="MOCARECN" type="short"/>
+			<property name="mocarecc" column="MOCARECC" type="short"/>
+			<property name="mocarecr" column="MOCARECR" type="short"/>
+			<property name="mocaordt" column="MOCAORDT" type="short"/>
+			<property name="mocaormo" column="MOCAORMO" type="short"/>
+			<property name="mocaoryr" column="MOCAORYR" type="short"/>
+			<property name="mocaordy" column="MOCAORDY" type="short"/>
+			<property name="mocaorpl" column="MOCAORPL" type="short"/>
+			<property name="mocaorct" column="MOCAORCT" type="short"/>
+			<property name="npsycloc" column="NPSYCLOC" type="short"/>
+			<property name="npsylan" column="NPSYLAN" type="short"/>
+			<property name="npsylanx" column="NPSYLANX" type="string" length="60"/>
+			<property name="craftvrs" column="CRAFTVRS" type="short"/>
+			<property name="crafturs" column="CRAFTURS" type="short"/>
+			<property name="udsbentc" column="UDSBENTC" type="short"/>
+			<property name="digforct" column="DIGFORCT" type="short"/>
+			<property name="digforsl" column="DIGFORSL" type="short"/>
+			<property name="digbacct" column="DIGBACCT" type="short"/>
+			<property name="digbacls" column="DIGBACLS" type="short"/>
+			<property name="animals" column="ANIMALS" type="short"/>
+			<property name="veg" column="VEG" type="short"/>
+			<property name="traila" column="TRAILA" type="short"/>
+			<property name="trailarr" column="TRAILARR" type="short"/>
+			<property name="trailali" column="TRAILALI" type="short"/>
+			<property name="trailb" column="TRAILB" type="short"/>
+			<property name="trailbrr" column="TRAILBRR" type="short"/>
+			<property name="trailbli" column="TRAILBLI" type="short"/>
+			<property name="craftdvr" column="CRAFTDVR" type="short"/>
+			<property name="craftdre" column="CRAFTDRE" type="short"/>
+			<property name="craftdti" column="CRAFTDTI" type="short"/>
+			<property name="craftcue" column="CRAFTCUE" type="short"/>
+			<property name="udsbentd" column="UDSBENTD" type="short"/>
+			<property name="udsbenrs" column="UDSBENRS" type="short"/>
+			<property name="minttots" column="MINTTOTS" type="short"/>
+			<property name="minttotw" column="MINTTOTW" type="short"/>
+			<property name="mintscng" column="MINTSCNG" type="short"/>
+			<property name="mintscnc" column="MINTSCNC" type="short"/>
+			<property name="mintpcng" column="MINTPCNG" type="short"/>
+			<property name="mintpcnc" column="MINTPCNC" type="short"/>
+			<property name="udsverfc" column="UDSVERFC" type="short"/>
+			<property name="udsverfn" column="UDSVERFN" type="short"/>
+			<property name="udsvernf" column="UDSVERNF" type="short"/>
+			<property name="udsverlc" column="UDSVERLC" type="short"/>
+			<property name="udsverlr" column="UDSVERLR" type="short"/>
+			<property name="udsverln" column="UDSVERLN" type="short"/>
+			<property name="udsvertn" column="UDSVERTN" type="short"/>
+			<property name="udsverte" column="UDSVERTE" type="short"/>
+			<property name="udsverti" column="UDSVERTI" type="short"/>
+			<property name="cogstat" column="COGSTAT" type="short"/>
+		</join>	
+
+        &instrInclude2;
+        
+	</class>        
+	
+</hibernate-mapping>

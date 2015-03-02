@@ -2,6 +2,8 @@ package edu.ucsf.lava.crms.assessment.model;
 
 import java.util.Date;
 
+import org.springframework.util.StringUtils;
+
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.people.model.Patient;
@@ -19,16 +21,16 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 	}
 	
 	// note: id inherited from Instrument
-	protected Short ftdbentc;
-	protected Short ftdverfc;
-	protected Short ftdverfn;
-	protected Short ftdvernf;
-	protected Short ftdverlc;
-	protected Short ftdverlr;
-	protected Short ftdverln;
-	protected Short ftdvertn;
-	protected Short ftdverte;
-	protected Short ftdverti;
+	protected Short ftdbentc; // delete in FTLD Module v. 3
+	protected Short ftdverfc; // delete in FTLD Module v. 3
+	protected Short ftdverfn; // delete in FTLD Module v. 3
+	protected Short ftdvernf; // delete in FTLD Module v. 3
+	protected Short ftdverlc; // delete in FTLD Module v. 3
+	protected Short ftdverlr; // delete in FTLD Module v. 3
+	protected Short ftdverln; // delete in FTLD Module v. 3
+	protected Short ftdvertn; // delete in FTLD Module v. 3
+	protected Short ftdverte; // delete in FTLD Module v. 3
+	protected Short ftdverti; // delete in FTLD Module v. 3
 	protected Short ftdworrc;
 	protected Short ftdworrs;
 	protected Short ftdworrr;
@@ -36,8 +38,8 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 	protected Short ftdworis;
 	protected Short ftdworir;
 	protected Short ftdworip;
-	protected Short ftdbentd;
-	protected Short ftdbenrs;
+	protected Short ftdbentd; // delete in FTLD Module v. 3
+	protected Short ftdbenrs; // delete in FTLD Module v. 3
 	protected Short ftdsemmt;
 	protected Short ftdsemaa;
 	protected Short ftdsemta;
@@ -353,18 +355,9 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 		this.ftdreapr = ftdreapr;
 	}
 
-	public String[] getRequiredResultFields() {
-		return new String[] {
-				"ftdbentc",
-				"ftdverfc",
-				"ftdverfn",
-				"ftdvernf",
-				"ftdverlc",
-				"ftdverlr",
-				"ftdverln",
-				"ftdvertn",
-				"ftdverte",
-				"ftdverti",
+	public String[] getRequiredResultFields(String version) {
+		String[] required;
+		required = new String[] {
 				"ftdworrc",
 				"ftdworrs",
 				"ftdworrr",
@@ -372,8 +365,6 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 				"ftdworis",
 				"ftdworir",
 				"ftdworip",
-				"ftdbentd",
-				"ftdbenrs",
 				"ftdsemmt",
 				"ftdsemaa",
 				"ftdsemta",
@@ -393,20 +384,47 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 				"ftdreasr",
 				"ftdreapr"
 		};
+		if (version.equals("2")){
+			// fields deleted in FTLD Module 3
+			required = StringUtils.concatenateStringArrays(required, new String[]{
+					"ftdbentc",
+					"ftdverfc",
+					"ftdverfn",
+					"ftdvernf",
+					"ftdverlc",
+					"ftdverlr",
+					"ftdverln",
+					"ftdvertn",
+					"ftdverte",
+					"ftdverti",
+					"ftdbentd",
+					"ftdbenrs"});
+		}
+		return required;
+	}
+	
+	
+	public void markUnusedFields(String version) {
+		if(version.equals("3")) {
+			this.ftdbentc = this.ftdverfc = this.ftdverfn = this.ftdvernf = this.ftdverlc = this.ftdverlr = this.ftdverln 
+					= this.ftdvertn = this.ftdverte = this.ftdverti = this.ftdbentd = this.ftdbenrs = (short)-8;
+		}
 	}
 	
 	public String getUdsUploadCsvRecord() {
 		StringBuffer buffer = UdsUploadUtils.getCommonFields(this);
-		buffer.append(UdsUploadUtils.formatField(getFtdbentc())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdverfc())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdverfn())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdvernf())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdverlc())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdverlr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdverln())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdvertn())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdverte())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdverti())).append(",");
+		if (getInstrVer().equals("2")) {
+			buffer.append(UdsUploadUtils.formatField(getFtdbentc())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdverfc())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdverfn())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdvernf())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdverlc())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdverlr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdverln())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdvertn())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdverte())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdverti())).append(",");
+		}
 		buffer.append(UdsUploadUtils.formatField(getFtdworrc())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdworrs())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdworrr())).append(",");
@@ -414,8 +432,10 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdworis())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdworir())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdworip())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdbentd())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdbenrs())).append(",");
+		if (getInstrVer().equals("2")) {
+			buffer.append(UdsUploadUtils.formatField(getFtdbentd())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdbenrs())).append(",");
+		}
 		buffer.append(UdsUploadUtils.formatField(getFtdsemmt())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdsemaa())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdsemta())).append(",");
