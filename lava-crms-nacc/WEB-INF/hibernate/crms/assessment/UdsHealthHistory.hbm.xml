@@ -15,16 +15,30 @@
 		&udsInstrInclude;
 		
 		<join table="udshealthhistory">
-			<key column="InstrID"/>		
+			<key column="InstrID"/>	
+	       <property name="tobac30" column="TOBAC30" type="short"/>
+	       <property name="tobac100" column="TOBAC100" type="short"/>
+	       <property name="smokYrs" column="SMOKYRS" type="short"/>
+	       <property name="packsPer" column="PACKSPER" type="short"/>
+	       <property name="quitSmok" column="QUITSMOK" type="short"/>
+	       <property name="alcoCcas" column="ALCOCCAS" type="short"/>
+	       <property name="alcFreq" column="ALCFREQ" type="short"/>
 	       <property name="cvHAtt" column="CVHATT" type="short"/>
+	       <property name="hattMult" column="HATTMULT" type="short"/>
+	       <property name="hattYear" column="HATTYEAR" type="short"/>
 	       <property name="cvAFib" column="CVAFIB" type="short"/>
 	       <property name="cvAngio" column="CVANGIO" type="short"/>
 	       <property name="cvBypass" column="CVBYPASS" type="short"/>
 	       <property name="cvPace" column="CVPACE" type="short"/>
+	       <property name="cvPacDef" column="CVPACDEF" type="short"/>
 	       <property name="cvChf" column="CVCHF" type="short"/>
+	       <property name="cvAngina" column="CVANGINA" type="short"/>
+	       <property name="cvHValve" column="CVHVALVE" type="short"/>
 	       <property name="cvOthr" column="CVOTHR" type="short"/>
 	       <property name="cvOthrx" column="CVOTHRX" type="string" length="60"/>
 	       <property name="cbStroke" column="CBSTROKE" type="short"/>
+	       <property name="strokMul" column="STROKMUL" type="short"/>
+	       <property name="strokYr" column="STROKYR" type="short"/>
 	       <property name="strok1Yr" column="STROK1YR" type="short"/>
 	       <property name="strok2Yr" column="STROK2YR" type="short"/>
 	       <property name="strok3Yr" column="STROK3YR" type="short"/>
@@ -32,6 +46,8 @@
 	       <property name="strok5Yr" column="STROK5YR" type="short"/>
 	       <property name="strok6Yr" column="STROK6YR" type="short"/>
 	       <property name="cbTia" column="CBTIA" type="short"/>
+	       <property name="tiaMult" column="TIAMULT" type="short"/>
+	       <property name="tiaYear" column="TIAYEAR" type="short"/>
 	       <property name="tia1Yr" column="TIA1YR" type="short"/>
 	       <property name="tia2Yr" column="TIA2YR" type="short"/>
 	       <property name="tia3Yr" column="TIA3YR" type="short"/>
@@ -50,26 +66,45 @@
 	       <property name="traumChr" column="TRAUMCHR" type="short"/>
 	       <property name="ncOthr" column="NCOTHR" type="short"/>
 	       <property name="ncOthrx" column="NCOTHRX" type="string" length="60"/>
+	       <property name="tbi" column="TBI" type="short"/>
+	       <property name="tbiBrief" column="TBIBRIEF" type="short"/>
+	       <property name="tbiExten" column="TBIEXTEN" type="short"/>
+	       <property name="tbiWolos" column="TBIWOLOS" type="short"/>
+	       <property name="tbiYear" column="TBIYEAR" type="short"/>
+	       <property name="diabetes" column="DIABETES" type="short"/>
+	       <property name="diabType" column="DIABTYPE" type="short"/>
 	       <property name="hyperten" column="HYPERTEN" type="short"/>
 	       <property name="hyperCho" column="HYPERCHO" type="short"/>
-	       <property name="diabetes" column="DIABETES" type="short"/>
 	       <property name="b12Def" column="B12DEF" type="short"/>
 	       <property name="thyroid" column="THYROID" type="short"/>
+	       <property name="arthrit" column="ARTHRIT" type="short"/>
+	       <property name="arthType" column="ARTHTYPE" type="short"/>
+	       <property name="arthTypx" column="ARTHTYPX" type="string" length="60"/>
+	       <property name="arthUpEx" column="ARTHUPEX" type="short"/>
+	       <property name="arthLoEx" column="ARTHLOEX" type="short"/>
+	       <property name="arthSpin" column="ARTHSPIN" type="short"/>
+	       <property name="arthUnk" column="ARTHUNK" type="short"/>
 	       <property name="incontU" column="INCONTU" type="short"/>
 	       <property name="incontF" column="INCONTF" type="short"/>
-	       <property name="dep2Yrs" column="DEP2YRS" type="short"/>
-	       <property name="depOthr" column="DEPOTHR" type="short"/>
+	       <property name="apnea" column="APNEA" type="short"/>
+	       <property name="rbd" column="RBD" type="short"/>
+	       <property name="insomn" column="INSOMN" type="short"/>
+	       <property name="othSleep" column="OTHSLEEP" type="short"/>
+	       <property name="othSleex" column="OTHSLEEX" type="string" length="60"/>
 	       <property name="alcohol" column="ALCOHOL" type="short"/>
-	       <property name="tobac30" column="TOBAC30" type="short"/>
-	       <property name="tobac100" column="TOBAC100" type="short"/>
-	       <property name="smokYrs" column="SMOKYRS" type="short"/>
-	       <property name="packsPer" column="PACKSPER" type="short"/>
-	       <property name="quitSmok" column="QUITSMOK" type="short"/>
 	       <property name="abusOthr" column="ABUSOTHR" type="short"/>
 	       <property name="abusx" column="ABUSX" type="string" length="60"/>
+	       <property name="ptsd" column="PTSD" type="short"/>
+	       <property name="bipolar" column="BIPOLAR" type="short"/>
+	       <property name="schiz" column="SCHIZ" type="short"/>
+	       <property name="dep2Yrs" column="DEP2YRS" type="short"/>
+	       <property name="depOthr" column="DEPOTHR" type="short"/>
+	       <property name="anxiety" column="ANXIETY" type="short"/>
+	       <property name="ocd" column="OCD" type="short"/>
+	       <property name="npsyDev" column="NPSYDEV" type="short"/>
 	       <property name="psycDis" column="PSYCDIS" type="short"/>
 	       <property name="psycDisx" column="PSYCDISX" type="string" length="60"/>
-			</join>	
+		</join>	
 		
 		&instrInclude2;
 		

@@ -19,16 +19,14 @@ public class UdsSubjectDemo extends UdsInstrument {
 		this.setFormId(UDS_SUBJECTDEMO_FORMID);
 	}
 	
-	// note: id inherited from Instrument
-	
-	private Short inMds;
-	private Short reason;
-	private String reasonx;
-	private Short refer;
-	private String referx;
+	private Short inMds; // UDS3 remove
+	private Short reason; // UDS3 recode
+	private String reasonx; // UDS3 remove
+	private Short refer; // UDS3 replaced by "referSc"
+	private String referx; // UDS3 remove
 	private Short preStat;
 	private Short presPart;
-	private Short source;
+	private Short source; // UDS3 replaced by "sourceNw"
 	private Short birthMo;
 	private Short birthYr;
 	private Short sex;
@@ -44,16 +42,21 @@ public class UdsSubjectDemo extends UdsInstrument {
 	private Short primLang;
 	private String primLanx;
 	private Short educ;
-	private Short livSit;
-	private String livSitx;
+	private Short mariStat; // UDS3 recode
+	private String mariStax; // UDS3 remove
+	private Short livSit; // UDS3 replaced by "livSitua"
+	private String livSitx; // UDS3 remove
 	private Short independ;
-	private Short residenc;
-	private String residenx;
+	private Short residenc; // UDS3 recode 
+	private String residenx; // UDS3 remove
 	private String zip;
-	private Short mariStat;
-	private String mariStax;
 	private Short handed;
-		
+
+	// new variables in UDS 3
+	private Short referSc; // UDS3 new var, replaced "refer"
+	private Short learned; // UDS3 new
+	private Short sourceNw; // UDS3 new var, replaced "source"
+	private Short livSitua; // UDS3 new var, replaced "livSit"
 
 	public Short getBirthMo() {
 		return birthMo;
@@ -310,97 +313,223 @@ public class UdsSubjectDemo extends UdsInstrument {
 	public String getZip(){
 		return this.zip;
 	}
-
 	
-	public String[] getRequiredResultFields() {
+	public Short getLearned() {
+		return learned;
+	}
+
+	public void setLearned(Short learned) {
+		this.learned = learned;
+	}
+
+	public Short getReferSc() {
+		return referSc;
+	}
+
+	public void setReferSc(Short referSc) {
+		this.referSc = referSc;
+	}
+
+	public Short getSourceNw() {
+		return sourceNw;
+	}
+
+	public void setSourceNw(Short sourceNw) {
+		this.sourceNw = sourceNw;
+	}
+
+	public Short getLivSitua() {
+		return livSitua;
+	}
+
+	public void setLivSitua(Short livSitua) {
+		this.livSitua = livSitua;
+	}
+	
+	public void markUnusedFields(String version) {
+		if(version.equalsIgnoreCase("3")){
+			this.inMds = this.refer = this.source = this.livSit = (short)-8;
+			this.reasonx = this.referx = this.mariStax = livSitx = residenx = "-8";
+			if (this.getPacket() != null && !this.getPacket().equals("I")) {
+				// PROBLEM is that this is called when this instrument is added and at that time do not know whether the packet will
+				// be initial or followup, so these do not get marked. if the form is data entered as followup these values are
+				// not required so just remain null instead of setting to Unused code -8 and are saved as null. this is ok for the NACC 
+				// since the "initial packet only" fields do not get submitted anyway for a followup, but for LAVA Query would be clearer
+				// if they were marked as unused instead of null
+				// UPDATE: fixed by calling markUnusedFields in InstrumentHandler override of doSave
+				this.reason = this.referSc = this.learned = this.preStat = this.presPart = this.sourceNw = this.hispanic
+				= this.hispOr = this.race = this.raceSec = this.raceTer = this.primLang = this.educ = this.handed = (short)-8;
+				this.hispOrx = this.racex = this.raceSecx = this.raceTerx = this.primLanx = "-8";
+			}
+		}
+	}
+
+	public String[] getRequiredResultFields(String version) {
 		// different fields are required depending on packet type
 		if (this.getPacket().equals("I")){
-			return new String[] {
-			    "inMds",
-			    "reason",
-			    "refer",
-			    "preStat",
-			    "presPart",
-			    "source",
-			    "birthMo",
-			    "birthYr",
-			    "sex",
-			    "hispanic",
-			    "hispOr",
-			    "race",
-			    "raceSec",
-			    "raceTer",
-			    "primLang",
-			    "educ",
-			    "livSit",
-			    "independ",
-			    "residenc",
-			    "mariStat",
-			    "handed" };
+			if (version.equals("3")) {
+				return new String[] {
+					    "reason",
+					    "referSc",
+					    "learned",
+					    "preStat",
+					    "presPart",
+					    "sourceNw",
+					    "birthMo",
+					    "birthYr",
+					    "sex",
+					    "hispanic",
+					    "hispOr",
+					    "race",
+					    "raceSec",
+					    "raceTer",
+					    "primLang",
+					    "educ",
+					    "livSitua",
+					    "independ",
+					    "residenc",
+					    "mariStat",
+					    "handed" };
+			}
+			else {
+				return new String[] {
+				    "inMds",
+				    "reason",
+				    "refer",
+				    "preStat",
+				    "presPart",
+				    "source",
+				    "birthMo",
+				    "birthYr",
+				    "sex",
+				    "hispanic",
+				    "hispOr",
+				    "race",
+				    "raceSec",
+				    "raceTer",
+				    "primLang",
+				    "educ",
+				    "livSit",
+				    "independ",
+				    "residenc",
+				    "mariStat",
+				    "handed" };
+			}
 		} else {
-			return new String[] {
+			if (version.equals("3")) {
+				return new String[] {
+				"birthMo",
+				"birthYr",
+				"mariStat",
+				"sex",
+				"livSitua",
+				"independ",
+				"residenc"};
+			}
+			else {
+				return new String[] {
 				"birthMo",
 				"birthYr",
 				"sex",
 				"livSit",
 				"independ",
 				"residenc",
-				"mariStat" };
+				"mariStat"};
+			}
 		}
 	}
-
-	
 
 	public String getUdsUploadCsvRecord() {
 		if(getPacket()==null){return "";}
 		
 		StringBuffer buffer = UdsUploadUtils.getCommonFields(this);
 		if(getPacket().equals("I")){
-			buffer.append(UdsUploadUtils.formatField(getInMds())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getReason())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getReasonx())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getRefer())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getReferx())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getPreStat())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getPresPart())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getSource())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getBirthMo())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getBirthYr())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getSex())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getHispanic())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getHispOr())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getHispOrx())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getRace())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getRacex())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getRaceSec())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getRaceSecx())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getRaceTer())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getRaceTerx())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getPrimLang())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getPrimLanx())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getEduc())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getLivSit())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getLivSitx())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getIndepend())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getResidenc())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getResidenx())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getZip())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getMariStat())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getMariStax())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getHanded()));
-		}
+			if (getInstrVer().equals("3")) {
+				buffer.append(UdsUploadUtils.formatField(getReason())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getReferSc())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getLearned())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getPreStat())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getPresPart())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getSourceNw())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getBirthMo())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getBirthYr())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getSex())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getHispanic())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getHispOr())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getHispOrx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRace())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRacex())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRaceSec())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRaceSecx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRaceTer())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRaceTerx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getPrimLang())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getPrimLanx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getEduc())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getMariStat())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getLivSitua())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getIndepend())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getResidenc())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getZip())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getHanded()));
+			}
+			else {
+				buffer.append(UdsUploadUtils.formatField(getInMds())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getReason())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getReasonx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRefer())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getReferx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getPreStat())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getPresPart())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getSource())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getBirthMo())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getBirthYr())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getSex())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getHispanic())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getHispOr())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getHispOrx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRace())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRacex())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRaceSec())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRaceSecx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRaceTer())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getRaceTerx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getPrimLang())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getPrimLanx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getEduc())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getLivSit())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getLivSitx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getIndepend())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getResidenc())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getResidenx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getZip())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getMariStat())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getMariStax())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getHanded()));
+			}
+		}		
 		else if(getPacket().equals("T") || getPacket().equals("F")){
-			buffer.append(UdsUploadUtils.formatField(getBirthMo())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getBirthYr())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getSex())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getLivSit())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getLivSitx())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getIndepend())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getResidenc())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getResidenx())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getZip())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getMariStat())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getMariStax()));
+			if (getInstrVer().equals("3")) {
+				buffer.append(UdsUploadUtils.formatField(getBirthMo())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getBirthYr())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getMariStat())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getSex())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getLivSitua())).append(",");
+				
+			}
+			else {
+				buffer.append(UdsUploadUtils.formatField(getBirthMo())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getBirthYr())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getSex())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getLivSit())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getLivSitx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getIndepend())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getResidenc())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getResidenx())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getZip())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getMariStat())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getMariStax()));
+			}
 		}
 	return buffer.toString();
 	}

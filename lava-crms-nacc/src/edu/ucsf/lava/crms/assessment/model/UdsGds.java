@@ -270,24 +270,18 @@ public class UdsGds extends UdsInstrument {
 		
 		// 12 is the required number of questions that must be answered to be considered complete
 		
-		// note: noGds can be recalculated purely from number of answered questions since skip
-		// logic is skipping all questions on "unable to complete".  The only way it could be
-		// different than user input is if not enough questions were answered, in which it overwrites
-		// it as "unable to complete".
-		// TODO: consider removing skip logic: we do not apply skip logic code here when it changes,
-		// so the old answers still exist until user edits the form again and saves
-		// (skip logic applied, wiping them).  One could argue we want to allow saving all questions
-		// regardless if noGds=1
-		
-		if (num_answered < 12) { 
-			this.noGds = (short)1;  // Yes, subject was NOT able to complete the GDS
-		} else {
-			this.noGds = (short)0;  // No, subject WAS able to complete the GDS
-		}
+		// if < 12 answered, set the sum gds to 88. if < 12 but some answered, leave user setting for noGds to
+		// "Able to Complete" (0) because do not want to wipe out the answered questions data (via skip logic) even
+		// if the patient did not answer the minimum 
+		// NOTE: this was a change made with UDS 3 so we'll see if it passes NACC logic check to have noGds=0
+		// and gds=88. prior to this, UDS 2 was explicitly setting noGds to 1 if < 12 questions answered
 		
 		if (this.noGds != null
 			&& this.noGds.equals((short)1)) {
 			// then "Unable to Complete" and form says to fill in 88 for gds
+			this.gds = (short)88;
+		}
+		else if (num_answered < 12) {
 			this.gds = (short)88;
 		}
 		else {
@@ -310,7 +304,17 @@ public class UdsGds extends UdsInstrument {
 			if (this.hopeless != null && this.hopeless.equals((short)1)) counter++;
 			if (this.better != null   && this.better.equals((short)1))   counter++;
 			
-			this.gds = counter;
+			// if 12,13 or 14 questions answered (less than that cannot compute total, per above) then prorate scores
+			// for those questions per NACC documentation:
+			// Total Score of Completed items / # completed items * # unanswered items
+			// Round to nearest integer
+			if (num_answered < 15) {
+				double proratedSum = counter + ((double)counter / num_answered) * (15 - num_answered);
+				this.gds = (short) Math.round(proratedSum);
+			}
+			else {
+				this.gds = counter;
+			}
 		}
 	}
 
