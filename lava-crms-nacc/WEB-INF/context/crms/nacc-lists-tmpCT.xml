@@ -29,7 +29,7 @@
     <bean id="list.udsftldspecimenconsent3.codes" parent="list.uds.codes"/>
     <bean id="list.udsftldupdrs3.codes" parent="list.uds.codes"/>
 
-  <bean id="list.uds.a1.reason" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.reason" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="To participate in a research study"/>
@@ -50,7 +50,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a1.refersc" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.refersc" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Self-referral"/>
@@ -87,7 +87,7 @@
     </list></property> 
   </bean>
  
-  <bean id="list.uds.a1.learned" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.learned" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="ADC advertisement"/>
@@ -116,7 +116,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a1.sourcenw" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.sourcenw" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Primarily ADC-funded"/>
@@ -139,7 +139,7 @@
 	<property name="defaultMaxValue" value="2015"/>
   </bean>	
 
-  <bean id="list.uds.a1.maristat" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.maristat" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Married"/>
@@ -172,7 +172,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a1.livsitua" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.livsitua" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Lives alone"/>
@@ -205,7 +205,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a1.residenc" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.residenc" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Single- or multi-family private residence (apartment, condo, house)"/>
@@ -230,7 +230,7 @@
     </list></property> 
   </bean>
   
-    <bean id="list.uds.a1.raceNone" parent="list.dataOnlyUds">
+    <bean id="list.uds.a1.raceNone" parent="list.dataOnlyUdsValueConcatLabel">
 		<property name="staticReferenceLists"><list>
 			<ref bean="list.uds.a1.race"/>
 		</list></property>
@@ -243,7 +243,7 @@
   	</bean>
   
   
-	<bean id="list.uds.a2.relation" parent="list.dataOnlyUds"> 
+	<bean id="list.uds.a2.relation" parent="list.dataOnlyUdsValueConcatLabel"> 
 		<property name="data"><list> 
 	    	<bean parent="list.data">
     		    <constructor-arg value="Spouse, partner or companion (include ex-spouse, ex-partner, fiance(e), boyfriend, girlfriend)"/>
@@ -285,7 +285,7 @@
     	</list></property> 
 	</bean>
   				 	
-  <bean id="list.uds.a3.fadmut" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.fadmut" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -314,7 +314,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a3.fadmuso" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.fadmuso" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Family report (no test documentation available)"/>
@@ -339,7 +339,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a3.fftdmut" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.fftdmut" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -390,7 +390,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a3.neurprob" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.neurprob" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Cognitive impairment/behavior change"/>
@@ -621,7 +621,7 @@
   </bean>
   
   
-  <bean id="list.uds.a3.evalMethod" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.evalMethod" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Autopsy"/>
@@ -685,7 +685,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a5.packsPer" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a5.packsPer" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="1 cigarette to less than 1/2 pack"/>
@@ -714,7 +714,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a5.alcFreq" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a5.alcFreq" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Less than once a month"/>
@@ -743,7 +743,7 @@
     </list></property> 
   </bean>
 
-  <bean id="list.uds.a5.tbi" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a5.tbi" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -764,7 +764,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a5.diabType" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a5.diabType" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Type 1"/>
@@ -785,7 +785,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.a5.arthType" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a5.arthType" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Rheumatoid"/>
@@ -861,7 +861,7 @@
     </list></property> 
   </bean>
   
-	<bean id="list.uds.b5.severity" parent="list.dataOnlyUds">
+	<bean id="list.uds.b5.severity" parent="list.dataOnlyUdsValueConcatLabel">
 		<property name="defaultSort" value="valueNumeric"/>
 		<property name="data"><list>
 			<bean parent="list.data"><constructor-arg value="1 - Mild"/><constructor-arg value="1"/></bean>
@@ -922,7 +922,7 @@
     </list></property> 
   </bean>
 
-  <bean id="list.uds.b8.normExam" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b8.normExam" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No abnormal findings"/>
@@ -939,7 +939,7 @@
     </list></property> 
   </bean>
 
-  <bean id="list.uds.b8.signs" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b8.signs" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -959,7 +959,7 @@
   
   
   
-  <bean id="list.uds.b9.decSub" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.decSub" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -976,7 +976,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.b9.decIn" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.decIn" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -1033,7 +1033,7 @@
     </list></property> 
   </bean>
 
-  <bean id="list.uds.b9.cogFPredI" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.cogFPredI" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Memory"/>
@@ -1083,7 +1083,7 @@
     </list></property> 
   </bean>
  	
-  <bean id="list.uds.b9.mode" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.mode" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Gradual"/>
@@ -1108,7 +1108,7 @@
     </list></property> 
   </bean>
 
-  <bean id="list.uds.b9.beFPredI" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.beFPredI" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Apathy / withdrawal"/>
@@ -1157,7 +1157,7 @@
     </list></property> 
   </bean>
  	
-  <bean id="list.uds.b9.beFPredF" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.beFPredF" parent="list.dataOnlyUdsValueConcatLabel"> 
   	<property name="staticReferenceLists"><list>
 		<ref bean="list.uds.b9.beFPredI"/>
 	</list></property>
@@ -1169,7 +1169,7 @@
     </list></property> 
   </bean>
  	
-   <bean id="list.uds.b9.moFrstI" parent="list.dataOnlyUds"> 
+   <bean id="list.uds.b9.moFrstI" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Gait disorder"/>
@@ -1194,7 +1194,7 @@
     </list></property> 
   </bean>
  				
-  <bean id="list.uds.b9.moFrstF" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.moFrstF" parent="list.dataOnlyUdsValueConcatLabel"> 
   	<property name="staticReferenceLists"><list>
 		<ref bean="list.uds.b9.moFrstI"/>
 	</list></property>
@@ -1206,7 +1206,7 @@
     </list></property> 
   </bean>
  	
-  <bean id="list.uds.b9.course" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.course" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Gradually progressive"/>
@@ -1239,7 +1239,7 @@
     </list></property> 
   </bean>
 					
-  <bean id="list.uds.b9.frstChg" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.frstChg" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Cognition"/>
@@ -1264,7 +1264,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.b9f.bvftd" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9f.bvftd" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="0 - Does not meet criteria for bvFTD"/>
