@@ -359,7 +359,7 @@ set messageCode='*.udscoparticipantdemo3.inRelTo', locale='en', instance='lava',
   scope='crms-nacc', entity='udscoparticipantdemo3', property='inRelTo',
   required='No', proporder='15', attributes='', quickHelp='', 
   label="8. What is co-participant's relationship to subject?", context="r",
-  list="uds.a2.relation", style="scale";
+  list="uds.a2.relation3", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udscoparticipantdemo3.inKnown', locale='en', instance='lava', 
@@ -496,7 +496,7 @@ set messageCode='followup.udscoparticipantdemo3.inRelTo', locale='en', instance=
   scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRelTo',
   required='No', proporder='15', attributes='', quickHelp='', 
   label="9. What is co-participant's relationship to subject?", context="r",
-  list="uds.a2.relation", style="scale";
+  list="uds.a2.relation3", style="scale";
 
 insert into viewproperty 
 set messageCode='followup.udscoparticipantdemo3.inKnown', locale='en', instance='lava', 
@@ -3932,7 +3932,7 @@ set messageCode='*.udssymptomsonset3.cogMode', locale='en', instance='lava',
   scope='crms-nacc', entity='udssymptomsonset3', property='cogMode',
   required='No', proporder='16', attributes='', quickHelp='', 
   label="6. Mode of onset of cognitive symptoms", context="r",
-  list="uds.b9.mode", style="scale";
+  list="uds.b9.modeNoNA", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.cogModex', locale='en', instance='lava', 
@@ -4111,7 +4111,7 @@ set messageCode='*.udssymptomsonset3.beMode', locale='en', instance='lava',
   scope='crms-nacc', entity='udssymptomsonset3', property='beMode',
   required='No', proporder='38', attributes='', quickHelp='', 
   label="11. Mode of onset of behavioral symptoms", context="r",
-  list="uds.b9.mode", style="scale";
+  list="uds.b9.modeNoNA", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.beModex', locale='en', instance='lava', 
@@ -4187,7 +4187,7 @@ set messageCode='*.udssymptomsonset3.moMode', locale='en', instance='lava',
   scope='crms-nacc', entity='udssymptomsonset3', property='moMode',
   required='No', proporder='47', attributes='', quickHelp='', 
   label="16. Mode of onset of motor symptoms", context="r",
-  list="uds.b9.mode", style="scale";
+  list="uds.b9.modeNoNA", style="scale";
 
 insert into viewproperty 
 set messageCode='*.udssymptomsonset3.moModex', locale='en', instance='lava', 
