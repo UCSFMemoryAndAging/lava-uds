@@ -8,10 +8,28 @@
 	<bean id="list.udscoparticipantdemo3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsfamilyhistory3.codes" parent="list.uds.codes"/>
 	<bean id="list.udshealthhistory3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsphysical3.codes" parent="list.uds.codes"/>
+	<bean id="list.udscdr3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsnpi3.codes" parent="list.ref.udsErrorCodesWithSkipCodes"/>
+	<bean id="list.udsgds3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsfaq3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsneuroexam3.codes" parent="list.uds.codes"/>
 	<bean id="list.udssymptomsonset3.codes" parent="list.uds.codes"/>
+	
+	<bean id="list.udsftldbis3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsftldclinfeatures3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsftldformchecklist3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsftldimagingavail3.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldimagingdiag3.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldiri3.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldneuropsych3.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldrsms3.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldsboc3.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldsnq3.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldspecimenconsent3.codes" parent="list.uds.codes"/>
+    <bean id="list.udsftldupdrs3.codes" parent="list.uds.codes"/>
 
-  <bean id="list.uds.subjectdemo3.REASON" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.reason" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="To participate in a research study"/>
@@ -32,7 +50,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.subjectdemo3.REFERSC" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.refersc" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Self-referral"/>
@@ -69,7 +87,7 @@
     </list></property> 
   </bean>
  
-  <bean id="list.uds.subjectdemo3.LEARNED" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.learned" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="ADC advertisement"/>
@@ -98,7 +116,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.subjectdemo3.SOURCENW" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.sourcenw" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Primarily ADC-funded"/>
@@ -111,17 +129,17 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.subjectdemo3.birthMo" parent="list.numericRangeUds">
+  <bean id="list.uds.a1.birthMo" parent="list.numericRangeUds">
 	<property name="defaultMinValue" value="1"/>	
 	<property name="defaultMaxValue" value="12"/>
   </bean>	
   
-  <bean id="list.uds.subjectdemo3.birthYr" parent="list.numericRangeUds">
+  <bean id="list.uds.a1.birthYr" parent="list.numericRangeUds">
 	<property name="defaultMinValue" value="1900"/>	
 	<property name="defaultMaxValue" value="2015"/>
   </bean>	
 
-  <bean id="list.uds.subjectdemo3.MARISTAT" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.maristat" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Married"/>
@@ -154,7 +172,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.subjectdemo3.LIVSITUA" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.livsitua" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Lives alone"/>
@@ -187,7 +205,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.subjectdemo3.RESIDENC" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a1.residenc" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Single- or multi-family private residence (apartment, condo, house)"/>
@@ -212,7 +230,7 @@
     </list></property> 
   </bean>
   
-    <bean id="list.uds.subjectdemo3.raceNone" parent="list.dataOnlyUds">
+    <bean id="list.uds.a1.raceNone" parent="list.dataOnlyUds">
 		<property name="staticReferenceLists"><list>
 			<ref bean="list.uds.a1.race"/>
 		</list></property>
@@ -225,7 +243,7 @@
   	</bean>
   
   
-	<bean id="list.uds.coparticipantdemo3.relation" parent="list.dataOnlyUds"> 
+	<bean id="list.uds.a2.relation" parent="list.dataOnlyUds"> 
 		<property name="data"><list> 
 	    	<bean parent="list.data">
     		    <constructor-arg value="Spouse, partner or companion (include ex-spouse, ex-partner, fiance(e), boyfriend, girlfriend)"/>
@@ -254,7 +272,7 @@
 	    </list></property> 
 	</bean>
   
-	<bean id="list.uds.coparticipantdemo3.inKnown" parent="list.numericRangeUds"> 
+	<bean id="list.uds.a2.inKnown" parent="list.numericRangeUds"> 
     	<property name="defaultMinValue" value="0"/>
     	<property name="defaultMaxValue" value="115"/>
     	<property name="data"><list> 
@@ -267,7 +285,7 @@
     	</list></property> 
 	</bean>
   				 	
-  <bean id="list.uds.familyhistory3.FADMUT" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.fadmut" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -296,7 +314,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.familyhistory3.FADMUSO" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.fadmuso" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Family report (no test documentation available)"/>
@@ -321,7 +339,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.familyhistory3.FFTDMUT" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.fftdmut" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -355,20 +373,7 @@
   </bean>
   
   
-<!-- using uds.yearUnknown for all these  
-  <bean id="list.uds.familyhistory3.FamAdultYOB" parent="list.numericRangeUds"> 
-    <property name="defaultMinValue" value="1875"/>
-    <property name="defaultMaxValue" value="2015"/>
-    <property name="data"><list> 
-      <bean parent="list.data">
-        <constructor-arg value="9999"/>
-        <constructor-arg value="9999"/>
-      </bean> 
-    </list></property> 
-  </bean>
--->  
-  
-  <bean id="list.uds.familyhistory3.AgeOfDeath" parent="list.numericRangeUds"> 
+  <bean id="list.uds.a3.ageOfDeath" parent="list.numericRangeUds"> 
     <property name="defaultMinValue" value="0"/>
     <property name="defaultMaxValue" value="110"/>
     <property name="data"><list> 
@@ -385,7 +390,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.familyhistory3.NEURPROB" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.neurprob" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Cognitive impairment/behavior change"/>
@@ -418,7 +423,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.familyhistory3.PrimDx" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.primDx" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="040  Mild cognitive impairment (MCI), not otherwise specified"/>
@@ -616,7 +621,7 @@
   </bean>
   
   
-  <bean id="list.uds.familyhistory3.EvalMethod" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a3.evalMethod" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Autopsy"/>
@@ -649,7 +654,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.familyhistory3.FamAgeOfOnset" parent="list.numericRangeUds"> 
+  <bean id="list.uds.a3.famAgeOfOnset" parent="list.numericRangeUds"> 
     <property name="defaultMinValue" value="15"/>
     <property name="defaultMaxValue" value="110"/>
     <property name="data"><list> 
@@ -661,28 +666,15 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.familyhistory3.SIBS" parent="list.numericRangeUds"> 
+  <bean id="list.uds.a3.sibs" parent="list.numericRangeUds"> 
     <property name="defaultMaxValue" value="20"/>
   </bean>
   
-  <bean id="list.uds.familyhistory3.KIDS" parent="list.numericRangeUds"> 
+  <bean id="list.uds.a3.kids" parent="list.numericRangeUds"> 
     <property name="defaultMaxValue" value="15"/>
   </bean>
   
-<!-- using uds.yearUnknown for all these  
-  <bean id="list.uds.familyhistory3.FamChildYOB" parent="list.numericRangeUds"> 
-    <property name="defaultMinValue" value="1910"/>
-    <property name="defaultMaxValue" value="2015"/>
-    <property name="data"><list> 
-      <bean parent="list.data">
-        <constructor-arg value="9999"/>
-        <constructor-arg value="9999"/>
-      </bean> 
-    </list></property> 
-  </bean>
--->
-
-  <bean id="list.uds.healthhistory3.SMOKYRS" parent="list.numericRangeUds"> 
+  <bean id="list.uds.a5.smokYrs" parent="list.numericRangeUds"> 
     <property name="defaultMaxValue" value="80"/>
     <property name="data"><list> 
       <bean parent="list.data">
@@ -693,7 +685,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.healthhistory3.PACKSPER" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a5.packsPer" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="1 cigarette to less than 1/2 pack"/>
@@ -722,7 +714,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.healthhistory3.ALCFREQ" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a5.alcFreq" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Less than once a month"/>
@@ -751,7 +743,7 @@
     </list></property> 
   </bean>
 
-  <bean id="list.uds.healthhistory3.TBI" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a5.tbi" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -772,7 +764,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.healthhistory3.DIABTYPE" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a5.diabType" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Type 1"/>
@@ -793,7 +785,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.healthhistory3.ARTHTYPE" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.a5.arthType" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Rheumatoid"/>
@@ -814,7 +806,123 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.neuroexam3.NORMEXAM" parent="list.dataOnlyUds"> 
+ 	<bean id="list.uds.b1.height" parent="list.decimalRangeUds">
+		<property name="defaultMinValue" value="30.0"/>	
+		<property name="defaultMaxValue" value="86.0"/>
+    	<property name="data"><list> 
+      		<bean parent="list.data">
+        		<constructor-arg value="88.8"/>
+        		<constructor-arg value="88.8"/>
+      		</bean> 
+    	</list></property> 
+	</bean>
+		
+  <bean id="list.uds.b1.weight" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="50"/>
+    <property name="defaultMaxValue" value="400"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="888"/>
+        <constructor-arg value="888"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.b1.bpSys" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="70"/>
+    <property name="defaultMaxValue" value="230"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="888"/>
+        <constructor-arg value="888"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.b1.bpDias" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="30"/>
+    <property name="defaultMaxValue" value="140"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="888"/>
+        <constructor-arg value="888"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.b1.hRate" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="33"/>
+    <property name="defaultMaxValue" value="160"/>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="888"/>
+        <constructor-arg value="888"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+	<bean id="list.uds.b5.severity" parent="list.dataOnlyUds">
+		<property name="defaultSort" value="valueNumeric"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="1 - Mild"/><constructor-arg value="1"/></bean>
+			<bean parent="list.data"><constructor-arg value="2 - Moderate"/><constructor-arg value="2"/></bean>
+			<bean parent="list.data"><constructor-arg value="3 - Severe"/><constructor-arg value="3"/></bean>
+			<bean parent="list.data"><constructor-arg value="9 - Unknown"/><constructor-arg value="9"/></bean>
+		</list></property>
+	</bean>
+	
+    <bean id="list.uds.b6.total" parent="list.numericRangeUds">
+		<property name="staticReferenceLists"><list>
+			<ref bean="list.ref.totalErrorCode"/>
+		</list></property>
+    	<property name="data"><list> 
+		      <bean parent="list.data">
+        		<constructor-arg value="88"/>
+        		<constructor-arg value="88"/>
+      		</bean> 
+    	</list></property> 
+  	</bean>
+  
+   <bean id="list.uds.b6.yesNoUnkScale_NoCorrect" parent="list.combination"> 
+	<property name="defaultFormat" value="valueConcatLabel"/>
+  	<property name="staticReferenceLists"><list>
+		<ref bean="list.uds.b6.yesNoScale_NoCorrect"/>
+	</list></property>
+    <property name="data"><list> 
+    <bean parent="list.data">
+        <constructor-arg value="Did not answer"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+   <bean id="list.uds.b6.yesNoUnkScale_YesCorrect" parent="list.combination"> 
+	<property name="defaultFormat" value="valueConcatLabel"/>
+  	<property name="staticReferenceLists"><list>
+		<ref bean="list.uds.b6.yesNoScale_YesCorrect"/>
+	</list></property>
+    <property name="data"><list> 
+    <bean parent="list.data">
+        <constructor-arg value="Did not answer"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.b7.diffUnk" parent="list.combination"> 
+	<property name="defaultFormat" value="valueConcatLabel"/>
+  	<property name="staticReferenceLists"><list>
+		<ref bean="list.uds.b7.diff"/>
+	</list></property>
+    <property name="data"><list> 
+    <bean parent="list.data">
+        <constructor-arg value="Unknown"/>
+        <constructor-arg value="9"/>
+      </bean> 
+    </list></property> 
+  </bean>
+
+  <bean id="list.uds.b8.normExam" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No abnormal findings"/>
@@ -831,7 +939,7 @@
     </list></property> 
   </bean>
 
-  <bean id="list.uds.neuroexam3.signs" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b8.signs" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -851,7 +959,7 @@
   
   
   
-  <bean id="list.uds.symptomsonset3.DECSUB" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.decSub" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -868,7 +976,7 @@
     </list></property> 
   </bean>
   
-  <bean id="list.uds.symptomsonset3.DECIN" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.decIn" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="No"/>
@@ -885,12 +993,12 @@
     </list></property> 
   </bean>
  	
-    <bean id="list.uds.symptomsonset3.ageOfOnsetI" parent="list.numericRangeUds">
+    <bean id="list.uds.b9.ageOfOnsetI" parent="list.numericRangeUds">
 		<property name="defaultMinValue" value="15"/>	
 		<property name="defaultMaxValue" value="115"/>
 	</bean>
  		
-    <bean id="list.uds.symptomsonset3.ageOfOnsetF" parent="list.numericRangeUds">
+    <bean id="list.uds.b9.ageOfOnsetF" parent="list.numericRangeUds">
 		<property name="defaultMinValue" value="15"/>	
 		<property name="defaultMaxValue" value="115"/>
 		<property name="data"><list>
@@ -899,9 +1007,9 @@
 		</list></property>
 	</bean>
 	
-  <bean id="list.uds.symptomsonset3.BEVHAGOI" parent="list.numericRangeUds"> 
+  <bean id="list.uds.b9.bevAgOI" parent="list.numericRangeUds"> 
   	<property name="staticReferenceLists"><list>
-		<ref bean="list.uds.symptomsonset3.ageOfOnsetI"/>
+		<ref bean="list.uds.b9.ageOfOnsetI"/>
 	</list></property>
     <property name="data"><list> 
       <bean parent="list.data">
@@ -912,9 +1020,9 @@
     </list></property> 
   </bean>
     			
-  <bean id="list.uds.symptomsonset3.BEVHAGOF" parent="list.numericRangeUds"> 
+  <bean id="list.uds.b9.bevAgOF" parent="list.numericRangeUds"> 
   	<property name="staticReferenceLists"><list>
-		<ref bean="list.uds.symptomsonset3.ageOfOnsetF"/>
+		<ref bean="list.uds.b9.ageOfOnsetF"/>
 	</list></property>
     <property name="data"><list> 
       <bean parent="list.data">
@@ -925,7 +1033,7 @@
     </list></property> 
   </bean>
 
-  <bean id="list.uds.symptomsonset3.COGFPREDI" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.cogFPredI" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Memory"/>
@@ -966,7 +1074,7 @@
     </list></property> 
   </bean>
  	
-  <bean id="list.uds.symptomsonset3.COGFPREDF" parent="list.uds.symptomsonset3.COGFPREDI"> 
+  <bean id="list.uds.b9.cogFPredF" parent="list.uds.b9.cogFPredI"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Assessed at previous UDS visit"/>
@@ -975,7 +1083,7 @@
     </list></property> 
   </bean>
  	
-  <bean id="list.uds.symptomsonset3.MODE" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.mode" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Gradual"/>
@@ -1000,7 +1108,7 @@
     </list></property> 
   </bean>
 
-  <bean id="list.uds.symptomsonset3.BEFPREDI" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.beFPredI" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Apathy / withdrawal"/>
@@ -1049,9 +1157,9 @@
     </list></property> 
   </bean>
  	
-  <bean id="list.uds.symptomsonset3.BEFPREDF" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.beFPredF" parent="list.dataOnlyUds"> 
   	<property name="staticReferenceLists"><list>
-		<ref bean="list.uds.symptomsonset3.BEFPREDI"/>
+		<ref bean="list.uds.b9.beFPredI"/>
 	</list></property>
     <property name="data"><list> 
       <bean parent="list.data">
@@ -1061,7 +1169,7 @@
     </list></property> 
   </bean>
  	
-   <bean id="list.uds.symptomsonset3.MOFRSTI" parent="list.dataOnlyUds"> 
+   <bean id="list.uds.b9.moFrstI" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Gait disorder"/>
@@ -1086,9 +1194,9 @@
     </list></property> 
   </bean>
  				
-  <bean id="list.uds.symptomsonset3.MOFRSTF" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.moFrstF" parent="list.dataOnlyUds"> 
   	<property name="staticReferenceLists"><list>
-		<ref bean="list.uds.symptomsonset3.MOFRSTI"/>
+		<ref bean="list.uds.b9.moFrstI"/>
 	</list></property>
     <property name="data"><list> 
       <bean parent="list.data">
@@ -1098,7 +1206,7 @@
     </list></property> 
   </bean>
  	
-  <bean id="list.uds.symptomsonset3.COURSE" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.course" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Gradually progressive"/>
@@ -1131,7 +1239,7 @@
     </list></property> 
   </bean>
 					
-  <bean id="list.uds.symptomsonset3.FRSTCHG" parent="list.dataOnlyUds"> 
+  <bean id="list.uds.b9.frstChg" parent="list.dataOnlyUds"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Cognition"/>
@@ -1155,5 +1263,54 @@
       </bean> 
     </list></property> 
   </bean>
-		
+  
+  <bean id="list.uds.b9f.bvftd" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="0 - Does not meet criteria for bvFTD"/>
+        <constructor-arg value="0"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="1 - Probable bvFTD"/>
+        <constructor-arg value="1"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="2 - Meets criteria for possible bvFTD and has impaired daily functioning"/>
+        <constructor-arg value="2"/>
+      </bean> 
+      <bean parent="list.data">
+        <constructor-arg value="3 - Meets criteria for possible bvFTD but daily functioning is not impaired"/>
+        <constructor-arg value="3"/>
+      </bean> 
+    </list></property> 
+  </bean>
+  
+  <bean id="list.uds.c1f.onlyRange0_5" parent="list.uds.range">
+	<property name="defaultMaxValue" value="5"/>
+  </bean>	
+  
+  <bean id="list.uds.c1f.onlyRange0_8" parent="list.uds.range">
+	<property name="defaultMaxValue" value="8"/>
+  </bean>	
+  
+  <bean id="list.uds.c1f.onlyRange0_10" parent="list.uds.range">
+	<property name="defaultMaxValue" value="10"/>
+  </bean>	
+  
+  <bean id="list.uds.c1f.onlyRange0_15" parent="list.uds.range">
+	<property name="defaultMaxValue" value="15"/>
+  </bean>	
+  
+  <bean id="list.uds.c1f.onlyRange0_16" parent="list.uds.range">
+	<property name="defaultMaxValue" value="16"/>
+  </bean>	
+  
+  <bean id="list.uds.c1f.onlyRange0_20" parent="list.uds.range">
+	<property name="defaultMaxValue" value="20"/>
+  </bean>	
+
+  <bean id="list.uds.c1f.onlyRange0_37" parent="list.uds.range">
+	<property name="defaultMaxValue" value="37"/>
+  </bean>	
+
 </beans>

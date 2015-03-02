@@ -31,7 +31,8 @@ public class UdsAppraisal extends UdsInstrument {
 	private Short foclDef; // UDS3 removed
 	private Short gaitDis; // UDS3 removed
 	private Short eyeMove; // UDS3 removed
-	// all of the following variables were added in UDS 3.0
+	
+	// new fields for UDS 3
 	private Short normexam;
 	private Short parksign;
 	private Short resttrl;

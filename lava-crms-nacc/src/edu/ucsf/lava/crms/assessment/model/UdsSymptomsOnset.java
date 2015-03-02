@@ -25,30 +25,23 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	private Short decSub;
 	private Short decIn;
 	private Short decClin; // UDS3 removed, replaced by decClCog
-	private Short decClCog; // UDS 3 new (cognitive symptoms gateway question)
 	private Short cogMem;
-	private Short cogOri; // UDS new
 	private Short cogJudg;
 	private Short cogLang;
 	private Short cogVis;
 	private Short cogAttn;
 	private Short cogFluc;
-	private Short cogFlAgO; // UDS3 new (fluctuating cognition age of onset)
 	private Short cogOthr;
 	private String cogOthrx;
 	private Short cogFrst; // UDS3 replaced by cogFPred
 	private String cogFrstx; // UDS3 replaced by cogFPrex
-	private Short cogFPred; // UDS3 replaced cogFrst, recoded
-	private String cogFPrex; // UDS3 replaced cogFrstx
 	private Short cogMode;
 	private String cogModex;
 	private Short decAge; // UDS3 moved from item 3 to item 7 
-	private Short decClBe; // UDS3 new (behavioral symptoms gateway question)
 	private Short beApathy;
 	private Short beDep;
 	private Short beVHall;
 	private Short beVWell;
-	private Short beVHAgO; // UDS3 new (visual hallucinations age of onset)
 	private Short beAHall;
 	private Short beDel;
 	private Short beDisin;
@@ -56,18 +49,12 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	private Short beAgit;
 	private Short bePerCh;
 	private Short beRem;
-	private Short beRemAgO; // UDS3 new (REM sleep behavior disorder age of onset)
-	private Short beAnx; // UDS3 new (anxiety)
 	private Short beOthr;
 	private String beOthrx;
 	private Short beFrst; // UDS3 replaced by beFPred
 	private String beFrstx; // UDS3 replaced by beFPredX  
-	private Short beFPred; // UDS3 replaced beFrst (behavior first predominant symptom), recoded
-	private String beFPredx; // UDS3 replaced beFrstx
 	private Short beMode;
 	private String beModex;
-	private Short beAge; // UDS3 new (behavioral symptoms age of onset)
-	private Short decClMot; // UDS3 new (motor symptoms gateway question)
 	private Short moGait;
 	private Short moFalls;
 	private Short moTrem;
@@ -76,15 +63,31 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	private Short moMode;
 	private String moModex;
 	private Short moMoPark;
+	private Short course;
+	private Short frstChg;
+
+	// new variables UDS 3
+	private Short decClCog; // UDS 3 new (cognitive symptoms gateway question)
+	private Short cogOri; // UDS new
+	private Short cogFlAgO; // UDS3 new (fluctuating cognition age of onset)
+	private Short cogFPred; // UDS3 replaced cogFrst, recoded
+	private String cogFPrex; // UDS3 replaced cogFrstx
+	private Short decClBe; // UDS3 new (behavioral symptoms gateway question)
+	private Short beVHAgO; // UDS3 new (visual hallucinations age of onset)
+	private Short beRemAgO; // UDS3 new (REM sleep behavior disorder age of onset)
+	private Short beAnx; // UDS3 new (anxiety)
+	private Short beFPred; // UDS3 replaced beFrst (behavior first predominant symptom), recoded
+	private String beFPredx; // UDS3 replaced beFrstx
+	private Short beAge; // UDS3 new (behavioral symptoms age of onset)
+	private Short decClMot; // UDS3 new (motor symptoms gateway question)
 	private Short parkAge; // UDS3 new
 	private Short moMoAls; // UDS3 new
 	private Short alsAge; // UDS3 new
 	private Short moAge; // UDS3 new
-	private Short course;
-	private Short frstChg;
 	private Short lbdEval; // UDS3 new
 	private Short ftldEval; // UDS3 new
-
+	
+	
 	public Short getB9Chg() {
 		return b9Chg;
 	}

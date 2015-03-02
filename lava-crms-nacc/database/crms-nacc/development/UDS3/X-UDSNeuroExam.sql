@@ -49,7 +49,6 @@ ALTER TABLE udsappraisal
 	
 DELETE FROM viewproperty WHERE entity="udsneuroexam3";
 
--- Add columns to viewproperty table
 insert into viewproperty 
 set messageCode='*.udsneuroexam3.normexam', locale='en', instance='lava', 
   scope='crms-nacc', entity='udsneuroexam3', property='normexam',

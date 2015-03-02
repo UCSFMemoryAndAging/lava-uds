@@ -46,12 +46,12 @@ public class UdsInformantDemo extends UdsInstrument {
 	private Short inEduc;
 	private Short inRelTo; // UDS3 recoded
 	private String inRelTox; // UDS3 removed
-	private Short inKnown; // UDS3 new
 	private Short inLivWth;
 	private Short inVisits;
 	private Short inCalls;
 	private Short inRely;
 	
+	private Short inKnown; // UDS3 new
 
 	public Short getInBirMo() {
 		return inBirMo;

@@ -40,14 +40,17 @@
 		<property name="defaultSort" value="valueDecimal"/>
 		<property name="defaultFormat" value="valueConcatLabel"/>
 	</bean>
-
+	
 	<bean id="list.dataOnlyUds" abstract="true" parent="list.dataOnly">
 		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodes"/></property>
 		<property name="defaultSort" value="valueNumeric"/>
-		<property name="defaultFormat" value="valueConcatLabel"/>
 	</bean>
 	
 	<bean id="list.numericRangeUds" abstract="true" parent="list.numericRange">
+		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodes"/></property>
+	</bean>
+	
+	<bean id="list.decimalRangeUds" abstract="true" parent="list.decimalRange">
 		<property name="defaultCodes"><ref bean="list.ref.udsErrorCodes"/></property>
 	</bean>
 	
@@ -579,21 +582,21 @@
 	<bean id="list.uds.b4.cdrScale" parent="list.dataOnlyUds">
 		<property name="defaultSort" value="valueDecimal"/>
 			<property name="data"><list>
-						<bean parent="list.data"><constructor-arg value="0"/><constructor-arg value="0"/></bean>
-						<bean parent="list.data"><constructor-arg value=".5"/><constructor-arg value=".5"/></bean>
-						<bean parent="list.data"><constructor-arg value="1"/><constructor-arg value="1"/></bean>
-						<bean parent="list.data"><constructor-arg value="2"/><constructor-arg value="2"/></bean>
-						<bean parent="list.data"><constructor-arg value="3"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="0 - None"/><constructor-arg value="0.0"/></bean>
+						<bean parent="list.data"><constructor-arg value="0.5 - Questionable"/><constructor-arg value="0.5"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - Mild"/><constructor-arg value="1.0"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - Moderate"/><constructor-arg value="2.0"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - Severe"/><constructor-arg value="3.0"/></bean>
 			</list></property>
 	</bean>	
 
 	<bean id="list.uds.b4.cdrScaleNoPointFive" parent="list.dataOnlyUds">
-				<property name="defaultSort" value="valueNumeric"/>
+				<property name="defaultSort" value="valueDecimal"/>
 				<property name="data"><list>
-						<bean parent="list.data"><constructor-arg value="0"/><constructor-arg value="0"/></bean>
-						<bean parent="list.data"><constructor-arg value="1"/><constructor-arg value="1"/></bean>
-						<bean parent="list.data"><constructor-arg value="2"/><constructor-arg value="2"/></bean>
-						<bean parent="list.data"><constructor-arg value="3"/><constructor-arg value="3"/></bean>
+						<bean parent="list.data"><constructor-arg value="0 - None"/><constructor-arg value="0.0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - Mild"/><constructor-arg value="1.0"/></bean>
+						<bean parent="list.data"><constructor-arg value="2 - Moderate"/><constructor-arg value="2.0"/></bean>
+						<bean parent="list.data"><constructor-arg value="3 - Severe"/><constructor-arg value="3.0"/></bean>
 			</list></property>
 	</bean>	
 			
@@ -610,8 +613,6 @@
 			<property name="data"><list>
 						<bean parent="list.data"><constructor-arg value="Able to Complete"/><constructor-arg value="0"/></bean>
 						<bean parent="list.data"><constructor-arg value="Unable to Complete"/><constructor-arg value="1"/></bean>
-						<bean parent="list.data"><constructor-arg value="3 - Other"/><constructor-arg value="3"/></bean>
-					
 			</list></property>
 	</bean>	
 

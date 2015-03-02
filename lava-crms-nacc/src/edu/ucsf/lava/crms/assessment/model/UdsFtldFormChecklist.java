@@ -2,6 +2,8 @@ package edu.ucsf.lava.crms.assessment.model;
 
 import java.util.Date;
 
+import org.springframework.util.StringUtils;
+
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.people.model.Patient;
@@ -22,9 +24,9 @@ public class UdsFtldFormChecklist extends UdsInstrument {
 	protected Short ftda3afs;
 	protected Short ftda3afr;
 	protected String ftda3afc;
-	protected Short ftda3fs;
-	protected Short ftda3fr;
-	protected String ftda3fc;
+	protected Short ftda3fs; // FTLD Module 3 removed
+	protected Short ftda3fr; // FTLD Module 3 removed
+	protected String ftda3fc; // FTLD Module 3 removed
 	protected Short ftdc4fs;
 	protected Short ftdc4fr;
 	protected String ftdc4fc;
@@ -155,14 +157,12 @@ public class UdsFtldFormChecklist extends UdsInstrument {
 		this.ftdc6fc = ftdc6fc;
 	}
 
-	public String[] getRequiredResultFields() {
-		return new String[] {
+	public String[] getRequiredResultFields(String version) {
+		String[] required;
+		required = new String[] {
 				"ftda3afs",
 				"ftda3afr",
 				//"ftda3afc",
-				"ftda3fs",
-				"ftda3fr",
-				//"ftda3fc",
 				"ftdc4fs",
 				"ftdc4fr",
 				//"ftdc4fc",
@@ -173,16 +173,33 @@ public class UdsFtldFormChecklist extends UdsInstrument {
 				"ftdc6fr"
 				//"ftdc6fc"
 		};
+		if (version.equals("2")){
+			// Form A3F eliminated in FTLD Module 3
+			required = StringUtils.concatenateStringArrays(required, new String[]{"ftda3fs","ftda3fr"});
+		}
+		return required;
 	}
+	
+	
+	public void markUnusedFields(String version) {
+		if(version.equals("3")) {
+			this.ftda3fs = (short)-8;
+			this.ftda3fr = (short)-8;
+			this.ftda3fc = "-8";
+		}
+	}
+	
 	
 	public String getUdsUploadCsvRecord() {
 		StringBuffer buffer = UdsUploadUtils.getCommonFields(this);
 		buffer.append(UdsUploadUtils.formatField(getFtda3afs())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtda3afr())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtda3afc())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtda3fs())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtda3fr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtda3fc())).append(",");
+		if (getInstrVer().equals("2")) {
+			buffer.append(UdsUploadUtils.formatField(getFtda3fs())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtda3fr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtda3fc())).append(",");
+		}
 		buffer.append(UdsUploadUtils.formatField(getFtdc4fs())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdc4fr())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdc4fc())).append(",");

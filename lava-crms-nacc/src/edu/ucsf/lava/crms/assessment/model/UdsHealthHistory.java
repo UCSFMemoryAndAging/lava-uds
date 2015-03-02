@@ -22,25 +22,16 @@ public class UdsHealthHistory extends UdsInstrument {
 	private Short tobac100;
 	private Short smokYrs; // UDS3 recode
 	private Short quitSmok;
-	private Short packsPer; // UDS3 packsPer
-	private Short alcoCcas; // UDS3 new
-	private Short alcFreq; // UDS3 new
+	private Short packsPer; // UDS3 recode
 	private Short cvHAtt;
-	private Short hattMult; // UDS3 new
-	private Short hattYear; // UDS3 new
 	private Short cvAFib;
 	private Short cvAngio;
 	private Short cvBypass;
 	private Short cvPace; // UDS3 replaced by cvPacDef
-	private Short cvPacDef; // UDS new var replaced cvPace
 	private Short cvChf;
-	private Short cvAngina; // UDS3 new
-	private Short cvHValve; // UDS3 new
 	private Short cvOthr;
 	private String cvOthrx;
 	private Short cbStroke;
-	private Short strokMul; // UDS3 new
-	private Short strokYr; // UDS3 new
 	private Short strok1Yr; // UDS3 removed
 	private Short strok2Yr; // UDS3 removed
 	private Short strok3Yr; // UDS3 removed
@@ -48,8 +39,6 @@ public class UdsHealthHistory extends UdsInstrument {
 	private Short strok5Yr; // UDS3 removed
 	private Short strok6Yr; // UDS3 removed
 	private Short cbTia;
-	private Short tiaMult; // UDS new
-	private Short tiaYear; // UDS new
 	private Short tia1Yr; // UDS3 removed
 	private Short tia2Yr; // UDS3 removed
 	private Short tia3Yr; // UDS3 removed
@@ -63,22 +52,44 @@ public class UdsHealthHistory extends UdsInstrument {
 	private Short pdOthr;
 	private Short pdOthrYr;
 	private Short seizures;
-	private Short tbi; // UDS3 new
-	private Short tbiBrief; // UDS3 new
-	private Short tbiExten; // UDS3 new
-	private Short tbiWolos; // UDS3 new
-	private Short tbiYear; // UDS3 new
 	private Short traumBrf; // UDS removed
 	private Short traumExt; // UDS3 removed
 	private Short traumChr; // UDS3 removed
 	private Short ncOthr; // UDS3 removed
 	private String ncOthrx; // UDS3 removed
 	private Short diabetes;
-	private Short diabType; // UDS new
 	private Short hyperten;
 	private Short hyperCho;
 	private Short b12Def;
 	private Short thyroid;
+	private Short incontU;
+	private Short incontF;
+	private Short alcohol;
+	private Short abusOthr;
+	private String abusx;
+	private Short dep2Yrs;
+	private Short depOthr;
+	private Short psycDis;
+	private String psycDisx;
+	
+	// new variables for UDS 3
+	private Short alcoCcas; // UDS3 new
+	private Short alcFreq; // UDS3 new
+	private Short hattMult; // UDS3 new
+	private Short hattYear; // UDS3 new
+	private Short cvPacDef; // UDS new var replaced cvPace
+	private Short cvAngina; // UDS3 new
+	private Short cvHValve; // UDS3 new
+	private Short strokMul; // UDS3 new
+	private Short strokYr; // UDS3 new
+	private Short tiaMult; // UDS new
+	private Short tiaYear; // UDS new
+	private Short tbi; // UDS3 new
+	private Short tbiBrief; // UDS3 new
+	private Short tbiExten; // UDS3 new
+	private Short tbiWolos; // UDS3 new
+	private Short tbiYear; // UDS3 new
+	private Short diabType; // UDS new
 	private Short arthrit; // UDS3 new
 	private Short arthType; // UDS3 new
 	private String arthTypx; // UDS3 new
@@ -86,26 +97,18 @@ public class UdsHealthHistory extends UdsInstrument {
 	private Short arthLoEx; // UDS3 new
 	private Short arthSpin; // UDS3 new
 	private Short arthUnk; // UDS3 new
-	private Short incontU;
-	private Short incontF;
 	private Short apnea; // UDS3 new
 	private Short rbd; // UDS3 new
 	private Short insomn; // UDS3 new
 	private Short othSleep; // UDS3 new
 	private String othSleex; // UDS3 new
-	private Short alcohol;
-	private Short abusOthr;
-	private String abusx;
 	private Short ptsd; // UDS3 new
 	private Short bipolar; // UDS3 new
 	private Short schiz; // UDS3 new
-	private Short dep2Yrs;
-	private Short depOthr;
 	private Short anxiety; // UDS3 new
 	private Short ocd; // UD3 new
 	private Short npsyDev; // UDS3 new
-	private Short psycDis;
-	private String psycDisx;
+	
 	
 	public Short getAbusOthr() {
 		return abusOthr;

@@ -23,13 +23,10 @@ public class UdsSubjectDemo extends UdsInstrument {
 	private Short reason; // UDS3 recode
 	private String reasonx; // UDS3 remove
 	private Short refer; // UDS3 replaced by "referSc"
-	private Short referSc; // UDS3 new var, replaced "refer"
 	private String referx; // UDS3 remove
-	private Short learned; // UDS3 new
 	private Short preStat;
 	private Short presPart;
 	private Short source; // UDS3 replaced by "sourceNw"
-	private Short sourceNw; // UDS3 new var, replaced "source"
 	private Short birthMo;
 	private Short birthYr;
 	private Short sex;
@@ -48,14 +45,18 @@ public class UdsSubjectDemo extends UdsInstrument {
 	private Short mariStat; // UDS3 recode
 	private String mariStax; // UDS3 remove
 	private Short livSit; // UDS3 replaced by "livSitua"
-	private Short livSitua; // UDS3 new var, replaced "livSit"
 	private String livSitx; // UDS3 remove
 	private Short independ;
 	private Short residenc; // UDS3 recode 
 	private String residenx; // UDS3 remove
 	private String zip;
 	private Short handed;
-		
+
+	// new variables in UDS 3
+	private Short referSc; // UDS3 new var, replaced "refer"
+	private Short learned; // UDS3 new
+	private Short sourceNw; // UDS3 new var, replaced "source"
+	private Short livSitua; // UDS3 new var, replaced "livSit"
 
 	public Short getBirthMo() {
 		return birthMo;

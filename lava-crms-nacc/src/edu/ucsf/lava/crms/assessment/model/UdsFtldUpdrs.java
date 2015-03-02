@@ -2,6 +2,8 @@ package edu.ucsf.lava.crms.assessment.model;
 
 import java.util.Date;
 
+import org.springframework.util.StringUtils;
+
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.people.model.Patient;
@@ -22,12 +24,12 @@ public class UdsFtldUpdrs extends UdsInstrument {
 	protected Short ftdltfas;
 	protected Short ftdlimb;
 	protected Short ftdbulb;
-	protected Short ftdeye;
-	protected Short ftddyst;
-	protected Short ftdideo;
-	protected Short ftdalien;
-	protected Short ftdmyocl;
-	protected Short ftdcorts;
+	protected Short ftdeye; // delete in FTLD Module v. 3
+	protected Short ftddyst; // delete in FTLD Module v. 3
+	protected Short ftdideo; // delete in FTLD Module v. 3
+	protected Short ftdalien; // delete in FTLD Module v. 3
+	protected Short ftdmyocl; // delete in FTLD Module v. 3
+	protected Short ftdcorts; // delete in FTLD Module v. 3
 	protected Short ftdgsev;
 	protected String ftdgsevx;
 	protected Short ftdgtyp;
@@ -146,23 +148,40 @@ public class UdsFtldUpdrs extends UdsInstrument {
 		this.ftdgtypx = ftdgtypx;
 	}
 
-	public String[] getRequiredResultFields() {
-		return new String[] {
+	public String[] getRequiredResultFields(String version) {
+		String[] required;
+		required = new String[] {
 				"ftdltfas",
 				"ftdlimb",
 				"ftdbulb",
-				"ftdeye",
-				"ftddyst",
-				"ftdideo",
-				"ftdalien",
-				"ftdmyocl",
-				"ftdcorts",
 				"ftdgsev",
 				"ftdgsevx",
 				"ftdgtyp",
 				"ftdgtypg",
 				"ftdgtypx"
 		};
+		if (version.equals("2")){
+			// properties deleted in FTLD Module 3
+			required = StringUtils.concatenateStringArrays(required, new String[]{
+					"ftdeye",
+					"ftddyst",
+					"ftdideo",
+					"ftdalien",
+					"ftdmyocl",
+					"ftdcorts"});
+		}
+		return required;
+	}
+	
+	public void markUnusedFields(String version) {
+		if(version.equals("3")) {
+			this.ftdeye = (short)-8;
+			this.ftddyst = (short)-8;
+			this.ftdideo = (short)-8;
+			this.ftdalien = (short)-8;
+			this.ftdmyocl = (short)-8;
+			this.ftdcorts = (short)-8;
+		}
 	}
 	
 	public String getUdsUploadCsvRecord() {
@@ -170,12 +189,14 @@ public class UdsFtldUpdrs extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdltfas())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdlimb())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdbulb())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdeye())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtddyst())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdideo())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdalien())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdmyocl())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdcorts())).append(",");
+		if (getInstrVer().equals("2")) {
+			buffer.append(UdsUploadUtils.formatField(getFtdeye())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtddyst())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdideo())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdalien())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdmyocl())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getFtdcorts())).append(",");
+		}
 		buffer.append(UdsUploadUtils.formatField(getFtdgsev())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdgsevx())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdgtyp())).append(",");
