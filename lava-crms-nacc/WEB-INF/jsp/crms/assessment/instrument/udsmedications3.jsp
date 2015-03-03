@@ -34,7 +34,7 @@
 
 <c:choose>
 	<c:when test="${componentView == 'enter'}">
-		<c:import url="/WEB-INF/jsp/crms/assessment/instrument/udsmedications2EditContent.jsp">
+		<c:import url="/WEB-INF/jsp/crms/assessment/instrument/udsmedications3EditContent.jsp">
 			<c:param name="component">udsMedications2Dto</c:param>
 			<c:param name="componentView">${componentView}</c:param>
 			<c:param name="instrTypeEncoded">${instrTypeEncoded}</c:param>	
@@ -42,7 +42,7 @@
 		</c:import>
 	</c:when>
 	<c:otherwise>
-		<c:import url="/WEB-INF/jsp/crms/assessment/instrument/udsmedications2ViewContent.jsp">
+		<c:import url="/WEB-INF/jsp/crms/assessment/instrument/udsmedications3ViewContent.jsp">
 			<c:param name="component">${component}</c:param>
 			<c:param name="componentView">${componentView}</c:param>
 			<c:param name="instrTypeEncoded">${instrTypeEncoded}</c:param>	
