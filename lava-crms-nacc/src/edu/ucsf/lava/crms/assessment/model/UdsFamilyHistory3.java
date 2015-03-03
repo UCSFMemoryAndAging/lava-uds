@@ -2266,6 +2266,9 @@ public class UdsFamilyHistory3 extends UdsInstrument{
 
 	public String[] getRequiredResultFields() {
 		String[] required;
+		if (this.getPacket() == null) {
+			return new String[] {"packet"};
+		}
 		required = new String[] {
       "fadmut",
       "fadmutx",

@@ -226,8 +226,9 @@ public class UdsInformantDemo extends UdsInstrument {
 	public String[] getRequiredResultFields(String version) {
 		String[] required;
 		
-		if (this.getPacket() == null)
-			return new String[] {};
+		if (this.getPacket() == null) {
+			return new String[] {"packet"};
+		}
 		
 		if (this.getPacket().equals("I")) {
 			required = new String[] {
@@ -276,7 +277,7 @@ public class UdsInformantDemo extends UdsInstrument {
 
 	
 	public void markUnusedFields(String version) {
-		if (this.getPacket().equals("I")){
+		if (this.getPacket() != null && this.getPacket().equals("I")){
 			this.newInf = (short)-8;
 		}
 		if(version.equals("1") || (version.equals("2"))) {
