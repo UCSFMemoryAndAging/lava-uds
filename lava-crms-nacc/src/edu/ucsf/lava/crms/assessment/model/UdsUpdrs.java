@@ -16,6 +16,10 @@ public class UdsUpdrs extends UdsInstrument {
 	public UdsUpdrs(Patient p, Visit v, String projName, String instrType, Date dcDate, String dcStatus) {
 		super(p,v,projName,instrType,dcDate,dcStatus);
 		this.setFormId(UDS_UPDRS_FORMID);
+		// this instrument was discontinued after version "2" so override the current version set
+		// in UdsInstrument constructor
+		setInstrVer("2");
+		this.setFormVer("2");
 	}
 	
 	// note: id inherited from Instrument
