@@ -366,7 +366,10 @@ public class UdsSubjectDemo extends UdsInstrument {
 
 	public String[] getRequiredResultFields(String version) {
 		// different fields are required depending on packet type
-		if (this.getPacket().equals("I")){
+		if (this.getPacket() == null) {
+			return new String[] {"packet"};
+		}
+		else if (this.getPacket().equals("I")){
 			if (version.equals("3")) {
 				return new String[] {
 					    "reason",
