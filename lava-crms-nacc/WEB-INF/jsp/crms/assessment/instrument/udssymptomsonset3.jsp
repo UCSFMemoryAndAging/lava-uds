@@ -54,7 +54,7 @@
 <tags:createField property="cogAttn" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogFluc" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogFlAgO" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="cogOthr" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="cogOther" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogOthrx" entity="${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogFPred" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 <tags:createField property="cogFPrex" entity="${instrTypeEncoded}" component="${component}"/>
@@ -152,7 +152,7 @@ in followup. --%>
 
 <ui:formGuide>
   <ui:observe elementIds="decClCog" component="${component}" forValue="^1"/>
-  <ui:unskip elementIds="cogMem,cogOri,cogJudg,cogLang,cogVis,cogAttn,cogFluc,cogOthr,cogFPred,cogMode,decAge" component="${component}"/>
+  <ui:unskip elementIds="cogMem,cogOri,cogJudg,cogLang,cogVis,cogAttn,cogFluc,cogOther,cogFPred,cogMode,decAge" component="${component}"/>
 </ui:formGuide>        
 
 <ui:formGuide>
@@ -162,7 +162,7 @@ in followup. --%>
 </ui:formGuide>        
 
 <ui:formGuide>
-  <ui:observe elementIds="cogOthr" component="${component}" forValue="^1"/>
+  <ui:observe elementIds="cogOther" component="${component}" forValue="^1"/>
   <ui:unskip elementIds="cogOthrx" component="${component}"/>
 </ui:formGuide>           
 

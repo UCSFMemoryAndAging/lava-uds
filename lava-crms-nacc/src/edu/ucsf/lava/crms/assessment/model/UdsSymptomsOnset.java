@@ -21,7 +21,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	}
 	
 	// note: id inherited from Instrument
-	private Short b9Chg;
+	private Short b9Chg; // UDS3 removed
 	private Short decSub;
 	private Short decIn;
 	private Short decClin; // UDS3 removed, replaced by decClCog
@@ -31,7 +31,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	private Short cogVis;
 	private Short cogAttn;
 	private Short cogFluc;
-	private Short cogOthr;
+	private Short cogOther;
 	private String cogOthrx;
 	private Short cogFrst; // UDS3 replaced by cogFPred
 	private String cogFrstx; // UDS3 replaced by cogFPrex
@@ -280,12 +280,12 @@ public class UdsSymptomsOnset extends UdsInstrument {
 		this.cogModex = cogModex;
 	}
 
-	public Short getCogOthr() {
-		return cogOthr;
+	public Short getCogOther() {
+		return cogOther;
 	}
 
-	public void setCogOthr(Short cogOthr) {
-		this.cogOthr = cogOthr;
+	public void setCogOther(Short cogOther) {
+		this.cogOther = cogOther;
 	}
 
 	public String getCogOthrx() {
@@ -749,9 +749,9 @@ public class UdsSymptomsOnset extends UdsInstrument {
 	}
 	
 	public String getUdsUploadCsvRecord() {
-		if(getInstrVer()==null || getPacket()==null){return "";}
-		
+		if(getPacket()==null) { return ""; }
 		StringBuffer buffer = UdsUploadUtils.getCommonFields(this);
+		
 		if(getInstrVer().equals("1")){
 			if(getPacket().equals("I")){
 				buffer.append(UdsUploadUtils.formatField(getDecSub())).append(",");
@@ -763,7 +763,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 				buffer.append(UdsUploadUtils.formatField(getCogLang())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogVis())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
-				buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrst())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrstx())).append(",");
@@ -806,7 +806,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 				buffer.append(UdsUploadUtils.formatField(getCogLang())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogVis())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
-				buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrst())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getCogFrstx())).append(",");
@@ -850,7 +850,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getCogVis())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFluc())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFrst())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFrstx())).append(",");
@@ -895,7 +895,7 @@ public class UdsSymptomsOnset extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getCogAttn())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFluc())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFlAgO())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCogOthr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogOther())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogOthrx())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFPred())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogFPrex())).append(",");
