@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/jsp/includes/include.jsp" %>
-<c:set var="instrTypeEncoded" value="udsneuroexam3"/>
+<c:set var="instrTypeEncoded" value="udsappraisal3"/>
 <c:import url="/WEB-INF/jsp/crms/assessment/instrument/include.jsp">
 	<c:param name="instrTypeEncoded" value="${instrTypeEncoded}"/>
 </c:import>
@@ -42,14 +42,14 @@
 </c:import>
 
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udsneuroexam3.abnormal.section"/></page:param>
+  <page:param name="section"><spring:message code="udsappraisal3.abnormal.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
 <tags:createField property="normexam" entity="${entity}" component="${component}"/>
 </page:applyDecorator>
 
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udsneuroexam3.findings.section"/></page:param>
+  <page:param name="section"><spring:message code="udsappraisal3.findings.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
 
@@ -62,21 +62,21 @@
 	<tags:tableForm>  
 		<tags:listRow>
 			<tags:listColumnHeader label="&nbsp;" width="60%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.leftHeader" width="20%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.rightHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsappraisal3.leftHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsappraisal3.rightHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.resting" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.resting" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="resttrl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="resttrr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.slowing" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.slowing" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="slowingl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="slowingr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.rigidity" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.rigidity" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="rigidl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="rigidr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
@@ -85,18 +85,18 @@
 	<tags:tableForm>  
 		<tags:listRow>
 			<tags:listColumnHeader label="&nbsp;" width="80%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.presentHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsappraisal3.presentHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.brady" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.brady" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="brady" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.gait" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.gait" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="parkgait" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.postural" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.postural" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="postinst" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 	</tags:tableForm>	
@@ -111,14 +111,14 @@
 	<tags:tableForm>  
 		<tags:listRow>
 			<tags:listColumnHeader label="&nbsp;" width="80%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.presentHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsappraisal3.presentHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.corticaDeficit" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.corticaDeficit" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="cortdef" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.focal" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.focal" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="sivdfind" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 	</tags:tableForm>	
@@ -126,21 +126,21 @@
 	<tags:tableForm>  
 		<tags:listRow>
 			<tags:listColumnHeader label="&nbsp;" width="60%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.leftHeader" width="20%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.rightHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsappraisal3.leftHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsappraisal3.rightHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.motor" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.motor" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="cvdmotl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="cvdmotr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.corticalLoss" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.corticalLoss" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="cortvisl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="cortvisr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.somatosensory" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.somatosensory" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="somatl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="somatr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
@@ -164,26 +164,26 @@
 	<tags:tableForm>  
 		<tags:listRow>
 			<tags:listColumnHeader label="&nbsp;" width="80%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.presentHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsappraisal3.presentHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.eyeMovement" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.eyeMovement" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="eyepsp" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.dysarthria" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.dysarthria" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="dyspsp" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.axial" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.axial" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="axialpsp" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.gaitPSP" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.gaitPSP" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="gaitpsp" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.apraxia" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.apraxia" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="apraxsp" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 	</tags:tableForm>	
@@ -191,36 +191,36 @@
 	<tags:tableForm>  
 		<tags:listRow>
 			<tags:listColumnHeader label="&nbsp;" width="60%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.leftHeader" width="20%"/>
-			<tags:listColumnHeader labelKey="udsneuroexam3.rightHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsappraisal3.leftHeader" width="20%"/>
+			<tags:listColumnHeader labelKey="udsappraisal3.rightHeader" width="20%"/>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.apraxiaCBS" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.apraxiaCBS" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="apraxl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="apraxr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.corticalCBS" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.corticalCBS" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="cortsenl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="cortsenr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.ataxia" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.ataxia" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="ataxl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="ataxr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.alien" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.alien" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="alienlml" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="alienlmr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.dystonia" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.dystonia" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="dystonl" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="dystonr" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>
 		<tags:listRow>
-			<tags:listCell><tags:outputText textKey="udsneuroexam3.myoclonus" inline="false"/></tags:listCell>
+			<tags:listCell><tags:outputText textKey="udsappraisal3.myoclonus" inline="false"/></tags:listCell>
 			<tags:listCell><tags:createField property="myocllt" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 			<tags:listCell><tags:createField property="myoclrt" component="${component}" entity="${instrTypeEncoded}" mode="${controlMode}"/></tags:listCell>
 		</tags:listRow>

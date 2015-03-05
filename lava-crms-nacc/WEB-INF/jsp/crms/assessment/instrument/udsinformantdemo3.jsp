@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/jsp/includes/include.jsp" %>
-<c:set var="instrTypeEncoded" value="udscoparticipantdemo3"/>
+<c:set var="instrTypeEncoded" value="udsinformantdemo3"/>
 <c:import url="/WEB-INF/jsp/crms/assessment/instrument/include.jsp">
 	<c:param name="instrTypeEncoded" value="${instrTypeEncoded}"/>
 </c:import>
@@ -37,7 +37,7 @@
 </c:import>
 
 <page:applyDecorator name="component.instrument.section">
-  <page:param name="section"><spring:message code="udsinformantdemo2.informantDemo.section"/></page:param>
+  <page:param name="section"><spring:message code="udsinformantdemo3.informantDemo.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"> </page:param>
 
