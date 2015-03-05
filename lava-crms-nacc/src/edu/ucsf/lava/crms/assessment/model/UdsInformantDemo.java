@@ -10,9 +10,9 @@ import edu.ucsf.lava.crms.people.model.Patient;
 import edu.ucsf.lava.crms.scheduling.model.Visit;
 
 /**
- * As of UDS 3.0 the name of the form was changed from "A2: Informant Demographics" to 
- * "A2: Co-participant Demographics". However the content is largely the same so this same underlying
- * model class is used. 
+ * 
+ * As of UDS 3 this form is called 'UDS Co-Participant Demographics'
+ *
  */
 public class UdsInformantDemo extends UdsInstrument {
 	

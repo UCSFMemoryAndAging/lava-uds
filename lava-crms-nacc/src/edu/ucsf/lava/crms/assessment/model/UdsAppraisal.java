@@ -27,7 +27,7 @@ public class UdsAppraisal extends UdsInstrument {
 	}
 	
 	// note: id inherited from Instrument
-	private Short normal;
+	private Short normal;  // UDS3 removed
 	private Short foclDef; // UDS3 removed
 	private Short gaitDis; // UDS3 removed
 	private Short eyeMove; // UDS3 removed
