@@ -136,7 +136,7 @@
 
 	<bean id="list.udsformchecklist3.codes" parent="list.uds.codes"/>    
 	<bean id="list.udssubjectdemo3.codes" parent="list.uds.codes"/>
-	<bean id="list.udscoparticipantdemo3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsinformantdemo3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsfamilyhistory3.codes" parent="list.uds.codes"/>
 	<bean id="list.udshealthhistory3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsphysical3.codes" parent="list.uds.codes"/>
@@ -144,7 +144,7 @@
 	<bean id="list.udsnpi3.codes" parent="list.ref.udsErrorCodesWithSkipCodes"/>
 	<bean id="list.udsgds3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsfaq3.codes" parent="list.uds.codes"/>
-	<bean id="list.udsneuroexam3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsappraisal3.codes" parent="list.uds.codes"/>
 	<bean id="list.udssymptomsonset3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsdiagnosis3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsmedicalconditions3.codes" parent="list.uds.codes"/>
@@ -2845,12 +2845,34 @@
 		<property name="defaultMaxValue" value="10"/>
 	</bean>
 
+    <bean id="list.uds.c1f.range0_10Total" parent="list.numericRangeUds">
+  		<property name="staticReferenceLists"><list>
+			<ref bean="list.uds.c1f.range0_10"/>
+		</list></property>
+		<property name="data"><list>
+			<bean parent="list.data">
+				<constructor-arg value="Cannot Total"/><constructor-arg value="-5"/>
+			</bean></list>
+		</property> 
+	</bean>
+
     <bean id="list.uds.c1f.range0_15" parent="list.uds.c1.range">
 		<property name="defaultMaxValue" value="15"/>
 	</bean>
 
     <bean id="list.uds.c1f.range0_16" parent="list.uds.c1.range">
 		<property name="defaultMaxValue" value="16"/>
+	</bean>
+
+    <bean id="list.uds.c1f.range0_16Total" parent="list.numericRangeUds">
+  		<property name="staticReferenceLists"><list>
+			<ref bean="list.uds.c1f.range0_16"/>
+		</list></property>
+		<property name="data"><list>
+			<bean parent="list.data">
+				<constructor-arg value="Cannot Total"/><constructor-arg value="-5"/>
+			</bean></list>
+		</property> 
 	</bean>
 
     <bean id="list.uds.c1f.range0_17" parent="list.uds.c1.range">
