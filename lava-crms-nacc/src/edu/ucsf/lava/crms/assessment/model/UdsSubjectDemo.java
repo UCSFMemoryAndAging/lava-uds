@@ -347,16 +347,17 @@ public class UdsSubjectDemo extends UdsInstrument {
 	}
 	
 	public void markUnusedFields(String version) {
-		if(version.equalsIgnoreCase("3")){
+		if(version.equalsIgnoreCase("1") || version.equalsIgnoreCase("2")){
+			this.referSc = this.learned = this.sourceNw = this.livSitua = (short)-8;
+		}
+		else if(version.equalsIgnoreCase("3")){
 			this.inMds = this.refer = this.source = this.livSit = (short)-8;
 			this.reasonx = this.referx = this.mariStax = livSitx = residenx = "-8";
 			if (this.getPacket() != null && !this.getPacket().equals("I")) {
-				// PROBLEM is that this is called when this instrument is added and at that time do not know whether the packet will
-				// be initial or followup, so these do not get marked. if the form is data entered as followup these values are
-				// not required so just remain null instead of setting to Unused code -8 and are saved as null. this is ok for the NACC 
-				// since the "initial packet only" fields do not get submitted anyway for a followup, but for LAVA Query would be clearer
-				// if they were marked as unused instead of null
-				// UPDATE: fixed by calling markUnusedFields in InstrumentHandler override of doSave
+				// note that when when this instrument is added do not know at that time whether the packet will
+				// be initial or followup, so these do not get marked. however, markUnusedFields is call in 
+				// InstrumentHandler override of doSave and at that point packet will have a value (since it is
+				// required)
 				this.reason = this.referSc = this.learned = this.preStat = this.presPart = this.sourceNw = this.hispanic
 				= this.hispOr = this.race = this.raceSec = this.raceTer = this.primLang = this.educ = this.handed = (short)-8;
 				this.hispOrx = this.racex = this.raceSecx = this.raceTerx = this.primLanx = "-8";
