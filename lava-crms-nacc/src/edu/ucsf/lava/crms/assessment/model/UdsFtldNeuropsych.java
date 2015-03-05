@@ -6,6 +6,7 @@ import org.springframework.util.StringUtils;
 
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
+import edu.ucsf.lava.crms.assessment.controller.CalcUtils;
 import edu.ucsf.lava.crms.people.model.Patient;
 import edu.ucsf.lava.crms.scheduling.model.Visit;
 
@@ -368,17 +369,14 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 				"ftdsemmt",
 				"ftdsemaa",
 				"ftdsemta",
-				"ftdsemsu",
 				"ftdanasw",
 				"ftdanaow",
-				"ftdanats",
 				"ftdsenas",
 				"ftdsenos",
 				"ftdsensr",
 				"ftdsenpr",
 				"ftdnounc",
 				"ftdverbc",
-				"ftdratio",
 				"ftdreaas",
 				"ftdreaos",
 				"ftdreasr",
@@ -460,6 +458,14 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 	@Override
 	public void updateCalculatedFields() {
 		super.updateCalculatedFields();
+
+		this.ftdsemsu = CalcUtils.add(new Short[] {
+				this.ftdsemaa, this.ftdsemta
+		}).shortValue();
+
+		this.ftdanats = CalcUtils.add(new Short[] {
+				this.ftdanasw, this.ftdanaow
+		}).shortValue();
 		
 		this.ftdratio = (float) 88.88;
 		if (this.ftdnounc!=null && this.ftdverbc!=null) {

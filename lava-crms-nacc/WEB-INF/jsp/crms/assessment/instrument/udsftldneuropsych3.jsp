@@ -115,12 +115,12 @@
 
 <ui:formGuide>
   <ui:observe elementIds="ftdsemaa" component="${component}" forValue="^-[1-9]|^9[5-8]"/>
-  <ui:skip elementIds="ftdsemta,ftdsemsu" component="${component}"/>
+  <ui:skip elementIds="ftdsemta" component="${component}"/>
 </ui:formGuide>
 
 <ui:formGuide>
   <ui:observe elementIds="ftdanasw" component="${component}" forValue="^-[1-9]|^9[5-8]"/>
-  <ui:skip elementIds="ftdanaow,ftdanats" component="${component}"/>
+  <ui:skip elementIds="ftdanaow" component="${component}"/>
 </ui:formGuide>
 
 <ui:formGuide>
