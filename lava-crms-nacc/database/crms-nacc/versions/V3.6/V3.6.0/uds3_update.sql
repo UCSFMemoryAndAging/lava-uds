@@ -253,282 +253,277 @@ set messageCode='*.udssubjectdemo3.handed', locale='en', instance='lava',
   
   
 -- A2  
--- changing the LAVA instrument name to correspond to change in UDS 3.0 name of form A2
-DELETE FROM instrument where InstrName='UDS Informant Demo';
-DELETE FROM instrument where InstrName='UDS Co-Participant Demo';
-INSERT INTO instrument (InstrName, TableName, FormName, HasVersion) VALUES ('UDS Co-Participant Demo', 'udsinformantdemo', 'LavaWebOnly', 0);
-
-DELETE FROM viewproperty where entity="udscoparticipantdemo3";
+DELETE FROM viewproperty where entity= 'udsinformantdemo3';
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inBirMo', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inBirMo',
+set messageCode='*.udsinformantdemo3.inBirMo', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inBirMo',
   required='No', proporder='1', attributes='', quickHelp='', size="3",
   label="1. Co-participant's month and year of birth (MM/YYYY) (99/9999 = unknown)", context="r",
   list="uds.a1.birthMo", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inBirYr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inBirYr',
+set messageCode='*.udsinformantdemo3.inBirYr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inBirYr',
   required='No', proporder='2', attributes='', quickHelp='', 
   label="1. Co-participant's year of birth", context="r", size="3",
   list="uds.a1.birthYr", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inSex', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inSex',
+set messageCode='*.udsinformantdemo3.inSex', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inSex',
   required='No', proporder='3', attributes='', quickHelp='', 
   label="2. Co-participant's sex", context="r",
   list="uds.gender", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.newInf', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='newInf',
+set messageCode='*.udsinformantdemo3.newInf', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='newInf',
   required='No', proporder='4', attributes='', quickHelp='', 
   label="Is this a new co-participant - i.e., one who was not a co-participant at any past UDS visit?", context="h",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inHisp', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inHisp',
+set messageCode='*.udsinformantdemo3.inHisp', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inHisp',
   required='No', proporder='5', attributes='', quickHelp='', 
   label="3. Does the co-participant report being of Hispanic/ Latino ethnicity (i.e., having origins from mainly Spanish-speaking Latin American country), regardless of race?", context="r",
   list="uds.noYesUnknown019", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inHispOr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inHispOr',
+set messageCode='*.udsinformantdemo3.inHispOr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inHispOr',
   required='No', proporder='6', attributes='', quickHelp='', 
   label="3a. If yes, what are the co-participant's reported origins?", context="r",
   list="uds.a1.hispanic", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inHispOx', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inHispOx',
+set messageCode='*.udsinformantdemo3.inHispOx', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inHispOx',
   required='No', proporder='7', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other (specify)", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inRace', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRace',
+set messageCode='*.udsinformantdemo3.inRace', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inRace',
   required='No', proporder='8', attributes='', quickHelp='', 
   label="4. What does the co-participant report as his or her race?", context="r",
   list="uds.a1.race", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inRacex', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRacex',
+set messageCode='*.udsinformantdemo3.inRacex', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inRacex',
   required='No', proporder='9', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other (specify)", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inRaSec', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRaSec',
+set messageCode='*.udsinformantdemo3.inRaSec', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inRaSec',
   required='No', proporder='10', attributes='', quickHelp='', 
   label="5. What additional race does co-participant report?", context="r",
   list="uds.a1.raceNone", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inRaSecx', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRaSecx',
+set messageCode='*.udsinformantdemo3.inRaSecx', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inRaSecx',
   required='No', proporder='11', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other (specify)", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inRaTer', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRaTer',
+set messageCode='*.udsinformantdemo3.inRaTer', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inRaTer',
   required='No', proporder='12', attributes='', quickHelp='', 
   label="6. What additional race, beyond those reported in Questions 4 and 5, does the co-participant report?", context="r",
   list="uds.a1.raceNone", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inRaTerx', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRaTerx',
+set messageCode='*.udsinformantdemo3.inRaTerx', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inRaTerx',
   required='No', proporder='13', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other (specify)", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inEduc', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inEduc',
+set messageCode='*.udsinformantdemo3.inEduc', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inEduc',
   required='No', proporder='14', attributes='', quickHelp='', 
   label="7. Co-participant's years of education", context="r",
   list="uds.range0_30", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inRelTo', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRelTo',
+set messageCode='*.udsinformantdemo3.inRelTo', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inRelTo',
   required='No', proporder='15', attributes='', quickHelp='', 
   label="8. What is co-participant's relationship to subject?", context="r",
   list="uds.a2.relation3", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inKnown', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inKnown',
+set messageCode='*.udsinformantdemo3.inKnown', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inKnown',
   required='No', proporder='16', attributes='', quickHelp='', 
   label="8a. How long has the co-participant known the subject?", context="r",
   list="uds.a2.inKnown", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inLivWth', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inLivWth',
+set messageCode='*.udsinformantdemo3.inLivWth', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inLivWth',
   required='No', proporder='17', attributes='', quickHelp='', 
   label="9. Does the co-participant live with the subject?", context="r",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inVisits', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inVisits',
+set messageCode='*.udsinformantdemo3.inVisits', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inVisits',
   required='No', proporder='18', attributes='', quickHelp='', 
   label="9a. If no, approximate frequency of in-person visits?", context="r",
   list="uds.a2.freq", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inCalls', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inCalls',
+set messageCode='*.udsinformantdemo3.inCalls', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inCalls',
   required='No', proporder='19', attributes='', quickHelp='', 
   label="9b. If no, approximate frequency of telephone contact?", context="r",
   list="uds.a2.freq", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udscoparticipantdemo3.inRely', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udscoparticipantdemo3', property='inRely',
+set messageCode='*.udsinformantdemo3.inRely', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsinformantdemo3', property='inRely',
   required='No', proporder='20', attributes='', quickHelp='', 
   label="10. Is there a question about the co-participant's reliability?", context="r",
   list="uds.noYes01", style="scale";
 
 -- followup metadata (item numbering differs, a little text differs, newInf is not hidden)
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inBirMo', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inBirMo',
+set messageCode='followup.udsinformantdemo3.inBirMo', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inBirMo',
   required='No', proporder='1', attributes='', quickHelp='', size="3", 
   label="1. Co-participant's month and year of birth (MM/YYYY) (99/9999 = unknown)", context="r",
   list="uds.a1.birthMo", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inBirYr', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inBirYr',
+set messageCode='followup.udsinformantdemo3.inBirYr', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inBirYr',
   required='No', proporder='2', attributes='', quickHelp='',  size="3",
   label="Co-participant's year of birth", context="r",
   list="uds.a1.birthYr", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inSex', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inSex',
+set messageCode='followup.udsinformantdemo3.inSex', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inSex',
   required='No', proporder='3', attributes='', quickHelp='', 
   label="2. Co-participant's sex", context="r",
   list="uds.gender", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.newInf', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='newInf',
+set messageCode='followup.udsinformantdemo3.newInf', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='newInf',
   required='No', proporder='4', attributes='', quickHelp='', 
   label="3. Is this a new co-participant - i.e., one who was not a co-participant at any past UDS visit?", context="r",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inHisp', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inHisp',
+set messageCode='followup.udsinformantdemo3.inHisp', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inHisp',
   required='No', proporder='5', attributes='', quickHelp='', 
   label="4. Does the co-participant report being of Hispanic/ Latino ethnicity (i.e., having origins from mainly Spanish-speaking Latin American country), regardless of race?", context="r",
   list="uds.noYesUnknown019", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inHispOr', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inHispOr',
+set messageCode='followup.udsinformantdemo3.inHispOr', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inHispOr',
   required='No', proporder='6', attributes='', quickHelp='', 
   label="4a. If yes, what are the co-participant's reported origins?", context="r",
   list="uds.a1.hispanic", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inHispOx', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inHispOx',
+set messageCode='followup.udsinformantdemo3.inHispOx', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inHispOx',
   required='No', proporder='7', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other (specify)", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inRace', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRace',
+set messageCode='followup.udsinformantdemo3.inRace', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inRace',
   required='No', proporder='8', attributes='', quickHelp='', 
   label="5. What does the co-participant report as his or her race?", context="r",
   list="uds.a1.race", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inRacex', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRacex',
+set messageCode='followup.udsinformantdemo3.inRacex', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inRacex',
   required='No', proporder='9', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other (specify)", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inRaSec', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRaSec',
+set messageCode='followup.udsinformantdemo3.inRaSec', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inRaSec',
   required='No', proporder='10', attributes='', quickHelp='', 
   label="6. What additional race does co-participant report?", context="r",
   list="uds.a1.raceNone", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inRaSecx', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRaSecx',
+set messageCode='followup.udsinformantdemo3.inRaSecx', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inRaSecx',
   required='No', proporder='11', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other (specify)", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inRaTer', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRaTer',
+set messageCode='followup.udsinformantdemo3.inRaTer', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inRaTer',
   required='No', proporder='12', attributes='', quickHelp='', 
   label="7. What additional race, beyond those reported in Questions 5 and 6, does the co-participant report?", context="r",
   list="uds.a1.raceNone", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inRaTerx', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRaTerx',
+set messageCode='followup.udsinformantdemo3.inRaTerx', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inRaTerx',
   required='No', proporder='13', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other (specify)", context="i", maxLength="60", size="60", style="string";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inEduc', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inEduc',
+set messageCode='followup.udsinformantdemo3.inEduc', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inEduc',
   required='No', proporder='14', attributes='', quickHelp='', 
   label="8. Co-participant's years of education", context="r",
   list="uds.range0_30", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inRelTo', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRelTo',
+set messageCode='followup.udsinformantdemo3.inRelTo', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inRelTo',
   required='No', proporder='15', attributes='', quickHelp='', 
   label="9. What is co-participant's relationship to subject?", context="r",
   list="uds.a2.relation3", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inKnown', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inKnown',
+set messageCode='followup.udsinformantdemo3.inKnown', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inKnown',
   required='No', proporder='16', attributes='', quickHelp='', 
   label="9a. How long has the co-participant known the subject?", context="r",
   list="uds.a2.inKnown", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inLivWth', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inLivWth',
+set messageCode='followup.udsinformantdemo3.inLivWth', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inLivWth',
   required='No', proporder='17', attributes='', quickHelp='', 
   label="10. Does the co-participant live with the subject?", context="r",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inVisits', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inVisits',
+set messageCode='followup.udsinformantdemo3.inVisits', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inVisits',
   required='No', proporder='18', attributes='', quickHelp='', 
   label="10a. If no, approximate frequency of in-person visits?", context="r",
   list="uds.a2.freq", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inCalls', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inCalls',
+set messageCode='followup.udsinformantdemo3.inCalls', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inCalls',
   required='No', proporder='19', attributes='', quickHelp='', 
   label="10b. If no, approximate frequency of telephone contact?", context="r",
   list="uds.a2.freq", style="scale";
 
 insert into viewproperty 
-set messageCode='followup.udscoparticipantdemo3.inRely', locale='en', instance='lava', 
-  scope='crms-nacc', prefix='followup', entity='udscoparticipantdemo3', property='inRely',
+set messageCode='followup.udsinformantdemo3.inRely', locale='en', instance='lava', 
+  scope='crms-nacc', prefix='followup', entity='udsinformantdemo3', property='inRely',
   required='No', proporder='20', attributes='', quickHelp='', 
   label="11. Is there a question about the co-participant's reliability?", context="r",
   list="uds.noYes01", style="scale";
@@ -3501,310 +3496,305 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 
 
 -- B8
--- changing the LAVA instrument name to more accurately reflect form B8
-DELETE FROM instrument where InstrName='UDS Appraisal';
-DELETE FROM instrument where InstrName='UDS Neuro Exam';
-INSERT INTO instrument (InstrName, TableName, FormName, HasVersion) VALUES ('UDS Neuro Exam', 'udsneuroexam', 'LavaWebOnly', 0);
-
-DELETE FROM viewproperty WHERE entity="udsneuroexam3";
+DELETE FROM viewproperty WHERE entity= 'udsappraisal3';
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.normexam', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='normexam',
+set messageCode='*.udsappraisal3.normexam', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='normexam',
   required='No', proporder='1', attributes='', quickHelp='', 
   label="1. Were there abnormal neurological exam findings?", context="r",
   list="uds.b8.normExam", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.parksign', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='parksign',
+set messageCode='*.udsappraisal3.parksign', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='parksign',
   required='No', proporder='2', attributes='', quickHelp='', 
   label="2. Parkinsonian signs", context="r",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.resttrl', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='resttrl',
+set messageCode='*.udsappraisal3.resttrl', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='resttrl',
   required='No', proporder='3', attributes='', quickHelp='', 
   label="2a. Resting tremor - left arm", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.resttrr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='resttrr',
+set messageCode='*.udsappraisal3.resttrr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='resttrr',
   required='No', proporder='4', attributes='', quickHelp='', 
   label="2a. Resting tremor - right arm", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.slowingl', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='slowingl',
+set messageCode='*.udsappraisal3.slowingl', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='slowingl',
   required='No', proporder='5', attributes='', quickHelp='', 
   label="2b. Slowing of fine motor movements - left side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.slowingr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='slowingr',
+set messageCode='*.udsappraisal3.slowingr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='slowingr',
   required='No', proporder='6', attributes='', quickHelp='', 
   label="2b. Slowing of fine motor movements - right side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.rigidl', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='rigidl',
+set messageCode='*.udsappraisal3.rigidl', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='rigidl',
   required='No', proporder='7', attributes='', quickHelp='', 
   label="2c. Rigidity - left arm", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.rigidr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='rigidr',
+set messageCode='*.udsappraisal3.rigidr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='rigidr',
   required='No', proporder='8', attributes='', quickHelp='', 
   label="2c. Rigidity - right arm", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.brady', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='brady',
+set messageCode='*.udsappraisal3.brady', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='brady',
   required='No', proporder='9', attributes='', quickHelp='', 
   label="2d. Bradykinesia", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.parkgait', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='parkgait',
+set messageCode='*.udsappraisal3.parkgait', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='parkgait',
   required='No', proporder='10', attributes='', quickHelp='', 
   label="2e. Parkinsonian gait disorder", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.postinst', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='postinst',
+set messageCode='*.udsappraisal3.postinst', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='postinst',
   required='No', proporder='11', attributes='', quickHelp='', 
   label="2f. Postural instability", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.cvdsigns', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='cvdsigns',
+set messageCode='*.udsappraisal3.cvdsigns', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='cvdsigns',
   required='No', proporder='12', attributes='', quickHelp='', 
   label="3. Neurological sign considered by examiner to be most likely consistent with cerebrovascular disease", context="r",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.cortdef', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='cortdef',
+set messageCode='*.udsappraisal3.cortdef', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='cortdef',
   required='No', proporder='13', attributes='', quickHelp='', 
   label="3a. Cortical cognitive deficit (e.g., aphasia, apraxia, neglect)", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.sivdfind', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='sivdfind',
+set messageCode='*.udsappraisal3.sivdfind', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='sivdfind',
   required='No', proporder='14', attributes='', quickHelp='', 
   label="3b. Focal or other neurological findings consistend with SIVD", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.cvdmotl', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='cvdmotl',
+set messageCode='*.udsappraisal3.cvdmotl', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='cvdmotl',
   required='No', proporder='15', attributes='', quickHelp='', 
   label="3c. Motor (may include weakness of combination of face, arm, and leg; reflex changes, etc.) - left side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.cvdmotr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='cvdmotr',
+set messageCode='*.udsappraisal3.cvdmotr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='cvdmotr',
   required='No', proporder='16', attributes='', quickHelp='', 
   label="3c. Motor (may include weakness of combination of face, arm, and leg; reflex changes, etc.) - right side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.cortvisl', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='cortvisl',
+set messageCode='*.udsappraisal3.cortvisl', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='cortvisl',
   required='No', proporder='17', attributes='', quickHelp='', 
   label="3d. Cortical visual field loss - left side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.cortvisr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='cortvisr',
+set messageCode='*.udsappraisal3.cortvisr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='cortvisr',
   required='No', proporder='18', attributes='', quickHelp='', 
   label="3d. Cortical visual field loss - right side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.somatl', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='somatl',
+set messageCode='*.udsappraisal3.somatl', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='somatl',
   required='No', proporder='19', attributes='', quickHelp='', 
   label="3e. Somatosensory loss - left side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.somatr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='somatr',
+set messageCode='*.udsappraisal3.somatr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='somatr',
   required='No', proporder='20', attributes='', quickHelp='', 
   label="3e. Somatosensory loss - right side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.postcort', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='postcort',
+set messageCode='*.udsappraisal3.postcort', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='postcort',
   required='No', proporder='21', attributes='', quickHelp='', 
   label="4. Higher cortical visual problem suggesting posterior cortical atrophy (e.g., prosopagnosia, simultagnosia, Balint’s syndrome) or apraxia of gaze", context="r",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.pspcbs', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='pspcbs',
+set messageCode='*.udsappraisal3.pspcbs', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='pspcbs',
   required='No', proporder='22', attributes='', quickHelp='', 
   label="5. Findings suggestive of progressive supranuclear palsy (PSP), corticobasal syndrome, or other related disorders", context="r",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.eyepsp', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='eyepsp',
+set messageCode='*.udsappraisal3.eyepsp', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='eyepsp',
   required='No', proporder='23', attributes='', quickHelp='', 
   label="5a. Eye movement changes consistent with PSP", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.dyspsp', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='dyspsp',
+set messageCode='*.udsappraisal3.dyspsp', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='dyspsp',
   required='No', proporder='24', attributes='', quickHelp='', 
   label="5b. Dysarthria consistent with PSP", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.axialpsp', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='axialpsp',
+set messageCode='*.udsappraisal3.axialpsp', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='axialpsp',
   required='No', proporder='25', attributes='', quickHelp='', 
   label="5c. Axial rigidity consistent with PSP", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.gaitpsp', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='gaitpsp',
+set messageCode='*.udsappraisal3.gaitpsp', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='gaitpsp',
   required='No', proporder='26', attributes='', quickHelp='', 
   label="5d. Gait disorder consistent with PSP", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.apraxsp', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='apraxsp',
+set messageCode='*.udsappraisal3.apraxsp', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='apraxsp',
   required='No', proporder='27', attributes='', quickHelp='', 
   label="5e. Apraxia of speech", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.apraxl', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='apraxl',
+set messageCode='*.udsappraisal3.apraxl', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='apraxl',
   required='No', proporder='28', attributes='', quickHelp='', 
   label="5f. Apraxia - left side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.apraxr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='apraxr',
+set messageCode='*.udsappraisal3.apraxr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='apraxr',
   required='No', proporder='29', attributes='', quickHelp='', 
   label="5f. Apraxia - right side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.cortsenl', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='cortsenl',
+set messageCode='*.udsappraisal3.cortsenl', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='cortsenl',
   required='No', proporder='30', attributes='', quickHelp='', 
   label="5g. Cortical sensory deficits - left side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.cortsenr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='cortsenr',
+set messageCode='*.udsappraisal3.cortsenr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='cortsenr',
   required='No', proporder='31', attributes='', quickHelp='', 
   label="5g. Cortical sensory deficits - right side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.ataxl', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='ataxl',
+set messageCode='*.udsappraisal3.ataxl', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='ataxl',
   required='No', proporder='32', attributes='', quickHelp='', 
   label="5h. Ataxia - left side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.ataxr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='ataxr',
+set messageCode='*.udsappraisal3.ataxr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='ataxr',
   required='No', proporder='33', attributes='', quickHelp='', 
   label="5h. Ataxia - right side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.alienlml', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='alienlml',
+set messageCode='*.udsappraisal3.alienlml', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='alienlml',
   required='No', proporder='34', attributes='', quickHelp='', 
   label="5i. Alien limb - left side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.alienlmr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='alienlmr',
+set messageCode='*.udsappraisal3.alienlmr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='alienlmr',
   required='No', proporder='35', attributes='', quickHelp='', 
   label="5i. Alien limb - right side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.dystonl', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='dystonl',
+set messageCode='*.udsappraisal3.dystonl', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='dystonl',
   required='No', proporder='36', attributes='', quickHelp='', 
   label="5j. Dystonia - left side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.dystonr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='dystonr',
+set messageCode='*.udsappraisal3.dystonr', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='dystonr',
   required='No', proporder='37', attributes='', quickHelp='', 
   label="5j. Dystonia - right side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.myocllt', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='myocllt',
+set messageCode='*.udsappraisal3.myocllt', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='myocllt',
   required='No', proporder='38', attributes='', quickHelp='', 
   label="5k. Myoclonus - left side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.myoclrt', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='myoclrt',
+set messageCode='*.udsappraisal3.myoclrt', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='myoclrt',
   required='No', proporder='39', attributes='', quickHelp='', 
   label="5k. Myoclonus - right side", context="r",
   list="uds.b8.signs", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.alsfind', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='alsfind',
+set messageCode='*.udsappraisal3.alsfind', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='alsfind',
   required='No', proporder='40', attributes='', quickHelp='', 
   label="6. Findings suggesting ALS", context="r",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.gaitnph', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='gaitnph',
+set messageCode='*.udsappraisal3.gaitnph', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='gaitnph',
   required='No', proporder='41', attributes='', quickHelp='', 
   label="7. Normal pressure hydrocephalus: Gait apraxia", context="r",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.othneur', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='othneur',
+set messageCode='*.udsappraisal3.othneur', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='othneur',
   required='No', proporder='42', attributes='', quickHelp='', 
   label="8. Other findings (e.g., cerebella ataxia, chorea, myoclonus) (NOTE: For this question, do not specify symptoms that have already been checked above.)", context="r",
   list="uds.noYes01", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udsneuroexam3.othneurx', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udsneuroexam3', property='othneurx', indentLevel=1,
+set messageCode='*.udsappraisal3.othneurx', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udsappraisal3', property='othneurx', indentLevel=1,
   required='No', proporder='43', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other findings (specify)", context="i", maxLength="60", size="60", style="string";
 
@@ -3899,8 +3889,8 @@ set messageCode='followup.udssymptomsonset3.cogFlAgO', locale='en', instance='la
   list="uds.b9.ageOfOnsetF", style="scale";
 
 insert into viewproperty 
-set messageCode='*.udssymptomsonset3.cogOthr', locale='en', instance='lava', 
-  scope='crms-nacc', entity='udssymptomsonset3', property='cogOthr',
+set messageCode='*.udssymptomsonset3.cogOther', locale='en', instance='lava', 
+  scope='crms-nacc', entity='udssymptomsonset3', property='cogOther',
   required='No', proporder='12', attributes='', quickHelp='', 
   label="4h. Other", context="r",
   list="uds.noYes01", style="scale";
@@ -6336,10 +6326,10 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdsemmt','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdsemmt',NULL,'r','scale','Yes','2a. Total correct word-picture matches (0-20)',NULL,0,NULL,0,NULL,'uds.c1f.range0_20',NULL,20,'2a. Total correct word-picture matches (0-20)','2012-09-28 17:24:21');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdsemaa','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdsemaa',NULL,'r','scale','Yes','3a. Total correct animal associations (0-8)',NULL,0,NULL,0,NULL,'uds.c1f.range0_8',NULL,21,'3a. Total correct animal associations (0-8)','2012-09-28 17:24:21');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdsemta','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdsemta',NULL,'r','scale','Yes','3b. Total correct tool associations (0-8)',NULL,0,NULL,0,NULL,'uds.c1f.onlyRange0_8',NULL,22,'3b. Total correct tool associations (0-8)','2012-09-28 17:24:21');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdsemsu','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdsemsu',NULL,'r','scale','Yes','3c. Sum of all correct associations (Semantic Associates Test total score) (0-16)',NULL,0,NULL,0,NULL,'uds.c1f.onlyRange0_16',NULL,23,'3c. Sum of all correct associations (Semantic Associates Test total score) (0-16)','2012-09-28 17:24:21');
+INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdsemsu','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdsemsu',NULL,'r','scale','Yes','3c. Sum of all correct associations (Semantic Associates Test total score) (0-16)',NULL,0,NULL,0,'disabled','uds.c1f.onlyRange0_16Total',NULL,23,'3c. Sum of all correct associations (Semantic Associates Test total score) (0-16)','2012-09-28 17:24:21');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdanasw','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdanasw',NULL,'r','scale','Yes','4a. Correct subject who-questions (0-5)',NULL,0,NULL,0,NULL,'uds.c1f.range0_5',NULL,24,'4a. Correct subject who-questions (0-5)','2012-09-28 17:24:21');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdanaow','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdanaow',NULL,'r','scale','Yes','4b. Correct object who-questions (0-5)',NULL,0,NULL,0,NULL,'uds.c1f.onlyRange0_5',NULL,25,'4b. Correct object who-questions (0-5)','2012-09-28 17:24:21');
-INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdanats','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdanats',NULL,'r','scale','Yes','4c. Total score: sum of all correct questions (0-10)',NULL,0,NULL,0,NULL,'uds.c1f.onlyRange0_10',NULL,26,'4c. Total score: sum of all correct questions (0-10)','2012-09-28 17:24:21');
+INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdanats','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdanats',NULL,'r','scale','Yes','4c. Total score: sum of all correct questions (0-10)',NULL,0,NULL,0,'disabled','uds.c1f.onlyRange0_10Total',NULL,26,'4c. Total score: sum of all correct questions (0-10)','2012-09-28 17:24:21');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdsenas','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdsenas',NULL,'r','scale','Yes','5a. Number of completely accurate sentences (0-5)',NULL,0,NULL,0,NULL,'uds.c1f.range0_5',NULL,27,'5a. Number of completely accurate sentences (0-5)','2012-09-28 17:24:21');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdsenos','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdsenos',NULL,'r','scale','Yes','5b. Total number of words omitted from sentences (0-37)',NULL,0,NULL,0,NULL,'uds.c1f.onlyRange0_37',NULL,28,'5b. Total number of words omitted from sentences (0-37)','2012-09-28 17:24:21');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdsensr','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdsensr',NULL,'r','scale','Yes','5c. Total number of semantically related or unrelated incorrect real words (0-20)',NULL,0,NULL,0,NULL,'uds.c1f.onlyRange0_20',NULL,29,'5c. Total number of semantically related or unrelated incorrect real words (0-20)','2012-09-28 17:24:21');
