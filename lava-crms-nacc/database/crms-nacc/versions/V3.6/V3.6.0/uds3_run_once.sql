@@ -1,10 +1,47 @@
-
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udssubjectdemo','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsinformantdemo','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsfamilyhistory','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsmedications','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udshealthhistory','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsphysical','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udscdr','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsnpi','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsgds','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsfaq','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsappraisal','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udssymptomsonset','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
 INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsdiagnosis','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
 INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsformchecklist','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
 INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsmedicalconditions','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
 INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsmilestone','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
 INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsneuropsychmoca','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
 INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsphoneinclusion','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldspecimenconsent','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldspecimenconsent','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldupdrs','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldupdrs','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldclinfeatures','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldclinfeatures','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldneuropsych','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldneuropsych','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldsnq','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldsnq','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldsboc','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldsboc','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldbis','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldbis','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldiri','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldiri','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldrsms','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldrsms','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldimagingavail','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldimagingavail','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldimagingdiag','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldimagingdiag','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldformchecklist','2',2,NOW() FROM `list` where `ListName`='InstrumentVersions';
+INSERT INTO `listvalues` (`ListID`,`instance`,`scope`,`ValueKey`,`ValueDesc`,`OrderID`,`modified`) SELECT `ListID`,'lava','crms-nacc','udsftldformchecklist','3',3,NOW() FROM `list` where `ListName`='InstrumentVersions';
+
+
 
 ALTER TABLE udssubjectdemo
    ADD REFERSC SMALLINT AFTER REFER,
