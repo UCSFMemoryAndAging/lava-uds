@@ -82,7 +82,10 @@ public class UdsVisit extends Visit {
 			LavaDaoFilter filter = newFilterInstance();
 			filter.setAlias("visit","visit");
 			filter.addDaoParam(filter.daoEqualityParam("visit.id", this.getId()));
-			filter.addDaoParam(filter.daoNot(filter.daoEqualityParam("formId", this.getVisitType().equals("FTLD Assessment") ? UdsFtldFormChecklist.UDS_FTLD_FORMCHECKLIST_FORMID : UdsFormChecklist.UDS_FORMCHECKLIST_FORMID)));
+			filter.addDaoParam(filter.daoNot(
+					filter.daoOr(
+							filter.daoEqualityParam("formId", UdsFtldFormChecklist.UDS_FTLD_FORMCHECKLIST_FORMID),
+							filter.daoEqualityParam("formId", UdsFormChecklist.UDS_FORMCHECKLIST_FORMID))));
 			List<UdsInstrumentTracking> udsInstrs = UdsInstrumentTracking.MANAGER.get(filter);
 			for (UdsInstrumentTracking udsInstr : udsInstrs) {
 				// at this point the Patient property of udsInstr is a hibernateProxy so materialize the Patient 
