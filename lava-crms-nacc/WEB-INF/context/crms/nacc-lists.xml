@@ -272,7 +272,7 @@
 		</list></property> 
  	</bean>
 
-	<bean id="list.uds.v3.m1.dropreas" parent="list.dataOnlyUds">
+	<bean id="list.uds.m1.dropreas" parent="list.dataOnlyUds">
 		<property name="data"><list> 
 			<bean parent="list.data"><constructor-arg value="1 - ADC decision or protocol"/><constructor-arg value="1"/></bean>		
 			<bean parent="list.data"><constructor-arg value="2 - Subject or co-participant asked to be dropped"/><constructor-arg value="2"/></bean>  
