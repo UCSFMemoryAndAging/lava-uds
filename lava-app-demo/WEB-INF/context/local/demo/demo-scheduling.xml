@@ -64,7 +64,7 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsDiagnosis" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Diagnosis"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory2" parent="initialUDSInstrumentPrototype">
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory3" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Family History"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFaq" parent="initialUDSInstrumentPrototype">
@@ -73,23 +73,17 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsGds" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS GDS"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsHachinski" parent="initialUDSInstrumentPrototype">
-					<property name="instrType" value="UDS Hachinski"/>
-				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsHealthHistory" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Health History"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Informant Demo"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsLabsImaging" parent="initialUDSInstrumentPrototype">
-					<property name="instrType" value="UDS Labs Imaging"/>
-				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedications2" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Medications"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNeuroPsych" parent="initialUDSInstrumentPrototype">
-					<property name="instrType" value="UDS NeuroPsych"/>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNeuroPsychMoca" parent="initialUDSInstrumentPrototype">
+					<property name="instrType" value="UDS NeuroPsych Moca"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNpi" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS NPI"/>
@@ -102,9 +96,6 @@
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsSymptomsOnset" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Symptoms Onset"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsUpdrs" parent="initialUDSInstrumentPrototype">
-					<property name="instrType" value="UDS UPDRS"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFormChecklist" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Form Checklist"/>
@@ -123,7 +114,7 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsDiagnosis" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Diagnosis"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory2" parent="followUpUDSInstrumentPrototype">
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory3" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Family History"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFaq" parent="followUpUDSInstrumentPrototype">
@@ -132,23 +123,14 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsGds" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS GDS"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsHachinski" parent="followUpUDSInstrumentPrototype">
-					<property name="instrType" value="UDS Hachinski"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsHealthHistory" parent="followUpUDSInstrumentPrototype">
-					<property name="instrType" value="UDS Health History"/>
-				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Informant Demo"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsLabsImaging" parent="followUpUDSInstrumentPrototype">
-					<property name="instrType" value="UDS Labs Imaging"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedications2" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Medications"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNeuroPsych" parent="followUpUDSInstrumentPrototype">
-					<property name="instrType" value="UDS NeuroPsych"/>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNeuroPsychMoca" parent="followUpUDSInstrumentPrototype">
+					<property name="instrType" value="UDS NeuroPsych Moca"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNpi" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS NPI"/>
@@ -162,9 +144,6 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsSymptomsOnset" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Symptoms Onset"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsUpdrs" parent="followUpUDSInstrumentPrototype">
-					<property name="instrType" value="UDS UPDRS"/>
-				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFormChecklist" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Form Checklist"/>
 				</bean>
@@ -177,20 +156,14 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsDiagnosis" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Diagnosis"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory2" parent="telephoneUDSInstrumentPrototype">
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFamilyHistory3" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Family History"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFaq" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS FAQ"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsHealthHistory" parent="telephoneUDSInstrumentPrototype">
-					<property name="instrType" value="UDS Health History"/>
-				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Informant Demo"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsLabsImaging" parent="telephoneUDSInstrumentPrototype">
-					<property name="instrType" value="UDS Labs Imaging"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedications2" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Medications"/>
@@ -216,9 +189,6 @@
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldClinFeatures" parent="ftldUDSInstrumentPrototype">
 					<property name="instrType" value="UDS FTLD Clin Features"/>
-				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldFamilyHistory" parent="ftldUDSInstrumentPrototype">
-					<property name="instrType" value="UDS FTLD Family History"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsFtldFormChecklist" parent="ftldUDSInstrumentPrototype">
 					<property name="instrType" value="UDS FTLD Form Checklist"/>

@@ -35,24 +35,21 @@
    					<value>UDS Medications</value>
    					<value>UDS Health History</value>
    					<value>UDS Physical</value>
-   					<value>UDS Hachinski</value>
-   					<value>UDS UPDRS</value>
    					<value>UDS CDR</value>
    					<value>UDS NPI</value>
    					<value>UDS GDS</value>
    					<value>UDS FAQ</value>
 					<value>UDS Appraisal</value>
    					<value>UDS Symptoms Onset</value>
-					<value>UDS NeuroPsych</value>
+					<value>UDS NeuroPsych Moca</value>
 					<value>UDS Diagnosis</value>
-   					<value>UDS Labs Imaging</value>
+					<value>UDS Medical Conditions</value>
 					<value>UDS Form Checklist</value>
 		     	 </list>
 			</entry>
 		 	<entry key="UDS~FTLD Assessment">
 				<list>
    					<value>UDS FTLD Specimen Consent</value>
-   					<value>UDS FTLD Family History</value>
    					<value>UDS FTLD UPDRS</value>
    					<value>UDS FTLD Clin Features</value>
    					<value>UDS FTLD Neuropsych</value>
