@@ -79,6 +79,9 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Informant Demo"/>
 				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedicalConditions" parent="initialUDSInstrumentPrototype">
+					<property name="instrType" value="UDS Medical Conditions"/>
+				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedications2" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Medications"/>
 				</bean>
@@ -125,6 +128,9 @@
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Informant Demo"/>
+				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedicalConditions" parent="initialUDSInstrumentPrototype">
+					<property name="instrType" value="UDS Medical Conditions"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedications2" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Medications"/>
