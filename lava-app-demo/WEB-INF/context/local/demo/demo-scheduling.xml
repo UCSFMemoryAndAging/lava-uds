@@ -82,8 +82,8 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedications2" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Medications"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNeuroPsychMoca" parent="initialUDSInstrumentPrototype">
-					<property name="instrType" value="UDS NeuroPsych Moca"/>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNeuropsychMoca" parent="initialUDSInstrumentPrototype">
+					<property name="instrType" value="UDS Neuropsych Moca"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNpi" parent="initialUDSInstrumentPrototype">
 					<property name="instrType" value="UDS NPI"/>
@@ -129,8 +129,8 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedications2" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Medications"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNeuroPsychMoca" parent="followUpUDSInstrumentPrototype">
-					<property name="instrType" value="UDS NeuroPsych Moca"/>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNeuropsychMoca" parent="followUpUDSInstrumentPrototype">
+					<property name="instrType" value="UDS Neuropsych Moca"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNpi" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS NPI"/>
