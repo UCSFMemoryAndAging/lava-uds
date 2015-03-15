@@ -16,7 +16,7 @@
   <page:param name="component">${instrTypeEncoded}</page:param> 
   <page:param name="focusField">${focusField}</page:param>
   <page:param name="pageHeadingArgs">UDS Neuropsych Moca</page:param>
-  <page:param name="quicklinks">moca,remain,craft,bensoncopy,spanfwd,spanbck,catfluency,trails,craftdelayed,bensonrecall,mint,verbfluency,overall</page:param>
+  <page:param name="quicklinks">moca,remain,craft,<br/>,bensoncopy,spanfwd,spanbck,catfluency,trails,<br/>,craftdelayed,bensonrecall,mint,verbfluency,<br/>,overall</page:param>
    
 <page:applyDecorator name="component.instrument.content">
   <page:param name="instrTypeEncoded">${instrTypeEncoded}</page:param>
