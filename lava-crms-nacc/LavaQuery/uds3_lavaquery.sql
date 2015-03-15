@@ -1,6 +1,67 @@
--- A1: UDS Subject Demo
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udssubjectdemo','UDS Subject Demo',1,1,1);
+-- this script contains all of the views and stored procedures for the UDS 3 / FTLD 3 instruments. the views and
+-- stored procedures for instruments that were removed in UDS 3 / FTLD 3 still exist but are not in this script.
+-- even instruments that did not have any field changes got a new view because the view now includes the UDS
+-- header fields
 
+DELETE from query_objects where instance='lava' and scope in ('crms','crms-nacc') and module='query' and section='nacc';
+
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udssubjectdemo','UDS Subject Demo',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsinformantdemo','UDS Informant Demo',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsfamilyhistory3','UDS Family History(V3)',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsmedications2','UDS Medications 2(UDS V2,V3)',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udshealthhistory','UDS Health History',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsphysical','UDS Physical',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udscdr','UDS CDR',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsnpi','UDS NPI',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsgds','UDS GDS',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsfaq','UDS FAQ',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsappraisal','UDS Appraisal',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udssymptomsonset','UDS Symptoms Onset',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsneuropsychmoca','UDS Neuropsych Moca',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsdiagnosis','UDS Diagnosis',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsmedicalconditions','UDS Medical Conditions',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsmilestone','UDS Milestone',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsphoneinclusion','UDS Phone Inclusion',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsformchecklist','UDS Form Checklist',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldspecimenconsent','UDS FTLD Specimen Consent',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldupdrs','UDS FTLD UPDRS',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldclinfeatures','UDS FTLD Clin Features',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldneuropsych','UDS FTLD Neuropsych',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldsnq','UDS FTLD SNQ',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldsboc','UDS FTLD SBOC',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldbis','UDS FTLD BIS',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldiri','UDS FTLD IRI',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldrsms','UDS FTLD RSMS',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldimagingavail','UDS FTLD Imaging Avail',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldimagingdiag','UDS FTLD Imaging Diag',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldformchecklist','UDS FTLD Form Checklist',1,1,1);
+
+-- the following are query objects for instruments that were discontinued in UDS 3 / FTLD 3 but are still supported so
+-- users can query UDS 1 and 2 data. the views and stored procedures for these are not defined in this script.
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) 
+  VALUES('lava','crms-nacc','query','nacc','udsfamilyhistory1','UDS Family History(V1)',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) 
+  VALUES('lava','crms-nacc','query','nacc','udsfamilyhistory2','UDS Family History(V2)',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) 
+  VALUES('lava','crms-nacc','query','nacc','udsfamilyhistory2Extended','UDS Family History(V2-Extended)',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) 
+  VALUES('lava','crms','query','nacc','udshachinski','UDS Hachinski',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) 
+  VALUES('lava','crms-nacc','query','nacc','udsupdrs','UDS UPDRS',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) 
+  VALUES('lava','crms','query','nacc','udsneuropsych','UDS Neuropsych',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) 
+  VALUES('lava','crms-nacc','query','nacc','udslabsimaging','UDS Labs Imaging',1,1,1);
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) 
+  values('lava','crms-nacc','query','nacc','udsftldfamilyhistory2','UDS FTLD Family History',1,1,1);
+  
+-- the view and stored procedure for this query object did not change at all so is not in this script
+INSERT INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) 
+  VALUES('lava','crms-nacc','query','nacc','udsmedications2','UDS Medication Details (V2)',1,0,0);
+  
+  
+
+-- A1: UDS Subject Demo
 -- -----------------------------------------------------
 -- view lq_view_udssubjectdemo
 -- -----------------------------------------------------
@@ -190,8 +251,6 @@ DELIMITER ;
   
   
 -- A2 UDS Informant Demo  
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsinformantdemo','UDS Informant Demo',1,1,1);
-  
 -- -----------------------------------------------------
 -- view lq_view_udsinformantdemo
 -- -----------------------------------------------------
@@ -365,8 +424,6 @@ DELIMITER ;
 
 
 -- A3 UDS Family History
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsfamilyhistory3','UDS Family History(V3)',1,1,1);
-  
 -- -----------------------------------------------------
 -- view lq_view_udsfamilyhistory3
 -- -----------------------------------------------------
@@ -799,8 +856,6 @@ DELIMITER ;
   
   
 -- A4 UDS Medications
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsmedications2','UDS Medications 2(UDS V2,V3)',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsmedications2
 -- -----------------------------------------------------
@@ -954,8 +1009,6 @@ DELIMITER ;
 
   
 -- A5 UDS Health History  
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udshealthhistory','UDS Health History',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udshealthhistory
 -- -----------------------------------------------------
@@ -1197,8 +1250,6 @@ DELIMITER ;
 
 
 -- B1 UDS Physical
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsphysical','UDS Physical',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsphysical
 -- -----------------------------------------------------
@@ -1363,8 +1414,6 @@ DELIMITER ;
 
   
 -- B4 UDS CDR
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udscdr','UDS CDR',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udscdr
 -- -----------------------------------------------------
@@ -1530,8 +1579,6 @@ DELIMITER ;
 
 
 -- B5 UDS NPI
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsnpi','UDS NPI',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsnpi
 -- -----------------------------------------------------
@@ -1709,11 +1756,7 @@ DELIMITER ;
 
 
 
-
-
 -- B6 UDS GDS
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsgds','UDS GDS',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsgds
 -- -----------------------------------------------------
@@ -1884,8 +1927,6 @@ DELIMITER ;
 
 
 -- B7 UDS FAQ
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsfaq','UDS FAQ',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsfaq
 -- -----------------------------------------------------
@@ -2050,8 +2091,6 @@ DELIMITER ;
 
 
 -- B8 UDS Appraisal
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsappraisal','UDS Appraisal',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsappraisal
 -- -----------------------------------------------------
@@ -2253,8 +2292,6 @@ DELIMITER ;
 
   
 -- B9 UDS Symptoms Onset
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udssymptomsonset','UDS Symptoms Onset',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udssymptomsonset
 -- -----------------------------------------------------
@@ -2470,8 +2507,6 @@ DELIMITER ;
 
 
 -- C2 UDS Neuropsych Moca
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsneuropsychmoca3','UDS Neuropsych Moca',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsneuropsychmoca
 -- -----------------------------------------------------
@@ -2578,13 +2613,13 @@ WHERE `t1`.`InstrType` = 'UDS Neuropsych Moca';
 
 
 -- -----------------------------------------------------
--- procedure lq_get_nacc_udsneuropsychmoca3
+-- procedure lq_get_nacc_udsneuropsychmoca
 -- -----------------------------------------------------
 
-DROP PROCEDURE IF EXISTS `lq_get_nacc_udsneuropsychmoca3`;
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsneuropsychmoca`;
 DELIMITER $$
 
-CREATE PROCEDURE `lq_get_nacc_udsneuropsychmoca3`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsneuropsychmoca`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
 CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsneuropsychmoca3', query_type);
 
@@ -2694,8 +2729,6 @@ DELIMITER ;
 
 
 -- D1 UDS Diagnosis
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsdiagnosis3','UDS Diagnosis',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsdiagnosis
 -- -----------------------------------------------------
@@ -2889,12 +2922,12 @@ WHERE `t1`.`InstrType` = 'UDS Diagnosis';
 -- procedure lq_get_nacc_udsdiagnosis3
 -- -----------------------------------------------------
 
-DROP PROCEDURE IF EXISTS `lq_get_nacc_udsdiagnosis3`;
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsdiagnosis`;
 DELIMITER $$
 
-CREATE PROCEDURE `lq_get_nacc_udsdiagnosis3`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsdiagnosis`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
-CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsdiagnosis3', query_type);
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsdiagnosis', query_type);
 
 IF query_type = 'Simple' THEN
 	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
@@ -3001,8 +3034,6 @@ DELIMITER ;
 
 
 -- D2 UDS Medical Conditions
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsmedicalconditions3','UDS Medical Conditions',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsmedicalconditions
 -- -----------------------------------------------------
@@ -3075,12 +3106,12 @@ WHERE `t1`.`InstrType` = 'UDS Medical Conditions';
 -- procedure lq_get_nacc_udsmedicalconditions3
 -- -----------------------------------------------------
 
-DROP PROCEDURE IF EXISTS `lq_get_nacc_udsmedicalconditions3`;
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsmedicalconditions`;
 DELIMITER $$
 
-CREATE PROCEDURE `lq_get_nacc_udsmedicalconditions3`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsmedicalconditions`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
-CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsmedicalconditions3', query_type);
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsmedicalconditions', query_type);
 
 IF query_type = 'Simple' THEN
 	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
@@ -3188,8 +3219,6 @@ DELIMITER ;
 
 
 -- Z1 UDS Form Checklist
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsformchecklist','UDS Form Checklist',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsformchecklist
 -- -----------------------------------------------------
@@ -3373,8 +3402,6 @@ DELIMITER ;
 
 
 -- M1 UDS Milestone
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsmilestone3','UDS Milestone',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsmilestone
 -- -----------------------------------------------------
@@ -3457,15 +3484,15 @@ WHERE `t1`.`InstrType` = 'UDS Milestone';
 
 
 -- -----------------------------------------------------
--- procedure lq_get_nacc_udsmilestone3
+-- procedure lq_get_nacc_udsmilestone
 -- -----------------------------------------------------
 
-DROP PROCEDURE IF EXISTS `lq_get_nacc_udsmilestone3`;
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsmilestone`;
 DELIMITER $$
 
-CREATE PROCEDURE `lq_get_nacc_udsmilestone3`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+CREATE PROCEDURE `lq_get_nacc_udsmilestone`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
 BEGIN
-CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsmilestone3', query_type);
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsmilestone', query_type);
 
 IF query_type = 'Simple' THEN
 	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
@@ -3573,8 +3600,6 @@ DELIMITER ;
 
 
 -- T1: UDS Phone Inclusion
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsphoneinclusion','UDS Phone Inclusion',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsphoneinclusion
 -- -----------------------------------------------------
@@ -3735,8 +3760,6 @@ DELIMITER ;
 
 
 -- A3a FTLD Specimen Consent
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldspecimenconsent','UDS FTLD Specimen Consent',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldspecimenconsent
 -- -----------------------------------------------------
@@ -3782,6 +3805,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD Specimen Consent';
 -- procedure lq_get_nacc_udsftldspecimenconsent
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldspecimenconsent2`;  -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldspecimenconsent`;
 DELIMITER $$
 
@@ -3894,8 +3918,6 @@ DELIMITER ;
 
 
 -- B3F FTLD UPDRS
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldupdrs','UDS FTLD UPDRS',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldupdrs
 -- -----------------------------------------------------
@@ -3949,6 +3971,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD UPDRS';
 -- procedure lq_get_nacc_udsftldupdrs
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldupdrs2`; -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldupdrs`;
 DELIMITER $$
 
@@ -4063,8 +4086,6 @@ DELIMITER ;
 
 
 -- B9F FTDL Clin Features
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldclinfeatures','UDS FTLD Clin Features',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldclinfeatures
 -- -----------------------------------------------------
@@ -4130,6 +4151,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD Clin Features';
 -- procedure lq_get_nacc_udsftldclinfeatures
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldclinfeatures2`; -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldclinfeatures`;
 DELIMITER $$
 
@@ -4244,8 +4266,6 @@ DELIMITER ;
 
 
 -- C1F FTLD Neuropsych
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldneuropsych','UDS FTLD Neuropsych',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldneuropsych
 -- -----------------------------------------------------
@@ -4322,6 +4342,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD Neuropsych';
 -- procedure lq_get_nacc_udsftldneuropsych
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldneuropsych2`; -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldneuropsych`;
 DELIMITER $$
 
@@ -4436,8 +4457,6 @@ DELIMITER ;
 
 
 -- C2F FTLD SNQ
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldsnq','UDS FTLD SNQ',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldsnq
 -- -----------------------------------------------------
@@ -4504,6 +4523,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD SNQ';
 -- procedure lq_get_nacc_udsftldsnq
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldsnq2`; -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldsnq`;
 DELIMITER $$
 
@@ -4618,8 +4638,6 @@ DELIMITER ;
 
 
 -- C3F FTLD SBOC
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldsboc','UDS FTLD SBOC',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldsboc
 -- -----------------------------------------------------
@@ -4711,6 +4729,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD SBOC';
 -- procedure lq_get_nacc_udsftldsboc
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldsboc2`; -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldsboc`;
 DELIMITER $$
 
@@ -4827,8 +4846,6 @@ DELIMITER ;
 
 
 -- C4F FTLD BIS
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldbis','UDS FTLD BIS',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldbis
 -- -----------------------------------------------------
@@ -4876,7 +4893,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD BIS';
 -- -----------------------------------------------------
 -- procedure lq_get_nacc_udsftldbis
 -- -----------------------------------------------------
-
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldbis2`; -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldbis`;
 DELIMITER $$
 
@@ -4992,8 +5009,6 @@ DELIMITER ;
 
 
 -- C5F FTLD IRI
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldiri','UDS FTLD IRI',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldiri
 -- -----------------------------------------------------
@@ -5054,6 +5069,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD IRI';
 -- procedure lq_get_nacc_udsftldiri
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldiri2`; -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldiri`;
 DELIMITER $$
 
@@ -5168,8 +5184,6 @@ DELIMITER ;
 
 
 -- C6F FTLD RSMS
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldrsms','UDS FTLD RSMS',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldrsms
 -- -----------------------------------------------------
@@ -5226,6 +5240,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD RSMS';
 -- procedure lq_get_nacc_udsftldrsms
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldrsms2`; -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldrsms`;
 DELIMITER $$
 
@@ -5338,8 +5353,6 @@ DELIMITER ;
 
 
 -- E2F FTLD Imaging Avail
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldimagingavail','UDS FTLD Imaging Avail',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldimagingavail
 -- -----------------------------------------------------
@@ -5425,6 +5438,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD Imaging Avail';
 -- procedure lq_get_nacc_udsftldimagingavail
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldimagingavail2`; -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldimagingavail`;
 DELIMITER $$
 
@@ -5539,8 +5553,6 @@ DELIMITER ;
 
 
 -- E3F FTLD Imaging Diag
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldimagingdiag','UDS FTLD Imaging Diag',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldimagingdiag
 -- -----------------------------------------------------
@@ -5639,6 +5651,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD Imaging Diag';
 -- procedure lq_get_nacc_udsftldimagingdiag
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldimagingdiag2`; -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldimagingdiag`;
 DELIMITER $$
 
@@ -5751,8 +5764,6 @@ DELIMITER ;
 
 
 -- Z1F UDS FTLD Form Checklist
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldformchecklist','UDS FTLD Form Checklist',1,1,1);
-
 -- -----------------------------------------------------
 -- view lq_view_udsftldformchecklist
 -- -----------------------------------------------------
@@ -5807,6 +5818,7 @@ WHERE `t1`.`InstrType` = 'UDS FTLD Form Checklist';
 -- procedure lq_get_nacc_udsftldformchecklist
 -- -----------------------------------------------------
 
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldformchecklist2`;  -- earlier version
 DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldformchecklist`;
 DELIMITER $$
 
@@ -5920,11 +5932,8 @@ DELIMITER ;
 
  
 
-DELETE FROM versionhistory WHERE module='lava-crms-nacc-model' AND version='3.6.0';
+DELETE FROM versionhistory WHERE module='lava-crms-nacc-lavaquery' AND version='3.6.0';
 INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
-VALUES ('lava-crms-nacc-model','3.6.0','2015-03-01',3,6,0,0);
+VALUES ('lava-crms-nacc-lavaquery','3.6.0','2015-03-01',3,6,0,0);
 
-DELETE FROM versionhistory WHERE module='lava-crms-nacc-data' AND version='3.6.0';
-INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
-VALUES ('lava-crms-nacc-data','3.6.0','2015-03-01',3,6,0,0);
 
