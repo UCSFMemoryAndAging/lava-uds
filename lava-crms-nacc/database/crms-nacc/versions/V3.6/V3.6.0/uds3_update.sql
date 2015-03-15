@@ -251,6 +251,195 @@ set messageCode='*.udssubjectdemo3.handed', locale='en', instance='lava',
   list="uds.a1.handed", style="scale";
 
   
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udssubjectdemo','UDS Subject Demo',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udssubjectdemo
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udssubjectdemo`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udssubjectdemo` AS select 
+`t2`.`InstrID`,
+`t2`.`INMDS`,
+`t2`.`REASON`,
+`t2`.`REASONX`,
+`t2`.`REFER`,
+`t2`.`REFERSC`,
+`t2`.`REFERX`,
+`t2`.`LEARNED`,
+`t2`.`PRESTAT`,
+`t2`.`PRESPART`,
+`t2`.`SOURCE`,
+`t2`.`SOURCENW`,
+`t2`.`BIRTHMO`,
+`t2`.`BIRTHYR`,
+`t2`.`SEX`,
+`t2`.`HISPANIC`,
+`t2`.`HISPOR`,
+`t2`.`HISPORX`,
+`t2`.`RACE`,
+`t2`.`RACEX`,
+`t2`.`RACESEC`,
+`t2`.`RACESECX`,
+`t2`.`RACETER`,
+`t2`.`RACETERX`,
+`t2`.`PRIMLANG`,
+`t2`.`PRIMLANX`,
+`t2`.`EDUC`,
+`t2`.`LIVSIT`,
+`t2`.`LIVSITUA`,
+`t2`.`LIVSITX`,
+`t2`.`INDEPEND`,
+`t2`.`RESIDENC`,
+`t2`.`RESIDENX`,
+`t2`.`ZIP`,
+`t2`.`MARISTAT`,
+`t2`.`MARISTAX`,
+`t2`.`HANDED`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udssubjectdemo` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS Subject Demo';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udssubjectdemo
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udssubjectdemo`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udssubjectdemo`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udssubjectdemo', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udssubjectdemo i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS Subject Demo' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udssubjectdemo i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS Subject Demo' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udssubjectdemo d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udssubjectdemo d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udssubjectdemo d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS Subject Demo' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udssubjectdemo d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS Subject Demo' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS Subject Demo';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udssubjectdemo d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
+  
   
 -- A2  
 DELETE FROM viewproperty where entity= 'udsinformantdemo3';
@@ -527,6 +716,179 @@ set messageCode='followup.udsinformantdemo3.inRely', locale='en', instance='lava
   required='No', proporder='20', attributes='', quickHelp='', 
   label="11. Is there a question about the co-participant's reliability?", context="r",
   list="uds.noYes01", style="scale";
+  
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsinformantdemo','UDS Informant Demo',1,1,1);
+  
+-- -----------------------------------------------------
+-- view lq_view_udsinformantdemo
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsinformantdemo`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsinformantdemo` AS select 
+`t2`.`InstrID`,
+`t2`.`INBIRMO`,
+`t2`.`INBIRYR`,
+`t2`.`INSEX`,
+`t2`.`NEWINF`,
+`t2`.`INHISP`,
+`t2`.`INHISPOR`,
+`t2`.`INHISPOX`,
+`t2`.`INRACE`,
+`t2`.`INRACEX`,
+`t2`.`INRASEC`,
+`t2`.`INRASECX`,
+`t2`.`INRATER`,
+`t2`.`INRATERX`,
+`t2`.`INEDUC`,
+`t2`.`INRELTO`,
+`t2`.`INRELTOX`,
+`t2`.`INKNOWN`,
+`t2`.`INLIVWTH`,
+`t2`.`INVISITS`,
+`t2`.`INCALLS`,
+`t2`.`INRELY`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsinformantdemo` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS Informant Demo';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsinformantdemo
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsinformantdemo`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsinformantdemo`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsinformantdemo', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsinformantdemo i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS Informant Demo' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsinformantdemo i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS Informant Demo' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsinformantdemo d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsinformantdemo d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsinformantdemo d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS Informant Demo' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsinformantdemo d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS Informant Demo' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS Informant Demo';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsinformantdemo d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
 
 
 -- A3
@@ -816,7 +1178,6 @@ CREATE TABLE udsfamilyhistory3 (
 PRIMARY KEY (`InstrID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
-
 
 delete from viewproperty where entity="udsfamilyhistory3";
 
@@ -2794,7 +3155,438 @@ set messageCode='*.udsfamilyhistory3.kid15ago', locale='en', instance='lava',
   list="uds.a3.famAgeOfOnset", style="scale";
 
 
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsfamilyhistory3','UDS Family History(V3)',1,1,1);
+  
+-- -----------------------------------------------------
+-- view lq_view_udsfamilyhistory3
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsfamilyhistory3`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsfamilyhistory3` AS select 
+`t2`.`InstrID`,
+`t2`.`AFFFAMM`,
+`t2`.`NWINFMUT`,
+`t2`.`FADMUT`,
+`t2`.`FADMUTX`,
+`t2`.`FADMUSO`,
+`t2`.`FADMUSOX`,
+`t2`.`FFTDMUT`,
+`t2`.`FFTDMUTX`,
+`t2`.`FFTDMUSO`,
+`t2`.`FFTDMUSX`,
+`t2`.`FOTHMUT`,
+`t2`.`FOTHMUTX`,
+`t2`.`FOTHMUSO`,
+`t2`.`FOTHMUSX`,
+`t2`.`NWINFPAR`,
+`t2`.`MOMMOB`,
+`t2`.`MOMYOB`,
+`t2`.`MOMDAGE`,
+`t2`.`MOMNEUR`,
+`t2`.`MOMPRDX`,
+`t2`.`MOMMOE`,
+`t2`.`MOMAGEO`,
+`t2`.`DADMOB`,
+`t2`.`DADYOB`,
+`t2`.`DADDAGE`,
+`t2`.`DADNEUR`,
+`t2`.`DADPRDX`,
+`t2`.`DADMOE`,
+`t2`.`DADAGEO`,
+`t2`.`SIBS`,
+`t2`.`NWINFSIB`,
+`t2`.`SIB1MOB`,
+`t2`.`SIB1YOB`,
+`t2`.`SIB1AGD`,
+`t2`.`SIB1NEU`,
+`t2`.`SIB1PDX`,
+`t2`.`SIB1MOE`,
+`t2`.`SIB1AGO`,
+`t2`.`SIB2MOB`,
+`t2`.`SIB2YOB`,
+`t2`.`SIB2AGD`,
+`t2`.`SIB2NEU`,
+`t2`.`SIB2PDX`,
+`t2`.`SIB2MOE`,
+`t2`.`SIB2AGO`,
+`t2`.`SIB3MOB`,
+`t2`.`SIB3YOB`,
+`t2`.`SIB3AGD`,
+`t2`.`SIB3NEU`,
+`t2`.`SIB3PDX`,
+`t2`.`SIB3MOE`,
+`t2`.`SIB3AGO`,
+`t2`.`SIB4MOB`,
+`t2`.`SIB4YOB`,
+`t2`.`SIB4AGD`,
+`t2`.`SIB4NEU`,
+`t2`.`SIB4PDX`,
+`t2`.`SIB4MOE`,
+`t2`.`SIB4AGO`,
+`t2`.`SIB5MOB`,
+`t2`.`SIB5YOB`,
+`t2`.`SIB5AGD`,
+`t2`.`SIB5NEU`,
+`t2`.`SIB5PDX`,
+`t2`.`SIB5MOE`,
+`t2`.`SIB5AGO`,
+`t2`.`SIB6MOB`,
+`t2`.`SIB6YOB`,
+`t2`.`SIB6AGD`,
+`t2`.`SIB6NEU`,
+`t2`.`SIB6PDX`,
+`t2`.`SIB6MOE`,
+`t2`.`SIB6AGO`,
+`t2`.`SIB7MOB`,
+`t2`.`SIB7YOB`,
+`t2`.`SIB7AGD`,
+`t2`.`SIB7NEU`,
+`t2`.`SIB7PDX`,
+`t2`.`SIB7MOE`,
+`t2`.`SIB7AGO`,
+`t2`.`SIB8MOB`,
+`t2`.`SIB8YOB`,
+`t2`.`SIB8AGD`,
+`t2`.`SIB8NEU`,
+`t2`.`SIB8PDX`,
+`t2`.`SIB8MOE`,
+`t2`.`SIB8AGO`,
+`t2`.`SIB9MOB`,
+`t2`.`SIB9YOB`,
+`t2`.`SIB9AGD`,
+`t2`.`SIB9NEU`,
+`t2`.`SIB9PDX`,
+`t2`.`SIB9MOE`,
+`t2`.`SIB9AGO`,
+`t2`.`SIB10MOB`,
+`t2`.`SIB10YOB`,
+`t2`.`SIB10AGD`,
+`t2`.`SIB10NEU`,
+`t2`.`SIB10PDX`,
+`t2`.`SIB10MOE`,
+`t2`.`SIB10AGO`,
+`t2`.`SIB11MOB`,
+`t2`.`SIB11YOB`,
+`t2`.`SIB11AGD`,
+`t2`.`SIB11NEU`,
+`t2`.`SIB11PDX`,
+`t2`.`SIB11MOE`,
+`t2`.`SIB11AGO`,
+`t2`.`SIB12MOB`,
+`t2`.`SIB12YOB`,
+`t2`.`SIB12AGD`,
+`t2`.`SIB12NEU`,
+`t2`.`SIB12PDX`,
+`t2`.`SIB12MOE`,
+`t2`.`SIB12AGO`,
+`t2`.`SIB13MOB`,
+`t2`.`SIB13YOB`,
+`t2`.`SIB13AGD`,
+`t2`.`SIB13NEU`,
+`t2`.`SIB13PDX`,
+`t2`.`SIB13MOE`,
+`t2`.`SIB13AGO`,
+`t2`.`SIB14MOB`,
+`t2`.`SIB14YOB`,
+`t2`.`SIB14AGD`,
+`t2`.`SIB14NEU`,
+`t2`.`SIB14PDX`,
+`t2`.`SIB14MOE`,
+`t2`.`SIB14AGO`,
+`t2`.`SIB15MOB`,
+`t2`.`SIB15YOB`,
+`t2`.`SIB15AGD`,
+`t2`.`SIB15NEU`,
+`t2`.`SIB15PDX`,
+`t2`.`SIB15MOE`,
+`t2`.`SIB15AGO`,
+`t2`.`SIB16MOB`,
+`t2`.`SIB16YOB`,
+`t2`.`SIB16AGD`,
+`t2`.`SIB16NEU`,
+`t2`.`SIB16PDX`,
+`t2`.`SIB16MOE`,
+`t2`.`SIB16AGO`,
+`t2`.`SIB17MOB`,
+`t2`.`SIB17YOB`,
+`t2`.`SIB17AGD`,
+`t2`.`SIB17NEU`,
+`t2`.`SIB17PDX`,
+`t2`.`SIB17MOE`,
+`t2`.`SIB17AGO`,
+`t2`.`SIB18MOB`,
+`t2`.`SIB18YOB`,
+`t2`.`SIB18AGD`,
+`t2`.`SIB18NEU`,
+`t2`.`SIB18PDX`,
+`t2`.`SIB18MOE`,
+`t2`.`SIB18AGO`,
+`t2`.`SIB19MOB`,
+`t2`.`SIB19YOB`,
+`t2`.`SIB19AGD`,
+`t2`.`SIB19NEU`,
+`t2`.`SIB19PDX`,
+`t2`.`SIB19MOE`,
+`t2`.`SIB19AGO`,
+`t2`.`SIB20MOB`,
+`t2`.`SIB20YOB`,
+`t2`.`SIB20AGD`,
+`t2`.`SIB20NEU`,
+`t2`.`SIB20PDX`,
+`t2`.`SIB20MOE`,
+`t2`.`SIB20AGO`,
+`t2`.`KIDS`,
+`t2`.`NWINFKID`,
+`t2`.`KID1MOB`,
+`t2`.`KID1YOB`,
+`t2`.`KID1AGD`,
+`t2`.`KID1NEU`,
+`t2`.`KID1PDX`,
+`t2`.`KID1MOE`,
+`t2`.`KID1AGO`,
+`t2`.`KID2MOB`,
+`t2`.`KID2YOB`,
+`t2`.`KID2AGD`,
+`t2`.`KID2NEU`,
+`t2`.`KID2PDX`,
+`t2`.`KID2MOE`,
+`t2`.`KID2AGO`,
+`t2`.`KID3MOB`,
+`t2`.`KID3YOB`,
+`t2`.`KID3AGD`,
+`t2`.`KID3NEU`,
+`t2`.`KID3PDX`,
+`t2`.`KID3MOE`,
+`t2`.`KID3AGO`,
+`t2`.`KID4MOB`,
+`t2`.`KID4YOB`,
+`t2`.`KID4AGD`,
+`t2`.`KID4NEU`,
+`t2`.`KID4PDX`,
+`t2`.`KID4MOE`,
+`t2`.`KID4AGO`,
+`t2`.`KID5MOB`,
+`t2`.`KID5YOB`,
+`t2`.`KID5AGD`,
+`t2`.`KID5NEU`,
+`t2`.`KID5PDX`,
+`t2`.`KID5MOE`,
+`t2`.`KID5AGO`,
+`t2`.`KID6MOB`,
+`t2`.`KID6YOB`,
+`t2`.`KID6AGD`,
+`t2`.`KID6NEU`,
+`t2`.`KID6PDX`,
+`t2`.`KID6MOE`,
+`t2`.`KID6AGO`,
+`t2`.`KID7MOB`,
+`t2`.`KID7YOB`,
+`t2`.`KID7AGD`,
+`t2`.`KID7NEU`,
+`t2`.`KID7PDX`,
+`t2`.`KID7MOE`,
+`t2`.`KID7AGO`,
+`t2`.`KID8MOB`,
+`t2`.`KID8YOB`,
+`t2`.`KID8AGD`,
+`t2`.`KID8NEU`,
+`t2`.`KID8PDX`,
+`t2`.`KID8MOE`,
+`t2`.`KID8AGO`,
+`t2`.`KID9MOB`,
+`t2`.`KID9YOB`,
+`t2`.`KID9AGD`,
+`t2`.`KID9NEU`,
+`t2`.`KID9PDX`,
+`t2`.`KID9MOE`,
+`t2`.`KID9AGO`,
+`t2`.`KID10MOB`,
+`t2`.`KID10YOB`,
+`t2`.`KID10AGD`,
+`t2`.`KID10NEU`,
+`t2`.`KID10PDX`,
+`t2`.`KID10MOE`,
+`t2`.`KID10AGO`,
+`t2`.`KID11MOB`,
+`t2`.`KID11YOB`,
+`t2`.`KID11AGD`,
+`t2`.`KID11NEU`,
+`t2`.`KID11PDX`,
+`t2`.`KID11MOE`,
+`t2`.`KID11AGO`,
+`t2`.`KID12MOB`,
+`t2`.`KID12YOB`,
+`t2`.`KID12AGD`,
+`t2`.`KID12NEU`,
+`t2`.`KID12PDX`,
+`t2`.`KID12MOE`,
+`t2`.`KID12AGO`,
+`t2`.`KID13MOB`,
+`t2`.`KID13YOB`,
+`t2`.`KID13AGD`,
+`t2`.`KID13NEU`,
+`t2`.`KID13PDX`,
+`t2`.`KID13MOE`,
+`t2`.`KID13AGO`,
+`t2`.`KID14MOB`,
+`t2`.`KID14YOB`,
+`t2`.`KID14AGD`,
+`t2`.`KID14NEU`,
+`t2`.`KID14PDX`,
+`t2`.`KID14MOE`,
+`t2`.`KID14AGO`,
+`t2`.`KID15MOB`,
+`t2`.`KID15YOB`,
+`t2`.`KID15AGD`,
+`t2`.`KID15NEU`,
+`t2`.`KID15PDX`,
+`t2`.`KID15MOE`,
+`t2`.`KID15AGO`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsfamilyhistory3` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS Family History 3';
 
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsfamilyhistory3
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsfamilyhistory3`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsfamilyhistory3`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsfamilyhistory3', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsfamilyhistory3 i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS Family History 3' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsfamilyhistory3 i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS Family History 3' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsfamilyhistory3 d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsfamilyhistory3 d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsfamilyhistory3 d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS Family History 3' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsfamilyhistory3 d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS Family History 3' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS Family History 3';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsfamilyhistory3 d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
+  
+  
   
 -- A4 Medications
 -- no table changes
@@ -2807,7 +3599,161 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsmedications3.drugLookupClone','en','lava','crms-nacc',NULL,'udsmedications3','drugLookupClone','','r','range','no','Lookup (00000=clear,99999=Not Listed)',NULL,100,NULL,0,'','',NULL,40,'Lookup medication by brand or generic name','2009-01-24 21:28:51');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsmedications3.anyMeds','en','lava','crms-nacc',NULL,'udsmedications3','anyMeds','','r','range','Yes','Any Meds',NULL,NULL,NULL,0,'','uds.noYes01',NULL,56,'Is the subject currently taking any medications?','2009-01-24 21:28:51');
 
-  
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsmedications2','UDS Medications 2(UDS V2,V3)',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsmedications2
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsmedications2`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsmedications2` AS select 
+`t2`.`InstrID`,
+`t2`.`ANYMEDS`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsmedications2` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS Medications 2';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsmedications2
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsmedications2`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsmedications2`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsmedications2', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsmedications2 i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS Medications 2' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsmedications2 i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS Medications 2' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsmedications2 d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsmedications2 d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsmedications2 d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS Medications 2' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsmedications2 d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS Medications 2' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS Medications 2';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsmedications2 d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
+
   
 -- A5  
 DELETE FROM viewproperty WHERE entity="udshealthhistory3";
@@ -3320,8 +4266,248 @@ set messageCode='*.udshealthhistory3.psycDisx', locale='en', instance='lava',
   required='No', proporder='68', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="7h1. If recent/active or remote/ inactive, specify disorder", context="i", maxLength="60", size="60", style="string";
 
-   
+ 
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udshealthhistory','UDS Health History',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udshealthhistory
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udshealthhistory`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udshealthhistory` AS select 
+`t2`.`InstrID`,
+`t2`.`TOBAC30`,
+`t2`.`TOBAC100`,
+`t2`.`SMOKYRS`,
+`t2`.`PACKSPER`,
+`t2`.`QUITSMOK`,
+`t2`.`ALCOCCAS`,
+`t2`.`ALCFREQ`,
+`t2`.`CVHATT`,
+`t2`.`HATTMULT`,
+`t2`.`HATTYEAR`,
+`t2`.`CVAFIB`,
+`t2`.`CVANGIO`,
+`t2`.`CVBYPASS`,
+`t2`.`CVPACE`,
+`t2`.`CVPACDEF`,
+`t2`.`CVCHF`,
+`t2`.`CVANGINA`,
+`t2`.`CVHVALVE`,
+`t2`.`CVOTHR`,
+`t2`.`CVOTHRX`,
+`t2`.`CBSTROKE`,
+`t2`.`STROK1YR`,
+`t2`.`STROK2YR`,
+`t2`.`STROK3YR`,
+`t2`.`STROK4YR`,
+`t2`.`STROK5YR`,
+`t2`.`STROK6YR`,
+`t2`.`STROKMUL`,
+`t2`.`STROKYR`,
+`t2`.`CBTIA`,
+`t2`.`TIA1YR`,
+`t2`.`TIA2YR`,
+`t2`.`TIA3YR`,
+`t2`.`TIA4YR`,
+`t2`.`TIA5YR`,
+`t2`.`TIA6YR`,
+`t2`.`TIAMULT`,
+`t2`.`TIAYEAR`,
+`t2`.`CBOTHR`,
+`t2`.`CBOTHRX`,
+`t2`.`PD`,
+`t2`.`PDYR`,
+`t2`.`PDOTHR`,
+`t2`.`PDOTHRYR`,
+`t2`.`SEIZURES`,
+`t2`.`TRAUMBRF`,
+`t2`.`TRAUMEXT`,
+`t2`.`TRAUMCHR`,
+`t2`.`TBI`,
+`t2`.`TBIBRIEF`,
+`t2`.`TBIEXTEN`,
+`t2`.`TBIWOLOS`,
+`t2`.`TBIYEAR`,
+`t2`.`NCOTHR`,
+`t2`.`NCOTHRX`,
+`t2`.`HYPERTEN`,
+`t2`.`HYPERCHO`,
+`t2`.`DIABETES`,
+`t2`.`DIABTYPE`,
+`t2`.`B12DEF`,
+`t2`.`THYROID`,
+`t2`.`ARTHRIT`,
+`t2`.`ARTHTYPE`,
+`t2`.`ARTHTYPX`,
+`t2`.`ARTHUPEX`,
+`t2`.`ARTHLOEX`,
+`t2`.`ARTHSPIN`,
+`t2`.`ARTHUNK`,
+`t2`.`INCONTU`,
+`t2`.`INCONTF`,
+`t2`.`APNEA`,
+`t2`.`RBD`,
+`t2`.`INSOMN`,
+`t2`.`OTHSLEEP`,
+`t2`.`OTHSLEEX`,
+`t2`.`ALCOHOL`,
+`t2`.`ABUSOTHR`,
+`t2`.`ABUSX`,
+`t2`.`PTSD`,
+`t2`.`BIPOLAR`,
+`t2`.`SCHIZ`,
+`t2`.`DEP2YRS`,
+`t2`.`DEPOTHR`,
+`t2`.`ANXIETY`,
+`t2`.`OCD`,
+`t2`.`NPSYDEV`,
+`t2`.`PSYCDIS`,
+`t2`.`PSYCDISX`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udshealthhistory` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS Health History';
   
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udshealthhistory
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udshealthhistory`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udshealthhistory`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udshealthhistory', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udshealthhistory i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS Health History' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udshealthhistory i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS Health History' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udshealthhistory d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udshealthhistory d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udshealthhistory d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS Health History' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udshealthhistory d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS Health History' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS Health History';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udshealthhistory d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+  
+
 
 -- B1
 DELETE from viewproperty where entity = 'udsphysical3';
@@ -3403,6 +4589,168 @@ set messageCode='*.udsphysical3.hearWAid', locale='en', instance='lava',
   label="8a. If yes, is the subject''s hearing functionally normal with a hearing aid(s)?", context="r",
   list="uds.noYesUnknown019", style="scale";
 
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsphysical','UDS Physical',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsphysical
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsphysical`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsphysical` AS select 
+`t2`.`InstrID`,
+`t2`.`HEIGHT`,
+`t2`.`WEIGHT`,
+`t2`.`BPSYS`,
+`t2`.`BPDIAS`,
+`t2`.`HRATE`,
+`t2`.`VISION`,
+`t2`.`VISCORR`,
+`t2`.`VISWCORR`,
+`t2`.`HEARING`,
+`t2`.`HEARAID`,
+`t2`.`HEARWAID`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsphysical` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS Physical';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsphysical
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsphysical`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsphysical`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsphysical', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsphysical i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS Physical' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsphysical i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS Physical' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsphysical d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsphysical d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsphysical d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS Physical' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsphysical d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS Physical' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS Physical';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsphysical d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
 
 
   
@@ -3418,6 +4766,168 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscdr3.cdrGlob','en','lava','crms-nacc',NULL,'udscdr3','cdrGlob','Clinical Dementia Rating (CDR)','r','range','No','8. Global CDR: Total (-5 = Cannot Total)',NULL,NULL,NULL,0,'disabled','ref.totalErrorCodeDecimal',NULL,11,'','2009-01-24 21:28:51');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscdr3.comport','en','lava','crms-nacc',NULL,'udscdr3','comport','Supplemental CDR','r','scale','No','9. Behavior, Comportment and Personality',NULL,NULL,NULL,0,'','uds.b4.cdrScale',NULL,12,'','2009-01-24 21:28:51');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udscdr3.cdrLang','en','lava','crms-nacc',NULL,'udscdr3','cdrLang','Supplemental CDR','r','scale','No','10. Language',NULL,NULL,NULL,0,'','uds.b4.cdrScale',NULL,13,'','2009-01-24 21:28:51');
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udscdr','UDS CDR',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udscdr
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udscdr`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udscdr` AS select 
+`t2`.`InstrID`,
+`t2`.`MEMORY`,
+`t2`.`ORIENT`,
+`t2`.`JUDGEMENT`,
+`t2`.`COMMUN`,
+`t2`.`HOMEHOBB`,
+`t2`.`PERSCARE`,
+`t2`.`CDRSUM`,
+`t2`.`CDRGLOB`,
+`t2`.`COMPORT`,
+`t2`.`CDRLANG`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udscdr` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS CDR';
+
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udscdr
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udscdr`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udscdr`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udscdr', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udscdr i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS CDR' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udscdr i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS CDR' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udscdr d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udscdr d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udscdr d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS CDR' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udscdr d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS CDR' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS CDR';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udscdr d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
 
 
 
@@ -3452,6 +4962,185 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsnpi3.app','en','lava','crms-nacc',NULL,'udsnpi3','app','Symptoms','r','scale','No','13.a Appetite and Eating: Has the patient lost or gained weight, or had a change in the food he or she likes?',NULL,NULL,NULL,0,'','uds.noYesUnknown019',NULL,28,'','2009-01-24 21:28:51');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsnpi3.appSev','en','lava','crms-nacc',NULL,'udsnpi3','appSev','Symptoms','r','scale','No','13.b Severity',NULL,NULL,NULL,1,'','uds.b5.severity',NULL,29,'','2009-01-24 21:28:51');
 
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsnpi','UDS NPI',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsnpi
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsnpi`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsnpi` AS select 
+`t2`.`InstrID`,
+`t2`.`NPIQINF`,
+`t2`.`NPIQINFX`,
+`t2`.`DEL`,
+`t2`.`DELSEV`,
+`t2`.`HALL`,
+`t2`.`HALLSEV`,
+`t2`.`AGIT`,
+`t2`.`AGITSEV`,
+`t2`.`DEPD`,
+`t2`.`DEPDSEV`,
+`t2`.`ANX`,
+`t2`.`ANXSEV`,
+`t2`.`ELAT`,
+`t2`.`ELATSEV`,
+`t2`.`APA`,
+`t2`.`APASEV`,
+`t2`.`DISN`,
+`t2`.`DISNSEV`,
+`t2`.`IRR`,
+`t2`.`IRRSEV`,
+`t2`.`MOT`,
+`t2`.`MOTSEV`,
+`t2`.`NITE`,
+`t2`.`NITESEV`,
+`t2`.`APP`,
+`t2`.`APPSEV`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsnpi` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS NPI';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsnpi
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsnpi`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsnpi`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsnpi', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsnpi i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS NPI' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsnpi i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS NPI' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsnpi d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsnpi d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsnpi d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS NPI' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsnpi d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS NPI' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS NPI';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsnpi d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
+
 
 
 -- B6
@@ -3474,6 +5163,173 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsgds3.better','en','lava','crms-nacc',NULL,'udsgds3','better','GDS (15 questions)','r','scale','No','15. Do you think that most people are better off than you are?',NULL,NULL,NULL,0,'','uds.b6.yesNoUnkScale_YesCorrect',NULL,19,'','2009-01-24 21:28:51');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsgds3.gds','en','lava','crms-nacc',NULL,'udsgds3','gds','GDS (15 questions)','r','range','No','16. GDS Total (max score=15, did not complete=88)',NULL,NULL,NULL,0,'disabled','uds.b6.total',NULL,20,'','2009-01-24 21:28:51');
 
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsgds','UDS GDS',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsgds
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsgds`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsgds` AS select 
+`t2`.`InstrID`,
+`t2`.`NOGDS`,
+`t2`.`SATIS`,
+`t2`.`DROPACT`,
+`t2`.`EMPTY`,
+`t2`.`BORED`,
+`t2`.`SPIRITS`,
+`t2`.`AFRAID`,
+`t2`.`HAPPY`,
+`t2`.`HELPLESS`,
+`t2`.`STAYHOME`,
+`t2`.`MEMPROB`,
+`t2`.`WONDRFUL`,
+`t2`.`WRTHLESS`,
+`t2`.`ENERGY`,
+`t2`.`HOPELESS`,
+`t2`.`BETTER`,
+`t2`.`GDS`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsgds` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS GDS';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsgds
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsgds`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsgds`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsgds', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsgds i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS GDS' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsgds i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS GDS' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsgds d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsgds d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsgds d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS GDS' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsgds d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS GDS' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS GDS';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsgds d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
 
 
 
@@ -3490,6 +5346,167 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsfaq3.payAttn','en','lava','crms-nacc',NULL,'udsfaq3','payAttn','','r','scale','No','8. Paying attention to, understanding, discussing TV, book, magazine.',NULL,NULL,NULL,0,'','uds.b7.diffUnk',NULL,11,'','2009-01-24 21:28:51');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsfaq3.remDates','en','lava','crms-nacc',NULL,'udsfaq3','remDates','','r','scale','No','9. Remebering appointments, family occasions, holidays, medication.',NULL,NULL,NULL,0,'','uds.b7.diffUnk',NULL,12,'','2009-01-24 21:28:51');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsfaq3.travel','en','lava','crms-nacc',NULL,'udsfaq3','travel','','r','scale','No','10. Traveling out of neighborhood, driving, arranging to take buses.',NULL,NULL,NULL,0,'','uds.b7.diffUnk',NULL,13,'','2009-01-24 21:28:51');
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsfaq','UDS FAQ',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsfaq
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsfaq`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsfaq` AS select 
+`t2`.`InstrID`,
+`t2`.`BILLS`,
+`t2`.`TAXES`,
+`t2`.`SHOPPING`,
+`t2`.`GAMES`,
+`t2`.`STOVE`,
+`t2`.`MEALPREP`,
+`t2`.`EVENTS`,
+`t2`.`PAYATTN`,
+`t2`.`REMDATES`,
+`t2`.`TRAVEL`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsfaq` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FAQ';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsfaq
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsfaq`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsfaq`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsfaq', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsfaq i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FAQ' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsfaq i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FAQ' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsfaq d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsfaq d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsfaq d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FAQ' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsfaq d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FAQ' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FAQ';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsfaq d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
 
 
 
@@ -3797,6 +5814,205 @@ set messageCode='*.udsappraisal3.othneurx', locale='en', instance='lava',
   scope='crms-nacc', entity='udsappraisal3', property='othneurx', indentLevel=1,
   required='No', proporder='43', attributes='onkeypress="UDS_onlyNaccCharactersAllowed(event)"', quickHelp='', 
   label="Other findings (specify)", context="i", maxLength="60", size="60", style="string";
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsappraisal','UDS Appraisal',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsappraisal
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsappraisal`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsappraisal` AS select 
+`t2`.`InstrID`,
+`t2`.`NORMAL`,
+`t2`.`FOCLDEF`,
+`t2`.`GAITDIS`,
+`t2`.`EYEMOVE`,
+`t2`.`NORMEXAM`,
+`t2`.`PARKSIGN`,
+`t2`.`RESTTRL`,
+`t2`.`RESTTRR`,
+`t2`.`SLOWINGL`,
+`t2`.`SLOWINGR`,
+`t2`.`RIGIDL`,
+`t2`.`RIGIDR`,
+`t2`.`BRADY`,
+`t2`.`PARKGAIT`,
+`t2`.`POSTINST`,
+`t2`.`CVDSIGNS`,
+`t2`.`CORTDEF`,
+`t2`.`SIVDFIND`,
+`t2`.`CVDMOTL`,
+`t2`.`CVDMOTR`,
+`t2`.`CORTVISL`,
+`t2`.`CORTVISR`,
+`t2`.`SOMATL`,
+`t2`.`SOMATR`,
+`t2`.`POSTCORT`,
+`t2`.`PSPCBS`,
+`t2`.`EYEPSP`,
+`t2`.`DYSPSP`,
+`t2`.`AXIALPSP`,
+`t2`.`GAITPSP`,
+`t2`.`APRAXSP`,
+`t2`.`APRAXL`,
+`t2`.`APRAXR`,
+`t2`.`CORTSENL`,
+`t2`.`CORTSENR`,
+`t2`.`ATAXL`,
+`t2`.`ATAXR`,
+`t2`.`ALIENLML`,
+`t2`.`ALIENLMR`,
+`t2`.`DYSTONL`,
+`t2`.`DYSTONR`,
+`t2`.`MYOCLLT`,
+`t2`.`MYOCLRT`,
+`t2`.`ALSFIND`,
+`t2`.`GAITNPH`,
+`t2`.`OTHNEUR`,
+`t2`.`OTHNEURX`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsappraisal` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS Appraisal';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsappraisal
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsappraisal`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsappraisal`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsappraisal', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsappraisal i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS Appraisal' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsappraisal i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS Appraisal' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsappraisal d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsappraisal d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsappraisal d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS Appraisal' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsappraisal d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS Appraisal' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS Appraisal';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsappraisal d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
 
 
 
@@ -4273,6 +6489,221 @@ set messageCode='*.udssymptomsonset3.ftldEval', locale='en', instance='lava',
   label="23. Is the subject a potential candidate for further evaluation for frontotemporal lobar degeneration?", context="r",
   list="uds.noYes01", style="scale";
 
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udssymptomsonset','UDS Symptoms Onset',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udssymptomsonset
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udssymptomsonset`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udssymptomsonset` AS select 
+`t2`.`InstrID`,
+`t2`.`B9CHG`,
+`t2`.`DECSUB`,
+`t2`.`DECIN`,
+`t2`.`DECCLIN`,
+`t2`.`DECCLCOG`,
+`t2`.`COGMEM`,
+`t2`.`COGORI`,
+`t2`.`COGJUDG`,
+`t2`.`COGLANG`,
+`t2`.`COGVIS`,
+`t2`.`COGATTN`,
+`t2`.`COGFLUC`,
+`t2`.`COGFLAGO`,
+`t2`.`COGOTHR`,
+`t2`.`COGOTHRX`,
+`t2`.`COGFRST`,
+`t2`.`COGFRSTX`,
+`t2`.`COGFPRED`,
+`t2`.`COGFPREX`,
+`t2`.`COGMODE`,
+`t2`.`COGMODEX`,
+`t2`.`DECAGE`,
+`t2`.`DECCLBE`,
+`t2`.`BEAPATHY`,
+`t2`.`BEDEP`,
+`t2`.`BEVHALL`,
+`t2`.`BEVWELL`,
+`t2`.`BEVHAGO`,
+`t2`.`BEAHALL`,
+`t2`.`BEDEL`,
+`t2`.`BEDISIN`,
+`t2`.`BEIRRIT`,
+`t2`.`BEAGIT`,
+`t2`.`BEPERCH`,
+`t2`.`BEREM`,
+`t2`.`BEREMAGO`,
+`t2`.`BEANX`,
+`t2`.`BEOTHR`,
+`t2`.`BEOTHRX`,
+`t2`.`BEFRST`,
+`t2`.`BEFRSTX`,
+`t2`.`BEFPRED`,
+`t2`.`BEFPREDX`,
+`t2`.`BEMODE`,
+`t2`.`BEMODEX`,
+`t2`.`BEAGE`,
+`t2`.`DECCLMOT`,
+`t2`.`MOGAIT`,
+`t2`.`MOFALLS`,
+`t2`.`MOTREM`,
+`t2`.`MOSLOW`,
+`t2`.`MOFRST`,
+`t2`.`MOMODE`,
+`t2`.`MOMODEX`,
+`t2`.`MOMOPARK`,
+`t2`.`PARKAGE`,
+`t2`.`MOMOALS`,
+`t2`.`ALSAGE`,
+`t2`.`MOAGE`,
+`t2`.`COURSE`,
+`t2`.`FRSTCHG`,
+`t2`.`LBDEVAL`,
+`t2`.`FTLDEVAL`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udssymptomsonset` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS Symptoms Onset';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udssymptomsonset
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udssymptomsonset`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udssymptomsonset`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udssymptomsonset', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udssymptomsonset i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS Symptoms Onset' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udssymptomsonset i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS Symptoms Onset' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udssymptomsonset d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udssymptomsonset d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udssymptomsonset d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS Symptoms Onset' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udssymptomsonset d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS Symptoms Onset' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS Symptoms Onset';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udssymptomsonset d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
 
 
 DELETE from datadictionary where instance='lava' and scope='crms-nacc' and entity='udsdiagnosis3';
@@ -4673,7 +7104,7 @@ INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,
 INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,`dbColumn`,`dbType`,`dbLength`,`dbPrecision`,`dbScale`,`dbOrder`,`hibernateProperty`,`hibernateType`,`hibernateClass`,`hibernateNotNull`,`modified`) VALUES('lava','crms-nacc','udsdiagnosis3','impsubif','udsdiagnosis','IMPSUBIF','smallint',NULL,5,0,155,'impsubif','short',NULL,'No','2015-02-26 20:59:06');
 
 
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms','query','nacc','udsdiagnosis3','UDS Diagnosis',1,1,1);
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsdiagnosis3','UDS Diagnosis',1,1,1);
 
 -- -----------------------------------------------------
 -- view lq_view_udsdiagnosis
@@ -5158,7 +7589,7 @@ INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,
 INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,`dbColumn`,`dbType`,`dbLength`,`dbPrecision`,`dbScale`,`dbOrder`,`hibernateProperty`,`hibernateType`,`hibernateClass`,`hibernateNotNull`,`modified`) VALUES('lava','crms-nacc','udsmedicalconditions3','othcondx','udsmedicalconditions','OTHCONDX','varchar',60,NULL,NULL,34,'othcondx','string',NULL,'No','2015-02-17 12:29:10');
 
 
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms','query','nacc','udsmedicalconditions3','UDS Medical Conditions',1,1,1);
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsmedicalconditions3','UDS Medical Conditions',1,1,1);
 
 -- -----------------------------------------------------
 -- view lq_view_udsmedicalconditions
@@ -5430,7 +7861,7 @@ INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,
 INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,`dbColumn`,`dbType`,`dbLength`,`dbPrecision`,`dbScale`,`dbOrder`,`hibernateProperty`,`hibernateType`,`hibernateClass`,`hibernateNotNull`,`modified`) VALUES('lava','crms-nacc','udsmilestone3','discyr','udsmilestone','DISCYR','smallint',NULL,5,0,26,'discyr','short',NULL,'No','2015-02-27 17:04:11');
 INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,`dbColumn`,`dbType`,`dbLength`,`dbPrecision`,`dbScale`,`dbOrder`,`hibernateProperty`,`hibernateType`,`hibernateClass`,`hibernateNotNull`,`modified`) VALUES('lava','crms-nacc','udsmilestone3','dropreas','udsmilestone','DROPREAS','smallint',NULL,5,0,27,'dropreas','short',NULL,'No','2015-02-27 17:04:11');
 
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms','query','nacc','udsmilestone3','UDS Milestone',1,1,1);
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsmilestone3','UDS Milestone',1,1,1);
 
 -- -----------------------------------------------------
 -- view lq_view_udsmilestone
@@ -5929,7 +8360,7 @@ INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,
 INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,`dbColumn`,`dbType`,`dbLength`,`dbPrecision`,`dbScale`,`dbOrder`,`hibernateProperty`,`hibernateType`,`hibernateClass`,`hibernateNotNull`,`modified`) VALUES('lava','crms-nacc','udsneuropsychmoca3','udsverti','udsneuropsychmoca','UDSVERTI','smallint',NULL,5,0,70,'udsverti','short',NULL,'No','2015-02-17 19:50:26');
 INSERT INTO hibernateproperty (`instance`,`scope`,`entity`,`property`,`dbTable`,`dbColumn`,`dbType`,`dbLength`,`dbPrecision`,`dbScale`,`dbOrder`,`hibernateProperty`,`hibernateType`,`hibernateClass`,`hibernateNotNull`,`modified`) VALUES('lava','crms-nacc','udsneuropsychmoca3','cogstat','udsneuropsychmoca','COGSTAT','smallint',NULL,5,0,71,'cogstat','short',NULL,'No','2015-02-17 19:50:26');
 
-INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms','query','nacc','udsneuropsychmoca3','UDS Neuropsych Moca',1,1,1);
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsneuropsychmoca3','UDS Neuropsych Moca',1,1,1);
 
 -- -----------------------------------------------------
 -- view lq_view_udsneuropsychmoca
@@ -6192,6 +8623,174 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldformchecklist3.ftdc6fr','en','lava','crms-nacc',NULL,'udsftldformchecklist3','ftdc6fr',NULL,'r','scale','Yes','',NULL,0,25,0,NULL,'uds.z1f.reason',NULL,14,'Revised Self-monitoring Scale (Form C6F), Reason not submitted','2012-10-01 13:46:00');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldformchecklist3.ftdc6fc','en','lava','crms-nacc',NULL,'udsftldformchecklist3','ftdc6fc',NULL,'r','string','No','',NULL,60,NULL,0,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,15,'Revised Self-monitoring Scale (Form C6F), Comments','2012-10-01 13:46:00');
   
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldformchecklist','UDS FTLD Form Checklist',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldformchecklist
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldformchecklist`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldformchecklist` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDA3AFS`,
+`t2`.`FTDA3AFR`,
+`t2`.`FTDA3AFC`,
+`t2`.`FTDA3FS`,
+`t2`.`FTDA3FR`,
+`t2`.`FTDA3FC`,
+`t2`.`FTDC4FS`,
+`t2`.`FTDC4FR`,
+`t2`.`FTDC4FC`,
+`t2`.`FTDC5FS`,
+`t2`.`FTDC5FR`,
+`t2`.`FTDC5FC`,
+`t2`.`FTDC6FS`,
+`t2`.`FTDC6FR`,
+`t2`.`FTDC6FC`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldformchecklist` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD Form Checklist';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldformchecklist
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldformchecklist`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldformchecklist`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldformchecklist', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldformchecklist i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD Form Checklist' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldformchecklist i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD Form Checklist' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldformchecklist d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldformchecklist d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldformchecklist d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD Form Checklist' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldformchecklist d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD Form Checklist' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD Form Checklist';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldformchecklist d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
+
   
 -- A3a
 DELETE from datadictionary where entity = 'udsftldspecimenconsent3';
@@ -6208,6 +8807,163 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldspecimenconsent3.ftdstore','en','lava','crms-nacc',NULL,'udsftldspecimenconsent3','ftdstore',NULL,'r','scale','Yes','1a. I permit my sample to be stored and used in future research of neurologic disease at ',NULL,0,NULL,0,NULL,'uds.noYes01',NULL,4,'1a. I permit my sample to be stored and used in future research of neurologic disease at ','2012-10-02 16:11:34');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldspecimenconsent3.ftdslear','en','lava','crms-nacc',NULL,'udsftldspecimenconsent3','ftdslear',NULL,'r','scale','Yes','1b. I permit my sample to be stored and used in future research at (home institution) to learn about, prevent, or treat other health problems.(home institution).',NULL,0,NULL,0,NULL,'uds.noYes01',NULL,5,'1b. I permit my sample to be stored and used in future research at (home institution) to learn about, prevent, or treat other health problems.(home institution).','2012-10-02 16:11:34');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldspecimenconsent3.ftdcomme','en','lava','crms-nacc',NULL,'udsftldspecimenconsent3','ftdcomme',NULL,'r','scale','Yes','1c. There is a small chance that some commercial value may result from my sample at the National Cell Repository for Alzheimer\'s Disease (NCRAD). If that would happen, I would not be offered a share in any profits. I permit (home institution) to give my sample to researchers at other institutions.',NULL,0,NULL,0,NULL,'uds.noYes01',NULL,6,'1c. There is a small chance that some commercial value may result from my sample at the National Cell Repository for Alzheimer\'s Disease (NCRAD). If that would happen, I would not be offered a share in any profits. I permit (home institution) to give my sample to researchers at other institutions.','2012-10-02 16:11:34');
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldspecimenconsent','UDS FTLD Specimen Consent',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldspecimenconsent
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldspecimenconsent`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldspecimenconsent` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDRELCO`,
+`t2`.`FTDSIBBY`,
+`t2`.`FTDCHDBY`,
+`t2`.`FTDSTORE`,
+`t2`.`FTDSLEAR`,
+`t2`.`FTDCOMME`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldspecimenconsent` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD Specimen Consent';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldspecimenconsent
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldspecimenconsent`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldspecimenconsent`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldspecimenconsent', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldspecimenconsent i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD Specimen Consent' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldspecimenconsent i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD Specimen Consent' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldspecimenconsent d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldspecimenconsent d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldspecimenconsent d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD Specimen Consent' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldspecimenconsent d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD Specimen Consent' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD Specimen Consent';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldspecimenconsent d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
 
 
 -- B3F
@@ -6229,6 +8985,173 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldupdrs3.ftdgtyp','en','lava','crms-nacc',NULL,'udsftldupdrs3','ftdgtyp',NULL,'r','scale','Yes','B2. Gait disturbances - type?',NULL,0,NULL,0,NULL,'uds.b3f.sectionbType',NULL,12,'B2. Gait disturbances - type?','2012-10-01 14:27:20');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldupdrs3.ftdgtypg','en','lava','crms-nacc',NULL,'udsftldupdrs3','ftdgtypg',NULL,'r','string','Yes','a. Gait disturbances - type, Other gait disorder not listed above (specify)',NULL,60,NULL,1,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,13,'B2a. Gait disturbances - type, Other gait disorder not listed above (specify)','2012-10-01 14:27:20');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldupdrs3.ftdgtypx','en','lava','crms-nacc',NULL,'udsftldupdrs3','ftdgtypx',NULL,'r','string','Yes','b. Gait disturbances - type, Untestable (specify reason)',NULL,60,NULL,1,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,14,'B2b. Gait disturbances - type, Untestable (specify reason)','2012-10-01 14:27:20');
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldupdrs','UDS FTLD UPDRS',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldupdrs
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldupdrs`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldupdrs` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDLTFAS`,
+`t2`.`FTDLIMB`,
+`t2`.`FTDBULB`,
+`t2`.`FTDEYE`,
+`t2`.`FTDDYST`,
+`t2`.`FTDIDEO`,
+`t2`.`FTDALIEN`,
+`t2`.`FTDMYOCL`,
+`t2`.`FTDCORTS`,
+`t2`.`FTDGSEV`,
+`t2`.`FTDGSEVX`,
+`t2`.`FTDGTYP`,
+`t2`.`FTDGTYPG`,
+`t2`.`FTDGTYPX`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldupdrs` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD UPDRS';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldupdrs
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldupdrs`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldupdrs`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldupdrs', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldupdrs i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD UPDRS' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldupdrs i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD UPDRS' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldupdrs d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldupdrs d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldupdrs d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD UPDRS' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldupdrs d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD UPDRS' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD UPDRS';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldupdrs d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
 
 
 -- B9F
@@ -6287,6 +9210,185 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldclinfeatures3.ftdemgmn','en','lava','crms-nacc',NULL,'udsftldclinfeatures3','ftdemgmn',NULL,'r','scale','Yes','25. If an EMG was performed, did it show evidence of motor neuron disease?',NULL,0,NULL,0,NULL,'uds.noYesUncertain019',NULL,25,'25. If an EMG was performed, did it show evidence of motor neuron disease?','2012-09-27 15:04:47');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldclinfeatures3.ftdpabvf','en','lava','crms-nacc',NULL,'udsftldclinfeatures3','ftdpabvf',NULL,'r','scale','Yes','26. In subjects with a diagnosis of PPA and bvFTD, which diagnosis appeared first?',NULL,0,NULL,0,NULL,'uds.b9f.ftdpabvf',NULL,26,'26. In subjects with a diagnosis of PPA and bvFTD, which diagnosis appeared first?','2012-09-27 15:04:47');
 
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldclinfeatures','UDS FTLD Clin Features',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldclinfeatures
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldclinfeatures`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldclinfeatures` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDPPASL`,
+`t2`.`FTDPPAPO`,
+`t2`.`FTDPPAIW`,
+`t2`.`FTDPPASW`,
+`t2`.`FTDPPAPK`,
+`t2`.`FTDPPAGS`,
+`t2`.`FTDPPAEH`,
+`t2`.`FTDPPACS`,
+`t2`.`FTDPPASS`,
+`t2`.`FTDPPASR`,
+`t2`.`FTDPPASD`,
+`t2`.`FTDCPPA`,
+`t2`.`FTDCPPAS`,
+`t2`.`FTDBVCLN`,
+`t2`.`FTDBVDIS`,
+`t2`.`FTDBVAPA`,
+`t2`.`FTDBVLOS`,
+`t2`.`FTDBVRIT`,
+`t2`.`FTDBVHYP`,
+`t2`.`FTDBVNEU`,
+`t2`.`FTDBVIDL`,
+`t2`.`FTDBVFT`,
+`t2`.`FTDEMGPV`,
+`t2`.`FTDEMGPY`,
+`t2`.`FTDEMGMN`,
+`t2`.`FTDPABVF`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldclinfeatures` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD Clin Features';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldclinfeatures
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldclinfeatures`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldclinfeatures`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldclinfeatures', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldclinfeatures i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD Clin Features' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldclinfeatures i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD Clin Features' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldclinfeatures d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldclinfeatures d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldclinfeatures d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD Clin Features' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldclinfeatures d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD Clin Features' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD Clin Features';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldclinfeatures d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
+
 
 -- C1F
 DELETE from datadictionary where entity = 'udsftldneuropsych3';
@@ -6341,6 +9443,196 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdreaos','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdreaos',NULL,'r','scale','Yes','7b. Total number of words omitted from sentence (0-37)',NULL,0,NULL,0,NULL,'uds.c1f.onlyRange0_37',NULL,35,'7b. Total number of words omitted from sentence (0-37)','2012-09-28 17:24:21');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdreasr','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdreasr',NULL,'r','scale','Yes','7c. Total number of semantically related or unrelated incorrect real words (0-20)',NULL,0,NULL,0,NULL,'uds.c1f.onlyRange0_20',NULL,36,'7c. Total number of semantically related or unrelated incorrect real words (0-20)','2012-09-28 17:24:21');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldneuropsych3.ftdreapr','en','lava','crms-nacc',NULL,'udsftldneuropsych3','ftdreapr',NULL,'r','scale','Yes','7d. Total number of phonologically related words or nonword errors (0-20)',NULL,0,NULL,0,NULL,'uds.c1f.onlyRange0_20',NULL,37,'7d. Total number of phonologically related words or nonword errors (0-20)','2012-09-28 17:24:21');
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldneuropsych','UDS FTLD Neuropsych',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldneuropsych
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldneuropsych`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldneuropsych` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDBENTC`,
+`t2`.`FTDVERFC`,
+`t2`.`FTDVERFN`,
+`t2`.`FTDVERNF`,
+`t2`.`FTDVERLC`,
+`t2`.`FTDVERLR`,
+`t2`.`FTDVERLN`,
+`t2`.`FTDVERTN`,
+`t2`.`FTDVERTE`,
+`t2`.`FTDVERTI`,
+`t2`.`FTDWORRC`,
+`t2`.`FTDWORRS`,
+`t2`.`FTDWORRR`,
+`t2`.`FTDWORIC`,
+`t2`.`FTDWORIS`,
+`t2`.`FTDWORIR`,
+`t2`.`FTDWORIP`,
+`t2`.`FTDBENTD`,
+`t2`.`FTDBENRS`,
+`t2`.`FTDSEMMT`,
+`t2`.`FTDSEMAA`,
+`t2`.`FTDSEMTA`,
+`t2`.`FTDSEMSU`,
+`t2`.`FTDANASW`,
+`t2`.`FTDANAOW`,
+`t2`.`FTDANATS`,
+`t2`.`FTDSENAS`,
+`t2`.`FTDSENOS`,
+`t2`.`FTDSENSR`,
+`t2`.`FTDSENPR`,
+`t2`.`FTDNOUNC`,
+`t2`.`FTDVERBC`,
+`t2`.`FTDRATIO`,
+`t2`.`FTDREAAS`,
+`t2`.`FTDREAOS`,
+`t2`.`FTDREASR`,
+`t2`.`FTDREAPR`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldneuropsych` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD Neuropsych';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldneuropsych
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldneuropsych`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldneuropsych`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldneuropsych', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldneuropsych i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD Neuropsych' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldneuropsych i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD Neuropsych' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldneuropsych d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldneuropsych d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldneuropsych d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD Neuropsych' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldneuropsych d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD Neuropsych' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD Neuropsych';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldneuropsych d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
 
 
 -- C2F
@@ -6400,6 +9692,186 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldsnq3.ftdsntbs','en','lava','crms-nacc',NULL,'udsftldsnq3','ftdsntbs',NULL,'r','scale','No','24. SNQ22 Break Score',NULL,0,NULL,0,'disabled','ref.totalErrorCode',NULL,25,'24. SNQ22 Break Score','2012-10-01 18:41:04');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldsnq3.ftdsntos','en','lava','crms-nacc',NULL,'udsftldsnq3','ftdsntos',NULL,'r','scale','No','25. SNQ22 Overadhere Score',NULL,0,NULL,0,'disabled','ref.totalErrorCode',NULL,26,'25. SNQ22 Overadhere Score','2012-10-01 18:41:04');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldsnq3.ftdsnrat','en','lava','crms-nacc',NULL,'udsftldsnq3','ftdsnrat',NULL,'r','scale','No','26. SNQ22 Yes/No Ratio Score',NULL,5,NULL,0,'disabled','ref.totalErrorCodeDecimal',NULL,27,'26. SNQ22 Yes/No Ratio Score','2012-10-01 18:41:04');
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldsnq','UDS FTLD SNQ',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldsnq
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldsnq`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldsnq` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDCPC2F`,
+`t2`.`FTDHAIRD`,
+`t2`.`FTDSPIT`,
+`t2`.`FTDNOSE`,
+`t2`.`FTDCOAGE`,
+`t2`.`FTDCRY`,
+`t2`.`FTDCUT`,
+`t2`.`FTDYTRIP`,
+`t2`.`FTDEATP`,
+`t2`.`FTDTELLA`,
+`t2`.`FTDOPIN`,
+`t2`.`FTDLAUGH`,
+`t2`.`FTDSHIRT`,
+`t2`.`FTDKEEPM`,
+`t2`.`FTDPICKN`,
+`t2`.`FTDOVER`,
+`t2`.`FTDEATR`,
+`t2`.`FTDHAIRL`,
+`t2`.`FTDSHIRW`,
+`t2`.`FTDMOVE`,
+`t2`.`FTDHUGS`,
+`t2`.`FTDLOUD`,
+`t2`.`FTDLOST`,
+`t2`.`FTDSNTOT`,
+`t2`.`FTDSNTBS`,
+`t2`.`FTDSNTOS`,
+`t2`.`FTDSNRAT`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldsnq` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD SNQ';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldsnq
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldsnq`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldsnq`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldsnq', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldsnq i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD SNQ' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldsnq i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD SNQ' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldsnq d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldsnq d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldsnq d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD SNQ' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldsnq d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD SNQ' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD SNQ';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldsnq d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
 
 
 -- C3F
@@ -6510,6 +9982,213 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldsboc3.ftdsbcto','en','lava','crms-nacc',NULL,'udsftldsboc3','ftdsbcto',NULL,'r','scale','Yes','16. Checklist (Behavior) Score',NULL,0,NULL,0,NULL,'uds.range0_105',NULL,51,'16. Checklist (Behavior) Score','2012-09-28 16:45:12');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldsboc3.ftdlengt','en','lava','crms-nacc',NULL,'udsftldsboc3','ftdlengt',NULL,'r','scale','Yes','17. Length of the entire FTLD neuropsychological testing session',NULL,0,NULL,0,NULL,'uds.range20_240',NULL,52,'17. Length of the entire FTLD neuropsychological testing session','2012-09-28 16:45:12');
 
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldsboc','UDS FTLD SBOC',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldsboc
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldsboc`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldsboc` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDSELF`,
+`t2`.`FTDBADLY`,
+`t2`.`FTDDEPR`,
+`t2`.`FTDEMOTD`,
+`t2`.`FTDLSELF`,
+`t2`.`FTDDISR`,
+`t2`.`FTDBELCH`,
+`t2`.`FTDGIGG`,
+`t2`.`FTDPRIV`,
+`t2`.`FTDNEGAT`,
+`t2`.`FTDECOMM`,
+`t2`.`FTDINAPJ`,
+`t2`.`FTDFAILA`,
+`t2`.`FTDRESIS`,
+`t2`.`FTDINTER`,
+`t2`.`FTDVERBA`,
+`t2`.`FTDPHYSI`,
+`t2`.`FTDTOPIC`,
+`t2`.`FTDPROTO`,
+`t2`.`FTDPREO`,
+`t2`.`FTDFINI`,
+`t2`.`FTDACTED`,
+`t2`.`FTDABS`,
+`t2`.`FTDFEEDB`,
+`t2`.`FTDFRUST`,
+`t2`.`FTDANXI`,
+`t2`.`FTDNERVO`,
+`t2`.`FTDNDIAG`,
+`t2`.`FTDSTIMB`,
+`t2`.`FTDSTIME`,
+`t2`.`FTDOBJEC`,
+`t2`.`FTDCIRCU`,
+`t2`.`FTDPERSE`,
+`t2`.`FTDREPEA`,
+`t2`.`FTDANECD`,
+`t2`.`FTDDINIT`,
+`t2`.`FTDDELAY`,
+`t2`.`FTDADDVE`,
+`t2`.`FTDFLUCT`,
+`t2`.`FTDLOSTT`,
+`t2`.`FTDREPRU`,
+`t2`.`FTDTRAIN`,
+`t2`.`FTDDISCL`,
+`t2`.`FTDSPONT`,
+`t2`.`FTDSPONR`,
+`t2`.`FTDSTOOD`,
+`t2`.`FTDTOUCH`,
+`t2`.`FTDDSOCI`,
+`t2`.`FTDEXAGG`,
+`t2`.`FTDSBTOT`,
+`t2`.`FTDSBCTO`,
+`t2`.`FTDLENGT`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldsboc` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD SBOC';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldsboc
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldsboc`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldsboc`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldsboc', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldsboc i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD SBOC' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldsboc i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD SBOC' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldsboc d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldsboc d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldsboc d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD SBOC' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldsboc d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD SBOC' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD SBOC';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldsboc d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
+
+
+
 
 -- C4F
 DELETE from datadictionary where entity = 'udsftldbis3';
@@ -6532,6 +10211,169 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldbis3.ftdpoor','en','lava','crms-nacc',NULL,'udsftldbis3','ftdpoor',NULL,'r','scale','Yes','6. The subject feels worried when he/she thinks he/she has done poorly at something.',NULL,0,NULL,0,NULL,'uds.c4f.scale',NULL,7,'6. The subject feels worried when he/she thinks he/she has done poorly at something.','2012-10-02 16:11:07');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldbis3.ftdffear','en','lava','crms-nacc',NULL,'udsftldbis3','ftdffear',NULL,'r','scale','Yes','7. The subject has very few fears compared to his/her friends.',NULL,0,NULL,0,NULL,'uds.c4f.scale',NULL,8,'7. The subject has very few fears compared to his/her friends.','2012-10-02 16:11:07');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldbis3.ftdbist','en','lava','crms-nacc',NULL,'udsftldbis3','ftdbist',NULL,'r','scale','Yes','8. BIS Total Score',NULL,0,NULL,0,'disabled','ref.totalErrorCode',NULL,9,'8. BIS Total Score','2012-10-02 16:11:07');
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldbis','UDS FTLD BIS',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldbis
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldbis`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldbis` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDCPC4F`,
+`t2`.`FTDWORKU`,
+`t2`.`FTDMIST`,
+`t2`.`FTDCRIT`,
+`t2`.`FTDWORR`,
+`t2`.`FTDBAD`,
+`t2`.`FTDPOOR`,
+`t2`.`FTDFFEAR`,
+`t2`.`FTDBIST`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldbis` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD BIS';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldbis
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldbis`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldbis`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldbis', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldbis i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD BIS' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldbis i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD BIS' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldbis d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldbis d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldbis d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD BIS' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldbis d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD BIS' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD BIS';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldbis d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
+
 
 
 -- C5F
@@ -6580,6 +10422,180 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldiri3.ftdiriec','en','lava','crms-nacc',NULL,'udsftldiri3','ftdiriec',NULL,'r','scale','No','15. Empathic Concern Score (EC)',NULL,0,NULL,0,'disabled','ref.totalErrorCode',NULL,20,'15. Empathic Concern Score (EC)','2012-10-01 19:05:21');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldiri3.ftdiript','en','lava','crms-nacc',NULL,'udsftldiri3','ftdiript',NULL,'r','scale','No','16. Perspective-taking Score (PT)',NULL,0,NULL,0,'disabled','ref.totalErrorCode',NULL,21,'16. Perspective-taking Score (PT)','2012-10-01 19:05:21');
 
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldiri','UDS FTLD IRI',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldiri
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldiri`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldiri` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDCPC5F`,
+`t2`.`FTDINSEX`,
+`t2`.`FTDINFMO`,
+`t2`.`FTDINFYR`,
+`t2`.`FTDINFRE`,
+`t2`.`FTDFEEL`,
+`t2`.`FTDDIFF`,
+`t2`.`FTDSORR`,
+`t2`.`FTDSIDE`,
+`t2`.`FTDADVAN`,
+`t2`.`FTDIMAG`,
+`t2`.`FTDMISF`,
+`t2`.`FTDWASTE`,
+`t2`.`FTDPITY`,
+`t2`.`FTDQTOUC`,
+`t2`.`FTDSIDES`,
+`t2`.`FTDSOFTH`,
+`t2`.`FTDUPSET`,
+`t2`.`FTDCRITI`,
+`t2`.`FTDIRIEC`,
+`t2`.`FTDIRIPT`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldiri` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD IRI';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldiri
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldiri`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldiri`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldiri', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldiri i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD IRI' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldiri i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD IRI' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldiri d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldiri d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldiri d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD IRI' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldiri d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD IRI' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD IRI';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldiri d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
+
 
 -- C6F
 DELETE from datadictionary where entity = 'udsftldrsms3';
@@ -6618,6 +10634,173 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldrsms3.ftdsmscr','en','lava','crms-nacc',NULL,'udsftldrsms3','ftdsmscr',NULL,'r','scale','No','14. Sensitiviy to Socio-emotional Expressiveness Score (EX) (0-30)',NULL,0,NULL,0,'disabled','ref.totalErrorCode',NULL,15,'14. Sensitiviy to Socio-emotional Expressiveness Score (EX) (0-30)','2012-10-02 12:13:15');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldrsms3.ftdspscr','en','lava','crms-nacc',NULL,'udsftldrsms3','ftdspscr',NULL,'r','scale','No','15. Ability to Modify Selp-presentation Score (SP) (0-35)',NULL,0,NULL,0,'disabled','ref.totalErrorCode',NULL,16,'15. Ability to Modify Selp-presentation Score (SP) (0-35)','2012-10-02 12:13:15');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldrsms3.ftdrsmst','en','lava','crms-nacc',NULL,'udsftldrsms3','ftdrsmst',NULL,'r','scale','No','16. RSMS Total Score (0-65)',NULL,0,NULL,0,'disabled','ref.totalErrorCode',NULL,17,'16. RSMS Total Score (0-65)','2012-10-02 12:13:15');
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldrsms','UDS FTLD RSMS',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldrsms
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldrsms`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldrsms` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDCPC6F`,
+`t2`.`FTDALTER`,
+`t2`.`FTDEMOT`,
+`t2`.`FTDACROS`,
+`t2`.`FTDCONV`,
+`t2`.`FTDINTUI`,
+`t2`.`FTDJOKE`,
+`t2`.`FTDIMAGP`,
+`t2`.`FTDINAPP`,
+`t2`.`FTDCHBEH`,
+`t2`.`FTDADBEH`,
+`t2`.`FTDLYING`,
+`t2`.`FTDGOODF`,
+`t2`.`FTDREGUL`,
+`t2`.`FTDSMSCR`,
+`t2`.`FTDSPSCR`,
+`t2`.`FTDRSMST`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldrsms` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD RSMS';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldrsms
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldrsms`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldrsms`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldrsms', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldrsms i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD RSMS' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldrsms i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD RSMS' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldrsms d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldrsms d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldrsms d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD RSMS' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldrsms d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD RSMS' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD RSMS';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldrsms d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
 
 
 -- E2F
@@ -6715,6 +10898,205 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldimagingavail3.ftdotcho','en','lava','crms-nacc',NULL,'udsftldimagingavail3','ftdotcho',NULL,'r','scale','Yes','c. Other PET or SPECT scans: Is a cholinergic scan available?',NULL,0,NULL,1,NULL,'uds.noYesUnknown019',NULL,44,'4c. Other PET or SPECT scans: Is a cholinergic scan available?','2012-09-28 12:52:03');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldimagingavail3.ftdotano','en','lava','crms-nacc',NULL,'udsftldimagingavail3','ftdotano',NULL,'r','scale','Yes','d. Other PET or SPECT scans: Is another kind of scan available?',NULL,0,NULL,1,NULL,'uds.noYes01',NULL,45,'4d. Other PET or SPECT scans: Is another kind of scan available?','2012-09-28 12:52:03');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldimagingavail3.ftdotans','en','lava','crms-nacc',NULL,'udsftldimagingavail3','ftdotans',NULL,'r','string','Yes','d1. Other scan specify',NULL,60,NULL,1,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,46,'4d1. Other scan specify','2012-09-28 12:52:03');
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldimagingavail','UDS FTLD Imaging Avail',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldimagingavail
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldimagingavail`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldimagingavail` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDSMRI`,
+`t2`.`FTDSMMO`,
+`t2`.`FTDSMDY`,
+`t2`.`FTDSMYR`,
+`t2`.`FTDSMDIC`,
+`t2`.`FTDSMDIS`,
+`t2`.`FTDSMADN`,
+`t2`.`FTDSMADV`,
+`t2`.`FTDSMMAN`,
+`t2`.`FTDSMMAO`,
+`t2`.`FTDSMMAM`,
+`t2`.`FTDSMFS`,
+`t2`.`FTDSMFSO`,
+`t2`.`FTDSMQU`,
+`t2`.`FTDFDGPT`,
+`t2`.`FTDFPMO`,
+`t2`.`FTDFPDY`,
+`t2`.`FTDFPYR`,
+`t2`.`FTDFDDIC`,
+`t2`.`FTDFDDID`,
+`t2`.`FTDFDADN`,
+`t2`.`FTDFDADV`,
+`t2`.`FTDFDMAN`,
+`t2`.`FTDFDMAO`,
+`t2`.`FTDFDMAM`,
+`t2`.`FTDFDQU`,
+`t2`.`FTDAMYPT`,
+`t2`.`FTDAMMO`,
+`t2`.`FTDAMDY`,
+`t2`.`FTDAMYR`,
+`t2`.`FTDAMDIC`,
+`t2`.`FTDAMDID`,
+`t2`.`FTDAMLIG`,
+`t2`.`FTDAMLIO`,
+`t2`.`FTDAMADN`,
+`t2`.`FTDAMADV`,
+`t2`.`FTDAMMAN`,
+`t2`.`FTDAMMAO`,
+`t2`.`FTDAMMAM`,
+`t2`.`FTDAMQU`,
+`t2`.`FTDOTHER`,
+`t2`.`FTDOTDOP`,
+`t2`.`FTDOTSER`,
+`t2`.`FTDOTCHO`,
+`t2`.`FTDOTANO`,
+`t2`.`FTDOTANS`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldimagingavail` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD Imaging Avail';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldimagingavail
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldimagingavail`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldimagingavail`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldimagingavail', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldimagingavail i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD Imaging Avail' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldimagingavail i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD Imaging Avail' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldimagingavail d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldimagingavail d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldimagingavail d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD Imaging Avail' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldimagingavail d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD Imaging Avail' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD Imaging Avail';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldimagingavail d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
 
 
 -- E3F
@@ -6838,6 +11220,221 @@ INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`en
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldimagingdiag3.ftdcbfos','en','lava','crms-nacc',NULL,'udsftldimagingdiag3','ftdcbfos',NULL,'r','string','Yes','a11a. CBF SPECT: Other area of brain specification',NULL,60,NULL,1,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,57,'5a11a. CBF SPECT: Other area of brain specification','2012-09-28 13:45:36');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldimagingdiag3.ftdothi','en','lava','crms-nacc',NULL,'udsftldimagingdiag3','ftdothi',NULL,'r','scale','Yes','6. Was other imaging done?',NULL,0,NULL,0,NULL,'uds.noYes01',NULL,58,'6. Was other imaging done?','2012-09-28 13:45:36');
 INSERT INTO viewproperty (`messageCode`,`locale`,`instance`,`scope`,`prefix`,`entity`,`property`,`section`,`context`,`style`,`required`,`label`,`label2`,`maxLength`,`size`,`indentLevel`,`attributes`,`list`,`listAttributes`,`propOrder`,`quickHelp`,`modified`) VALUES('*.udsftldimagingdiag3.ftdothis','en','lava','crms-nacc',NULL,'udsftldimagingdiag3','ftdothis',NULL,'r','string','Yes','a. Other imaging, specification',NULL,60,NULL,1,'onkeypress="UDS_onlyNaccCharactersAllowed(event)"',NULL,NULL,59,'6a. Other imaging, specification','2012-09-28 13:45:36');
+
+INSERT IGNORE INTO query_objects(instance,scope,module,section,target,short_desc,standard,primary_link,secondary_link) values('lava','crms-nacc','query','nacc','udsftldimagingdiag','UDS FTLD Imaging Diag',1,1,1);
+
+-- -----------------------------------------------------
+-- view lq_view_udsftldimagingdiag
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `lq_view_udsftldimagingdiag`;
+CREATE OR REPLACE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `lq_view_udsftldimagingdiag` AS select 
+`t2`.`InstrID`,
+`t2`.`FTDIDIAG`,
+`t2`.`FTDSMRIO`,
+`t2`.`FTDMRIFA`,
+`t2`.`FTDMRIRF`,
+`t2`.`FTDMRILF`,
+`t2`.`FTDMRIRT`,
+`t2`.`FTDMRILT`,
+`t2`.`FTDMRIRM`,
+`t2`.`FTDMRILM`,
+`t2`.`FTDMRIRP`,
+`t2`.`FTDMRILP`,
+`t2`.`FTDMRIRB`,
+`t2`.`FTDMRILB`,
+`t2`.`FTDMRIOB`,
+`t2`.`FTDMRIOS`,
+`t2`.`FTDFDGPE`,
+`t2`.`FTDFDGFH`,
+`t2`.`FTDFDGRF`,
+`t2`.`FTDFDGLF`,
+`t2`.`FTDFDGRT`,
+`t2`.`FTDFDGLT`,
+`t2`.`FTDFDGRM`,
+`t2`.`FTDFDGLM`,
+`t2`.`FTDFDGRP`,
+`t2`.`FTDFDGLP`,
+`t2`.`FTDFDGRB`,
+`t2`.`FTDFDGLB`,
+`t2`.`FTDFDGOA`,
+`t2`.`FTDFDGOS`,
+`t2`.`FTDAMYP`,
+`t2`.`FTDAMYVI`,
+`t2`.`FTDAMYRF`,
+`t2`.`FTDAMYLF`,
+`t2`.`FTDAMYRT`,
+`t2`.`FTDAMYLT`,
+`t2`.`FTDAMYRM`,
+`t2`.`FTDAMYLM`,
+`t2`.`FTDAMYRP`,
+`t2`.`FTDAMYLP`,
+`t2`.`FTDAMYRB`,
+`t2`.`FTDAMYLB`,
+`t2`.`FTDAMYOA`,
+`t2`.`FTDAMYOS`,
+`t2`.`FTDCBFSP`,
+`t2`.`FTDCBFVI`,
+`t2`.`FTDCBFRF`,
+`t2`.`FTDCBFLF`,
+`t2`.`FTDCBFRT`,
+`t2`.`FTDCBFLT`,
+`t2`.`FTDCBFRM`,
+`t2`.`FTDCBFLM`,
+`t2`.`FTDCBFRP`,
+`t2`.`FTDCBFLP`,
+`t2`.`FTDCBFRB`,
+`t2`.`FTDCBFLB`,
+`t2`.`FTDCBFOA`,
+`t2`.`FTDCBFOS`,
+`t2`.`FTDOTHI`,
+`t2`.`FTDOTHIS`,
+`t3`.`Packet`,
+`t3`.`FormID`,
+`t3`.`FormVer`,
+`t3`.`ADCID`,
+`t3`.`PTID`,
+`t3`.`VisitMo`,
+`t3`.`VisitDay`,
+`t3`.`VisitYr`,
+`t3`.`VisitNum`,
+`t3`.`Initials`,
+`t3`.`PacketDate`,
+`t3`.`PacketBy`,
+`t3`.`PacketStatus`,
+`t3`.`PacketReason`,
+`t3`.`PacketNotes`,
+`t3`.`DSDate`,
+`t3`.`DSBy`,
+`t3`.`DSStatus`,
+`t3`.`DSReason`,
+`t3`.`DSNotes`,
+`t3`.`LCDate`,
+`t3`.`LCBy`,
+`t3`.`LCStatus`,
+`t3`.`LCReason`,
+`t3`.`LCNotes`
+FROM `instrumenttracking` `t1` join `udsftldimagingdiag` `t2` on (`t1`.`InstrID` = `t2`.`InstrID`) join `udstracking` `t3` on (`t1`.`InstrID` = `t3`.`InstrID`)
+WHERE `t1`.`InstrType` = 'UDS FTLD Imaging Diag';
+
+
+-- -----------------------------------------------------
+-- procedure lq_get_nacc_udsftldimagingdiag
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS `lq_get_nacc_udsftldimagingdiag`;
+DELIMITER $$
+
+CREATE PROCEDURE `lq_get_nacc_udsftldimagingdiag`(user_name varchar(50), host_name varchar(50), query_type varchar(25), query_subtype VARCHAR(25), query_days INTEGER)
+BEGIN
+CALL lq_audit_event(user_name, host_name, 'crms-nacc.nacc.udsftldimagingdiag', query_type);
+
+IF query_type = 'Simple' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it 
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldimagingdiag i ON (it.InstrID = i.instr_id) 
+		INNER JOIN temp_pidn p ON (p.PIDN = it.PIDN) 
+	WHERE it.InstrType = 'UDS FTLD Imaging Diag' or it.InstrType is null 
+	ORDER BY p.pidn, it.DCDate;
+      
+ELSEIF query_type = 'SimpleAllPatients' THEN
+	SELECT p.PIDN, it.InstrType, it.DCDate, v.VType, it.DCStatus, it.AgeAtDC, i.* FROM instrumenttracking it  
+	    INNER JOIN visit v ON (it.VID = v.VID) 
+		INNER JOIN lq_view_udsftldimagingdiag i ON (it.InstrID = i.instr_id)  
+		RIGHT OUTER JOIN temp_pidn p ON (p.PIDN = it.PIDN)  
+	WHERE it.InstrType =  'UDS FTLD Imaging Diag' or it.InstrType is null 
+	ORDER BY P.pidn, it.DCDate;
+	
+ELSEIF query_type = 'VisitGrouping' THEN
+    SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*
+    FROM temp_linkdata l LEFT OUTER JOIN (visit v, instrumenttracking i, lq_view_udsftldimagingdiag d)
+      ON (l.link_id=v.vid AND v.vid=i.vid AND i.InstrID=d.instr_id AND
+          NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%')
+    ORDER BY l.PIDN, l.link_date, l.link_id;
+	
+ELSEIF query_type = 'PrimaryAll' THEN 
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldimagingdiag d ON (i.InstrID=d.instr_id) 
+		WHERE NOT i.DCStatus = 'Scheduled' AND NOT i.DCStatus like 'Canceled%' 
+		ORDER BY p.pidn, i.DCDate, i.InstrID ;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryLatest' THEN  
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN, i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.*  
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN)  
+			INNER JOIN lq_view_udsftldimagingdiag d ON (i.InstrID=d.instr_id) 
+		WHERE i.DCDate = (SELECT MAX(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND  
+			i2.InstrType = 'UDS FTLD Imaging Diag' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%') 
+		ORDER BY p.pidn, i.DCDate, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type = 'PrimaryFirst' THEN
+	CREATE TEMPORARY TABLE temp_linkdata as 
+		SELECT p.PIDN,i.DCDate as link_date, i.InstrID as link_id, i.InstrType, i.DCDate, i.DCStatus, i.AgeAtDC, d.* 
+		FROM temp_pidn p INNER JOIN instrumenttracking i ON (p.PIDN=i.PIDN) 
+			INNER JOIN lq_view_udsftldimagingdiag d ON (i.InstrID=d.instr_id)
+		WHERE i.DCDate = (SELECT MIN(i2.DCDate) from instrumenttracking i2 WHERE i2.PIDN=p.PIDN AND 
+			i2.InstrType = 'UDS FTLD Imaging Diag' AND NOT i2.DCStatus = 'Scheduled' AND NOT i2.DCStatus like 'Canceled%')
+		ORDER BY p.pidn, i.InstrID;
+	ALTER TABLE temp_linkdata ADD INDEX(pidn,link_date,link_id);	
+	SELECT * from temp_linkdata;
+	
+ELSEIF query_type IN ('SecondaryAll','SecondaryClosest') THEN
+	#Create candidate table with secondary instruments 
+	CREATE TEMPORARY TABLE temp_secondary_candidates AS
+		SELECT l.PIDN, l.link_date, l.link_id, i2.InstrType, i2.InstrID, DATEDIFF(l.link_date, i2.DCDate) AS Days 
+		FROM temp_linkdata l INNER JOIN instrumenttracking i2 ON (i2.PIDN=l.PIDN) 
+		WHERE i2.InstrType = 'UDS FTLD Imaging Diag';
+	ALTER TABLE temp_secondary_candidates ADD INDEX(pidn,link_date,link_id,Days);
+	
+	#get rid of earlier or later instruments as necessary
+	IF query_subtype = 'Earlier' THEN DELETE from temp_secondary_candidates WHERE Days >0;
+	ELSEIF query_subtype = 'MoreRecent' THEN DELETE from temp_secondary_candidates WHERE Days <0;
+	END IF;
+	
+	#limit records to specified day range      
+	DELETE FROM temp_secondary_candidates WHERE abs(Days) > query_days;
+
+	#only keep closest if appropriate
+	IF query_type = 'SecondaryClosest' THEN
+		CREATE TEMPORARY TABLE temp_secondary_closest AS
+			SELECT pidn,link_date,link_id,MIN(ABS(Days)) as min_days 
+			FROM temp_secondary_candidates
+			GROUP BY pidn,link_date,link_id;
+		ALTER TABLE temp_secondary_closest ADD INDEX (pidn,link_date,link_id);
+		DELETE FROM temp_secondary_candidates
+			WHERE ABS(days) <> 
+				(SELECT min_days 
+				FROM temp_secondary_closest s2 
+				WHERE (s2.pidn = temp_secondary_candidates.pidn and s2.link_date=temp_secondary_candidates.link_date and s2.link_id=temp_secondary_candidates.link_id));
+		DROP TABLE temp_secondary_closest;
+	END IF;
+
+	SELECT l.PIDN, l.link_date, l.link_id, v.VType, i.InstrType, i.DCDate, temp_secondary_candidates.days as DayDiff, i.DCStatus, i.AgeAtDC, d.* 
+	FROM temp_linkdata l
+		LEFT OUTER JOIN temp_secondary_candidates ON (l.pidn=temp_secondary_candidates.pidn and l.link_date = temp_secondary_candidates.link_date and l.link_id=temp_secondary_candidates.link_id) 
+		LEFT JOIN instrumenttracking i ON (temp_secondary_candidates.InstrID=i.InstrID)
+		LEFT JOIN visit v ON (i.VID = v.VID)
+		LEFT JOIN lq_view_udsftldimagingdiag d ON (i.InstrID=d.instr_id) ORDER BY l.pidn, l.link_date, l.link_id;
+
+	DROP TABLE temp_secondary_candidates;
+
+END IF;
+
+END$$
+
+$$
+DELIMITER ;
+
+
+
+
+
+
 
 DELETE FROM versionhistory WHERE module='lava-crms-nacc-model' AND version='3.6.0';
 INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
