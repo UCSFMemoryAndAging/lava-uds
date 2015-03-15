@@ -171,6 +171,9 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Informant Demo"/>
 				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedicalConditions" parent="initialUDSInstrumentPrototype">
+					<property name="instrType" value="UDS Medical Conditions"/>
+				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedications2" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Medications"/>
 				</bean>
