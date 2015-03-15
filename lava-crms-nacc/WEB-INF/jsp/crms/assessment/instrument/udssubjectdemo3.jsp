@@ -28,7 +28,6 @@ the first double enter property here --%>
   <page:param name="component">${instrTypeEncoded}</page:param> 
   <page:param name="focusField">${focusField}</page:param>
   <page:param name="pageHeadingArgs">UDS Subject Demographics</page:param>
-  <page:param name="quicklinks">udsa1120</page:param>
    
 <page:applyDecorator name="component.instrument.content">
   <page:param name="instrTypeEncoded">${instrTypeEncoded}</page:param>
@@ -40,7 +39,6 @@ the first double enter property here --%>
 	<c:param name="component" value="${component}"/>
 </c:import>
 
-<tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="udsa1120" linkTextKey="top.quicklink"/>
 <page:applyDecorator name="component.instrument.section">
   <page:param name="section"><spring:message code="udssubjectdemo2.1-20.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
