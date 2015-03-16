@@ -138,6 +138,7 @@
 	<bean id="list.udssubjectdemo3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsinformantdemo3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsfamilyhistory3.codes" parent="list.uds.codes"/>
+	<bean id="list.udsmedications3.codes" parent="list.uds.codes"/>
 	<bean id="list.udshealthhistory3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsphysical3.codes" parent="list.uds.codes"/>
 	<bean id="list.udscdr3.codes" parent="list.uds.codes"/>
