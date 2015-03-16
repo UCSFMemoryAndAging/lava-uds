@@ -1540,7 +1540,7 @@
 			</list></property>
 	</bean>
 	
-	<bean id="list.uds.b5.severity" parent="list.dataOnlyUdsValueConcatLabel">
+	<bean id="list.uds.b5.severity" parent="list.dataOnlyUds">
 		<property name="defaultSort" value="valueNumeric"/>
 		<property name="data"><list>
 			<bean parent="list.data"><constructor-arg value="1 - Mild"/><constructor-arg value="1"/></bean>
@@ -1552,8 +1552,8 @@
 	
 	<bean id="list.uds.b6.noGds" parent="list.dataOnlyUds">
 			<property name="data"><list>
-						<bean parent="list.data"><constructor-arg value="Able to Complete"/><constructor-arg value="0"/></bean>
-						<bean parent="list.data"><constructor-arg value="Unable to Complete"/><constructor-arg value="1"/></bean>
+						<bean parent="list.data"><constructor-arg value="0 - Able to Complete"/><constructor-arg value="0"/></bean>
+						<bean parent="list.data"><constructor-arg value="1 - Unable to Complete"/><constructor-arg value="1"/></bean>
 			</list></property>
 	</bean>	
 
