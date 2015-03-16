@@ -94,6 +94,7 @@ initializeMedicationFields();
 <ui:formGuide>
 	<ui:observe component="${dtoComponent}" elementIds="anyMeds" forValue="^$|0|[\-7]|[\-8]|[\-9]|[\-6]" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
    	<ui:skip component="${dtoComponent}" elementIds="details_${item}_drugLookup" skipValue=""/>
+   	<ui:disable component="${dtoComponent}" elementIds="details_${item}_drugId"/>
    	<ui:setValue component="${dtoComponent}" elementIds="details_${item}_drugId" value=""/>
 </ui:formGuide>
 
