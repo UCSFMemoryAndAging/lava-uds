@@ -519,7 +519,9 @@ public class UdsSubjectDemo extends UdsInstrument {
 				buffer.append(UdsUploadUtils.formatField(getMariStat())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getSex())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getLivSitua())).append(",");
-				
+				buffer.append(UdsUploadUtils.formatField(getIndepend())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getResidenc())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getZip()));
 			}
 			else {
 				buffer.append(UdsUploadUtils.formatField(getBirthMo())).append(",");
