@@ -558,7 +558,27 @@ public class UdsAppraisal extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getSomatr())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getPostcort())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getPspcbs())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getEyepsp()));
+			buffer.append(UdsUploadUtils.formatField(getEyepsp())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDyspsp())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAxialpsp())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getGaitpsp())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getApraxsp())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getApraxl())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getApraxr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCortsenl())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCortsenr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAtaxl())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAtaxr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAlienlml())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAlienlmr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDystonl())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDystonr())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMyocllt())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMyoclrt())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getAlsfind())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getGaitnph())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getOthneur())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getOthneurx()));
 		}
 		return buffer.toString();
 	}
