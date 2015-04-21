@@ -1,7 +1,7 @@
 package edu.ucsf.lava.crms.assessment.model;
 
+import org.springframework.util.StringUtils;
 import java.util.Date;
-
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
 import edu.ucsf.lava.crms.people.model.Patient;
@@ -324,33 +324,56 @@ public class UdsFormChecklist extends UdsInstrument {
    		}
 	}	
 	
-	public String[] getRequiredResultFields() {
-		return new String[] {
-			"a2Sub",
-			"a2Not",
-			"a3Sub",
-			"a3Not",
-			"a4Sub",
-			"a4Not",
-			"b1Sub",
-			"b1Not",
-			"b2Sub",
-			"b2Not",
-			"b3Sub",
-			"b3Not",
-			"b5Sub",
-			"b5Not",
-			"b6Sub",
-			"b6Not",
-			"b7Sub",
-			"b7Not",
-			"b8Sub",
-			"b8Not"
-		};
-	}
-
-	
-	
+	public String[] getRequiredResultFields(String version) {
+		String[] required = null;
+		if (version.equals("1") || version.equals("2")) {
+			required = new String[] {
+					"a2Sub",
+					"a2Not",
+					"a3Sub",
+					"a3Not",
+					"a4Sub",
+					"a4Not",
+					"b1Sub",
+					"b1Not",
+					"b2Sub",
+					"b2Not",
+					"b3Sub",
+					"b3Not",
+					"b5Sub",
+					"b5Not",
+					"b6Sub",
+					"b6Not",
+					"b7Sub",
+					"b7Not",
+					"b8Sub",
+					"b8Not"
+			};
+		}
+		else if (version.equals("3")) {
+			required = new String[] {
+					"a3Sub",
+					"a3Not",
+					"a4Sub",
+					"a4Not",
+					"b5Sub",
+					"b5Not",
+					"b7Sub",
+					"b7Not",
+			};
+			if (getPacket() != null && (getPacket().equals("I") || getPacket().equals("F"))) {
+				required = StringUtils.concatenateStringArrays(required, new String[] {
+					"a2Sub",
+					"a2Not",
+					"b1Sub",
+					"b1Not",
+					"b6Sub",
+					"b6Not",				
+				});
+			}
+		}
+		return required;
+	}	
 
 	public String getUdsUploadCsvRecord() {
 		if(getPacket()==null) { return ""; }
