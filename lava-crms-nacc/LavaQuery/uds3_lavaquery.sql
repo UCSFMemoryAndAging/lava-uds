@@ -6418,9 +6418,10 @@ DELIMITER ;
 
 
 
-
-DELETE FROM versionhistory WHERE module='lava-crms-lavaquery' AND version='3.6.0';
+-- renamed from lava-crms-lavaquery to lava-crms-nacc-lavaquery on 4/23/15. name switched back
+-- and forth so may have inserts for both in a database's versionhistory
+DELETE FROM versionhistory WHERE module='lava-crms-nacc-lavaquery' AND version='3.6.0';
 INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
-VALUES ('lava-crms-lavaquery','3.6.0','2015-03-01',3,6,0,0);
+VALUES ('lava-crms-nacc-lavaquery','3.6.0','2015-03-01',3,6,0,0);
 
 
