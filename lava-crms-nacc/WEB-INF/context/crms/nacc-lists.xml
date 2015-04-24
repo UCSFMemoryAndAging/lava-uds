@@ -660,7 +660,23 @@
       		</bean> 
     	</list></property> 
   	</bean>
+
+	<bean id="list.uds.a2.birthMo" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="1"/>	
+		<property name="defaultMaxValue" value="12"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="99"/><constructor-arg value="99"/></bean>
+		</list></property>
+	</bean>	
   
+	<bean id="list.uds.a2.birthYr" parent="list.numericRangeUds">
+		<property name="defaultMinValue" value="1900"/>	
+		<property name="defaultMaxValue" value="2000"/>
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="9999"/><constructor-arg value="9999"/></bean>
+		</list></property>
+	</bean>	
+
     <bean id="list.uds.a2.relation" parent="list.standardUds">
  		<property name="dbListName" value="udsa2relation"/>
  	</bean>
