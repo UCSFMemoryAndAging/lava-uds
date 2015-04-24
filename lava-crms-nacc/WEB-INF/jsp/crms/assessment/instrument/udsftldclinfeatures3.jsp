@@ -90,7 +90,7 @@
 </ui:formGuide>
 
 <ui:formGuide>
-  <ui:depends elementIds="ftdppasl" component="instrument"/>
+  <ui:depends elementIds="ftdppasl" component="${component}"/>
   <ui:observe elementIds="ftdcppa" component="${component}" forValue="^0"/>
   <ui:skip elementIds="ftdcppas" component="${component}"/>
 </ui:formGuide>
@@ -101,13 +101,12 @@
 </ui:formGuide>
 
 <ui:formGuide>
-  <ui:depends elementIds="ftdbvcln" component="instrument"/>
   <ui:observe elementIds="ftdemgpv" component="${component}" forValue="^1"/>
   <ui:skip elementIds="ftdemgpy" component="${component}"/>
 </ui:formGuide>
 
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
-  <ui:depends elementIds="ftdemgpv" component="instrument"/>
+  <ui:depends elementIds="ftdemgpv" component="${component}"/>
   <ui:observe elementIds="ftdemgpy" component="${component}" forValue="^0"/>
   <ui:skip elementIds="ftdemgmn" component="${component}"/>
 </ui:formGuide>
