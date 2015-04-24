@@ -114,8 +114,14 @@ public class UdsPhoneInclusion extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getRefused())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getOther())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getOtherx())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getMilestone())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getInperson()));
+		if (this.getInstrVer().equals("1") || this.getInstrVer().equals("2")) {
+			buffer.append(UdsUploadUtils.formatField(getMilestone())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getInperson()));
+		} // swapped order of these in UDS 3
+		else if (this.getInstrVer().equals("3")) {
+			buffer.append(UdsUploadUtils.formatField(getInperson())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getMilestone()));
+		}
 		return buffer.toString();
 	}
 

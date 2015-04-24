@@ -65,11 +65,11 @@
 </tags:listRow>
 <tags:listRow>
 	<tags:listColumnHeader labelKey="udsphoneinclusion3.2"/>
-	<tags:listCell><tags:createField property="milestone" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+	<tags:listCell><tags:createField property="inperson" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
 </tags:listRow>
 <tags:listRow>
 	<tags:listColumnHeader labelKey="udsphoneinclusion3.3"/>
-	<tags:listCell><tags:createField property="inperson" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
+	<tags:listCell><tags:createField property="milestone" component="${component}" entity="${instrTypeEncoded}"/></tags:listCell>
 </tags:listRow>
 
 </tags:tableForm>
