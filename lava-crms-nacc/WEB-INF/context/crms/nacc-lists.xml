@@ -2979,7 +2979,7 @@
 	
 	<bean id="list.uds.c5f.year" parent="list.numericRangeUds">
 		<property name="defaultMinValue" value="1900"/>	
-		<property name="defaultMaxValue" value="1990"/>
+		<property name="defaultMaxValue" value="1999"/>
 	</bean>
  	
  	<bean id="list.uds.c5f.q0c" parent="list.standardUds">
