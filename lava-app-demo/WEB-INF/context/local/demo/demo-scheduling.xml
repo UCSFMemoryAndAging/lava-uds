@@ -129,7 +129,7 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Informant Demo"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedicalConditions" parent="initialUDSInstrumentPrototype">
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedicalConditions" parent="followUpUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Medical Conditions"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedications2" parent="followUpUDSInstrumentPrototype">
@@ -171,7 +171,7 @@
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsInformantDemo" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Informant Demo"/>
 				</bean>
-				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedicalConditions" parent="initialUDSInstrumentPrototype">
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedicalConditions" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Medical Conditions"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsMedications2" parent="telephoneUDSInstrumentPrototype">
@@ -179,6 +179,9 @@
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsNpi" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS NPI"/>
+				</bean>
+				<bean class="edu.ucsf.lava.crms.assessment.model.UdsPhoneInclusion" parent="telephoneUDSInstrumentPrototype">
+					<property name="instrType" value="UDS Phone Inclusion"/>
 				</bean>
 				<bean class="edu.ucsf.lava.crms.assessment.model.UdsSubjectDemo" parent="telephoneUDSInstrumentPrototype">
 					<property name="instrType" value="UDS Subject Demo"/>
