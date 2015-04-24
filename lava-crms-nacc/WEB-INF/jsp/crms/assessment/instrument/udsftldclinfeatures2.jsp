@@ -96,20 +96,13 @@
   <ui:observe elementIds="ftdppasl" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:disable elementIds="ftdppapo,ftdppaiw,ftdppasw,ftdppapk,ftdppags,ftdppaeh,ftdppacs,ftdppass,ftdppasr,ftdppasd,ftdcppa" component="${componentPrefix}"/>
   <ui:setValue elementIds="ftdppapo,ftdppaiw,ftdppasw,ftdppapk,ftdppags,ftdppaeh,ftdppacs,ftdppass,ftdppasr,ftdppasd,ftdcppa" value="0" component="${componentPrefix}"/>
-</ui:formGuide>
-
-<ui:formGuide>
-  <ui:observe elementIds="ftdppasl" component="${componentPrefix}" forValue="^9" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:disable elementIds="ftdppapo,ftdppaiw,ftdppasw,ftdppapk,ftdppags,ftdppaeh,ftdppacs,ftdppass,ftdppasr,ftdppasd,ftdcppa,ftdcppas" component="${componentPrefix}"/>
-  <ui:setValue elementIds="ftdppapo,ftdppaiw,ftdppasw,ftdppapk,ftdppags,ftdppaeh,ftdppacs,ftdppass,ftdppasr,ftdppasd" value="9" component="${componentPrefix}"/>
-  <ui:setValue elementIds="ftdcppa,ftdcppas" value="-6" component="${componentPrefix}"/>
-</ui:formGuide>
-
-<ui:formGuide>
-  <ui:depends elementIds="ftdppasl" component="instrument"/>
-  <ui:observe elementIds="ftdcppa" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:disable elementIds="ftdcppas" component="${componentPrefix}"/>
-  <ui:setValue elementIds="ftdcppas" value="-6" component="${componentPrefix}"/>     
+  <ui:setValue elementIds="ftdcppas" value="-6" component="${componentPrefix}"/>
+</ui:formGuide>
+
+<ui:formGuide>
+  <ui:observe elementIds="ftdcppa" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+  <ui:skip elementIds="ftdcppas" component="${componentPrefix}"/>
 </ui:formGuide>
 
 <ui:formGuide>
@@ -119,24 +112,22 @@
 </ui:formGuide>
 
 <ui:formGuide>
-  <ui:observe elementIds="ftdbvcln" component="${componentPrefix}" forValue="^9" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:disable elementIds="ftdbvdis,ftdbvapa,ftdbvlos,ftdbvrit,ftdbvhyp,ftdbvneu,ftdbvidl,ftdbvft" component="${componentPrefix}"/>
-  <ui:setValue elementIds="ftdbvdis,ftdbvapa,ftdbvlos,ftdbvrit,ftdbvhyp,ftdbvneu,ftdbvidl" value="9" component="${componentPrefix}"/>
-  <ui:setValue elementIds="ftdbvft" value="-6" component="${componentPrefix}"/>       
-</ui:formGuide>
-
-<ui:formGuide>
-  <ui:depends elementIds="ftdbvcln" component="instrument"/>
   <ui:observe elementIds="ftdemgpv" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+  <%--
   <ui:disable elementIds="ftdemgpy" component="${componentPrefix}"/>
   <ui:setValue elementIds="ftdemgpy" value="-6" component="${componentPrefix}"/>
+   --%>
+  <ui:skip elementIds="ftdemgpy" component="${componentPrefix}"/>
 </ui:formGuide>
 
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
-  <ui:depends elementIds="ftdbvcln" component="instrument"/>
+  <ui:depends elementIds="ftdemgpv" component="${componentPrefix}"/>
   <ui:observe elementIds="ftdemgpy" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
+  <%--
   <ui:disable elementIds="ftdemgmn" component="${componentPrefix}"/>
-  <ui:setValue elementIds="ftdemgmn" value="-6" component="${componentPrefix}"/>  
+  <ui:setValue elementIds="ftdemgmn" value="-6" component="${componentPrefix}"/>
+   --%>  
+  <ui:skip elementIds="ftdemgmn" component="${componentPrefix}"/>
 </ui:formGuide>
 
 
