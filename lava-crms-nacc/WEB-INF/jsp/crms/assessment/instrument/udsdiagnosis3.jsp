@@ -695,6 +695,8 @@
   <ui:skip elementIds="demented,amndem,pca,ppasyn,ppasynt,ftdsyn,lbdsyn,namndem,mciaMem,mciaPlus,mciaPLan,mciaPAtt,mciaPEx,mciaPVis,mciNon1,mciN1Lan,mciN1Att,mciN1Ex,mciN1Vis,mciNon2,mciN2Lan,mciN2Att,mciN2Ex,mciN2Vis,impNoMci" component="${component}" />
 </ui:formGuide>
 <ui:formGuide>
+  <%-- ignore if normCog is not 1 or error code, i.e. anything other than No (0) --%>
+  <ui:ignore elementIds="normCog" component="${component}" forValue="^0" negate="true" />
   <ui:observe elementIds="demented" forValue="^0" component="${component}" />
   <ui:skip elementIds="amndem,pca,ppasyn,ppasynt,ftdsyn,lbdsyn,namndem" component="${component}" />
 </ui:formGuide>    
