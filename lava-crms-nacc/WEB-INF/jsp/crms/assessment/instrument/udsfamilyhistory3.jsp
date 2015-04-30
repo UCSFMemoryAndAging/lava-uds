@@ -58,6 +58,7 @@ the first double enter property here --%>
 			<tags:createField property="nwinfmut" component="${component}" entity="initial.${instrTypeEncoded}"/>
 		</c:if>   
 		<c:if test="${packetType == 'F' || packetType == 'T'}">
+			<tags:outputText textKey="udsfamilyhistory3.q1.followUpInstrucs" indent="true" styleClass="italic"/>
 			<tags:createField property="nwinfmut" component="${component}" entity="${instrTypeEncoded}" labelStyle="longLeft"/>
 		</c:if>  
 		<%-- need the following div for layout problem where inline form table following createField shifts to right --%>
@@ -138,6 +139,7 @@ the first double enter property here --%>
   	<page:param name="instructions"> </page:param>
   	<%-- note that metadata context is 'r' for result field so it part of double entry, but passing 'longLeft' labelStyle 
   		takes precedence over the 'right' labelStyle for result fields becasue it appears later in the css --%>
+	<tags:outputText textKey="udsfamilyhistory3.q5.followUpInstrucs" indent="true" styleClass="italic"/>
 	<tags:createField property="nwinfpar" entity="${instrTypeEncoded}" component="${component}" labelStyle="longLeft"/>
 </page:applyDecorator>
 </c:if>  
@@ -187,6 +189,7 @@ the first double enter property here --%>
 			<tags:createField property="nwinfsib" component="${component}" entity="initial.${instrTypeEncoded}"/>
 		</c:if>   
 		<c:if test="${packetType == 'F' || packetType == 'T'}">
+			<tags:outputText textKey="udsfamilyhistory3.q6a.followUpInstrucs" indent="true" styleClass="italic"/>
 			<tags:createField property="nwinfsib" entity="${instrTypeEncoded}" component="${component}" labelStyle="longLeft"/>
 		</c:if>  
 </page:applyDecorator>
@@ -231,6 +234,7 @@ the first double enter property here --%>
 			<tags:createField property="nwinfkid" component="${component}" entity="initial.${instrTypeEncoded}"/>
 		</c:if>   
 		<c:if test="${packetType == 'F' || packetType == 'T'}">
+			<tags:outputText textKey="udsfamilyhistory3.q7a.followUpInstrucs" indent="true" styleClass="italic"/>
 			<tags:createField property="nwinfkid" entity="${instrTypeEncoded}" component="${component}" labelStyle="longLeft"/>
 		</c:if>  
 </page:applyDecorator>
