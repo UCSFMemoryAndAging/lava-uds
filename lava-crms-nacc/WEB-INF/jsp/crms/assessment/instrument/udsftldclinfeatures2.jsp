@@ -113,20 +113,12 @@
 
 <ui:formGuide>
   <ui:observe elementIds="ftdemgpv" component="${componentPrefix}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <%--
-  <ui:disable elementIds="ftdemgpy" component="${componentPrefix}"/>
-  <ui:setValue elementIds="ftdemgpy" value="-6" component="${componentPrefix}"/>
-   --%>
   <ui:skip elementIds="ftdemgpy" component="${componentPrefix}"/>
 </ui:formGuide>
 
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
   <ui:depends elementIds="ftdemgpv" component="${componentPrefix}"/>
   <ui:observe elementIds="ftdemgpy" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <%--
-  <ui:disable elementIds="ftdemgmn" component="${componentPrefix}"/>
-  <ui:setValue elementIds="ftdemgmn" value="-6" component="${componentPrefix}"/>
-   --%>  
   <ui:skip elementIds="ftdemgmn" component="${componentPrefix}"/>
 </ui:formGuide>
 
