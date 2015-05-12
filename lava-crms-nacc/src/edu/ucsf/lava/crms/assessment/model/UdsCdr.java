@@ -206,7 +206,7 @@ public class UdsCdr extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getCdrSum())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getCdrGlob()));
 		
-		if(this.getInstrVer().equals("2") || this.getInstrVer().equals("3")){
+		if(this.getInstrVer().equals("2")){
 			buffer.append(",");
 			buffer.append(UdsUploadUtils.formatField(getComport())).append(",");
 			// EMORY change: see below
@@ -224,6 +224,12 @@ public class UdsCdr extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getCdrSumSupp())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCdrSumSuppAndStd()));
 
+		}
+		else if(this.getInstrVer().equals("3")){
+			buffer.append(",");
+			// note: the two undocumented fields added above for UDS 2 resulted in a submissions error in UDS 3
+			buffer.append(UdsUploadUtils.formatField(getComport())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCdrLang()));
 		}
 		return buffer.toString();
 	}
