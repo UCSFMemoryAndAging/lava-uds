@@ -639,7 +639,7 @@ public class UdsMilestone extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getDiscMo())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getDiscDy())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getDiscYr())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getDropreas())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getDropreas()));
 		}
 		return buffer.toString();
 	}	

@@ -671,7 +671,7 @@ public class UdsFtldImagingDiag extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdcbfoa())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdcbfos())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdothi())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdothis())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdothis()));
 		return buffer.toString();
 	}
 	

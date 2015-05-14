@@ -328,7 +328,7 @@ public class UdsFtldSnq extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdsntot())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdsntbs())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdsntos())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdsnrat())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdsnrat()));
 		return buffer.toString();
 	}
 	

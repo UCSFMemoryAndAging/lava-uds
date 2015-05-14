@@ -201,7 +201,7 @@ public class UdsFtldUpdrs extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdgsevx())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdgtyp())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdgtypg())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdgtypx())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdgtypx()));
 		return buffer.toString();
 	}
 	

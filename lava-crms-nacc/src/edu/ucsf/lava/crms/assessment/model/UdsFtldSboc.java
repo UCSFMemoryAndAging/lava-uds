@@ -598,7 +598,7 @@ public class UdsFtldSboc extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdexagg())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdsbtot())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdsbcto())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdlengt())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdlengt()));
 		return buffer.toString();
 	}
 	

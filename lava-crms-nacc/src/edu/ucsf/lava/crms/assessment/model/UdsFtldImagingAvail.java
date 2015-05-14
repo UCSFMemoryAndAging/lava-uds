@@ -517,7 +517,7 @@ public class UdsFtldImagingAvail extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdotser())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdotcho())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdotano())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdotans())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdotans()));
 		return buffer.toString();
 	}
 	

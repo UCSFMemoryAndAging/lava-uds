@@ -127,7 +127,7 @@ public class UdsFtldBis extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdbad())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdpoor())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdffear())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdbist())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdbist()));
 		return buffer.toString();
 	}
 	

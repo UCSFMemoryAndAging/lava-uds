@@ -1989,7 +1989,7 @@ public class UdsDiagnosis extends UdsInstrument {
 			buffer.append(UdsUploadUtils.formatField(getCogOth2x())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogOth3())).append(",");
 			buffer.append(UdsUploadUtils.formatField(getCogOth3If())).append(",");
-			buffer.append(UdsUploadUtils.formatField(getCogOth3x())).append(",");
+			buffer.append(UdsUploadUtils.formatField(getCogOth3x()));
 		}		
 		return buffer.toString();
 	}	

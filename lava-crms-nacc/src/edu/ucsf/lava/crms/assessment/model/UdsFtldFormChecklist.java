@@ -208,7 +208,7 @@ public class UdsFtldFormChecklist extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdc5fc())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdc6fs())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdc6fr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdc6fc())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdc6fc()));
 		return buffer.toString();
 	}
 	

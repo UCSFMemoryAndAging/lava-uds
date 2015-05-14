@@ -213,7 +213,7 @@ public class UdsFtldRsms extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdregul())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdsmscr())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdspscr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdrsmst())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdrsmst()));
 		return buffer.toString();
 	}
 	

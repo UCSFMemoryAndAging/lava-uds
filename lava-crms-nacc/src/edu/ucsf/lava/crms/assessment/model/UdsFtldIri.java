@@ -258,7 +258,7 @@ public class UdsFtldIri extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdupset())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdcriti())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdiriec())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdiript())).append(",");		
+		buffer.append(UdsUploadUtils.formatField(getFtdiript()));		
 		return buffer.toString();
 	}
 	

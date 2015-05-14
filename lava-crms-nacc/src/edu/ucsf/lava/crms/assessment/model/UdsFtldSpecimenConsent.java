@@ -92,7 +92,7 @@ public class UdsFtldSpecimenConsent extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdchdby())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdstore())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdslear())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdcomme())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdcomme()));
 		return buffer.toString();
 	}
 	

@@ -389,7 +389,7 @@ public class UdsMedicalConditions extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getAntienc())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getAntiencx())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getOthcond())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getOthcondx())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getOthcondx()));
 		return buffer.toString();
 	}
 	

@@ -312,7 +312,7 @@ public class UdsFtldClinFeatures extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdemgpv())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdemgpy())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdemgmn())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdpabvf())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdpabvf()));
 		return buffer.toString();
 	}
 	

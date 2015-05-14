@@ -451,7 +451,7 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getFtdreaas())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdreaos())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getFtdreasr())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getFtdreapr())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getFtdreapr()));
 		return buffer.toString();
 	}
 	

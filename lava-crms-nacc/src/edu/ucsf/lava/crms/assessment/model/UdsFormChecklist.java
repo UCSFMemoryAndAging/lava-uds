@@ -450,7 +450,7 @@ public class UdsFormChecklist extends UdsInstrument {
 				buffer.append(UdsUploadUtils.formatField(getB6Comm())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getB7Sub())).append(",");
 				buffer.append(UdsUploadUtils.formatField(getB7Not())).append(",");
-				buffer.append(UdsUploadUtils.formatField(getB7Comm())).append(",");
+				buffer.append(UdsUploadUtils.formatField(getB7Comm()));
 			}
 		}		
 		

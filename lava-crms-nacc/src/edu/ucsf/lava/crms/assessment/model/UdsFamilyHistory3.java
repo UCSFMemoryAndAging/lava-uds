@@ -2856,7 +2856,7 @@ public class UdsFamilyHistory3 extends UdsInstrument{
 		buffer.append(UdsUploadUtils.formatField(getKid15neu())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getKid15pdx())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getKid15moe())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getKid15ago())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getKid15ago()));
 		
 		return buffer.toString();
 	}
