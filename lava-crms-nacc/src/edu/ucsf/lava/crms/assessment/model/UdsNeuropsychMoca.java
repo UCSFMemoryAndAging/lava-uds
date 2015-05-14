@@ -796,7 +796,7 @@ public class UdsNeuropsychMoca extends UdsInstrument {
 		buffer.append(UdsUploadUtils.formatField(getUdsvertn())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getUdsverte())).append(",");
 		buffer.append(UdsUploadUtils.formatField(getUdsverti())).append(",");
-		buffer.append(UdsUploadUtils.formatField(getCogstat())).append(",");
+		buffer.append(UdsUploadUtils.formatField(getCogstat()));
 		return buffer.toString();
 	}
 	
