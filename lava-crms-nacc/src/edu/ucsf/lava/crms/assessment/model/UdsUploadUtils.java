@@ -251,12 +251,18 @@ public class UdsUploadUtils {
 		if (i == null) return false;  // don't include nothing
 		
 		if (z1 != null) {
+			// note: UDS 3 changes
+			// forms removed in UDS 3: A5 (FollowUp and Telephone),B2,B3,C1,E1
+			// forms added in UDS 3: C2 (Initial and FollowUp, required),D2 (required)
+			// form B8 is required in UDS 3, not optional
+			
 			// always include these
 			if (i.getFormId().equals("A1")) return true;
 			if (i.getFormId().equals("A5")) return true;
 			if (i.getFormId().equals("B4")) return true;
 			if (i.getFormId().equals("B9")) return true;
 			if (i.getFormId().equals("D1")) return true;
+			if (i.getFormId().equals("D2")) return true;
 			if (i.getFormId().equals("E1")) return true;
 			if (i.getFormId().equals("Z1")) return true;	
 			
@@ -273,13 +279,19 @@ public class UdsUploadUtils {
 				if (i.getFormId().equals("T1")) return true;			
 			} else {
 				if (i.getFormId().equals("C1")) return true;
+				if (i.getFormId().equals("C2")) return true;
 				
 				// the following are included unless Z1 *explicitly* says not to submit it
 				if (i.getFormId().equals("B1") && (z1.getB1Sub()==null || z1.getB1Sub().equals((short)1))) return true;
 				if (i.getFormId().equals("B2") && (z1.getB2Sub()==null || z1.getB2Sub().equals((short)1))) return true;
 				if (i.getFormId().equals("B3") && (z1.getB3Sub()==null || z1.getB3Sub().equals((short)1))) return true;
-				if (i.getFormId().equals("B6") && (z1.getB6Sub()==null || z1.getB6Sub().equals((short)1))) return true;				
-				if (i.getFormId().equals("B8") && (z1.getB8Sub()==null || z1.getB8Sub().equals((short)1))) return true;
+				if (i.getFormId().equals("B6") && (z1.getB6Sub()==null || z1.getB6Sub().equals((short)1))) return true;
+				if (i.getInstrVer().equals("3")) {
+					if (i.getFormId().equals("B8")) return true;
+				}
+				else {
+					if (i.getFormId().equals("B8") && (z1.getB8Sub()==null || z1.getB8Sub().equals((short)1))) return true;
+				}
 			}
 			
 			// if made it through, then this instrument is not to be included
@@ -287,6 +299,8 @@ public class UdsUploadUtils {
 		}
 		// FTLD Module
 		else if (z1f != null) {
+			// note: FTLD 3 changes
+			// forms removed in FTLD 3: A3F
 			if (i.getFormId().equals("B3F")) return true;
 			if (i.getFormId().equals("B9F")) return true;
 			if (i.getFormId().equals("C1F")) return true;
