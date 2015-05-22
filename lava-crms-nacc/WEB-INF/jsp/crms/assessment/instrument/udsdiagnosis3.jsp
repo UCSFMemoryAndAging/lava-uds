@@ -931,6 +931,10 @@
   <ui:unskip elementIds="othpsyx" component="${component}"/>
 </ui:formGuide>   
 <ui:formGuide>
+  <ui:observe elementIds="alcDem" component="${component}" forValue="^1" />
+  <ui:unskip elementIds="alcabuse" component="${component}"/>
+</ui:formGuide>   
+<ui:formGuide>
   <ui:observe elementIds="cogOth" component="${component}" forValue="^1" />
   <ui:unskip elementIds="cogOthx" component="${component}"/>
 </ui:formGuide>   
