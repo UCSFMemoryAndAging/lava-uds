@@ -1840,7 +1840,10 @@
     </list></property> 
   </bean>
  	
-  <bean id="list.uds.b9.cogFPredF" parent="list.uds.b9.cogFPredI"> 
+  <bean id="list.uds.b9.cogFPredF" parent="list.dataOnlyUdsValueConcatLabel"> 
+  	<property name="staticReferenceLists"><list>
+		<ref bean="list.uds.b9.cogFPredI"/>
+	</list></property>
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Assessed at previous UDS visit"/>
@@ -1848,7 +1851,7 @@
       </bean> 
     </list></property> 
   </bean>
- 	
+  
   <bean id="list.uds.b9.modeNoNA" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
