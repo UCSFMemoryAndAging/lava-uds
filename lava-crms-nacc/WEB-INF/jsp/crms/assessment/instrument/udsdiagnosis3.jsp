@@ -892,7 +892,7 @@
   <ui:observe elementIds="lbdis" component="${component}" forValue="^1" />
   <ui:unskip elementIds="park" component="${component}"/>
 </ui:formGuide>
-<ui:formGuide>
+<ui:formGuide observeAndOr="or">
   <ui:observe elementIds="psp,cort,ftldmo,ftldnos" component="${component}" forValue="^1" />
   <ui:unskip elementIds="ftldsubt" component="${component}"/>
 </ui:formGuide>
