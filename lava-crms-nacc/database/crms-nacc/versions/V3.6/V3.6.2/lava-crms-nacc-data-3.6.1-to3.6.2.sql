@@ -16,7 +16,7 @@ where messageCode = '*.udsfamilyhistory3.kids';
 
 update viewproperty
 set label = '7a. Since the last visit, is new information available concerning the status of the subject''s biological children?'
-where messageCode = '*.udsfamilyhistory3.nwinfkid'
+where messageCode = '*.udsfamilyhistory3.nwinfkid';
 
 DELETE FROM versionhistory WHERE module='lava-crms-nacc-data' AND version='3.6.2';
 INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
