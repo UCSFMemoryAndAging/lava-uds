@@ -754,6 +754,10 @@
     <ui:unskip elementIds="npold1,npold2,npold3,npold4" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
+    <ui:observe elementIds="npoldd" component="${component}" forValue="1" />
+    <ui:unskip elementIds="npoldd1,npoldd2,npoldd3,npoldd4" component="${component}"/>
+</ui:formGuide>
+<ui:formGuide>
     <ui:observe elementIds="nppath" component="${component}" forValue="1|2|3" />
     <ui:unskip elementIds="npnec,nppath2,nppath3,nppath4,nppath5,nppath6,nppath7,nppath8,nppath9,nppath10,nppath11,nppatho,nppathox" component="${component}"/>
 </ui:formGuide>
