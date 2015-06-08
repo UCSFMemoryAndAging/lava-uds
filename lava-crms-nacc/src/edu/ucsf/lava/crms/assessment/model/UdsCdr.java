@@ -234,15 +234,23 @@ public class UdsCdr extends UdsInstrument {
 		return buffer.toString();
 	}
 	
-
-	public boolean afterUpdate(){
-		super.afterUpdate();
+	
+	/**
+	 * Using lookup properties for Hibernate formula that works with a lookup table. These
+	 * are populated on retrieval, so if user has edited any values then need to re-lookup
+	 * these values. A non-transactional "report" named query is used for this purpose. Note
+	 * that this query works with the object so that any changed values that we bind to 
+	 * the object are used for the lookup.
+	 *  
+	 * Since computed properties in Hibernate cannot have a column value of their own, 
+	 * these computed lookup values are transferred to other properties which are persisted,
+	 * so that other tools like LAVA Query can retrieve them.
+	 * NOTE: other solution to this is to do the lookup in LAVA Query which has been done
+	 * in the past for neuropsych scaled scores 
+	 */
+	public void beforeUpdate(){
+		super.beforeUpdate();
 		
-		// at this point, the entity modifications have been persisted but the summary values
-		// which are looked up when the entity is retrieved have not been updated, so now
-		// retrieve the lookup values only (since the entity itself is already part of the
-		// Hibernate session) and update their persistent counterparts, and return true
-		// from this method so the entity will be re-saved
 		LavaDaoFilter filter = newFilterInstance();
 		filter.addDaoParam(filter.daoNamedParam("id", this.getId()));
 		List list = MANAGER.findByNamedQuery("udsCdr.retrieveLookupValues",filter);
@@ -269,14 +277,11 @@ public class UdsCdr extends UdsInstrument {
 			this.setCdrGlob((float)DATA_CODES_CANNOT_TOTAL);
 		}
 		
-		
 		this.setSummary(new StringBuffer("Sum of Boxes: " ).append(this.getCdrSum())
 				.append("\nGlobal: ").append(this.getCdrGlob()).toString());
 		
-		return true;
 	}
 	
-		
 }
 
 
