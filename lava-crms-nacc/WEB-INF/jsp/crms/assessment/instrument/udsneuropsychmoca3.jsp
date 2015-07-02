@@ -238,11 +238,11 @@
     <ui:skip elementIds="digbacls" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
-	<ui:observe elementIds="traila" component="${component}" forValue="95|96|97|98" />
+	<ui:observe elementIds="traila" component="${component}" forValue="995|996|997|998" />
     <ui:skip elementIds="trailarr,trailali" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
-	<ui:observe elementIds="trailb" component="${component}" forValue="95|96|97|98" />
+	<ui:observe elementIds="trailb" component="${component}" forValue="995|996|997|998" />
     <ui:skip elementIds="trailbrr,trailbli" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
