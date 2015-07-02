@@ -32,6 +32,8 @@
 	<c:param name="alternateLanguage" value="${alternateLanguage}"/>
 </c:import>
 
+<tags:outputText textKey="udsnpi3.version3.1" styleClass="bold"/>
+
 <page:applyDecorator name="component.instrument.section">
   <page:param name="section"><spring:message code="udsnpi3.npi.section"/></page:param>
   <page:param name="view">${componentView}</page:param>
