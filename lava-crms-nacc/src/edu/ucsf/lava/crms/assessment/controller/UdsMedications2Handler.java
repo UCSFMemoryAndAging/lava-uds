@@ -61,7 +61,7 @@ public class UdsMedications2Handler extends UdsInstrumentHandler {
 
 		// editStatus does not require the DTO. just editing the instrument status fields.		
 		String currentFlowState = context.getCurrentState().getId();
-		if (!currentFlowState.equals("editStatus")) {
+		if (!currentFlowState.equals("editStatus") && !currentFlowState.equals("changeVersion")) {
 			UdsMedications2 dto = this.createUdsMedications2Dto(); // method to allow override by custom subclasses
 			
 			if(flowMode.equals("enterReview")){
@@ -192,7 +192,7 @@ public class UdsMedications2Handler extends UdsInstrumentHandler {
 		// allow binding of UdsMedications' DTO object, not just the default 'instrument'
 		String currentFlowState = context.getCurrentState().getId();
 		// editStatus does not require the DTO so use the 'instrument command component		
-		if (currentFlowState.equals("editStatus")) {
+		if (currentFlowState.equals("editStatus") || currentFlowState.equals("changeVersion")) {
 			return "instrument";
 		}
 		else {
