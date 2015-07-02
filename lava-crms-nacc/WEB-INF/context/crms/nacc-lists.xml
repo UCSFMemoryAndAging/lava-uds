@@ -1101,7 +1101,7 @@
   </bean>
   
   <bean id="list.uds.a3.famAgeOfOnset" parent="list.numericRangeUds"> 
-    <property name="defaultMinValue" value="15"/>
+    <property name="defaultMinValue" value="0"/>
     <property name="defaultMaxValue" value="110"/>
     <property name="data"><list> 
       <bean parent="list.data">
