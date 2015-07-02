@@ -27,7 +27,14 @@ public class UdsUploadUtils {
 			buffer.append(formatField(udsInstrument.getPacket())).append(",");
 		
 		buffer.append(formatField(udsInstrument.getFormId())).append(formIdSuffix).append(",");
-		buffer.append(formatField(udsInstrument.getFormVer())).append(",");
+		// special case where UDS NPI version 3 must be specifically 3.1
+		// decided to handle this just on extract instead of making a 3.1 form throughout LAVA
+		if (udsInstrument.getFormId().equals(UdsNpi.UDS_NPI_FORMID) && udsInstrument.getFormVer().equals("3")) {
+			buffer.append("3.1").append(",");
+		}
+		else {
+			buffer.append(formatField(udsInstrument.getFormVer())).append(",");
+		}
 		buffer.append(formatField(udsInstrument.getAdcId())).append(",");
 		buffer.append(formatField(udsInstrument.getPtid())).append(",");
 		buffer.append(formatField(udsInstrument.getVisitMo())).append(",");
