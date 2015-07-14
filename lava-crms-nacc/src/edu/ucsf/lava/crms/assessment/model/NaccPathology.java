@@ -265,7 +265,8 @@ public class NaccPathology extends Instrument implements UdsUploadable {
 			setNpdage(null);
 			return;
 		}
-		setPtid((patient.getId()!= null)?patient.getId().toString():null);
+		// use strategy classes (possibly overridden) to determine PTID
+		this.setPtid(CoreManagerUtils.getIdManager().getEntityPropId(this, "ptid"));
 		//TODO: we really should not have a NpDOD field since one part may be unknown.  In meantime, set DOD first, then set the parts individually to possibly override
 		setNpdod(patient.getDeathDate());
 		setNpdodmo(patient.getDeathMonth());
@@ -2326,4 +2327,11 @@ public class NaccPathology extends Instrument implements UdsUploadable {
 		buffer.append(",").append(UdsUploadUtils.formatField(getInstrVer()));
 		return buffer.toString();
 	}
+	
+	@Override
+	public void beforeUpdate() {
+		super.beforeUpdate();
+		this.setPtid(CoreManagerUtils.getIdManager().getEntityPropId(this, "ptid"));
+	}
+	
 }
