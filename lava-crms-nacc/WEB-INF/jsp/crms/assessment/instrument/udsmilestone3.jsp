@@ -243,11 +243,13 @@
 </ui:formGuide>
 <ui:formGuide>
 	<ui:observe elementIds="deceased" component="${component}" forValue="^1" />
+	<ui:depends elementIds="discont" component="${component}" />
     <ui:unskip elementIds="deathMo,deathDy,deathYr,autopsy" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
 	<ui:observe elementIds="discont" component="${component}" forValue="^1" />
     <ui:unskip elementIds="discMo,discDy,discYr,dropreas" component="${component}"/>
+    <ui:skip elementIds="deceased" component="${component}"/>
 </ui:formGuide>
 
   </c:if>
