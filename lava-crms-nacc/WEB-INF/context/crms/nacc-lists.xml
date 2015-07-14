@@ -2008,7 +2008,7 @@
     </list></property> 
   </bean>
 					
-  <bean id="list.uds.b9.frstChg" parent="list.dataOnlyUdsValueConcatLabel"> 
+  <bean id="list.uds.b9.frstChgI" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">
         <constructor-arg value="Cognition"/>
@@ -2032,7 +2032,19 @@
       </bean> 
     </list></property> 
   </bean>
-  
+
+  <bean id="list.uds.b9.frstChgF" parent="list.dataOnlyUdsValueConcatLabel"> 
+  	<property name="staticReferenceLists"><list>
+		<ref bean="list.uds.b9.frstChgI"/>
+	</list></property>
+    <property name="data"><list> 
+      <bean parent="list.data">
+        <constructor-arg value="Assessed at previous UDS visit"/>
+        <constructor-arg value="0"/>
+      </bean> 
+    </list></property> 
+  </bean>
+ 	
   <bean id="list.uds.b9f.bvftd" parent="list.dataOnlyUdsValueConcatLabel"> 
     <property name="data"><list> 
       <bean parent="list.data">

@@ -118,7 +118,7 @@
   <page:param name="view">${componentView}</page:param>
   <page:param name="instructions"></page:param>
 <tags:createField property="course" entity="${instrTypeEncoded}" component="${component}"/>
-<tags:createField property="frstChg" entity="${instrTypeEncoded}" component="${component}"/>
+<tags:createField property="frstChg" entity="${packetType == 'F' || packetType == 'T' ? 'followup.' : ''}${instrTypeEncoded}" component="${component}"/>
 </page:applyDecorator>
 
 <tags:sectionQuicklink requestUrl="${requestUrl}" sectionId="top" sourceSectionId="overall" linkTextKey="top.quicklink"/>
