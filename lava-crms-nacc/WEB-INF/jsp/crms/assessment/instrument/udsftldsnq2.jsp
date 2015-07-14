@@ -28,6 +28,8 @@
 	<c:param name="component" value="${component}"/>
 </c:import>
 
+<tags:outputText textKey="udsftldsnq.guide" styleClass="bold"/>
+
 <page:applyDecorator name="component.instrument.section">
 	<page:param name="section"><spring:message code="udsftldsnq2.main.section"/></page:param>
 	<page:param name="view">${componentView}</page:param>

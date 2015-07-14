@@ -273,31 +273,38 @@ public class UdsFtldSnq extends UdsInstrument {
 	}
 
 	public String[] getRequiredResultFields() {
-		return new String[] {
-				"ftdcpc2f",
-				"ftdhaird",
-				"ftdspit",
-				"ftdnose",
-				"ftdcoage",
-				"ftdcry",
-				"ftdcut",
-				"ftdytrip",
-				"ftdeatp",
-				"ftdtella",
-				"ftdopin",
-				"ftdlaugh",
-				"ftdshirt",
-				"ftdkeepm",
-				"ftdpickn",
-				"ftdover",
-				"ftdeatr",
-				"ftdhairl",
-				"ftdshirw",
-				"ftdmove",
-				"ftdhugs",
-				"ftdloud",
-				"ftdlost"
-		};
+		// per C2F Guidelines, if all questions 1-22 answered all yes or all no then enter a reason in FTDCPC2F
+		// and leave all other questions blank
+		if (this.getFtdcpc2f() != null && this.getFtdcpc2f() >= 95 &&  this.getFtdcpc2f() <= 98) {
+			return new String[]{};
+		}
+		else {
+			return new String[] {
+					"ftdcpc2f",
+					"ftdhaird",
+					"ftdspit",
+					"ftdnose",
+					"ftdcoage",
+					"ftdcry",
+					"ftdcut",
+					"ftdytrip",
+					"ftdeatp",
+					"ftdtella",
+					"ftdopin",
+					"ftdlaugh",
+					"ftdshirt",
+					"ftdkeepm",
+					"ftdpickn",
+					"ftdover",
+					"ftdeatr",
+					"ftdhairl",
+					"ftdshirw",
+					"ftdmove",
+					"ftdhugs",
+					"ftdloud",
+					"ftdlost"
+			};
+		}
 	}
 	
 	public String getUdsUploadCsvRecord() {
@@ -335,6 +342,10 @@ public class UdsFtldSnq extends UdsInstrument {
 	public void beforeUpdate() {
 
 		super.beforeUpdate();
+		
+		if (this.getFtdcpc2f() != null && this.getFtdcpc2f() >= 95 &&  this.getFtdcpc2f() <= 98) {
+			return;
+		}
 				
 		//Fields to hold if the response was correct or incorrect
 		Short ftdhairdC;
