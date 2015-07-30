@@ -128,7 +128,10 @@
   <ui:skip elementIds="ftdsenos,ftdsensr,ftdsenpr" component="${component}"/>
 </ui:formGuide>
 
-<%-- cannot set ftdratio to 88.88 if cannot calculate because it is disabled --%>
+<ui:formGuide>
+  <ui:observe elementIds="ftdnounc" component="${component}" forValue="^-[1-9]|^9[5-8]"/>
+  <ui:skip elementIds="ftdverbc,ftdratio" component="${component}"/>
+</ui:formGuide>
 
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
   <ui:observe elementIds="ftdreaas" component="${component}" forValue="^-[1-9]|^9[5-8]"/>
