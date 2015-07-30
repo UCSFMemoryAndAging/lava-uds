@@ -64,6 +64,29 @@
 	<tags:createField property="ftdsnrat" component="${component}" entity="${instrTypeEncoded}"/>
 </page:applyDecorator>
 
+<c:if test="${componentMode != 'vw'}">
+<c:forEach begin="0" end="1" var="current">
+  <c:choose>
+    <c:when test="${componentView == 'doubleEnter' || (componentView == 'compare' && current == 1)}">
+      <c:set var="component" value="compareInstrument"/>
+    </c:when>
+    <c:otherwise>
+      <c:set var="component" value="instrument"/>
+    </c:otherwise>
+  </c:choose>
+  <c:if test="${current == 0 || (current == 1 && componentView == 'compare')}">
+
+<ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
+  <ui:observe elementIds="ftdcpc2f" component="${component}" forValue="^-[1-9]|^9[5-8]"/>
+  <ui:skip elementIds="ftdhaird,ftdspit,ftdnose,ftdcoage,ftdcry,ftdcut,ftdytrip,ftdeatp,ftdtella,ftdopin,
+  	ftdlaugh,ftdshirt,ftdkeepm,ftdpickn,ftdover,ftdeatr,ftdhairl,ftdshirw,ftdmove,ftdhugs,ftdloud,ftdlost"
+  	component="${component}"/>
+</ui:formGuide>
+
+  </c:if>
+</c:forEach>
+</c:if>
+
 </page:applyDecorator>    
 </page:applyDecorator>    
 	    
