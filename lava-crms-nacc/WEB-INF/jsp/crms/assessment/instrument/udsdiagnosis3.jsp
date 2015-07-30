@@ -698,7 +698,7 @@
   <%-- ignore if normCog is not 1 or error code, i.e. anything other than No (0) --%>
   <ui:ignore elementIds="normCog" component="${component}" forValue="^0" negate="true" />
   <ui:observe elementIds="demented" forValue="^0" component="${component}" />
-  <ui:skip elementIds="amndem,pca,ppasyn,ppasynt,ftdsyn,lbdsyn,namndem" component="${component}" />
+  <ui:skip elementIds="amndem,pca,ppasyn,ppasynt,ftdsyn,lbdsyn,namndem,mciaMem,mciaPlus" component="${component}" />
 </ui:formGuide>    
 <ui:formGuide>
   <%-- ignore if demented is anything other than No (0) --%>
