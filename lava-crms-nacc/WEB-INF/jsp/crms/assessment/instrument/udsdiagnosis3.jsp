@@ -695,24 +695,26 @@
   <ui:skip elementIds="demented,amndem,pca,ppasyn,ppasynt,ftdsyn,lbdsyn,namndem,mciaMem,mciaPlus,mciaPLan,mciaPAtt,mciaPEx,mciaPVis,mciNon1,mciN1Lan,mciN1Att,mciN1Ex,mciN1Vis,mciNon2,mciN2Lan,mciN2Att,mciN2Ex,mciN2Vis,impNoMci" component="${component}" />
 </ui:formGuide>
 <ui:formGuide>
-  <%-- ignore if normCog is not 1 or error code, i.e. anything other than No (0) --%>
+  <%-- ignore if normCog is not 1 or error code, i.e. anything other than No (0) 
+  	if question 3, demented, is No, skip all question 4 items, unskip all question 5 items
+  	if question 3, demented, is Yes, unskip all question 4 items. skip all question 5 items --%>
   <ui:ignore elementIds="normCog" component="${component}" forValue="^0" negate="true" />
   <ui:observe elementIds="demented" forValue="^0" component="${component}" />
-  <ui:skip elementIds="amndem,pca,ppasyn,ppasynt,ftdsyn,lbdsyn,namndem,mciaMem,mciaPlus" component="${component}" />
+  <ui:skip elementIds="amndem,pca,ppasyn,ppasynt,ftdsyn,lbdsyn,namndem" component="${component}" />
+  <ui:unskip elementIds="mciaMem,mciaPlus,mciNon1,mciNon2,impNoMci" component="${component}" />
 </ui:formGuide>    
 <ui:formGuide>
-  <%-- ignore if demented is anything other than No (0) --%>
-  <ui:ignore elementIds="demented" component="${component}" forValue="^0" negate="true" />
+  <ui:depends elementIds="demented" component="${component}"/>
   <ui:observe elementIds="mciaPlus" component="${component}" forValue="^1" />
   <ui:unskip elementIds="mciaPLan,mciaPAtt,mciaPEx,mciaPVis" component="${component}" />
 </ui:formGuide>      
 <ui:formGuide>
-  <ui:ignore elementIds="demented" component="${component}" forValue="^0" negate="true" />
+  <ui:depends elementIds="demented" component="${component}"/>
   <ui:observe elementIds="mciNon1" component="${component}" forValue="^1" />
   <ui:unskip elementIds="mciN1Lan,mciN1Att,mciN1Ex,mciN1Vis" component="${component}" />
 </ui:formGuide>      
 <ui:formGuide>
-  <ui:ignore elementIds="demented" component="${component}" forValue="^0" negate="true" />
+  <ui:depends elementIds="demented" component="${component}"/>
   <ui:observe elementIds="mciNon2" component="${component}" forValue="^1" />
   <ui:unskip elementIds="mciN2Lan,mciN2Att,mciN2Ex,mciN2Vis" component="${component}" />
 </ui:formGuide>             
