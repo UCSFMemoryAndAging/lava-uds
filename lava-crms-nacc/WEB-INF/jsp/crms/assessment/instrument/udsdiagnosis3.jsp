@@ -700,7 +700,7 @@
   	if question 3, demented, is Yes, unskip all question 4 items. skip all question 5 items --%>
   <ui:ignore elementIds="normCog" component="${component}" forValue="^0" negate="true" />
   <ui:observe elementIds="demented" forValue="^0" component="${component}" />
-  <ui:skip elementIds="amndem,pca,ppasyn,ppasynt,ftdsyn,lbdsyn,namndem" component="${component}" />
+  <ui:skip elementIds="amndem,pca,ppasyn,ftdsyn,lbdsyn,namndem" component="${component}" />
   <ui:unskip elementIds="mciaMem,mciaPlus,mciNon1,mciNon2,impNoMci" component="${component}" />
 </ui:formGuide>    
 <ui:formGuide>
@@ -717,7 +717,12 @@
   <ui:depends elementIds="demented" component="${component}"/>
   <ui:observe elementIds="mciNon2" component="${component}" forValue="^1" />
   <ui:unskip elementIds="mciN2Lan,mciN2Att,mciN2Ex,mciN2Vis" component="${component}" />
-</ui:formGuide>             
+</ui:formGuide>
+<ui:formGuide>
+  <ui:depends elementIds="demented" component="${component}" />
+  <ui:observe elementIds="ppasyn" forValue="^1" component="${component}" />
+  <ui:unskip elementIds="ppasynt" component="${component}" />
+</ui:formGuide>
 <ui:formGuide>
   <ui:observe elementIds="othbiom" component="${component}" forValue="^1" />
   <ui:unskip elementIds="othbiomx" component="${component}"/>
