@@ -258,12 +258,143 @@ public class UdsUploadUtils {
 		if (i == null) return false;  // don't include nothing
 		
 		if (z1 != null) {
+			// if form is not collected this method should not be called for the instrument, but explicitly
+			// excluding forms that are not collected below, just in case form was collected when it should 
+			// not have been
+
+			// for optional forms below, they are included unless Z1 *explicitly* says not to submit it
+			//   (if Z1 hadn't been filled out yet, then for now, assume it to be included)
+
 			// note: UDS 3 changes
 			// forms removed in UDS 3: A5 (FollowUp and Telephone),B2,B3,C1,E1
 			// forms added in UDS 3: C2 (Initial and FollowUp, required),D2 (required)
 			// form B8 is required in UDS 3, not optional
 			
-			// always include these
+			
+			// A1 required
+			if (i.getFormId().equals("A1")) return true;
+			
+			// A2 optional for Initial and Followup, required for Telephone
+			if (i.getFormId().equals("A2")) {
+				if (i.getPacket().equals("I") | i.getPacket().equals("F")) {
+					if ((z1.getA2Sub()==null || z1.getA2Sub().equals((short)1))) return true;
+				}
+				if (i.getPacket().equals("T")) {
+					return true;
+				}
+			}
+
+			// A3 optional
+			if (i.getFormId().equals("A3") && (z1.getA3Sub()==null || z1.getA3Sub().equals((short)1))) return true;
+			
+			// A4 optional 
+			if (i.getFormId().equals("A4") && (z1.getA4Sub()==null || z1.getA4Sub().equals((short)1))) return true;
+			
+			// A5 required, except not collected in UDS 3 Followup or Telephone
+			if (i.getFormId().equals("A5")) {
+				if (i.getFormVer().equals("1") || i.getFormVer().equals("2") || 
+						(i.getFormVer().equals("3") && i.getPacket().equals("I"))) {
+					return true;
+				}
+			}
+
+			// B1 optional, but not collected for Telephone visits
+			if (i.getFormId().equals("B1")) {
+				if (i.getPacket().equals("I") || i.getPacket().equals("F"))
+					if ((z1.getB1Sub()==null || z1.getB1Sub().equals((short)1))) return true;
+			}
+			
+			// B2 optional, but not collected for Telephone visits, and discontinued for UDS 3 
+			if (i.getFormId().equals("B2")) {
+				if ((i.getFormVer().equals(1) || i.getFormVer().equals(2)) 
+						&& (i.getPacket().equals("I") || i.getPacket().equals("F"))) {
+					if ((z1.getB2Sub()==null || z1.getB2Sub().equals((short)1))) return true;
+				}
+			}
+
+			// B3 optional, but not collected for Telephone visits, and discontinued for UDS 3 
+			if (i.getFormId().equals("B3")) {
+				if ((i.getFormVer().equals(1) || i.getFormVer().equals(2)) 
+						&& (i.getPacket().equals("I") || i.getPacket().equals("F"))) {
+					if ((z1.getB3Sub()==null || z1.getB3Sub().equals((short)1))) return true;
+				}
+			}
+
+			// B4 required
+			if (i.getFormId().equals("B4")) return true;
+			
+			// B5 optional
+			if (i.getFormId().equals("B5") && (z1.getB5Sub()==null || z1.getB5Sub().equals((short)1))) return true;
+
+			// B6 optional, but not collected for Telephone visits
+			if (i.getFormId().equals("B6")) {
+				if (i.getPacket().equals("I") || i.getPacket().equals("F"))
+					if ((z1.getB6Sub()==null || z1.getB6Sub().equals((short)1))) return true;
+			}
+			
+			// B7 optional
+			if (i.getFormId().equals("B7") && (z1.getB7Sub()==null || z1.getB7Sub().equals((short)1))) return true;
+
+			// B8 is not collected at Telephone visit, and is optional for UDS 1 and 2, and required for UDS 3
+			if (i.getFormId().equals("B8")) {
+				if (i.getPacket().equals("I") || i.getPacket().equals("F")) {
+					if (i.getFormVer().equals("1") || i.getFormVer().equals("2")) {
+						if (z1.getB8Sub()==null || z1.getB8Sub().equals((short)1)) return true;
+					}
+					else if (i.getInstrVer().equals("3")) {
+						return true;
+					}
+				}
+			}
+
+			// B9 is required
+			if (i.getFormId().equals("B9")) return true;
+
+			// C1 is not collected at Telephone, is required for UDS 1 and 2, and discontinued for UDS 3
+			if (i.getFormId().equals("C1")) {
+				if ((i.getPacket().equals("I") || i.getPacket().equals("F"))
+						&& (i.getFormVer().equals("1") || i.getFormVer().equals("2"))) {
+					return true;
+				}
+			}
+			
+			// C2 is not collected at Telephone, required for UDS 3, not collected for UDS 1 and 2 (new form for UDS 3)
+			if (i.getFormId().equals("C2")) {
+				if ((i.getPacket().equals("I") || i.getPacket().equals("F"))
+						&& i.getFormVer().equals("3")) {
+					return true;
+				}
+			}
+
+			// D1 is required
+			if (i.getFormId().equals("D1")) return true;
+
+			// D2 is required for UDS 3, not collected for UDS 1 or 2 (new form for UDS 3)
+			if (i.getFormId().equals("D2")) {
+				if (i.getFormVer().equals("3")) {
+					return true;
+				}
+			}
+
+			// E1 is required for UDS 1 and 2, discontinued for UDS 3
+			if (i.getFormId().equals("E1")) {
+				if (i.getFormVer().equals(1) || i.getFormVer().equals(2)) {
+					return true;
+				}
+			}
+			
+			// T1 is required for Telephone visits
+			if (i.getFormId().equals("T1")) {
+				if (i.getPacket().equals("T")) {
+					return true;
+				}
+			}
+
+			// Z1 is required
+			if (i.getFormId().equals("Z1")) return true;	
+			
+			
+// ORIGINAL CODE			
 			if (i.getFormId().equals("A1")) return true;
 			if (i.getFormId().equals("A5")) return true;
 			if (i.getFormId().equals("B4")) return true;
@@ -281,6 +412,14 @@ public class UdsUploadUtils {
 			if (i.getFormId().equals("B5") && (z1.getB5Sub()==null || z1.getB5Sub().equals((short)1))) return true;
 			if (i.getFormId().equals("B7") && (z1.getB7Sub()==null || z1.getB7Sub().equals((short)1))) return true;
 	
+// MARCO CODE 
+/*			
+			if (z1.getVisit().getVisitType().equals("Telephone Follow Up") && NumberUtils.toDouble(z1.getFormVer()) >= 3.0d){
+				List<String> requiredForms = Arrays.asList("Z1","T1","A1","A2","B4","B9","D1","D2");
+				if(requiredForms.contains(i.getFormId()))return true;
+			}
+*/			
+ 	
 			// the following are included based on whether it was a telephone follow up visit
 			if (z1.getVisit().getVisitType().equals("Telephone Follow Up")) {
 				if (i.getFormId().equals("T1")) return true;			
