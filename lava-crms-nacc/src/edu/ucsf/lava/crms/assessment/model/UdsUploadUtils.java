@@ -393,53 +393,6 @@ public class UdsUploadUtils {
 			// Z1 is required
 			if (i.getFormId().equals("Z1")) return true;	
 			
-			
-// ORIGINAL CODE			
-			if (i.getFormId().equals("A1")) return true;
-			if (i.getFormId().equals("A5")) return true;
-			if (i.getFormId().equals("B4")) return true;
-			if (i.getFormId().equals("B9")) return true;
-			if (i.getFormId().equals("D1")) return true;
-			if (i.getFormId().equals("D2")) return true;
-			if (i.getFormId().equals("E1")) return true;
-			if (i.getFormId().equals("Z1")) return true;	
-			
-			// the following are included unless Z1 *explicitly* says not to submit it
-			//   (if Z1 hadn't been filled out yet, then for now, assume it to be included)
-			if (i.getFormId().equals("A2") && (z1.getA2Sub()==null || z1.getA2Sub().equals((short)1))) return true;
-			if (i.getFormId().equals("A3") && (z1.getA3Sub()==null || z1.getA3Sub().equals((short)1))) return true;
-			if (i.getFormId().equals("A4") && (z1.getA4Sub()==null || z1.getA4Sub().equals((short)1))) return true;
-			if (i.getFormId().equals("B5") && (z1.getB5Sub()==null || z1.getB5Sub().equals((short)1))) return true;
-			if (i.getFormId().equals("B7") && (z1.getB7Sub()==null || z1.getB7Sub().equals((short)1))) return true;
-	
-// MARCO CODE 
-/*			
-			if (z1.getVisit().getVisitType().equals("Telephone Follow Up") && NumberUtils.toDouble(z1.getFormVer()) >= 3.0d){
-				List<String> requiredForms = Arrays.asList("Z1","T1","A1","A2","B4","B9","D1","D2");
-				if(requiredForms.contains(i.getFormId()))return true;
-			}
-*/			
- 	
-			// the following are included based on whether it was a telephone follow up visit
-			if (z1.getVisit().getVisitType().equals("Telephone Follow Up")) {
-				if (i.getFormId().equals("T1")) return true;			
-			} else {
-				if (i.getFormId().equals("C1")) return true;
-				if (i.getFormId().equals("C2")) return true;
-				
-				// the following are included unless Z1 *explicitly* says not to submit it
-				if (i.getFormId().equals("B1") && (z1.getB1Sub()==null || z1.getB1Sub().equals((short)1))) return true;
-				if (i.getFormId().equals("B2") && (z1.getB2Sub()==null || z1.getB2Sub().equals((short)1))) return true;
-				if (i.getFormId().equals("B3") && (z1.getB3Sub()==null || z1.getB3Sub().equals((short)1))) return true;
-				if (i.getFormId().equals("B6") && (z1.getB6Sub()==null || z1.getB6Sub().equals((short)1))) return true;
-				if (i.getInstrVer().equals("3")) {
-					if (i.getFormId().equals("B8")) return true;
-				}
-				else {
-					if (i.getFormId().equals("B8") && (z1.getB8Sub()==null || z1.getB8Sub().equals((short)1))) return true;
-				}
-			}
-			
 			// if made it through, then this instrument is not to be included
 			return false;
 		}
