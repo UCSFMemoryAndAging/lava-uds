@@ -219,10 +219,12 @@
     <ui:observe elementIds="instrument_packet" forValue=".+|^$"/>
     <ui:submitForm form="${instrTypeEncoded}" event="instrument__reRender"/>
 </ui:formGuide>
+<c:if test="${packetType=='I' || packetType =='F'}">
 <ui:formGuide>
   <ui:observe elementIds="a2Sub" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="a2Not,a2Comm" component="${componentPrefix}"/>
 </ui:formGuide>
+</c:if>
 <ui:formGuide>
   <ui:observe elementIds="a3Sub" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="a3Not,a3Comm" component="${componentPrefix}"/>
@@ -231,18 +233,22 @@
   <ui:observe elementIds="a4Sub" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="a4Not,a4Comm" component="${componentPrefix}"/>
 </ui:formGuide>
+<c:if test="${packetType=='I' || packetType=='F'}">
 <ui:formGuide>
   <ui:observe elementIds="b1Sub" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="b1Not,b1Comm" component="${componentPrefix}"/>
 </ui:formGuide>
+</c:if>
 <ui:formGuide>
   <ui:observe elementIds="b5Sub" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="b5Not,b5Comm" component="${componentPrefix}"/>
 </ui:formGuide>
+<c:if test="${packetType=='I' || packetType=='F'}">
 <ui:formGuide>
   <ui:observe elementIds="b6Sub" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="b6Not,b6Comm" component="${componentPrefix}"/>
 </ui:formGuide>
+</c:if>
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
   <ui:observe elementIds="b7Sub" component="${componentPrefix}" forValue="^0" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
   <ui:unskip elementIds="b7Not,b7Comm" component="${componentPrefix}"/>
