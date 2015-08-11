@@ -348,6 +348,10 @@
 		<property name="defaultMaxValue" value="20"/>
 	</bean>	
 
+	<bean id="list.uds.rangeUnknown0_30" parent="list.uds.rangeUnknown">
+		<property name="defaultMaxValue" value="30"/>
+	</bean>	
+
 	<bean id="list.uds.rangeNAUnknown0_30" parent="list.uds.rangeNAUnknown">
 		<property name="defaultMaxValue" value="30"/>
 	</bean>
