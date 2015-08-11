@@ -67,8 +67,10 @@
 
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
   <ui:observe elementIds="noGds" component="${component}" forValue="^1" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/>
-  <ui:skip elementIds="satis,dropAct,empty,bored,spirits,afraid,happy,helpless,stayhome,memprob,wondrful,wrthless,energy,hopeless,better" 
-  	component="${component}" comboRadioSelect="${componentMode == 'dc' ? 'true' : 'false'}"/> 
+  <ui:disable elementIds="satis,dropAct,empty,bored,spirits,afraid,happy,helpless,stayhome,memprob,wondrful,wrthless,energy,hopeless,better" 
+  	component="${component}"/> 
+  <ui:setValue elementIds="satis,dropAct,empty,bored,spirits,afraid,happy,helpless,stayhome,memprob,wondrful,wrthless,energy,hopeless,better" 
+  	component="${component}" value="9"/> 
   <ui:setValue elementIds="gds" component="${component}" value="88"/>	    	
 </ui:formGuide>
 
