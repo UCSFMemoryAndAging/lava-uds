@@ -23,9 +23,7 @@ IF existing_version <> new_version THEN
 		DELETE FROM udsmedicationspre1 where instrId = instrument_id;
 		DELETE FROM udsmedicationsnon1 where instrId = instrument_id;
 		DELETE FROM udsmedicationsvit1 where instrId = instrument_id;
-		IF (existing_version = '1') THEN
-			INSERT INTO udsmedications2 (InstrID) VALUES (instrument_id);
-		END IF;
+		INSERT INTO udsmedications2 (InstrID) VALUES (instrument_id);
 			
 	ELSEIF (new_version = '1') THEN
 	
