@@ -229,10 +229,15 @@
     <ui:unskip elementIds="aconsent" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
+	<ui:observe elementIds="protocol" component="${component}" forValue="1" />
+    <ui:skip elementIds="ftlddisc" component="${component}"/>
+</ui:formGuide>
+<ui:formGuide>
 	<ui:observe elementIds="renurse" component="${component}" forValue="^1" />
     <ui:unskip elementIds="nurseMo,nurseDy,nurseYr" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
+    <ui:depends elementIds="protocol" component="${component}"/>
 	<ui:observe elementIds="ftlddisc" component="${component}" forValue="^1" />
     <ui:unskip elementIds="ftldreas" component="${component}"/>
 </ui:formGuide>
