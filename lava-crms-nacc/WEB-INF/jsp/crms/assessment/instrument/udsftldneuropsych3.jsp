@@ -130,7 +130,7 @@
 
 <ui:formGuide>
   <ui:observe elementIds="ftdnounc" component="${component}" forValue="^-[1-9]|^9[5-8]"/>
-  <ui:skip elementIds="ftdverbc,ftdratio" component="${component}"/>
+  <ui:skip elementIds="ftdverbc" component="${component}"/>
 </ui:formGuide>
 
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
