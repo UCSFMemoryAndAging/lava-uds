@@ -467,11 +467,21 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 				this.ftdanasw, this.ftdanaow
 		}).shortValue();
 		
-		this.ftdratio = (float) 88.88;
 		if (this.ftdnounc!=null && this.ftdverbc!=null) {
 			if (this.ftdnounc>0 && this.ftdnounc<=16 && this.ftdverbc>0 && this.ftdverbc<=16) {
 				this.ftdratio = this.ftdnounc.floatValue() / this.ftdverbc.floatValue();
 			}
+			else if (this.ftdnounc.equals(0) && this.ftdverbc.equals(0)) {
+				this.ftdratio = (float) 88.88;
+			}
+			else {
+				// if either or both noun and verb are NACC (95-98) or MAC (-6 to -9) error codes
+				// set it to Cannot Calculate code
+				this.ftdratio = (float) -5.0;
+			}
+		}
+		else {
+			this.ftdratio = (float) -5.0;
 		}
 		
 	}	
