@@ -34,7 +34,7 @@
 	<page:param name="section"><spring:message code="udsftldsnq3.main.section"/></page:param>
 	<page:param name="view">${componentView}</page:param>
 	<page:param name="instructions"> </page:param>
-
+	<tags:outputText textKey="udsftldsnq3.ftdcpc2f.info" inline="true" styleClass="italic"/>
 	<tags:createField property="ftdcpc2f" component="${component}" entity="${instrTypeEncoded}"/>
 	<tags:createField property="ftdhaird" component="${component}" entity="${instrTypeEncoded}"/>
 	<tags:createField property="ftdspit" component="${component}" entity="${instrTypeEncoded}"/>
