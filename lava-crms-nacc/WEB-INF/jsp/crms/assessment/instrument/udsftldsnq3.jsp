@@ -77,7 +77,7 @@
   <c:if test="${current == 0 || (current == 1 && componentView == 'compare')}">
 
 <ui:formGuide simulateEvents="${(current == 0 && componentView != 'compare') || (current == 1) ? 'true' : ''}">
-  <ui:observe elementIds="ftdcpc2f" component="${component}" forValue="^-[1-9]|^9[5-8]"/>
+  <ui:observe elementIds="ftdcpc2f" component="${component}" forValue="95|96|97|98"/>
   <ui:skip elementIds="ftdhaird,ftdspit,ftdnose,ftdcoage,ftdcry,ftdcut,ftdytrip,ftdeatp,ftdtella,ftdopin,
   	ftdlaugh,ftdshirt,ftdkeepm,ftdpickn,ftdover,ftdeatr,ftdhairl,ftdshirw,ftdmove,ftdhugs,ftdloud,ftdlost"
   	component="${component}"/>
