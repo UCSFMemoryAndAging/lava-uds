@@ -4,9 +4,6 @@ import java.util.Comparator;
 
 import org.apache.commons.lang.StringUtils;
 
-import edu.ucsf.lava.core.list.model.LabelValueBean;
-import edu.ucsf.lava.crms.assessment.model.Instrument;
-
 public class UdsUploadUtils {
 
 	
