@@ -306,7 +306,7 @@ public class UdsUploadUtils {
 			
 			// B2 optional, but not collected for Telephone visits, and discontinued for UDS 3 
 			if (i.getFormId().equals("B2")) {
-				if ((i.getFormVer().equals(1) || i.getFormVer().equals(2)) 
+				if ((i.getFormVer().equals("1") || i.getFormVer().equals("2")) 
 						&& (i.getPacket().equals("I") || i.getPacket().equals("F"))) {
 					if ((z1.getB2Sub()==null || z1.getB2Sub().equals((short)1))) return true;
 				}
@@ -314,7 +314,7 @@ public class UdsUploadUtils {
 
 			// B3 optional, but not collected for Telephone visits, and discontinued for UDS 3 
 			if (i.getFormId().equals("B3")) {
-				if ((i.getFormVer().equals(1) || i.getFormVer().equals(2)) 
+				if ((i.getFormVer().equals("1") || i.getFormVer().equals("2")) 
 						&& (i.getPacket().equals("I") || i.getPacket().equals("F"))) {
 					if ((z1.getB3Sub()==null || z1.getB3Sub().equals((short)1))) return true;
 				}
@@ -378,7 +378,7 @@ public class UdsUploadUtils {
 
 			// E1 is required for UDS 1 and 2, discontinued for UDS 3
 			if (i.getFormId().equals("E1")) {
-				if (i.getFormVer().equals(1) || i.getFormVer().equals(2)) {
+				if (i.getFormVer().equals("1") || i.getFormVer().equals("2")) {
 					return true;
 				}
 			}
