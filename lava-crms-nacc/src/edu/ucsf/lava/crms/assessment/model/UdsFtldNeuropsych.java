@@ -459,13 +459,9 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 	public void updateCalculatedFields() {
 		super.updateCalculatedFields();
 
-		this.ftdsemsu = CalcUtils.add(new Short[] {
-				this.ftdsemaa, this.ftdsemta
-		}).shortValue();
+		this.ftdsemsu = CalcUtils.add(new Short[] {this.ftdsemaa, this.ftdsemta}, new Short[]{95,96,97,98}).shortValue();
 
-		this.ftdanats = CalcUtils.add(new Short[] {
-				this.ftdanasw, this.ftdanaow
-		}).shortValue();
+		this.ftdanats = CalcUtils.add(new Short[] {this.ftdanasw, this.ftdanaow}, new Short[]{95,96,97,98}).shortValue();
 		
 		if (this.ftdnounc!=null && this.ftdverbc!=null) {
 			if (this.ftdnounc>0 && this.ftdnounc<=16 && this.ftdverbc>0 && this.ftdverbc<=16) {
