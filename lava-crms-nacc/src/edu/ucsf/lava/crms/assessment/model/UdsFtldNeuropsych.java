@@ -467,7 +467,7 @@ public class UdsFtldNeuropsych extends UdsInstrument {
 			if (this.ftdnounc>0 && this.ftdnounc<=16 && this.ftdverbc>0 && this.ftdverbc<=16) {
 				this.ftdratio = this.ftdnounc.floatValue() / this.ftdverbc.floatValue();
 			}
-			else if (this.ftdnounc.equals(0) && this.ftdverbc.equals(0)) {
+			else if (this.ftdnounc.equals((short)0) || this.ftdverbc.equals((short)0)) {
 				this.ftdratio = (float) 88.88;
 			}
 			else {

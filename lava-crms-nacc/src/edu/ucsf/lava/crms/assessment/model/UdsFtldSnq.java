@@ -344,6 +344,8 @@ public class UdsFtldSnq extends UdsInstrument {
 		super.beforeUpdate();
 		
 		if (this.getFtdcpc2f() != null && this.getFtdcpc2f() >= 95 &&  this.getFtdcpc2f() <= 98) {
+			this.ftdsntot = this.ftdsntbs = this.ftdsntos = -5;
+			this.ftdsnrat = (float) -5.0;
 			return;
 		}
 				
@@ -408,7 +410,7 @@ public class UdsFtldSnq extends UdsInstrument {
 		else ftdtellaC=this.ftdtella;
 		
 		if (this.ftdopin.equals(UdsFtldSnq.YES)) ftdopinC=UdsFtldSnq.CORRECT;
-		else if (this.ftdhaird.equals(UdsFtldSnq.NO)) ftdopinC=UdsFtldSnq.INCORRECT;
+		else if (this.ftdopin.equals(UdsFtldSnq.NO)) ftdopinC=UdsFtldSnq.INCORRECT;
 		else ftdopinC=this.ftdopin;
 		
 		if (this.ftdlaugh.equals(UdsFtldSnq.NO)) ftdlaughC=UdsFtldSnq.CORRECT;
