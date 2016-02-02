@@ -13,3 +13,9 @@ update viewproperty set quickHelp=label where entity='udsneuropsychmoca3' and pr
 DELETE FROM versionhistory WHERE module='lava-crms-nacc-data' AND version='3.6.8';
 INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
 VALUES ('lava-crms-nacc-data','3.6.8','2016-02-02',3,6,8,0);
+
+-- fixes an error in the lava-crms-nacc-model-3.6.6-to3.6.7.sql that had the wrong version
+DELETE FROM versionhistory WHERE module='lava-crms-nacc-model' AND version='3.6.7';
+INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
+VALUES ('lava-crms-nacc-model','3.6.7','2015-10-05',3,6,7,0);
+
