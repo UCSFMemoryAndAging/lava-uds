@@ -214,7 +214,7 @@
 </ui:formGuide>
 <ui:formGuide>
 	<ui:observe elementIds="mocacomp" component="${component}" forValue="1" />
-    <ui:unskip elementIds="mocaloc,mocalan,mocalanx,mocavis,mocahear,mocatots,mocatrai,mocacube,mocacloc,mocaclon,mocacloh,mocanami,mocaregi,mocadigi,mocalett,mocaser7,mocarepe,mocaflue,mocaabst,mocarecn,mocarecc,mocarecr,mocaordt,mocaormo,mocaoryr,mocaordy,mocaorpl,mocaorct" component="${component}"/>
+    <ui:unskip elementIds="mocaloc,mocalan,mocalanx,mocavis,mocahear,mocatrai,mocacube,mocacloc,mocaclon,mocacloh,mocanami,mocaregi,mocadigi,mocalett,mocaser7,mocarepe,mocaflue,mocaabst,mocarecn,mocarecc,mocarecr,mocaordt,mocaormo,mocaoryr,mocaordy,mocaorpl,mocaorct" component="${component}"/>
 </ui:formGuide>
 <ui:formGuide>
 	<ui:depends elementIds="mocacomp" component="${component}" />
