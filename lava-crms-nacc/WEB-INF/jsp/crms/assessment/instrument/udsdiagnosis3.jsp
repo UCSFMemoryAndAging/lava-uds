@@ -694,6 +694,13 @@
   <ui:observe elementIds="normCog" forValue="^1" component="${component}" />
   <ui:skip elementIds="demented,amndem,pca,ppasyn,ppasynt,ftdsyn,lbdsyn,namndem,mciaMem,mciaPlus,mciaPLan,mciaPAtt,mciaPEx,mciaPVis,mciNon1,mciN1Lan,mciN1Att,mciN1Ex,mciN1Vis,mciNon2,mciN2Lan,mciN2Att,mciN2Ex,mciN2Vis,impNoMci" component="${component}" />
 </ui:formGuide>
+<%-- when Normal Cognition, set all the condition variables to Logical Skip. Otherwise, do not do anything and
+let the skip logic for corresponding items control the condition variables --%>
+<ui:formGuide ignoreUndoOnLoad="true" ignoreUndo="true">
+  <ui:observe elementIds="normCog" forValue="^1" component="${component}" />
+  <ui:skip elementIds="alzdisif,lbdif,msaif,pspIf,cortIf,ftldmoif,ftldnoif,cvdif,esstreif,downsIf,huntIf,prionIf,brnInjIf,hycephIf,epilepif,neopIf,
+   hivif,othcogif,depIf,bipoldif,schizoif,anxietif,delirif,ptsddxif,othPsyIf,alcDemIf,impsubif,dysIllIf,medsIf,cogOthIf,cogOth2If,cogOth3If" component="${component}" />
+</ui:formGuide>
 <ui:formGuide>
   <%-- ignore if normCog is not 1 or error code, i.e. anything other than No (0) 
   	if question 3, demented, is No, skip all question 4 items, unskip all question 5 items
