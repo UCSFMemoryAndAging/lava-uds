@@ -10,6 +10,10 @@ import edu.ucsf.lava.crms.scheduling.model.Visit;
 public class UdsNeuropsychMoca extends UdsInstrument {
 	public static EntityManager MANAGER = new EntityBase.Manager(UdsNeuropsychMoca.class);
 	public static final String UDS_NEUROPSYCHMOCA_FORMID = "C2";
+	
+	public static final Short NOT_APPLICABLE = Short.valueOf((short)88);
+	public static final Short NOT_ADMINISTERED = Short.valueOf((short)95);		
+	
 	public UdsNeuropsychMoca() {}
 	
 	/* constructor for adding new instruments. do instrument-specific initialization here. */
@@ -724,6 +728,38 @@ public class UdsNeuropsychMoca extends UdsInstrument {
 				"cogstat"
 		};
 	}
+		
+	public void beforeUpdate() {
+
+		super.beforeUpdate();
+
+		// Enter the uncorrected score for NACC UDS Form C2, Question 1f. If any of the scored MoCA items (1g - 1l, 1n - 1t, and 1w - 1bb) were not administered, enter 88=Not applicable for the total score.
+		this.mocatots = NOT_APPLICABLE;
+		if (this.mocatrai!=null && this.mocacube!=null && this.mocacloc!=null && this.mocaclon!=null && this.mocacloh!=null && this.mocanami!=null && this.mocadigi!=null && this.mocalett!=null && this.mocaser7!=null && this.mocarepe!=null && this.mocaflue!=null && this.mocaabst!=null && this.mocarecn!=null && this.mocaordt!=null && this.mocaormo!=null && this.mocaoryr!=null && this.mocaordy!=null && this.mocaorpl!=null && this.mocaorct!=null) {
+			if (this.mocatrai >= 0 && this.mocatrai < NOT_ADMINISTERED)
+				if (this.mocacube >= 0 && this.mocacube < NOT_ADMINISTERED)
+					if (this.mocacloc >= 0 && this.mocacloc < NOT_ADMINISTERED)
+						if (this.mocaclon >= 0 && this.mocaclon < NOT_ADMINISTERED)
+							if (this.mocacloh >= 0 && this.mocacloh < NOT_ADMINISTERED)
+								if (this.mocanami >= 0 && this.mocanami < NOT_ADMINISTERED)
+									if (this.mocadigi >= 0 && this.mocadigi < NOT_ADMINISTERED)
+										if (this.mocalett >= 0 && this.mocalett < NOT_ADMINISTERED)
+											if (this.mocaser7 >= 0 && this.mocaser7 < NOT_ADMINISTERED)
+												if (this.mocarepe >= 0 && this.mocarepe < NOT_ADMINISTERED)
+													if (this.mocaflue >= 0 && this.mocaflue < NOT_ADMINISTERED)
+														if (this.mocaabst >= 0 && this.mocaabst < NOT_ADMINISTERED)
+															if (this.mocarecn >= 0 && this.mocarecn < NOT_ADMINISTERED)
+																if (this.mocaordt >= 0 && this.mocaordt < NOT_ADMINISTERED)
+																	if (this.mocaormo >= 0 && this.mocaormo < NOT_ADMINISTERED)
+																		if (this.mocaoryr >= 0 && this.mocaoryr < NOT_ADMINISTERED)
+																			if (this.mocaordy >= 0 && this.mocaordy < NOT_ADMINISTERED)
+																				if (this.mocaorpl >= 0 && this.mocaorpl < NOT_ADMINISTERED)
+																					if (this.mocaorct >= 0 && this.mocaorct < NOT_ADMINISTERED)
+																						this.mocatots = (short) (this.mocatrai + this.mocacube + this.mocacloc + this.mocaclon + this.mocacloh + this.mocanami + this.mocadigi + this.mocalett + this.mocaser7 + this.mocarepe + this.mocaflue + this.mocaabst + this.mocarecn + this.mocaordt + this.mocaormo + this.mocaoryr + this.mocaordy + this.mocaorpl + this.mocaorct);
+
+		}
+		
+	}	
 	
 	public String getUdsUploadCsvRecord() {
 		StringBuffer buffer = UdsUploadUtils.getCommonFields(this);

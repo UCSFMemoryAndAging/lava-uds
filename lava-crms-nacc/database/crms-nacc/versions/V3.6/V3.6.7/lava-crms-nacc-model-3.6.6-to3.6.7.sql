@@ -45,6 +45,6 @@ END$$
 
 DELIMITER ;
 
-DELETE FROM versionhistory WHERE module='lava-crms-nacc-model' AND version='3.6.3';
+DELETE FROM versionhistory WHERE module='lava-crms-nacc-model' AND version='3.6.7';
 INSERT INTO versionhistory(module,version,versiondate,major,minor,fix,updaterequired)
-VALUES ('lava-crms-nacc-model','3.6.3','2015-06-30',3,6,3,0);
+VALUES ('lava-crms-nacc-model','3.6.7','2015-10-05',3,6,7,0);
