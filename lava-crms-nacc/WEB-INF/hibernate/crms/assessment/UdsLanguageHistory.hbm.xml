@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UdsLanguageHistory" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+    &udsInstrInclude;
+
+    <join table="udslanguagehistory">
+      <key column="InstrID"/>
+            <property name="APREFLAN" column="APREFLAN" type="int" />
+            <property name="AYRSPAN" column="AYRSPAN" type="int" />
+            <property name="AYRENGL" column="AYRENGL" type="int" />
+            <property name="APCSPAN" column="APCSPAN" type="int" />
+            <property name="APCENGL" column="APCENGL" type="int" />
+            <property name="ASPKSPAN" column="ASPKSPAN" type="int" />
+            <property name="AREASPAN" column="AREASPAN" type="int" />
+            <property name="AWRISPAN" column="AWRISPAN" type="int" />
+            <property name="AUNDSPAN" column="AUNDSPAN" type="int" />
+            <property name="ASPKENGL" column="ASPKENGL" type="int" />
+            <property name="AREAENGL" column="AREAENGL" type="int" />
+            <property name="AWRIENGL" column="AWRIENGL" type="int" />
+            <property name="AUNDENGL" column="AUNDENGL" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>
