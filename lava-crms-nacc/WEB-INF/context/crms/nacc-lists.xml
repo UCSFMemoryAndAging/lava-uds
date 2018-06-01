@@ -135,6 +135,7 @@
     <bean id="list.udsftldupdrs2.codes" parent="list.uds.codes"/>
 
 	<bean id="list.udsformchecklist3.codes" parent="list.uds.codes"/>    
+	<bean id="list.udsformchecklistx3.codes" parent="list.uds.codes"/>
 	<bean id="list.udssubjectdemo3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsinformantdemo3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsfamilyhistory3.codes" parent="list.uds.codes"/>
@@ -152,6 +153,7 @@
 	<bean id="list.udsneuropsychmoca3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsmilestone3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsphoneinclusion3.codes" parent="list.uds.codes"/>	    
+<bean id="list.udslanguagehistory3.codes" parent="list.uds.codes"/>
     
 	<bean id="list.udsftldformchecklist3.codes" parent="list.uds.codes"/>
 	<bean id="list.udsftldbis3.codes" parent="list.uds.codes"/>
@@ -3050,5 +3052,55 @@
 	<bean id="list.uds.z1f.reason" parent="list.standardUds">
  		<property name="dbListName" value="UDSZ1FReason"/>
  	</bean>
+ 	
+ 	
+  <bean id="list.udscls.language" parent="list.dataOnlyUds"> 
+	<property name="data"><list>
+		<bean parent="list.data"><constructor-arg value="1 - English"/><constructor-arg value="1"/></bean>
+    		<bean parent="list.data"><constructor-arg value="2 - Spanish"/><constructor-arg value="2"/></bean>
+	</list></property>
+  </bean>
+  
+  <bean id="list.udscls.years" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="0"/>
+    <property name="defaultMaxValue" value="110"/>
+  </bean>
+  
+  <bean id="list.udscls.percent" parent="list.numericRangeUds"> 
+    <property name="defaultMinValue" value="0"/>
+    <property name="defaultMaxValue" value="100"/>
+  </bean>
+  
+  <bean id="list.udscls.proficiency" parent="list.dataOnlyUds"> 
+    <property name="data"><list> 
+		<bean parent="list.data"><constructor-arg value="Almost None"/><constructor-arg value="1"/></bean>
+		<bean parent="list.data"><constructor-arg value="Very Poor"/><constructor-arg value="2"/></bean>
+		<bean parent="list.data"><constructor-arg value="Fair"/><constructor-arg value="3"/></bean>
+		<bean parent="list.data"><constructor-arg value="Functional"/><constructor-arg value="4"/></bean>
+		<bean parent="list.data"><constructor-arg value="Good"/><constructor-arg value="5"/></bean>
+		<bean parent="list.data"><constructor-arg value="Very Good"/><constructor-arg value="6"/></bean>
+		<bean parent="list.data"><constructor-arg value="Like Native Speaker"/><constructor-arg value="7"/></bean>
+    </list></property> 
+  </bean>
+ 	 	
+	  <bean id="list.udsformchecklistx.whyunable" parent="list.dataOnlyUds">
+    		<property name="data"><list>
+      		<bean parent="list.data"><constructor-arg value="95 - Physical problem"/><constructor-arg value="95"/></bean>
+      		<bean parent="list.data"><constructor-arg value="96 - Cognitive/behavior problem"/><constructor-arg value="96"/></bean>
+      		<bean parent="list.data"><constructor-arg value="97 - Other problem"/><constructor-arg value="97"/></bean>
+      		<bean parent="list.data"><constructor-arg value="98 - Verbal refusal"/><constructor-arg value="98"/></bean>
+    		</list></property>
+  	</bean>
+
+	<bean id="list.udsformchecklistx.whyunable2" parent="list.dataOnlyUds">
+		<property name="data"><list>
+			<bean parent="list.data"><constructor-arg value="95 - Physical problem"/><constructor-arg value="95"/></bean>
+			<bean parent="list.data"><constructor-arg value="96 - Cognitive/behavior problem"/><constructor-arg value="96"/></bean>
+			<bean parent="list.data"><constructor-arg value="97 - Other problem"/><constructor-arg value="97"/></bean>
+			<bean parent="list.data"><constructor-arg value="98 - Verbal refusal"/><constructor-arg value="98"/></bean>
+			<bean parent="list.data"><constructor-arg value="99 - Unknown or inadequate information"/><constructor-arg value="99"/></bean>
+    </list></property>
+  </bean>
+			
  	 	
 </beans>

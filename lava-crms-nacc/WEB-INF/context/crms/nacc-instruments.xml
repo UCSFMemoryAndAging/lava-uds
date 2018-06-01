@@ -35,6 +35,7 @@
 	<bean id="lava.crms.assessment.instrument.udsformchecklist1" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsformchecklist2" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsformchecklist3" parent="crmsInstrumentFlowAction"/>
+	<bean id="lava.crms.assessment.instrument.udsformchecklistx3" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsftldbis2" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsftldbis3" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsftldclinfeatures2" parent="crmsInstrumentFlowAction"/>	
@@ -73,6 +74,7 @@
 	<bean id="lava.crms.assessment.instrument.udsinformantdemo3" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udslabsimaging1" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udslabsimaging2" parent="crmsInstrumentFlowAction"/>
+<bean id="lava.crms.assessment.instrument.udslanguagehistory3" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsmedications1" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsmedications2" parent="crmsInstrumentFlowAction"/>
 	<bean id="lava.crms.assessment.instrument.udsmedications3" parent="crmsInstrumentFlowAction"/>
@@ -154,6 +156,7 @@
 	<bean id="udsformchecklist1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsformchecklist2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsformchecklist3FormAction" parent="udsInstrumentFormAction"/>
+	<bean id="udsformchecklistx3FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsftldbis2FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsftldbis3FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsftldclinfeatures2FormAction" parent="udsInstrumentFormAction"/>
@@ -192,6 +195,7 @@
 	<bean id="udsinformantdemo3FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udslabsimaging1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udslabsimaging2FormAction" parent="udsInstrumentFormAction"/>
+<bean id="udslanguagehistory3FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsmedications1FormAction" parent="udsInstrumentFormAction"/>
 	<bean id="udsmedications2FormAction" parent="crmsInstrumentComponentFormAction">
     	<constructor-arg><list>
@@ -342,7 +346,13 @@
 		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFormChecklist</value></property>
 		<property name="supportedFlows"><value>enter</value></property>
 		<property name="currentVersionAlias"><value>udsformchecklist</value></property>
-	</bean>		 			
+	</bean>	
+	
+	<bean id="udsformchecklistx3" parent="instrumentConfig">
+	    <property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFormChecklistX</value></property>
+    		<property name="supportedFlows"><value>enter</value></property>
+    		<property name="currentVersionAlias"><value>udsformchecklistx</value></property>
+  	</bean>
 
 	<bean id="udsftldbis2" parent="instrumentConfig">
 		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsFtldBis</value></property>
@@ -550,7 +560,13 @@
 		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsLabsImaging</value></property>
 		<property name="supportedFlows"><value>enter</value></property>
 		<property name="currentVersionAlias"><value>udslabsimaging</value></property>
-	</bean>		 			
+	</bean>	
+	
+	<bean id="udslanguagehistory3" parent="instrumentConfig">
+		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsLanguageHistory</value></property>
+		<property name="supportedFlows"><value>enter</value></property>
+		<property name="currentVersionAlias"><value>udslanguagehistory</value></property>
+	</bean>
 	 
 	 <bean id="udsmedications1" parent="instrumentConfig">
 		<property name="className"><value>edu.ucsf.lava.crms.assessment.model.UdsMedications1</value></property>
