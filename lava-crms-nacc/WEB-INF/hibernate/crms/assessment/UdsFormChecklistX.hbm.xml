@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"
+    [<!ENTITY instrInclude SYSTEM "classpath://../hibernate/crms/assessment/instrInclude.xml" >
+     <!ENTITY instrInclude2 SYSTEM "classpath://../hibernate/crms/assessment/instrInclude2.xml" >
+     <!ENTITY udsInstrInclude SYSTEM "classpath://../hibernate/crms/assessment/udsInstrInclude.xml" >]>
+
+
+<hibernate-mapping>
+
+  <class name="edu.ucsf.lava.crms.assessment.model.UdsFormChecklistX" table="instrumenttracking" select-before-update="true">
+
+    &instrInclude;
+    &udsInstrInclude;
+
+    <join table="udsformchecklistx">
+      <key column="InstrID"/>
+            <property name="langt1" column="LANGT1" type="int" />
+            <property name="langa1" column="LANGA1" type="int" />
+            <property name="langa2" column="LANGA2" type="int" />
+            <property name="a2sub" column="A2SUB" type="int" />
+            <property name="a2not" column="A2NOT" type="int" />
+            <property name="langa3" column="LANGA3" type="int" />
+            <property name="a3sub" column="A3SUB" type="int" />
+            <property name="a3not" column="A3NOT" type="int" />
+            <property name="langa4" column="LANGA4" type="int" />
+            <property name="a4sub" column="A4SUB" type="int" />
+            <property name="a4not" column="A4NOT" type="int" />
+            <property name="langa5" column="LANGA5" type="int" />
+            <property name="langb1" column="LANGB1" type="int" />
+            <property name="b1sub" column="B1SUB" type="int" />
+            <property name="b1not" column="B1NOT" type="int" />
+            <property name="langb4" column="LANGB4" type="int" />
+            <property name="langb5" column="LANGB5" type="int" />
+            <property name="b5sub" column="B5SUB" type="int" />
+            <property name="b5not" column="B5NOT" type="int" />
+            <property name="langb6" column="LANGB6" type="int" />
+            <property name="b6sub" column="B6SUB" type="int" />
+            <property name="b6not" column="B6NOT" type="int" />
+            <property name="langb7" column="LANGB7" type="int" />
+            <property name="b7sub" column="B7SUB" type="int" />
+            <property name="b7not" column="B7NOT" type="int" />
+            <property name="langb8" column="LANGB8" type="int" />
+            <property name="langb9" column="LANGB9" type="int" />
+            <property name="langc1" column="LANGC1" type="int" />
+            <property name="langc2" column="LANGC2" type="int" />
+            <property name="langd1" column="LANGD1" type="int" />
+            <property name="langd2" column="LANGD2" type="int" />
+            <property name="langa3a" column="LANGA3A" type="int" />
+            <property name="ftda3afs" column="FTDA3AFS" type="int" />
+            <property name="ftda3afr" column="FTDA3AFR" type="int" />
+            <property name="langb3f" column="LANGB3F" type="int" />
+            <property name="langb9f" column="LANGB9F" type="int" />
+            <property name="langc1f" column="LANGC1F" type="int" />
+            <property name="langc2f" column="LANGC2F" type="int" />
+            <property name="langc3f" column="LANGC3F" type="int" />
+            <property name="langc4f" column="LANGC4F" type="int" />
+            <property name="ftdc4fs" column="FTDC4FS" type="int" />
+            <property name="ftdc4fr" column="FTDC4FR" type="int" />
+            <property name="langc5f" column="LANGC5F" type="int" />
+            <property name="ftdc5fs" column="FTDC5FS" type="int" />
+            <property name="ftdc5fr" column="FTDC5FR" type="int" />
+            <property name="langc6f" column="LANGC6F" type="int" />
+            <property name="ftdc6fs" column="FTDC6FS" type="int" />
+            <property name="ftdc6fr" column="FTDC6FR" type="int" />
+            <property name="lange2f" column="LANGE2F" type="int" />
+            <property name="lange3f" column="LANGE3F" type="int" />
+            <property name="langcls" column="LANGCLS" type="int" />
+            <property name="clssub" column="CLSSUB" type="int" />
+    </join>
+
+    &instrInclude2;
+  </class>
+</hibernate-mapping>
