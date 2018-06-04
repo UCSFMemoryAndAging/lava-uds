@@ -1,9 +1,12 @@
 package edu.ucsf.lava.crms.assessment.model;
 
 import java.util.Date;
+import java.util.Locale;
 
+import edu.ucsf.lava.core.metadata.MetadataManager;
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
+import edu.ucsf.lava.core.model.ValidationException;
 import edu.ucsf.lava.crms.people.model.Patient;
 import edu.ucsf.lava.crms.scheduling.model.Visit;
 
@@ -1415,6 +1418,58 @@ public class UdsDiagnosis extends UdsInstrument {
 		}
 		
 	}
+	
+	
+	public void validate(MetadataManager metadataManager) {
+		super.validate(metadataManager);
+		
+		if(this.getFormVer().equalsIgnoreCase("3")){
+			// Only one diagnosis can be selected as 1=Primary.
+			int numPrimaryDxs = 0;
+			
+			if (this.alzdisif != null && this.alzdisif==1) numPrimaryDxs++;
+			if (this.lbdif != null && this.lbdif==1) numPrimaryDxs++;
+			if (this.msaif != null && this.msaif==1) numPrimaryDxs++;
+			if (this.pspIf != null && this.pspIf==1) numPrimaryDxs++;
+			if (this.cortIf != null && this.cortIf==1) numPrimaryDxs++;
+			if (this.ftldmoif != null && this.ftldmoif==1) numPrimaryDxs++;
+			if (this.ftldnoif != null && this.ftldnoif==1) numPrimaryDxs++;
+			if (this.cvdif != null && this.cvdif==1) numPrimaryDxs++;
+			if (this.esstreif != null && this.esstreif==1) numPrimaryDxs++;
+			if (this.downsIf != null && this.downsIf==1) numPrimaryDxs++;
+			if (this.huntIf != null && this.huntIf==1) numPrimaryDxs++;
+			if (this.prionIf != null && this.prionIf==1) numPrimaryDxs++;
+			if (this.brnInjIf != null && this.brnInjIf==1) numPrimaryDxs++;
+			if (this.hycephIf != null && this.hycephIf==1) numPrimaryDxs++;
+			if (this.epilepif != null && this.epilepif==1) numPrimaryDxs++;
+			if (this.neopIf != null && this.neopIf==1) numPrimaryDxs++;
+			if (this.hivif != null && this.hivif==1) numPrimaryDxs++;
+			if (this.othcogif != null && this.othcogif==1) numPrimaryDxs++;
+			if (this.depIf != null && this.depIf==1) numPrimaryDxs++;
+			if (this.bipoldif != null && this.bipoldif==1) numPrimaryDxs++;
+			if (this.schizoif != null && this.schizoif==1) numPrimaryDxs++;
+			if (this.anxietif != null && this.anxietif==1) numPrimaryDxs++;
+			if (this.delirif != null && this.delirif==1) numPrimaryDxs++;
+			if (this.ptsddxif != null && this.ptsddxif==1) numPrimaryDxs++;
+			if (this.othPsyIf != null && this.othPsyIf==1) numPrimaryDxs++;
+			if (this.alcDemIf != null && this.alcDemIf==1) numPrimaryDxs++;
+			if (this.impsubif != null && this.impsubif==1) numPrimaryDxs++;
+			if (this.dysIllIf != null && this.dysIllIf==1) numPrimaryDxs++;
+			if (this.medsIf != null && this.medsIf==1) numPrimaryDxs++;
+			if (this.cogOthIf != null && this.cogOthIf==1) numPrimaryDxs++;
+			if (this.cogOth2If != null && this.cogOth2If==1) numPrimaryDxs++;
+			if (this.cogOth3If != null && this.cogOth3If==1) numPrimaryDxs++;
+	
+			if (numPrimaryDxs > 1) {
+				throw new ValidationException(metadataManager.getMessage("udsdiagnosis3.validation.primaryDx",null,Locale.getDefault()));
+			}
+	
+			if (this.othbiom != null && this.othbiom < 0) {
+				throw new ValidationException(metadataManager.getMessage("udsdiagnosis3.validation.othbiomYesNo",null,Locale.getDefault()));
+			}
+		}
+	}
+	
 
 	public String[] getRequiredResultFields(String version) {
 		
