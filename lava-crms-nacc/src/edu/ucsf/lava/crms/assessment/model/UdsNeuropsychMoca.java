@@ -1,9 +1,12 @@
 package edu.ucsf.lava.crms.assessment.model;
 
 import java.util.Date;
+import java.util.Locale;
 
+import edu.ucsf.lava.core.metadata.MetadataManager;
 import edu.ucsf.lava.core.model.EntityBase;
 import edu.ucsf.lava.core.model.EntityManager;
+import edu.ucsf.lava.core.model.ValidationException;
 import edu.ucsf.lava.crms.people.model.Patient;
 import edu.ucsf.lava.crms.scheduling.model.Visit;
 
@@ -663,7 +666,6 @@ public class UdsNeuropsychMoca extends UdsInstrument {
 				"mocalanx",
 				"mocavis",
 				"mocahear",
-				"mocatots",
 				"mocatrai",
 				"mocacube",
 				"mocacloc",
@@ -728,6 +730,21 @@ public class UdsNeuropsychMoca extends UdsInstrument {
 				"cogstat"
 		};
 	}
+	
+
+	public void validate(MetadataManager metadataManager) {
+		super.validate(metadataManager);
+		
+		if (this.traila != null && this.traila >= 0 && this.traila < 150 && this.trailali < 24) {
+			throw new ValidationException(metadataManager.getMessage("udsneuropsychmoca3.validation.traila",null,Locale.getDefault()));
+		}
+
+		if (this.trailb != null && this.trailb >= 0 && this.trailb < 300 && this.trailbli < 24) {
+			throw new ValidationException(metadataManager.getMessage("udsneuropsychmoca3.validation.trailb",null,Locale.getDefault()));
+		}
+
+	}
+	
 		
 	public void beforeUpdate() {
 
